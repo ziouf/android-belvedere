@@ -9,9 +9,11 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.CameraPosition;
+import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.VisibleRegion;
 
 import java.io.InputStream;
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -24,7 +26,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
     private GoogleMap mMap;
     private Set<InputStream> kmlfiles;
-    private List<MapsMarker> markers;
+    private Set<Marker> markers = new HashSet<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,8 +39,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
         this.kmlfiles = new HashSet<>();
         this.kmlfiles.add(this.getResources().openRawResource(R.raw.sommets_des_alpes_francaises));
-
-        this.markers = new KmlReader(this.kmlfiles).readKmlFiles().getMapsMarkers();
 
     }
 
@@ -55,7 +55,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
-        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(markers.get(0).getLatLng(), 10));
+        this.updateMarkersOnMap(mMap);
+        //mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(markers.get(0).getPosition(), 10));
 
         mMap.setOnMapLoadedCallback(new GoogleMap.OnMapLoadedCallback() {
             @Override
@@ -71,13 +72,14 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             }
         });
 
+
     }
 
     private void updateMarkersOnMap(GoogleMap mMap) {
         MapArea area = new MapArea(mMap.getProjection().getVisibleRegion());
 
-        for (MapsMarker m : markers)
+        for (MapsMarker m : new KmlReader(this.kmlfiles).readKmlFiles())
             if (area.isInArea(m.getLatLng()))
-                mMap.addMarker(m.getMarkerOptions());
+                markers.add(mMap.addMarker(m.getMarkerOptions()));
     }
 }

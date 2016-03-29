@@ -17,14 +17,12 @@ import fr.marin.cyril.mapsapp.model.MapsMarker;
 class KmlHandler extends DefaultHandler {
     private static final String PLACEMARK = "Placemark";
     private static final String NAME = "name";
+    private static final String POINT = "Point";
     private static final String DESCRIPTION = "description";
     private static final String COORDINATES = "coordinates";
 
     private Boolean inElement = false;
     private Boolean inPlacemark = false;
-    private Boolean inName = false;
-    private Boolean inDescription = false;
-    private Boolean inCoordinates = false;
 
     private String elementValue;
     private MapsMarker data;
@@ -34,26 +32,12 @@ class KmlHandler extends DefaultHandler {
         return mapsMarkers;
     }
 
-    public void setMapsMarkers(Set<MapsMarker> mapsMarkers) {
-        this.mapsMarkers = mapsMarkers;
-    }
-
     @Override
     public void startElement(String uri, String localName, String qName, Attributes attributes) throws SAXException {
         this.inElement = true;
-        this.elementValue = "";
         if (localName.equalsIgnoreCase(PLACEMARK)) {
-            this.inPlacemark = true;
             data = new MapsMarker();
-        }
-        else if (localName.equalsIgnoreCase(NAME) && inPlacemark) {
-            this.inName = true;
-        }
-        else if (localName.equalsIgnoreCase(DESCRIPTION) && inPlacemark) {
-            this.inDescription = true;
-        }
-        else if (localName.equalsIgnoreCase(COORDINATES) && inPlacemark) {
-            this.inCoordinates = true;
+            this.inPlacemark = true;
         }
     }
 
@@ -61,19 +45,16 @@ class KmlHandler extends DefaultHandler {
     public void endElement(String uri, String localName, String qName) throws SAXException {
         this.inElement = false;
         if (localName.equalsIgnoreCase(PLACEMARK)) {
-            this.inPlacemark = false;
             this.mapsMarkers.add(data);
+            this.inPlacemark = false;
         }
-        else if (localName.equalsIgnoreCase(NAME) && inName) {
-            this.inName = false;
+        if (localName.equalsIgnoreCase(NAME) && inPlacemark) {
             this.data.setTitle(elementValue);
         }
-        else if (localName.equalsIgnoreCase(DESCRIPTION) && inDescription) {
-            this.inDescription = false;
+        if (localName.equalsIgnoreCase(DESCRIPTION) && inPlacemark) {
             this.data.setDescription(elementValue);
         }
-        else if (localName.equalsIgnoreCase(COORDINATES) && inCoordinates) {
-            this.inCoordinates = false;
+        if (localName.equalsIgnoreCase(COORDINATES) && inPlacemark) {
             this.data.setLatLng(this.getLatLngFromKmlCoordinates(elementValue));
             this.data.setElevation(this.getElevationFromKmlCoordinates(elementValue));
         }
@@ -81,15 +62,20 @@ class KmlHandler extends DefaultHandler {
 
     @Override
     public void characters(char[] ch, int start, int length) throws SAXException {
-        if (this.inElement) elementValue = new String(ch, start, length);
+        if (this.inElement)
+            elementValue = new String(ch, start, length);
     }
 
     private LatLng getLatLngFromKmlCoordinates(String s) {
         String[] coordinates = s.split(",");
-        return new LatLng(Double.parseDouble(coordinates[1]), Double.parseDouble(coordinates[0]));
+        if (coordinates.length < 3)
+            System.out.println();
+        return new LatLng(Double.valueOf(coordinates[1]), Double.valueOf(coordinates[0]));
     }
     private Integer getElevationFromKmlCoordinates(String s) {
         String[] coordinates = s.split(",");
-        return Double.valueOf(coordinates[2]).intValue();
+        if (coordinates.length < 3)
+            System.out.println();
+        return Integer.valueOf(coordinates[2]);
     }
 }
