@@ -8,26 +8,28 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.CameraPosition;
+import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
 
+import fr.marin.cyril.mapsapp.database.DatabaseHelper;
 import fr.marin.cyril.mapsapp.kml.parser.KmlParser;
 import fr.marin.cyril.mapsapp.kml.model.MapsMarker;
 import fr.marin.cyril.mapsapp.tool.MapArea;
 
-public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
+public class MapsActivity extends FragmentActivity
+        implements OnMapReadyCallback{
 
+    private LatLng myPosition = new LatLng(45.46472,5.92528);
     private GoogleMap mMap;
-    private Set<InputStream> kmlfiles;
-    private List<MapsMarker> mapsMarkers;
+    private Collection<InputStream> kmlfiles;
+    private Collection<Marker> markersShown;
 
-    private Set<Marker> markersShown = new HashSet<>();
+    private DatabaseHelper dbHelper;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,12 +40,16 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
 
+        this.dbHelper = new DatabaseHelper(getApplicationContext());
+
         this.kmlfiles = new HashSet<>();
         this.kmlfiles.add(this.getResources().openRawResource(R.raw.sommets_des_alpes_francaises));
 
-        this.mapsMarkers = new ArrayList<>(new KmlParser().parseAll(this.kmlfiles));
-    }
+        this.markersShown = new HashSet<>();
 
+        this.dbHelper.insertAll(new KmlParser().parseAll(this.kmlfiles));
+
+    }
 
     /**
      * Manipulates the map once available.
@@ -57,8 +63,10 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
+
         this.updateMarkersOnMap(mMap);
-        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(mapsMarkers.get(0).getCoordinates().getLatLng(), 10));
+
+        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(myPosition, 10));
 
         mMap.setOnMapLoadedCallback(new GoogleMap.OnMapLoadedCallback() {
             @Override
@@ -74,24 +82,29 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             }
         });
 
-
     }
 
     private void updateMarkersOnMap(GoogleMap mMap) {
         MapArea area = new MapArea(mMap.getProjection().getVisibleRegion());
 
-        Collection<Marker> toRemove = new ArrayList<>();
-        for (Marker m : markersShown) {
-            if (!area.isInArea(m.getPosition())) {
-                m.remove();
-                toRemove.add(m);
-            }
-        }
+        this.removeOffScreenMarkers(area);
 
-        markersShown.removeAll(toRemove);
-
-        for (MapsMarker m : mapsMarkers)
+        for (MapsMarker m : this.dbHelper.findInArea(area))
             if (area.isInArea(m.getCoordinates().getLatLng()))
                 markersShown.add(mMap.addMarker(m.getMarkerOptions()));
     }
+
+    private void removeOffScreenMarkers(MapArea area) {
+        Collection<Marker> toRemove = new ArrayList<>();
+
+        for (Marker m : markersShown)
+            if (!area.isInArea(m.getPosition())) {
+                toRemove.add(m);
+                m.remove();
+            }
+
+
+        markersShown.removeAll(toRemove);
+    }
+
 }
