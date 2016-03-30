@@ -12,6 +12,7 @@ import com.google.android.gms.maps.model.Marker;
 
 import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -79,7 +80,15 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     private void updateMarkersOnMap(GoogleMap mMap) {
         MapArea area = new MapArea(mMap.getProjection().getVisibleRegion());
 
-        markersShown.removeAll(markersShown);
+        Collection<Marker> toRemove = new ArrayList<>();
+        for (Marker m : markersShown) {
+            if (!area.isInArea(m.getPosition())) {
+                m.remove();
+                toRemove.add(m);
+            }
+        }
+
+        markersShown.removeAll(toRemove);
 
         for (MapsMarker m : mapsMarkers)
             if (area.isInArea(m.getCoordinates().getLatLng()))
