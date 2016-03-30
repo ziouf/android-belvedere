@@ -9,7 +9,7 @@ import android.provider.BaseColumns;
 /**
  * Created by cscm6014 on 30/03/2016.
  */
-public final class DatabaseContract {
+final class DatabaseContract {
     public static final int DATABASE_VERSION = 1;
     public static final String DATABASE_NAME = "database.db";
 
