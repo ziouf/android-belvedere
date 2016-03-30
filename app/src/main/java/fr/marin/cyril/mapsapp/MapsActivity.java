@@ -22,7 +22,7 @@ import fr.marin.cyril.mapsapp.kml.model.MapsMarker;
 import fr.marin.cyril.mapsapp.tool.MapArea;
 
 public class MapsActivity extends FragmentActivity
-        implements OnMapReadyCallback{
+        implements OnMapReadyCallback, GoogleMap.OnMapLoadedCallback, GoogleMap.OnCameraChangeListener{
 
     private LatLng myPosition = new LatLng(45.46472,5.92528);
     private GoogleMap mMap;
@@ -40,15 +40,14 @@ public class MapsActivity extends FragmentActivity
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
 
-        this.dbHelper = new DatabaseHelper(getApplicationContext());
+        this.dbHelper = new DatabaseHelper(this);
 
         this.kmlfiles = new HashSet<>();
         this.kmlfiles.add(this.getResources().openRawResource(R.raw.sommets_des_alpes_francaises));
 
         this.markersShown = new HashSet<>();
 
-        if (this.dbHelper.count() == 0)
-            this.dbHelper.insertAll(new KmlParser().parseAll(this.kmlfiles));
+        this.dbHelper.insertAllIfEmpty(new KmlParser().parseAll(this.kmlfiles));
 
     }
 
@@ -64,25 +63,22 @@ public class MapsActivity extends FragmentActivity
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
+        mMap.setOnMapLoadedCallback(this);
+        mMap.setOnCameraChangeListener(this);
 
         this.updateMarkersOnMap(mMap);
 
-        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(myPosition, 10));
+        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(myPosition, 12));
+    }
 
-        mMap.setOnMapLoadedCallback(new GoogleMap.OnMapLoadedCallback() {
-            @Override
-            public void onMapLoaded() {
-                updateMarkersOnMap(mMap);
-            }
-        });
+    @Override
+    public void onMapLoaded() {
+        this.updateMarkersOnMap(mMap);
+    }
 
-        mMap.setOnCameraChangeListener(new GoogleMap.OnCameraChangeListener() {
-            @Override
-            public void onCameraChange(CameraPosition cameraPosition) {
-                updateMarkersOnMap(mMap);
-            }
-        });
-
+    @Override
+    public void onCameraChange(CameraPosition cameraPosition) {
+        this.updateMarkersOnMap(mMap);
     }
 
     private void updateMarkersOnMap(GoogleMap mMap) {

@@ -54,6 +54,10 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         for (MapsMarker m : markers) insert(m);
     }
 
+    public void insertAllIfEmpty(Collection<MapsMarker> markers) {
+        if (this.count() == 0) this.insertAll(markers);
+    }
+
     public Collection<MapsMarker> findInArea(Double top, Double left, Double right, Double bottom) {
         SQLiteDatabase db = this.getReadableDatabase();
         Collection<MapsMarker> markers = new ArrayList<>();
