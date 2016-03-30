@@ -154,7 +154,7 @@ public class KmlParser {
                 parser.require(XmlPullParser.END_TAG, ns, COORDINATES);
 
                 coordinates.setLatLng(new LatLng(Double.parseDouble(c[1]), Double.parseDouble(c[0])));
-                coordinates.setElevation(Integer.parseInt(c[2]));
+                coordinates.setElevation(Double.parseDouble(c[2]));
             } else {
                 skip(parser);
             }

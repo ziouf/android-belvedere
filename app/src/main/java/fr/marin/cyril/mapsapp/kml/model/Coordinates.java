@@ -7,7 +7,7 @@ import com.google.android.gms.maps.model.LatLng;
  */
 public class Coordinates {
     private LatLng latLng;
-    private Integer elevation = 0;
+    private Double elevation = 0d;
 
     public Coordinates() {
     }
@@ -16,7 +16,7 @@ public class Coordinates {
         this.latLng = latLng;
     }
 
-    public Coordinates(LatLng latLng, Integer elevation) {
+    public Coordinates(LatLng latLng, Double elevation) {
         this.latLng = latLng;
         this.elevation = elevation;
     }
@@ -29,11 +29,11 @@ public class Coordinates {
         this.latLng = latLng;
     }
 
-    public Integer getElevation() {
+    public Double getElevation() {
         return elevation;
     }
 
-    public void setElevation(Integer elevation) {
+    public void setElevation(Double elevation) {
         this.elevation = elevation;
     }
 }

@@ -996,73 +996,9 @@
 			<description><![CDATA[<br>Source: Wikipedia article <a href="https://fr.wikipedia.org/wiki/Dentelles_de_Montmirail">Dentelles de Montmirail</a>]]></description>
 		</Placemark>
 		<Placemark>
-			<name><![CDATA[Château du Barroux]]></name>
-			<Point>
-				<coordinates>5.09944,44.13694,0</coordinates>
-			</Point>
-			<Snippet></Snippet>
-			<description><![CDATA[<br>Source: Wikipedia article <a href="https://fr.wikipedia.org/wiki/Dentelles_de_Montmirail">Dentelles de Montmirail</a>]]></description>
-		</Placemark>
-		<Placemark>
-			<name><![CDATA[Église Saint-Jean-Baptiste du Barroux]]></name>
-			<Point>
-				<coordinates>5.099924,44.136328,0</coordinates>
-			</Point>
-			<Snippet></Snippet>
-			<description><![CDATA[<br>Source: Wikipedia article <a href="https://fr.wikipedia.org/wiki/Dentelles_de_Montmirail">Dentelles de Montmirail</a>]]></description>
-		</Placemark>
-		<Placemark>
-			<name><![CDATA[Moulin à huile communal du Barroux]]></name>
-			<Point>
-				<coordinates>5.100325,44.137204,0</coordinates>
-			</Point>
-			<Snippet></Snippet>
-			<description><![CDATA[<br>Source: Wikipedia article <a href="https://fr.wikipedia.org/wiki/Dentelles_de_Montmirail">Dentelles de Montmirail</a>]]></description>
-		</Placemark>
-		<Placemark>
-			<name><![CDATA[Chapelle Notre-Dame d'Aubune]]></name>
-			<Point>
-				<coordinates>5.01217,44.12327,0</coordinates>
-			</Point>
-			<Snippet></Snippet>
-			<description><![CDATA[<br>Source: Wikipedia article <a href="https://fr.wikipedia.org/wiki/Dentelles_de_Montmirail">Dentelles de Montmirail</a>]]></description>
-		</Placemark>
-		<Placemark>
-			<name><![CDATA[Fontaine de Beaumes-de-Venise]]></name>
-			<Point>
-				<coordinates>5.028652,44.121645,0</coordinates>
-			</Point>
-			<Snippet></Snippet>
-			<description><![CDATA[<br>Source: Wikipedia article <a href="https://fr.wikipedia.org/wiki/Dentelles_de_Montmirail">Dentelles de Montmirail</a>]]></description>
-		</Placemark>
-		<Placemark>
-			<name><![CDATA[Atelier de Claude et François Stahly]]></name>
-			<Point>
-				<coordinates>5.064475,44.199309,0</coordinates>
-			</Point>
-			<Snippet></Snippet>
-			<description><![CDATA[<br>Source: Wikipedia article <a href="https://fr.wikipedia.org/wiki/Dentelles_de_Montmirail">Dentelles de Montmirail</a>]]></description>
-		</Placemark>
-		<Placemark>
-			<name><![CDATA[Église Saint-Sauveur-et-Saint-Sixte de Crestet]]></name>
-			<Point>
-				<coordinates>5.08387,44.21671,0</coordinates>
-			</Point>
-			<Snippet></Snippet>
-			<description><![CDATA[<br>Source: Wikipedia article <a href="https://fr.wikipedia.org/wiki/Dentelles_de_Montmirail">Dentelles de Montmirail</a>]]></description>
-		</Placemark>
-		<Placemark>
-			<name><![CDATA[Fontaine des Mascarons (Séguret)]]></name>
-			<Point>
-				<coordinates>5.023595,44.205744,0</coordinates>
-			</Point>
-			<Snippet></Snippet>
-			<description><![CDATA[<br>Source: Wikipedia article <a href="https://fr.wikipedia.org/wiki/Dentelles_de_Montmirail">Dentelles de Montmirail</a>]]></description>
-		</Placemark>
-		<Placemark>
 			<name><![CDATA[Dents d'Ambin]]></name>
 			<Point>
-				<coordinates>6.89328,45.16927,0</coordinates>
+				<coordinates>6.89328,45.16927,3372</coordinates>
 			</Point>
 			<Snippet></Snippet>
 			<description><![CDATA[<br>Source: Wikipedia article <a href="https://fr.wikipedia.org/wiki/Dents_d'Ambin">Dents d'Ambin</a>]]></description>
@@ -1070,7 +1006,7 @@
 		<Placemark>
 			<name><![CDATA[Dents de Lanfon]]></name>
 			<Point>
-				<coordinates>6.2417,45.8611,0</coordinates>
+				<coordinates>6.2417,45.8611,1824</coordinates>
 			</Point>
 			<Snippet></Snippet>
 			<description><![CDATA[<br>Source: Wikipedia article <a href="https://fr.wikipedia.org/wiki/Dents_de_Lanfon">Dents de Lanfon</a>]]></description>
@@ -1078,7 +1014,7 @@
 		<Placemark>
 			<name><![CDATA[Dôme de Barrot]]></name>
 			<Point>
-				<coordinates>6.91667,44.03667,0</coordinates>
+				<coordinates>6.91667,44.03667,2137</coordinates>
 			</Point>
 			<Snippet></Snippet>
 			<description><![CDATA[<br>Source: Wikipedia article <a href="https://fr.wikipedia.org/wiki/Dôme_de_Barrot">Dôme de Barrot</a>]]></description>
@@ -1086,7 +1022,7 @@
 		<Placemark>
 			<name><![CDATA[Dôme de Bellefont]]></name>
 			<Point>
-				<coordinates>5.88111,45.34194,0</coordinates>
+				<coordinates>5.88111,45.34194,1975</coordinates>
 			</Point>
 			<Snippet></Snippet>
 			<description><![CDATA[<br>Source: Wikipedia article <a href="https://fr.wikipedia.org/wiki/Dôme_de_Bellefont">Dôme de Bellefont</a>]]></description>
@@ -1094,7 +1030,7 @@
 		<Placemark>
 			<name><![CDATA[Dôme de Chasseforêt]]></name>
 			<Point>
-				<coordinates>6.76056,45.3306,0</coordinates>
+				<coordinates>6.76056,45.3306,3586</coordinates>
 			</Point>
 			<Snippet></Snippet>
 			<description><![CDATA[<br>Source: Wikipedia article <a href="https://fr.wikipedia.org/wiki/Dôme_de_Chasseforêt">Dôme de Chasseforêt</a>]]></description>
@@ -1102,7 +1038,7 @@
 		<Placemark>
 			<name><![CDATA[Dôme de Monêtier]]></name>
 			<Point>
-				<coordinates>6.4525,44.93083,0</coordinates>
+				<coordinates>6.4525,44.93083,3404</coordinates>
 			</Point>
 			<Snippet></Snippet>
 			<description><![CDATA[<br>Source: Wikipedia article <a href="https://fr.wikipedia.org/wiki/Dôme_de_Monêtier">Dôme de Monêtier</a>]]></description>
@@ -1110,7 +1046,7 @@
 		<Placemark>
 			<name><![CDATA[Dôme de Polset]]></name>
 			<Point>
-				<coordinates>6.64028,45.27639,0</coordinates>
+				<coordinates>6.64028,45.27639,3501</coordinates>
 			</Point>
 			<Snippet></Snippet>
 			<description><![CDATA[<br>Source: Wikipedia article <a href="https://fr.wikipedia.org/wiki/Dôme_de_Polset">Dôme de Polset</a>]]></description>
@@ -1118,7 +1054,7 @@
 		<Placemark>
 			<name><![CDATA[Dôme de Rochefort]]></name>
 			<Point>
-				<coordinates>6.9675,45.86417,0</coordinates>
+				<coordinates>6.9675,45.86417,4015</coordinates>
 			</Point>
 			<Snippet></Snippet>
 			<description><![CDATA[<br>Source: Wikipedia article <a href="https://fr.wikipedia.org/wiki/Dôme_de_Rochefort">Dôme de Rochefort</a>]]></description>
@@ -1126,7 +1062,7 @@
 		<Placemark>
 			<name><![CDATA[Dôme de l'Arpont]]></name>
 			<Point>
-				<coordinates>6.74278,45.31861,0</coordinates>
+				<coordinates>6.74278,45.31861,3601</coordinates>
 			</Point>
 			<Snippet></Snippet>
 			<description><![CDATA[<br>Source: Wikipedia article <a href="https://fr.wikipedia.org/wiki/Dôme_de_l'Arpont">Dôme de l'Arpont</a>]]></description>
@@ -1134,7 +1070,7 @@
 		<Placemark>
 			<name><![CDATA[Dôme de la Sache]]></name>
 			<Point>
-				<coordinates>6.87056,45.5111,0</coordinates>
+				<coordinates>6.87056,45.5111,3601</coordinates>
 			</Point>
 			<Snippet></Snippet>
 			<description><![CDATA[<br>Source: Wikipedia article <a href="https://fr.wikipedia.org/wiki/Dôme_de_la_Sache">Dôme de la Sache</a>]]></description>
@@ -1142,7 +1078,7 @@
 		<Placemark>
 			<name><![CDATA[Dôme de neige des Écrins]]></name>
 			<Point>
-				<coordinates>6.35389,44.92444,0</coordinates>
+				<coordinates>6.35389,44.92444,4015</coordinates>
 			</Point>
 			<Snippet></Snippet>
 			<description><![CDATA[<br>Source: Wikipedia article <a href="https://fr.wikipedia.org/wiki/Dôme_de_neige_des_Écrins">Dôme de neige des Écrins</a>]]></description>
@@ -1150,7 +1086,7 @@
 		<Placemark>
 			<name><![CDATA[Dôme des Nants]]></name>
 			<Point>
-				<coordinates>6.74139,45.32639,0</coordinates>
+				<coordinates>6.74139,45.32639,3570</coordinates>
 			</Point>
 			<Snippet></Snippet>
 			<description><![CDATA[<br>Source: Wikipedia article <a href="https://fr.wikipedia.org/wiki/Dôme_des_Nants">Dôme des Nants</a>]]></description>
@@ -1158,7 +1094,7 @@
 		<Placemark>
 			<name><![CDATA[Dôme des Pichères]]></name>
 			<Point>
-				<coordinates>6.79833,45.4917,0</coordinates>
+				<coordinates>6.79833,45.4917,3319</coordinates>
 			</Point>
 			<Snippet></Snippet>
 			<description><![CDATA[<br>Source: Wikipedia article <a href="https://fr.wikipedia.org/wiki/Dôme_des_Pichères">Dôme des Pichères</a>]]></description>
@@ -1166,7 +1102,7 @@
 		<Placemark>
 			<name><![CDATA[Dôme des Platières]]></name>
 			<Point>
-				<coordinates>6.8639,45.5075,0</coordinates>
+				<coordinates>6.8639,45.5075,3473</coordinates>
 			</Point>
 			<Snippet></Snippet>
 			<description><![CDATA[<br>Source: Wikipedia article <a href="https://fr.wikipedia.org/wiki/Dôme_des_Platières">Dôme des Platières</a>]]></description>
@@ -1174,7 +1110,7 @@
 		<Placemark>
 			<name><![CDATA[Dôme des Sonnailles]]></name>
 			<Point>
-				<coordinates>6.74556,45.34583,0</coordinates>
+				<coordinates>6.74556,45.34583,3361</coordinates>
 			</Point>
 			<Snippet></Snippet>
 			<description><![CDATA[<br>Source: Wikipedia article <a href="https://fr.wikipedia.org/wiki/Dôme_des_Sonnailles">Dôme des Sonnailles</a>]]></description>
@@ -1182,7 +1118,7 @@
 		<Placemark>
 			<name><![CDATA[Dôme du Goûter]]></name>
 			<Point>
-				<coordinates>6.84333,45.84278,0</coordinates>
+				<coordinates>6.84333,45.84278,4304</coordinates>
 			</Point>
 			<Snippet></Snippet>
 			<description><![CDATA[<br>Source: Wikipedia article <a href="https://fr.wikipedia.org/wiki/Dôme_du_Goûter">Dôme du Goûter</a>]]></description>
@@ -1190,7 +1126,7 @@
 		<Placemark>
 			<name><![CDATA[Dômes de Miage]]></name>
 			<Point>
-				<coordinates>6.8,45.81583,0</coordinates>
+				<coordinates>6.8,45.81583,3673</coordinates>
 			</Point>
 			<Snippet></Snippet>
 			<description><![CDATA[<br>Source: Wikipedia article <a href="https://fr.wikipedia.org/wiki/Dômes_de_Miage">Dômes de Miage</a>]]></description>
@@ -1198,7 +1134,7 @@
 		<Placemark>
 			<name><![CDATA[Fort Carra]]></name>
 			<Point>
-				<coordinates>6.8075,44.24556,0</coordinates>
+				<coordinates>6.8075,44.24556,2880</coordinates>
 			</Point>
 			<Snippet></Snippet>
 			<description><![CDATA[<br>Source: Wikipedia article <a href="https://fr.wikipedia.org/wiki/Fort_Carra">Fort Carra</a>]]></description>
@@ -1206,7 +1142,7 @@
 		<Placemark>
 			<name><![CDATA[Goléon]]></name>
 			<Point>
-				<coordinates>6.32639,45.10361,0</coordinates>
+				<coordinates>6.32639,45.10361,3427</coordinates>
 			</Point>
 			<Snippet></Snippet>
 			<description><![CDATA[<br>Source: Wikipedia article <a href="https://fr.wikipedia.org/wiki/Goléon">Goléon</a>]]></description>
@@ -1214,7 +1150,7 @@
 		<Placemark>
 			<name><![CDATA[Grand Arc]]></name>
 			<Point>
-				<coordinates>6.36472,45.56639,0</coordinates>
+				<coordinates>6.36472,45.56639,2484</coordinates>
 			</Point>
 			<Snippet></Snippet>
 			<description><![CDATA[<br>Source: Wikipedia article <a href="https://fr.wikipedia.org/wiki/Grand_Arc">Grand Arc</a>]]></description>
@@ -1222,7 +1158,7 @@
 		<Placemark>
 			<name><![CDATA[Grand Armet]]></name>
 			<Point>
-				<coordinates>5.93444,44.98111,0</coordinates>
+				<coordinates>5.93444,44.98111,2792</coordinates>
 			</Point>
 			<Snippet></Snippet>
 			<description><![CDATA[<br>Source: Wikipedia article <a href="https://fr.wikipedia.org/wiki/Grand_Armet">Grand Armet</a>]]></description>
@@ -1230,7 +1166,7 @@
 		<Placemark>
 			<name><![CDATA[Grand Aréa]]></name>
 			<Point>
-				<coordinates>6.57278,44.98,0</coordinates>
+				<coordinates>6.57278,44.98,2869</coordinates>
 			</Point>
 			<Snippet></Snippet>
 			<description><![CDATA[<br>Source: Wikipedia article <a href="https://fr.wikipedia.org/wiki/Grand_Aréa">Grand Aréa</a>]]></description>
@@ -1238,7 +1174,7 @@
 		<Placemark>
 			<name><![CDATA[Grand Assaly]]></name>
 			<Point>
-				<coordinates>6.97028,45.65417,0</coordinates>
+				<coordinates>6.97028,45.65417,3173</coordinates>
 			</Point>
 			<Snippet></Snippet>
 			<description><![CDATA[<br>Source: Wikipedia article <a href="https://fr.wikipedia.org/wiki/Grand_Assaly">Grand Assaly</a>]]></description>
@@ -1246,7 +1182,7 @@
 		<Placemark>
 			<name><![CDATA[Grand Bec]]></name>
 			<Point>
-				<coordinates>6.7528,45.42361,0</coordinates>
+				<coordinates>6.7528,45.42361,3398</coordinates>
 			</Point>
 			<Snippet></Snippet>
 			<description><![CDATA[<br>Source: Wikipedia article <a href="https://fr.wikipedia.org/wiki/Grand_Bec">Grand Bec</a>]]></description>
@@ -1254,7 +1190,7 @@
 		<Placemark>
 			<name><![CDATA[Grand Bérard]]></name>
 			<Point>
-				<coordinates>6.66,44.44944,0</coordinates>
+				<coordinates>6.66,44.44944,3046</coordinates>
 			</Point>
 			<Snippet></Snippet>
 			<description><![CDATA[<br>Source: Wikipedia article <a href="https://fr.wikipedia.org/wiki/Grand_Bérard">Grand Bérard</a>]]></description>
@@ -1262,7 +1198,7 @@
 		<Placemark>
 			<name><![CDATA[Grand Capelet]]></name>
 			<Point>
-				<coordinates>7.42722,44.07833,0</coordinates>
+				<coordinates>7.42722,44.07833,2935</coordinates>
 			</Point>
 			<Snippet></Snippet>
 			<description><![CDATA[<br>Source: Wikipedia article <a href="https://fr.wikipedia.org/wiki/Grand_Capelet">Grand Capelet</a>]]></description>
@@ -1270,7 +1206,7 @@
 		<Placemark>
 			<name><![CDATA[Grand Capucin]]></name>
 			<Point>
-				<coordinates>6.89806,45.85167,0</coordinates>
+				<coordinates>6.89806,45.85167,3838</coordinates>
 			</Point>
 			<Snippet></Snippet>
 			<description><![CDATA[<br>Source: Wikipedia article <a href="https://fr.wikipedia.org/wiki/Grand_Capucin">Grand Capucin</a>]]></description>
@@ -1278,7 +1214,7 @@
 		<Placemark>
 			<name><![CDATA[Grand Charnier d'Allemond]]></name>
 			<Point>
-				<coordinates>5.99667,45.155,0</coordinates>
+				<coordinates>5.99667,45.155,2777</coordinates>
 			</Point>
 			<Snippet></Snippet>
 			<description><![CDATA[<br>Source: Wikipedia article <a href="https://fr.wikipedia.org/wiki/Grand_Charnier_d'Allemond">Grand Charnier d'Allemond</a>]]></description>
@@ -1286,7 +1222,7 @@
 		<Placemark>
 			<name><![CDATA[Grand Cheval de Bois]]></name>
 			<Point>
-				<coordinates>6.63333,44.29194,0</coordinates>
+				<coordinates>6.63333,44.29194,2838</coordinates>
 			</Point>
 			<Snippet></Snippet>
 			<description><![CDATA[<br>Source: Wikipedia article <a href="https://fr.wikipedia.org/wiki/Grand_Cheval_de_Bois">Grand Cheval de Bois</a>]]></description>
@@ -1294,7 +1230,7 @@
 		<Placemark>
 			<name><![CDATA[Grand Coyer]]></name>
 			<Point>
-				<coordinates>6.68972,44.10028,0</coordinates>
+				<coordinates>6.68972,44.10028,2693</coordinates>
 			</Point>
 			<Snippet></Snippet>
 			<description><![CDATA[<br>Source: Wikipedia article <a href="https://fr.wikipedia.org/wiki/Grand_Coyer">Grand Coyer</a>]]></description>
@@ -1302,7 +1238,7 @@
 		<Placemark>
 			<name><![CDATA[Grand Ferrand]]></name>
 			<Point>
-				<coordinates>5.815,44.72194,0</coordinates>
+				<coordinates>5.815,44.72194,2758</coordinates>
 			</Point>
 			<Snippet></Snippet>
 			<description><![CDATA[<br>Source: Wikipedia article <a href="https://fr.wikipedia.org/wiki/Grand_Ferrand">Grand Ferrand</a>]]></description>
@@ -1310,7 +1246,7 @@
 		<Placemark>
 			<name><![CDATA[Grand Galbert]]></name>
 			<Point>
-				<coordinates>5.95944,45.09056,0</coordinates>
+				<coordinates>5.95944,45.09056,2561</coordinates>
 			</Point>
 			<Snippet></Snippet>
 			<description><![CDATA[<br>Source: Wikipedia article <a href="https://fr.wikipedia.org/wiki/Grand_Galbert">Grand Galbert</a>]]></description>
@@ -1318,7 +1254,7 @@
 		<Placemark>
 			<name><![CDATA[Grand Galibier]]></name>
 			<Point>
-				<coordinates>6.43389,45.06417,0</coordinates>
+				<coordinates>6.43389,45.06417,3228</coordinates>
 			</Point>
 			<Snippet></Snippet>
 			<description><![CDATA[<br>Source: Wikipedia article <a href="https://fr.wikipedia.org/wiki/Grand_Galibier">Grand Galibier</a>]]></description>
@@ -1326,7 +1262,7 @@
 		<Placemark>
 			<name><![CDATA[Grand Glaiza]]></name>
 			<Point>
-				<coordinates>6.88194,44.84944,0</coordinates>
+				<coordinates>6.88194,44.84944,3293</coordinates>
 			</Point>
 			<Snippet></Snippet>
 			<description><![CDATA[<br>Source: Wikipedia article <a href="https://fr.wikipedia.org/wiki/Grand_Glaiza">Grand Glaiza</a>]]></description>
@@ -1334,7 +1270,7 @@
 		<Placemark>
 			<name><![CDATA[Grand Margès]]></name>
 			<Point>
-				<coordinates>6.27861,43.7556,0</coordinates>
+				<coordinates>6.27861,43.7556,1576</coordinates>
 			</Point>
 			<Snippet></Snippet>
 			<description><![CDATA[<br>Source: Wikipedia article <a href="https://fr.wikipedia.org/wiki/Grand_Margès">Grand Margès</a>]]></description>
@@ -1342,7 +1278,7 @@
 		<Placemark>
 			<name><![CDATA[Grand Mont]]></name>
 			<Point>
-				<coordinates>6.53667,45.63194,0</coordinates>
+				<coordinates>6.53667,45.63194,2686</coordinates>
 			</Point>
 			<Snippet></Snippet>
 			<description><![CDATA[<br>Source: Wikipedia article <a href="https://fr.wikipedia.org/wiki/Grand_Mont">Grand Mont</a>]]></description>
@@ -1350,7 +1286,7 @@
 		<Placemark>
 			<name><![CDATA[Grand Pinier]]></name>
 			<Point>
-				<coordinates>6.40139,44.72333,0</coordinates>
+				<coordinates>6.40139,44.72333,3117</coordinates>
 			</Point>
 			<Snippet></Snippet>
 			<description><![CDATA[<br>Source: Wikipedia article <a href="https://fr.wikipedia.org/wiki/Grand_Pinier">Grand Pinier</a>]]></description>
@@ -1358,7 +1294,7 @@
 		<Placemark>
 			<name><![CDATA[Grand Roc]]></name>
 			<Point>
-				<coordinates>6.68806,45.26556,0</coordinates>
+				<coordinates>6.68806,45.26556,3316</coordinates>
 			</Point>
 			<Snippet></Snippet>
 			<description><![CDATA[<br>Source: Wikipedia article <a href="https://fr.wikipedia.org/wiki/Grand_Roc">Grand Roc</a>]]></description>
@@ -1366,7 +1302,7 @@
 		<Placemark>
 			<name><![CDATA[Grand Rocher]]></name>
 			<Point>
-				<coordinates>6.05,45.30361,0</coordinates>
+				<coordinates>6.05,45.30361,1926</coordinates>
 			</Point>
 			<Snippet></Snippet>
 			<description><![CDATA[<br>Source: Wikipedia article <a href="https://fr.wikipedia.org/wiki/Grand_Rocher">Grand Rocher</a>]]></description>
@@ -1374,7 +1310,7 @@
 		<Placemark>
 			<name><![CDATA[Grand Serre]]></name>
 			<Point>
-				<coordinates>5.82639,45.0056,0</coordinates>
+				<coordinates>5.82639,45.0056,2141</coordinates>
 			</Point>
 			<Snippet></Snippet>
 			<description><![CDATA[<br>Source: Wikipedia article <a href="https://fr.wikipedia.org/wiki/Grand_Serre">Grand Serre</a>]]></description>
@@ -1382,7 +1318,7 @@
 		<Placemark>
 			<name><![CDATA[Grand Som]]></name>
 			<Point>
-				<coordinates>5.81194,45.37056,0</coordinates>
+				<coordinates>5.81194,45.37056,2026</coordinates>
 			</Point>
 			<Snippet></Snippet>
 			<description><![CDATA[<br>Source: Wikipedia article <a href="https://fr.wikipedia.org/wiki/Grand_Som">Grand Som</a>]]></description>
@@ -1390,7 +1326,7 @@
 		<Placemark>
 			<name><![CDATA[Grand Veymont]]></name>
 			<Point>
-				<coordinates>5.52694,44.87,0</coordinates>
+				<coordinates>5.52694,44.87,2341</coordinates>
 			</Point>
 			<Snippet></Snippet>
 			<description><![CDATA[<br>Source: Wikipedia article <a href="https://fr.wikipedia.org/wiki/Grand_Veymont">Grand Veymont</a>]]></description>
@@ -1398,7 +1334,7 @@
 		<Placemark>
 			<name><![CDATA[Grand pic de Belledonne]]></name>
 			<Point>
-				<coordinates>5.9917,45.17111,0</coordinates>
+				<coordinates>5.9917,45.17111,2977</coordinates>
 			</Point>
 			<Snippet></Snippet>
 			<description><![CDATA[<br>Source: Wikipedia article <a href="https://fr.wikipedia.org/wiki/Grand_pic_de_Belledonne">Grand pic de Belledonne</a>]]></description>
@@ -1406,7 +1342,7 @@
 		<Placemark>
 			<name><![CDATA[Grand pic de la Lauzière]]></name>
 			<Point>
-				<coordinates>6.36639,45.45917,0</coordinates>
+				<coordinates>6.36639,45.45917,2829</coordinates>
 			</Point>
 			<Snippet></Snippet>
 			<description><![CDATA[<br>Source: Wikipedia article <a href="https://fr.wikipedia.org/wiki/Grand_pic_de_la_Lauzière">Grand pic de la Lauzière</a>]]></description>
@@ -1414,7 +1350,7 @@
 		<Placemark>
 			<name><![CDATA[Grand roc Noir]]></name>
 			<Point>
-				<coordinates>6.8917,45.33028,0</coordinates>
+				<coordinates>6.8917,45.33028,3582</coordinates>
 			</Point>
 			<Snippet></Snippet>
 			<description><![CDATA[<br>Source: Wikipedia article <a href="https://fr.wikipedia.org/wiki/Grand_roc_Noir">Grand roc Noir</a>]]></description>
@@ -1422,7 +1358,7 @@
 		<Placemark>
 			<name><![CDATA[Grande Balmaz]]></name>
 			<Point>
-				<coordinates>6.49639,45.89306,0</coordinates>
+				<coordinates>6.49639,45.89306,2616</coordinates>
 			</Point>
 			<Snippet></Snippet>
 			<description><![CDATA[<br>Source: Wikipedia article <a href="https://fr.wikipedia.org/wiki/Grande_Balmaz">Grande Balmaz</a>]]></description>
@@ -1430,7 +1366,7 @@
 		<Placemark>
 			<name><![CDATA[Grande Bosse]]></name>
 			<Point>
-				<coordinates>6.85583,45.83528,0</coordinates>
+				<coordinates>6.85583,45.83528,4513</coordinates>
 			</Point>
 			<Snippet></Snippet>
 			<description><![CDATA[<br>Source: Wikipedia article <a href="https://fr.wikipedia.org/wiki/Grande_Bosse">Grande Bosse</a>]]></description>
@@ -1438,7 +1374,7 @@
 		<Placemark>
 			<name><![CDATA[Grande Casse]]></name>
 			<Point>
-				<coordinates>6.8275,45.40528,0</coordinates>
+				<coordinates>6.8275,45.40528,3855</coordinates>
 			</Point>
 			<Snippet></Snippet>
 			<description><![CDATA[<br>Source: Wikipedia article <a href="https://fr.wikipedia.org/wiki/Grande_Casse">Grande Casse</a>]]></description>
@@ -1446,7 +1382,7 @@
 		<Placemark>
 			<name><![CDATA[Grande Lance de Domène]]></name>
 			<Point>
-				<coordinates>5.95917,45.17139,0</coordinates>
+				<coordinates>5.95917,45.17139,2790</coordinates>
 			</Point>
 			<Snippet></Snippet>
 			<description><![CDATA[<br>Source: Wikipedia article <a href="https://fr.wikipedia.org/wiki/Grande_Lance_de_Domène">Grande Lance de Domène</a>]]></description>
@@ -1454,7 +1390,7 @@
 		<Placemark>
 			<name><![CDATA[Grande Lauzière]]></name>
 			<Point>
-				<coordinates>5.95889,45.15694,0</coordinates>
+				<coordinates>5.95889,45.15694,2741</coordinates>
 			</Point>
 			<Snippet></Snippet>
 			<description><![CDATA[<br>Source: Wikipedia article <a href="https://fr.wikipedia.org/wiki/Grande_Lauzière">Grande Lauzière</a>]]></description>
@@ -1462,7 +1398,7 @@
 		<Placemark>
 			<name><![CDATA[Grande Motte]]></name>
 			<Point>
-				<coordinates>6.87028,45.4111,0</coordinates>
+				<coordinates>6.87028,45.4111,3653</coordinates>
 			</Point>
 			<Snippet></Snippet>
 			<description><![CDATA[<br>Source: Wikipedia article <a href="https://fr.wikipedia.org/wiki/Grande_Motte">Grande Motte</a>]]></description>
@@ -1470,7 +1406,7 @@
 		<Placemark>
 			<name><![CDATA[Grande Moucherolle]]></name>
 			<Point>
-				<coordinates>5.56417,45.00528,0</coordinates>
+				<coordinates>5.56417,45.00528,2284</coordinates>
 			</Point>
 			<Snippet></Snippet>
 			<description><![CDATA[<br>Source: Wikipedia article <a href="https://fr.wikipedia.org/wiki/Grande_Moucherolle">Grande Moucherolle</a>]]></description>
@@ -1478,7 +1414,7 @@
 		<Placemark>
 			<name><![CDATA[Grande Parel]]></name>
 			<Point>
-				<coordinates>6.64222,45.62722,0</coordinates>
+				<coordinates>6.64222,45.62722,2725</coordinates>
 			</Point>
 			<Snippet></Snippet>
 			<description><![CDATA[<br>Source: Wikipedia article <a href="https://fr.wikipedia.org/wiki/Grande_Parel">Grande Parel</a>]]></description>
@@ -1486,7 +1422,7 @@
 		<Placemark>
 			<name><![CDATA[Grande Rocheuse]]></name>
 			<Point>
-				<coordinates>6.97278,45.93444,0</coordinates>
+				<coordinates>6.97278,45.93444,4102</coordinates>
 			</Point>
 			<Snippet></Snippet>
 			<description><![CDATA[<br>Source: Wikipedia article <a href="https://fr.wikipedia.org/wiki/Grande_Rocheuse">Grande Rocheuse</a>]]></description>
@@ -1494,7 +1430,7 @@
 		<Placemark>
 			<name><![CDATA[Grande Ruine]]></name>
 			<Point>
-				<coordinates>6.32889,44.9675,0</coordinates>
+				<coordinates>6.32889,44.9675,3765</coordinates>
 			</Point>
 			<Snippet></Snippet>
 			<description><![CDATA[<br>Source: Wikipedia article <a href="https://fr.wikipedia.org/wiki/Grande_Ruine">Grande Ruine</a>]]></description>
@@ -1502,7 +1438,7 @@
 		<Placemark>
 			<name><![CDATA[Grande Sure]]></name>
 			<Point>
-				<coordinates>5.70306,45.33528,0</coordinates>
+				<coordinates>5.70306,45.33528,1920</coordinates>
 			</Point>
 			<Snippet></Snippet>
 			<description><![CDATA[<br>Source: Wikipedia article <a href="https://fr.wikipedia.org/wiki/Grande_Sure">Grande Sure</a>]]></description>
@@ -1510,7 +1446,7 @@
 		<Placemark>
 			<name><![CDATA[Grande Séolane]]></name>
 			<Point>
-				<coordinates>6.54583,44.3375,0</coordinates>
+				<coordinates>6.54583,44.3375,2909</coordinates>
 			</Point>
 			<Snippet></Snippet>
 			<description><![CDATA[<br>Source: Wikipedia article <a href="https://fr.wikipedia.org/wiki/Grande_Séolane">Grande Séolane</a>]]></description>
@@ -1518,7 +1454,7 @@
 		<Placemark>
 			<name><![CDATA[Grande Tête de l'Obiou]]></name>
 			<Point>
-				<coordinates>5.83944,44.77528,0</coordinates>
+				<coordinates>5.83944,44.77528,2789</coordinates>
 			</Point>
 			<Snippet></Snippet>
 			<description><![CDATA[<br>Source: Wikipedia article <a href="https://fr.wikipedia.org/wiki/Grande_Tête_de_l'Obiou">Grande Tête de l'Obiou</a>]]></description>
@@ -1526,7 +1462,7 @@
 		<Placemark>
 			<name><![CDATA[Grande aiguille Rousse]]></name>
 			<Point>
-				<coordinates>7.1096,45.4329,0</coordinates>
+				<coordinates>7.1096,45.4329,3482</coordinates>
 			</Point>
 			<Snippet></Snippet>
 			<description><![CDATA[<br>Source: Wikipedia article <a href="https://fr.wikipedia.org/wiki/Grande_aiguille_Rousse">Grande aiguille Rousse</a>]]></description>
@@ -1534,7 +1470,7 @@
 		<Placemark>
 			<name><![CDATA[Grande aiguille de la Bérarde]]></name>
 			<Point>
-				<coordinates>6.2775,44.91611,0</coordinates>
+				<coordinates>6.2775,44.91611,3421</coordinates>
 			</Point>
 			<Snippet></Snippet>
 			<description><![CDATA[<br>Source: Wikipedia article <a href="https://fr.wikipedia.org/wiki/Grande_aiguille_de_la_Bérarde">Grande aiguille de la Bérarde</a>]]></description>
@@ -1542,7 +1478,7 @@
 		<Placemark>
 			<name><![CDATA[Grandes Jorasses]]></name>
 			<Point>
-				<coordinates>6.98806,45.86889,0</coordinates>
+				<coordinates>6.98806,45.86889,4208</coordinates>
 			</Point>
 			<Snippet></Snippet>
 			<description><![CDATA[<br>Source: Wikipedia article <a href="https://fr.wikipedia.org/wiki/Grandes_Jorasses">Grandes Jorasses</a>]]></description>
@@ -1550,7 +1486,7 @@
 		<Placemark>
 			<name><![CDATA[Grands Crêts]]></name>
 			<Point>
-				<coordinates>5.81361,45.27111,0</coordinates>
+				<coordinates>5.81361,45.27111,1489</coordinates>
 			</Point>
 			<Snippet></Snippet>
 			<description><![CDATA[<br>Source: Wikipedia article <a href="https://fr.wikipedia.org/wiki/Grands_Crêts">Grands Crêts</a>]]></description>
@@ -1558,7 +1494,7 @@
 		<Placemark>
 			<name><![CDATA[Grenier de Commune]]></name>
 			<Point>
-				<coordinates>6.83306,46.04556,0</coordinates>
+				<coordinates>6.83306,46.04556,2775</coordinates>
 			</Point>
 			<Snippet></Snippet>
 			<description><![CDATA[<br>Source: Wikipedia article <a href="https://fr.wikipedia.org/wiki/Grenier_de_Commune">Grenier de Commune</a>]]></description>
@@ -1566,7 +1502,7 @@
 		<Placemark>
 			<name><![CDATA[Gros Rognon]]></name>
 			<Point>
-				<coordinates>6.90444,45.86833,0</coordinates>
+				<coordinates>6.90444,45.86833,3541</coordinates>
 			</Point>
 			<Snippet></Snippet>
 			<description><![CDATA[<br>Source: Wikipedia article <a href="https://fr.wikipedia.org/wiki/Gros_Rognon">Gros Rognon</a>]]></description>
@@ -1574,7 +1510,7 @@
 		<Placemark>
 			<name><![CDATA[Grun de Saint-Maurice]]></name>
 			<Point>
-				<coordinates>6.05639,44.81583,0</coordinates>
+				<coordinates>6.05639,44.81583,2775</coordinates>
 			</Point>
 			<Snippet></Snippet>
 			<description><![CDATA[<br>Source: Wikipedia article <a href="https://fr.wikipedia.org/wiki/Grun_de_Saint-Maurice">Grun de Saint-Maurice</a>]]></description>
@@ -1582,7 +1518,7 @@
 		<Placemark>
 			<name><![CDATA[Haute-Pointe]]></name>
 			<Point>
-				<coordinates>6.54972,46.17528,0</coordinates>
+				<coordinates>6.54972,46.17528,1958</coordinates>
 			</Point>
 			<Snippet></Snippet>
 			<description><![CDATA[<br>Source: Wikipedia article <a href="https://fr.wikipedia.org/wiki/Haute-Pointe">Haute-Pointe</a>]]></description>
@@ -1590,7 +1526,7 @@
 		<Placemark>
 			<name><![CDATA[Hauts-Forts]]></name>
 			<Point>
-				<coordinates>6.7775,46.16861,0</coordinates>
+				<coordinates>6.7775,46.16861,2466</coordinates>
 			</Point>
 			<Snippet></Snippet>
 			<description><![CDATA[<br>Source: Wikipedia article <a href="https://fr.wikipedia.org/wiki/Hauts-Forts">Hauts-Forts</a>]]></description>
@@ -1598,7 +1534,7 @@
 		<Placemark>
 			<name><![CDATA[Hirmentaz]]></name>
 			<Point>
-				<coordinates>6.495,46.22972,0</coordinates>
+				<coordinates>6.495,46.22972,1607</coordinates>
 			</Point>
 			<Snippet></Snippet>
 			<description><![CDATA[<br>Source: Wikipedia article <a href="https://fr.wikipedia.org/wiki/Hirmentaz">Hirmentaz</a>]]></description>
@@ -1606,7 +1542,7 @@
 		<Placemark>
 			<name><![CDATA[Jocou]]></name>
 			<Point>
-				<coordinates>5.6475,44.72444,0</coordinates>
+				<coordinates>5.6475,44.72444,2051</coordinates>
 			</Point>
 			<Snippet></Snippet>
 			<description><![CDATA[<br>Source: Wikipedia article <a href="https://fr.wikipedia.org/wiki/Jocou">Jocou</a>]]></description>
@@ -1614,7 +1550,7 @@
 		<Placemark>
 			<name><![CDATA[L'Ailefroide]]></name>
 			<Point>
-				<coordinates>6.35667,44.885,0</coordinates>
+				<coordinates>6.35667,44.885,3954</coordinates>
 			</Point>
 			<Snippet></Snippet>
 			<description><![CDATA[<br>Source: Wikipedia article <a href="https://fr.wikipedia.org/wiki/L'Ailefroide">L'Ailefroide</a>]]></description>
@@ -1622,7 +1558,7 @@
 		<Placemark>
 			<name><![CDATA[L'Olan]]></name>
 			<Point>
-				<coordinates>6.19667,44.85889,0</coordinates>
+				<coordinates>6.19667,44.85889,3564</coordinates>
 			</Point>
 			<Snippet></Snippet>
 			<description><![CDATA[<br>Source: Wikipedia article <a href="https://fr.wikipedia.org/wiki/L'Olan">L'Olan</a>]]></description>
@@ -1630,7 +1566,7 @@
 		<Placemark>
 			<name><![CDATA[La Buffe]]></name>
 			<Point>
-				<coordinates>5.58417,45.24389,0</coordinates>
+				<coordinates>5.58417,45.24389,1623</coordinates>
 			</Point>
 			<Snippet></Snippet>
 			<description><![CDATA[<br>Source: Wikipedia article <a href="https://fr.wikipedia.org/wiki/La_Buffe">La Buffe</a>]]></description>
@@ -1638,7 +1574,7 @@
 		<Placemark>
 			<name><![CDATA[La Cochette]]></name>
 			<Point>
-				<coordinates>5.83556,45.45528,0</coordinates>
+				<coordinates>5.83556,45.45528,1618</coordinates>
 			</Point>
 			<Snippet></Snippet>
 			<description><![CDATA[<br>Source: Wikipedia article <a href="https://fr.wikipedia.org/wiki/La_Cochette">La Cochette</a>]]></description>
@@ -1646,7 +1582,7 @@
 		<Placemark>
 			<name><![CDATA[La Cucumelle]]></name>
 			<Point>
-				<coordinates>6.50889,44.93806,0</coordinates>
+				<coordinates>6.50889,44.93806,2698</coordinates>
 			</Point>
 			<Snippet></Snippet>
 			<description><![CDATA[<br>Source: Wikipedia article <a href="https://fr.wikipedia.org/wiki/La_Cucumelle">La Cucumelle</a>]]></description>
@@ -1654,7 +1590,7 @@
 		<Placemark>
 			<name><![CDATA[La Grande Pointe]]></name>
 			<Point>
-				<coordinates>6.58972,46.21806,0</coordinates>
+				<coordinates>6.58972,46.21806,1802</coordinates>
 			</Point>
 			<Snippet></Snippet>
 			<description><![CDATA[<br>Source: Wikipedia article <a href="https://fr.wikipedia.org/wiki/La_Grande_Pointe">La Grande Pointe</a>]]></description>
@@ -1662,7 +1598,7 @@
 		<Placemark>
 			<name><![CDATA[La Meije]]></name>
 			<Point>
-				<coordinates>6.30861,45.00472,0</coordinates>
+				<coordinates>6.30861,45.00472,3983</coordinates>
 			</Point>
 			<Snippet></Snippet>
 			<description><![CDATA[<br>Source: Wikipedia article <a href="https://fr.wikipedia.org/wiki/La_Meije">La Meije</a>]]></description>
@@ -1670,7 +1606,7 @@
 		<Placemark>
 			<name><![CDATA[La Miaz]]></name>
 			<Point>
-				<coordinates>6.538468,45.920459,0</coordinates>
+				<coordinates>6.538468,45.920459,2336</coordinates>
 			</Point>
 			<Snippet></Snippet>
 			<description><![CDATA[<br>Source: Wikipedia article <a href="https://fr.wikipedia.org/wiki/La_Miaz">La Miaz</a>]]></description>
@@ -1678,7 +1614,7 @@
 		<Placemark>
 			<name><![CDATA[La Scia]]></name>
 			<Point>
-				<coordinates>5.85083,45.34889,0</coordinates>
+				<coordinates>5.85083,45.34889,1791</coordinates>
 			</Point>
 			<Snippet></Snippet>
 			<description><![CDATA[<br>Source: Wikipedia article <a href="https://fr.wikipedia.org/wiki/La_Scia">La Scia</a>]]></description>
@@ -1686,7 +1622,7 @@
 		<Placemark>
 			<name><![CDATA[La Sure]]></name>
 			<Point>
-				<coordinates>5.59778,45.23528,0</coordinates>
+				<coordinates>5.59778,45.23528,1643</coordinates>
 			</Point>
 			<Snippet></Snippet>
 			<description><![CDATA[<br>Source: Wikipedia article <a href="https://fr.wikipedia.org/wiki/La_Sure">La Sure</a>]]></description>
@@ -1694,7 +1630,7 @@
 		<Placemark>
 			<name><![CDATA[La Tour Ronde]]></name>
 			<Point>
-				<coordinates>6.9075,45.84389,0</coordinates>
+				<coordinates>6.9075,45.84389,3792</coordinates>
 			</Point>
 			<Snippet></Snippet>
 			<description><![CDATA[<br>Source: Wikipedia article <a href="https://fr.wikipedia.org/wiki/La_Tour_Ronde">La Tour Ronde</a>]]></description>
@@ -1702,7 +1638,7 @@
 		<Placemark>
 			<name><![CDATA[La Tournette]]></name>
 			<Point>
-				<coordinates>6.2861,45.82722,0</coordinates>
+				<coordinates>6.2861,45.82722,2351</coordinates>
 			</Point>
 			<Snippet></Snippet>
 			<description><![CDATA[<br>Source: Wikipedia article <a href="https://fr.wikipedia.org/wiki/La_Tournette">La Tournette</a>]]></description>
@@ -1710,7 +1646,7 @@
 		<Placemark>
 			<name><![CDATA[Lancebranlette]]></name>
 			<Point>
-				<coordinates>6.85611,45.68528,0</coordinates>
+				<coordinates>6.85611,45.68528,2936</coordinates>
 			</Point>
 			<Snippet></Snippet>
 			<description><![CDATA[<br>Source: Wikipedia article <a href="https://fr.wikipedia.org/wiki/Lancebranlette">Lancebranlette</a>]]></description>
@@ -1718,7 +1654,7 @@
 		<Placemark>
 			<name><![CDATA[Lances de Malissard]]></name>
 			<Point>
-				<coordinates>5.87333,45.34667,0</coordinates>
+				<coordinates>5.87333,45.34667,2045</coordinates>
 			</Point>
 			<Snippet></Snippet>
 			<description><![CDATA[<br>Source: Wikipedia article <a href="https://fr.wikipedia.org/wiki/Lances_de_Malissard">Lances de Malissard</a>]]></description>
@@ -1726,15 +1662,15 @@
 		<Placemark>
 			<name><![CDATA[Le Brévent]]></name>
 			<Point>
-				<coordinates>6.83778,45.93417,0</coordinates>
+				<coordinates>6.83778,45.93417,2525</coordinates>
 			</Point>
 			<Snippet></Snippet>
 			<description><![CDATA[<br>Source: Wikipedia article <a href="https://fr.wikipedia.org/wiki/Le_Brévent">Le Brévent</a>]]></description>
 		</Placemark>
 		<Placemark>
-			<name><![CDATA[Le Cheval Blanc (sommet)]]></name>
+			<name><![CDATA[Le Cheval Blanc]]></name>
 			<Point>
-				<coordinates>6.87278,46.05194,0</coordinates>
+				<coordinates>6.87278,46.05194,2831</coordinates>
 			</Point>
 			<Snippet></Snippet>
 			<description><![CDATA[<br>Source: Wikipedia article <a href="https://fr.wikipedia.org/wiki/Le_Cheval_Blanc_(sommet)">Le Cheval Blanc (sommet)</a>]]></description>
@@ -1742,7 +1678,7 @@
 		<Placemark>
 			<name><![CDATA[Le Drouvet]]></name>
 			<Point>
-				<coordinates>6.3175,44.72111,0</coordinates>
+				<coordinates>6.3175,44.72111,2655</coordinates>
 			</Point>
 			<Snippet></Snippet>
 			<description><![CDATA[<br>Source: Wikipedia article <a href="https://fr.wikipedia.org/wiki/Le_Drouvet">Le Drouvet</a>]]></description>
@@ -1750,7 +1686,7 @@
 		<Placemark>
 			<name><![CDATA[Le Fifre]]></name>
 			<Point>
-				<coordinates>6.35667,44.91667,0</coordinates>
+				<coordinates>6.35667,44.91667,3699</coordinates>
 			</Point>
 			<Snippet></Snippet>
 			<description><![CDATA[<br>Source: Wikipedia article <a href="https://fr.wikipedia.org/wiki/Le_Fifre">Le Fifre</a>]]></description>
@@ -1758,7 +1694,7 @@
 		<Placemark>
 			<name><![CDATA[Le Grand Manti]]></name>
 			<Point>
-				<coordinates>5.90861,45.38472,0</coordinates>
+				<coordinates>5.90861,45.38472,1818</coordinates>
 			</Point>
 			<Snippet></Snippet>
 			<description><![CDATA[<br>Source: Wikipedia article <a href="https://fr.wikipedia.org/wiki/Le_Grand_Manti">Le Grand Manti</a>]]></description>
@@ -1766,7 +1702,7 @@
 		<Placemark>
 			<name><![CDATA[Le Marteau]]></name>
 			<Point>
-				<coordinates>6.76278,45.965853,0</coordinates>
+				<coordinates>6.76278,45.965853,2289</coordinates>
 			</Point>
 			<Snippet></Snippet>
 			<description><![CDATA[<br>Source: Wikipedia article <a href="https://fr.wikipedia.org/wiki/Le_Marteau">Le Marteau</a>]]></description>
@@ -1774,7 +1710,7 @@
 		<Placemark>
 			<name><![CDATA[Le Moucherotte]]></name>
 			<Point>
-				<coordinates>5.63944,45.1475,0</coordinates>
+				<coordinates>5.63944,45.1475,1901</coordinates>
 			</Point>
 			<Snippet></Snippet>
 			<description><![CDATA[<br>Source: Wikipedia article <a href="https://fr.wikipedia.org/wiki/Le_Moucherotte">Le Moucherotte</a>]]></description>
@@ -1782,7 +1718,7 @@
 		<Placemark>
 			<name><![CDATA[Le Môle]]></name>
 			<Point>
-				<coordinates>6.455,46.10667,0</coordinates>
+				<coordinates>6.455,46.10667,1863</coordinates>
 			</Point>
 			<Snippet></Snippet>
 			<description><![CDATA[<br>Source: Wikipedia article <a href="https://fr.wikipedia.org/wiki/Le_Môle">Le Môle</a>]]></description>
@@ -1790,7 +1726,7 @@
 		<Placemark>
 			<name><![CDATA[Le Pavé]]></name>
 			<Point>
-				<coordinates>6.32389,44.99861,0</coordinates>
+				<coordinates>6.32389,44.99861,3823</coordinates>
 			</Point>
 			<Snippet></Snippet>
 			<description><![CDATA[<br>Source: Wikipedia article <a href="https://fr.wikipedia.org/wiki/Le_Pavé">Le Pavé</a>]]></description>
@@ -1798,7 +1734,7 @@
 		<Placemark>
 			<name><![CDATA[Le Plaret]]></name>
 			<Point>
-				<coordinates>6.25889,44.96806,0</coordinates>
+				<coordinates>6.25889,44.96806,3563</coordinates>
 			</Point>
 			<Snippet></Snippet>
 			<description><![CDATA[<br>Source: Wikipedia article <a href="https://fr.wikipedia.org/wiki/Le_Plaret">Le Plaret</a>]]></description>
@@ -1806,7 +1742,7 @@
 		<Placemark>
 			<name><![CDATA[Le Rochail]]></name>
 			<Point>
-				<coordinates>6.03111,44.98,0</coordinates>
+				<coordinates>6.03111,44.98,3022</coordinates>
 			</Point>
 			<Snippet></Snippet>
 			<description><![CDATA[<br>Source: Wikipedia article <a href="https://fr.wikipedia.org/wiki/Le_Rochail">Le Rochail</a>]]></description>
@@ -1814,7 +1750,7 @@
 		<Placemark>
 			<name><![CDATA[Le Râteau]]></name>
 			<Point>
-				<coordinates>6.2806,45.00111,0</coordinates>
+				<coordinates>6.2806,45.00111,3809</coordinates>
 			</Point>
 			<Snippet></Snippet>
 			<description><![CDATA[<br>Source: Wikipedia article <a href="https://fr.wikipedia.org/wiki/Le_Râteau">Le Râteau</a>]]></description>
@@ -1822,7 +1758,7 @@
 		<Placemark>
 			<name><![CDATA[Le Sirac]]></name>
 			<Point>
-				<coordinates>6.30667,44.7889,0</coordinates>
+				<coordinates>6.30667,44.7889,3441</coordinates>
 			</Point>
 			<Snippet></Snippet>
 			<description><![CDATA[<br>Source: Wikipedia article <a href="https://fr.wikipedia.org/wiki/Le_Sirac">Le Sirac</a>]]></description>
@@ -1830,7 +1766,7 @@
 		<Placemark>
 			<name><![CDATA[Les Bans]]></name>
 			<Point>
-				<coordinates>6.3361,44.84833,0</coordinates>
+				<coordinates>6.3361,44.84833,3669</coordinates>
 			</Point>
 			<Snippet></Snippet>
 			<description><![CDATA[<br>Source: Wikipedia article <a href="https://fr.wikipedia.org/wiki/Les_Bans">Les Bans</a>]]></description>
@@ -1838,7 +1774,7 @@
 		<Placemark>
 			<name><![CDATA[Les Courtes]]></name>
 			<Point>
-				<coordinates>7.003472,45.9275,0</coordinates>
+				<coordinates>7.003472,45.9275,3856</coordinates>
 			</Point>
 			<Snippet></Snippet>
 			<description><![CDATA[<br>Source: Wikipedia article <a href="https://fr.wikipedia.org/wiki/Les_Courtes">Les Courtes</a>]]></description>
@@ -1846,7 +1782,7 @@
 		<Placemark>
 			<name><![CDATA[Les Droites]]></name>
 			<Point>
-				<coordinates>6.98917,45.93028,0</coordinates>
+				<coordinates>6.98917,45.93028,4000</coordinates>
 			</Point>
 			<Snippet></Snippet>
 			<description><![CDATA[<br>Source: Wikipedia article <a href="https://fr.wikipedia.org/wiki/Les_Droites">Les Droites</a>]]></description>
@@ -1854,7 +1790,7 @@
 		<Placemark>
 			<name><![CDATA[Les Drus]]></name>
 			<Point>
-				<coordinates>6.95639,45.93278,0</coordinates>
+				<coordinates>6.95639,45.93278,3754</coordinates>
 			</Point>
 			<Snippet></Snippet>
 			<description><![CDATA[<br>Source: Wikipedia article <a href="https://fr.wikipedia.org/wiki/Les_Drus">Les Drus</a>]]></description>
@@ -1862,7 +1798,7 @@
 		<Placemark>
 			<name><![CDATA[Les Monges]]></name>
 			<Point>
-				<coordinates>6.19417,44.26278,0</coordinates>
+				<coordinates>6.19417,44.26278,2115</coordinates>
 			</Point>
 			<Snippet></Snippet>
 			<description><![CDATA[<br>Source: Wikipedia article <a href="https://fr.wikipedia.org/wiki/Les_Monges">Les Monges</a>]]></description>
@@ -1870,7 +1806,7 @@
 		<Placemark>
 			<name><![CDATA[Les Périades]]></name>
 			<Point>
-				<coordinates>6.96056,45.8725,0</coordinates>
+				<coordinates>6.96056,45.8725,3549</coordinates>
 			</Point>
 			<Snippet></Snippet>
 			<description><![CDATA[<br>Source: Wikipedia article <a href="https://fr.wikipedia.org/wiki/Les_Périades">Les Périades</a>]]></description>
@@ -1878,7 +1814,7 @@
 		<Placemark>
 			<name><![CDATA[Les Rouies]]></name>
 			<Point>
-				<coordinates>6.25806,44.86361,0</coordinates>
+				<coordinates>6.25806,44.86361,3589</coordinates>
 			</Point>
 			<Snippet></Snippet>
 			<description><![CDATA[<br>Source: Wikipedia article <a href="https://fr.wikipedia.org/wiki/Les_Rouies">Les Rouies</a>]]></description>
@@ -1886,7 +1822,7 @@
 		<Placemark>
 			<name><![CDATA[Les Voirons]]></name>
 			<Point>
-				<coordinates>6.35528,46.2306,0</coordinates>
+				<coordinates>6.35528,46.2306,1480</coordinates>
 			</Point>
 			<Snippet></Snippet>
 			<description><![CDATA[<br>Source: Wikipedia article <a href="https://fr.wikipedia.org/wiki/Les_Voirons">Les Voirons</a>]]></description>
@@ -1894,7 +1830,7 @@
 		<Placemark>
 			<name><![CDATA[Levanna]]></name>
 			<Point>
-				<coordinates>7.17194,45.41028,0</coordinates>
+				<coordinates>7.17194,45.41028,3619</coordinates>
 			</Point>
 			<Snippet></Snippet>
 			<description><![CDATA[<br>Source: Wikipedia article <a href="https://fr.wikipedia.org/wiki/Levanna">Levanna</a>]]></description>
@@ -1902,7 +1838,7 @@
 		<Placemark>
 			<name><![CDATA[Massif d'Uchaux]]></name>
 			<Point>
-				<coordinates>4.8139,44.23111,0</coordinates>
+				<coordinates>4.8139,44.23111,281</coordinates>
 			</Point>
 			<Snippet></Snippet>
 			<description><![CDATA[<br>Source: Wikipedia article <a href="https://fr.wikipedia.org/wiki/Massif_d'Uchaux">Massif d'Uchaux</a>]]></description>
@@ -1910,7 +1846,7 @@
 		<Placemark>
 			<name><![CDATA[Miélandre]]></name>
 			<Point>
-				<coordinates>5.19639,44.48472,0</coordinates>
+				<coordinates>5.19639,44.48472,1451</coordinates>
 			</Point>
 			<Snippet></Snippet>
 			<description><![CDATA[<br>Source: Wikipedia article <a href="https://fr.wikipedia.org/wiki/Miélandre">Miélandre</a>]]></description>
@@ -1918,7 +1854,7 @@
 		<Placemark>
 			<name><![CDATA[Mont Agel]]></name>
 			<Point>
-				<coordinates>7.42639,43.77528,0</coordinates>
+				<coordinates>7.42639,43.77528,1148</coordinates>
 			</Point>
 			<Snippet></Snippet>
 			<description><![CDATA[<br>Source: Wikipedia article <a href="https://fr.wikipedia.org/wiki/Mont_Agel">Mont Agel</a>]]></description>
@@ -1926,7 +1862,7 @@
 		<Placemark>
 			<name><![CDATA[Mont Aiguille]]></name>
 			<Point>
-				<coordinates>5.55306,44.84194,0</coordinates>
+				<coordinates>5.55306,44.84194,2087</coordinates>
 			</Point>
 			<Snippet></Snippet>
 			<description><![CDATA[<br>Source: Wikipedia article <a href="https://fr.wikipedia.org/wiki/Mont_Aiguille">Mont Aiguille</a>]]></description>
@@ -1934,7 +1870,7 @@
 		<Placemark>
 			<name><![CDATA[Mont Aiguillette]]></name>
 			<Point>
-				<coordinates>7.02444,44.69111,0</coordinates>
+				<coordinates>7.02444,44.69111,3287</coordinates>
 			</Point>
 			<Snippet></Snippet>
 			<description><![CDATA[<br>Source: Wikipedia article <a href="https://fr.wikipedia.org/wiki/Mont_Aiguillette">Mont Aiguillette</a>]]></description>
@@ -1942,7 +1878,7 @@
 		<Placemark>
 			<name><![CDATA[Mont Bichet]]></name>
 			<Point>
-				<coordinates>6.53722,46.27806,0</coordinates>
+				<coordinates>6.53722,46.27806,1360</coordinates>
 			</Point>
 			<Snippet></Snippet>
 			<description><![CDATA[<br>Source: Wikipedia article <a href="https://fr.wikipedia.org/wiki/Mont_Bichet">Mont Bichet</a>]]></description>
@@ -1950,7 +1886,7 @@
 		<Placemark>
 			<name><![CDATA[Mont Billiat]]></name>
 			<Point>
-				<coordinates>6.58389,46.28833,0</coordinates>
+				<coordinates>6.58389,46.28833,1894</coordinates>
 			</Point>
 			<Snippet></Snippet>
 			<description><![CDATA[<br>Source: Wikipedia article <a href="https://fr.wikipedia.org/wiki/Mont_Billiat">Mont Billiat</a>]]></description>
@@ -1958,7 +1894,7 @@
 		<Placemark>
 			<name><![CDATA[Mont Blanc]]></name>
 			<Point>
-				<coordinates>6.864717,45.832627,0</coordinates>
+				<coordinates>6.864717,45.832627,4808.73</coordinates>
 			</Point>
 			<Snippet></Snippet>
 			<description><![CDATA[<br>Source: Wikipedia article <a href="https://fr.wikipedia.org/wiki/Mont_Blanc">Mont Blanc</a>]]></description>
@@ -1966,7 +1902,7 @@
 		<Placemark>
 			<name><![CDATA[Mont Blanc de Courmayeur]]></name>
 			<Point>
-				<coordinates>6.8694,45.82889,0</coordinates>
+				<coordinates>6.8694,45.82889,4748</coordinates>
 			</Point>
 			<Snippet></Snippet>
 			<description><![CDATA[<br>Source: Wikipedia article <a href="https://fr.wikipedia.org/wiki/Mont_Blanc_de_Courmayeur">Mont Blanc de Courmayeur</a>]]></description>
@@ -1974,7 +1910,7 @@
 		<Placemark>
 			<name><![CDATA[Mont Blanc du Tacul]]></name>
 			<Point>
-				<coordinates>6.88778,45.85667,0</coordinates>
+				<coordinates>6.88778,45.85667,4248</coordinates>
 			</Point>
 			<Snippet></Snippet>
 			<description><![CDATA[<br>Source: Wikipedia article <a href="https://fr.wikipedia.org/wiki/Mont_Blanc_du_Tacul">Mont Blanc du Tacul</a>]]></description>
@@ -1982,7 +1918,7 @@
 		<Placemark>
 			<name><![CDATA[Mont Boron]]></name>
 			<Point>
-				<coordinates>7.30083,43.69,0</coordinates>
+				<coordinates>7.30083,43.69,193.3</coordinates>
 			</Point>
 			<Snippet></Snippet>
 			<description><![CDATA[<br>Source: Wikipedia article <a href="https://fr.wikipedia.org/wiki/Mont_Boron">Mont Boron</a>]]></description>
@@ -1990,7 +1926,7 @@
 		<Placemark>
 			<name><![CDATA[Mont Bréquin]]></name>
 			<Point>
-				<coordinates>6.53361,45.25167,0</coordinates>
+				<coordinates>6.53361,45.25167,3130</coordinates>
 			</Point>
 			<Snippet></Snippet>
 			<description><![CDATA[<br>Source: Wikipedia article <a href="https://fr.wikipedia.org/wiki/Mont_Bréquin">Mont Bréquin</a>]]></description>
@@ -1998,7 +1934,7 @@
 		<Placemark>
 			<name><![CDATA[Mont Buet]]></name>
 			<Point>
-				<coordinates>6.8525,46.025,0</coordinates>
+				<coordinates>6.8525,46.025,3096</coordinates>
 			</Point>
 			<Snippet></Snippet>
 			<description><![CDATA[<br>Source: Wikipedia article <a href="https://fr.wikipedia.org/wiki/Mont_Buet">Mont Buet</a>]]></description>
@@ -2006,7 +1942,7 @@
 		<Placemark>
 			<name><![CDATA[Mont Bégo]]></name>
 			<Point>
-				<coordinates>7.45083,44.07306,0</coordinates>
+				<coordinates>7.45083,44.07306,2872</coordinates>
 			</Point>
 			<Snippet></Snippet>
 			<description><![CDATA[<br>Source: Wikipedia article <a href="https://fr.wikipedia.org/wiki/Mont_Bégo">Mont Bégo</a>]]></description>
@@ -2014,7 +1950,7 @@
 		<Placemark>
 			<name><![CDATA[Mont Chaberton]]></name>
 			<Point>
-				<coordinates>6.75111,44.96444,0</coordinates>
+				<coordinates>6.75111,44.96444,3131</coordinates>
 			</Point>
 			<Snippet></Snippet>
 			<description><![CDATA[<br>Source: Wikipedia article <a href="https://fr.wikipedia.org/wiki/Mont_Chaberton">Mont Chaberton</a>]]></description>
@@ -2022,7 +1958,7 @@
 		<Placemark>
 			<name><![CDATA[Mont Charvet]]></name>
 			<Point>
-				<coordinates>6.53861,45.94222,0</coordinates>
+				<coordinates>6.53861,45.94222,2538</coordinates>
 			</Point>
 			<Snippet></Snippet>
 			<description><![CDATA[<br>Source: Wikipedia article <a href="https://fr.wikipedia.org/wiki/Mont_Charvet">Mont Charvet</a>]]></description>
@@ -2030,7 +1966,7 @@
 		<Placemark>
 			<name><![CDATA[Mont Charvin (Aravis)]]></name>
 			<Point>
-				<coordinates>6.42028,45.8025,0</coordinates>
+				<coordinates>6.42028,45.8025,2409</coordinates>
 			</Point>
 			<Snippet></Snippet>
 			<description><![CDATA[<br>Source: Wikipedia article <a href="https://fr.wikipedia.org/wiki/Mont_Charvin_(Aravis)">Mont Charvin (Aravis)</a>]]></description>
@@ -2038,7 +1974,7 @@
 		<Placemark>
 			<name><![CDATA[Mont Charvin (Maurienne)]]></name>
 			<Point>
-				<coordinates>6.28472,45.21722,0</coordinates>
+				<coordinates>6.28472,45.21722,2207</coordinates>
 			</Point>
 			<Snippet></Snippet>
 			<description><![CDATA[<br>Source: Wikipedia article <a href="https://fr.wikipedia.org/wiki/Mont_Charvin_(Maurienne)">Mont Charvin (Maurienne)</a>]]></description>
@@ -2046,7 +1982,7 @@
 		<Placemark>
 			<name><![CDATA[Mont Chauffé]]></name>
 			<Point>
-				<coordinates>6.76056,46.30944,0</coordinates>
+				<coordinates>6.76056,46.30944,2093</coordinates>
 			</Point>
 			<Snippet></Snippet>
 			<description><![CDATA[<br>Source: Wikipedia article <a href="https://fr.wikipedia.org/wiki/Mont_Chauffé">Mont Chauffé</a>]]></description>
@@ -2054,7 +1990,7 @@
 		<Placemark>
 			<name><![CDATA[Mont Chenaillet]]></name>
 			<Point>
-				<coordinates>6.74028,44.90222,0</coordinates>
+				<coordinates>6.74028,44.90222,2650</coordinates>
 			</Point>
 			<Snippet></Snippet>
 			<description><![CDATA[<br>Source: Wikipedia article <a href="https://fr.wikipedia.org/wiki/Mont_Chenaillet">Mont Chenaillet</a>]]></description>
@@ -2062,7 +1998,7 @@
 		<Placemark>
 			<name><![CDATA[Mont Chiran]]></name>
 			<Point>
-				<coordinates>6.31667,43.86806,0</coordinates>
+				<coordinates>6.31667,43.86806,1905</coordinates>
 			</Point>
 			<Snippet></Snippet>
 			<description><![CDATA[<br>Source: Wikipedia article <a href="https://fr.wikipedia.org/wiki/Mont_Chiran">Mont Chiran</a>]]></description>
@@ -2070,7 +2006,7 @@
 		<Placemark>
 			<name><![CDATA[Mont Chéry]]></name>
 			<Point>
-				<coordinates>6.64806,46.16889,0</coordinates>
+				<coordinates>6.64806,46.16889,1826</coordinates>
 			</Point>
 			<Snippet></Snippet>
 			<description><![CDATA[<br>Source: Wikipedia article <a href="https://fr.wikipedia.org/wiki/Mont_Chéry">Mont Chéry</a>]]></description>
@@ -2078,7 +2014,7 @@
 		<Placemark>
 			<name><![CDATA[Mont Clapier]]></name>
 			<Point>
-				<coordinates>7.42,44.11528,0</coordinates>
+				<coordinates>7.42,44.11528,3045</coordinates>
 			</Point>
 			<Snippet></Snippet>
 			<description><![CDATA[<br>Source: Wikipedia article <a href="https://fr.wikipedia.org/wiki/Mont_Clapier">Mont Clapier</a>]]></description>
@@ -2086,7 +2022,7 @@
 		<Placemark>
 			<name><![CDATA[Mont Coin]]></name>
 			<Point>
-				<coordinates>6.62056,45.63194,0</coordinates>
+				<coordinates>6.62056,45.63194,2539</coordinates>
 			</Point>
 			<Snippet></Snippet>
 			<description><![CDATA[<br>Source: Wikipedia article <a href="https://fr.wikipedia.org/wiki/Mont_Coin">Mont Coin</a>]]></description>
@@ -2094,7 +2030,7 @@
 		<Placemark>
 			<name><![CDATA[Mont Colombier]]></name>
 			<Point>
-				<coordinates>6.1194,45.6444,0</coordinates>
+				<coordinates>6.1194,45.6444,2043</coordinates>
 			</Point>
 			<Snippet></Snippet>
 			<description><![CDATA[<br>Source: Wikipedia article <a href="https://fr.wikipedia.org/wiki/Mont_Colombier">Mont Colombier</a>]]></description>
@@ -2102,7 +2038,7 @@
 		<Placemark>
 			<name><![CDATA[Mont Colombis]]></name>
 			<Point>
-				<coordinates>6.2175,44.495,0</coordinates>
+				<coordinates>6.2175,44.495,1734</coordinates>
 			</Point>
 			<Snippet></Snippet>
 			<description><![CDATA[<br>Source: Wikipedia article <a href="https://fr.wikipedia.org/wiki/Mont_Colombis">Mont Colombis</a>]]></description>
@@ -2110,7 +2046,7 @@
 		<Placemark>
 			<name><![CDATA[Mont Fleuri (sommet)]]></name>
 			<Point>
-				<coordinates>6.53361,45.93278,0</coordinates>
+				<coordinates>6.53361,45.93278,2511</coordinates>
 			</Point>
 			<Snippet></Snippet>
 			<description><![CDATA[<br>Source: Wikipedia article <a href="https://fr.wikipedia.org/wiki/Mont_Fleuri_(sommet)">Mont Fleuri (sommet)</a>]]></description>
@@ -2118,7 +2054,7 @@
 		<Placemark>
 			<name><![CDATA[Mont Forchat]]></name>
 			<Point>
-				<coordinates>6.48833,46.27361,0</coordinates>
+				<coordinates>6.48833,46.27361,1539</coordinates>
 			</Point>
 			<Snippet></Snippet>
 			<description><![CDATA[<br>Source: Wikipedia article <a href="https://fr.wikipedia.org/wiki/Mont_Forchat">Mont Forchat</a>]]></description>
@@ -2126,7 +2062,7 @@
 		<Placemark>
 			<name><![CDATA[Mont Férion]]></name>
 			<Point>
-				<coordinates>7.2725,43.86861,0</coordinates>
+				<coordinates>7.2725,43.86861,1412</coordinates>
 			</Point>
 			<Snippet></Snippet>
 			<description><![CDATA[<br>Source: Wikipedia article <a href="https://fr.wikipedia.org/wiki/Mont_Férion">Mont Férion</a>]]></description>
@@ -2134,7 +2070,7 @@
 		<Placemark>
 			<name><![CDATA[Mont Giusalet]]></name>
 			<Point>
-				<coordinates>6.92972,45.1806,0</coordinates>
+				<coordinates>6.92972,45.1806,3312</coordinates>
 			</Point>
 			<Snippet></Snippet>
 			<description><![CDATA[<br>Source: Wikipedia article <a href="https://fr.wikipedia.org/wiki/Mont_Giusalet">Mont Giusalet</a>]]></description>
@@ -2150,7 +2086,7 @@
 		<Placemark>
 			<name><![CDATA[Mont Jalla]]></name>
 			<Point>
-				<coordinates>5.72472,45.20472,0</coordinates>
+				<coordinates>5.72472,45.20472,635</coordinates>
 			</Point>
 			<Snippet></Snippet>
 			<description><![CDATA[<br>Source: Wikipedia article <a href="https://fr.wikipedia.org/wiki/Mont_Jalla">Mont Jalla</a>]]></description>
@@ -2158,7 +2094,7 @@
 		<Placemark>
 			<name><![CDATA[Mont Joigny]]></name>
 			<Point>
-				<coordinates>5.89778,45.4917,0</coordinates>
+				<coordinates>5.89778,45.4917,1556</coordinates>
 			</Point>
 			<Snippet></Snippet>
 			<description><![CDATA[<br>Source: Wikipedia article <a href="https://fr.wikipedia.org/wiki/Mont_Joigny">Mont Joigny</a>]]></description>
@@ -2166,7 +2102,7 @@
 		<Placemark>
 			<name><![CDATA[Mont Joly]]></name>
 			<Point>
-				<coordinates>6.69278,45.82583,0</coordinates>
+				<coordinates>6.69278,45.82583,2525</coordinates>
 			</Point>
 			<Snippet></Snippet>
 			<description><![CDATA[<br>Source: Wikipedia article <a href="https://fr.wikipedia.org/wiki/Mont_Joly">Mont Joly</a>]]></description>
@@ -2174,7 +2110,7 @@
 		<Placemark>
 			<name><![CDATA[Mont Julioz]]></name>
 			<Point>
-				<coordinates>6.16056,45.70722,0</coordinates>
+				<coordinates>6.16056,45.70722,1662</coordinates>
 			</Point>
 			<Snippet></Snippet>
 			<description><![CDATA[<br>Source: Wikipedia article <a href="https://fr.wikipedia.org/wiki/Mont_Julioz">Mont Julioz</a>]]></description>
@@ -2182,7 +2118,7 @@
 		<Placemark>
 			<name><![CDATA[Mont Lachat]]></name>
 			<Point>
-				<coordinates>6.35139,45.9275,0</coordinates>
+				<coordinates>6.35139,45.9275,2023</coordinates>
 			</Point>
 			<Snippet></Snippet>
 			<description><![CDATA[<br>Source: Wikipedia article <a href="https://fr.wikipedia.org/wiki/Mont_Lachat">Mont Lachat</a>]]></description>
@@ -2190,7 +2126,7 @@
 		<Placemark>
 			<name><![CDATA[Mont Malinvern]]></name>
 			<Point>
-				<coordinates>7.1889,44.19861,0</coordinates>
+				<coordinates>7.1889,44.19861,2938</coordinates>
 			</Point>
 			<Snippet></Snippet>
 			<description><![CDATA[<br>Source: Wikipedia article <a href="https://fr.wikipedia.org/wiki/Mont_Malinvern">Mont Malinvern</a>]]></description>
@@ -2198,7 +2134,7 @@
 		<Placemark>
 			<name><![CDATA[Mont Mallet]]></name>
 			<Point>
-				<coordinates>6.96056,45.86528,0</coordinates>
+				<coordinates>6.96056,45.86528,3989</coordinates>
 			</Point>
 			<Snippet></Snippet>
 			<description><![CDATA[<br>Source: Wikipedia article <a href="https://fr.wikipedia.org/wiki/Mont_Mallet">Mont Mallet</a>]]></description>
@@ -2206,7 +2142,7 @@
 		<Placemark>
 			<name><![CDATA[Mont Margériaz]]></name>
 			<Point>
-				<coordinates>6.03444,45.63583,0</coordinates>
+				<coordinates>6.03444,45.63583,1845</coordinates>
 			</Point>
 			<Snippet></Snippet>
 			<description><![CDATA[<br>Source: Wikipedia article <a href="https://fr.wikipedia.org/wiki/Mont_Margériaz">Mont Margériaz</a>]]></description>
@@ -2214,7 +2150,7 @@
 		<Placemark>
 			<name><![CDATA[Mont Maudit]]></name>
 			<Point>
-				<coordinates>6.87583,45.84778,0</coordinates>
+				<coordinates>6.87583,45.84778,4465</coordinates>
 			</Point>
 			<Snippet></Snippet>
 			<description><![CDATA[<br>Source: Wikipedia article <a href="https://fr.wikipedia.org/wiki/Mont_Maudit">Mont Maudit</a>]]></description>
@@ -2222,7 +2158,7 @@
 		<Placemark>
 			<name><![CDATA[Mont Mirantin]]></name>
 			<Point>
-				<coordinates>6.49889,45.68444,0</coordinates>
+				<coordinates>6.49889,45.68444,2460</coordinates>
 			</Point>
 			<Snippet></Snippet>
 			<description><![CDATA[<br>Source: Wikipedia article <a href="https://fr.wikipedia.org/wiki/Mont_Mirantin">Mont Mirantin</a>]]></description>
@@ -2230,7 +2166,7 @@
 		<Placemark>
 			<name><![CDATA[Mont Mounier]]></name>
 			<Point>
-				<coordinates>6.97167,44.15417,0</coordinates>
+				<coordinates>6.97167,44.15417,2817</coordinates>
 			</Point>
 			<Snippet></Snippet>
 			<description><![CDATA[<br>Source: Wikipedia article <a href="https://fr.wikipedia.org/wiki/Mont_Mounier">Mont Mounier</a>]]></description>
@@ -2238,7 +2174,7 @@
 		<Placemark>
 			<name><![CDATA[Mont Neiglier]]></name>
 			<Point>
-				<coordinates>7.38694,44.08833,0</coordinates>
+				<coordinates>7.38694,44.08833,2786</coordinates>
 			</Point>
 			<Snippet></Snippet>
 			<description><![CDATA[<br>Source: Wikipedia article <a href="https://fr.wikipedia.org/wiki/Mont_Neiglier">Mont Neiglier</a>]]></description>
@@ -2246,7 +2182,7 @@
 		<Placemark>
 			<name><![CDATA[Mont Orchez]]></name>
 			<Point>
-				<coordinates>6.55056,46.09917,0</coordinates>
+				<coordinates>6.55056,46.09917,1347</coordinates>
 			</Point>
 			<Snippet></Snippet>
 			<description><![CDATA[<br>Source: Wikipedia article <a href="https://fr.wikipedia.org/wiki/Mont_Orchez">Mont Orchez</a>]]></description>
@@ -2254,7 +2190,7 @@
 		<Placemark>
 			<name><![CDATA[Mont Outheran]]></name>
 			<Point>
-				<coordinates>5.845,45.46583,0</coordinates>
+				<coordinates>5.845,45.46583,1676</coordinates>
 			</Point>
 			<Snippet></Snippet>
 			<description><![CDATA[<br>Source: Wikipedia article <a href="https://fr.wikipedia.org/wiki/Mont_Outheran">Mont Outheran</a>]]></description>
@@ -2262,7 +2198,7 @@
 		<Placemark>
 			<name><![CDATA[Mont Ouzon]]></name>
 			<Point>
-				<coordinates>6.6444,46.29972,0</coordinates>
+				<coordinates>6.6444,46.29972,1880</coordinates>
 			</Point>
 			<Snippet></Snippet>
 			<description><![CDATA[<br>Source: Wikipedia article <a href="https://fr.wikipedia.org/wiki/Mont_Ouzon">Mont Ouzon</a>]]></description>
@@ -2270,7 +2206,7 @@
 		<Placemark>
 			<name><![CDATA[Mont Pelat]]></name>
 			<Point>
-				<coordinates>6.70583,44.26472,0</coordinates>
+				<coordinates>6.70583,44.26472,3050</coordinates>
 			</Point>
 			<Snippet></Snippet>
 			<description><![CDATA[<br>Source: Wikipedia article <a href="https://fr.wikipedia.org/wiki/Mont_Pelat">Mont Pelat</a>]]></description>
@@ -2278,7 +2214,7 @@
 		<Placemark>
 			<name><![CDATA[Mont Pelve]]></name>
 			<Point>
-				<coordinates>6.78139,45.35667,0</coordinates>
+				<coordinates>6.78139,45.35667,3261</coordinates>
 			</Point>
 			<Snippet></Snippet>
 			<description><![CDATA[<br>Source: Wikipedia article <a href="https://fr.wikipedia.org/wiki/Mont_Pelve">Mont Pelve</a>]]></description>
@@ -2286,7 +2222,7 @@
 		<Placemark>
 			<name><![CDATA[Mont Pelvoux]]></name>
 			<Point>
-				<coordinates>6.39333,44.89806,0</coordinates>
+				<coordinates>6.39333,44.89806,3946</coordinates>
 			</Point>
 			<Snippet></Snippet>
 			<description><![CDATA[<br>Source: Wikipedia article <a href="https://fr.wikipedia.org/wiki/Mont_Pelvoux">Mont Pelvoux</a>]]></description>
@@ -2294,7 +2230,7 @@
 		<Placemark>
 			<name><![CDATA[Mont Peney]]></name>
 			<Point>
-				<coordinates>5.99,45.59778,0</coordinates>
+				<coordinates>5.99,45.59778,1356</coordinates>
 			</Point>
 			<Snippet></Snippet>
 			<description><![CDATA[<br>Source: Wikipedia article <a href="https://fr.wikipedia.org/wiki/Mont_Peney">Mont Peney</a>]]></description>
@@ -2302,7 +2238,7 @@
 		<Placemark>
 			<name><![CDATA[Mont Pourri]]></name>
 			<Point>
-				<coordinates>6.86,45.52833,0</coordinates>
+				<coordinates>6.86,45.52833,3779</coordinates>
 			</Point>
 			<Snippet></Snippet>
 			<description><![CDATA[<br>Source: Wikipedia article <a href="https://fr.wikipedia.org/wiki/Mont_Pourri">Mont Pourri</a>]]></description>
