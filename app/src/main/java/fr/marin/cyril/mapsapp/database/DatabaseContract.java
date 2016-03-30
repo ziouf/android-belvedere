@@ -15,6 +15,7 @@ public final class DatabaseContract {
 
     public static final String TEXT_TYPE = " TEXT";
     public static final String NUMBER_TYPE = " REAL";
+    public static final String UNIQUE = " UNIQUE";
     public static final String COMMA_SEP = ",";
 
     public DatabaseContract() {
@@ -33,9 +34,9 @@ public final class DatabaseContract {
         public static final String CREATE_TABLE =
                 "CREATE TABLE " + MarkerEntry.TABLE_NAME + " (" +
                         MarkerEntry._ID + " INTEGER PRIMARY KEY," +
-                        MarkerEntry.COLUMN_NAME_TITLE + TEXT_TYPE + COMMA_SEP +
+                        MarkerEntry.COLUMN_NAME_TITLE + TEXT_TYPE + UNIQUE + COMMA_SEP +
                         MarkerEntry.COLUMN_NAME_DESCRIPTION + TEXT_TYPE + COMMA_SEP +
-                        MarkerEntry.COLUMN_NAME_URL + TEXT_TYPE + COMMA_SEP +
+                        MarkerEntry.COLUMN_NAME_URL + TEXT_TYPE + UNIQUE + COMMA_SEP +
                         MarkerEntry.COLUMN_NAME_LATITUDE + NUMBER_TYPE + COMMA_SEP +
                         MarkerEntry.COLUMN_NAME_LONGITUDE + NUMBER_TYPE + COMMA_SEP +
                         MarkerEntry.COLUMN_NAME_ALTITUDE + NUMBER_TYPE +
