@@ -47,7 +47,8 @@ public class MapsActivity extends FragmentActivity
 
         this.markersShown = new HashSet<>();
 
-        this.dbHelper.insertAll(new KmlParser().parseAll(this.kmlfiles));
+        if (this.dbHelper.count() == 0)
+            this.dbHelper.insertAll(new KmlParser().parseAll(this.kmlfiles));
 
     }
 

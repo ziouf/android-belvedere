@@ -75,7 +75,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 right.toString(), left.toString() };
 
         Cursor c = db.query(distinct, DatabaseContract.MarkerEntry.TABLE_NAME, columns, select, args,
-                null, null, null, "50");
+                null, null, null, "25");
 
         c.moveToFirst();
         while (!c.isAfterLast()) {
@@ -102,4 +102,13 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return findInArea(area.getTop(), area.getLeft(), area.getRight(), area.getBottom());
     }
 
+    public Long count() {
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor c = db.rawQuery("SELECT COUNT(*) FROM ?", new String[] {DatabaseContract.MarkerEntry.TABLE_NAME});
+        c.moveToFirst();
+        Long count = c.getLong(0);
+        c.close();
+
+        return count;
+    }
 }
