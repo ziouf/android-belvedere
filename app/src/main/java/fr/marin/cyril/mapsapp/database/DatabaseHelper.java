@@ -104,7 +104,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     public Long count() {
         SQLiteDatabase db = this.getReadableDatabase();
-        Cursor c = db.rawQuery("SELECT COUNT(*) FROM ?", new String[] {DatabaseContract.MarkerEntry.TABLE_NAME});
+        Cursor c = db.rawQuery("SELECT COUNT(*) FROM " + DatabaseContract.MarkerEntry.TABLE_NAME, null);
         c.moveToFirst();
         Long count = c.getLong(0);
         c.close();
