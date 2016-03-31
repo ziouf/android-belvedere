@@ -2,6 +2,7 @@ package fr.marin.cyril.mapsapp;
 
 import android.content.Intent;
 import android.net.Uri;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
 import android.text.util.Linkify;
@@ -59,6 +60,14 @@ public class MapsActivity extends FragmentActivity
 
         this.dbHelper.insertAllIfEmpty(new KmlParser().parseAll(this.kmlfiles));
 
+        // Action au click sur le bouton camera
+        FloatingActionButton cameraButton = (FloatingActionButton) this.findViewById(R.id.camera_button);
+        cameraButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(MapsActivity.this, CameraActivity.class));
+            }
+        });
     }
 
     /**
