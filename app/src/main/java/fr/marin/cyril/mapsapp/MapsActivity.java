@@ -68,7 +68,7 @@ public class MapsActivity extends FragmentActivity
 
         this.updateMarkersOnMap(mMap);
 
-        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(myPosition, 12));
+        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(myPosition, 11));
     }
 
     @Override
