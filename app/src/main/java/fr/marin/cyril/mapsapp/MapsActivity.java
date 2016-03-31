@@ -1,10 +1,17 @@
 package fr.marin.cyril.mapsapp;
 
+import android.Manifest;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.location.Location;
+import android.location.LocationListener;
+import android.location.LocationManager;
 import android.net.Uri;
 import android.support.design.widget.FloatingActionButton;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
+import android.support.v4.content.ContextCompat;
 import android.text.util.Linkify;
 import android.view.MotionEvent;
 import android.view.View;
@@ -19,6 +26,7 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
+import com.google.android.gms.maps.model.MarkerOptions;
 
 import java.io.InputStream;
 import java.util.ArrayList;
@@ -31,11 +39,12 @@ import fr.marin.cyril.mapsapp.kml.model.MapsMarker;
 import fr.marin.cyril.mapsapp.tool.MapArea;
 
 public class MapsActivity extends FragmentActivity
-        implements OnMapReadyCallback, GoogleMap.OnMapLoadedCallback, GoogleMap.OnCameraChangeListener{
+        implements OnMapReadyCallback, GoogleMap.OnMapLoadedCallback, GoogleMap.OnCameraChangeListener {
 
-    // Position fixe en attendant d'implémenter la geolocalisation
-    private LatLng myPosition = new LatLng(45.46472,5.92528);
+    private static final Long LOCATION_REFRESH_TIME = 10000L;
+    private static final Float LOCATION_REFRESH_DISTANCE = 25F;
 
+    private LocationManager locationManager;
     private GoogleMap mMap;
     private Collection<InputStream> kmlfiles;
     private Collection<Marker> markersShown;
@@ -82,8 +91,14 @@ public class MapsActivity extends FragmentActivity
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
+
+        mMap.setMyLocationEnabled(true);
         mMap.setOnMapLoadedCallback(this);
         mMap.setOnCameraChangeListener(this);
+
+        mMap.getUiSettings().setMapToolbarEnabled(false);
+        mMap.getUiSettings().setRotateGesturesEnabled(false);
+
         mMap.setInfoWindowAdapter(new GoogleMap.InfoWindowAdapter() {
             @Override
             public View getInfoWindow(Marker marker) {
@@ -116,7 +131,35 @@ public class MapsActivity extends FragmentActivity
 
         this.updateMarkersOnMap(mMap);
 
-        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(myPosition, 11));
+        // Obtention du gestionnaire de Geolocalisation
+        LocationListener mLocationListener = new LocationListener() {
+            @Override
+            public void onLocationChanged(Location location) {
+                LatLng latLng = new LatLng(location.getLatitude(), location.getLongitude());
+                mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, 11));
+            }
+
+            @Override
+            public void onStatusChanged(String provider, int status, Bundle extras) {
+
+            }
+
+            @Override
+            public void onProviderEnabled(String provider) {
+
+            }
+
+            @Override
+            public void onProviderDisabled(String provider) {
+
+            }
+        };
+        this.locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
+
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED)
+            this.locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER,
+                    LOCATION_REFRESH_TIME, LOCATION_REFRESH_DISTANCE, mLocationListener);
+
     }
 
     /**
@@ -157,6 +200,7 @@ public class MapsActivity extends FragmentActivity
     private void removeOffScreenMarkers(MapArea area) {
         Collection<Marker> toRemove = new ArrayList<>();
 
+        if (markersShown.size() > 0)
         for (Marker m : markersShown)
             if (!area.isInArea(m.getPosition())) {
                 toRemove.add(m);

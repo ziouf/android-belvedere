@@ -72,6 +72,7 @@ public class MapsMarker {
         return new MarkerOptions()
                 .position(this.getCoordinates().getLatLng())
                 .title(this.getTitle())
-                .snippet(this.getCoordinates().getElevation() + "m");
+                .snippet(this.getCoordinates().getElevation() + "m")
+                ;
     }
 }
