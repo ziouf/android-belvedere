@@ -33,6 +33,10 @@ public class Coordinates {
         return elevation;
     }
 
+    public String getElevationString() {
+        return elevation.toString() + " m";
+    }
+
     public void setElevation(Double elevation) {
         this.elevation = elevation;
     }

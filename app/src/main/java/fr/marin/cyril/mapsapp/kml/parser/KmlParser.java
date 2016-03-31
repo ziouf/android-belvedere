@@ -126,7 +126,12 @@ public class KmlParser {
 
             } else if (name.equalsIgnoreCase(DESCRIPTION)) {
                 parser.require(XmlPullParser.START_TAG, ns, DESCRIPTION);
-                mapsMarker.setDescription(readText(parser));;
+                String description = readText(parser);
+                mapsMarker.setDescription(description);
+
+                String url = description.substring(description.indexOf("http"), description.indexOf("\">"));
+                mapsMarker.setUrl(url);
+
                 parser.require(XmlPullParser.END_TAG, ns, DESCRIPTION);
             } else {
                 skip(parser);

@@ -1,7 +1,15 @@
 package fr.marin.cyril.mapsapp;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
+import android.text.util.Linkify;
+import android.view.MotionEvent;
+import android.view.View;
+import android.widget.ImageButton;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -24,7 +32,9 @@ import fr.marin.cyril.mapsapp.tool.MapArea;
 public class MapsActivity extends FragmentActivity
         implements OnMapReadyCallback, GoogleMap.OnMapLoadedCallback, GoogleMap.OnCameraChangeListener{
 
+    // Position fixe en attendant d'implémenter la geolocalisation
     private LatLng myPosition = new LatLng(45.46472,5.92528);
+
     private GoogleMap mMap;
     private Collection<InputStream> kmlfiles;
     private Collection<Marker> markersShown;
@@ -65,22 +75,62 @@ public class MapsActivity extends FragmentActivity
         mMap = googleMap;
         mMap.setOnMapLoadedCallback(this);
         mMap.setOnCameraChangeListener(this);
+        mMap.setInfoWindowAdapter(new GoogleMap.InfoWindowAdapter() {
+            @Override
+            public View getInfoWindow(Marker marker) {
+                return null;
+            }
+
+            @Override
+            public View getInfoContents(Marker marker) {
+                View v = getLayoutInflater().inflate(R.layout.info_window, null);
+
+                MapsMarker m = dbHelper.findByLatLng(marker.getPosition());
+
+                TextView tvTitle = (TextView) v.findViewById(R.id.iw_title);
+                TextView tvAltitude = (TextView) v.findViewById(R.id.iw_altitude);
+
+                tvTitle.setText(m.getTitle());
+                tvAltitude.setText(m.getCoordinates().getElevationString());
+
+                return v;
+            }
+        });
+
+        mMap.setOnInfoWindowClickListener(new GoogleMap.OnInfoWindowClickListener() {
+            @Override
+            public void onInfoWindowClick(Marker marker) {
+                MapsMarker m = dbHelper.findByLatLng(marker.getPosition());
+                startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(m.getUrl())));
+            }
+        });
 
         this.updateMarkersOnMap(mMap);
 
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(myPosition, 11));
     }
 
+    /**
+     * Callback triggered when the map is loaded
+     */
     @Override
     public void onMapLoaded() {
         this.updateMarkersOnMap(mMap);
     }
 
+    /**
+     * Callback triggered when the camera is moved or zoomed
+     * @param cameraPosition
+     */
     @Override
     public void onCameraChange(CameraPosition cameraPosition) {
         this.updateMarkersOnMap(mMap);
     }
 
+    /**
+     *
+     * @param mMap
+     */
     private void updateMarkersOnMap(GoogleMap mMap) {
         MapArea area = new MapArea(mMap.getProjection().getVisibleRegion());
 
@@ -91,6 +141,10 @@ public class MapsActivity extends FragmentActivity
                 markersShown.add(mMap.addMarker(m.getMarkerOptions()));
     }
 
+    /**
+     *
+     * @param area
+     */
     private void removeOffScreenMarkers(MapArea area) {
         Collection<Marker> toRemove = new ArrayList<>();
 

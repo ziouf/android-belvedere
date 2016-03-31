@@ -99,12 +99,46 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             c.moveToNext();
         }
 
+        c.close();
         return markers;
     }
 
     public Collection<MapsMarker> findInArea(MapArea area) {
         return findInArea(area.getTop(), area.getLeft(), area.getRight(), area.getBottom());
     }
+
+    public MapsMarker findByLatLng(LatLng latLng) {
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        Boolean distinct = true;
+        String[] columns = new String[]{
+                DatabaseContract.MarkerEntry.COLUMN_NAME_TITLE,
+                DatabaseContract.MarkerEntry.COLUMN_NAME_DESCRIPTION,
+                DatabaseContract.MarkerEntry.COLUMN_NAME_URL,
+                DatabaseContract.MarkerEntry.COLUMN_NAME_LATITUDE,
+                DatabaseContract.MarkerEntry.COLUMN_NAME_LONGITUDE,
+                DatabaseContract.MarkerEntry.COLUMN_NAME_ALTITUDE
+        };
+        String select = DatabaseContract.MarkerEntry.COLUMN_NAME_LATITUDE + " = ? "
+                + " AND " + DatabaseContract.MarkerEntry.COLUMN_NAME_LONGITUDE + " = ? ";
+        String[] args = new String[] { ""+latLng.latitude, ""+latLng.longitude };
+
+        Cursor c = db.query(distinct, DatabaseContract.MarkerEntry.TABLE_NAME, columns, select, args,
+                null, null, null, null);
+
+        c.moveToFirst();
+        MapsMarker marker = new MapsMarker();
+        marker.setTitle(c.getString(0));
+        marker.setDescription(c.getString(1));
+        marker.setUrl(c.getString(2));
+        Coordinates coordinates = new Coordinates();
+        coordinates.setLatLng(new LatLng(c.getDouble(3), c.getDouble(4)));
+        coordinates.setElevation(c.getDouble(5));
+        marker.setCoordinates(coordinates);
+
+        c.close();
+        return marker;
+        }
 
     public Long count() {
         SQLiteDatabase db = this.getReadableDatabase();

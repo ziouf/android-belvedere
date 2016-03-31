@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="5dp"
+        >
+        <TextView
+            android:id="@+id/iw_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textStyle="bold"
+            android:textColor="@color/iw_title"
+            />
+
+        <TextView
+            android:id="@+id/iw_altitude"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            />
+    </LinearLayout>
+
+    <ImageButton
+        android:id="@+id/ib_wiki"
+        android:layout_width="36dp"
+        android:layout_height="36dp"
+        android:padding="0dp"
+        android:scaleType="fitCenter"
+        android:src="@drawable/wikipedia"
+        />
+
+</LinearLayout>

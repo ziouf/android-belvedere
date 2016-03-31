@@ -5,4 +5,5 @@
     <color name="colorAccent">#40b6ff</color>
 
     <color name="black_overlay">#66000000</color>
+    <color name="iw_title">#000</color>
 </resources>
