@@ -3,6 +3,7 @@ package fr.marin.cyril.mapsapp;
 import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.hardware.SensorManager;
 import android.location.Location;
 import android.location.LocationManager;
 import android.net.Uri;
@@ -107,7 +108,7 @@ public class MapsActivity extends FragmentActivity
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
 
-        if (this.checkPermission(LOCATION_PERMISSION)) {
+        if (ContextCompat.checkSelfPermission(this, LOCATION_PERMISSION) == PackageManager.PERMISSION_GRANTED) {
             mMap.setMyLocationEnabled(true);
 
             Location l = this.locationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
@@ -217,11 +218,4 @@ public class MapsActivity extends FragmentActivity
         markersShown.removeAll(toRemove);
     }
 
-    /**
-     *
-     * @return
-     */
-    private Boolean checkPermission(String perm) {
-        return ContextCompat.checkSelfPermission(MapsActivity.this, perm) == PackageManager.PERMISSION_GRANTED;
-    }
 }
