@@ -19,7 +19,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|right"
         android:layout_margin="16dp"
-        android:src="@drawable/binoculars_icon"
+        android:src="@drawable/binoculars_flat_floating_action_button"
         android:clickable="true"
         android:id="@+id/camera_button"
         app:layout_anchor="@id/map"
