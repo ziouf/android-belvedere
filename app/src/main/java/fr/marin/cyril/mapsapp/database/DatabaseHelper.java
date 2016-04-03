@@ -18,7 +18,7 @@ import fr.marin.cyril.mapsapp.tool.MapArea;
 /**
  * Created by cscm6014 on 30/03/2016.
  */
-public class DatabaseHelper extends SQLiteOpenHelper {
+class DatabaseHelper extends SQLiteOpenHelper {
 
 
     public DatabaseHelper(Context context) {
