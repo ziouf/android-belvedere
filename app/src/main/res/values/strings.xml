@@ -1,11 +1,8 @@
 <resources>
     <string name="app_name">Belvedere</string>
 
-    <string name="title_activity_loading">LoadingActivity</string>
-    <string name="title_activity_maps">MapsActivity</string>
-    <string name="title_activity_camera">CameraActivity</string>
-
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="title_activity_loading">Chargement</string>
+    <string name="title_activity_maps">Carte</string>
+    <string name="title_activity_camera">Jumelles</string>
 
 </resources>
