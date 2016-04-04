@@ -1,7 +1,9 @@
 package fr.marin.cyril.mapsapp.database;
 
 import android.app.Service;
+import android.content.ComponentName;
 import android.content.Intent;
+import android.content.ServiceConnection;
 import android.os.Binder;
 import android.os.IBinder;
 
@@ -12,7 +14,6 @@ import java.util.Collection;
 import java.util.HashSet;
 
 import fr.marin.cyril.mapsapp.R;
-import fr.marin.cyril.mapsapp.database.DatabaseHelper;
 import fr.marin.cyril.mapsapp.kml.model.MapsMarker;
 import fr.marin.cyril.mapsapp.kml.parser.KmlParser;
 import fr.marin.cyril.mapsapp.tool.MapArea;
@@ -23,6 +24,9 @@ public class DatabaseService extends Service {
 
     private DatabaseHelper dbHelper;
     private Collection<InputStream> kmlfiles;
+
+    public DatabaseService() {
+    }
 
     @Override
     public void onCreate() {
@@ -73,6 +77,7 @@ public class DatabaseService extends Service {
     public MapsMarker findByLatLng(LatLng latLng) {
         return dbHelper.findByLatLng(latLng);
     }
+
     public Collection<MapsMarker> findInArea(MapArea area) {
         return dbHelper.findInArea(area);
     }

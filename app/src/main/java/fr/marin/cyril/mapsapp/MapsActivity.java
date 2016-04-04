@@ -29,6 +29,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
 
+import fr.marin.cyril.mapsapp.database.DatabaseServiceConnection;
 import fr.marin.cyril.mapsapp.kml.model.MapsMarker;
 import fr.marin.cyril.mapsapp.database.DatabaseService;
 import fr.marin.cyril.mapsapp.tool.MapArea;
@@ -38,12 +39,27 @@ public class MapsActivity extends FragmentActivity
 
     private static final String LOCATION_PERMISSION = Manifest.permission.ACCESS_FINE_LOCATION;
 
-    private boolean isDbServiceBound = false;
-    private DatabaseService dbService;
-
     private GoogleMap mMap;
     private LocationManager locationManager;
     private Collection<Marker> markersShown;
+
+    private boolean databaseServiceBound = false;
+    private DatabaseService databaseService;
+    /** Defines callbacks for service binding, passed to bindService() */
+    private ServiceConnection databaseServiceConnection = new ServiceConnection() {
+        @Override
+        public void onServiceConnected(ComponentName name, IBinder service) {
+            DatabaseService.DatabaseServiceBinder binder = (DatabaseService.DatabaseServiceBinder) service;
+            databaseService = binder.getService();
+            databaseServiceBound = databaseService != null;
+        }
+
+        @Override
+        public void onServiceDisconnected(ComponentName name) {
+            databaseServiceBound = false;
+        }
+    };
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,40 +72,28 @@ public class MapsActivity extends FragmentActivity
 
         // Init
         this.markersShown = new HashSet<>();
-        // Init sensor providers
-        this.locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
 
+        this.initServices();
         this.initOnClickActions();
-
-        Intent dbServiceIntent = new Intent(getApplicationContext(), DatabaseService.class);
-        this.bindService(dbServiceIntent, mConnection, Context.BIND_AUTO_CREATE);
     }
 
     @Override
     protected void onDestroy() {
-
-        this.unbindService(mConnection);
-
+        this.unbindService(databaseServiceConnection);
         super.onDestroy();
     }
 
-    /** Defines callbacks for service binding, passed to bindService() */
-    private ServiceConnection mConnection = new ServiceConnection() {
+    /**
+     *
+     */
+    private void initServices() {
+        // Init sensor providers
+        this.locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
 
-        @Override
-        public void onServiceConnected(ComponentName className,
-                                       IBinder service) {
-            // We've bound to LocalService, cast the IBinder and get LocalService instance
-            DatabaseService.DatabaseServiceBinder binder = (DatabaseService.DatabaseServiceBinder) service;
-            dbService = binder.getService();
-            isDbServiceBound = true;
-        }
-
-        @Override
-        public void onServiceDisconnected(ComponentName arg0) {
-            isDbServiceBound = false;
-        }
-    };
+        // Bind database services
+        this.bindService(new Intent(getApplicationContext(), DatabaseService.class),
+                databaseServiceConnection, Context.BIND_AUTO_CREATE);
+    }
 
     /**
      *
@@ -155,7 +159,7 @@ public class MapsActivity extends FragmentActivity
             public View getInfoContents(Marker marker) {
                 View v = getLayoutInflater().inflate(R.layout.info_window, null);
 
-                MapsMarker m = dbService.findByLatLng(marker.getPosition());
+                MapsMarker m = databaseService.findByLatLng(marker.getPosition());
 
                 TextView tvTitle = (TextView) v.findViewById(R.id.iw_title);
                 TextView tvAltitude = (TextView) v.findViewById(R.id.iw_altitude);
@@ -176,7 +180,7 @@ public class MapsActivity extends FragmentActivity
         return new GoogleMap.OnInfoWindowClickListener() {
             @Override
             public void onInfoWindowClick(Marker marker) {
-                MapsMarker m = dbService.findByLatLng(marker.getPosition());
+                MapsMarker m = databaseService.findByLatLng(marker.getPosition());
                 startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(m.getUrl())));
             }
         };
@@ -205,30 +209,19 @@ public class MapsActivity extends FragmentActivity
     private void updateMarkersOnMap() {
         MapArea area = new MapArea(mMap.getProjection().getVisibleRegion());
 
-        this.removeOffScreenMarkers(area);
-
-        if(isDbServiceBound)
-        for (MapsMarker m : dbService.findInArea(area))
-            if (area.isInArea(m.getCoordinates().getLatLng()))
-                markersShown.add(mMap.addMarker(m.getMarkerOptions()));
-    }
-
-    /**
-     *
-     * @param area
-     */
-    private void removeOffScreenMarkers(MapArea area) {
         Collection<Marker> toRemove = new ArrayList<>();
-
         if (markersShown.size() > 0)
-        for (Marker m : markersShown)
-            if (!area.isInArea(m.getPosition())) {
-                toRemove.add(m);
-                m.remove();
-            }
-
-
+            for (Marker m : markersShown)
+                if (!area.isInArea(m.getPosition())) {
+                    toRemove.add(m);
+                    m.remove();
+                }
         markersShown.removeAll(toRemove);
+
+        if(databaseServiceBound)
+            for (MapsMarker m : databaseService.findInArea(area))
+                if (area.isInArea(m.getCoordinates().getLatLng()))
+                    markersShown.add(mMap.addMarker(m.getMarkerOptions()));
     }
 
 }
