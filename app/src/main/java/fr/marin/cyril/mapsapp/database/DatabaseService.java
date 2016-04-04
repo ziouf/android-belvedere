@@ -1,9 +1,7 @@
 package fr.marin.cyril.mapsapp.database;
 
 import android.app.Service;
-import android.content.ComponentName;
 import android.content.Intent;
-import android.content.ServiceConnection;
 import android.os.Binder;
 import android.os.IBinder;
 
@@ -70,11 +68,12 @@ public class DatabaseService extends Service {
         }
     }
 
-    public boolean initData() {
-        boolean mustInsert = this.dbHelper.count() == 0;
-        if (mustInsert)
-            this.dbHelper.insertAll(new KmlParser().parseAll(this.kmlfiles));
-        return mustInsert;
+    public boolean isNotInit() {
+        return this.dbHelper.count() == 0;
+    }
+
+    public void initDataIfNeeded() {
+        if (this.isNotInit()) this.dbHelper.insertAll(new KmlParser().parseAll(this.kmlfiles));
     }
 
     public MapsMarker findByLatLng(LatLng latLng) {
