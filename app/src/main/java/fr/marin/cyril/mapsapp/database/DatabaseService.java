@@ -46,9 +46,6 @@ public class DatabaseService extends Service {
 
     @Override
     public IBinder onBind(Intent intent) {
-        if (this.dbHelper.count() == 0)
-            this.dbHelper.insertAll(new KmlParser().parseAll(this.kmlfiles));
-
         return binder;
     }
 
@@ -73,6 +70,12 @@ public class DatabaseService extends Service {
         }
     }
 
+    public boolean initData() {
+        boolean mustInsert = this.dbHelper.count() == 0;
+        if (mustInsert)
+            this.dbHelper.insertAll(new KmlParser().parseAll(this.kmlfiles));
+        return mustInsert;
+    }
 
     public MapsMarker findByLatLng(LatLng latLng) {
         return dbHelper.findByLatLng(latLng);

@@ -2,7 +2,10 @@ package fr.marin.cyril.mapsapp;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
+import android.content.ComponentName;
 import android.content.Context;
+import android.content.Intent;
+import android.content.ServiceConnection;
 import android.content.pm.PackageManager;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
@@ -13,6 +16,7 @@ import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.location.LocationProvider;
+import android.os.IBinder;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
@@ -20,6 +24,8 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.view.MotionEvent;
 import android.view.View;
+
+import fr.marin.cyril.mapsapp.database.DatabaseService;
 
 /**
  * An example full-screen activity that shows and hides the system UI (i.e.
@@ -46,6 +52,22 @@ public class CameraActivity extends AppCompatActivity {
         }
     };
 
+    private boolean databaseServiceBound = false;
+    private DatabaseService databaseService;
+    /** Defines callbacks for service binding, passed to bindService() */
+    private ServiceConnection databaseServiceConnection = new ServiceConnection() {
+        @Override
+        public void onServiceConnected(ComponentName name, IBinder service) {
+            DatabaseService.DatabaseServiceBinder binder = (DatabaseService.DatabaseServiceBinder) service;
+            databaseService = binder.getService();
+            databaseServiceBound = databaseService != null;
+        }
+
+        @Override
+        public void onServiceDisconnected(ComponentName name) {
+            databaseServiceBound = false;
+        }
+    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,6 +83,10 @@ public class CameraActivity extends AppCompatActivity {
         this.sensor = sensorManager.getDefaultSensor(Sensor.TYPE_GYROSCOPE);
         this.locationProvider = locationManager.getProvider(
                 locationManager.getBestProvider(fineCriteria, true));
+
+        // Bind database services
+        this.bindService(new Intent(getApplicationContext(), DatabaseService.class),
+                databaseServiceConnection, Context.BIND_AUTO_CREATE);
     }
 
     @Override

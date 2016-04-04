@@ -65,6 +65,7 @@ public class MapsActivity extends FragmentActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_maps);
+
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
@@ -129,7 +130,7 @@ public class MapsActivity extends FragmentActivity
 
             Location l = this.locationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
             LatLng latLng = new LatLng(l.getLatitude(), l.getLongitude());
-            mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, 11));
+            mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, 12));
         }
 
         mMap.setOnMapLoadedCallback(this);
@@ -209,14 +210,15 @@ public class MapsActivity extends FragmentActivity
     private void updateMarkersOnMap() {
         MapArea area = new MapArea(mMap.getProjection().getVisibleRegion());
 
-        Collection<Marker> toRemove = new ArrayList<>();
-        if (markersShown.size() > 0)
+        if (markersShown.size() > 0) {
+            Collection<Marker> toRemove = new ArrayList<>();
             for (Marker m : markersShown)
                 if (!area.isInArea(m.getPosition())) {
                     toRemove.add(m);
                     m.remove();
                 }
-        markersShown.removeAll(toRemove);
+            markersShown.removeAll(toRemove);
+        }
 
         if(databaseServiceBound)
             for (MapsMarker m : databaseService.findInArea(area))
