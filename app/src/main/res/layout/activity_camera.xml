@@ -3,11 +3,12 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:background="@drawable/loading_background"
     tools:context="fr.marin.cyril.mapsapp.CameraActivity">
 
 
-    <SurfaceView
-        android:id="@+id/cameraview"
+    <TextureView
+        android:id="@+id/textureView"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 

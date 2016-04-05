@@ -41,6 +41,9 @@ public class MapsActivity extends FragmentActivity
 
     private static final int LOCATION_PERMISSION_CODE = 1;
 
+
+    private FloatingActionButton cameraButton;
+
     private GoogleMap mMap;
     private LocationManager locationManager;
     private Collection<Marker> markersShown;
@@ -74,6 +77,12 @@ public class MapsActivity extends FragmentActivity
 
         // Init
         this.markersShown = new HashSet<>();
+        this.cameraButton = (FloatingActionButton) this.findViewById(R.id.camera_button);
+
+        // Désactivation du module AR si api < LOLLIPOP
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
+            this.cameraButton.hide();
+        }
 
         this.initServices();
         this.initOnClickActions();
@@ -102,7 +111,6 @@ public class MapsActivity extends FragmentActivity
      */
     private void initOnClickActions() {
         // Action au click sur le bouton camera
-        FloatingActionButton cameraButton = (FloatingActionButton) this.findViewById(R.id.camera_button);
         cameraButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
