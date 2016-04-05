@@ -1,8 +1,8 @@
 <resources>
     <string name="app_name">Belvedere</string>
-
-    <string name="title_activity_loading">Chargement</string>
-    <string name="title_activity_maps">Carte</string>
-    <string name="title_activity_camera">Jumelles</string>
-
+    <string name="title_activity_camera">Binoculars</string>
+    <string name="title_activity_loading">Loading</string>
+    <string name="title_activity_maps">Map</string>
+    <string name="loading_database_init">Database initialisation...\nIt may take a while</string>
+    <string name="loading_application_openning">Openning application...</string>
 </resources>

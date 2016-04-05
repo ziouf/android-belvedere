@@ -25,12 +25,12 @@ public class LoadingActivity extends AppCompatActivity {
                 TextView loadingInfoTV = (TextView) findViewById(R.id.loading_info);
                 @Override
                 protected void onPreExecute() {
-                    loadingInfoTV.setText("Initialisation de la base de données...");
+                    loadingInfoTV.setText(R.string.loading_database_init);
                 }
 
                 @Override
                 protected void onPostExecute(Object value) {
-                    loadingInfoTV.setText("Chargement de l'application...");
+                    loadingInfoTV.setText(R.string.loading_application_openning);
 
                     startActivity(new Intent(LoadingActivity.this, MapsActivity.class));
                     finish();
@@ -56,8 +56,9 @@ public class LoadingActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        // Passage en mode plein ecran immerssif
         setContentView(R.layout.activity_loading);
+
+        // Passage en mode plein ecran immerssif
         getWindow().getDecorView()
                 .setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_STABLE
                         | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION

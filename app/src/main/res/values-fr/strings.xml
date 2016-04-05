@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Belvedere</string>
+    <string name="title_activity_camera">Jumelles</string>
+    <string name="title_activity_loading">Chargement</string>
+    <string name="title_activity_maps">Carte</string>
+    <string name="loading_database_init">Initialisation de la base de données...\nCette opération peut prendre du temps</string>
+    <string name="loading_application_openning">Chargement de l\'application...</string>
+</resources>

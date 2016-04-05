@@ -160,9 +160,10 @@ public class MapsActivity extends FragmentActivity
         mMap.setMyLocationEnabled(true);
 
         Location l = this.locationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
-        LatLng latLng = new LatLng(l.getLatitude(), l.getLongitude());
-        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, 12));
-
+        if (l != null) {
+            LatLng latLng = new LatLng(l.getLatitude(), l.getLongitude());
+            mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, 12));
+        }
 
         mMap.setOnMapLoadedCallback(this);
         mMap.setOnCameraChangeListener(this);
