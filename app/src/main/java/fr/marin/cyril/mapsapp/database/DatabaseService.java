@@ -35,6 +35,9 @@ public class DatabaseService extends Service {
         this.kmlfiles = new HashSet<>();
         // Ajouter ci dessous la liste des fichiers de ressource
         this.kmlfiles.add(this.getResources().openRawResource(R.raw.sommets_des_alpes_francaises));
+        this.kmlfiles.add(this.getResources().openRawResource(R.raw.sommets_des_pyrenees));
+        this.kmlfiles.add(this.getResources().openRawResource(R.raw.sommets_du_massif_central));
+        this.kmlfiles.add(this.getResources().openRawResource(R.raw.sommets_du_massif_des_vosges));
     }
 
     @Override
@@ -73,7 +76,9 @@ public class DatabaseService extends Service {
     }
 
     public void initDataIfNeeded() {
-        if (this.isNotInit()) this.dbHelper.insertAll(new KmlParser().parseAll(this.kmlfiles));
+        if (this.isNotInit()) {
+            this.dbHelper.insertAll(new KmlParser().parseAll(this.kmlfiles));
+        }
     }
 
     public MapsMarker findByLatLng(LatLng latLng) {

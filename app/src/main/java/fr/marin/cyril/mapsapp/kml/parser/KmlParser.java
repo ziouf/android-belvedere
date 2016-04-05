@@ -127,8 +127,6 @@ public class KmlParser {
             } else if (name.equalsIgnoreCase(DESCRIPTION)) {
                 parser.require(XmlPullParser.START_TAG, ns, DESCRIPTION);
                 String description = readText(parser);
-                mapsMarker.setDescription(description);
-
                 String url = description.substring(description.indexOf("http"), description.indexOf("\">"));
                 mapsMarker.setUrl(url);
 

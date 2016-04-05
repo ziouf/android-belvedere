@@ -9,6 +9,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 import com.google.android.gms.maps.model.LatLng;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
 
 import fr.marin.cyril.mapsapp.kml.model.Coordinates;
@@ -41,7 +42,6 @@ class DatabaseHelper extends SQLiteOpenHelper {
 
         ContentValues values = new ContentValues();
         values.put(DatabaseContract.MarkerEntry.COLUMN_NAME_TITLE, marker.getTitle());
-        values.put(DatabaseContract.MarkerEntry.COLUMN_NAME_DESCRIPTION, marker.getDescription());
         values.put(DatabaseContract.MarkerEntry.COLUMN_NAME_URL, marker.getUrl());
         values.put(DatabaseContract.MarkerEntry.COLUMN_NAME_LATITUDE, marker.getCoordinates().getLatLng().latitude);
         values.put(DatabaseContract.MarkerEntry.COLUMN_NAME_LONGITUDE, marker.getCoordinates().getLatLng().longitude);
@@ -65,7 +65,6 @@ class DatabaseHelper extends SQLiteOpenHelper {
         Boolean distinct = true;
         String[] columns = new String[]{
                 DatabaseContract.MarkerEntry.COLUMN_NAME_TITLE,
-                DatabaseContract.MarkerEntry.COLUMN_NAME_DESCRIPTION,
                 DatabaseContract.MarkerEntry.COLUMN_NAME_URL,
                 DatabaseContract.MarkerEntry.COLUMN_NAME_LATITUDE,
                 DatabaseContract.MarkerEntry.COLUMN_NAME_LONGITUDE,
@@ -85,12 +84,11 @@ class DatabaseHelper extends SQLiteOpenHelper {
         while (!c.isAfterLast()) {
             MapsMarker m = new MapsMarker();
             m.setTitle(c.getString(0));
-            m.setDescription(c.getString(1));
-            m.setUrl(c.getString(2));
+            m.setUrl(c.getString(1));
 
-            LatLng latLng = new LatLng(c.getDouble(3), c.getDouble(4));
+            LatLng latLng = new LatLng(c.getDouble(2), c.getDouble(3));
             Coordinates coordinates = new Coordinates(latLng);
-            coordinates.setElevation(c.getDouble(5));
+            coordinates.setElevation(c.getDouble(4));
 
             m.setCoordinates(coordinates);
 
@@ -113,7 +111,6 @@ class DatabaseHelper extends SQLiteOpenHelper {
         Boolean distinct = true;
         String[] columns = new String[]{
                 DatabaseContract.MarkerEntry.COLUMN_NAME_TITLE,
-                DatabaseContract.MarkerEntry.COLUMN_NAME_DESCRIPTION,
                 DatabaseContract.MarkerEntry.COLUMN_NAME_URL,
                 DatabaseContract.MarkerEntry.COLUMN_NAME_LATITUDE,
                 DatabaseContract.MarkerEntry.COLUMN_NAME_LONGITUDE,
@@ -129,11 +126,10 @@ class DatabaseHelper extends SQLiteOpenHelper {
         c.moveToFirst();
         MapsMarker marker = new MapsMarker();
         marker.setTitle(c.getString(0));
-        marker.setDescription(c.getString(1));
-        marker.setUrl(c.getString(2));
+        marker.setUrl(c.getString(1));
         Coordinates coordinates = new Coordinates();
-        coordinates.setLatLng(new LatLng(c.getDouble(3), c.getDouble(4)));
-        coordinates.setElevation(c.getDouble(5));
+        coordinates.setLatLng(new LatLng(c.getDouble(2), c.getDouble(3)));
+        coordinates.setElevation(c.getDouble(4));
         marker.setCoordinates(coordinates);
 
         c.close();

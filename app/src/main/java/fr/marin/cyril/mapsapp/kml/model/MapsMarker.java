@@ -9,7 +9,6 @@ import com.google.android.gms.maps.model.MarkerOptions;
 public class MapsMarker {
     private Coordinates coordinates;
     private String title;
-    private String description;
     private String url;
 
     public MapsMarker() {
@@ -30,26 +29,12 @@ public class MapsMarker {
         this.title = title;
     }
 
-    public MapsMarker(LatLng latLng, String title, String description) {
-        this.coordinates = new Coordinates(latLng);
-        this.title = title;
-        this.description = description;
-    }
-
     public String getTitle() {
         return title;
     }
 
     public void setTitle(String title) {
         this.title = title;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
     }
 
     public String getUrl() {

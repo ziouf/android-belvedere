@@ -25,7 +25,6 @@ final class DatabaseContract {
         public static final String TABLE_NAME = "marker";
 
         public static final String COLUMN_NAME_TITLE = "title";
-        public static final String COLUMN_NAME_DESCRIPTION = "description";
         public static final String COLUMN_NAME_URL = "url";
         public static final String COLUMN_NAME_LATITUDE = "latitude";
         public static final String COLUMN_NAME_LONGITUDE = "longitude";
@@ -35,7 +34,6 @@ final class DatabaseContract {
                 "CREATE TABLE " + MarkerEntry.TABLE_NAME + " (" +
                         MarkerEntry._ID + " INTEGER PRIMARY KEY," +
                         MarkerEntry.COLUMN_NAME_TITLE + TEXT_TYPE + UNIQUE + COMMA_SEP +
-                        MarkerEntry.COLUMN_NAME_DESCRIPTION + TEXT_TYPE + COMMA_SEP +
                         MarkerEntry.COLUMN_NAME_URL + TEXT_TYPE + UNIQUE + COMMA_SEP +
                         MarkerEntry.COLUMN_NAME_LATITUDE + NUMBER_TYPE + COMMA_SEP +
                         MarkerEntry.COLUMN_NAME_LONGITUDE + NUMBER_TYPE + COMMA_SEP +
