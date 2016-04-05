@@ -8,6 +8,11 @@ import android.content.Intent;
 import android.content.ServiceConnection;
 import android.content.pm.PackageManager;
 import android.graphics.SurfaceTexture;
+import android.hardware.GeomagneticField;
+import android.hardware.Sensor;
+import android.hardware.SensorEvent;
+import android.hardware.SensorEventListener;
+import android.hardware.SensorManager;
 import android.hardware.camera2.CameraAccessException;
 import android.hardware.camera2.CameraCaptureSession;
 import android.hardware.camera2.CameraCharacteristics;
@@ -30,6 +35,7 @@ import android.util.Size;
 import android.view.Surface;
 import android.view.TextureView;
 import android.view.View;
+import android.widget.TextView;
 
 import java.util.Arrays;
 
@@ -45,6 +51,9 @@ public class CameraActivity extends AppCompatActivity
 
     private static final int PERMISSIONS_CODE = 1;
 
+    private GeomagneticField geomagneticField;
+    private Sensor compas;
+    private SensorManager sensorManager;
     private Location location;
     private LocationManager locationManager;
 
@@ -66,7 +75,40 @@ public class CameraActivity extends AppCompatActivity
     };
 
     private TextureView textureView;
-    private TextureView.SurfaceTextureListener surfaceTextureListener;
+    private TextureView.SurfaceTextureListener surfaceTextureListener = new TextureView.SurfaceTextureListener() {
+        @Override
+        public void onSurfaceTextureAvailable(SurfaceTexture surface, int width, int height) {
+            if (ActivityCompat.checkSelfPermission(CameraActivity.this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED)
+                return;
+
+            CameraManager cameraManager = (CameraManager) getSystemService(CAMERA_SERVICE);
+            try {
+                String cameraId = cameraManager.getCameraIdList()[0];
+                CameraCharacteristics characteristics = cameraManager.getCameraCharacteristics(cameraId);
+                StreamConfigurationMap map = characteristics.get(CameraCharacteristics.SCALER_STREAM_CONFIGURATION_MAP);
+                previewSize = map.getOutputSizes(SurfaceTexture.class)[0];
+
+                cameraManager.openCamera(cameraId, stateCallback, null);
+            } catch (CameraAccessException e) {
+
+            }
+        }
+
+        @Override
+        public void onSurfaceTextureSizeChanged(SurfaceTexture surface, int width, int height) {
+
+        }
+
+        @Override
+        public boolean onSurfaceTextureDestroyed(SurfaceTexture surface) {
+            return false;
+        }
+
+        @Override
+        public void onSurfaceTextureUpdated(SurfaceTexture surface) {
+
+        }
+    };;
 
     private Size previewSize;
     private CameraDevice cameraDevice;
@@ -141,6 +183,7 @@ public class CameraActivity extends AppCompatActivity
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        getSupportActionBar().hide();
         getWindow().getDecorView()
                 .setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_STABLE
                         | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
@@ -169,48 +212,41 @@ public class CameraActivity extends AppCompatActivity
         }
     }
 
+    private SensorEventListener compasEventListener = new SensorEventListener() {
+        @Override
+        public void onSensorChanged(SensorEvent event) {
+            geomagneticField = new GeomagneticField(
+                    event.values[0], event.values[1], event.values[2], System.currentTimeMillis()
+            );
+
+            Location northPole = new Location(LocationManager.PASSIVE_PROVIDER);
+            northPole.setLatitude(90d);
+            northPole.setLongitude(0d);
+            TextView cameraTextView = (TextView) findViewById(R.id.cameraTextView);
+            cameraTextView.setText(String.format("Lat : %s | Lng : %s | Alt : %s | Heading : %s | Bearing : %s",
+                    location.getLatitude(), location.getLongitude(), location.getAltitude(),
+                    0d, 0d));
+        }
+
+        @Override
+        public void onAccuracyChanged(Sensor sensor, int accuracy) {
+
+        }
+    };
+
     private void initGeoLocation() {
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) return;
         this.locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
         this.location = locationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
+
+        this.sensorManager = (SensorManager) getSystemService(SENSOR_SERVICE);
+        this.compas = sensorManager.getDefaultSensor(Sensor.TYPE_MAGNETIC_FIELD);
+        this.sensorManager.registerListener(compasEventListener, compas, SensorManager.SENSOR_DELAY_GAME);
     }
 
     private void initCamera() {
         textureView = (TextureView) findViewById(R.id.textureView);
-        textureView.setSurfaceTextureListener(new TextureView.SurfaceTextureListener() {
-            @Override
-            public void onSurfaceTextureAvailable(SurfaceTexture surface, int width, int height) {
-                if (ActivityCompat.checkSelfPermission(CameraActivity.this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED)
-                    return;
-
-                CameraManager cameraManager = (CameraManager) getSystemService(CAMERA_SERVICE);
-                try {
-                    String cameraId = cameraManager.getCameraIdList()[0];
-                    CameraCharacteristics characteristics = cameraManager.getCameraCharacteristics(cameraId);
-                    StreamConfigurationMap map = characteristics.get(CameraCharacteristics.SCALER_STREAM_CONFIGURATION_MAP);
-                    previewSize = map.getOutputSizes(SurfaceTexture.class)[0];
-
-                    cameraManager.openCamera(cameraId, stateCallback, null);
-                } catch (CameraAccessException e) {
-
-                }
-            }
-
-            @Override
-            public void onSurfaceTextureSizeChanged(SurfaceTexture surface, int width, int height) {
-
-            }
-
-            @Override
-            public boolean onSurfaceTextureDestroyed(SurfaceTexture surface) {
-                return false;
-            }
-
-            @Override
-            public void onSurfaceTextureUpdated(SurfaceTexture surface) {
-
-            }
-        });
+        textureView.setSurfaceTextureListener(surfaceTextureListener);
     }
 
     @Override
@@ -237,17 +273,26 @@ public class CameraActivity extends AppCompatActivity
     @Override
     protected void onPause() {
         super.onPause();
-
-        if (cameraDevice != null) cameraDevice.close();
     }
 
     @Override
     protected void onResume() {
+
+        getWindow().getDecorView()
+                .setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_STABLE
+                        | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
+                        | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
+                        | View.SYSTEM_UI_FLAG_FULLSCREEN
+                        | View.SYSTEM_UI_FLAG_IMMERSIVE);
+
         super.onResume();
     }
 
     @Override
     protected void onDestroy() {
+
+        if (cameraDevice != null) cameraDevice.close();
+
         // Unbind database service
         this.unbindService(databaseServiceConnection);
         super.onDestroy();
