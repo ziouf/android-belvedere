@@ -9,11 +9,10 @@ import android.database.sqlite.SQLiteOpenHelper;
 import com.google.android.gms.maps.model.LatLng;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collection;
 
 import fr.marin.cyril.mapsapp.kml.model.Coordinates;
-import fr.marin.cyril.mapsapp.kml.model.MapsMarker;
+import fr.marin.cyril.mapsapp.kml.model.Placemark;
 import fr.marin.cyril.mapsapp.tool.MapArea;
 
 /**
@@ -37,7 +36,7 @@ class DatabaseHelper extends SQLiteOpenHelper {
         onCreate(db);
     }
 
-    public void insert(MapsMarker marker) {
+    public void insert(Placemark marker) {
         SQLiteDatabase db = this.getWritableDatabase();
 
         ContentValues values = new ContentValues();
@@ -50,17 +49,17 @@ class DatabaseHelper extends SQLiteOpenHelper {
         db.insert(DatabaseContract.MarkerEntry.TABLE_NAME, null, values);
     }
 
-    public void insertAll(Collection<MapsMarker> markers) {
-        for (MapsMarker m : markers) insert(m);
+    public void insertAll(Collection<Placemark> markers) {
+        for (Placemark m : markers) insert(m);
     }
 
-    public void insertAllIfEmpty(Collection<MapsMarker> markers) {
+    public void insertAllIfEmpty(Collection<Placemark> markers) {
         if (this.count() == 0) this.insertAll(markers);
     }
 
-    public Collection<MapsMarker> findInArea(Double top, Double left, Double right, Double bottom) {
+    public Collection<Placemark> findInArea(Double top, Double left, Double right, Double bottom) {
         SQLiteDatabase db = this.getReadableDatabase();
-        Collection<MapsMarker> markers = new ArrayList<>();
+        Collection<Placemark> markers = new ArrayList<>();
 
         Boolean distinct = true;
         String[] columns = new String[]{
@@ -82,7 +81,7 @@ class DatabaseHelper extends SQLiteOpenHelper {
 
         c.moveToFirst();
         while (!c.isAfterLast()) {
-            MapsMarker m = new MapsMarker();
+            Placemark m = new Placemark();
             m.setTitle(c.getString(0));
             m.setUrl(c.getString(1));
 
@@ -101,11 +100,11 @@ class DatabaseHelper extends SQLiteOpenHelper {
         return markers;
     }
 
-    public Collection<MapsMarker> findInArea(MapArea area) {
+    public Collection<Placemark> findInArea(MapArea area) {
         return findInArea(area.getTop(), area.getLeft(), area.getRight(), area.getBottom());
     }
 
-    public MapsMarker findByLatLng(LatLng latLng) {
+    public Placemark findByLatLng(LatLng latLng) {
         SQLiteDatabase db = this.getReadableDatabase();
 
         Boolean distinct = true;
@@ -124,7 +123,7 @@ class DatabaseHelper extends SQLiteOpenHelper {
                 null, null, null, null);
 
         c.moveToFirst();
-        MapsMarker marker = new MapsMarker();
+        Placemark marker = new Placemark();
         marker.setTitle(c.getString(0));
         marker.setUrl(c.getString(1));
         Coordinates coordinates = new Coordinates();

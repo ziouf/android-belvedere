@@ -12,7 +12,7 @@ import java.util.Collection;
 import java.util.HashSet;
 
 import fr.marin.cyril.mapsapp.R;
-import fr.marin.cyril.mapsapp.kml.model.MapsMarker;
+import fr.marin.cyril.mapsapp.kml.model.Placemark;
 import fr.marin.cyril.mapsapp.kml.parser.KmlParser;
 import fr.marin.cyril.mapsapp.tool.MapArea;
 
@@ -71,21 +71,19 @@ public class DatabaseService extends Service {
         }
     }
 
-    public boolean isNotInit() {
-        return this.dbHelper.count() == 0;
+    public boolean isInit() {
+        return this.dbHelper.count() > 0;
     }
 
     public void initDataIfNeeded() {
-        if (this.isNotInit()) {
-            this.dbHelper.insertAll(new KmlParser().parseAll(this.kmlfiles));
-        }
+        if (!this.isInit()) this.dbHelper.insertAll(new KmlParser().parseAll(this.kmlfiles));
     }
 
-    public MapsMarker findByLatLng(LatLng latLng) {
+    public Placemark findByLatLng(LatLng latLng) {
         return dbHelper.findByLatLng(latLng);
     }
 
-    public Collection<MapsMarker> findInArea(MapArea area) {
+    public Collection<Placemark> findInArea(MapArea area) {
         return dbHelper.findInArea(area);
     }
 }

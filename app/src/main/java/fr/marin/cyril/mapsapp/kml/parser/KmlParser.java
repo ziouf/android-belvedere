@@ -13,7 +13,7 @@ import java.util.Collection;
 import java.util.HashSet;
 
 import fr.marin.cyril.mapsapp.kml.model.Coordinates;
-import fr.marin.cyril.mapsapp.kml.model.MapsMarker;
+import fr.marin.cyril.mapsapp.kml.model.Placemark;
 
 /**
  * Created by cscm6014 on 30/03/2016.
@@ -32,9 +32,9 @@ public class KmlParser {
     private static final String DESCRIPTION = "description";
     private static final String COORDINATES = "coordinates";
 
-    private Collection<MapsMarker> markers = new HashSet<>();
+    private Collection<Placemark> markers = new HashSet<>();
 
-    public Collection<MapsMarker> parseAll(Collection<InputStream> inputStreams) {
+    public Collection<Placemark> parseAll(Collection<InputStream> inputStreams) {
 
         try {
             for (InputStream in : inputStreams)
@@ -104,11 +104,11 @@ public class KmlParser {
         }
     }
 
-    private MapsMarker readPlacemark(XmlPullParser parser)
+    private Placemark readPlacemark(XmlPullParser parser)
             throws IOException, XmlPullParserException {
         parser.require(XmlPullParser.START_TAG, ns, PLACEMARK);
 
-        MapsMarker mapsMarker = new MapsMarker();
+        Placemark placemark = new Placemark();
 
         while (parser.next() != XmlPullParser.END_TAG) {
             if (parser.getEventType() != XmlPullParser.START_TAG) {
@@ -118,17 +118,17 @@ public class KmlParser {
 
             if (name.equalsIgnoreCase(NAME)) {
                 parser.require(XmlPullParser.START_TAG, ns, NAME);
-                mapsMarker.setTitle(readText(parser));
+                placemark.setTitle(readText(parser));
                 parser.require(XmlPullParser.END_TAG, ns, NAME);
 
             } else if (name.equalsIgnoreCase(POINT)) {
-                mapsMarker.setCoordinates(readCoordinates(parser));
+                placemark.setCoordinates(readCoordinates(parser));
 
             } else if (name.equalsIgnoreCase(DESCRIPTION)) {
                 parser.require(XmlPullParser.START_TAG, ns, DESCRIPTION);
                 String description = readText(parser);
                 String url = description.substring(description.indexOf("http"), description.indexOf("\">"));
-                mapsMarker.setUrl(url);
+                placemark.setUrl(url);
 
                 parser.require(XmlPullParser.END_TAG, ns, DESCRIPTION);
             } else {
@@ -136,7 +136,7 @@ public class KmlParser {
             }
         }
 
-        return mapsMarker;
+        return placemark;
     }
 
     private Coordinates readCoordinates(XmlPullParser parser)

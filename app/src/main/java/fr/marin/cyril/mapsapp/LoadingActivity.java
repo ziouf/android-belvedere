@@ -8,6 +8,7 @@ import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.IBinder;
+import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.view.Window;
@@ -19,36 +20,36 @@ import fr.marin.cyril.mapsapp.database.DatabaseService;
 public class LoadingActivity extends AppCompatActivity {
 
     /** Defines callbacks for service binding, passed to bindService() */
-    private ServiceConnection databaseServiceConnection = new ServiceConnection() {
+    private final ServiceConnection databaseServiceConnection = new ServiceConnection() {
         @Override
         public void onServiceConnected(ComponentName name, IBinder service) {
             final DatabaseService.DatabaseServiceBinder binder = (DatabaseService.DatabaseServiceBinder) service;
+            final AsyncTask databaseInitAsyncTask = new AsyncTask<Object, Void, Void>() {
+                private TextView loadingInfoTextView = (TextView) LoadingActivity.this.findViewById(R.id.loading_info);
 
-            AsyncTask insertAll = new AsyncTask<Object, Void, Object>() {
-                TextView loadingInfoTV = (TextView) findViewById(R.id.loading_info);
                 @Override
                 protected void onPreExecute() {
-                    loadingInfoTV.setText(R.string.loading_database_init);
+                    loadingInfoTextView.setText(R.string.loading_database_init);
                 }
 
                 @Override
-                protected String doInBackground(Object... params) {
+                protected Void doInBackground(Object... params) {
                     binder.getService().initDataIfNeeded();
                     return null;
                 }
 
                 @Override
-                protected void onPostExecute(Object value) {
-                    loadingInfoTV.setText(R.string.loading_application_openning);
+                protected void onPostExecute(Void value) {
+                    loadingInfoTextView.setText(R.string.loading_application_openning);
 
-                    startActivity(new Intent(LoadingActivity.this, MapsActivity.class));
-                    finish();
+                    LoadingActivity.this.startActivity(new Intent(LoadingActivity.this, MapsActivity.class));
+                    LoadingActivity.this.finish();
                 }
             };
 
-            insertAll.execute();
-
+            databaseInitAsyncTask.execute();
         }
+
         @Override
         public void onServiceDisconnected(ComponentName name) {
 
@@ -84,8 +85,8 @@ public class LoadingActivity extends AppCompatActivity {
         super.onWindowFocusChanged(hasFocus);
 
         // Bind database services
-        bindService(new Intent(getApplicationContext(), DatabaseService.class),
-                databaseServiceConnection, Context.BIND_AUTO_CREATE);
+        this.bindService(new Intent(this, DatabaseService.class),
+                this.databaseServiceConnection, Context.BIND_AUTO_CREATE);
 
     }
 

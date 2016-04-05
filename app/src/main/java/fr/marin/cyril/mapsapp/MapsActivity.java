@@ -32,7 +32,7 @@ import java.util.Collection;
 import java.util.HashSet;
 
 import fr.marin.cyril.mapsapp.database.DatabaseService;
-import fr.marin.cyril.mapsapp.kml.model.MapsMarker;
+import fr.marin.cyril.mapsapp.kml.model.Placemark;
 import fr.marin.cyril.mapsapp.tool.MapArea;
 
 public class MapsActivity extends FragmentActivity
@@ -192,7 +192,7 @@ public class MapsActivity extends FragmentActivity
             public View getInfoContents(Marker marker) {
                 View v = getLayoutInflater().inflate(R.layout.info_window, null);
 
-                MapsMarker m = databaseService.findByLatLng(marker.getPosition());
+                Placemark m = databaseService.findByLatLng(marker.getPosition());
 
                 TextView tvTitle = (TextView) v.findViewById(R.id.iw_title);
                 TextView tvAltitude = (TextView) v.findViewById(R.id.iw_altitude);
@@ -213,7 +213,7 @@ public class MapsActivity extends FragmentActivity
         return new GoogleMap.OnInfoWindowClickListener() {
             @Override
             public void onInfoWindowClick(Marker marker) {
-                MapsMarker m = databaseService.findByLatLng(marker.getPosition());
+                Placemark m = databaseService.findByLatLng(marker.getPosition());
                 startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(m.getUrl())));
             }
         };
@@ -253,7 +253,7 @@ public class MapsActivity extends FragmentActivity
         }
 
         if(databaseServiceBound)
-            for (MapsMarker m : databaseService.findInArea(area))
+            for (Placemark m : databaseService.findInArea(area))
                 if (area.isInArea(m.getCoordinates().getLatLng()))
                     markersShown.add(mMap.addMarker(m.getMarkerOptions()));
     }
