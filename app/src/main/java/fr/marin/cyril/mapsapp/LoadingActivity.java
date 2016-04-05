@@ -8,7 +8,6 @@ import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.IBinder;
-import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.view.Window;
@@ -85,7 +84,7 @@ public class LoadingActivity extends AppCompatActivity {
         super.onWindowFocusChanged(hasFocus);
 
         // Bind database services
-        this.bindService(new Intent(this, DatabaseService.class),
+        this.bindService(new Intent(getApplicationContext(), DatabaseService.class),
                 this.databaseServiceConnection, Context.BIND_AUTO_CREATE);
 
     }
