@@ -98,6 +98,12 @@ public class CameraActivity extends AppCompatActivity
         }
 
         @Override
+        public void onClosed(CameraDevice camera) {
+            super.onClosed(camera);
+            cameraDevice = null;
+        }
+
+        @Override
         public void onDisconnected(CameraDevice camera) {
 
         }
@@ -232,10 +238,7 @@ public class CameraActivity extends AppCompatActivity
     protected void onPause() {
         super.onPause();
 
-        if (cameraDevice != null) {
-            cameraDevice.close();
-            cameraDevice = null;
-        }
+        if (cameraDevice != null) cameraDevice.close();
     }
 
     @Override
