@@ -2,29 +2,25 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     android:background="@color/black_overlay"
     tools:context="fr.marin.cyril.mapsapp.CameraActivity">
 
     <TextureView
         android:id="@+id/textureView"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
-
-    <ImageView
-        android:id="@+id/icon"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:visibility="invisible" />
+        android:layout_height="match_parent"
+        />
 
     <TextView
         android:id="@+id/cameraTextView"
+
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop = "true"
-        android:layout_gravity="center|bottom"
-        android:background="#FFFFFF" />
+        android:layout_marginBottom="30dip"
+        android:layout_gravity="center_horizontal|bottom"
 
+        android:background="#AA000000"
+        android:textColor="#ffffffff"
+        />
 
 </FrameLayout>
