@@ -6,7 +6,7 @@ import com.google.android.gms.maps.model.VisibleRegion;
 /**
  * Created by cscm6014 on 29/03/2016.
  */
-public class MapArea {
+public class Area {
     private LatLng northeast;
     private LatLng southwest;
 
@@ -15,13 +15,13 @@ public class MapArea {
     private double right;
     private double bottom;
 
-    public MapArea(LatLng northeast, LatLng southwest) {
+    public Area(LatLng northeast, LatLng southwest) {
         this.northeast = northeast;
         this.southwest = southwest;
         this.init();
     }
 
-    public MapArea(VisibleRegion vr) {
+    public Area(VisibleRegion vr) {
         this.northeast = vr.latLngBounds.northeast;
         this.southwest = vr.latLngBounds.southwest;
         this.init();

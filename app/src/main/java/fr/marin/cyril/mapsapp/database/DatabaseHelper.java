@@ -13,7 +13,7 @@ import java.util.Collection;
 
 import fr.marin.cyril.mapsapp.kml.model.Coordinates;
 import fr.marin.cyril.mapsapp.kml.model.Placemark;
-import fr.marin.cyril.mapsapp.tool.MapArea;
+import fr.marin.cyril.mapsapp.tool.Area;
 
 /**
  * Created by cscm6014 on 30/03/2016.
@@ -100,7 +100,7 @@ class DatabaseHelper extends SQLiteOpenHelper {
         return markers;
     }
 
-    public Collection<Placemark> findInArea(MapArea area) {
+    public Collection<Placemark> findInArea(Area area) {
         return findInArea(area.getTop(), area.getLeft(), area.getRight(), area.getBottom());
     }
 

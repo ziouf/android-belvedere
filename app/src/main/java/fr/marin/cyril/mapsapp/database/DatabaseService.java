@@ -14,7 +14,7 @@ import java.util.HashSet;
 import fr.marin.cyril.mapsapp.R;
 import fr.marin.cyril.mapsapp.kml.model.Placemark;
 import fr.marin.cyril.mapsapp.kml.parser.KmlParser;
-import fr.marin.cyril.mapsapp.tool.MapArea;
+import fr.marin.cyril.mapsapp.tool.Area;
 
 public class DatabaseService extends Service {
 
@@ -83,7 +83,7 @@ public class DatabaseService extends Service {
         return dbHelper.findByLatLng(latLng);
     }
 
-    public Collection<Placemark> findInArea(MapArea area) {
+    public Collection<Placemark> findInArea(Area area) {
         return dbHelper.findInArea(area);
     }
 }

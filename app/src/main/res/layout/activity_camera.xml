@@ -13,13 +13,14 @@
 
     <TextView
         android:id="@+id/cameraTextView"
+        android:rotation="90"
 
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="45dip"
-        android:layout_gravity="center_horizontal|bottom"
+        android:layout_marginLeft="5dp"
+        android:layout_gravity="center_vertical|left"
 
-        android:background="#AA000000"
+        android:background="@color/black_overlay"
         android:textColor="#ffffffff"
         />
 

@@ -33,7 +33,7 @@ import java.util.HashSet;
 
 import fr.marin.cyril.mapsapp.database.DatabaseService;
 import fr.marin.cyril.mapsapp.kml.model.Placemark;
-import fr.marin.cyril.mapsapp.tool.MapArea;
+import fr.marin.cyril.mapsapp.tool.Area;
 
 public class MapsActivity extends FragmentActivity
         implements OnMapReadyCallback, ActivityCompat.OnRequestPermissionsResultCallback,
@@ -248,7 +248,7 @@ public class MapsActivity extends FragmentActivity
      *
      */
     private void updateMarkersOnMap() {
-        MapArea area = new MapArea(mMap.getProjection().getVisibleRegion());
+        Area area = new Area(mMap.getProjection().getVisibleRegion());
 
         if (markersShown.size() > 0) {
             Collection<Marker> toRemove = new ArrayList<>();
