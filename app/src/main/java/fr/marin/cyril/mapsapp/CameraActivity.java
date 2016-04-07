@@ -20,6 +20,7 @@ import android.hardware.camera2.CameraDevice;
 import android.hardware.camera2.CameraManager;
 import android.hardware.camera2.CameraMetadata;
 import android.hardware.camera2.CaptureRequest;
+import android.hardware.camera2.TotalCaptureResult;
 import android.hardware.camera2.params.StreamConfigurationMap;
 import android.location.Location;
 import android.location.LocationManager;
@@ -172,6 +173,9 @@ public class CameraActivity extends AppCompatActivity
             } catch (CameraAccessException e) {
 
             }
+
+            ImageView camera_loading_splash = (ImageView) findViewById(R.id.camera_loading);
+            camera_loading_splash.setVisibility(View.INVISIBLE);
         }
 
         @Override
@@ -280,6 +284,5 @@ public class CameraActivity extends AppCompatActivity
         this.unbindService(databaseServiceConnection);
         super.onDestroy();
     }
-
 
 }

@@ -60,13 +60,12 @@ public class LoadingActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
 
         // BugFix mode immersif pour api < 23
-        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.M) {
-            requestWindowFeature(Window.FEATURE_NO_TITLE);
-            getSupportActionBar().hide();
-            getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
-                    WindowManager.LayoutParams.FLAG_FULLSCREEN);
-        }
-        // Passage en mode plein ecran immerssif
+        requestWindowFeature(Window.FEATURE_NO_TITLE);
+        getSupportActionBar().hide();
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
+            WindowManager.LayoutParams.FLAG_FULLSCREEN);
+
+        // Passage en mode plein ecran immerssif (api >= 23)
         getWindow().getDecorView()
                 .setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_STABLE
                         | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
@@ -74,7 +73,6 @@ public class LoadingActivity extends AppCompatActivity {
                         | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
                         | View.SYSTEM_UI_FLAG_FULLSCREEN
                         | View.SYSTEM_UI_FLAG_IMMERSIVE);
-
 
         setContentView(R.layout.activity_loading);
     }

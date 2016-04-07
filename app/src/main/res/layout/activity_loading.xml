@@ -2,7 +2,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/loading_background"
+    android:background="@drawable/splash_screen_background"
     tools:context="fr.marin.cyril.mapsapp.LoadingActivity">
 
     <TextView
@@ -10,7 +10,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="bottom|center"
-
         />
 
 </RelativeLayout>

@@ -41,9 +41,6 @@ public class MapsActivity extends FragmentActivity
 
     private static final int LOCATION_PERMISSION_CODE = 1;
 
-
-    private FloatingActionButton cameraButton;
-
     private GoogleMap mMap;
     private LocationManager locationManager;
     private Collection<Marker> markersShown;
@@ -77,15 +74,16 @@ public class MapsActivity extends FragmentActivity
 
         // Init
         this.markersShown = new HashSet<>();
-        this.cameraButton = (FloatingActionButton) this.findViewById(R.id.camera_button);
-
-        // Désactivation du module AR si api < LOLLIPOP
-        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
-            this.cameraButton.hide();
-        }
 
         this.initServices();
         this.initOnClickActions();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        this.centerMapCameraOnMyPosition();
     }
 
     @Override
@@ -110,6 +108,13 @@ public class MapsActivity extends FragmentActivity
      *
      */
     private void initOnClickActions() {
+        FloatingActionButton cameraButton = (FloatingActionButton) this.findViewById(R.id.camera_button);
+
+        // Désactivation du module AR si api < LOLLIPOP
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
+            cameraButton.hide();
+        }
+
         // Action au click sur le bouton camera
         cameraButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -167,11 +172,7 @@ public class MapsActivity extends FragmentActivity
 
         mMap.setMyLocationEnabled(true);
 
-        Location l = this.locationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
-        if (l != null) {
-            LatLng latLng = new LatLng(l.getLatitude(), l.getLongitude());
-            mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, 12));
-        }
+        this.centerMapCameraOnMyPosition();
 
         mMap.setOnMapLoadedCallback(this);
         mMap.setOnCameraChangeListener(this);
@@ -183,6 +184,20 @@ public class MapsActivity extends FragmentActivity
         mMap.setOnInfoWindowClickListener(this.getOnInfoWindowClickListener());
 
         this.updateMarkersOnMap();
+    }
+
+    /**
+     *
+     */
+    private void centerMapCameraOnMyPosition() {
+        if (mMap == null) return;
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) return;
+
+        Location l = this.locationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
+        if (l != null) {
+            LatLng latLng = new LatLng(l.getLatitude(), l.getLongitude());
+            mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, 12));
+        }
     }
 
     /**
@@ -248,6 +263,8 @@ public class MapsActivity extends FragmentActivity
      *
      */
     private void updateMarkersOnMap() {
+        if(!databaseServiceBound) return;
+
         Area area = new Area(mMap.getProjection().getVisibleRegion());
 
         if (markersShown.size() > 0) {
@@ -260,10 +277,9 @@ public class MapsActivity extends FragmentActivity
             markersShown.removeAll(toRemove);
         }
 
-        if(databaseServiceBound)
-            for (Placemark m : databaseService.findInArea(area))
-                if (area.isInArea(m.getCoordinates().getLatLng()))
-                    markersShown.add(mMap.addMarker(m.getMarkerOptions()));
+        for (Placemark m : databaseService.findInArea(area))
+            if (area.isInArea(m.getCoordinates().getLatLng()))
+                markersShown.add(mMap.addMarker(m.getMarkerOptions()));
     }
 
 }
