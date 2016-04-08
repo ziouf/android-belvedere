@@ -76,7 +76,13 @@ public class MapsActivity extends FragmentActivity
         // Init
         this.markersShown = new HashSet<>();
 
-        this.initServices();
+        // Init sensor providers
+        this.locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
+
+        // Bind database services
+        this.bindService(new Intent(getApplicationContext(), DatabaseService.class),
+                databaseServiceConnection, Context.BIND_AUTO_CREATE);
+
         this.initOnClickActions();
     }
 
@@ -88,21 +94,17 @@ public class MapsActivity extends FragmentActivity
     }
 
     @Override
-    protected void onDestroy() {
-        this.unbindService(databaseServiceConnection);
-        super.onDestroy();
+    protected void onPause() {
+
+        super.onPause();
     }
 
-    /**
-     *
-     */
-    private void initServices() {
-        // Init sensor providers
-        this.locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
+    @Override
+    protected void onDestroy() {
+        if (databaseServiceBound)
+            this.unbindService(databaseServiceConnection);
 
-        // Bind database services
-        this.bindService(new Intent(getApplicationContext(), DatabaseService.class),
-                databaseServiceConnection, Context.BIND_AUTO_CREATE);
+        super.onDestroy();
     }
 
     /**
