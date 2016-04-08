@@ -27,6 +27,7 @@ import android.os.Handler;
 import android.os.HandlerThread;
 import android.os.IBinder;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Size;
@@ -47,9 +48,9 @@ import fr.marin.cyril.mapsapp.database.DatabaseService;
  */
 @TargetApi(Build.VERSION_CODES.LOLLIPOP)
 public class CameraActivity extends AppCompatActivity
-        implements ActivityCompat.OnRequestPermissionsResultCallback {
+        implements ActivityCompat.OnRequestPermissionsResultCallback, TextureView.SurfaceTextureListener, SensorEventListener {
 
-    private static final int PERMISSIONS_CODE = 1;
+    private static final int PERMISSIONS_CODE = 2;
 
     private GeomagneticField geomagneticField;
     private Sensor compas;
@@ -84,14 +85,17 @@ public class CameraActivity extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        // Hide action bar
-        getSupportActionBar().hide();
-        getWindow().getDecorView()
-                .setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_STABLE
-                        | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
-                        | View.SYSTEM_UI_FLAG_FULLSCREEN);
+        // Configuration du mode immersif
+        this.initUI();
+
         // Inflate UI
         setContentView(R.layout.activity_camera);
+
+    }
+
+    @Override
+    protected void onPostCreate(@Nullable Bundle savedInstanceState) {
+        super.onPostCreate(savedInstanceState);
 
         // Check for permissions
         if (ActivityCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED
@@ -112,17 +116,22 @@ public class CameraActivity extends AppCompatActivity
 
     @Override
     protected void onResume() {
-        // TODO : A implémenter
         super.onResume();
+
+        // Configuration du mode immersif
+        this.initUI();
+
+        // Re-ouverture de la camera
+        if (this.textureView != null)
+            this.textureView.setSurfaceTextureListener(this);
     }
 
     @Override
     protected void onPause() {
-        // TODO : A implémenter
-
-        finish();
-
         super.onPause();
+
+        // Close Camera
+        if (cameraDevice != null) cameraDevice.close();
     }
 
     @Override
@@ -141,77 +150,98 @@ public class CameraActivity extends AppCompatActivity
 
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+
         if (requestCode == PERMISSIONS_CODE) {
             if (grantResults.length == 2
                     && grantResults[0] == PackageManager.PERMISSION_GRANTED
                     && grantResults[1] == PackageManager.PERMISSION_GRANTED) {
 
-                // Workarround : pb application des permissions trop lente par rapport à l'exécution de l'activity
-                startActivity(new Intent(this, CameraActivity.class));
-                finish();
-                //this.initActivity();
             } else {
                 Toast.makeText(this, "Permission refusée", Toast.LENGTH_SHORT).show();
             }
+            finish();
         }
     }
 
+    private void initUI() {
+        // Hide action bar
+        getSupportActionBar().hide();
+        getWindow().getDecorView()
+                .setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_STABLE
+                        | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
+                        | View.SYSTEM_UI_FLAG_FULLSCREEN);
+    }
+
     private void initActivity() {
-        if (ActivityCompat.checkSelfPermission(CameraActivity.this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED)
-            return;
+        // Init Camera view
+        this.textureView = (TextureView) findViewById(R.id.textureView);
+        this.textureView.setSurfaceTextureListener(this);
 
         // Bind database services
         this.bindService(new Intent(getApplicationContext(), DatabaseService.class),
                 databaseServiceConnection, Context.BIND_AUTO_CREATE);
 
+        // Check location permissions
+        if (ActivityCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED)
+            return;
         // Get location
         LocationManager locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
         this.location = locationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
 
         // Get compas
         this.sensorManager = (SensorManager) getSystemService(SENSOR_SERVICE);
-        this.compasEventListener = getCompasEventListener();
         this.compas = sensorManager.getDefaultSensor(Sensor.TYPE_GEOMAGNETIC_ROTATION_VECTOR);
-        this.sensorManager.registerListener(this.compasEventListener, this.compas, SensorManager.SENSOR_DELAY_UI);
+        this.sensorManager.registerListener(this, this.compas, SensorManager.SENSOR_DELAY_NORMAL);
 
-        // Init Camera view
-        this.textureView = (TextureView) findViewById(R.id.textureView);
-        this.textureView.setSurfaceTextureListener(this.getSurfaceTextureListener());
     }
 
-    private TextureView.SurfaceTextureListener getSurfaceTextureListener() {
-        return new TextureView.SurfaceTextureListener() {
-            @Override
-            public void onSurfaceTextureAvailable(SurfaceTexture surface, int width, int height) {
-                if (ActivityCompat.checkSelfPermission(CameraActivity.this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED)
-                    return;
+    @Override
+    public void onSurfaceTextureAvailable(SurfaceTexture surface, int width, int height) {
+        if (ActivityCompat.checkSelfPermission(CameraActivity.this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED)
+            return;
 
-                CameraManager cameraManager = (CameraManager) getSystemService(CAMERA_SERVICE);
+        CameraManager cameraManager = (CameraManager) getSystemService(CAMERA_SERVICE);
 
-                try {
-                    String cameraId = cameraManager.getCameraIdList()[0];
-                    cameraManager.openCamera(cameraId, getCameraDeviceStateCallback(), null);
-                }
-                catch (CameraAccessException e) {
+        try {
+            String cameraId = cameraManager.getCameraIdList()[0];
+            cameraManager.openCamera(cameraId, this.getCameraDeviceStateCallback(), null);
+        }
+        catch (CameraAccessException e) {
 
-                }
-            }
+        }
+    }
 
-            @Override
-            public void onSurfaceTextureSizeChanged(SurfaceTexture surface, int width, int height) {
+    @Override
+    public void onSurfaceTextureSizeChanged(SurfaceTexture surface, int width, int height) {
+        this.onSurfaceTextureAvailable(surface, width, height);
+    }
 
-            }
+    @Override
+    public boolean onSurfaceTextureDestroyed(SurfaceTexture surface) {
+        return false;
+    }
 
-            @Override
-            public boolean onSurfaceTextureDestroyed(SurfaceTexture surface) {
-                return false;
-            }
+    @Override
+    public void onSurfaceTextureUpdated(SurfaceTexture surface) {
 
-            @Override
-            public void onSurfaceTextureUpdated(SurfaceTexture surface) {
+    }
 
-            }
-        };
+    @Override
+    public void onSensorChanged(SensorEvent event) {
+        float Gx = event.values[0];
+        float Gy = event.values[1];
+        float Gz = event.values[2];
+
+        TextView cameraTextView = (TextView) findViewById(R.id.cameraTextView);
+        cameraTextView.setText(String.format("Lat : %s | Lng : %s | Alt : %s\nHeading : %sx %sy %sz\nBearing : %s",
+                location.getLatitude(), location.getLongitude(), location.getAltitude(),
+                Gx, Gy, Gz, location.getBearing()));
+    }
+
+    @Override
+    public void onAccuracyChanged(Sensor sensor, int accuracy) {
+
     }
 
     private CameraDevice.StateCallback getCameraDeviceStateCallback() {
@@ -283,27 +313,6 @@ public class CameraActivity extends AppCompatActivity
 
             @Override
             public void onConfigureFailed(CameraCaptureSession session) {
-
-            }
-        };
-    }
-
-    private SensorEventListener getCompasEventListener() {
-        return new SensorEventListener() {
-            @Override
-            public void onSensorChanged(SensorEvent event) {
-                float Gx = event.values[0];
-                float Gy = event.values[1];
-                float Gz = event.values[2];
-
-                TextView cameraTextView = (TextView) findViewById(R.id.cameraTextView);
-                cameraTextView.setText(String.format("Lat : %s | Lng : %s | Alt : %s\nHeading : %sx %sy %sz\nBearing : %s",
-                        location.getLatitude(), location.getLongitude(), location.getAltitude(),
-                        Gx, Gy, Gz, location.getBearing()));
-            }
-
-            @Override
-            public void onAccuracyChanged(Sensor sensor, int accuracy) {
 
             }
         };

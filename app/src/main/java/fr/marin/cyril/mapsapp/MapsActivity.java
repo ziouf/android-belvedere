@@ -18,6 +18,7 @@ import android.support.v4.app.FragmentActivity;
 import android.support.v4.content.ContextCompat;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -39,7 +40,7 @@ public class MapsActivity extends FragmentActivity
         implements OnMapReadyCallback, ActivityCompat.OnRequestPermissionsResultCallback,
             GoogleMap.OnMapLoadedCallback, GoogleMap.OnCameraChangeListener {
 
-    private static final int LOCATION_PERMISSION_CODE = 1;
+    private static final int PERMISSION_CODE = 1;
 
     private GoogleMap mMap;
     private LocationManager locationManager;
@@ -113,13 +114,14 @@ public class MapsActivity extends FragmentActivity
         // Désactivation du module AR si api < LOLLIPOP
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
             cameraButton.hide();
+            return;
         }
 
         // Action au click sur le bouton camera
         cameraButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(MapsActivity.this, CameraActivity.class));
+                startActivity(new Intent(getApplicationContext(), CameraActivity.class));
             }
         });
 
@@ -128,14 +130,16 @@ public class MapsActivity extends FragmentActivity
 
     @Override
     public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
 
-        if (requestCode == LOCATION_PERMISSION_CODE) {
+        if (requestCode == PERMISSION_CODE) {
             if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                 this.initMaps();
+            } else {
+                Toast.makeText(this, "Permission refusée", Toast.LENGTH_SHORT).show();
             }
         }
 
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
     }
 
     /**
@@ -154,7 +158,7 @@ public class MapsActivity extends FragmentActivity
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             // Request LOCATION permissions
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                this.requestPermissions(new String[] { Manifest.permission.ACCESS_FINE_LOCATION }, LOCATION_PERMISSION_CODE);
+                requestPermissions(new String[] { Manifest.permission.ACCESS_FINE_LOCATION }, PERMISSION_CODE);
             }
 
         } else {
