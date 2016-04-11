@@ -27,7 +27,6 @@ import android.os.Handler;
 import android.os.HandlerThread;
 import android.os.IBinder;
 import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
@@ -86,23 +85,11 @@ public class CameraActivity extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        // Configuration du mode immersif
-        this.initUI();
-
-        // Inflate UI
-        setContentView(R.layout.activity_camera);
-
-    }
-
-    @Override
-    protected void onPostCreate(@Nullable Bundle savedInstanceState) {
-        super.onPostCreate(savedInstanceState);
-
         // Check for permissions
         if (ActivityCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED
                 || ActivityCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                String[] permissions = new String[] {
+                String[] permissions = new String[]{
                         Manifest.permission.ACCESS_FINE_LOCATION,
                         Manifest.permission.CAMERA
                 };
@@ -110,9 +97,20 @@ public class CameraActivity extends AppCompatActivity
             }
         } else {
 
-            this.initActivity();
+            this.init();
 
         }
+
+    }
+
+    private void init() {
+        // Configuration du mode immersif
+        this.initUI();
+
+        // Inflate UI
+        setContentView(R.layout.activity_camera);
+
+        this.initActivity();
     }
 
     @Override
@@ -123,8 +121,11 @@ public class CameraActivity extends AppCompatActivity
         this.initUI();
 
         // Re-ouverture de la camera
-        if (this.textureView != null)
+        if (this.textureView != null && this.textureView.isAvailable()) {
             this.textureView.setSurfaceTextureListener(this);
+            this.onSurfaceTextureAvailable(this.textureView.getSurfaceTexture(),
+                    this.textureView.getWidth(), this.textureView.getHeight());
+        }
     }
 
     @Override
@@ -132,7 +133,13 @@ public class CameraActivity extends AppCompatActivity
         super.onPause();
 
         // Close Camera
-        if (cameraDevice != null) cameraDevice.close();
+        if (cameraDevice != null) {
+            cameraDevice.close();
+
+            ImageView camera_loading_splash = (ImageView) findViewById(R.id.camera_loading);
+            if (camera_loading_splash != null)
+                camera_loading_splash.setVisibility(View.VISIBLE);
+        }
     }
 
     @Override
@@ -158,11 +165,11 @@ public class CameraActivity extends AppCompatActivity
                     && grantResults[0] == PackageManager.PERMISSION_GRANTED
                     && grantResults[1] == PackageManager.PERMISSION_GRANTED) {
 
-                this.initActivity();
+                this.init();
+
             } else {
                 Toast.makeText(this, "Permission refusée", Toast.LENGTH_SHORT).show();
             }
-            //finish();
         }
     }
 
@@ -180,12 +187,7 @@ public class CameraActivity extends AppCompatActivity
     private void initActivity() {
         // Init Camera view
         this.textureView = (TextureView) findViewById(R.id.textureView);
-        if (this.textureView != null) {
-            this.textureView.setSurfaceTextureListener(this);
-            // Workarround if textureview is already available when setting listener
-            if (this.cameraDevice == null && this.textureView.isAvailable())
-                this.onSurfaceTextureAvailable(this.textureView.getSurfaceTexture(), this.textureView.getWidth(), this.textureView.getHeight());
-        }
+        if (this.textureView != null) this.textureView.setSurfaceTextureListener(this);
 
         // Bind database services
         this.bindService(new Intent(getApplicationContext(), DatabaseService.class),
@@ -283,7 +285,9 @@ public class CameraActivity extends AppCompatActivity
             public void onClosed(CameraDevice camera) {
                 super.onClosed(camera);
                 previewSession.close();
+                previewSession = null;
                 cameraDevice = null;
+                previewBuilder = null;
             }
 
             @Override
