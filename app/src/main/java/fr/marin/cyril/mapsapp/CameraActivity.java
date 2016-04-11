@@ -29,6 +29,7 @@ import android.os.IBinder;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Size;
 import android.view.Surface;
@@ -38,7 +39,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import java.util.Arrays;
+import java.util.Collections;
 
 import fr.marin.cyril.mapsapp.database.DatabaseService;
 
@@ -157,16 +158,19 @@ public class CameraActivity extends AppCompatActivity
                     && grantResults[0] == PackageManager.PERMISSION_GRANTED
                     && grantResults[1] == PackageManager.PERMISSION_GRANTED) {
 
+                this.initActivity();
             } else {
                 Toast.makeText(this, "Permission refusée", Toast.LENGTH_SHORT).show();
             }
-            finish();
+            //finish();
         }
     }
 
     private void initUI() {
         // Hide action bar
-        getSupportActionBar().hide();
+        ActionBar actionBar = getSupportActionBar();
+        if (actionBar != null) actionBar.hide();
+
         getWindow().getDecorView()
                 .setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_STABLE
                         | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
@@ -176,7 +180,12 @@ public class CameraActivity extends AppCompatActivity
     private void initActivity() {
         // Init Camera view
         this.textureView = (TextureView) findViewById(R.id.textureView);
-        this.textureView.setSurfaceTextureListener(this);
+        if (this.textureView != null) {
+            this.textureView.setSurfaceTextureListener(this);
+            // Workarround if textureview is already available when setting listener
+            if (this.cameraDevice == null && this.textureView.isAvailable())
+                this.onSurfaceTextureAvailable(this.textureView.getSurfaceTexture(), this.textureView.getWidth(), this.textureView.getHeight());
+        }
 
         // Bind database services
         this.bindService(new Intent(getApplicationContext(), DatabaseService.class),
@@ -232,11 +241,12 @@ public class CameraActivity extends AppCompatActivity
         float Gx = event.values[0];
         float Gy = event.values[1];
         float Gz = event.values[2];
+        String s = "Lat : %s | Lng : %s | Alt : %s\nHeading : %sx %sy %sz\nBearing : %s";
 
         TextView cameraTextView = (TextView) findViewById(R.id.cameraTextView);
-        cameraTextView.setText(String.format("Lat : %s | Lng : %s | Alt : %s\nHeading : %sx %sy %sz\nBearing : %s",
-                location.getLatitude(), location.getLongitude(), location.getAltitude(),
-                Gx, Gy, Gz, location.getBearing()));
+        if (cameraTextView != null)
+            cameraTextView.setText(String.format(s, location.getLatitude(), location.getLongitude(), location.getAltitude(),
+                    Gx, Gy, Gz, location.getBearing()));
     }
 
     @Override
@@ -263,7 +273,7 @@ public class CameraActivity extends AppCompatActivity
                 previewBuilder.addTarget(surface);
 
                 try {
-                    cameraDevice.createCaptureSession(Arrays.asList(surface), getPreviewSessionStateCallback(), null);
+                    cameraDevice.createCaptureSession(Collections.singletonList(surface), getPreviewSessionStateCallback(), null);
                 } catch (CameraAccessException e) {
 
                 }
@@ -278,12 +288,12 @@ public class CameraActivity extends AppCompatActivity
 
             @Override
             public void onDisconnected(CameraDevice camera) {
-
+                Toast.makeText(getApplicationContext(), "CameraDevice disconnected", Toast.LENGTH_SHORT).show();
             }
 
             @Override
             public void onError(CameraDevice camera, int error) {
-
+                Toast.makeText(getApplicationContext(), "CameraDevice error", Toast.LENGTH_SHORT).show();
             }
         };
     }
@@ -308,12 +318,13 @@ public class CameraActivity extends AppCompatActivity
                 }
 
                 ImageView camera_loading_splash = (ImageView) findViewById(R.id.camera_loading);
-                camera_loading_splash.setVisibility(View.INVISIBLE);
+                if (camera_loading_splash != null)
+                    camera_loading_splash.setVisibility(View.INVISIBLE);
             }
 
             @Override
             public void onConfigureFailed(CameraCaptureSession session) {
-
+                Toast.makeText(getApplicationContext(), "CaptureSession configuration failed", Toast.LENGTH_SHORT).show();
             }
         };
     }
