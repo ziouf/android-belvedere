@@ -1,7 +1,9 @@
 package fr.marin.cyril.mapsapp.database;
 
 import android.app.Service;
+import android.content.ComponentName;
 import android.content.Intent;
+import android.content.ServiceConnection;
 import android.os.Binder;
 import android.os.IBinder;
 
@@ -60,17 +62,6 @@ public class DatabaseService extends Service {
         super.onRebind(intent);
     }
 
-    /**
-     * Class used for the client Binder.  Because we know this service always
-     * runs in the same process as its clients, we don't need to deal with IPC.
-     */
-    public class DatabaseServiceBinder extends Binder {
-        public DatabaseService getService() {
-            // Return this instance of LocalService so clients can call public methods
-            return DatabaseService.this;
-        }
-    }
-
     public boolean isInit() {
         return this.dbHelper.count() > 0;
     }
@@ -85,5 +76,41 @@ public class DatabaseService extends Service {
 
     public Collection<Placemark> findInArea(Area area) {
         return dbHelper.findInArea(area);
+    }
+
+    public static class DatabaseServiceConnection implements ServiceConnection {
+        boolean bound = false;
+        DatabaseService databaseService;
+
+        @Override
+        public void onServiceConnected(ComponentName name, IBinder service) {
+            DatabaseService.DatabaseServiceBinder binder = (DatabaseService.DatabaseServiceBinder) service;
+            databaseService = binder.getService();
+            bound = databaseService != null;
+        }
+
+        @Override
+        public void onServiceDisconnected(ComponentName name) {
+            bound = false;
+        }
+
+        public boolean isBound() {
+            return bound;
+        }
+
+        public DatabaseService getDatabaseService() {
+            return databaseService;
+        }
+    }
+
+    /**
+     * Class used for the client Binder.  Because we know this service always
+     * runs in the same process as its clients, we don't need to deal with IPC.
+     */
+    public class DatabaseServiceBinder extends Binder {
+        public DatabaseService getService() {
+            // Return this instance of LocalService so clients can call public methods
+            return DatabaseService.this;
+        }
     }
 }

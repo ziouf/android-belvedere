@@ -2,17 +2,14 @@ package fr.marin.cyril.mapsapp;
 
 import android.Manifest;
 import android.annotation.TargetApi;
-import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
-import android.content.ServiceConnection;
 import android.content.pm.PackageManager;
+import android.graphics.Point;
 import android.graphics.SurfaceTexture;
-import android.hardware.GeomagneticField;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
-import android.hardware.SensorManager;
 import android.hardware.camera2.CameraAccessException;
 import android.hardware.camera2.CameraCaptureSession;
 import android.hardware.camera2.CameraDevice;
@@ -25,12 +22,12 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.HandlerThread;
-import android.os.IBinder;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Size;
+import android.view.Display;
 import android.view.Surface;
 import android.view.TextureView;
 import android.view.View;
@@ -42,40 +39,42 @@ import java.util.Collections;
 
 import fr.marin.cyril.mapsapp.database.DatabaseService;
 
+// TODO : Implémentation de SensorService
 /**
  * An example full-screen activity that shows and hides the system UI (i.e.
  * status bar and navigation/system bar) with user interaction.
  */
 @TargetApi(Build.VERSION_CODES.LOLLIPOP)
 public class CameraActivity extends AppCompatActivity
-        implements ActivityCompat.OnRequestPermissionsResultCallback, TextureView.SurfaceTextureListener, SensorEventListener {
+        implements ActivityCompat.OnRequestPermissionsResultCallback, TextureView.SurfaceTextureListener {
 
     private static final int PERMISSIONS_CODE = 2;
 
-    private GeomagneticField geomagneticField;
-    private Sensor compas;
-    private SensorManager sensorManager;
-    private SensorEventListener compasEventListener;
-    private Location location;
+    private DatabaseService.DatabaseServiceConnection databaseServiceConnection = new DatabaseService.DatabaseServiceConnection();
+    //private SensorService.SensorServiceConnection sensorServiceConnection = new SensorService.SensorServiceConnection();
 
-    private boolean databaseServiceBound = false;
-    private DatabaseService databaseService;
-    /** Defines callbacks for service binding, passed to bindService() */
-    private ServiceConnection databaseServiceConnection = new ServiceConnection() {
+    private Location location;
+    private SensorEventListener compasEventListener = new SensorEventListener() {
         @Override
-        public void onServiceConnected(ComponentName name, IBinder service) {
-            DatabaseService.DatabaseServiceBinder binder = (DatabaseService.DatabaseServiceBinder) service;
-            databaseService = binder.getService();
-            databaseServiceBound = databaseService != null;
+        public void onSensorChanged(SensorEvent event) {
+            float Gx = event.values[0];
+            float Gy = event.values[1];
+            float Gz = event.values[2];
+            String s = "Lat : %s | Lng : %s | Alt : %s\nHeading : %sx %sy %sz\nBearing : %s";
+
+            TextView cameraTextView = (TextView) findViewById(R.id.cameraTextView);
+            if (cameraTextView != null)
+                cameraTextView.setText(String.format(s, location.getLatitude(), location.getLongitude(), location.getAltitude(),
+                        Gx, Gy, Gz, location.getBearing()));
         }
 
         @Override
-        public void onServiceDisconnected(ComponentName name) {
-            databaseServiceBound = false;
+        public void onAccuracyChanged(Sensor sensor, int accuracy) {
+
         }
     };
 
-    private Size previewSize = new Size(1920, 1080);
+    private Size previewSize;
     private TextureView textureView;
     private CameraDevice cameraDevice;
     private CaptureRequest.Builder previewBuilder;
@@ -84,6 +83,11 @@ public class CameraActivity extends AppCompatActivity
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        Display display = getWindowManager().getDefaultDisplay();
+        Point size = new Point();
+        display.getRealSize(size);
+        this.previewSize = new Size(size.y, size.x);
 
         // Check for permissions
         if (ActivityCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED
@@ -103,22 +107,18 @@ public class CameraActivity extends AppCompatActivity
 
     }
 
-    private void init() {
-        // Configuration du mode immersif
-        this.initUI();
-
-        // Inflate UI
-        setContentView(R.layout.activity_camera);
-
-        this.initActivity();
-    }
-
     @Override
     protected void onResume() {
         super.onResume();
 
         // Configuration du mode immersif
         this.initUI();
+
+        // Bind services
+        this.bindService(new Intent(getApplicationContext(), DatabaseService.class),
+                databaseServiceConnection, Context.BIND_AUTO_CREATE);
+        //this.bindService(new Intent(getApplicationContext(), SensorService.class),
+        //        sensorServiceConnection, Context.BIND_AUTO_CREATE);
 
         // Re-ouverture de la camera
         if (this.textureView != null && this.textureView.isAvailable()) {
@@ -132,6 +132,10 @@ public class CameraActivity extends AppCompatActivity
     protected void onPause() {
         super.onPause();
 
+        // Unbind services
+        if (databaseServiceConnection.isBound()) this.unbindService(databaseServiceConnection);
+        //if (sensorServiceConnection.isBound()) this.unbindService(sensorServiceConnection);
+
         // Close Camera
         if (cameraDevice != null) {
             cameraDevice.close();
@@ -144,15 +148,6 @@ public class CameraActivity extends AppCompatActivity
 
     @Override
     protected void onDestroy() {
-        // Close Camera
-        if (cameraDevice != null) cameraDevice.close();
-
-        // Close SensorManager
-        if (sensorManager != null) sensorManager.unregisterListener(compasEventListener);
-
-        // Unbind database service
-        if (databaseServiceBound) this.unbindService(databaseServiceConnection);
-
         super.onDestroy();
     }
 
@@ -173,6 +168,17 @@ public class CameraActivity extends AppCompatActivity
         }
     }
 
+    private void init() {
+        // Configuration du mode immersif
+        this.initUI();
+
+        // Inflate UI
+        setContentView(R.layout.activity_camera);
+
+        // Initialisation de l'activity
+        this.initActivity();
+    }
+
     private void initUI() {
         // Hide action bar
         ActionBar actionBar = getSupportActionBar();
@@ -189,21 +195,12 @@ public class CameraActivity extends AppCompatActivity
         this.textureView = (TextureView) findViewById(R.id.textureView);
         if (this.textureView != null) this.textureView.setSurfaceTextureListener(this);
 
-        // Bind database services
-        this.bindService(new Intent(getApplicationContext(), DatabaseService.class),
-                databaseServiceConnection, Context.BIND_AUTO_CREATE);
-
         // Check location permissions
         if (ActivityCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED)
             return;
         // Get location
         LocationManager locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
         this.location = locationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
-
-        // Get compas
-        this.sensorManager = (SensorManager) getSystemService(SENSOR_SERVICE);
-        this.compas = sensorManager.getDefaultSensor(Sensor.TYPE_GEOMAGNETIC_ROTATION_VECTOR);
-        this.sensorManager.registerListener(this, this.compas, SensorManager.SENSOR_DELAY_NORMAL);
 
     }
 
@@ -235,24 +232,6 @@ public class CameraActivity extends AppCompatActivity
 
     @Override
     public void onSurfaceTextureUpdated(SurfaceTexture surface) {
-
-    }
-
-    @Override
-    public void onSensorChanged(SensorEvent event) {
-        float Gx = event.values[0];
-        float Gy = event.values[1];
-        float Gz = event.values[2];
-        String s = "Lat : %s | Lng : %s | Alt : %s\nHeading : %sx %sy %sz\nBearing : %s";
-
-        TextView cameraTextView = (TextView) findViewById(R.id.cameraTextView);
-        if (cameraTextView != null)
-            cameraTextView.setText(String.format(s, location.getLatitude(), location.getLongitude(), location.getAltitude(),
-                    Gx, Gy, Gz, location.getBearing()));
-    }
-
-    @Override
-    public void onAccuracyChanged(Sensor sensor, int accuracy) {
 
     }
 

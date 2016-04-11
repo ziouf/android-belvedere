@@ -1,17 +1,14 @@
 package fr.marin.cyril.mapsapp;
 
 import android.Manifest;
-import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
-import android.content.ServiceConnection;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.location.LocationManager;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
-import android.os.IBinder;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentActivity;
@@ -46,22 +43,7 @@ public class MapsActivity extends FragmentActivity
     private LocationManager locationManager;
     private Collection<Marker> markersShown;
 
-    private boolean databaseServiceBound = false;
-    private DatabaseService databaseService;
-    /** Defines callbacks for service binding, passed to bindService() */
-    private ServiceConnection databaseServiceConnection = new ServiceConnection() {
-        @Override
-        public void onServiceConnected(ComponentName name, IBinder service) {
-            DatabaseService.DatabaseServiceBinder binder = (DatabaseService.DatabaseServiceBinder) service;
-            databaseService = binder.getService();
-            databaseServiceBound = databaseService != null;
-        }
-
-        @Override
-        public void onServiceDisconnected(ComponentName name) {
-            databaseServiceBound = false;
-        }
-    };
+    private DatabaseService.DatabaseServiceConnection databaseServiceConnection = new DatabaseService.DatabaseServiceConnection();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -101,8 +83,7 @@ public class MapsActivity extends FragmentActivity
 
     @Override
     protected void onDestroy() {
-        if (databaseServiceBound)
-            this.unbindService(databaseServiceConnection);
+        if (databaseServiceConnection.isBound()) this.unbindService(databaseServiceConnection);
 
         super.onDestroy();
     }
@@ -221,7 +202,7 @@ public class MapsActivity extends FragmentActivity
             public View getInfoContents(Marker marker) {
                 View v = getLayoutInflater().inflate(R.layout.info_window, null);
 
-                Placemark m = databaseService.findByLatLng(marker.getPosition());
+                Placemark m = databaseServiceConnection.getDatabaseService().findByLatLng(marker.getPosition());
 
                 TextView tvTitle = (TextView) v.findViewById(R.id.iw_title);
                 TextView tvAltitude = (TextView) v.findViewById(R.id.iw_altitude);
@@ -242,7 +223,7 @@ public class MapsActivity extends FragmentActivity
         return new GoogleMap.OnInfoWindowClickListener() {
             @Override
             public void onInfoWindowClick(Marker marker) {
-                Placemark m = databaseService.findByLatLng(marker.getPosition());
+                Placemark m = databaseServiceConnection.getDatabaseService().findByLatLng(marker.getPosition());
                 startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(m.getUrl())));
             }
         };
@@ -269,7 +250,7 @@ public class MapsActivity extends FragmentActivity
      *
      */
     private void updateMarkersOnMap() {
-        if(!databaseServiceBound) return;
+        if (!databaseServiceConnection.isBound()) return;
 
         Area area = new Area(mMap.getProjection().getVisibleRegion());
 
@@ -283,7 +264,7 @@ public class MapsActivity extends FragmentActivity
             markersShown.removeAll(toRemove);
         }
 
-        for (Placemark m : databaseService.findInArea(area))
+        for (Placemark m : databaseServiceConnection.getDatabaseService().findInArea(area))
             if (area.isInArea(m.getCoordinates().getLatLng()))
                 markersShown.add(mMap.addMarker(m.getMarkerOptions()));
     }
