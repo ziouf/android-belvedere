@@ -7,9 +7,6 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Point;
 import android.graphics.SurfaceTexture;
-import android.hardware.Sensor;
-import android.hardware.SensorEvent;
-import android.hardware.SensorEventListener;
 import android.hardware.camera2.CameraAccessException;
 import android.hardware.camera2.CameraCaptureSession;
 import android.hardware.camera2.CameraDevice;
@@ -54,23 +51,18 @@ public class CameraActivity extends AppCompatActivity
     //private SensorService.SensorServiceConnection sensorServiceConnection = new SensorService.SensorServiceConnection();
 
     private Location location;
-    private SensorEventListener compasEventListener = new SensorEventListener() {
+    private SensorService.SensorServiceListener compasEventListener = new SensorService.SensorServiceListener() {
         @Override
-        public void onSensorChanged(SensorEvent event) {
-            float Gx = event.values[0];
-            float Gy = event.values[1];
-            float Gz = event.values[2];
+        public void onChange(float[] values) {
+            float Gx = values[0];
+            float Gy = values[1];
+            float Gz = values[2];
             String s = "Lat : %s | Lng : %s | Alt : %s\nHeading : %sx %sy %sz\nBearing : %s";
 
             TextView cameraTextView = (TextView) findViewById(R.id.cameraTextView);
             if (cameraTextView != null)
                 cameraTextView.setText(String.format(s, location.getLatitude(), location.getLongitude(), location.getAltitude(),
                         Gx, Gy, Gz, location.getBearing()));
-        }
-
-        @Override
-        public void onAccuracyChanged(Sensor sensor, int accuracy) {
-
         }
     };
 
