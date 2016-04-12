@@ -2,8 +2,10 @@ package fr.marin.cyril.mapsapp;
 
 import android.Manifest;
 import android.annotation.TargetApi;
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
+import android.content.ServiceConnection;
 import android.content.pm.PackageManager;
 import android.graphics.Point;
 import android.graphics.SurfaceTexture;
@@ -19,12 +21,15 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.HandlerThread;
+import android.os.IBinder;
+import android.os.Message;
+import android.os.Messenger;
+import android.os.RemoteException;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Size;
-import android.view.Display;
 import android.view.Surface;
 import android.view.TextureView;
 import android.view.View;
@@ -36,7 +41,6 @@ import java.util.Collections;
 
 import fr.marin.cyril.mapsapp.database.DatabaseService;
 
-// TODO : Implémentation de SensorService
 /**
  * An example full-screen activity that shows and hides the system UI (i.e.
  * status bar and navigation/system bar) with user interaction.
@@ -45,40 +49,87 @@ import fr.marin.cyril.mapsapp.database.DatabaseService;
 public class CameraActivity extends AppCompatActivity
         implements ActivityCompat.OnRequestPermissionsResultCallback, TextureView.SurfaceTextureListener {
 
-    private static final int PERMISSIONS_CODE = 2;
+    private static final int PERMISSIONS_CODE = 0;
 
     private DatabaseService.DatabaseServiceConnection databaseServiceConnection = new DatabaseService.DatabaseServiceConnection();
-    //private SensorService.SensorServiceConnection sensorServiceConnection = new SensorService.SensorServiceConnection();
 
     private Location location;
-    private SensorService.SensorServiceListener compasEventListener = new SensorService.SensorServiceListener() {
+    private final Messenger mMessenger = new Messenger(new Handler() {
         @Override
-        public void onChange(float[] values) {
-            float Gx = values[0];
-            float Gy = values[1];
-            float Gz = values[2];
-            String s = "Lat : %s | Lng : %s | Alt : %s\nHeading : %sx %sy %sz\nBearing : %s";
+        public void handleMessage(Message msg) {
+            switch (msg.what) {
+                case SensorService.MSG_COMPAS_UPDATED:
+                    Bundle values = msg.getData();
+                    float x = values.getFloat(SensorService.COMPAS_X);
+                    float y = values.getFloat(SensorService.COMPAS_Y);
+                    float z = values.getFloat(SensorService.COMPAS_Z);
 
-            TextView cameraTextView = (TextView) findViewById(R.id.cameraTextView);
-            if (cameraTextView != null)
-                cameraTextView.setText(String.format(s, location.getLatitude(), location.getLongitude(), location.getAltitude(),
-                        Gx, Gy, Gz, location.getBearing()));
+                    CameraActivity.this.updateCompas(x, y, z);
+
+                    break;
+                case SensorService.MSG_ALTITUDE_UPDATED:
+                    float altitude = msg.getData().getFloat(SensorService.ALTITUDE);
+
+                    CameraActivity.this.updateAltitude(altitude);
+
+                    break;
+                default:
+                    super.handleMessage(msg);
+            }
+        }
+    });
+    private boolean sensorServiceBound = false;
+    private Messenger sensorServiceMessenger;
+    private ServiceConnection sensorServiceConnection = new ServiceConnection() {
+        @Override
+        public void onServiceConnected(ComponentName name, IBinder service) {
+            sensorServiceMessenger = new Messenger(service);
+            sensorServiceBound = true;
+
+            try {
+                Message msg = Message.obtain(null, SensorService.MSG_REGISTER_CLIENT);
+                msg.replyTo = mMessenger;
+                sensorServiceMessenger.send(msg);
+
+            } catch (RemoteException e) {
+
+            }
+
+            //Toast.makeText(getApplicationContext(), "Sensor Service Connected", Toast.LENGTH_SHORT).show();
+        }
+
+        @Override
+        public void onServiceDisconnected(ComponentName name) {
+            sensorServiceMessenger = null;
+            sensorServiceBound = false;
+
+            //Toast.makeText(getApplicationContext(), "Sensor Service DisConnected", Toast.LENGTH_SHORT).show();
         }
     };
-
     private Size previewSize;
     private TextureView textureView;
     private CameraDevice cameraDevice;
     private CaptureRequest.Builder previewBuilder;
     private CameraCaptureSession previewSession;
 
+    private void updateCompas(float x, float y, float z) {
+        String s = "Lat : %s | Lng : %s | Alt : %s\nHeading : %sx %sy %sz\nBearing : %s";
+        TextView cameraTextView = (TextView) findViewById(R.id.cameraTextView);
+        if (cameraTextView != null)
+            cameraTextView.setText(String.format(s, location.getLatitude(), location.getLongitude(), location.getAltitude(),
+                    x, y, z, location.getBearing()));
+    }
+
+    private void updateAltitude(float altitude) {
+        this.location.setAltitude(altitude);
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        Display display = getWindowManager().getDefaultDisplay();
         Point size = new Point();
-        display.getRealSize(size);
+        getWindowManager().getDefaultDisplay().getRealSize(size);
         this.previewSize = new Size(size.y, size.x);
 
         // Check for permissions
@@ -109,8 +160,8 @@ public class CameraActivity extends AppCompatActivity
         // Bind services
         this.bindService(new Intent(getApplicationContext(), DatabaseService.class),
                 databaseServiceConnection, Context.BIND_AUTO_CREATE);
-        //this.bindService(new Intent(getApplicationContext(), SensorService.class),
-        //        sensorServiceConnection, Context.BIND_AUTO_CREATE);
+        this.bindService(new Intent(getApplicationContext(), SensorService.class),
+                sensorServiceConnection, Context.BIND_AUTO_CREATE);
 
         // Re-ouverture de la camera
         if (this.textureView != null && this.textureView.isAvailable()) {
@@ -122,11 +173,18 @@ public class CameraActivity extends AppCompatActivity
 
     @Override
     protected void onPause() {
-        super.onPause();
-
         // Unbind services
         if (databaseServiceConnection.isBound()) this.unbindService(databaseServiceConnection);
-        //if (sensorServiceConnection.isBound()) this.unbindService(sensorServiceConnection);
+        if (sensorServiceBound) {
+            try {
+                Message msg = Message.obtain(null, SensorService.MSG_UNREGISTER_CLIENT);
+                msg.replyTo = mMessenger;
+                if (sensorServiceMessenger != null) sensorServiceMessenger.send(msg);
+            } catch (RemoteException e) {
+
+            }
+            this.unbindService(sensorServiceConnection);
+        }
 
         // Close Camera
         if (cameraDevice != null) {
@@ -136,6 +194,8 @@ public class CameraActivity extends AppCompatActivity
             if (camera_loading_splash != null)
                 camera_loading_splash.setVisibility(View.VISIBLE);
         }
+
+        super.onPause();
     }
 
     @Override
