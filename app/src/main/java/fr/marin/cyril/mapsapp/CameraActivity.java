@@ -221,9 +221,6 @@ public class CameraActivity extends AppCompatActivity
     }
 
     private void init() {
-        // Configuration du mode immersif
-        this.initUI();
-
         // Inflate UI
         setContentView(R.layout.activity_camera);
 
