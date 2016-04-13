@@ -107,19 +107,10 @@ public class SensorService extends Service {
 
             //float azimuth = (float) (1/Math.tan((R[1]-R[3]) / (R[0]-R[4])));
 
-            for (Messenger messenger : mClients) {
-                Message msg = Message.obtain(null, SensorService.MSG_AZIMUTH_UPDATED);
-                Bundle values = new Bundle();
-                values.putFloat(SensorService.AZIMUTH, azimuth);
-                msg.setData(values);
+            Bundle values = new Bundle();
+            values.putFloat(SensorService.AZIMUTH, azimuth);
 
-                try {
-                    messenger.send(msg);
-
-                } catch (RemoteException ignore) {
-
-                }
-            }
+            sendNewMessageToAll(SensorService.MSG_AZIMUTH_UPDATED, values);
 
         }
 
@@ -128,6 +119,23 @@ public class SensorService extends Service {
 
         }
     };
+
+    void sendNewMessageToAll(int type, Bundle data) {
+        for (Messenger messenger : mClients)
+            sendNewMessage(messenger, type, data);
+    }
+
+    void sendNewMessage(Messenger messenger, int type, Bundle data) {
+        Message msg = Message.obtain(null, type);
+        msg.setData(data);
+
+        try {
+            messenger.send(msg);
+
+        } catch (RemoteException ignore) {
+
+        }
+    }
 
 
     @Nullable
