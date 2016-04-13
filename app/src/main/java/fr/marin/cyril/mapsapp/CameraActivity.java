@@ -59,11 +59,8 @@ public class CameraActivity extends AppCompatActivity
         @Override
         public void handleMessage(Message msg) {
             switch (msg.what) {
-                case SensorService.MSG_ALTITUDE_UPDATED:
+                case SensorService.MSG_SENSOR_UPDATE:
                     location.setAltitude(msg.getData().getFloat(SensorService.ALTITUDE));
-
-                    break;
-                case SensorService.MSG_ORIENTATION_UPDATED:
                     location.setExtras(msg.getData());
 
                     break;
@@ -110,12 +107,16 @@ public class CameraActivity extends AppCompatActivity
     private void updateTextView() {
         String s = "Lat : %s | Lng : %s | Alt : %.0fm\nAzimuth : %.2f deg (%s)\nPitch : %.2f deg";
         TextView cameraTextView = (TextView) findViewById(R.id.cameraTextView);
+        if (cameraTextView == null) return;
 
-        if (cameraTextView != null)
-            cameraTextView.setText(String.format(s, location.getLatitude(), location.getLongitude(),
-                    location.getAltitude(), location.getExtras().getFloat(SensorService.AZIMUTH),
-                    Utils.getDirectionFromDegrees(location.getExtras().getFloat(SensorService.AZIMUTH)),
-                    location.getExtras().getFloat(SensorService.PITCH)));
+        double lat = location.getLatitude();
+        double lng = location.getLongitude();
+        double alt = location.getAltitude();
+        float azimuth = location.getExtras().getFloat(SensorService.AZIMUTH);
+        float pitch = location.getExtras().getFloat(SensorService.PITCH);
+
+        cameraTextView.setText(String.format(s, lat, lng,
+                alt, azimuth, Utils.getDirectionFromDegrees(azimuth), pitch));
     }
 
     @Override
