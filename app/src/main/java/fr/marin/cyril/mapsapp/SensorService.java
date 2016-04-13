@@ -25,19 +25,12 @@ public class SensorService extends Service {
 
     public static final int MSG_REGISTER_CLIENT = 0;
     public static final int MSG_UNREGISTER_CLIENT = 1;
-    public static final int MSG_COMPAS_UPDATED = 10;
-    public static final int MSG_ALTITUDE_UPDATED = 11;
-    public static final int MSG_AZIMUTH_UPDATED = 12;
+    public static final int MSG_ALTITUDE_UPDATED = 10;
+    public static final int MSG_ORIENTATION_UPDATED = 11;
 
-    public static final String COMPAS_X = "compas_x";
-    public static final String COMPAS_Y = "compas_y";
-    public static final String COMPAS_Z = "compas_z";
     public static final String ALTITUDE = "altitude";
     public static final String AZIMUTH = "azimuth";
-
-    private static final int X = 0;
-    private static final int Y = 1;
-    private static final int Z = 2;
+    public static final String PITCH = "pitch";
 
     private Set<Messenger> mClients = new HashSet<>();
     final Messenger messenger = new Messenger(new Handler() {
@@ -62,19 +55,9 @@ public class SensorService extends Service {
         public void onSensorChanged(SensorEvent event) {
             float altitude = SensorManager.getAltitude(SensorManager.PRESSURE_STANDARD_ATMOSPHERE, event.values[0]);
 
-            for (Messenger messenger : mClients) {
-                Message msg = Message.obtain(null, SensorService.MSG_ALTITUDE_UPDATED);
-                Bundle values = new Bundle();
-                values.putFloat(SensorService.ALTITUDE, altitude);
-                msg.setData(values);
-
-                try {
-                    messenger.send(msg);
-
-                } catch (RemoteException ignore) {
-
-                }
-            }
+            Bundle values = new Bundle();
+            values.putFloat(SensorService.ALTITUDE, altitude);
+            sendNewMessageToAll(SensorService.MSG_ALTITUDE_UPDATED, values);
         }
 
         @Override
@@ -103,14 +86,11 @@ public class SensorService extends Service {
             float[] oMat = new float[3];
             SensorManager.getOrientation(R, oMat);
 
-            float azimuth = (float) Math.toDegrees(oMat[0]);
-
-            //float azimuth = (float) (1/Math.tan((R[1]-R[3]) / (R[0]-R[4])));
-
             Bundle values = new Bundle();
-            values.putFloat(SensorService.AZIMUTH, azimuth);
+            values.putFloat(SensorService.AZIMUTH, (float) Math.toDegrees(oMat[0]));
+            values.putFloat(SensorService.PITCH, (float) Math.toDegrees(oMat[1]));
 
-            sendNewMessageToAll(SensorService.MSG_AZIMUTH_UPDATED, values);
+            sendNewMessageToAll(SensorService.MSG_ORIENTATION_UPDATED, values);
 
         }
 
@@ -122,7 +102,7 @@ public class SensorService extends Service {
 
     void sendNewMessageToAll(int type, Bundle data) {
         for (Messenger messenger : mClients)
-            sendNewMessage(messenger, type, data);
+            this.sendNewMessage(messenger, type, data);
     }
 
     void sendNewMessage(Messenger messenger, int type, Bundle data) {
@@ -136,7 +116,6 @@ public class SensorService extends Service {
 
         }
     }
-
 
     @Nullable
     @Override

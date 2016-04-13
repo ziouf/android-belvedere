@@ -60,20 +60,17 @@ public class CameraActivity extends AppCompatActivity
         public void handleMessage(Message msg) {
             switch (msg.what) {
                 case SensorService.MSG_ALTITUDE_UPDATED:
-                    float altitude = msg.getData().getFloat(SensorService.ALTITUDE);
-
-                    CameraActivity.this.updateAltitude(altitude);
+                    location.setAltitude(msg.getData().getFloat(SensorService.ALTITUDE));
 
                     break;
-                case SensorService.MSG_AZIMUTH_UPDATED:
-                    float azimuth = msg.getData().getFloat(SensorService.AZIMUTH);
-
-                    CameraActivity.this.updateAzimuth(azimuth);
+                case SensorService.MSG_ORIENTATION_UPDATED:
+                    location.setExtras(msg.getData());
 
                     break;
                 default:
                     super.handleMessage(msg);
             }
+            updateTextView();
         }
     });
     private boolean sensorServiceBound = false;
@@ -111,24 +108,14 @@ public class CameraActivity extends AppCompatActivity
     private CameraCaptureSession previewSession;
 
     private void updateTextView() {
-        String s = "Lat : %s | Lng : %s | Alt : %.0fm\nAzimuth : %.2f deg (%s)";
+        String s = "Lat : %s | Lng : %s | Alt : %.0fm\nAzimuth : %.2f deg (%s)\nPitch : %.2f deg";
         TextView cameraTextView = (TextView) findViewById(R.id.cameraTextView);
 
         if (cameraTextView != null)
             cameraTextView.setText(String.format(s, location.getLatitude(), location.getLongitude(),
-                    location.getAltitude(), location.getBearing(), Utils.getDirectionFromDegrees(location.getBearing())));
-    }
-
-    private void updateAltitude(float altitude) {
-        this.location.setAltitude(altitude);
-
-        this.updateTextView();
-    }
-
-    private void updateAzimuth(float azimuth) {
-        this.location.setBearing(azimuth);
-
-        this.updateTextView();
+                    location.getAltitude(), location.getExtras().getFloat(SensorService.AZIMUTH),
+                    Utils.getDirectionFromDegrees(location.getExtras().getFloat(SensorService.AZIMUTH)),
+                    location.getExtras().getFloat(SensorService.PITCH)));
     }
 
     @Override
