@@ -2,6 +2,7 @@ package fr.marin.cyril.mapsapp;
 
 import android.app.Service;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
@@ -120,11 +121,18 @@ public class SensorService extends Service {
         //Toast.makeText(getApplicationContext(), "Sensor Service Created", Toast.LENGTH_SHORT).show();
 
         this.sensorManager = (SensorManager) getSystemService(SENSOR_SERVICE);
-        Sensor compas = sensorManager.getDefaultSensor(Sensor.TYPE_MAGNETIC_FIELD);
-        Sensor presure = sensorManager.getDefaultSensor(Sensor.TYPE_PRESSURE);
 
-        this.sensorManager.registerListener(this.compasSensorEventListener, compas, SensorManager.SENSOR_DELAY_NORMAL);
-        this.sensorManager.registerListener(this.presureEventListener, presure, SensorManager.SENSOR_DELAY_NORMAL);
+        PackageManager packageManager = getPackageManager();
+
+        if (packageManager.hasSystemFeature(PackageManager.FEATURE_SENSOR_COMPASS)) {
+            Sensor compas = sensorManager.getDefaultSensor(Sensor.TYPE_MAGNETIC_FIELD);
+            this.sensorManager.registerListener(this.compasSensorEventListener, compas, SensorManager.SENSOR_DELAY_NORMAL);
+        }
+
+        if (packageManager.hasSystemFeature(PackageManager.FEATURE_SENSOR_BAROMETER)) {
+            Sensor presure = sensorManager.getDefaultSensor(Sensor.TYPE_PRESSURE);
+            this.sensorManager.registerListener(this.presureEventListener, presure, SensorManager.SENSOR_DELAY_NORMAL);
+        }
     }
 
     @Override

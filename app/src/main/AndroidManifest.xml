@@ -57,7 +57,7 @@
         <service
             android:name=".SensorService"
             android:enabled="true"
-            android:process=":remote" />
+            android:process=":sensors" />
 
     </application>
 

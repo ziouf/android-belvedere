@@ -113,7 +113,7 @@ public class CameraActivity extends AppCompatActivity
     private CameraCaptureSession previewSession;
 
     private void updateCompas(float x, float y, float z) {
-        String s = "Lat : %s | Lng : %s | Alt : %s\nHeading : %sx %sy %sz\nBearing : %s";
+        String s = "Lat : %s | Lng : %s | Alt : %.0fm\nHeading : %.4fx %.4fy %.4fz\nBearing : %s";
         TextView cameraTextView = (TextView) findViewById(R.id.cameraTextView);
         if (cameraTextView != null)
             cameraTextView.setText(String.format(s, location.getLatitude(), location.getLongitude(), location.getAltitude(),
