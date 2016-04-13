@@ -77,7 +77,7 @@ class DatabaseHelper extends SQLiteOpenHelper {
                 right.toString(), left.toString() };
 
         Cursor c = db.query(distinct, DatabaseContract.MarkerEntry.TABLE_NAME, columns, select, args,
-                null, null, null, "25");
+                null, null, DatabaseContract.MarkerEntry.COLUMN_NAME_ALTITUDE + " DESC", "25");
 
         c.moveToFirst();
         while (!c.isAfterLast()) {
