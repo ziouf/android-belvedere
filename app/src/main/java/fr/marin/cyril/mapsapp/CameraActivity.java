@@ -40,6 +40,7 @@ import android.widget.Toast;
 import java.util.Collections;
 
 import fr.marin.cyril.mapsapp.database.DatabaseService;
+import fr.marin.cyril.mapsapp.tool.Utils;
 
 /**
  * An example full-screen activity that shows and hides the system UI (i.e.
@@ -115,36 +116,7 @@ public class CameraActivity extends AppCompatActivity
 
         if (cameraTextView != null)
             cameraTextView.setText(String.format(s, location.getLatitude(), location.getLongitude(),
-                    location.getAltitude(), location.getBearing(), this.getDirectionFromDegrees(location.getBearing())));
-    }
-
-    private String getDirectionFromDegrees(float degrees) {
-        if (degrees >= (359.9 - 22.5) || degrees < 22.5) {
-            return "N";
-        }
-        if (degrees >= 22.5 && degrees < 67.5) {
-            return "NE";
-        }
-        if (degrees >= 67.5 && degrees < 112.5) {
-            return "E";
-        }
-        if (degrees >= 112.5 && degrees < 157.5) {
-            return "SE";
-        }
-        if (degrees >= 157.5 && degrees < (359.9 - 157.5)) {
-            return "S";
-        }
-        if (degrees >= (359.9 - 157.5) && degrees < (359.9 - 112.5)) {
-            return "SW";
-        }
-        if (degrees >= (359.9 - 112.5) && degrees < (359.9 - 67.5)) {
-            return "W";
-        }
-        if (degrees >= (359.9 - 67.5) && degrees < (359.9 - 22.5)) {
-            return "NW";
-        }
-
-        return null;
+                    location.getAltitude(), location.getBearing(), Utils.getDirectionFromDegrees(location.getBearing())));
     }
 
     private void updateAltitude(float altitude) {
