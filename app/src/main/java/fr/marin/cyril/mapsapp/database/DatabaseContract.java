@@ -1,9 +1,5 @@
 package fr.marin.cyril.mapsapp.database;
 
-import android.content.Context;
-import android.database.DatabaseErrorHandler;
-import android.database.sqlite.SQLiteDatabase;
-import android.database.sqlite.SQLiteOpenHelper;
 import android.provider.BaseColumns;
 
 /**
@@ -42,6 +38,12 @@ final class DatabaseContract {
 
         public static final String DROP_TABLE =
                 "DROP TABLE IF EXISTS " + MarkerEntry.TABLE_NAME;
+
+        public static final String CREATE_INDEX_LAT_LNG =
+                "CREATE INDEX IF NOT EXISTS index_lat_lng ON " + MarkerEntry.TABLE_NAME + "(" +
+                        MarkerEntry.COLUMN_NAME_LATITUDE + COMMA_SEP +
+                        MarkerEntry.COLUMN_NAME_LONGITUDE + ")";
+
     }
 
 }

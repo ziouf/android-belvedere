@@ -27,7 +27,10 @@ class DatabaseHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
+        // Create table
         db.execSQL(DatabaseContract.MarkerEntry.CREATE_TABLE);
+        // Create indexes
+        db.execSQL(DatabaseContract.MarkerEntry.CREATE_INDEX_LAT_LNG);
     }
 
     @Override
