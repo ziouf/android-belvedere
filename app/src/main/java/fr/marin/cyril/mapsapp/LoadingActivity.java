@@ -1,66 +1,30 @@
 package fr.marin.cyril.mapsapp;
 
-import android.content.ComponentName;
-import android.content.Context;
 import android.content.Intent;
-import android.content.ServiceConnection;
 import android.os.AsyncTask;
+import android.os.Build;
 import android.os.Bundle;
-import android.os.IBinder;
+import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.TextView;
 
-import fr.marin.cyril.mapsapp.database.DatabaseService;
+import fr.marin.cyril.mapsapp.database.DatabaseHelper;
 
 public class LoadingActivity extends AppCompatActivity {
-
-    /** Defines callbacks for service binding, passed to bindService() */
-    private final ServiceConnection databaseServiceConnection = new ServiceConnection() {
-        @Override
-        public void onServiceConnected(ComponentName name, IBinder service) {
-            final DatabaseService.DatabaseServiceBinder binder = (DatabaseService.DatabaseServiceBinder) service;
-            final AsyncTask databaseInitAsyncTask = new AsyncTask<Object, Void, Void>() {
-                private TextView loadingInfoTextView = (TextView) LoadingActivity.this.findViewById(R.id.loading_info);
-
-                @Override
-                protected void onPreExecute() {
-                    loadingInfoTextView.setText(R.string.loading_database_init);
-                }
-
-                @Override
-                protected Void doInBackground(Object... params) {
-                    binder.getService().initDataIfNeeded();
-                    return null;
-                }
-
-                @Override
-                protected void onPostExecute(Void value) {
-                    loadingInfoTextView.setText(R.string.loading_application_openning);
-
-                    LoadingActivity.this.startActivity(new Intent(LoadingActivity.this, MapsActivity.class));
-                    LoadingActivity.this.finish();
-                }
-            };
-
-            databaseInitAsyncTask.execute();
-        }
-
-        @Override
-        public void onServiceDisconnected(ComponentName name) {
-
-        }
-    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         // BugFix mode immersif pour api < 23
-        requestWindowFeature(Window.FEATURE_NO_TITLE);
-        getSupportActionBar().hide();
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.M) {
+            requestWindowFeature(Window.FEATURE_NO_TITLE);
+            if (getSupportActionBar() != null) getSupportActionBar().hide();
+        }
+
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
             WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
@@ -72,24 +36,42 @@ public class LoadingActivity extends AppCompatActivity {
                         | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
                         | View.SYSTEM_UI_FLAG_FULLSCREEN
                         | View.SYSTEM_UI_FLAG_IMMERSIVE);
+    }
 
+    @Override
+    protected void onPostCreate(@Nullable Bundle savedInstanceState) {
+        super.onPostCreate(savedInstanceState);
         setContentView(R.layout.activity_loading);
     }
 
     @Override
-    public void onWindowFocusChanged(boolean hasFocus) {
-        super.onWindowFocusChanged(hasFocus);
+    protected void onResume() {
+        super.onResume();
 
-        // Bind database services
-        this.bindService(new Intent(getApplicationContext(), DatabaseService.class),
-                this.databaseServiceConnection, Context.BIND_AUTO_CREATE);
-
+        new DbInitAsyncTask().execute();
     }
 
-    @Override
-    protected void onDestroy() {
-        this.unbindService(databaseServiceConnection);
-        super.onDestroy();
-    }
+    private class DbInitAsyncTask extends AsyncTask {
+        private DatabaseHelper db = new DatabaseHelper(LoadingActivity.this);
+        private TextView loadingInfoTextView = (TextView) LoadingActivity.this.findViewById(R.id.loading_info);
 
+        @Override
+        protected void onPreExecute() {
+            this.loadingInfoTextView.setText(R.string.loading_database_init);
+        }
+
+        @Override
+        protected Object doInBackground(Object[] params) {
+            this.db.initDataIfNeeded();
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Object o) {
+            this.loadingInfoTextView.setText(R.string.loading_application_openning);
+
+            LoadingActivity.this.startActivity(new Intent(LoadingActivity.this, MapsActivity.class));
+            LoadingActivity.this.finish();
+        }
+    }
 }

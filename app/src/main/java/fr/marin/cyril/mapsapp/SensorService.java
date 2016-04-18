@@ -12,21 +12,18 @@ import android.os.Handler;
 import android.os.IBinder;
 import android.os.Message;
 import android.os.Messenger;
-import android.os.RemoteException;
 import android.support.annotation.Nullable;
 
 import java.util.HashSet;
 import java.util.Set;
+
+import fr.marin.cyril.mapsapp.services.Messages;
 
 /**
  * Created by CSCM6014 on 11/04/2016.
  */
 public class SensorService extends Service
         implements SensorEventListener {
-
-    public static final int MSG_REGISTER_CLIENT = 0;
-    public static final int MSG_UNREGISTER_CLIENT = 1;
-    public static final int MSG_SENSOR_UPDATE = 5;
 
     public static final String ALTITUDE = "altitude";
     public static final String AZIMUTH = "azimuth";
@@ -37,14 +34,14 @@ public class SensorService extends Service
     private float altitude;
 
     private Set<Messenger> mClients = new HashSet<>();
-    final Messenger messenger = new Messenger(new Handler() {
+    private final Messenger mMessenger = new Messenger(new Handler() {
         @Override
         public void handleMessage(Message msg) {
             switch (msg.what) {
-                case SensorService.MSG_REGISTER_CLIENT:
+                case Messages.MSG_REGISTER_CLIENT:
                     mClients.add(msg.replyTo);
                     break;
-                case SensorService.MSG_UNREGISTER_CLIENT:
+                case Messages.MSG_UNREGISTER_CLIENT:
                     mClients.remove(msg.replyTo);
                     break;
                 default:
@@ -80,7 +77,7 @@ public class SensorService extends Service
             }
         }
 
-        this.sendNewMessageToAll(SensorService.MSG_SENSOR_UPDATE, values);
+        Messages.sendNewMessageToAll(mClients, Messages.MSG_SENSOR_UPDATE, values, mMessenger);
     }
 
     @Override
@@ -88,27 +85,10 @@ public class SensorService extends Service
 
     }
 
-    void sendNewMessageToAll(int type, Bundle data) {
-        for (Messenger messenger : mClients)
-            this.sendNewMessage(messenger, type, data);
-    }
-
-    void sendNewMessage(Messenger messenger, int type, Bundle data) {
-        Message msg = Message.obtain(null, type);
-        msg.setData(data);
-
-        try {
-            messenger.send(msg);
-
-        } catch (RemoteException ignore) {
-
-        }
-    }
-
     @Nullable
     @Override
     public IBinder onBind(Intent intent) {
-        return messenger.getBinder();
+        return mMessenger.getBinder();
     }
 
     @Override

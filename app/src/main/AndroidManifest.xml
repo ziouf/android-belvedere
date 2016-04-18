@@ -50,11 +50,6 @@
             android:theme="@style/FullscreenTheme" />
 
         <service
-            android:name=".database.DatabaseService"
-            android:enabled="true"
-            android:exported="true" />
-
-        <service
             android:name=".SensorService"
             android:enabled="true"
             android:process=":sensors" />

@@ -1,7 +1,6 @@
 package fr.marin.cyril.mapsapp;
 
 import android.Manifest;
-import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Location;
@@ -9,6 +8,9 @@ import android.location.LocationManager;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
+import android.os.Messenger;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentActivity;
@@ -29,8 +31,9 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
 
-import fr.marin.cyril.mapsapp.database.DatabaseService;
+import fr.marin.cyril.mapsapp.database.DatabaseHelper;
 import fr.marin.cyril.mapsapp.kml.model.Placemark;
+import fr.marin.cyril.mapsapp.services.Messages;
 import fr.marin.cyril.mapsapp.tool.Area;
 
 public class MapsActivity extends FragmentActivity
@@ -38,12 +41,22 @@ public class MapsActivity extends FragmentActivity
             GoogleMap.OnMapLoadedCallback, GoogleMap.OnCameraChangeListener {
 
     private static final int PERMISSION_CODE = 1;
+    private final Messenger mMessenger = new Messenger(new Handler() {
+        @Override
+        public void handleMessage(Message msg) {
+            switch (msg.what) {
+                case Messages.MSG_MARKER_FOUND:
 
+                    break;
+                default:
+                    super.handleMessage(msg);
+            }
+        }
+    });
+    private DatabaseHelper db = new DatabaseHelper(MapsActivity.this);
     private GoogleMap mMap;
     private LocationManager locationManager;
     private Collection<Marker> markersShown;
-
-    private DatabaseService.DatabaseServiceConnection databaseServiceConnection = new DatabaseService.DatabaseServiceConnection();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,10 +74,6 @@ public class MapsActivity extends FragmentActivity
         // Init sensor providers
         this.locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
 
-        // Bind database services
-        this.bindService(new Intent(getApplicationContext(), DatabaseService.class),
-                databaseServiceConnection, Context.BIND_AUTO_CREATE);
-
         this.initOnClickActions();
     }
 
@@ -77,14 +86,11 @@ public class MapsActivity extends FragmentActivity
 
     @Override
     protected void onPause() {
-
         super.onPause();
     }
 
     @Override
     protected void onDestroy() {
-        if (databaseServiceConnection.isBound()) this.unbindService(databaseServiceConnection);
-
         super.onDestroy();
     }
 
@@ -202,7 +208,7 @@ public class MapsActivity extends FragmentActivity
             public View getInfoContents(Marker marker) {
                 View v = getLayoutInflater().inflate(R.layout.info_window, null);
 
-                Placemark m = databaseServiceConnection.getDatabaseService().findByLatLng(marker.getPosition());
+                Placemark m = db.findByLatLng(marker.getPosition());
 
                 TextView tvTitle = (TextView) v.findViewById(R.id.iw_title);
                 TextView tvAltitude = (TextView) v.findViewById(R.id.iw_altitude);
@@ -223,7 +229,7 @@ public class MapsActivity extends FragmentActivity
         return new GoogleMap.OnInfoWindowClickListener() {
             @Override
             public void onInfoWindowClick(Marker marker) {
-                Placemark m = databaseServiceConnection.getDatabaseService().findByLatLng(marker.getPosition());
+                Placemark m = db.findByLatLng(marker.getPosition());
                 startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(m.getUrl())));
             }
         };
@@ -250,8 +256,6 @@ public class MapsActivity extends FragmentActivity
      *
      */
     private void updateMarkersOnMap() {
-        if (!databaseServiceConnection.isBound()) return;
-
         Area area = new Area(mMap.getProjection().getVisibleRegion());
 
         if (markersShown.size() > 0) {
@@ -264,7 +268,7 @@ public class MapsActivity extends FragmentActivity
             markersShown.removeAll(toRemove);
         }
 
-        for (Placemark m : databaseServiceConnection.getDatabaseService().findInArea(area))
+        for (Placemark m : db.findInArea(area))
             if (area.isInArea(m.getCoordinates().getLatLng()))
                 markersShown.add(mMap.addMarker(m.getMarkerOptions()));
     }

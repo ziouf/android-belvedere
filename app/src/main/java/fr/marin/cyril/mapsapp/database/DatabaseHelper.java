@@ -8,20 +8,26 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 import com.google.android.gms.maps.model.LatLng;
 
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashSet;
 
+import fr.marin.cyril.mapsapp.R;
 import fr.marin.cyril.mapsapp.kml.model.Coordinates;
 import fr.marin.cyril.mapsapp.kml.model.Placemark;
+import fr.marin.cyril.mapsapp.kml.parser.KmlParser;
 import fr.marin.cyril.mapsapp.tool.Area;
 
 /**
  * Created by cscm6014 on 30/03/2016.
  */
-class DatabaseHelper extends SQLiteOpenHelper {
+public class DatabaseHelper extends SQLiteOpenHelper {
+    private Context context;
 
     public DatabaseHelper(Context context) {
         super(context, DatabaseContract.DATABASE_NAME, null, DatabaseContract.DATABASE_VERSION);
+        this.context = context;
     }
 
     @Override
@@ -38,6 +44,19 @@ class DatabaseHelper extends SQLiteOpenHelper {
             db.execSQL(DatabaseContract.MarkerEntry.DROP_TABLE);
             onCreate(db);
         }
+    }
+
+    public void initDataIfNeeded() {
+        if (this.count() > 0) return;
+
+        Collection<InputStream> kmlfiles = new HashSet<>();
+        // Ajouter ci dessous la liste des fichiers de ressource
+        kmlfiles.add(context.getResources().openRawResource(R.raw.sommets_des_alpes_francaises));
+        kmlfiles.add(context.getResources().openRawResource(R.raw.sommets_des_pyrenees));
+        kmlfiles.add(context.getResources().openRawResource(R.raw.sommets_du_massif_central));
+        kmlfiles.add(context.getResources().openRawResource(R.raw.sommets_du_massif_des_vosges));
+
+        this.insertAll(new KmlParser().parseAll(kmlfiles));
     }
 
     public void insert(Placemark marker) {
