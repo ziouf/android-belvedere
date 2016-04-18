@@ -20,7 +20,6 @@ import fr.marin.cyril.mapsapp.tool.Area;
  */
 class DatabaseHelper extends SQLiteOpenHelper {
 
-
     public DatabaseHelper(Context context) {
         super(context, DatabaseContract.DATABASE_NAME, null, DatabaseContract.DATABASE_VERSION);
     }
@@ -35,8 +34,10 @@ class DatabaseHelper extends SQLiteOpenHelper {
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        db.execSQL(DatabaseContract.MarkerEntry.DROP_TABLE);
-        onCreate(db);
+        if (oldVersion != newVersion) {
+            db.execSQL(DatabaseContract.MarkerEntry.DROP_TABLE);
+            onCreate(db);
+        }
     }
 
     public void insert(Placemark marker) {
@@ -54,10 +55,6 @@ class DatabaseHelper extends SQLiteOpenHelper {
 
     public void insertAll(Collection<Placemark> markers) {
         for (Placemark m : markers) insert(m);
-    }
-
-    public void insertAllIfEmpty(Collection<Placemark> markers) {
-        if (this.count() == 0) this.insertAll(markers);
     }
 
     public Collection<Placemark> findInArea(Double top, Double left, Double right, Double bottom) {
