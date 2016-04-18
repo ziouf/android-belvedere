@@ -24,7 +24,6 @@ import android.os.HandlerThread;
 import android.os.IBinder;
 import android.os.Message;
 import android.os.Messenger;
-import android.os.RemoteException;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.ActionBar;
@@ -39,7 +38,7 @@ import android.widget.Toast;
 
 import java.util.Collections;
 
-import fr.marin.cyril.mapsapp.database.DatabaseService;
+import fr.marin.cyril.mapsapp.services.Messages;
 import fr.marin.cyril.mapsapp.tool.Utils;
 
 /**
@@ -52,14 +51,12 @@ public class CameraActivity extends AppCompatActivity
 
     private static final int PERMISSIONS_CODE = 0;
 
-    private DatabaseService.DatabaseServiceConnection databaseServiceConnection = new DatabaseService.DatabaseServiceConnection();
-
     private Location location;
     private final Messenger mMessenger = new Messenger(new Handler() {
         @Override
         public void handleMessage(Message msg) {
             switch (msg.what) {
-                case SensorService.MSG_SENSOR_UPDATE:
+                case Messages.MSG_SENSOR_UPDATE:
                     location.setAltitude(msg.getData().getFloat(SensorService.ALTITUDE));
                     location.setExtras(msg.getData());
 
@@ -77,27 +74,16 @@ public class CameraActivity extends AppCompatActivity
         public void onServiceConnected(ComponentName name, IBinder service) {
             sensorServiceMessenger = new Messenger(service);
             sensorServiceBound = true;
-
-            try {
-                Message msg = Message.obtain(null, SensorService.MSG_REGISTER_CLIENT);
-                msg.replyTo = mMessenger;
-                sensorServiceMessenger.send(msg);
-
-            } catch (RemoteException e) {
-
-            }
-
-            //Toast.makeText(getApplicationContext(), "Sensor Service Connected", Toast.LENGTH_SHORT).show();
+            Messages.sendNewMessage(sensorServiceMessenger, Messages.MSG_REGISTER_CLIENT, null, mMessenger);
         }
 
         @Override
         public void onServiceDisconnected(ComponentName name) {
             sensorServiceMessenger = null;
             sensorServiceBound = false;
-
-            //Toast.makeText(getApplicationContext(), "Sensor Service DisConnected", Toast.LENGTH_SHORT).show();
         }
     };
+
     private Size previewSize;
     private TextureView textureView;
     private CameraDevice cameraDevice;
@@ -153,8 +139,6 @@ public class CameraActivity extends AppCompatActivity
         this.initUI();
 
         // Bind services
-        this.bindService(new Intent(getApplicationContext(), DatabaseService.class),
-                databaseServiceConnection, Context.BIND_AUTO_CREATE);
         this.bindService(new Intent(getApplicationContext(), SensorService.class),
                 sensorServiceConnection, Context.BIND_AUTO_CREATE);
 
@@ -169,15 +153,8 @@ public class CameraActivity extends AppCompatActivity
     @Override
     protected void onPause() {
         // Unbind services
-        if (databaseServiceConnection.isBound()) this.unbindService(databaseServiceConnection);
         if (sensorServiceBound) {
-            try {
-                Message msg = Message.obtain(null, SensorService.MSG_UNREGISTER_CLIENT);
-                msg.replyTo = mMessenger;
-                if (sensorServiceMessenger != null) sensorServiceMessenger.send(msg);
-            } catch (RemoteException e) {
-
-            }
+            Messages.sendNewMessage(sensorServiceMessenger, Messages.MSG_UNREGISTER_CLIENT, null, mMessenger);
             this.unbindService(sensorServiceConnection);
         }
 
