@@ -32,7 +32,6 @@ public class LoadingActivity extends Activity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         this.setContentView(R.layout.activity_loading);
-
     }
 
     @Override
