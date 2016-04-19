@@ -2,6 +2,8 @@ package fr.marin.cyril.mapsapp;
 
 import android.Manifest;
 import android.annotation.TargetApi;
+import android.app.ActionBar;
+import android.app.Activity;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
@@ -24,10 +26,7 @@ import android.os.HandlerThread;
 import android.os.IBinder;
 import android.os.Message;
 import android.os.Messenger;
-import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
-import android.support.v7.app.ActionBar;
-import android.support.v7.app.AppCompatActivity;
 import android.util.Size;
 import android.view.Surface;
 import android.view.TextureView;
@@ -37,6 +36,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.Collections;
+import java.util.Locale;
 
 import fr.marin.cyril.mapsapp.services.Messages;
 import fr.marin.cyril.mapsapp.tool.Utils;
@@ -46,8 +46,8 @@ import fr.marin.cyril.mapsapp.tool.Utils;
  * status bar and navigation/system bar) with user interaction.
  */
 @TargetApi(Build.VERSION_CODES.LOLLIPOP)
-public class CameraActivity extends AppCompatActivity
-        implements ActivityCompat.OnRequestPermissionsResultCallback, TextureView.SurfaceTextureListener {
+public class CameraActivity extends Activity
+        implements TextureView.SurfaceTextureListener {
 
     private static final int PERMISSIONS_CODE = 0;
 
@@ -103,34 +103,23 @@ public class CameraActivity extends AppCompatActivity
         float azimuth = location.getExtras().getFloat(SensorService.AZIMUTH);
         float pitch = location.getExtras().getFloat(SensorService.PITCH);
 
-        cameraTextView.setText(String.format(s, lat, lng,
+        cameraTextView.setText(String.format(Locale.getDefault(), s, lat, lng,
                 alt, azimuth, Utils.getDirectionFromDegrees(azimuth), pitch));
     }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        // Inflate UI
+        setContentView(R.layout.activity_camera);
 
+        // Get sreen size
         Point size = new Point();
         getWindowManager().getDefaultDisplay().getRealSize(size);
         this.previewSize = new Size(size.y, size.x);
 
-        // Check for permissions
-        if (ActivityCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED
-                || ActivityCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                String[] permissions = new String[]{
-                        Manifest.permission.ACCESS_FINE_LOCATION,
-                        Manifest.permission.CAMERA
-                };
-                ActivityCompat.requestPermissions(this, permissions, PERMISSIONS_CODE);
-            }
-        } else {
-
-            this.init();
-
-        }
-
+        // Initialisation de l'activity
+        this.initActivity();
     }
 
     @Override
@@ -178,34 +167,9 @@ public class CameraActivity extends AppCompatActivity
         super.onDestroy();
     }
 
-    @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-
-        if (requestCode == PERMISSIONS_CODE) {
-            if (grantResults.length == 2
-                    && grantResults[0] == PackageManager.PERMISSION_GRANTED
-                    && grantResults[1] == PackageManager.PERMISSION_GRANTED) {
-
-                this.init();
-
-            } else {
-                Toast.makeText(this, "Permission refusée", Toast.LENGTH_SHORT).show();
-            }
-        }
-    }
-
-    private void init() {
-        // Inflate UI
-        setContentView(R.layout.activity_camera);
-
-        // Initialisation de l'activity
-        this.initActivity();
-    }
-
     private void initUI() {
         // Hide action bar
-        ActionBar actionBar = getSupportActionBar();
+        ActionBar actionBar = getActionBar();
         if (actionBar != null) actionBar.hide();
 
         getWindow().getDecorView()

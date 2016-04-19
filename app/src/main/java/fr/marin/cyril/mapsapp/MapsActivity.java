@@ -17,7 +17,6 @@ import android.support.v4.app.FragmentActivity;
 import android.support.v4.content.ContextCompat;
 import android.view.View;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -40,7 +39,6 @@ public class MapsActivity extends FragmentActivity
         implements OnMapReadyCallback, ActivityCompat.OnRequestPermissionsResultCallback,
             GoogleMap.OnMapLoadedCallback, GoogleMap.OnCameraChangeListener {
 
-    private static final int PERMISSION_CODE = 1;
     private final Messenger mMessenger = new Messenger(new Handler() {
         @Override
         public void handleMessage(Message msg) {
@@ -99,9 +97,11 @@ public class MapsActivity extends FragmentActivity
      */
     private void initOnClickActions() {
         FloatingActionButton cameraButton = (FloatingActionButton) this.findViewById(R.id.camera_button);
+        FloatingActionButton myPosition = (FloatingActionButton) this.findViewById(R.id.myPosition_button);
 
-        // Désactivation du module AR si api < LOLLIPOP
-        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
+        // Désactivation du module AR si api < LOLLIPOP ou si Permission CAMERA  refusée
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP
+                || ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
             cameraButton.hide();
             return;
         }
@@ -114,21 +114,15 @@ public class MapsActivity extends FragmentActivity
             }
         });
 
-        // Add other actions below if needed
-    }
-
-    @Override
-    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-
-        if (requestCode == PERMISSION_CODE) {
-            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                this.initMaps();
-            } else {
-                Toast.makeText(this, "Permission refusée", Toast.LENGTH_SHORT).show();
+        // Action au click sur le bouton myPosition
+        myPosition.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                MapsActivity.this.centerMapCameraOnMyPosition();
             }
-        }
+        });
 
+        // Add other actions below if needed
     }
 
     /**
@@ -144,28 +138,11 @@ public class MapsActivity extends FragmentActivity
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
 
-        if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            // Request LOCATION permissions
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                requestPermissions(new String[] { Manifest.permission.ACCESS_FINE_LOCATION }, PERMISSION_CODE);
-            }
-
-        } else {
-
-            this.initMaps();
-
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
+            mMap.setMyLocationEnabled(true);
+            mMap.getUiSettings().setMyLocationButtonEnabled(false);
+            this.centerMapCameraOnMyPosition();
         }
-    }
-
-    /**
-     * Initialisation de la carte Google Maps
-     */
-    private void initMaps() {
-        if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) return;
-
-        mMap.setMyLocationEnabled(true);
-
-        this.centerMapCameraOnMyPosition();
 
         mMap.setOnMapLoadedCallback(this);
         mMap.setOnCameraChangeListener(this);
@@ -269,8 +246,7 @@ public class MapsActivity extends FragmentActivity
         }
 
         for (Placemark m : db.findInArea(area))
-            if (area.isInArea(m.getCoordinates().getLatLng()))
-                markersShown.add(mMap.addMarker(m.getMarkerOptions()));
+            markersShown.add(mMap.addMarker(m.getMarkerOptions()));
     }
 
 }

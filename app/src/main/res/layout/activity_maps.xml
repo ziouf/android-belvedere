@@ -1,13 +1,12 @@
 <android.support.design.widget.CoordinatorLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
+    android:layout_height="match_parent"
     >
 
-    <fragment xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:map="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools"
+    <fragment
         android:id="@+id/map"
         android:name="com.google.android.gms.maps.SupportMapFragment"
         android:layout_width="match_parent"
@@ -15,15 +14,31 @@
         tools:context="fr.marin.cyril.mapsapp.MapsActivity" />
 
     <android.support.design.widget.FloatingActionButton
+        android:id="@+id/camera_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="bottom|right"
+        android:layout_gravity="bottom|end"
         android:layout_margin="16dp"
-        android:src="@drawable/ar_icon"
         android:clickable="true"
-        android:id="@+id/camera_button"
-        app:layout_anchor="@id/map"
-        app:layout_anchorGravity="bottom|right|end"
+        android:src="@drawable/ar_icon"
         />
+
+    <View
+        android:id="@+id/dummy"
+        android:layout_width="1dp"
+        android:layout_height="16dp"
+        app:layout_anchor="@id/camera_button"
+        app:layout_anchorGravity="top|end" />
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/myPosition_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="top|end"
+        android:layout_margin="16dp"
+        android:src="@android:drawable/ic_menu_mylocation"
+        app:backgroundTint="@color/myPosition_button"
+        app:layout_anchor="@id/dummy"
+        app:layout_anchorGravity="top|end" />
 
 </android.support.design.widget.CoordinatorLayout>

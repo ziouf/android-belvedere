@@ -2,34 +2,34 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/black_overlay"
+    android:background="@color/background_black"
     tools:context="fr.marin.cyril.mapsapp.CameraActivity">
 
     <TextureView
         android:id="@+id/textureView"
-        android:elevation="0dp"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:elevation="0dp"
         />
 
     <ImageView
-        android:elevation="1dp"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:elevation="1dp"
         android:scaleType="fitXY"
         android:src="@drawable/binocular_mask"
         />
 
     <TextView
         android:id="@+id/cameraTextView"
-        android:rotation="90"
-        android:elevation="12dp"
-
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="center_vertical"
 
-        android:background="@color/black_overlay"
+        android:layout_gravity="center_vertical"
+        android:background="@color/background_black"
+        android:elevation="12dp"
+
+        android:rotation="90"
         android:textColor="#ffffffff"
         />
 

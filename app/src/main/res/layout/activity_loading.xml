@@ -2,14 +2,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/splash_screen_background"
     tools:context="fr.marin.cyril.mapsapp.LoadingActivity">
 
     <TextView
         android:id="@+id/loading_info"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="bottom|center"
+        android:gravity="center"
+        android:text="@string/loading_database_init"
         />
 
 </RelativeLayout>
