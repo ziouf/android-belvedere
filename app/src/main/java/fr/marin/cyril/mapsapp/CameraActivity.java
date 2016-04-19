@@ -52,19 +52,21 @@ public class CameraActivity extends AppCompatActivity
     private static final int PERMISSIONS_CODE = 0;
 
     private Location location;
-    private final Messenger mMessenger = new Messenger(new Handler() {
+    private Messenger mMessenger = new Messenger(new Handler() {
         @Override
         public void handleMessage(Message msg) {
             switch (msg.what) {
                 case Messages.MSG_SENSOR_UPDATE:
-                    location.setAltitude(msg.getData().getFloat(SensorService.ALTITUDE));
-                    location.setExtras(msg.getData());
-
+                    if (location != null) {
+                        double altitude = msg.getData().getFloat(SensorService.ALTITUDE);
+                        location.setAltitude(altitude);
+                        location.setExtras(msg.getData());
+                    }
                     break;
                 default:
                     super.handleMessage(msg);
             }
-            updateTextView();
+            CameraActivity.this.updateTextView();
         }
     });
     private boolean sensorServiceBound = false;
@@ -139,8 +141,9 @@ public class CameraActivity extends AppCompatActivity
         this.initUI();
 
         // Bind services
-        this.bindService(new Intent(getApplicationContext(), SensorService.class),
-                sensorServiceConnection, Context.BIND_AUTO_CREATE);
+        if (sensorServiceConnection != null)
+            this.bindService(new Intent(getApplicationContext(), SensorService.class),
+                    sensorServiceConnection, Context.BIND_AUTO_CREATE);
 
         // Re-ouverture de la camera
         if (this.textureView != null && this.textureView.isAvailable()) {

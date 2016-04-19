@@ -61,6 +61,7 @@ public class SensorService extends Service
             geoMat = event.values;
 
         Bundle values = new Bundle();
+        values.setClassLoader(getClassLoader());
         values.putFloat(SensorService.ALTITUDE, altitude);
 
         if (graMat != null && geoMat != null) {
