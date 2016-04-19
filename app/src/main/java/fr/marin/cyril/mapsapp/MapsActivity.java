@@ -102,17 +102,17 @@ public class MapsActivity extends FragmentActivity
         // Désactivation du module AR si api < LOLLIPOP ou si Permission CAMERA  refusée
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP
                 || ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
-            cameraButton.hide();
-            return;
-        }
 
-        // Action au click sur le bouton camera
-        cameraButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(getApplicationContext(), CameraActivity.class));
-            }
-        });
+            cameraButton.hide();
+        } else {
+            // Action au click sur le bouton camera
+            cameraButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    startActivity(new Intent(getApplicationContext(), CameraActivity.class));
+                }
+            });
+        }
 
         // Action au click sur le bouton myPosition
         myPosition.setOnClickListener(new View.OnClickListener() {
