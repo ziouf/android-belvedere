@@ -1,6 +1,7 @@
 package fr.marin.cyril.mapsapp;
 
 import android.Manifest;
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Location;
@@ -37,22 +38,28 @@ import fr.marin.cyril.mapsapp.tool.Area;
 
 public class MapsActivity extends FragmentActivity
         implements OnMapReadyCallback, ActivityCompat.OnRequestPermissionsResultCallback,
-            GoogleMap.OnMapLoadedCallback, GoogleMap.OnCameraChangeListener {
+        GoogleMap.OnMapLoadedCallback, GoogleMap.OnCameraChangeListener {
 
+    private SensorService.SensorServiceConnection sensorServiceConnection = new SensorService.SensorServiceConnection(this.mMessenger);
+    private DatabaseHelper db = new DatabaseHelper(MapsActivity.this);
+    private GoogleMap mMap;
+    private Location myLocation;
     private final Messenger mMessenger = new Messenger(new Handler() {
         @Override
         public void handleMessage(Message msg) {
             switch (msg.what) {
-                case Messages.MSG_MARKER_FOUND:
+                case Messages.MSG_LOCATION_UPDATE:
+                    if (msg.obj == null) return;
+                    MapsActivity.this.myLocation = (Location) msg.obj;
 
+                    TextView tv = (TextView) findViewById(R.id.location_info);
+                    tv.setText(String.format("lat : %s | lng : %s | alt : %s", myLocation.getLatitude(), myLocation.getLongitude(), myLocation.getAltitude()));
                     break;
                 default:
                     super.handleMessage(msg);
             }
         }
     });
-    private DatabaseHelper db = new DatabaseHelper(MapsActivity.this);
-    private GoogleMap mMap;
     private LocationManager locationManager;
     private Collection<Marker> markersShown;
 
@@ -79,12 +86,24 @@ public class MapsActivity extends FragmentActivity
     protected void onResume() {
         super.onResume();
 
+        // Bind services
+        if (sensorServiceConnection != null)
+            this.bindService(new Intent(getApplicationContext(), SensorService.class),
+                    sensorServiceConnection, Context.BIND_AUTO_CREATE);
+
         this.centerMapCameraOnMyPosition();
     }
 
     @Override
     protected void onPause() {
         super.onPause();
+
+        // Unbind services
+        if (sensorServiceConnection.isBound()) {
+            Messages.sendNewMessage(sensorServiceConnection.getServiceMessenger(),
+                    Messages.MSG_UNREGISTER_CLIENT, null, mMessenger);
+            this.unbindService(sensorServiceConnection);
+        }
     }
 
     @Override
@@ -140,7 +159,6 @@ public class MapsActivity extends FragmentActivity
 
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
             mMap.setMyLocationEnabled(true);
-            mMap.getUiSettings().setMyLocationButtonEnabled(false);
             this.centerMapCameraOnMyPosition();
         }
 
@@ -149,6 +167,7 @@ public class MapsActivity extends FragmentActivity
 
         mMap.getUiSettings().setMapToolbarEnabled(false);
         mMap.getUiSettings().setRotateGesturesEnabled(false);
+        mMap.getUiSettings().setMyLocationButtonEnabled(false);
 
         mMap.setInfoWindowAdapter(this.getInfoWindowAdapter());
         mMap.setOnInfoWindowClickListener(this.getOnInfoWindowClickListener());
@@ -163,9 +182,11 @@ public class MapsActivity extends FragmentActivity
         if (mMap == null) return;
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) return;
 
-        Location l = this.locationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
-        if (l != null) {
-            LatLng latLng = new LatLng(l.getLatitude(), l.getLongitude());
+        if (this.myLocation == null)
+            this.myLocation = this.locationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
+
+        if (this.myLocation != null) {
+            LatLng latLng = new LatLng(this.myLocation.getLatitude(), this.myLocation.getLongitude());
             mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, 12));
         }
     }
@@ -248,5 +269,4 @@ public class MapsActivity extends FragmentActivity
         for (Placemark m : db.findInArea(area))
             markersShown.add(mMap.addMarker(m.getMarkerOptions()));
     }
-
 }

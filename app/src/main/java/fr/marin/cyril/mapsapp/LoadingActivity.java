@@ -2,11 +2,14 @@ package fr.marin.cyril.mapsapp;
 
 import android.Manifest;
 import android.app.Activity;
+import android.content.ComponentName;
 import android.content.Intent;
+import android.content.ServiceConnection;
 import android.content.pm.PackageManager;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.IBinder;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
@@ -54,6 +57,17 @@ public class LoadingActivity extends Activity
     }
 
     @Override
+    protected void onResume() {
+        super.onResume();
+
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+    }
+
+    @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
 
@@ -72,10 +86,24 @@ public class LoadingActivity extends Activity
     private class DbInitAsyncTask extends AsyncTask {
         private DatabaseHelper db = new DatabaseHelper(LoadingActivity.this);
         private TextView loadingInfoTextView = (TextView) LoadingActivity.this.findViewById(R.id.loading_info);
+        private ServiceConnection serviceConnection = new ServiceConnection() {
+            @Override
+            public void onServiceConnected(ComponentName name, IBinder service) {
+
+            }
+
+            @Override
+            public void onServiceDisconnected(ComponentName name) {
+
+            }
+        };
 
         @Override
         protected void onPreExecute() {
             this.loadingInfoTextView.setText(R.string.loading_database_init);
+
+            LoadingActivity.this.bindService(new Intent(getApplicationContext(), SensorService.class),
+                    serviceConnection, BIND_AUTO_CREATE);
         }
 
         @Override
@@ -89,6 +117,7 @@ public class LoadingActivity extends Activity
             this.loadingInfoTextView.setText(R.string.loading_application_openning);
 
             LoadingActivity.this.startActivity(new Intent(LoadingActivity.this, MapsActivity.class));
+            LoadingActivity.this.unbindService(serviceConnection);
             LoadingActivity.this.finish();
         }
     }

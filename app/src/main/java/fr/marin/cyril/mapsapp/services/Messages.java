@@ -16,10 +16,8 @@ public class Messages {
     public static final int MSG_UNREGISTER_CLIENT = 1;
 
     public static final int MSG_SENSOR_UPDATE = 5;
-
-    public static final int MSG_INIT_DB = 10;
-    public static final int MSG_MARKER_FOUND = 11;
-    public static final int MSG_FIND_BY_LAT_LNG = 12;
+    public static final int MSG_LOCATION_UPDATE = 6;
+    public static final int MSG_REQUEST_LOCATION = 7;
 
 
     public static void sendNewMessageToAll(Collection<Messenger> mClients, int type, Bundle data, Messenger replyTo) {
@@ -39,9 +37,22 @@ public class Messages {
         }
     }
 
-    public static void sendMessage(Message message, Messenger client) {
+    public static void sendMessage(Messenger client, Message message) {
+
         try {
             client.send(message);
+
+        } catch (RemoteException ignore) {
+
+        }
+    }
+
+    public static void sendMessageToAll(Collection<Messenger> clients, Message message) {
+
+        try {
+            for (Messenger client : clients)
+                client.send(message);
+
         } catch (RemoteException ignore) {
 
         }

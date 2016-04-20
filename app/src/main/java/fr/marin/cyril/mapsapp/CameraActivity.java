@@ -4,10 +4,8 @@ import android.Manifest;
 import android.annotation.TargetApi;
 import android.app.ActionBar;
 import android.app.Activity;
-import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
-import android.content.ServiceConnection;
 import android.content.pm.PackageManager;
 import android.graphics.Point;
 import android.graphics.SurfaceTexture;
@@ -18,12 +16,10 @@ import android.hardware.camera2.CameraManager;
 import android.hardware.camera2.CameraMetadata;
 import android.hardware.camera2.CaptureRequest;
 import android.location.Location;
-import android.location.LocationManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.HandlerThread;
-import android.os.IBinder;
 import android.os.Message;
 import android.os.Messenger;
 import android.support.v4.app.ActivityCompat;
@@ -49,42 +45,24 @@ import fr.marin.cyril.mapsapp.tool.Utils;
 public class CameraActivity extends Activity
         implements TextureView.SurfaceTextureListener {
 
-    private static final int PERMISSIONS_CODE = 0;
-
     private Location location;
     private Messenger mMessenger = new Messenger(new Handler() {
         @Override
         public void handleMessage(Message msg) {
             switch (msg.what) {
-                case Messages.MSG_SENSOR_UPDATE:
-                    if (location != null) {
-                        double altitude = msg.getData().getFloat(SensorService.ALTITUDE);
-                        location.setAltitude(altitude);
-                        location.setExtras(msg.getData());
-                    }
+                case Messages.MSG_LOCATION_UPDATE:
+                    CameraActivity.this.location = (Location) msg.obj;
                     break;
                 default:
                     super.handleMessage(msg);
             }
-            CameraActivity.this.updateTextView();
+            if (CameraActivity.this.location != null)
+                CameraActivity.this.updateTextView();
         }
     });
-    private boolean sensorServiceBound = false;
-    private Messenger sensorServiceMessenger;
-    private ServiceConnection sensorServiceConnection = new ServiceConnection() {
-        @Override
-        public void onServiceConnected(ComponentName name, IBinder service) {
-            sensorServiceMessenger = new Messenger(service);
-            sensorServiceBound = true;
-            Messages.sendNewMessage(sensorServiceMessenger, Messages.MSG_REGISTER_CLIENT, null, mMessenger);
-        }
 
-        @Override
-        public void onServiceDisconnected(ComponentName name) {
-            sensorServiceMessenger = null;
-            sensorServiceBound = false;
-        }
-    };
+    private SensorService.SensorServiceConnection sensorServiceConnection =
+            new SensorService.SensorServiceConnection(this.mMessenger);
 
     private Size previewSize;
     private TextureView textureView;
@@ -145,8 +123,9 @@ public class CameraActivity extends Activity
     @Override
     protected void onPause() {
         // Unbind services
-        if (sensorServiceBound) {
-            Messages.sendNewMessage(sensorServiceMessenger, Messages.MSG_UNREGISTER_CLIENT, null, mMessenger);
+        if (sensorServiceConnection.isBound()) {
+            Messages.sendNewMessage(sensorServiceConnection.getServiceMessenger(),
+                    Messages.MSG_UNREGISTER_CLIENT, null, mMessenger);
             this.unbindService(sensorServiceConnection);
         }
 
@@ -182,14 +161,6 @@ public class CameraActivity extends Activity
         // Init Camera view
         this.textureView = (TextureView) findViewById(R.id.textureView);
         if (this.textureView != null) this.textureView.setSurfaceTextureListener(this);
-
-        // Check location permissions
-        if (ActivityCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED)
-            return;
-        // Get location
-        LocationManager locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
-        this.location = locationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
-
     }
 
     @Override
