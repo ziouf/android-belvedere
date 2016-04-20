@@ -21,8 +21,10 @@ import android.os.Messenger;
 import android.support.annotation.Nullable;
 import android.support.v4.content.ContextCompat;
 
-import java.util.HashSet;
-import java.util.Set;
+import java.util.HashMap;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
 
 import fr.marin.cyril.mapsapp.services.Messages;
 
@@ -32,28 +34,46 @@ import fr.marin.cyril.mapsapp.services.Messages;
 public class SensorService extends Service
         implements SensorEventListener, LocationListener {
 
+    public static final int PORTRAIT = 0;
+    public static final int LAND = 1;
+
     public static final String AZIMUTH = "azimuth";
     public static final String PITCH = "pitch";
+
+    private static final int NOTIFICATION_FREQ_MS = 250;
 
     private Location location;
     private float[] graMat;
     private float[] geoMat;
-    private float azimuth;
-    private float pitch;
+    private float azimuth_portrait;
+    private float pitch_portrait;
+    private float azimuth_land;
+    private float pitch_land;
 
-    private Set<Messenger> mClients = new HashSet<>();
+    private ScheduledExecutorService pool = Executors.newScheduledThreadPool(1);
+    private HashMap<Messenger, Integer> mClients = new HashMap<>();
     private final Messenger mMessenger = new Messenger(new Handler() {
         @Override
         public void handleMessage(Message msg) {
             switch (msg.what) {
                 case Messages.MSG_REGISTER_CLIENT:
-                    mClients.add(msg.replyTo);
+                    mClients.put(msg.replyTo, msg.arg1);
                     break;
                 case Messages.MSG_UNREGISTER_CLIENT:
                     mClients.remove(msg.replyTo);
                     break;
                 case Messages.MSG_REQUEST_LOCATION:
-                    Messages.sendMessage(msg.replyTo, prepareMessage());
+                    if (location != null) {
+                        Bundle data = new Bundle();
+                        data.setClassLoader(getClassLoader());
+
+                        data.putFloat(SensorService.AZIMUTH, mClients.get(msg.replyTo) == PORTRAIT ? azimuth_portrait : azimuth_land);
+                        data.putFloat(SensorService.PITCH, mClients.get(msg.replyTo) == PORTRAIT ? pitch_portrait : pitch_land);
+                        location.setExtras(data);
+                    }
+                    Message m = Message.obtain(null, Messages.MSG_REQUEST_LOCATION_RESPONSE);
+                    m.obj = location;
+                    Messages.sendMessage(msg.replyTo, m);
                     break;
                 default:
                     super.handleMessage(msg);
@@ -63,22 +83,21 @@ public class SensorService extends Service
     private LocationManager locationManager;
     private SensorManager sensorManager;
 
-    private Message prepareMessage() {
+    private void sendUpdatesToAllClients() {
         Bundle data = new Bundle();
-
         data.setClassLoader(getClassLoader());
-        data.putFloat(SensorService.AZIMUTH, azimuth);
-        data.putFloat(SensorService.PITCH, pitch);
-        location.setExtras(data);
 
-        Message msg = Message.obtain(null, Messages.MSG_LOCATION_UPDATE);
-        msg.obj = location;
+        for (HashMap.Entry<Messenger, Integer> client : mClients.entrySet()) {
 
-        return msg;
-    }
+            data.putFloat(SensorService.AZIMUTH, client.getValue() == PORTRAIT ? azimuth_portrait : azimuth_land);
+            data.putFloat(SensorService.PITCH, client.getValue() == PORTRAIT ? pitch_portrait : pitch_land);
+            location.setExtras(data);
 
-    private void sendUpdates() {
-        Messages.sendMessageToAll(mClients, this.prepareMessage());
+            Message msg = Message.obtain(null, Messages.MSG_LOCATION_UPDATE);
+            msg.obj = location;
+
+            Messages.sendMessage(client.getKey(), msg);
+        }
     }
 
     @Override
@@ -89,20 +108,24 @@ public class SensorService extends Service
             geoMat = event.values;
 
         if (graMat != null && geoMat != null) {
+            float[] oMat;
             float[] tmp = new float[9];
             float[] R = new float[9];
             if (SensorManager.getRotationMatrix(tmp, null, graMat, geoMat)) {
                 SensorManager.remapCoordinateSystem(tmp, SensorManager.AXIS_X, SensorManager.AXIS_Z, R);
 
-                float[] oMat = new float[3];
-                SensorManager.getOrientation(R, oMat);
+                oMat = new float[3];
+                SensorManager.getOrientation(tmp, oMat);
+                this.azimuth_portrait = (float) Math.toDegrees(oMat[0]);
+                this.pitch_portrait = (float) Math.toDegrees(oMat[1]);
 
-                this.azimuth = (float) Math.toDegrees(oMat[0]);
-                this.pitch = (float) Math.toDegrees(oMat[1]);
+                oMat = new float[3];
+                SensorManager.getOrientation(R, oMat);
+                this.azimuth_land = (float) Math.toDegrees(oMat[0]);
+                this.pitch_land = (float) Math.toDegrees(oMat[1]);
+
             }
         }
-
-        this.sendUpdates();
     }
 
     @Override
@@ -113,7 +136,6 @@ public class SensorService extends Service
     @Override
     public void onLocationChanged(Location location) {
         this.location = location;
-        this.sendUpdates();
     }
 
     @Override
@@ -162,6 +184,8 @@ public class SensorService extends Service
             this.locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 2000, 10, this);
             this.location = this.locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
         }
+
+        this.pool.scheduleAtFixedRate(new LocationUpdateNotifyer(), 1000, NOTIFICATION_FREQ_MS, TimeUnit.MILLISECONDS);
     }
 
     @Override
@@ -173,23 +197,19 @@ public class SensorService extends Service
             this.locationManager.removeUpdates(this);
         }
 
+        this.pool.shutdown();
+
         super.onDestroy();
     }
 
     public static class SensorServiceConnection implements ServiceConnection {
-        private Messenger clientMessenger;
         private Messenger serviceMessenger;
         private boolean bound = false;
-
-        public SensorServiceConnection(Messenger clientMessenger) {
-            this.clientMessenger = clientMessenger;
-        }
 
         @Override
         public void onServiceConnected(ComponentName name, IBinder service) {
             this.serviceMessenger = new Messenger(service);
             this.bound = true;
-            Messages.sendNewMessage(serviceMessenger, Messages.MSG_REGISTER_CLIENT, null, clientMessenger);
         }
 
         @Override
@@ -204,6 +224,13 @@ public class SensorService extends Service
 
         public Messenger getServiceMessenger() {
             return serviceMessenger;
+        }
+    }
+
+    private class LocationUpdateNotifyer implements Runnable {
+        @Override
+        public void run() {
+            SensorService.this.sendUpdatesToAllClients();
         }
     }
 }

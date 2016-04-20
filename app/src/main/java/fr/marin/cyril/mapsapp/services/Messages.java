@@ -18,6 +18,7 @@ public class Messages {
     public static final int MSG_SENSOR_UPDATE = 5;
     public static final int MSG_LOCATION_UPDATE = 6;
     public static final int MSG_REQUEST_LOCATION = 7;
+    public static final int MSG_REQUEST_LOCATION_RESPONSE = 8;
 
 
     public static void sendNewMessageToAll(Collection<Messenger> mClients, int type, Bundle data, Messenger replyTo) {

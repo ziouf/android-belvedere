@@ -1,15 +1,16 @@
 package fr.marin.cyril.mapsapp;
 
 import android.Manifest;
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Location;
-import android.location.LocationManager;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.IBinder;
 import android.os.Message;
 import android.os.Messenger;
 import android.support.design.widget.FloatingActionButton;
@@ -23,9 +24,11 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
+import com.google.android.gms.maps.model.MarkerOptions;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -40,9 +43,9 @@ public class MapsActivity extends FragmentActivity
         implements OnMapReadyCallback, ActivityCompat.OnRequestPermissionsResultCallback,
         GoogleMap.OnMapLoadedCallback, GoogleMap.OnCameraChangeListener {
 
-    private SensorService.SensorServiceConnection sensorServiceConnection = new SensorService.SensorServiceConnection(this.mMessenger);
     private DatabaseHelper db = new DatabaseHelper(MapsActivity.this);
     private GoogleMap mMap;
+    private Marker myLocationMarker;
     private Location myLocation;
     private final Messenger mMessenger = new Messenger(new Handler() {
         @Override
@@ -51,16 +54,48 @@ public class MapsActivity extends FragmentActivity
                 case Messages.MSG_LOCATION_UPDATE:
                     if (msg.obj == null) return;
                     MapsActivity.this.myLocation = (Location) msg.obj;
+                    if (MapsActivity.this.myLocation.getExtras() != null) {
+
+                        Bundle data = MapsActivity.this.myLocation.getExtras();
+
+                        if (myLocationMarker == null) {
+                            myLocationMarker = mMap.addMarker(new MarkerOptions()
+                                    .position(new LatLng(myLocation.getLatitude(), myLocation.getLongitude())));
+                            myLocationMarker.setIcon(BitmapDescriptorFactory.fromResource(R.drawable.ic_compas_arrow));
+                        }
+                        if (myLocationMarker != null) {
+                            myLocationMarker.setRotation(Float.valueOf((data.getFloat(SensorService.AZIMUTH) + 360) % 360).longValue());
+                        }
+                    }
 
                     TextView tv = (TextView) findViewById(R.id.location_info);
-                    tv.setText(String.format("lat : %s | lng : %s | alt : %s", myLocation.getLatitude(), myLocation.getLongitude(), myLocation.getAltitude()));
+                    tv.setText(String.format("lat : %s | lng : %s | alt : %s\nazimuth : %s", myLocation.getLatitude(), myLocation.getLongitude(), myLocation.getAltitude(),
+                            myLocation.getExtras().getFloat(SensorService.AZIMUTH)));
+                    break;
+                case Messages.MSG_REQUEST_LOCATION_RESPONSE:
+                    myLocation = (Location) msg.obj;
+                    MapsActivity.this.centerMapCameraOnMyPosition();
                     break;
                 default:
                     super.handleMessage(msg);
             }
         }
     });
-    private LocationManager locationManager;
+    private SensorService.SensorServiceConnection sensorServiceConnection =
+            new SensorService.SensorServiceConnection() {
+                @Override
+                public void onServiceConnected(ComponentName name, IBinder service) {
+                    super.onServiceConnected(name, service);
+                    Message msg = Message.obtain(null, Messages.MSG_REGISTER_CLIENT);
+                    msg.replyTo = mMessenger;
+                    msg.arg1 = SensorService.PORTRAIT;
+                    Messages.sendMessage(this.getServiceMessenger(), msg);
+
+
+                    Messages.sendNewMessage(sensorServiceConnection.getServiceMessenger(),
+                            Messages.MSG_REQUEST_LOCATION, null, mMessenger);
+                }
+            };
     private Collection<Marker> markersShown;
 
     @Override
@@ -76,9 +111,6 @@ public class MapsActivity extends FragmentActivity
         // Init
         this.markersShown = new HashSet<>();
 
-        // Init sensor providers
-        this.locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
-
         this.initOnClickActions();
     }
 
@@ -87,9 +119,8 @@ public class MapsActivity extends FragmentActivity
         super.onResume();
 
         // Bind services
-        if (sensorServiceConnection != null)
-            this.bindService(new Intent(getApplicationContext(), SensorService.class),
-                    sensorServiceConnection, Context.BIND_AUTO_CREATE);
+        this.bindService(new Intent(getApplicationContext(), SensorService.class),
+                sensorServiceConnection, Context.BIND_AUTO_CREATE);
 
         this.centerMapCameraOnMyPosition();
     }
@@ -121,7 +152,6 @@ public class MapsActivity extends FragmentActivity
         // Désactivation du module AR si api < LOLLIPOP ou si Permission CAMERA  refusée
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP
                 || ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
-
             cameraButton.hide();
         } else {
             // Action au click sur le bouton camera
@@ -159,7 +189,6 @@ public class MapsActivity extends FragmentActivity
 
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
             mMap.setMyLocationEnabled(true);
-            this.centerMapCameraOnMyPosition();
         }
 
         mMap.setOnMapLoadedCallback(this);
@@ -181,9 +210,6 @@ public class MapsActivity extends FragmentActivity
     private void centerMapCameraOnMyPosition() {
         if (mMap == null) return;
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) return;
-
-        if (this.myLocation == null)
-            this.myLocation = this.locationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
 
         if (this.myLocation != null) {
             LatLng latLng = new LatLng(this.myLocation.getLatitude(), this.myLocation.getLongitude());

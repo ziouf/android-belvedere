@@ -4,6 +4,7 @@ import android.Manifest;
 import android.annotation.TargetApi;
 import android.app.ActionBar;
 import android.app.Activity;
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -20,6 +21,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.HandlerThread;
+import android.os.IBinder;
 import android.os.Message;
 import android.os.Messenger;
 import android.support.v4.app.ActivityCompat;
@@ -62,7 +64,16 @@ public class CameraActivity extends Activity
     });
 
     private SensorService.SensorServiceConnection sensorServiceConnection =
-            new SensorService.SensorServiceConnection(this.mMessenger);
+            new SensorService.SensorServiceConnection() {
+                @Override
+                public void onServiceConnected(ComponentName name, IBinder service) {
+                    super.onServiceConnected(name, service);
+                    Message msg = Message.obtain(null, Messages.MSG_REGISTER_CLIENT);
+                    msg.replyTo = mMessenger;
+                    msg.arg1 = SensorService.LAND;
+                    Messages.sendMessage(this.getServiceMessenger(), msg);
+                }
+            };
 
     private Size previewSize;
     private TextureView textureView;
