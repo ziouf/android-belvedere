@@ -1,4 +1,4 @@
-package fr.marin.cyril.mapsapp;
+package fr.marin.cyril.mapsapp.services;
 
 import android.Manifest;
 import android.app.Service;
@@ -26,8 +26,6 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
-import fr.marin.cyril.mapsapp.services.Messages;
-
 /**
  * Created by CSCM6014 on 11/04/2016.
  */
@@ -35,7 +33,7 @@ public class SensorService extends Service
         implements SensorEventListener, LocationListener {
 
     public static final int PORTRAIT = 0;
-    public static final int LAND = 1;
+    public static final int LANDSCAPE = 1;
 
     public static final String AZIMUTH = "azimuth";
     public static final String PITCH = "pitch";

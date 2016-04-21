@@ -23,12 +23,14 @@ public class Messages {
 
     public static void sendNewMessageToAll(Collection<Messenger> mClients, int type, Bundle data, Messenger replyTo) {
         for (Messenger client : mClients)
-            Messages.sendNewMessage(client, type, data, replyTo);
+            Messages.sendNewMessage(client, type, 0, 0, data, replyTo);
     }
 
-    public static void sendNewMessage(Messenger client, int type, Bundle data, Messenger replyTo) {
+    public static void sendNewMessage(Messenger client, int type, int arg1, int arg2, Bundle data, Messenger replyTo) {
         Message msg = Message.obtain(null, type);
         msg.replyTo = replyTo;
+        msg.arg1 = arg1;
+        msg.arg2 = arg2;
         msg.setData(data);
 
         try {

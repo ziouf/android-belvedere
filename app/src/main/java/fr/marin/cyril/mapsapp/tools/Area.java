@@ -1,4 +1,4 @@
-package fr.marin.cyril.mapsapp.tool;
+package fr.marin.cyril.mapsapp.tools;
 
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.VisibleRegion;

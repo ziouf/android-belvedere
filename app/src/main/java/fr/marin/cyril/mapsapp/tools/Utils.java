@@ -1,4 +1,4 @@
-package fr.marin.cyril.mapsapp.tool;
+package fr.marin.cyril.mapsapp.tools;
 
 /**
  * Created by CSCM6014 on 13/04/2016.

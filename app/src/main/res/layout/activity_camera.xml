@@ -3,16 +3,23 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/background_black"
-    tools:context="fr.marin.cyril.mapsapp.CameraActivity">
+    tools:context=".activities.CameraActivity">
 
     <TextureView
-        android:id="@+id/textureView"
+        android:id="@+id/camera_preview_tv"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:elevation="0dp"
+        android:elevation="0dp" />
+
+    <SurfaceView
+        android:id="@+id/camera_preview_sv"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
         />
 
     <ImageView
+        android:id="@+id/camera_binocular_mask"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:elevation="1dp"

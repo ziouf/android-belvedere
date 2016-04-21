@@ -17,7 +17,7 @@ import fr.marin.cyril.mapsapp.R;
 import fr.marin.cyril.mapsapp.kml.model.Coordinates;
 import fr.marin.cyril.mapsapp.kml.model.Placemark;
 import fr.marin.cyril.mapsapp.kml.parser.KmlParser;
-import fr.marin.cyril.mapsapp.tool.Area;
+import fr.marin.cyril.mapsapp.tools.Area;
 
 /**
  * Created by cscm6014 on 30/03/2016.

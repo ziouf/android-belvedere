@@ -1,4 +1,4 @@
-package fr.marin.cyril.mapsapp;
+package fr.marin.cyril.mapsapp.activities;
 
 import android.Manifest;
 import android.content.ComponentName;
@@ -7,7 +7,6 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.net.Uri;
-import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.IBinder;
@@ -17,6 +16,7 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.content.ContextCompat;
+import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
@@ -34,10 +34,12 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
 
+import fr.marin.cyril.mapsapp.R;
 import fr.marin.cyril.mapsapp.database.DatabaseHelper;
 import fr.marin.cyril.mapsapp.kml.model.Placemark;
 import fr.marin.cyril.mapsapp.services.Messages;
-import fr.marin.cyril.mapsapp.tool.Area;
+import fr.marin.cyril.mapsapp.services.SensorService;
+import fr.marin.cyril.mapsapp.tools.Area;
 
 public class MapsActivity extends FragmentActivity
         implements OnMapReadyCallback, ActivityCompat.OnRequestPermissionsResultCallback,
@@ -86,14 +88,8 @@ public class MapsActivity extends FragmentActivity
                 @Override
                 public void onServiceConnected(ComponentName name, IBinder service) {
                     super.onServiceConnected(name, service);
-                    Message msg = Message.obtain(null, Messages.MSG_REGISTER_CLIENT);
-                    msg.replyTo = mMessenger;
-                    msg.arg1 = SensorService.PORTRAIT;
-                    Messages.sendMessage(this.getServiceMessenger(), msg);
-
-
-                    Messages.sendNewMessage(sensorServiceConnection.getServiceMessenger(),
-                            Messages.MSG_REQUEST_LOCATION, null, mMessenger);
+                    Messages.sendNewMessage(this.getServiceMessenger(), Messages.MSG_REGISTER_CLIENT,
+                            SensorService.PORTRAIT, 0, null, mMessenger);
                 }
             };
     private Collection<Marker> markersShown;
@@ -111,7 +107,8 @@ public class MapsActivity extends FragmentActivity
         // Init
         this.markersShown = new HashSet<>();
 
-        this.initOnClickActions();
+        //
+        this.initFloatingActionButtons();
     }
 
     @Override
@@ -132,7 +129,7 @@ public class MapsActivity extends FragmentActivity
         // Unbind services
         if (sensorServiceConnection.isBound()) {
             Messages.sendNewMessage(sensorServiceConnection.getServiceMessenger(),
-                    Messages.MSG_UNREGISTER_CLIENT, null, mMessenger);
+                    Messages.MSG_UNREGISTER_CLIENT, 0, 0, null, mMessenger);
             this.unbindService(sensorServiceConnection);
         }
     }
@@ -145,28 +142,30 @@ public class MapsActivity extends FragmentActivity
     /**
      *
      */
-    private void initOnClickActions() {
+    private void initFloatingActionButtons() {
         FloatingActionButton cameraButton = (FloatingActionButton) this.findViewById(R.id.camera_button);
-        FloatingActionButton myPosition = (FloatingActionButton) this.findViewById(R.id.myPosition_button);
+        FloatingActionButton myPosButton = (FloatingActionButton) this.findViewById(R.id.myPosition_button);
 
         // Désactivation du module AR si api < LOLLIPOP ou si Permission CAMERA  refusée
-        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP
+        if (!getPackageManager().hasSystemFeature(PackageManager.FEATURE_CAMERA)
                 || ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
-            cameraButton.hide();
-        } else {
-            // Action au click sur le bouton camera
-            cameraButton.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    startActivity(new Intent(getApplicationContext(), CameraActivity.class));
-                }
-            });
+            cameraButton.setVisibility(View.GONE);
         }
 
-        // Action au click sur le bouton myPosition
-        myPosition.setOnClickListener(new View.OnClickListener() {
+        // Action au click sur le bouton camera
+        cameraButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Log.i("", "Click cameraButton");
+                startActivity(new Intent(getApplicationContext(), CameraActivity.class));
+            }
+        });
+
+        // Action au click sur le bouton myPosButton
+        myPosButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.i("", "Click myPosButton");
                 MapsActivity.this.centerMapCameraOnMyPosition();
             }
         });
