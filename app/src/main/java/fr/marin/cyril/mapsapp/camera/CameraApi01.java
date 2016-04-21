@@ -29,10 +29,9 @@ class CameraApi01
         context.findViewById(R.id.camera_preview_tv).setVisibility(View.GONE);
 
         mCamera = CameraApi01.getCameraInstance();
-        mHolder = getHolder();
+        mHolder = ((SurfaceView) getContext().findViewById(R.id.camera_preview_sv)).getHolder();
         mHolder.addCallback(this);
         mHolder.setType(SurfaceHolder.SURFACE_TYPE_PUSH_BUFFERS);
-
     }
 
     public static android.hardware.Camera getCameraInstance() {
@@ -45,19 +44,8 @@ class CameraApi01
         return c;
     }
 
-    private SurfaceHolder getHolder() {
-        SurfaceView preview = (SurfaceView) getContext().findViewById(R.id.camera_preview_sv);
-        return preview.getHolder();
-    }
-
     @Override
     public void surfaceCreated(SurfaceHolder holder) {
-        try {
-            mCamera.setPreviewDisplay(holder);
-            mCamera.startPreview();
-        } catch (IOException ignore) {
-        }
-
         getContext().findViewById(R.id.camera_loading).setVisibility(View.GONE);
     }
 
@@ -65,16 +53,8 @@ class CameraApi01
     public void surfaceChanged(SurfaceHolder holder, int format, int width, int height) {
         if (mHolder.getSurface() == null) return;
 
-        try {
-            mCamera.stopPreview();
-        } catch (Exception ignore) {
-        }
-
-        try {
-            mCamera.setPreviewDisplay(mHolder);
-            mCamera.startPreview();
-        } catch (IOException ignore) {
-        }
+        this.stopCameraPreview();
+        this.startCameraPreview(holder);
     }
 
     @Override
@@ -82,17 +62,39 @@ class CameraApi01
 
     }
 
+    private void startCameraPreview(SurfaceHolder holder) {
+        if (this.mCamera == null)
+            this.mCamera = CameraApi01.getCameraInstance();
+
+        try {
+            mCamera.setPreviewDisplay(holder);
+            mCamera.startPreview();
+        } catch (IOException ignore) {
+            Log.e("Camera", "Start preview failed");
+        }
+    }
+
+    private void stopCameraPreview() {
+        try {
+            mCamera.stopPreview();
+        } catch (Exception ignore) {
+            Log.e("Camera", "Stop preview failed");
+        }
+    }
+
     @Override
     public void pause() {
         super.pause();
 
         mCamera.release();
+        mCamera = null;
     }
 
     @Override
     public void resume() {
         super.resume();
 
-
+        this.stopCameraPreview();
+        this.startCameraPreview(mHolder);
     }
 }

@@ -48,6 +48,7 @@ public class MapsActivity extends FragmentActivity
     private DatabaseHelper db = new DatabaseHelper(MapsActivity.this);
     private GoogleMap mMap;
     private Marker myLocationMarker;
+    private boolean firstTimeLocationAquiered = true;
     private Location myLocation;
     private final Messenger mMessenger = new Messenger(new Handler() {
         @Override
@@ -55,20 +56,8 @@ public class MapsActivity extends FragmentActivity
             switch (msg.what) {
                 case Messages.MSG_LOCATION_UPDATE:
                     if (msg.obj == null) return;
-                    MapsActivity.this.myLocation = (Location) msg.obj;
-                    if (MapsActivity.this.myLocation.getExtras() != null) {
-
-                        Bundle data = MapsActivity.this.myLocation.getExtras();
-
-                        if (myLocationMarker == null) {
-                            myLocationMarker = mMap.addMarker(new MarkerOptions()
-                                    .position(new LatLng(myLocation.getLatitude(), myLocation.getLongitude())));
-                            myLocationMarker.setIcon(BitmapDescriptorFactory.fromResource(R.drawable.ic_compas_arrow));
-                        }
-                        if (myLocationMarker != null) {
-                            myLocationMarker.setRotation(Float.valueOf((data.getFloat(SensorService.AZIMUTH) + 360) % 360).longValue());
-                        }
-                    }
+                    MapsActivity.this.setMyLocation((Location) msg.obj);
+                    MapsActivity.this.updateMyLocationMarker(MapsActivity.this.myLocation.getExtras());
 
                     TextView tv = (TextView) findViewById(R.id.location_info);
                     tv.setText(String.format("lat : %s | lng : %s | alt : %s\nazimuth : %s", myLocation.getLatitude(), myLocation.getLongitude(), myLocation.getAltitude(),
@@ -93,6 +82,24 @@ public class MapsActivity extends FragmentActivity
                 }
             };
     private Collection<Marker> markersShown;
+
+    private boolean shouldShowOrientationIcon() {
+        PackageManager pm = getPackageManager();
+        return pm.hasSystemFeature(PackageManager.FEATURE_SENSOR_ACCELEROMETER)
+                && pm.hasSystemFeature(PackageManager.FEATURE_SENSOR_COMPASS);
+    }
+
+    private void setMyLocation(Location myLocation) {
+        this.myLocation = myLocation;
+        if (this.firstTimeLocationAquiered) this.centerMapCameraOnMyPosition();
+        this.firstTimeLocationAquiered = false;
+    }
+
+    private void updateMyLocationMarker(Bundle data) {
+        if (data == null || !shouldShowOrientationIcon()) return;
+        myLocationMarker.setPosition(new LatLng(myLocation.getLatitude(), myLocation.getLongitude()));
+        myLocationMarker.setRotation(Float.valueOf((data.getFloat(SensorService.AZIMUTH) + 360) % 360).longValue());
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -199,6 +206,11 @@ public class MapsActivity extends FragmentActivity
 
         mMap.setInfoWindowAdapter(this.getInfoWindowAdapter());
         mMap.setOnInfoWindowClickListener(this.getOnInfoWindowClickListener());
+
+        if (shouldShowOrientationIcon())
+            myLocationMarker = mMap.addMarker(new MarkerOptions()
+                    .position(new LatLng(0, 0))
+                    .icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_compas_arrow)));
 
         this.updateMarkersOnMap();
     }

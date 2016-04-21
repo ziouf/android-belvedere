@@ -5,7 +5,9 @@ import android.annotation.TargetApi;
 import android.app.Activity;
 import android.content.Context;
 import android.content.pm.PackageManager;
+import android.graphics.Matrix;
 import android.graphics.Point;
+import android.graphics.RectF;
 import android.graphics.SurfaceTexture;
 import android.hardware.camera2.CameraAccessException;
 import android.hardware.camera2.CameraCaptureSession;
@@ -37,8 +39,8 @@ class CameraApi21
         extends Camera
         implements TextureView.SurfaceTextureListener {
 
-    private Size previewSize;
-    private TextureView textureView;
+    private Size mPreviewSize;
+    private TextureView mTextureView;
     private CameraDevice cameraDevice;
     private CaptureRequest.Builder previewBuilder;
     private CameraCaptureSession previewSession;
@@ -49,12 +51,12 @@ class CameraApi21
         // Get sreen size
         Point size = new Point();
         context.getWindowManager().getDefaultDisplay().getRealSize(size);
-        this.previewSize = new Size(size.y, size.x);
+        this.mPreviewSize = new Size(size.x, size.y);
 
         // Init Camera view
         getContext().findViewById(R.id.camera_preview_sv).setVisibility(View.GONE);
-        this.textureView = (TextureView) context.findViewById(R.id.camera_preview_tv);
-        if (this.textureView != null) this.textureView.setSurfaceTextureListener(this);
+        this.mTextureView = (TextureView) context.findViewById(R.id.camera_preview_tv);
+        if (this.mTextureView != null) this.mTextureView.setSurfaceTextureListener(this);
     }
 
     @Override
@@ -76,11 +78,35 @@ class CameraApi21
         super.resume();
 
         // Re-ouverture de la camera
-        if (this.textureView != null && this.textureView.isAvailable()) {
-            this.textureView.setSurfaceTextureListener(this);
-            this.onSurfaceTextureAvailable(this.textureView.getSurfaceTexture(),
-                    this.textureView.getWidth(), this.textureView.getHeight());
+        if (this.mTextureView != null && this.mTextureView.isAvailable()) {
+            this.mTextureView.setSurfaceTextureListener(this);
+            this.onSurfaceTextureAvailable(this.mTextureView.getSurfaceTexture(),
+                    this.mTextureView.getWidth(), this.mTextureView.getHeight());
+
+            this.transformImage(mTextureView.getWidth(), mTextureView.getHeight());
         }
+    }
+
+    private void transformImage(int width, int height) {
+        if (mPreviewSize == null || mTextureView == null) {
+            return;
+        }
+        Matrix matrix = new Matrix();
+        int rotation = getContext().getWindowManager().getDefaultDisplay().getRotation();
+        RectF textureRectF = new RectF(0, 0, width, height);
+        RectF previewRectF = new RectF(0, 0, mPreviewSize.getHeight(), mPreviewSize.getWidth());
+        float centerX = textureRectF.centerX();
+        float centerY = textureRectF.centerY();
+        if (rotation == Surface.ROTATION_90 || rotation == Surface.ROTATION_270) {
+            previewRectF.offset(centerX - previewRectF.centerX(),
+                    centerY - previewRectF.centerY());
+            matrix.setRectToRect(textureRectF, previewRectF, Matrix.ScaleToFit.FILL);
+            float scale = Math.max((float) width / mPreviewSize.getWidth(),
+                    (float) height / mPreviewSize.getHeight());
+            matrix.postScale(scale, scale, centerX, centerY);
+            matrix.postRotate(90 * (rotation - 2), centerX, centerY);
+        }
+        mTextureView.setTransform(matrix);
     }
 
     @Override
@@ -96,6 +122,8 @@ class CameraApi21
         } catch (CameraAccessException e) {
 
         }
+
+        this.transformImage(width, height);
     }
 
     @Override
@@ -118,7 +146,7 @@ class CameraApi21
             @Override
             public void onOpened(@NonNull CameraDevice camera) {
                 cameraDevice = camera;
-                SurfaceTexture texture = textureView.getSurfaceTexture();
+                SurfaceTexture texture = mTextureView.getSurfaceTexture();
                 if (texture == null) return;
 
                 try {
@@ -127,7 +155,7 @@ class CameraApi21
 
                 }
 
-                texture.setDefaultBufferSize(previewSize.getWidth(), previewSize.getHeight());
+                texture.setDefaultBufferSize(mPreviewSize.getWidth(), mPreviewSize.getHeight());
                 Surface surface = new Surface(texture);
                 previewBuilder.addTarget(surface);
 

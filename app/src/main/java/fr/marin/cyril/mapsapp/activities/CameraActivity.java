@@ -6,6 +6,7 @@ import android.app.Activity;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
 import android.location.Location;
 import android.os.Build;
 import android.os.Bundle;
@@ -20,7 +21,6 @@ import java.util.Locale;
 
 import fr.marin.cyril.mapsapp.R;
 import fr.marin.cyril.mapsapp.camera.Camera;
-import fr.marin.cyril.mapsapp.camera.CameraFactory;
 import fr.marin.cyril.mapsapp.services.Messages;
 import fr.marin.cyril.mapsapp.services.SensorService;
 import fr.marin.cyril.mapsapp.tools.Utils;
@@ -80,8 +80,10 @@ public class CameraActivity extends Activity {
         // Inflate UI
         setContentView(R.layout.activity_camera);
 
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
+
         // Init Camera
-        this.camera = CameraFactory.getImpl(this);
+        this.camera = Camera.getCameraInstance(this);
     }
 
     @Override

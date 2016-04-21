@@ -55,8 +55,7 @@
 
         <service
             android:name=".services.SensorService"
-            android:enabled="true"
-            android:process=":sensors" />
+            android:enabled="true" />
 
     </application>
 

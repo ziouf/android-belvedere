@@ -104,6 +104,9 @@ public class SensorService extends Service
             graMat = event.values;
         if (event.sensor.getType() == Sensor.TYPE_MAGNETIC_FIELD)
             geoMat = event.values;
+        if (event.sensor.getType() == Sensor.TYPE_GAME_ROTATION_VECTOR)
+            geoMat = event.values;
+
 
         if (graMat != null && geoMat != null) {
             float[] oMat;
@@ -163,20 +166,8 @@ public class SensorService extends Service
         this.sensorManager = (SensorManager) getSystemService(SENSOR_SERVICE);
         this.locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
 
-        PackageManager packageManager = getPackageManager();
-
-        if (packageManager.hasSystemFeature(PackageManager.FEATURE_SENSOR_BAROMETER)) {
-            Sensor presure = sensorManager.getDefaultSensor(Sensor.TYPE_PRESSURE);
-            this.sensorManager.registerListener(this, presure, SensorManager.SENSOR_DELAY_NORMAL);
-        }
-
-        if (packageManager.hasSystemFeature(PackageManager.FEATURE_SENSOR_ACCELEROMETER)
-                && packageManager.hasSystemFeature(PackageManager.FEATURE_SENSOR_COMPASS)) {
-            Sensor compas = sensorManager.getDefaultSensor(Sensor.TYPE_MAGNETIC_FIELD);
-            Sensor accelerometer = sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
-            this.sensorManager.registerListener(this, compas, SensorManager.SENSOR_DELAY_NORMAL);
-            this.sensorManager.registerListener(this, accelerometer, SensorManager.SENSOR_DELAY_NORMAL);
-        }
+        this.registerSensorListener(sensorManager.getDefaultSensor(Sensor.TYPE_MAGNETIC_FIELD));
+        this.registerSensorListener(sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER));
 
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
             this.locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 2000, 10, this);
@@ -184,6 +175,11 @@ public class SensorService extends Service
         }
 
         this.pool.scheduleAtFixedRate(new LocationUpdateNotifyer(), 1000, NOTIFICATION_FREQ_MS, TimeUnit.MILLISECONDS);
+    }
+
+    private void registerSensorListener(Sensor sensor) {
+        if (sensor != null)
+            this.sensorManager.registerListener(this, sensor, SensorManager.SENSOR_DELAY_NORMAL);
     }
 
     @Override

@@ -35,8 +35,6 @@
         android:layout_gravity="center_vertical"
         android:background="@color/background_black"
         android:elevation="12dp"
-
-        android:rotation="90"
         android:textColor="#ffffffff"
         />
 
