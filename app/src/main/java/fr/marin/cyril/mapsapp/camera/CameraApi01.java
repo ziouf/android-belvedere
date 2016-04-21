@@ -2,7 +2,6 @@ package fr.marin.cyril.mapsapp.camera;
 
 import android.app.Activity;
 import android.content.pm.ActivityInfo;
-import android.hardware.Camera;
 import android.util.Log;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
@@ -16,11 +15,11 @@ import fr.marin.cyril.mapsapp.R;
  * Created by CSCM6014 on 21/04/2016.
  */
 class CameraApi01
-        extends AbstractCamera
+        extends Camera
         implements SurfaceHolder.Callback {
 
     private SurfaceHolder mHolder;
-    private Camera mCamera;
+    private android.hardware.Camera mCamera;
 
     public CameraApi01(Activity context) {
         super(context);
@@ -36,10 +35,10 @@ class CameraApi01
 
     }
 
-    public static Camera getCameraInstance() {
-        Camera c = null;
+    public static android.hardware.Camera getCameraInstance() {
+        android.hardware.Camera c = null;
         try {
-            c = Camera.open();
+            c = android.hardware.Camera.open();
         } catch (Exception e) {
             Log.e("Camera", "Not available");
         }

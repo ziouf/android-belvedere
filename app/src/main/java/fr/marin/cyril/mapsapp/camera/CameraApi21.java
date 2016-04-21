@@ -34,7 +34,7 @@ import fr.marin.cyril.mapsapp.R;
  */
 @TargetApi(Build.VERSION_CODES.LOLLIPOP)
 class CameraApi21
-        extends AbstractCamera
+        extends Camera
         implements TextureView.SurfaceTextureListener {
 
     private Size previewSize;

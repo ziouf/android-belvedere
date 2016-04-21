@@ -19,7 +19,7 @@ import android.widget.TextView;
 import java.util.Locale;
 
 import fr.marin.cyril.mapsapp.R;
-import fr.marin.cyril.mapsapp.camera.AbstractCamera;
+import fr.marin.cyril.mapsapp.camera.Camera;
 import fr.marin.cyril.mapsapp.camera.CameraFactory;
 import fr.marin.cyril.mapsapp.services.Messages;
 import fr.marin.cyril.mapsapp.services.SensorService;
@@ -32,7 +32,7 @@ import fr.marin.cyril.mapsapp.tools.Utils;
 @TargetApi(Build.VERSION_CODES.LOLLIPOP)
 public class CameraActivity extends Activity {
 
-    private AbstractCamera camera;
+    private Camera camera;
     private Location location;
     private Messenger mMessenger = new Messenger(new Handler() {
         @Override

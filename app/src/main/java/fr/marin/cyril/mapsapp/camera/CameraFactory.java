@@ -8,7 +8,7 @@ import android.os.Build;
  */
 public class CameraFactory {
 
-    public static AbstractCamera getImpl(Activity context) {
+    public static Camera getImpl(Activity context) {
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
             return new CameraApi01(context);
         } else {

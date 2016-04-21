@@ -5,11 +5,11 @@ import android.app.Activity;
 /**
  * Created by CSCM6014 on 21/04/2016.
  */
-public abstract class AbstractCamera {
+public abstract class Camera {
 
     private final Activity context;
 
-    public AbstractCamera(Activity context) {
+    public Camera(Activity context) {
         this.context = context;
     }
 
