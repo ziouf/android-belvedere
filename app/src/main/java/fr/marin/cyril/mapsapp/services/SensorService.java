@@ -39,6 +39,7 @@ public class SensorService extends Service
     public static final String PITCH = "pitch";
 
     private static final int NOTIFICATION_FREQ_MS = 250;
+    private static final int NOTIFICATION_DELAY_MS = 250;
 
     private Location location;
     private float[] graMat;
@@ -174,7 +175,7 @@ public class SensorService extends Service
             this.location = this.locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
         }
 
-        this.pool.scheduleAtFixedRate(new LocationUpdateNotifyer(), 250, NOTIFICATION_FREQ_MS, TimeUnit.MILLISECONDS);
+        this.pool.scheduleAtFixedRate(new LocationUpdateNotifyer(), NOTIFICATION_DELAY_MS, NOTIFICATION_FREQ_MS, TimeUnit.MILLISECONDS);
     }
 
     private void registerSensorListener(Sensor sensor) {
