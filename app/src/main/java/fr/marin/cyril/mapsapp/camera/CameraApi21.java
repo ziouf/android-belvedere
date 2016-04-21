@@ -35,7 +35,7 @@ import fr.marin.cyril.mapsapp.R;
  * Created by CSCM6014 on 21/04/2016.
  */
 @TargetApi(Build.VERSION_CODES.LOLLIPOP)
-class CameraApi21
+final class CameraApi21
         extends Camera
         implements TextureView.SurfaceTextureListener {
 

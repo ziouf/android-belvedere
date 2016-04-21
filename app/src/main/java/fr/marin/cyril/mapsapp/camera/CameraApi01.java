@@ -14,7 +14,7 @@ import fr.marin.cyril.mapsapp.R;
 /**
  * Created by CSCM6014 on 21/04/2016.
  */
-class CameraApi01
+final class CameraApi01
         extends Camera
         implements SurfaceHolder.Callback {
 
