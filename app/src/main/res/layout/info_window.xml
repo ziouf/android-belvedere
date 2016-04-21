@@ -3,18 +3,20 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:orientation="horizontal">
+    android:orientation="horizontal"
+    android:padding="2dp">
 
     <LinearLayout
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginRight="5dp"
+        android:layout_height="match_parent"
+        android:layout_marginEnd="5dp"
         android:orientation="vertical"
         >
         <TextView
             android:id="@+id/iw_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:text="Nom du sommet"
             android:textColor="@color/infobulle_text"
             android:textStyle="bold"
             />
@@ -23,6 +25,7 @@
             android:id="@+id/iw_altitude"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:text="Altitude"
             />
     </LinearLayout>
 
@@ -30,9 +33,11 @@
         android:id="@+id/ib_wiki"
         android:layout_width="36dp"
         android:layout_height="36dp"
+        android:layout_gravity="center|center_horizontal"
         android:padding="0dp"
         android:scaleType="fitCenter"
-        android:src="@drawable/wikipedia"
+        android:src="@drawable/ic_wikipedia"
         />
+
 
 </LinearLayout>

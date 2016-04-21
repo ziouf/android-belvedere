@@ -174,7 +174,7 @@ public class SensorService extends Service
             this.location = this.locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
         }
 
-        this.pool.scheduleAtFixedRate(new LocationUpdateNotifyer(), 1000, NOTIFICATION_FREQ_MS, TimeUnit.MILLISECONDS);
+        this.pool.scheduleAtFixedRate(new LocationUpdateNotifyer(), 250, NOTIFICATION_FREQ_MS, TimeUnit.MILLISECONDS);
     }
 
     private void registerSensorListener(Sensor sensor) {
