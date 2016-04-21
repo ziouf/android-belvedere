@@ -1,7 +1,8 @@
-<android.support.design.widget.CoordinatorLayout
+<RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/camera_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     >
@@ -23,28 +24,26 @@
         android:id="@+id/camera_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
         android:layout_gravity="bottom|end"
-        android:layout_margin="16dp"
-        android:clickable="true"
+        android:layout_marginBottom="16dp"
+        android:layout_marginRight="16dp"
         android:src="@drawable/ar_icon"
+        app:elevation="4dp"
         />
-
-    <View
-        android:id="@+id/dummy"
-        android:layout_width="1dp"
-        android:layout_height="16dp"
-        app:layout_anchor="@id/camera_button"
-        app:layout_anchorGravity="top|end" />
 
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/myPosition_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_above="@id/camera_button"
+        android:layout_alignParentEnd="true"
         android:layout_gravity="top|end"
-        android:layout_margin="16dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginRight="16dp"
         android:src="@android:drawable/ic_menu_mylocation"
         app:backgroundTint="@color/myPosition_button"
-        app:layout_anchor="@id/dummy"
-        app:layout_anchorGravity="top|end" />
+        app:elevation="4dp" />
 
-</android.support.design.widget.CoordinatorLayout>
+</RelativeLayout>
