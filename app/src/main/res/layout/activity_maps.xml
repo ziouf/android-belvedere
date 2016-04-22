@@ -16,34 +16,35 @@
 
     <TextView
         android:id="@+id/location_info"
+        style="@style/debug_tv"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp" />
 
     <android.support.design.widget.FloatingActionButton
-        android:id="@+id/camera_button"
+        android:id="@+id/myPosition_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_alignParentEnd="true"
-        android:layout_gravity="bottom|end"
-        android:layout_marginBottom="16dp"
-        android:layout_marginRight="16dp"
-        android:src="@drawable/ic_camera"
-        app:elevation="4dp"
-        />
-
-    <android.support.design.widget.FloatingActionButton
-        android:id="@+id/myPosition_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_above="@id/camera_button"
-        android:layout_alignParentEnd="true"
         android:layout_gravity="top|end"
-        android:layout_marginBottom="8dp"
-        android:layout_marginRight="16dp"
+        android:layout_marginBottom="@dimen/fab_bottom_margin"
+        android:layout_marginEnd="@dimen/fab_end_margin"
         android:src="@android:drawable/ic_menu_mylocation"
         app:backgroundTint="@color/myPosition_button"
         app:elevation="4dp" />
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/camera_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/myPosition_button"
+        android:layout_alignParentEnd="true"
+        android:layout_gravity="bottom|end"
+        android:layout_marginBottom="@dimen/fab_bottom_margin"
+        android:layout_marginEnd="@dimen/fab_end_margin"
+        android:src="@drawable/ic_camera"
+        app:elevation="4dp"
+        />
 
 </RelativeLayout>

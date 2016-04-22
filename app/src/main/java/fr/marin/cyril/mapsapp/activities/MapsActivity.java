@@ -83,7 +83,12 @@ public class MapsActivity extends FragmentActivity
             };
     private Collection<Marker> markersShown;
 
-    private boolean shouldShowOrientationIcon() {
+    /**
+     * Retourne true si le téléphone dispose des capteurs suffisants pour utiliser la Réalité Augmentée
+     *
+     * @return
+     */
+    private boolean isARCompatible() {
         PackageManager pm = getPackageManager();
         return pm.hasSystemFeature(PackageManager.FEATURE_SENSOR_ACCELEROMETER)
                 && pm.hasSystemFeature(PackageManager.FEATURE_SENSOR_COMPASS);
@@ -96,7 +101,7 @@ public class MapsActivity extends FragmentActivity
     }
 
     private void updateMyLocationMarker(Bundle data) {
-        if (data == null || !shouldShowOrientationIcon()) return;
+        if (data == null || !isARCompatible()) return;
         myLocationMarker.setPosition(new LatLng(myLocation.getLatitude(), myLocation.getLongitude()));
         myLocationMarker.setRotation(Float.valueOf((data.getFloat(SensorService.AZIMUTH) + 360) % 360).longValue());
     }
@@ -153,6 +158,8 @@ public class MapsActivity extends FragmentActivity
         FloatingActionButton cameraButton = (FloatingActionButton) this.findViewById(R.id.camera_button);
         FloatingActionButton myPosButton = (FloatingActionButton) this.findViewById(R.id.myPosition_button);
 
+        if (!isARCompatible()) cameraButton.setVisibility(View.GONE);
+
         // Désactivation du module AR si api < LOLLIPOP ou si Permission CAMERA  refusée
         if (!getPackageManager().hasSystemFeature(PackageManager.FEATURE_CAMERA)
                 || ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
@@ -207,7 +214,7 @@ public class MapsActivity extends FragmentActivity
         mMap.setInfoWindowAdapter(this.getInfoWindowAdapter());
         mMap.setOnInfoWindowClickListener(this.getOnInfoWindowClickListener());
 
-        if (shouldShowOrientationIcon())
+        if (isARCompatible())
             myLocationMarker = mMap.addMarker(new MarkerOptions()
                     .position(new LatLng(0, 0))
                     .icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_compas_arrow)));
