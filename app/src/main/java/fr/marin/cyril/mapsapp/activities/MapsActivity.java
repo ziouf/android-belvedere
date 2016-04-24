@@ -33,6 +33,7 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
+import java.util.Objects;
 
 import fr.marin.cyril.mapsapp.R;
 import fr.marin.cyril.mapsapp.database.DatabaseHelper;
@@ -248,6 +249,8 @@ public class MapsActivity extends FragmentActivity
 
             @Override
             public View getInfoContents(Marker marker) {
+                if (marker.getId().equals(myLocationMarker.getId())) return null;
+
                 View v = getLayoutInflater().inflate(R.layout.info_window, null);
 
                 Placemark m = db.findByLatLng(marker.getPosition());
