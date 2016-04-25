@@ -1,17 +1,14 @@
 package fr.marin.cyril.mapsapp.activities;
 
 import android.Manifest;
-import android.content.ComponentName;
-import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.location.Criteria;
 import android.location.Location;
+import android.location.LocationListener;
+import android.location.LocationManager;
 import android.net.Uri;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.IBinder;
-import android.os.Message;
-import android.os.Messenger;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentActivity;
@@ -33,55 +30,31 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
-import java.util.Objects;
 
 import fr.marin.cyril.mapsapp.R;
 import fr.marin.cyril.mapsapp.database.DatabaseHelper;
 import fr.marin.cyril.mapsapp.kml.model.Placemark;
-import fr.marin.cyril.mapsapp.services.Messages;
-import fr.marin.cyril.mapsapp.services.SensorService;
+import fr.marin.cyril.mapsapp.services.Compass;
 import fr.marin.cyril.mapsapp.tools.Area;
 
 public class MapsActivity extends FragmentActivity
-        implements OnMapReadyCallback, ActivityCompat.OnRequestPermissionsResultCallback,
+        implements LocationListener, OnMapReadyCallback, ActivityCompat.OnRequestPermissionsResultCallback,
         GoogleMap.OnMapLoadedCallback, GoogleMap.OnCameraChangeListener {
 
-    private DatabaseHelper db = new DatabaseHelper(MapsActivity.this);
-    private GoogleMap mMap;
-    private Marker myLocationMarker;
-    private boolean firstTimeLocationAquiered = true;
-    private Location myLocation;
-    private final Messenger mMessenger = new Messenger(new Handler() {
-        @Override
-        public void handleMessage(Message msg) {
-            switch (msg.what) {
-                case Messages.MSG_LOCATION_UPDATE:
-                    if (msg.obj == null) return;
-                    MapsActivity.this.setMyLocation((Location) msg.obj);
-                    MapsActivity.this.updateMyLocationMarker(MapsActivity.this.myLocation.getExtras());
+    private static final int LOCATION_UPDATE_TIME = 1000;
+    private static final int LOCATION_UPDATE_DISTANCE = 10;
 
-                    TextView tv = (TextView) findViewById(R.id.location_info);
-                    tv.setText(String.format("lat : %s | lng : %s | alt : %s\nazimuth : %s", myLocation.getLatitude(), myLocation.getLongitude(), myLocation.getAltitude(),
-                            myLocation.getExtras().getFloat(SensorService.AZIMUTH)));
-                    break;
-                case Messages.MSG_REQUEST_LOCATION_RESPONSE:
-                    myLocation = (Location) msg.obj;
-                    MapsActivity.this.centerMapCameraOnMyPosition();
-                    break;
-                default:
-                    super.handleMessage(msg);
-            }
-        }
-    });
-    private SensorService.SensorServiceConnection sensorServiceConnection =
-            new SensorService.SensorServiceConnection() {
-                @Override
-                public void onServiceConnected(ComponentName name, IBinder service) {
-                    super.onServiceConnected(name, service);
-                    Messages.sendNewMessage(this.getServiceMessenger(), Messages.MSG_REGISTER_CLIENT,
-                            SensorService.PORTRAIT, 0, null, mMessenger);
-                }
-            };
+    private final DatabaseHelper db = new DatabaseHelper(MapsActivity.this);
+    private final Criteria locationCriteria = new Criteria();
+
+    private boolean firstLocationChange = true;
+    private Location location;
+    private LocationManager locationManager;
+
+    private Compass compass;
+    private GoogleMap mMap;
+
+    private Marker myLocationMarker;
     private Collection<Marker> markersShown;
 
     /**
@@ -95,16 +68,10 @@ public class MapsActivity extends FragmentActivity
                 && pm.hasSystemFeature(PackageManager.FEATURE_SENSOR_COMPASS);
     }
 
-    private void setMyLocation(Location myLocation) {
-        this.myLocation = myLocation;
-        if (this.firstTimeLocationAquiered) this.centerMapCameraOnMyPosition();
-        this.firstTimeLocationAquiered = false;
-    }
-
     private void updateMyLocationMarker(Bundle data) {
         if (data == null || !isARCompatible()) return;
-        myLocationMarker.setPosition(new LatLng(myLocation.getLatitude(), myLocation.getLongitude()));
-        myLocationMarker.setRotation(Float.valueOf((data.getFloat(SensorService.AZIMUTH) + 360) % 360).longValue());
+        myLocationMarker.setPosition(new LatLng(location.getLatitude(), location.getLongitude()));
+        myLocationMarker.setRotation(Float.valueOf((data.getFloat(Compass.AZIMUTH_P) + 360) % 360).longValue());
     }
 
     @Override
@@ -119,6 +86,14 @@ public class MapsActivity extends FragmentActivity
 
         // Init
         this.markersShown = new HashSet<>();
+        this.compass = Compass.getInstance(MapsActivity.this);
+        this.locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
+        this.locationCriteria.setAccuracy(Criteria.ACCURACY_COARSE);
+        this.locationCriteria.setPowerRequirement(Criteria.POWER_MEDIUM);
+
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
+            this.location = locationManager.getLastKnownLocation(this.locationManager.getBestProvider(locationCriteria, true));
+        }
 
         //
         this.initFloatingActionButtons();
@@ -128,9 +103,11 @@ public class MapsActivity extends FragmentActivity
     protected void onResume() {
         super.onResume();
 
-        // Bind services
-        this.bindService(new Intent(getApplicationContext(), SensorService.class),
-                sensorServiceConnection, Context.BIND_AUTO_CREATE);
+        this.compass.resume();
+
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
+            this.locationManager.requestLocationUpdates(this.locationManager.getBestProvider(locationCriteria, true), LOCATION_UPDATE_TIME, LOCATION_UPDATE_DISTANCE, this);
+        }
 
         this.centerMapCameraOnMyPosition();
     }
@@ -139,17 +116,42 @@ public class MapsActivity extends FragmentActivity
     protected void onPause() {
         super.onPause();
 
-        // Unbind services
-        if (sensorServiceConnection.isBound()) {
-            Messages.sendNewMessage(sensorServiceConnection.getServiceMessenger(),
-                    Messages.MSG_UNREGISTER_CLIENT, 0, 0, null, mMessenger);
-            this.unbindService(sensorServiceConnection);
+        this.compass.pause();
+
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
+            this.locationManager.removeUpdates(this);
         }
     }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
+    }
+
+    @Override
+    public void onLocationChanged(Location location) {
+        this.location = location;
+        if (this.firstLocationChange) MapsActivity.this.centerMapCameraOnMyPosition();
+        this.firstLocationChange = false;
+
+        TextView tv = (TextView) findViewById(R.id.debug_location_info);
+        tv.setText(String.format("lat : %s | lng : %s | alt : %s",
+                location.getLatitude(), location.getLongitude(), location.getAltitude()));
+    }
+
+    @Override
+    public void onStatusChanged(String provider, int status, Bundle extras) {
+
+    }
+
+    @Override
+    public void onProviderEnabled(String provider) {
+
+    }
+
+    @Override
+    public void onProviderDisabled(String provider) {
+
     }
 
     /**
@@ -220,6 +222,18 @@ public class MapsActivity extends FragmentActivity
                     .position(new LatLng(0, 0))
                     .icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_compas_arrow)));
 
+        Runnable updateMyLocationMarker = new Runnable() {
+            @Override
+            public void run() {
+                MapsActivity.this.updateMyLocationMarker(compass.getData());
+
+                TextView tv = (TextView) findViewById(R.id.debug_azimuth_info);
+                tv.setText(String.format("azimuth : %s", compass.getData().getFloat(Compass.AZIMUTH_P)));
+            }
+        };
+
+        this.compass.addTask(updateMyLocationMarker.hashCode(), updateMyLocationMarker);
+
         this.updateMarkersOnMap();
     }
 
@@ -227,13 +241,10 @@ public class MapsActivity extends FragmentActivity
      *
      */
     private void centerMapCameraOnMyPosition() {
-        if (mMap == null) return;
-        if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) return;
+        if (mMap == null || location == null) return;
 
-        if (this.myLocation != null) {
-            LatLng latLng = new LatLng(this.myLocation.getLatitude(), this.myLocation.getLongitude());
-            mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, 12));
-        }
+        LatLng latLng = new LatLng(location.getLatitude(), location.getLongitude());
+        mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, 12));
     }
 
     /**

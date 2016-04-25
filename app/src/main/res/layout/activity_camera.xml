@@ -8,21 +8,18 @@
     <TextureView
         android:id="@+id/camera_preview_tv"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:elevation="0dp" />
+        android:layout_height="match_parent" />
 
     <SurfaceView
         android:id="@+id/camera_preview_sv"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_weight="1"
         />
 
     <ImageView
         android:id="@+id/camera_binocular_mask"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:elevation="1dp"
         android:scaleType="fitXY"
         android:src="@drawable/binocular_mask"
         />
@@ -34,7 +31,6 @@
 
         android:layout_gravity="center_vertical"
         android:background="@color/background_black"
-        android:elevation="12dp"
         android:textColor="#ffffffff"
         />
 
@@ -42,8 +38,6 @@
         android:id="@+id/camera_loading"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:elevation="24dp"
-        android:src="#000000"
-        />
+        android:src="#000000" />
 
 </FrameLayout>
