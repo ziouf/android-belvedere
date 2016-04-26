@@ -3,6 +3,7 @@ package fr.marin.cyril.mapsapp.activities;
 import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.hardware.GeomagneticField;
 import android.location.Criteria;
 import android.location.Location;
 import android.location.LocationListener;
@@ -34,45 +35,27 @@ import java.util.HashSet;
 import fr.marin.cyril.mapsapp.R;
 import fr.marin.cyril.mapsapp.database.DatabaseHelper;
 import fr.marin.cyril.mapsapp.kml.model.Placemark;
-import fr.marin.cyril.mapsapp.services.Compass;
 import fr.marin.cyril.mapsapp.tools.Area;
+import fr.marin.cyril.mapsapp.tools.Compass;
+import fr.marin.cyril.mapsapp.tools.Utils;
 
 public class MapsActivity extends FragmentActivity
         implements LocationListener, OnMapReadyCallback, ActivityCompat.OnRequestPermissionsResultCallback,
         GoogleMap.OnMapLoadedCallback, GoogleMap.OnCameraChangeListener {
 
-    private static final int LOCATION_UPDATE_TIME = 1000;
+    private static final int LOCATION_UPDATE_TIME = 2000;
     private static final int LOCATION_UPDATE_DISTANCE = 10;
 
+    private final Collection<Marker> markersShown = new HashSet<>();
     private final DatabaseHelper db = new DatabaseHelper(MapsActivity.this);
     private final Criteria locationCriteria = new Criteria();
 
-    private boolean firstLocationChange = true;
+    private GeomagneticField geoField;
+    private Compass compass;
+    private Marker compassMarker;
     private Location location;
     private LocationManager locationManager;
-
-    private Compass compass;
     private GoogleMap mMap;
-
-    private Marker myLocationMarker;
-    private Collection<Marker> markersShown;
-
-    /**
-     * Retourne true si le téléphone dispose des capteurs suffisants pour utiliser la Réalité Augmentée
-     *
-     * @return
-     */
-    private boolean isARCompatible() {
-        PackageManager pm = getPackageManager();
-        return pm.hasSystemFeature(PackageManager.FEATURE_SENSOR_ACCELEROMETER)
-                && pm.hasSystemFeature(PackageManager.FEATURE_SENSOR_COMPASS);
-    }
-
-    private void updateMyLocationMarker(Bundle data) {
-        if (data == null || !isARCompatible()) return;
-        myLocationMarker.setPosition(new LatLng(location.getLatitude(), location.getLongitude()));
-        myLocationMarker.setRotation(Float.valueOf((data.getFloat(Compass.AZIMUTH_P) + 360) % 360).longValue());
-    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -85,18 +68,42 @@ public class MapsActivity extends FragmentActivity
         mapFragment.getMapAsync(this);
 
         // Init
-        this.markersShown = new HashSet<>();
-        this.compass = Compass.getInstance(MapsActivity.this);
+        this.compass = Compass.getInstance(this, true);
         this.locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
-        this.locationCriteria.setAccuracy(Criteria.ACCURACY_COARSE);
+        this.locationCriteria.setAccuracy(Criteria.ACCURACY_FINE);
         this.locationCriteria.setPowerRequirement(Criteria.POWER_MEDIUM);
 
-        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
-            this.location = locationManager.getLastKnownLocation(this.locationManager.getBestProvider(locationCriteria, true));
+        // Initialisation des FAB
+        FloatingActionButton cameraButton = (FloatingActionButton) this.findViewById(R.id.camera_button);
+        FloatingActionButton myPosButton = (FloatingActionButton) this.findViewById(R.id.myPosition_button);
+
+        if (!Utils.isCompassAvailable(this)) cameraButton.setVisibility(View.GONE);
+
+        // Désactivation du module AR si api < LOLLIPOP ou si Permission CAMERA  refusée
+        if (!getPackageManager().hasSystemFeature(PackageManager.FEATURE_CAMERA)
+                || ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
+            cameraButton.setVisibility(View.GONE);
         }
 
-        //
-        this.initFloatingActionButtons();
+        // Action au click sur le bouton camera
+        cameraButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.i("", "Click cameraButton");
+                startActivity(new Intent(getApplicationContext(), CameraActivity.class));
+            }
+        });
+
+        // Action au click sur le bouton myPosButton
+        myPosButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.i("", "Click myPosButton");
+                MapsActivity.this.centerMapCameraOnMyPosition();
+            }
+        });
+
+        // Add other actions below if needed
     }
 
     @Override
@@ -131,8 +138,12 @@ public class MapsActivity extends FragmentActivity
     @Override
     public void onLocationChanged(Location location) {
         this.location = location;
-        if (this.firstLocationChange) MapsActivity.this.centerMapCameraOnMyPosition();
-        this.firstLocationChange = false;
+        this.geoField = new GeomagneticField(
+                (float) location.getLatitude(),
+                (float) location.getLongitude(),
+                (float) location.getAltitude(),
+                System.currentTimeMillis()
+        );
 
         TextView tv = (TextView) findViewById(R.id.debug_location_info);
         tv.setText(String.format("lat : %s | lng : %s | alt : %s",
@@ -155,42 +166,6 @@ public class MapsActivity extends FragmentActivity
     }
 
     /**
-     *
-     */
-    private void initFloatingActionButtons() {
-        FloatingActionButton cameraButton = (FloatingActionButton) this.findViewById(R.id.camera_button);
-        FloatingActionButton myPosButton = (FloatingActionButton) this.findViewById(R.id.myPosition_button);
-
-        if (!isARCompatible()) cameraButton.setVisibility(View.GONE);
-
-        // Désactivation du module AR si api < LOLLIPOP ou si Permission CAMERA  refusée
-        if (!getPackageManager().hasSystemFeature(PackageManager.FEATURE_CAMERA)
-                || ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
-            cameraButton.setVisibility(View.GONE);
-        }
-
-        // Action au click sur le bouton camera
-        cameraButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Log.i("", "Click cameraButton");
-                startActivity(new Intent(getApplicationContext(), CameraActivity.class));
-            }
-        });
-
-        // Action au click sur le bouton myPosButton
-        myPosButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Log.i("", "Click myPosButton");
-                MapsActivity.this.centerMapCameraOnMyPosition();
-            }
-        });
-
-        // Add other actions below if needed
-    }
-
-    /**
      * Manipulates the map once available.
      * This callback is triggered when the map is ready to be used.
      * This is where we can add markersShown or lines, add listeners or move the camera. In this case,
@@ -200,7 +175,7 @@ public class MapsActivity extends FragmentActivity
      * installed Google Play services and returned to the app.
      */
     @Override
-    public void onMapReady(GoogleMap googleMap) {
+    public void onMapReady(final GoogleMap googleMap) {
         mMap = googleMap;
 
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
@@ -215,33 +190,39 @@ public class MapsActivity extends FragmentActivity
         mMap.getUiSettings().setMyLocationButtonEnabled(false);
 
         mMap.setInfoWindowAdapter(this.getInfoWindowAdapter());
+        mMap.setOnMarkerClickListener(this.getOnMarkerClickListener());
         mMap.setOnInfoWindowClickListener(this.getOnInfoWindowClickListener());
 
-        if (isARCompatible())
-            myLocationMarker = mMap.addMarker(new MarkerOptions()
-                    .position(new LatLng(0, 0))
-                    .icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_compas_arrow)));
-
-        Runnable updateMyLocationMarker = new Runnable() {
-            @Override
-            public void run() {
-                MapsActivity.this.updateMyLocationMarker(compass.getData());
-
-                TextView tv = (TextView) findViewById(R.id.debug_azimuth_info);
-                tv.setText(String.format("azimuth : %s", compass.getData().getFloat(Compass.AZIMUTH_P)));
-            }
-        };
-
-        this.compass.addTask(updateMyLocationMarker.hashCode(), updateMyLocationMarker);
-
+        this.centerMapCameraOnMyPosition();
         this.updateMarkersOnMap();
+
+        final Location lastKnownLocation = locationManager.getLastKnownLocation(locationManager.getBestProvider(locationCriteria, true));
+        this.compassMarker = mMap.addMarker(new MarkerOptions()
+                .position(new LatLng(lastKnownLocation.getLatitude(), lastKnownLocation.getLongitude()))
+                .icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_compas_arrow))
+        );
+
+        compass.OnCompasEvent(new Compass.CompasEventListener() {
+            private TextView azimuth_tv = (TextView) findViewById(R.id.debug_azimuth_info);
+
+            @Override
+            public void onSensorChanged(float[] data) {
+                float azimuth = Compass.getAzimuth(data, geoField);
+                compassMarker.setRotation((azimuth + 360) % 360);
+                azimuth_tv.setText(String.format("azimuth : %s", azimuth));
+            }
+        });
     }
 
     /**
      *
      */
     private void centerMapCameraOnMyPosition() {
-        if (mMap == null || location == null) return;
+        if (mMap == null) return;
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED)
+            return;
+        if (location == null)
+            location = locationManager.getLastKnownLocation(locationManager.getBestProvider(locationCriteria, true));
 
         LatLng latLng = new LatLng(location.getLatitude(), location.getLongitude());
         mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, 12));
@@ -260,7 +241,7 @@ public class MapsActivity extends FragmentActivity
 
             @Override
             public View getInfoContents(Marker marker) {
-                if (marker.getId().equals(myLocationMarker.getId())) return null;
+                if (marker.getId().equals(compassMarker.getId())) return null;
 
                 View v = getLayoutInflater().inflate(R.layout.info_window, null);
 
@@ -287,6 +268,15 @@ public class MapsActivity extends FragmentActivity
             public void onInfoWindowClick(Marker marker) {
                 Placemark m = db.findByLatLng(marker.getPosition());
                 startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(m.getUrl())));
+            }
+        };
+    }
+
+    private GoogleMap.OnMarkerClickListener getOnMarkerClickListener() {
+        return new GoogleMap.OnMarkerClickListener() {
+            @Override
+            public boolean onMarkerClick(Marker marker) {
+                return marker.getId().equals(compassMarker.getId());
             }
         };
     }
