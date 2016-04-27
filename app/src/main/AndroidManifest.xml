@@ -38,7 +38,7 @@
             android:value="@string/google_maps_key" />
 
         <activity
-            android:name=".activities.LoadingActivity"
+            android:name=".activities.ui.LoadingActivity"
             android:theme="@style/SplashTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -46,10 +46,10 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".activities.MapsActivity" />
+        <activity android:name=".activities.ui.MapsActivity" />
 
         <activity
-            android:name=".activities.CameraActivity"
+            android:name=".activities.ui.CameraActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:theme="@android:style/Theme.DeviceDefault.NoActionBar.Fullscreen" />
 

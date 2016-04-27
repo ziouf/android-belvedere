@@ -1,4 +1,4 @@
-package fr.marin.cyril.mapsapp.activities;
+package fr.marin.cyril.mapsapp.activities.ui;
 
 import android.Manifest;
 import android.app.Activity;

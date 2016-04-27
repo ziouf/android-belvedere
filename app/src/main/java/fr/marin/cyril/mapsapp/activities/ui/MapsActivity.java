@@ -1,18 +1,13 @@
-package fr.marin.cyril.mapsapp.activities;
+package fr.marin.cyril.mapsapp.activities.ui;
 
 import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.hardware.GeomagneticField;
-import android.location.Criteria;
 import android.location.Location;
-import android.location.LocationListener;
-import android.location.LocationManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.ActivityCompat;
-import android.support.v4.app.FragmentActivity;
 import android.support.v4.content.ContextCompat;
 import android.util.Log;
 import android.view.View;
@@ -33,28 +28,20 @@ import java.util.Collection;
 import java.util.HashSet;
 
 import fr.marin.cyril.mapsapp.R;
+import fr.marin.cyril.mapsapp.activities.CompassFragmentActivity;
 import fr.marin.cyril.mapsapp.database.DatabaseHelper;
 import fr.marin.cyril.mapsapp.kml.model.Placemark;
 import fr.marin.cyril.mapsapp.tools.Area;
-import fr.marin.cyril.mapsapp.tools.Compass;
 import fr.marin.cyril.mapsapp.tools.Utils;
 
-public class MapsActivity extends FragmentActivity
-        implements LocationListener, OnMapReadyCallback, ActivityCompat.OnRequestPermissionsResultCallback,
+public class MapsActivity extends CompassFragmentActivity
+        implements OnMapReadyCallback, ActivityCompat.OnRequestPermissionsResultCallback,
         GoogleMap.OnMapLoadedCallback, GoogleMap.OnCameraChangeListener {
-
-    private static final int LOCATION_UPDATE_TIME = 2000;
-    private static final int LOCATION_UPDATE_DISTANCE = 10;
 
     private final Collection<Marker> markersShown = new HashSet<>();
     private final DatabaseHelper db = new DatabaseHelper(MapsActivity.this);
-    private final Criteria locationCriteria = new Criteria();
 
-    private GeomagneticField geoField;
-    private Compass compass;
     private Marker compassMarker;
-    private Location location;
-    private LocationManager locationManager;
     private GoogleMap mMap;
 
     @Override
@@ -66,12 +53,6 @@ public class MapsActivity extends FragmentActivity
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
-
-        // Init
-        this.compass = Compass.getInstance(this, true);
-        this.locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
-        this.locationCriteria.setAccuracy(Criteria.ACCURACY_FINE);
-        this.locationCriteria.setPowerRequirement(Criteria.POWER_MEDIUM);
 
         // Initialisation des FAB
         FloatingActionButton cameraButton = (FloatingActionButton) this.findViewById(R.id.camera_button);
@@ -109,25 +90,12 @@ public class MapsActivity extends FragmentActivity
     @Override
     protected void onResume() {
         super.onResume();
-
-        this.compass.resume();
-
-        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
-            this.locationManager.requestLocationUpdates(this.locationManager.getBestProvider(locationCriteria, true), LOCATION_UPDATE_TIME, LOCATION_UPDATE_DISTANCE, this);
-        }
-
         this.centerMapCameraOnMyPosition();
     }
 
     @Override
     protected void onPause() {
         super.onPause();
-
-        this.compass.pause();
-
-        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
-            this.locationManager.removeUpdates(this);
-        }
     }
 
     @Override
@@ -137,33 +105,15 @@ public class MapsActivity extends FragmentActivity
 
     @Override
     public void onLocationChanged(Location location) {
-        this.location = location;
-        this.geoField = new GeomagneticField(
-                (float) location.getLatitude(),
-                (float) location.getLongitude(),
-                (float) location.getAltitude(),
-                System.currentTimeMillis()
-        );
+        super.onLocationChanged(location);
+
+        this.compassMarker.setPosition(new LatLng(location.getLatitude(), location.getLongitude()));
 
         TextView tv = (TextView) findViewById(R.id.debug_location_info);
         tv.setText(String.format("lat : %s | lng : %s | alt : %s",
                 location.getLatitude(), location.getLongitude(), location.getAltitude()));
     }
 
-    @Override
-    public void onStatusChanged(String provider, int status, Bundle extras) {
-
-    }
-
-    @Override
-    public void onProviderEnabled(String provider) {
-
-    }
-
-    @Override
-    public void onProviderDisabled(String provider) {
-
-    }
 
     /**
      * Manipulates the map once available.
@@ -202,14 +152,14 @@ public class MapsActivity extends FragmentActivity
                 .icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_compas_arrow))
         );
 
-        compass.OnCompasEvent(new Compass.CompasEventListener() {
+        this.setOnCompasEvent(new CompassFragmentActivity.CompasEventListener() {
             private TextView azimuth_tv = (TextView) findViewById(R.id.debug_azimuth_info);
 
             @Override
             public void onSensorChanged(float[] data) {
-                float azimuth = Compass.getAzimuth(data, geoField);
-                compassMarker.setRotation((azimuth + 360) % 360);
-                azimuth_tv.setText(String.format("azimuth : %s", azimuth));
+                float azimuth = getAzimuth();
+                compassMarker.setRotation(azimuth);
+                azimuth_tv.setText(String.format("azimuth : %s°", (int) azimuth));
             }
         });
     }

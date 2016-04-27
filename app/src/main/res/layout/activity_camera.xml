@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/background_black"
-    tools:context=".activities.CameraActivity">
+    tools:context=".activities.ui.CameraActivity">
 
     <TextureView
         android:id="@+id/camera_preview_tv"
@@ -25,10 +25,11 @@
         />
 
     <TextView
-        android:id="@+id/cameraTextView"
+        android:id="@+id/debug_camera_tv"
+        style="@style/debug_tv"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
 
+        android:layout_height="wrap_content"
         android:layout_gravity="center_vertical"
         android:background="@color/background_black"
         android:textColor="#ffffffff"

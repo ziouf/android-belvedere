@@ -19,7 +19,36 @@ public class Utils {
                 && pm.hasSystemFeature(PackageManager.FEATURE_SENSOR_COMPASS);
     }
 
-    public static String getDirectionFromDegrees(float degrees) {
+    public static String getDirectionFrom0to360Degrees(float degrees) {
+        if (degrees >= 360 - 22.5 || degrees < 22.5) {
+            return "N";
+        }
+        if (degrees >= 22.5 && degrees < 67.5) {
+            return "NE";
+        }
+        if (degrees >= 67.5 && degrees < 112.5) {
+            return "E";
+        }
+        if (degrees >= 112.5 && degrees < 157.5) {
+            return "SE";
+        }
+        if (degrees >= 157.5 && degrees < 360 - 157.5) {
+            return "S";
+        }
+        if (degrees >= 360 - 157.5 && degrees < 360 - 112.5) {
+            return "SW";
+        }
+        if (degrees >= 360 - 112.5 && degrees < 360 - 67.5) {
+            return "W";
+        }
+        if (degrees >= 360 - 67.5 && degrees < 360 - 22.5) {
+            return "NW";
+        }
+
+        return null;
+    }
+
+    public static String getDirectionFromMinus180to180Degrees(float degrees) {
         if (degrees >= -22.5 && degrees < 22.5) {
             return "N";
         }
