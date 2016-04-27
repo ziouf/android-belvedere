@@ -4,6 +4,9 @@
     <string name="title_activity_camera">Jumelles</string>
     <string name="title_activity_loading">Chargement</string>
     <string name="title_activity_maps">Carte</string>
-    <string name="loading_database_init">Initialisation de la base de données...\nCette opération peut prendre du temps</string>
-    <string name="loading_application_openning">Chargement de l\'application...</string>
+    <string name="loading_database_init">Initialisation de la base de données…\nCette opération peut prendre du temps</string>
+    <string name="loading_application_openning">Chargement de l\'application…</string>
+
+    <string name="menu_maps">Carte</string>
+    <string name="menu_about">A propos</string>
 </resources>

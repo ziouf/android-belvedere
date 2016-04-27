@@ -1,6 +1,7 @@
-package fr.marin.cyril.mapsapp.activities;
+package fr.marin.cyril.mapsapp.activities.fragments;
 
 import android.Manifest;
+import android.content.Context;
 import android.content.pm.PackageManager;
 import android.hardware.GeomagneticField;
 import android.location.Criteria;
@@ -8,14 +9,12 @@ import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
-import android.support.v4.app.FragmentActivity;
 
 /**
  * Created by CSCM6014 on 27/04/2016.
  */
-public class LocationFragmentActivity extends FragmentActivity
+public class LocationFragment extends android.support.v4.app.Fragment
         implements LocationListener {
 
     private static final int LOCATION_UPDATE_TIME = 2000;
@@ -28,41 +27,61 @@ public class LocationFragmentActivity extends FragmentActivity
 
     protected LocationManager locationManager;
 
+
     @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
+    public void onAttach(Context context) {
+        super.onAttach(context);
+    }
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        this.locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
+        this.locationManager = (LocationManager) getActivity().getSystemService(Context.LOCATION_SERVICE);
         this.locationCriteria.setAccuracy(Criteria.ACCURACY_FINE);
         this.locationCriteria.setPowerRequirement(Criteria.POWER_MEDIUM);
     }
 
     @Override
-    protected void onResume() {
+    public void onStart() {
+        super.onStart();
+    }
+
+    @Override
+    public void onResume() {
         super.onResume();
-        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
+        if (ActivityCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
             this.location = locationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
             this.locationManager.requestLocationUpdates(locationManager.getBestProvider(locationCriteria, true), LOCATION_UPDATE_TIME, LOCATION_UPDATE_DISTANCE, this);
         }
     }
 
     @Override
-    protected void onPause() {
+    public void onPause() {
         super.onPause();
-        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
+        if (ActivityCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
             this.locationManager.removeUpdates(this);
         }
     }
 
     @Override
-    protected void onDestroy() {
+    public void onStop() {
+        super.onStop();
+    }
+
+    @Override
+    public void onDestroy() {
         super.onDestroy();
+    }
+
+    @Override
+    public void onDetach() {
+        super.onDetach();
     }
 
     @Override
     public void onLocationChanged(Location location) {
         if (this.location == null) onFirstLocationChanged(location);
-
         this.location = location;
         this.geoField = new GeomagneticField(
                 (float) location.getLatitude(),

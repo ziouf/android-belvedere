@@ -1,5 +1,6 @@
-package fr.marin.cyril.mapsapp.activities;
+package fr.marin.cyril.mapsapp.activities.fragments;
 
+import android.content.Context;
 import android.content.pm.PackageManager;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
@@ -9,9 +10,9 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 
 /**
- * Created by CSCM6014 on 25/04/2016.
+ * Created by CSCM6014 on 27/04/2016.
  */
-public class CompassFragmentActivity extends LocationFragmentActivity
+public class CompassFragment extends LocationFragment
         implements SensorEventListener {
     public static final int AZIMUTH = 0;
     public static final int PITCH = 1;
@@ -34,25 +35,26 @@ public class CompassFragmentActivity extends LocationFragmentActivity
     }
 
     protected boolean isCompassCompatible() {
-        PackageManager pm = getPackageManager();
+        PackageManager pm = getActivity().getPackageManager();
         return pm.hasSystemFeature(PackageManager.FEATURE_SENSOR_ACCELEROMETER)
                 && pm.hasSystemFeature(PackageManager.FEATURE_SENSOR_COMPASS);
     }
 
+
     @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
+    public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        this.sensorManager = (SensorManager) getSystemService(SENSOR_SERVICE);
+        this.sensorManager = (SensorManager) getActivity().getSystemService(Context.SENSOR_SERVICE);
     }
 
     @Override
-    protected void onPause() {
+    public void onPause() {
         super.onPause();
         this.sensorManager.unregisterListener(this);
     }
 
     @Override
-    protected void onResume() {
+    public void onResume() {
         super.onResume();
         if (isCompassCompatible()) {
             this.sensorManager.registerListener(this, sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER), SensorManager.SENSOR_DELAY_NORMAL);
@@ -112,4 +114,5 @@ public class CompassFragmentActivity extends LocationFragmentActivity
 
         public abstract void onSensorChanged(float[] data);
     }
+
 }
