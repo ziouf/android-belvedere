@@ -48,7 +48,7 @@ public class MapsActivity extends CompassFragmentActivity
         setContentView(R.layout.activity_maps);
 
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
-        MapFragment mapFragment = (MapFragment) getFragmentManager().findFragmentById(R.id.map);
+        MapFragment mapFragment = (MapFragment) getFragmentManager().findFragmentById(R.id.google_maps_fragment);
         mapFragment.getMapAsync(this);
 
         // Initialisation des FAB
