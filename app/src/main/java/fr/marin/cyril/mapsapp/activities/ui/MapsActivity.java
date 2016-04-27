@@ -7,7 +7,6 @@ import android.location.Location;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
-import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.util.Log;
 import android.view.View;
@@ -35,8 +34,7 @@ import fr.marin.cyril.mapsapp.tools.Area;
 import fr.marin.cyril.mapsapp.tools.Utils;
 
 public class MapsActivity extends CompassFragmentActivity
-        implements OnMapReadyCallback, ActivityCompat.OnRequestPermissionsResultCallback,
-        GoogleMap.OnMapLoadedCallback, GoogleMap.OnCameraChangeListener {
+        implements OnMapReadyCallback, GoogleMap.OnMapLoadedCallback, GoogleMap.OnCameraChangeListener {
 
     private final Collection<Marker> markersShown = new HashSet<>();
     private final DatabaseHelper db = new DatabaseHelper(MapsActivity.this);
