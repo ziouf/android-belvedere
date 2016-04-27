@@ -143,14 +143,13 @@ public class MapsActivity extends CompassFragmentActivity
         mMap.setOnMarkerClickListener(this.getOnMarkerClickListener());
         mMap.setOnInfoWindowClickListener(this.getOnInfoWindowClickListener());
 
-        this.centerMapCameraOnMyPosition();
-        this.updateMarkersOnMap();
-
-        final Location lastKnownLocation = locationManager.getLastKnownLocation(locationManager.getBestProvider(locationCriteria, true));
         this.compassMarker = mMap.addMarker(new MarkerOptions()
-                .position(new LatLng(lastKnownLocation.getLatitude(), lastKnownLocation.getLongitude()))
+                .position(new LatLng(location.getLatitude(), location.getLongitude()))
                 .icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_compas_arrow))
         );
+
+        this.centerMapCameraOnMyPosition();
+        this.updateMarkersOnMap();
 
         this.setOnCompasEvent(new CompassFragmentActivity.CompasEventListener() {
             private TextView azimuth_tv = (TextView) findViewById(R.id.debug_azimuth_info);
@@ -162,6 +161,13 @@ public class MapsActivity extends CompassFragmentActivity
                 azimuth_tv.setText(String.format("azimuth : %s°", (int) azimuth));
             }
         });
+    }
+
+    @Override
+    protected void onFirstLocationChanged(Location location) {
+        super.onFirstLocationChanged(location);
+
+
     }
 
     /**

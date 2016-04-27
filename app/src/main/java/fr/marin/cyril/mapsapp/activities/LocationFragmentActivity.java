@@ -43,7 +43,7 @@ public class LocationFragmentActivity extends FragmentActivity
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED)
             return;
 
-        this.location = locationManager.getLastKnownLocation(locationManager.getBestProvider(locationCriteria, true));
+        this.location = locationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
         this.locationManager.requestLocationUpdates(locationManager.getBestProvider(locationCriteria, true), LOCATION_UPDATE_TIME, LOCATION_UPDATE_DISTANCE, this);
     }
 
@@ -63,6 +63,7 @@ public class LocationFragmentActivity extends FragmentActivity
 
     @Override
     public void onLocationChanged(Location location) {
+        if (this.location == null) onFirstLocationChanged(location);
         this.location = location;
         this.geoField = new GeomagneticField(
                 (float) location.getLatitude(),
@@ -70,6 +71,10 @@ public class LocationFragmentActivity extends FragmentActivity
                 (float) location.getAltitude(),
                 System.currentTimeMillis()
         );
+    }
+
+    protected void onFirstLocationChanged(Location location) {
+
     }
 
     @Override

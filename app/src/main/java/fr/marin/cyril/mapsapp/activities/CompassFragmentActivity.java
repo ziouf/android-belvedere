@@ -42,7 +42,6 @@ public class CompassFragmentActivity extends LocationFragmentActivity
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         this.sensorManager = (SensorManager) getSystemService(SENSOR_SERVICE);
     }
 
@@ -57,8 +56,8 @@ public class CompassFragmentActivity extends LocationFragmentActivity
         super.onResume();
         if (!isCompassCompatible()) return;
 
-        this.sensorManager.registerListener(this, sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER), SensorManager.SENSOR_DELAY_GAME);
-        this.sensorManager.registerListener(this, sensorManager.getDefaultSensor(Sensor.TYPE_MAGNETIC_FIELD), SensorManager.SENSOR_DELAY_GAME);
+        this.sensorManager.registerListener(this, sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER), SensorManager.SENSOR_DELAY_NORMAL);
+        this.sensorManager.registerListener(this, sensorManager.getDefaultSensor(Sensor.TYPE_MAGNETIC_FIELD), SensorManager.SENSOR_DELAY_FASTEST);
     }
 
     @Override
@@ -85,6 +84,7 @@ public class CompassFragmentActivity extends LocationFragmentActivity
         if ((lastUpdate + 1000) > System.currentTimeMillis()) return;
         lastUpdate = System.currentTimeMillis();
 
+        if (location == null) return;
         if (location.getExtras() == null) location.setExtras(new Bundle());
         Bundle bundle = location.getExtras();
         bundle.putFloat(KEY_AZIMUTH, data[AZIMUTH]);

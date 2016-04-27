@@ -32,6 +32,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_vertical"
         android:background="@color/background_black"
+        android:elevation="4dp"
         android:textColor="#ffffffff"
         />
 

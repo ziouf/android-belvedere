@@ -53,10 +53,6 @@
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:theme="@android:style/Theme.DeviceDefault.NoActionBar.Fullscreen" />
 
-        <service
-            android:name=".services.SensorService"
-            android:enabled="true" />
-
     </application>
 
 </manifest>

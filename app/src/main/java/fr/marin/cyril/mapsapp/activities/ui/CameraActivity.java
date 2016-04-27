@@ -13,7 +13,6 @@ import java.util.Locale;
 import fr.marin.cyril.mapsapp.R;
 import fr.marin.cyril.mapsapp.activities.CompassFragmentActivity;
 import fr.marin.cyril.mapsapp.camera.Camera;
-import fr.marin.cyril.mapsapp.services.SensorService;
 import fr.marin.cyril.mapsapp.tools.Utils;
 
 /**
@@ -78,8 +77,8 @@ public class CameraActivity extends CompassFragmentActivity {
         double lat = location.getLatitude();
         double lng = location.getLongitude();
         double alt = location.getAltitude();
-        float azimuth = location.getExtras().getFloat(SensorService.AZIMUTH);
-        float pitch = location.getExtras().getFloat(SensorService.PITCH);
+        float azimuth = location.getExtras().getFloat(CompassFragmentActivity.KEY_AZIMUTH);
+        float pitch = location.getExtras().getFloat(CompassFragmentActivity.KEY_PITCH);
 
         cameraTextView.setText(String.format(Locale.getDefault(), s, lat, lng,
                 alt, azimuth, Utils.getDirectionFromMinus180to180Degrees(azimuth), pitch));
