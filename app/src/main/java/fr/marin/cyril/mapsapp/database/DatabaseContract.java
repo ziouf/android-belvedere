@@ -6,7 +6,7 @@ import android.provider.BaseColumns;
  * Created by cscm6014 on 30/03/2016.
  */
 final class DatabaseContract {
-    public static final int DATABASE_VERSION = 1;
+    public static final int DATABASE_VERSION = 3;
     public static final String DATABASE_NAME = "database.db";
 
     public static final String TEXT_TYPE = " TEXT";
@@ -27,22 +27,39 @@ final class DatabaseContract {
         public static final String COLUMN_NAME_ALTITUDE = "altitude";
 
         public static final String CREATE_TABLE =
-                "CREATE TABLE " + MarkerEntry.TABLE_NAME + " (" +
-                        MarkerEntry._ID + " INTEGER PRIMARY KEY," +
-                        MarkerEntry.COLUMN_NAME_TITLE + TEXT_TYPE + UNIQUE + COMMA_SEP +
-                        MarkerEntry.COLUMN_NAME_URL + TEXT_TYPE + UNIQUE + COMMA_SEP +
-                        MarkerEntry.COLUMN_NAME_LATITUDE + NUMBER_TYPE + COMMA_SEP +
-                        MarkerEntry.COLUMN_NAME_LONGITUDE + NUMBER_TYPE + COMMA_SEP +
-                        MarkerEntry.COLUMN_NAME_ALTITUDE + NUMBER_TYPE +
+                "CREATE TABLE " + TABLE_NAME + " (" +
+                        _ID + " INTEGER PRIMARY KEY," +
+                        COLUMN_NAME_TITLE + TEXT_TYPE + UNIQUE + COMMA_SEP +
+                        COLUMN_NAME_URL + TEXT_TYPE + UNIQUE + COMMA_SEP +
+                        COLUMN_NAME_LATITUDE + NUMBER_TYPE + COMMA_SEP +
+                        COLUMN_NAME_LONGITUDE + NUMBER_TYPE + COMMA_SEP +
+                        COLUMN_NAME_ALTITUDE + NUMBER_TYPE +
                         " )";
 
         public static final String DROP_TABLE =
-                "DROP TABLE IF EXISTS " + MarkerEntry.TABLE_NAME;
+                "DROP TABLE IF EXISTS " + TABLE_NAME;
 
         public static final String CREATE_INDEX_LAT_LNG =
-                "CREATE INDEX IF NOT EXISTS index_lat_lng ON " + MarkerEntry.TABLE_NAME + "(" +
-                        MarkerEntry.COLUMN_NAME_LATITUDE + COMMA_SEP +
-                        MarkerEntry.COLUMN_NAME_LONGITUDE + ")";
+                "CREATE INDEX IF NOT EXISTS index_lat_lng ON " + TABLE_NAME + "(" +
+                        COLUMN_NAME_LATITUDE + COMMA_SEP +
+                        COLUMN_NAME_LONGITUDE + ")";
+
+    }
+
+    public static abstract class KmlEntry implements BaseColumns {
+        public static final String TABLE_NAME = "kml";
+
+        public static final String COLUMN_NAME_KEY = "key";
+        public static final String COLUMN_NAME_VALUE = "value";
+
+        public static final String CREATE_TABLE =
+                "CREATE TABLE " + TABLE_NAME + " (" +
+                        _ID + " INTEGER PRIMARY KEY," +
+                        COLUMN_NAME_KEY + TEXT_TYPE + UNIQUE + COMMA_SEP +
+                        COLUMN_NAME_VALUE + TEXT_TYPE + UNIQUE + ")";
+
+        public static final String DROP_TABLE =
+                "DROP TABLE IF EXISTS " + TABLE_NAME;
 
     }
 

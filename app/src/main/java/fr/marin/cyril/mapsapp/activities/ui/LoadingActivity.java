@@ -57,8 +57,7 @@ public class LoadingActivity extends Activity
             }
 
         } else {
-
-            (new DbInitAsyncTask()).execute();
+            this.start();
         }
     }
 
@@ -82,8 +81,12 @@ public class LoadingActivity extends Activity
                 Toast.makeText(this, "La permission CAMERA est necessaire pour utiliser la fonction RA", Toast.LENGTH_SHORT).show();
         }
 
-        (new DbInitAsyncTask()).execute();
+        this.start();
 
+    }
+
+    private void start() {
+        (new DbInitAsyncTask()).execute();
     }
 
     private class DbInitAsyncTask extends AsyncTask<String, Integer, Boolean> {
@@ -97,7 +100,8 @@ public class LoadingActivity extends Activity
 
         @Override
         protected Boolean doInBackground(String[] params) {
-            (new DatabaseHelper(getApplicationContext())).initDataIfNeeded();
+            DatabaseHelper db = new DatabaseHelper(getApplicationContext());
+            db.initDataIfNeeded();
             return null;
         }
 

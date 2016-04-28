@@ -2,6 +2,13 @@ package fr.marin.cyril.mapsapp.tools;
 
 import android.content.Context;
 import android.content.pm.PackageManager;
+import android.util.Log;
+
+import java.io.BufferedInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 
 /**
  * Created by CSCM6014 on 13/04/2016.
@@ -75,5 +82,26 @@ public class Utils {
         }
 
         return null;
+    }
+
+    public static String getSHA1FromInputStream(InputStream is) {
+        StringBuilder sb = new StringBuilder();
+
+        try {
+            MessageDigest digest = MessageDigest.getInstance("SHA-1");
+            BufferedInputStream bis = new BufferedInputStream(is);
+            byte[] buffer = new byte[4096];
+            while (bis.read(buffer) != -1) {
+                digest.update(buffer);
+            }
+
+            for (byte b : digest.digest())
+                sb.append(String.format("%02x", b));
+
+        } catch (NoSuchAlgorithmException | IOException e) {
+            Log.e("MessageDigest", e.getMessage());
+        }
+
+        return sb.toString();
     }
 }

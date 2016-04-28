@@ -8,16 +8,16 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 import com.google.android.gms.maps.model.LatLng;
 
-import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.HashSet;
+import java.util.HashMap;
 
 import fr.marin.cyril.mapsapp.R;
 import fr.marin.cyril.mapsapp.kml.model.Coordinates;
 import fr.marin.cyril.mapsapp.kml.model.Placemark;
 import fr.marin.cyril.mapsapp.kml.parser.KmlParser;
 import fr.marin.cyril.mapsapp.tools.Area;
+import fr.marin.cyril.mapsapp.tools.Utils;
 
 /**
  * Created by cscm6014 on 30/03/2016.
@@ -32,31 +32,40 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        // Create table
+        // Create Settings table
+        db.execSQL(DatabaseContract.KmlEntry.CREATE_TABLE);
+
+        // Create Markers table
         db.execSQL(DatabaseContract.MarkerEntry.CREATE_TABLE);
-        // Create indexes
+        // Create Markers indexes
         db.execSQL(DatabaseContract.MarkerEntry.CREATE_INDEX_LAT_LNG);
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         if (oldVersion != newVersion) {
+            db.execSQL(DatabaseContract.KmlEntry.DROP_TABLE);
             db.execSQL(DatabaseContract.MarkerEntry.DROP_TABLE);
             onCreate(db);
         }
     }
 
     public void initDataIfNeeded() {
-        if (this.count() > 0) return;
-
-        Collection<InputStream> kmlfiles = new HashSet<>();
+        HashMap<String, Integer> kmlfiles = new HashMap<>();
         // Ajouter ci dessous la liste des fichiers de ressource
-        kmlfiles.add(context.getResources().openRawResource(R.raw.sommets_des_alpes_francaises));
-        kmlfiles.add(context.getResources().openRawResource(R.raw.sommets_des_pyrenees));
-        kmlfiles.add(context.getResources().openRawResource(R.raw.sommets_du_massif_central));
-        kmlfiles.add(context.getResources().openRawResource(R.raw.sommets_du_massif_des_vosges));
+        kmlfiles.put("sommets_des_alpes_francaises", R.raw.sommets_des_alpes_francaises);// "963f9abb35f78339886eb3ebd43bcbae95a0a129")
+        kmlfiles.put("sommets_des_pyrenees", R.raw.sommets_des_pyrenees); // "25fa96ca2f869004315750b429635f7f13c8c8da")
+        kmlfiles.put("sommets_du_massif_central", R.raw.sommets_du_massif_central);// "a02a91fe25a99453870d8109dbd1c252634b6047")
+        kmlfiles.put("sommets_du_massif_des_vosges", R.raw.sommets_du_massif_des_vosges);// "31a2a76ad41497d164fd13156b6007875c379fd1")
 
-        this.insertAll(new KmlParser().parseAll(kmlfiles));
+        for (String key : kmlfiles.keySet()) {
+            String savedHash = this.findKml(key);
+            String hash = Utils.getSHA1FromInputStream(context.getResources().openRawResource(kmlfiles.get(key)));
+            if (!hash.equals(savedHash)) {
+                this.insertAll(new KmlParser().parse(context.getResources().openRawResource(kmlfiles.get(key))));
+                this.insertKml(key, hash);
+            }
+        }
     }
 
     public void insert(Placemark marker) {
@@ -152,7 +161,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
         c.close();
         return marker;
-        }
+    }
 
     public Long count() {
         SQLiteDatabase db = this.getReadableDatabase();
@@ -162,5 +171,36 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         c.close();
 
         return count;
+    }
+
+    public String findKml(String key) {
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        Boolean distinct = true;
+        String[] columns = new String[]{
+                DatabaseContract.KmlEntry.COLUMN_NAME_VALUE
+        };
+        String select = DatabaseContract.KmlEntry.COLUMN_NAME_KEY + " = ? ";
+        String[] args = new String[]{key};
+
+        Cursor c = db.query(distinct, DatabaseContract.KmlEntry.TABLE_NAME, columns, select, args, null, null, null, null);
+
+        if (c.getCount() == 0) return null;
+
+        c.moveToFirst();
+        String value = c.getString(0);
+        c.close();
+
+        return value;
+    }
+
+    public void insertKml(String key, String value) {
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        ContentValues values = new ContentValues();
+        values.put(DatabaseContract.KmlEntry.COLUMN_NAME_KEY, key);
+        values.put(DatabaseContract.KmlEntry.COLUMN_NAME_VALUE, value);
+
+        db.insert(DatabaseContract.KmlEntry.TABLE_NAME, null, values);
     }
 }

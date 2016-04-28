@@ -1,5 +1,6 @@
 package fr.marin.cyril.mapsapp.kml.parser;
 
+import android.util.Log;
 import android.util.Xml;
 
 import com.google.android.gms.maps.model.LatLng;
@@ -36,34 +37,34 @@ public class KmlParser {
 
     public Collection<Placemark> parseAll(Collection<InputStream> inputStreams) {
 
-        try {
-            for (InputStream in : inputStreams)
-                parse(in);
-
-        } catch (XmlPullParserException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        for (InputStream in : inputStreams)
+            parse(in);
 
         return markers;
     }
 
-    public void parse(InputStream in) throws XmlPullParserException, IOException {
-
+    public Collection<Placemark> parse(InputStream in) {
         try {
-            XmlPullParser parser = Xml.newPullParser();
-            parser.setFeature(XmlPullParser.FEATURE_PROCESS_NAMESPACES, false);
+            try {
+                XmlPullParser parser = Xml.newPullParser();
+                parser.setFeature(XmlPullParser.FEATURE_PROCESS_NAMESPACES, false);
 
-            parser.setInput(in, null);
+                parser.setInput(in, null);
 
-            parser.nextTag();
+                parser.nextTag();
 
-            readFeed(parser);
+                readFeed(parser);
 
-        } finally {
-            in.close();
+            } catch (XmlPullParserException e) {
+                e.printStackTrace();
+            } finally {
+                in.close();
+            }
+        } catch (IOException e) {
+            Log.e("PARSER", e.getMessage());
         }
+
+        return markers;
     }
 
     private void readFeed(XmlPullParser parser)
