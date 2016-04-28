@@ -12,26 +12,23 @@
         <item name="android:windowTranslucentNavigation">@bool/translucentNavBar</item>
     </style>
 
+    <style name="MapsTheme.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
     <style name="CameraTheme" parent="android:Theme.DeviceDefault.NoActionBar.Fullscreen">
 
     </style>
 
     <style name="SplashTheme" parent="android:Theme.DeviceDefault.NoActionBar.Fullscreen">
         <item name="android:textColor">@color/loading_text</item>
-        <item name="android:windowBackground">@drawable/bg_splash_screen</item>
+        <item name="android:windowBackground">@drawable/splash_screen</item>
+        <item name="android:windowTranslucentNavigation">true</item>
     </style>
 
-    <style name="debug_tv">
+    <style name="DebugTheme">
         <item name="android:visibility">gone</item>
     </style>
-
-    <style name="MapsTheme.NoActionBar">
-        <item name="windowActionBar">false</item>
-        <item name="windowNoTitle">true</item>
-    </style>
-
-    <style name="MapsTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
-
-    <style name="MapsTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
 </resources>

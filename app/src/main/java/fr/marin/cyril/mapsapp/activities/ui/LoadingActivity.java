@@ -11,6 +11,7 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
+import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -27,18 +28,25 @@ public class LoadingActivity extends Activity
             Manifest.permission.ACCESS_FINE_LOCATION,
             Manifest.permission.CAMERA
     };
-    private DbInitAsyncTask dbInit;
+    private static final int SYSTEM_UI_VISIBILITY = View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY
+            | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
+            | View.SYSTEM_UI_FLAG_FULLSCREEN
+            | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION;
+
+    private View decorView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        decorView = getWindow().getDecorView();
+        decorView.setSystemUiVisibility(SYSTEM_UI_VISIBILITY);
+
         this.setContentView(R.layout.activity_loading);
     }
 
     @Override
     protected void onPostCreate(@Nullable Bundle savedInstanceState) {
         super.onPostCreate(savedInstanceState);
-        this.dbInit = new DbInitAsyncTask();
 
         // Check permissions
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED
@@ -50,19 +58,16 @@ public class LoadingActivity extends Activity
 
         } else {
 
-            this.dbInit.execute();
+            (new DbInitAsyncTask()).execute();
         }
     }
 
     @Override
-    protected void onResume() {
-        super.onResume();
-
-    }
-
-    @Override
-    protected void onPause() {
-        super.onPause();
+    public void onWindowFocusChanged(boolean hasFocus) {
+        super.onWindowFocusChanged(hasFocus);
+        if (hasFocus) {
+            decorView.setSystemUiVisibility(SYSTEM_UI_VISIBILITY);
+        }
     }
 
     @Override
@@ -77,29 +82,28 @@ public class LoadingActivity extends Activity
                 Toast.makeText(this, "La permission CAMERA est necessaire pour utiliser la fonction RA", Toast.LENGTH_SHORT).show();
         }
 
-        this.dbInit.execute();
+        (new DbInitAsyncTask()).execute();
 
     }
 
-    private class DbInitAsyncTask extends AsyncTask {
-        private DatabaseHelper db = new DatabaseHelper(LoadingActivity.this);
-        private TextView loadingInfoTextView = (TextView) LoadingActivity.this.findViewById(R.id.loading_info);
+    private class DbInitAsyncTask extends AsyncTask<String, Integer, Boolean> {
+        private TextView loadingInfoTextView;
 
         @Override
         protected void onPreExecute() {
+            this.loadingInfoTextView = (TextView) LoadingActivity.this.findViewById(R.id.loading_info);
             this.loadingInfoTextView.setText(R.string.loading_database_init);
         }
 
         @Override
-        protected Object doInBackground(Object[] params) {
-            this.db.initDataIfNeeded();
+        protected Boolean doInBackground(String[] params) {
+            (new DatabaseHelper(getApplicationContext())).initDataIfNeeded();
             return null;
         }
 
         @Override
-        protected void onPostExecute(Object o) {
+        protected void onPostExecute(Boolean result) {
             this.loadingInfoTextView.setText(R.string.loading_application_openning);
-
             LoadingActivity.this.startActivity(new Intent(LoadingActivity.this, MapsActivity.class));
             LoadingActivity.this.finish();
         }

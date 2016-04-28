@@ -15,14 +15,14 @@
 
     <TextView
         android:id="@+id/debug_location_info"
-        style="@style/debug_tv"
+        style="@style/DebugTheme"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp" />
 
     <TextView
         android:id="@+id/debug_azimuth_info"
-        style="@style/debug_tv"
+        style="@style/DebugTheme"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/debug_location_info" />

@@ -3,6 +3,7 @@
     <color name="colorPrimary">#14a35c</color>
     <color name="colorPrimaryDark">#1a6942</color>
     <color name="colorAccent">#3E9369</color>
+    <color name="splashLogo">#c83e9369</color>
 
     <color name="background_black">#000000</color>
     <color name="infobulle_text">#101010</color>

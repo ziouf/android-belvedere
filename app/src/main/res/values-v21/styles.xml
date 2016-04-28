@@ -6,4 +6,11 @@
         <item name="android:windowDrawsSystemBarBackgrounds">true</item>
         <item name="android:statusBarColor">@android:color/transparent</item>
     </style>
+
+    <style name="SplashTheme" parent="android:Theme.DeviceDefault.NoActionBar.Fullscreen">
+        <item name="android:textColor">@color/loading_text</item>
+        <item name="android:windowBackground">@drawable/splash_screen</item>
+        <item name="android:navigationBarColor">@color/wallet_bright_foreground_holo_dark</item>
+    </style>
+
 </resources>

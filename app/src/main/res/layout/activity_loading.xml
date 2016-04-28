@@ -4,13 +4,19 @@
     android:layout_height="match_parent"
     tools:context=".activities.ui.LoadingActivity">
 
+    <!--    <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:src="@drawable/splash_screen"
+            />-->
+
     <TextView
         android:id="@+id/loading_info"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
         android:text="@string/loading_database_init"
-        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textAppearance="?android:attr/textAppearanceSmall"
         />
 
 </RelativeLayout>
