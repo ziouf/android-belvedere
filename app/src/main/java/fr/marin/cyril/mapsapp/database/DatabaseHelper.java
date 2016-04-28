@@ -79,6 +79,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         values.put(DatabaseContract.MarkerEntry.COLUMN_NAME_ALTITUDE, marker.getCoordinates().getElevation());
 
         db.insert(DatabaseContract.MarkerEntry.TABLE_NAME, null, values);
+        db.close();
     }
 
     public void insertAll(Collection<Placemark> markers) {
@@ -106,6 +107,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
         Cursor c = db.query(distinct, DatabaseContract.MarkerEntry.TABLE_NAME, columns, select, args,
                 null, null, DatabaseContract.MarkerEntry.COLUMN_NAME_ALTITUDE + " DESC", "25");
+
+        db.close();
 
         c.moveToFirst();
         while (!c.isAfterLast()) {
@@ -150,6 +153,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         Cursor c = db.query(distinct, DatabaseContract.MarkerEntry.TABLE_NAME, columns, select, args,
                 null, null, null, null);
 
+        db.close();
+
         c.moveToFirst();
         Placemark marker = new Placemark();
         marker.setTitle(c.getString(0));
@@ -166,6 +171,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public Long count() {
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor c = db.rawQuery("SELECT COUNT(*) FROM " + DatabaseContract.MarkerEntry.TABLE_NAME, null);
+        db.close();
         c.moveToFirst();
         Long count = c.getLong(0);
         c.close();
@@ -184,6 +190,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         String[] args = new String[]{key};
 
         Cursor c = db.query(distinct, DatabaseContract.KmlEntry.TABLE_NAME, columns, select, args, null, null, null, null);
+        db.close();
 
         if (c.getCount() == 0) return null;
 
@@ -202,5 +209,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         values.put(DatabaseContract.KmlEntry.COLUMN_NAME_VALUE, value);
 
         db.insert(DatabaseContract.KmlEntry.TABLE_NAME, null, values);
+        db.close();
     }
 }
