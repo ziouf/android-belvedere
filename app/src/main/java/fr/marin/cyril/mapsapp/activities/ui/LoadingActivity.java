@@ -29,9 +29,7 @@ public class LoadingActivity extends Activity
             Manifest.permission.CAMERA
     };
     private static final int SYSTEM_UI_VISIBILITY = View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY
-            | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
-            | View.SYSTEM_UI_FLAG_FULLSCREEN
-            | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION;
+            | View.SYSTEM_UI_FLAG_FULLSCREEN;
 
     private View decorView;
 
