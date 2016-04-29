@@ -130,24 +130,26 @@ public class MapsActivity extends CompassFragmentActivity
         mMap.setOnMarkerClickListener(this.getOnMarkerClickListener());
         mMap.setOnInfoWindowClickListener(this.getOnInfoWindowClickListener());
 
-        this.compassMarker = mMap.addMarker(new MarkerOptions()
-                .position(new LatLng(location.getLatitude(), location.getLongitude()))
-                .icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_compas_arrow))
-        );
+        if (Utils.isCompassAvailable(getApplicationContext())) {
+            this.compassMarker = mMap.addMarker(new MarkerOptions()
+                    .position(new LatLng(location.getLatitude(), location.getLongitude()))
+                    .icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_compas_arrow))
+            );
+
+            this.setOnCompasEvent(new CompassFragmentActivity.CompasEventListener() {
+                private TextView azimuth_tv = (TextView) findViewById(R.id.debug_azimuth_info);
+
+                @Override
+                public void onSensorChanged(float[] data) {
+                    float azimuth = getAzimuth();
+                    compassMarker.setRotation(azimuth);
+                    azimuth_tv.setText(String.format("azimuth : %s°", (int) azimuth));
+                }
+            });
+        }
 
         this.centerMapCameraOnMyPosition();
         this.updateMarkersOnMap();
-
-        this.setOnCompasEvent(new CompassFragmentActivity.CompasEventListener() {
-            private TextView azimuth_tv = (TextView) findViewById(R.id.debug_azimuth_info);
-
-            @Override
-            public void onSensorChanged(float[] data) {
-                float azimuth = getAzimuth();
-                compassMarker.setRotation(azimuth);
-                azimuth_tv.setText(String.format("azimuth : %s°", (int) azimuth));
-            }
-        });
     }
 
     /**
