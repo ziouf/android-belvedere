@@ -24,6 +24,7 @@ import fr.marin.cyril.mapsapp.tools.Utils;
  * Created by cscm6014 on 30/03/2016.
  */
 public class DatabaseHelper extends SQLiteOpenHelper {
+    private static final String TAG = "DatabaseHelper";
     private final Context context;
 
     public DatabaseHelper(Context context) {
@@ -33,22 +34,22 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        // Create KML table
+        // Create KML Hash table + index
         db.execSQL(DatabaseContract.KmlHashEntry.CREATE_TABLE);
-        // Create KML indexes
-        db.execSQL(DatabaseContract.KmlHashEntry.CREATE_INDEX_KEY);
+        db.execSQL(DatabaseContract.KmlHashEntry.CREATE_INDEX);
 
-        // Create Markers table
+        // Create Markers table + index
         db.execSQL(DatabaseContract.MarkerEntry.CREATE_TABLE);
-        // Create Markers indexes
-        db.execSQL(DatabaseContract.MarkerEntry.CREATE_INDEX_LAT_LNG);
+        db.execSQL(DatabaseContract.MarkerEntry.CREATE_INDEX);
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         if (oldVersion != newVersion) {
             db.execSQL(DatabaseContract.KmlHashEntry.DROP_TABLE);
+            db.execSQL(DatabaseContract.KmlHashEntry.DROP_INDEX);
             db.execSQL(DatabaseContract.MarkerEntry.DROP_TABLE);
+            db.execSQL(DatabaseContract.MarkerEntry.DROP_INDEX);
             onCreate(db);
         }
     }
@@ -62,7 +63,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             String hash = Utils.getSHA1FromResource(context, id);
 
             if (!hash.equals(this.findKmlHash(key))) {
-                Log.i("KML FILES", String.format("insertion du fichier : %s (%s)", key, hash));
+                Log.i(TAG, String.format("insertion du fichier : %s (%s)", key, hash));
                 this.insertAllPlacemark(new KmlParser(context).parse(id));
                 this.insertKmlHash(key, hash);
             }
