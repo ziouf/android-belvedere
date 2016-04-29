@@ -46,10 +46,12 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         if (oldVersion != newVersion) {
-            db.execSQL(DatabaseContract.KmlHashEntry.DROP_TABLE);
             db.execSQL(DatabaseContract.KmlHashEntry.DROP_INDEX);
-            db.execSQL(DatabaseContract.MarkerEntry.DROP_TABLE);
+            db.execSQL(DatabaseContract.KmlHashEntry.DROP_TABLE);
+
             db.execSQL(DatabaseContract.MarkerEntry.DROP_INDEX);
+            db.execSQL(DatabaseContract.MarkerEntry.DROP_TABLE);
+
             onCreate(db);
         }
     }
