@@ -11,7 +11,7 @@ import android.widget.TextView;
 import java.util.Locale;
 
 import fr.marin.cyril.mapsapp.R;
-import fr.marin.cyril.mapsapp.activities.CompassFragmentActivity;
+import fr.marin.cyril.mapsapp.activities.CompassActivity;
 import fr.marin.cyril.mapsapp.camera.Camera;
 import fr.marin.cyril.mapsapp.tools.Utils;
 
@@ -20,7 +20,7 @@ import fr.marin.cyril.mapsapp.tools.Utils;
  * status bar and navigation/system bar) with user interaction.
  */
 @TargetApi(Build.VERSION_CODES.LOLLIPOP)
-public class CameraActivity extends CompassFragmentActivity {
+public class CameraActivity extends CompassActivity {
 
     private Camera camera;
 
@@ -35,7 +35,7 @@ public class CameraActivity extends CompassFragmentActivity {
         // Init Camera
         this.camera = Camera.getCameraInstance(this);
 
-        this.setOnCompasEvent(new CompassFragmentActivity.CompasEventListener() {
+        this.setOnCompasEvent(new CompassActivity.CompasEventListener() {
             @Override
             public void onSensorChanged(float[] data) {
                 updateTextView();
@@ -77,8 +77,8 @@ public class CameraActivity extends CompassFragmentActivity {
         double lat = location.getLatitude();
         double lng = location.getLongitude();
         double alt = location.getAltitude();
-        float azimuth = location.getExtras().getFloat(CompassFragmentActivity.KEY_AZIMUTH);
-        float pitch = location.getExtras().getFloat(CompassFragmentActivity.KEY_PITCH);
+        float azimuth = location.getExtras().getFloat(CompassActivity.KEY_AZIMUTH);
+        float pitch = location.getExtras().getFloat(CompassActivity.KEY_PITCH);
 
         cameraTextView.setText(String.format(Locale.getDefault(), s, lat, lng,
                 alt, azimuth, Utils.getDirectionFromMinus180to180Degrees(azimuth), pitch));

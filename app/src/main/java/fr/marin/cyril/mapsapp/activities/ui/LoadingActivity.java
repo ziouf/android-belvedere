@@ -4,7 +4,6 @@ import android.Manifest;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -12,6 +11,7 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.view.View;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -84,30 +84,34 @@ public class LoadingActivity extends Activity
     }
 
     private void start() {
-        (new DbInitAsyncTask()).execute();
-    }
+        DatabaseHelper.InitDBTask initDBTask = new DatabaseHelper.InitDBTask(getApplicationContext()) {
+            private TextView loadingInfoTextView;
+            private ProgressBar progressBar;
 
-    private class DbInitAsyncTask extends AsyncTask<String, Integer, Boolean> {
-        private TextView loadingInfoTextView;
+            @Override
+            protected void onPreExecute() {
+                super.onPreExecute();
+                this.progressBar = (ProgressBar) LoadingActivity.this.findViewById(R.id.loading_progress);
+                this.loadingInfoTextView = (TextView) LoadingActivity.this.findViewById(R.id.loading_info);
+                this.loadingInfoTextView.setText(R.string.loading_database_init);
+            }
 
-        @Override
-        protected void onPreExecute() {
-            this.loadingInfoTextView = (TextView) LoadingActivity.this.findViewById(R.id.loading_info);
-            this.loadingInfoTextView.setText(R.string.loading_database_init);
-        }
+            @Override
+            protected void onPostExecute(Boolean aBoolean) {
+                super.onPostExecute(aBoolean);
+                this.loadingInfoTextView.setText(R.string.loading_application_openning);
+                LoadingActivity.this.startActivity(new Intent(LoadingActivity.this, MapsActivity.class));
+                LoadingActivity.this.finish();
+            }
 
-        @Override
-        protected Boolean doInBackground(String[] params) {
-            DatabaseHelper db = new DatabaseHelper(getApplicationContext());
-            db.initDataIfNeeded();
-            return null;
-        }
+            @Override
+            protected void onProgressUpdate(Integer... values) {
+                super.onProgressUpdate(values);
+                this.progressBar.setProgress(values[0]);
+                this.progressBar.setMax(values[1]);
+            }
+        };
 
-        @Override
-        protected void onPostExecute(Boolean result) {
-            this.loadingInfoTextView.setText(R.string.loading_application_openning);
-            LoadingActivity.this.startActivity(new Intent(LoadingActivity.this, MapsActivity.class));
-            LoadingActivity.this.finish();
-        }
+        initDBTask.execute();
     }
 }

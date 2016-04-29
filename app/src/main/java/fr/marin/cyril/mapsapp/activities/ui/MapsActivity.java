@@ -27,13 +27,12 @@ import java.util.Collection;
 import java.util.HashSet;
 
 import fr.marin.cyril.mapsapp.R;
-import fr.marin.cyril.mapsapp.activities.CompassFragmentActivity;
+import fr.marin.cyril.mapsapp.activities.CompassActivity;
 import fr.marin.cyril.mapsapp.database.DatabaseHelper;
 import fr.marin.cyril.mapsapp.kml.model.Placemark;
 import fr.marin.cyril.mapsapp.tools.Area;
-import fr.marin.cyril.mapsapp.tools.Utils;
 
-public class MapsActivity extends CompassFragmentActivity
+public class MapsActivity extends CompassActivity
         implements OnMapReadyCallback, GoogleMap.OnMapLoadedCallback, GoogleMap.OnCameraChangeListener {
 
     private final Collection<Marker> markersShown = new HashSet<>();
@@ -55,7 +54,7 @@ public class MapsActivity extends CompassFragmentActivity
         FloatingActionButton cameraButton = (FloatingActionButton) this.findViewById(R.id.camera_button);
         FloatingActionButton myPosButton = (FloatingActionButton) this.findViewById(R.id.myPosition_button);
 
-        if (!Utils.isCompassAvailable(this)) cameraButton.setVisibility(View.GONE);
+        if (!isCompassCompatible()) cameraButton.setVisibility(View.GONE);
 
         // Désactivation du module AR si api < LOLLIPOP ou si Permission CAMERA  refusée
         if (!getPackageManager().hasSystemFeature(PackageManager.FEATURE_CAMERA)
@@ -130,26 +129,29 @@ public class MapsActivity extends CompassFragmentActivity
         mMap.setOnMarkerClickListener(this.getOnMarkerClickListener());
         mMap.setOnInfoWindowClickListener(this.getOnInfoWindowClickListener());
 
-        if (Utils.isCompassAvailable(getApplicationContext())) {
-            this.compassMarker = mMap.addMarker(new MarkerOptions()
-                    .position(new LatLng(location.getLatitude(), location.getLongitude()))
-                    .icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_compas_arrow))
-            );
-
-            this.setOnCompasEvent(new CompassFragmentActivity.CompasEventListener() {
-                private TextView azimuth_tv = (TextView) findViewById(R.id.debug_azimuth_info);
-
-                @Override
-                public void onSensorChanged(float[] data) {
-                    float azimuth = getAzimuth();
-                    compassMarker.setRotation(azimuth);
-                    azimuth_tv.setText(String.format("azimuth : %s°", (int) azimuth));
-                }
-            });
-        }
-
+        this.initCompassMarkerIcon();
         this.centerMapCameraOnMyPosition();
         this.updateMarkersOnMap();
+    }
+
+    private void initCompassMarkerIcon() {
+        if (!isCompassCompatible()) return;
+
+        this.compassMarker = mMap.addMarker(new MarkerOptions()
+                .position(new LatLng(location.getLatitude(), location.getLongitude()))
+                .icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_compas_arrow))
+        );
+
+        this.setOnCompasEvent(new CompassActivity.CompasEventListener() {
+            private TextView azimuth_tv = (TextView) findViewById(R.id.debug_azimuth_info);
+
+            @Override
+            public void onSensorChanged(float[] data) {
+                float azimuth = getAzimuth();
+                compassMarker.setRotation(azimuth);
+                azimuth_tv.setText(String.format("azimuth : %s°", (int) azimuth));
+            }
+        });
     }
 
     /**

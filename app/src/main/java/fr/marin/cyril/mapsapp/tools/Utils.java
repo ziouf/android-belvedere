@@ -1,7 +1,6 @@
 package fr.marin.cyril.mapsapp.tools;
 
 import android.content.Context;
-import android.content.pm.PackageManager;
 import android.util.Log;
 
 import java.io.BufferedInputStream;
@@ -15,17 +14,6 @@ import java.security.NoSuchAlgorithmException;
  */
 public class Utils {
     private static final String TAG = "Utils";
-
-    /**
-     * Retourne true si le téléphone dispose des capteurs suffisants pour utiliser la Réalité Augmentée
-     *
-     * @return
-     */
-    public static boolean isCompassAvailable(Context context) {
-        PackageManager pm = context.getPackageManager();
-        return pm.hasSystemFeature(PackageManager.FEATURE_SENSOR_ACCELEROMETER)
-                && pm.hasSystemFeature(PackageManager.FEATURE_SENSOR_COMPASS);
-    }
 
     public static String getDirectionFrom0to360Degrees(float degrees) {
         if (degrees >= 360 - 22.5 || degrees < 22.5) {
@@ -108,6 +96,7 @@ public class Utils {
             while (bis.read(buffer) != -1) {
                 digest.update(buffer);
             }
+            bis.close();
 
             for (byte b : digest.digest())
                 sb.append(String.format("%02x", b));

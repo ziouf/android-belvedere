@@ -15,7 +15,7 @@ import android.support.v4.app.FragmentActivity;
 /**
  * Created by CSCM6014 on 27/04/2016.
  */
-public class LocationFragmentActivity extends FragmentActivity
+public class LocationActivity extends FragmentActivity
         implements LocationListener {
 
     private static final int LOCATION_UPDATE_TIME = 2000;

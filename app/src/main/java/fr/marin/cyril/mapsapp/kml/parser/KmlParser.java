@@ -32,42 +32,41 @@ public class KmlParser {
     private static final String POINT = "Point";
     private static final String DESCRIPTION = "description";
     private static final String COORDINATES = "coordinates";
+
     private final Context context;
-    private Collection<Placemark> markers = new HashSet<>();
 
     public KmlParser(Context context) {
         this.context = context;
     }
 
     public Collection<Placemark> parse(int id) {
-        return parse(context.getResources().openRawResource(id));
-    }
-
-    public Collection<Placemark> parse(InputStream in) {
-        try {
-            try {
-                XmlPullParser parser = Xml.newPullParser();
-                parser.setFeature(XmlPullParser.FEATURE_PROCESS_NAMESPACES, false);
-
-                parser.setInput(in, null);
-
-                parser.nextTag();
-
-                readFeed(parser);
-
-            } catch (XmlPullParserException e) {
-                Log.e(TAG, e.getMessage());
-            } finally {
-                in.close();
-            }
+        try (InputStream is = context.getResources().openRawResource(id)) {
+            return this.parse(is);
         } catch (IOException e) {
             Log.e(TAG, e.getMessage());
         }
-
-        return markers;
+        return null;
     }
 
-    private void readFeed(XmlPullParser parser)
+    public Collection<Placemark> parse(InputStream in) throws IOException {
+        Collection<Placemark> buffer = new HashSet<>();
+        try {
+            XmlPullParser parser = Xml.newPullParser();
+            parser.setFeature(XmlPullParser.FEATURE_PROCESS_NAMESPACES, false);
+
+            parser.setInput(in, null);
+
+            parser.nextTag();
+
+            readFeed(parser, buffer);
+
+        } catch (XmlPullParserException e) {
+            Log.e(TAG, e.getMessage());
+        }
+        return buffer;
+    }
+
+    private void readFeed(XmlPullParser parser, Collection<Placemark> buffer)
             throws IOException, XmlPullParserException {
 
         parser.require(XmlPullParser.START_TAG, ns, START_TAG);
@@ -78,15 +77,16 @@ public class KmlParser {
             String name = parser.getName();
 
             if (name.equals(DOCUMENT)) {
-                readDocument(parser);
+                readDocument(parser, buffer);
             } else {
                 skip(parser);
             }
-
         }
+
+        Log.i(TAG, String.format("Importation de %s Placemark en base", buffer.size()));
     }
 
-    private void readDocument(XmlPullParser parser)
+    private void readDocument(XmlPullParser parser, Collection<Placemark> buffer)
             throws IOException, XmlPullParserException {
 
         parser.require(XmlPullParser.START_TAG, ns, DOCUMENT);
@@ -97,7 +97,7 @@ public class KmlParser {
             String name = parser.getName();
 
             if (name.equalsIgnoreCase(PLACEMARK)) {
-                markers.add(readPlacemark(parser));
+                buffer.add(readPlacemark(parser));
             } else {
                 skip(parser);
             }

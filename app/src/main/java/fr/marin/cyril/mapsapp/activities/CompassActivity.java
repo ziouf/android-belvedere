@@ -11,7 +11,7 @@ import android.support.annotation.Nullable;
 /**
  * Created by CSCM6014 on 25/04/2016.
  */
-public class CompassFragmentActivity extends LocationFragmentActivity
+public class CompassActivity extends LocationActivity
         implements SensorEventListener {
     public static final int AZIMUTH = 0;
     public static final int PITCH = 1;
