@@ -57,10 +57,10 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         // Obtention des fichiers de resource
         TypedArray ta = context.getResources().obtainTypedArray(R.array.kml_array);
         for (int i = 0; i < ta.length(); ++i) {
-            String key = ta.getString(i);
             int id = ta.getResourceId(i, -1);
-
+            String key = ta.getString(i);
             String hash = Utils.getSHA1FromResource(context, id);
+
             if (!hash.equals(this.findKmlHash(key))) {
                 Log.i("KML FILES", String.format("insertion du fichier : %s (%s)", key, hash));
                 this.insertAllPlacemark(new KmlParser(context).parse(id));
