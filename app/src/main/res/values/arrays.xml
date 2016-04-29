@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <array name="kml_array">
+        <item>@raw/sommets_des_alpes_francaises</item>
+        <item>@raw/sommets_des_pyrenees</item>
+        <item>@raw/sommets_du_massif_central</item>
+        <item>@raw/sommets_du_massif_des_vosges</item>
+    </array>
+</resources>

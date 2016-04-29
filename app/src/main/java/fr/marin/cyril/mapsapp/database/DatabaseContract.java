@@ -6,7 +6,7 @@ import android.provider.BaseColumns;
  * Created by cscm6014 on 30/03/2016.
  */
 final class DatabaseContract {
-    public static final int DATABASE_VERSION = 3;
+    public static final int DATABASE_VERSION = 6;
     public static final String DATABASE_NAME = "database.db";
 
     public static final String TEXT_TYPE = " TEXT";
@@ -40,14 +40,13 @@ final class DatabaseContract {
                 "DROP TABLE IF EXISTS " + TABLE_NAME;
 
         public static final String CREATE_INDEX_LAT_LNG =
-                "CREATE INDEX IF NOT EXISTS index_lat_lng ON " + TABLE_NAME + "(" +
-                        COLUMN_NAME_LATITUDE + COMMA_SEP +
-                        COLUMN_NAME_LONGITUDE + ")";
+                "CREATE INDEX IF NOT EXISTS index_" + TABLE_NAME + "_lat_lng ON "
+                        + TABLE_NAME + "(" + COLUMN_NAME_LATITUDE + COMMA_SEP + COLUMN_NAME_LONGITUDE + ")";
 
     }
 
-    public static abstract class KmlEntry implements BaseColumns {
-        public static final String TABLE_NAME = "kml";
+    public static abstract class KmlHashEntry implements BaseColumns {
+        public static final String TABLE_NAME = "kmlHash";
 
         public static final String COLUMN_NAME_KEY = "key";
         public static final String COLUMN_NAME_VALUE = "value";
@@ -60,6 +59,10 @@ final class DatabaseContract {
 
         public static final String DROP_TABLE =
                 "DROP TABLE IF EXISTS " + TABLE_NAME;
+
+        public static final String CREATE_INDEX_KEY =
+                "CREATE INDEX IF NOT EXISTS index_" + TABLE_NAME + "_key ON "
+                        + TABLE_NAME + "(" + COLUMN_NAME_KEY + ")";
 
     }
 

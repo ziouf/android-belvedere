@@ -1,5 +1,6 @@
 package fr.marin.cyril.mapsapp.kml.parser;
 
+import android.content.Context;
 import android.util.Log;
 import android.util.Xml;
 
@@ -20,10 +21,9 @@ import fr.marin.cyril.mapsapp.kml.model.Placemark;
  * Created by cscm6014 on 30/03/2016.
  */
 public class KmlParser {
-
+    private static final String TAG = "KmlParser";
     // On n'utilise pas les namespaces
     private static final String ns = null;
-
     // Tags KML
     private static final String START_TAG = "kml";
     private static final String DOCUMENT = "Document";
@@ -32,15 +32,15 @@ public class KmlParser {
     private static final String POINT = "Point";
     private static final String DESCRIPTION = "description";
     private static final String COORDINATES = "coordinates";
-
+    private final Context context;
     private Collection<Placemark> markers = new HashSet<>();
 
-    public Collection<Placemark> parseAll(Collection<InputStream> inputStreams) {
+    public KmlParser(Context context) {
+        this.context = context;
+    }
 
-        for (InputStream in : inputStreams)
-            parse(in);
-
-        return markers;
+    public Collection<Placemark> parse(int id) {
+        return parse(context.getResources().openRawResource(id));
     }
 
     public Collection<Placemark> parse(InputStream in) {
@@ -56,12 +56,12 @@ public class KmlParser {
                 readFeed(parser);
 
             } catch (XmlPullParserException e) {
-                e.printStackTrace();
+                Log.e(TAG, e.getMessage());
             } finally {
                 in.close();
             }
         } catch (IOException e) {
-            Log.e("PARSER", e.getMessage());
+            Log.e(TAG, e.getMessage());
         }
 
         return markers;

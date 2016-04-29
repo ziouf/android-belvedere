@@ -164,7 +164,7 @@ public class MapsFragment extends CompassFragment
 
                 View v = getActivity().getLayoutInflater().inflate(R.layout.info_window, null);
 
-                Placemark m = db.findByLatLng(marker.getPosition());
+                Placemark m = db.findPlacemarkByLatLng(marker.getPosition());
 
                 TextView tvTitle = (TextView) v.findViewById(R.id.iw_title);
                 TextView tvAltitude = (TextView) v.findViewById(R.id.iw_altitude);
@@ -184,7 +184,7 @@ public class MapsFragment extends CompassFragment
         return new GoogleMap.OnInfoWindowClickListener() {
             @Override
             public void onInfoWindowClick(Marker marker) {
-                Placemark m = db.findByLatLng(marker.getPosition());
+                Placemark m = db.findPlacemarkByLatLng(marker.getPosition());
                 startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(m.getUrl())));
             }
         };
@@ -233,7 +233,7 @@ public class MapsFragment extends CompassFragment
             markersShown.removeAll(toRemove);
         }
 
-        for (Placemark m : db.findInArea(area))
+        for (Placemark m : db.findPlacemarkInArea(area))
             markersShown.add(mMap.addMarker(m.getMarkerOptions()));
     }
 }

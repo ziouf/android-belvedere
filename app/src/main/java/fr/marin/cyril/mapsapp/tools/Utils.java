@@ -14,6 +14,7 @@ import java.security.NoSuchAlgorithmException;
  * Created by CSCM6014 on 13/04/2016.
  */
 public class Utils {
+    private static final String TAG = "Utils";
 
     /**
      * Retourne true si le téléphone dispose des capteurs suffisants pour utiliser la Réalité Augmentée
@@ -84,6 +85,19 @@ public class Utils {
         return null;
     }
 
+    /**
+     * @param context
+     * @param id
+     * @return
+     */
+    public static String getSHA1FromResource(Context context, int id) {
+        return Utils.getSHA1FromInputStream(context.getResources().openRawResource(id));
+    }
+
+    /**
+     * @param is
+     * @return
+     */
     public static String getSHA1FromInputStream(InputStream is) {
         StringBuilder sb = new StringBuilder();
 
@@ -99,7 +113,7 @@ public class Utils {
                 sb.append(String.format("%02x", b));
 
         } catch (NoSuchAlgorithmException | IOException e) {
-            Log.e("MessageDigest", e.getMessage());
+            Log.e(TAG, e.getMessage());
         }
 
         return sb.toString();
