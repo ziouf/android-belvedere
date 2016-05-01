@@ -80,7 +80,6 @@ public class LoadingActivity extends Activity
         }
 
         this.start();
-
     }
 
     private void start() {
