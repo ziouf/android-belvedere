@@ -2,6 +2,12 @@ apply plugin: 'com.android.application'
 
 android {
     signingConfigs {
+        Belvedere {
+            keyAlias 'BelvedereKey'
+            keyPassword 'open4range'
+            storeFile file('C:/Users/CSCM6014/AndroidStudioProjects/belvedere/_keystore/android.jks')
+            storePassword 'open4range'
+        }
     }
     compileSdkVersion 23
     buildToolsVersion "23.0.3"
@@ -17,6 +23,7 @@ android {
         release {
             minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.Belvedere
         }
     }
     compileOptions {
