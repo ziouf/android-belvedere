@@ -1,7 +1,10 @@
 package fr.marin.cyril.mapsapp.tools;
 
 import android.content.Context;
+import android.location.Location;
 import android.util.Log;
+
+import com.google.android.gms.maps.model.LatLng;
 
 import java.io.BufferedInputStream;
 import java.io.IOException;
@@ -14,6 +17,18 @@ import java.security.NoSuchAlgorithmException;
  */
 public class Utils {
     private static final String TAG = "Utils";
+
+    public static float getDistanceBetween(LatLng a, LatLng b) {
+        float[] result = new float[3];
+        Location.distanceBetween(a.latitude, a.longitude, b.latitude, b.longitude, result);
+        return result[0];
+    }
+
+    public static float getDistanceBetween(Location a, LatLng b) {
+        float[] result = new float[3];
+        Location.distanceBetween(a.getLatitude(), a.getLongitude(), b.latitude, b.longitude, result);
+        return result[0];
+    }
 
     public static String getDirectionFrom0to360Degrees(float degrees) {
         if (degrees >= 360 - 22.5 || degrees < 22.5) {

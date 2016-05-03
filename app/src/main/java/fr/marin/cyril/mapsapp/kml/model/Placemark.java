@@ -10,6 +10,7 @@ public class Placemark {
     private Coordinates coordinates;
     private String title;
     private String url;
+    private double matchLevel = 0d;
 
     public Placemark() {
     }
@@ -51,6 +52,14 @@ public class Placemark {
 
     public void setCoordinates(Coordinates coordinates) {
         this.coordinates = coordinates;
+    }
+
+    public double getMatchLevel() {
+        return matchLevel;
+    }
+
+    public void setMatchLevel(double matchLevel) {
+        this.matchLevel = matchLevel;
     }
 
     public MarkerOptions getMarkerOptions() {

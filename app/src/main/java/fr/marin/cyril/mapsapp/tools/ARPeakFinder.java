@@ -26,9 +26,9 @@ public class ARPeakFinder {
     private static final String TAG = "ARPeakFinder";
     private static final int MIN_VALUE = 0;
     private static final int MAX_VALUE = 1;
-    private static final int SEARCH_AREA_LATERAL_KM = 5;
-    private static final int SEARCH_AREA_FRONT_KM = 100;
-    private static final double AZIMUTH_ACCURACY = 0.25d;
+    private static final int SEARCH_AREA_LATERAL_KM = 15;
+    private static final int SEARCH_AREA_FRONT_KM = 80;
+    private static final double AZIMUTH_ACCURACY = 0.5d;
     private static final double EARTH_RADIUS = 6371d;
 
     private final Context context;
@@ -111,6 +111,22 @@ public class ARPeakFinder {
             Log.i(TAG, "getSearchArea : South West");
             southWest = front;
             northEast = new LatLng(right.latitude, left.longitude);
+        } else if (left.latitude == right.latitude && oLatLng.latitude < front.latitude) {
+            Log.i(TAG, "getSearchArea : North");
+            southWest = left;
+            northEast = new LatLng(right.latitude, front.longitude);
+        } else if (left.latitude == right.latitude && oLatLng.latitude > front.latitude) {
+            Log.i(TAG, "getSearchArea : South");
+            southWest = new LatLng(right.latitude, front.longitude);
+            northEast = left;
+        } else if (left.latitude < right.latitude && oLatLng.latitude == front.latitude) {
+            Log.i(TAG, "getSearchArea : East");
+            southWest = right;
+            northEast = new LatLng(front.latitude, left.longitude);
+        } else if (left.latitude > right.latitude && oLatLng.latitude == front.latitude) {
+            Log.i(TAG, "getSearchArea : West");
+            southWest = new LatLng(front.latitude, left.longitude);
+            northEast = right;
         } else {
             Log.i(TAG, "getSearchArea : ... nowere");
             return null;
@@ -129,6 +145,7 @@ public class ARPeakFinder {
             double theoricalAzimuth = getTheoricalAzimuth(p.getCoordinates());
             if (isMatchingAccuracy(theoricalAzimuth)) {
                 Log.i(TAG, "getMatchingPlacemark : Placemark Matching : " + p.getTitle());
+                p.setMatchLevel(Math.abs(theoricalAzimuth - oAzimuth));
                 matchingPlacemark.add(p);
             }
         }

@@ -3,7 +3,6 @@ package fr.marin.cyril.mapsapp.activities.ui;
 import android.annotation.TargetApi;
 import android.app.ActionBar;
 import android.content.pm.ActivityInfo;
-import android.location.Location;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
@@ -78,7 +77,7 @@ public class CameraActivity extends CompassActivity {
         // Resume Camera
         this.camera.resume();
 
-        arTask = mScheduler.scheduleWithFixedDelay(new ARTask(), 100, 500, TimeUnit.MILLISECONDS);
+        arTask = mScheduler.scheduleAtFixedRate(new ARTask(), 0, 125, TimeUnit.MILLISECONDS);
     }
 
     @Override
@@ -108,12 +107,13 @@ public class CameraActivity extends CompassActivity {
 
     private class ARTask implements Runnable {
         private ARPeakFinder ar = new ARPeakFinder(CameraActivity.this);
+        private double matchLevel;
         private float distance;
         private Placemark nearest = null;
 
         @Override
         public void run() {
-            distance = Float.MAX_VALUE;
+            matchLevel = Float.MAX_VALUE;
             ar.setObserverAzimuth(CameraActivity.this.getAzimuth());
             ar.setObserverLocation(CameraActivity.this.location);
 
@@ -121,12 +121,10 @@ public class CameraActivity extends CompassActivity {
             if (placemarks.size() == 0) return;
 
             for (Placemark p : placemarks) {
-                float[] result = new float[3];
-                Location.distanceBetween(location.getLatitude(), location.getLongitude(),
-                        p.getCoordinates().getLatLng().latitude, p.getCoordinates().getLatLng().longitude, result);
-                if (result[0] < distance) {
+                if (p.getMatchLevel() < matchLevel) {
                     Log.i(TAG, "ARTask : new nearest Placemark : " + p.getTitle());
-                    distance = result[0];
+                    matchLevel = p.getMatchLevel();
+                    distance = Utils.getDistanceBetween(location, p.getCoordinates().getLatLng());
                     nearest = p;
                 }
             }
