@@ -54,7 +54,7 @@ public class CameraActivity extends CompassActivity {
         this.setOnCompasEvent(new CompassActivity.CompasEventListener() {
             @Override
             public void onSensorChanged(float[] data) {
-                updateTextView();
+                updateDebugTextView();
             }
         });
 
@@ -90,7 +90,7 @@ public class CameraActivity extends CompassActivity {
         if (arTask != null) arTask.cancel(true);
     }
 
-    private void updateTextView() {
+    private void updateDebugTextView() {
         String s = "Lat : %s | Lng : %s | Alt : %.0fm\nAzimuth : %.2f deg (%s)\nPitch : %.2f deg";
         TextView cameraTextView = (TextView) findViewById(R.id.debug_camera_tv);
         if (cameraTextView == null) return;
