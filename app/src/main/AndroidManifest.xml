@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="fr.marin.cyril.mapsapp">
+    package="fr.marin.cyril.belvedere">
 
     <!--
          The ACCESS_COARSE/FINE_LOCATION permissions are not required to use
@@ -38,7 +38,7 @@
             android:value="@string/google_maps_key" />
 
         <activity
-            android:name=".activities.ui.LoadingActivity"
+            android:name="fr.marin.cyril.belvedere.activities.ui.LoadingActivity"
             android:theme="@style/SplashTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -46,9 +46,9 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".activities.ui.MapsActivity" />
+        <activity android:name="fr.marin.cyril.belvedere.activities.ui.MapsActivity" />
         <activity
-            android:name=".activities.ui.CameraActivity"
+            android:name="fr.marin.cyril.belvedere.activities.ui.CameraActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:theme="@android:style/Theme.DeviceDefault.NoActionBar.Fullscreen" />
 
