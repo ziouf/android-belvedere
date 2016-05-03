@@ -3,16 +3,21 @@ package fr.marin.cyril.mapsapp.activities.ui;
 import android.annotation.TargetApi;
 import android.app.ActionBar;
 import android.content.pm.ActivityInfo;
-import android.hardware.SensorEvent;
 import android.location.Location;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
 import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
 import java.util.Collection;
 import java.util.Locale;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.ScheduledFuture;
+import java.util.concurrent.TimeUnit;
 
 import fr.marin.cyril.mapsapp.R;
 import fr.marin.cyril.mapsapp.activities.CompassActivity;
@@ -29,8 +34,11 @@ import fr.marin.cyril.mapsapp.tools.Utils;
 public class CameraActivity extends CompassActivity {
     private static final String TAG = "CameraActivity";
 
-    private ARPeakFinder ar;
+    private final Handler handler = new Handler(Looper.getMainLooper());
+    private final ScheduledExecutorService mScheduler = Executors.newScheduledThreadPool(1);
+    TextView peak_info_tv;
     private Camera camera;
+    private ScheduledFuture arTask = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,7 +50,7 @@ public class CameraActivity extends CompassActivity {
 
         // Init Camera
         this.camera = Camera.getCameraInstance(this);
-        this.ar = new ARPeakFinder(this);
+        peak_info_tv = (TextView) findViewById(R.id.peak_info_tv);
 
         this.setOnCompasEvent(new CompassActivity.CompasEventListener() {
             @Override
@@ -50,6 +58,7 @@ public class CameraActivity extends CompassActivity {
                 updateTextView();
             }
         });
+
     }
 
     @Override
@@ -69,8 +78,7 @@ public class CameraActivity extends CompassActivity {
         // Resume Camera
         this.camera.resume();
 
-
-        this.ar.setObserverLocation(location);
+        arTask = mScheduler.scheduleWithFixedDelay(new ARTask(), 100, 500, TimeUnit.MILLISECONDS);
     }
 
     @Override
@@ -79,37 +87,8 @@ public class CameraActivity extends CompassActivity {
 
         // Pause Camera
         this.camera.pause();
-    }
 
-    @Override
-    public void onLocationChanged(Location location) {
-        super.onLocationChanged(location);
-
-    }
-
-    @Override
-    public void onSensorChanged(SensorEvent event) {
-        super.onSensorChanged(event);
-
-        this.ar.setObserverAzimuth(this.getAzimuth());
-
-        Runnable r = new Runnable() {
-            @Override
-            public void run() {
-                Collection<Placemark> placemarks = CameraActivity.this.ar.getMatchingPlacemark();
-                if (placemarks.size() == 0) return;
-
-                StringBuilder sb = new StringBuilder();
-                sb.append("Sie = ").append(placemarks.size()).append(" [");
-                for (Placemark p : placemarks)
-                    sb.append(p.getTitle()).append(",");
-                sb.append("]");
-
-                Log.i(TAG, sb.toString());
-            }
-        };
-
-        r.run();
+        if (arTask != null) arTask.cancel(true);
     }
 
     private void updateTextView() {
@@ -125,5 +104,38 @@ public class CameraActivity extends CompassActivity {
 
         cameraTextView.setText(String.format(Locale.getDefault(), s, lat, lng,
                 alt, azimuth, Utils.getDirectionFromMinus180to180Degrees(azimuth), pitch));
+    }
+
+    private class ARTask implements Runnable {
+        private ARPeakFinder ar = new ARPeakFinder(CameraActivity.this);
+        private float distance;
+        private Placemark nearest = null;
+
+        @Override
+        public void run() {
+            distance = Float.MAX_VALUE;
+            ar.setObserverAzimuth(CameraActivity.this.getAzimuth());
+            ar.setObserverLocation(CameraActivity.this.location);
+
+            Collection<Placemark> placemarks = ar.getMatchingPlacemark();
+            if (placemarks.size() == 0) return;
+
+            for (Placemark p : placemarks) {
+                float[] result = new float[3];
+                Location.distanceBetween(location.getLatitude(), location.getLongitude(),
+                        p.getCoordinates().getLatLng().latitude, p.getCoordinates().getLatLng().longitude, result);
+                if (result[0] < distance) {
+                    Log.i(TAG, "ARTask : new nearest Placemark : " + p.getTitle());
+                    distance = result[0];
+                    nearest = p;
+                }
+            }
+            handler.post(new Runnable() {
+                @Override
+                public void run() {
+                    peak_info_tv.setText(String.format(Locale.getDefault(), "[%s : %.2f km]", nearest.getTitle(), distance / 1000f));
+                }
+            });
+        }
     }
 }

@@ -2,6 +2,7 @@ package fr.marin.cyril.mapsapp.tools;
 
 import android.content.Context;
 import android.location.Location;
+import android.util.Log;
 
 import com.google.android.gms.maps.model.LatLng;
 
@@ -22,11 +23,12 @@ import fr.marin.cyril.mapsapp.kml.model.Placemark;
  * - Comparaison entre les deux azimuth modulo la précision
  */
 public class ARPeakFinder {
+    private static final String TAG = "ARPeakFinder";
     private static final int MIN_VALUE = 0;
     private static final int MAX_VALUE = 1;
     private static final int SEARCH_AREA_LATERAL_KM = 5;
     private static final int SEARCH_AREA_FRONT_KM = 100;
-    private static final double AZIMUTH_ACCURACY = 1d;
+    private static final double AZIMUTH_ACCURACY = 0.25d;
     private static final double EARTH_RADIUS = 6371d;
 
     private final Context context;
@@ -70,7 +72,7 @@ public class ARPeakFinder {
 
     private LatLng getLatLngFromDistanceAndBearing(int distance, double bearing) {
         double dist = distance / EARTH_RADIUS;
-        double brng = Math.toRadians(oAzimuth + bearing);
+        double brng = Math.toRadians((oAzimuth + bearing + 360) % 360);
         double lat = Math.toRadians(oLatLng.latitude);
         double lng = Math.toRadians(oLatLng.longitude);
 
@@ -89,22 +91,29 @@ public class ARPeakFinder {
         LatLng southWest;
         LatLng northEast;
 
-        if (left.latitude > right.latitude && oLatLng.latitude > front.latitude) // on regarde en haut à droite
+        if (left.latitude > right.latitude && oLatLng.latitude < front.latitude) // on regarde en haut à droite
         {
+            Log.i(TAG, "getSearchArea : North East");
             southWest = new LatLng(right.latitude, left.longitude);
             northEast = front;
-        } else if (left.latitude > right.latitude && oLatLng.latitude < front.latitude) // on regarde en bas a droite
+        } else if (left.latitude > right.latitude && oLatLng.latitude > front.latitude) // on regarde en bas a droite
         {
+            Log.i(TAG, "getSearchArea : South East");
             southWest = new LatLng(front.latitude, right.longitude);
             northEast = new LatLng(left.latitude, front.longitude);
-        } else if (left.latitude < right.latitude && oLatLng.latitude > front.latitude) // on regarde en haut a gauche
+        } else if (left.latitude < right.latitude && oLatLng.latitude < front.latitude) // on regarde en haut a gauche
         {
+            Log.i(TAG, "getSearchArea : North West");
             southWest = new LatLng(left.latitude, front.longitude);
             northEast = new LatLng(front.latitude, right.longitude);
-        } else // on regarde en bas a gauche
+        } else if (left.latitude < right.latitude && oLatLng.latitude > front.latitude) // on regarde en bas a gauche
         {
+            Log.i(TAG, "getSearchArea : South West");
             southWest = front;
             northEast = new LatLng(right.latitude, left.longitude);
+        } else {
+            Log.i(TAG, "getSearchArea : ... nowere");
+            return null;
         }
 
         return new Area(northEast, southWest);
@@ -113,9 +122,13 @@ public class ARPeakFinder {
     public Collection<Placemark> getMatchingPlacemark() {
         HashSet<Placemark> matchingPlacemark = new HashSet<>();
 
-        for (Placemark p : db.findPlacemarkInArea(getSearchArea())) {
+        Area area = getSearchArea();
+        if (area == null) return matchingPlacemark;
+
+        for (Placemark p : db.findPlacemarkInArea(area)) {
             double theoricalAzimuth = getTheoricalAzimuth(p.getCoordinates());
             if (isMatchingAccuracy(theoricalAzimuth)) {
+                Log.i(TAG, "getMatchingPlacemark : Placemark Matching : " + p.getTitle());
                 matchingPlacemark.add(p);
             }
         }

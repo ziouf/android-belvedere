@@ -72,7 +72,7 @@ public class CompassActivity extends LocationActivity
             float[] oMat;
             float[] R = new float[9];
             if (SensorManager.getRotationMatrix(R, null, graMat, geoMat)) {
-                if (portrait)
+                if (!portrait)
                     SensorManager.remapCoordinateSystem(R, SensorManager.AXIS_X, SensorManager.AXIS_Z, R);
                 oMat = new float[3];
                 SensorManager.getOrientation(R, oMat);
@@ -81,7 +81,7 @@ public class CompassActivity extends LocationActivity
             }
         }
 
-        if ((lastUpdate + 1000) > System.currentTimeMillis()) return;
+        if ((lastUpdate + 250) > System.currentTimeMillis()) return;
         lastUpdate = System.currentTimeMillis();
 
         if (location == null) return;
