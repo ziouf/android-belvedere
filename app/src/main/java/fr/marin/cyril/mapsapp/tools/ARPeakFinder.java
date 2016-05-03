@@ -91,23 +91,19 @@ public class ARPeakFinder {
         LatLng southWest;
         LatLng northEast;
 
-        if (left.latitude > right.latitude && oLatLng.latitude < front.latitude) // on regarde en haut à droite
-        {
+        if (left.latitude > right.latitude && oLatLng.latitude < front.latitude) { // on regarde en haut à droite
             Log.i(TAG, "getSearchArea : North East");
             southWest = new LatLng(right.latitude, left.longitude);
             northEast = front;
-        } else if (left.latitude > right.latitude && oLatLng.latitude > front.latitude) // on regarde en bas a droite
-        {
+        } else if (left.latitude > right.latitude && oLatLng.latitude > front.latitude) { // on regarde en bas a droite
             Log.i(TAG, "getSearchArea : South East");
             southWest = new LatLng(front.latitude, right.longitude);
             northEast = new LatLng(left.latitude, front.longitude);
-        } else if (left.latitude < right.latitude && oLatLng.latitude < front.latitude) // on regarde en haut a gauche
-        {
+        } else if (left.latitude < right.latitude && oLatLng.latitude < front.latitude) { // on regarde en haut a gauche
             Log.i(TAG, "getSearchArea : North West");
             southWest = new LatLng(left.latitude, front.longitude);
             northEast = new LatLng(front.latitude, right.longitude);
-        } else if (left.latitude < right.latitude && oLatLng.latitude > front.latitude) // on regarde en bas a gauche
-        {
+        } else if (left.latitude < right.latitude && oLatLng.latitude > front.latitude) { // on regarde en bas a gauche
             Log.i(TAG, "getSearchArea : South West");
             southWest = front;
             northEast = new LatLng(right.latitude, left.longitude);
