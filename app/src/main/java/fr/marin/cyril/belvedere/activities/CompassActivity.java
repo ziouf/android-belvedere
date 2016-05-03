@@ -10,6 +10,9 @@ import android.support.annotation.Nullable;
 
 /**
  * Created by CSCM6014 on 25/04/2016.
+ *
+ * See : http://stackoverflow.com/a/16386066/4287785
+ *
  */
 public class CompassActivity extends LocationActivity
         implements SensorEventListener {
