@@ -6,7 +6,7 @@
 	<Placemark>
 		<name><![CDATA[Mont Tauch]]></name>
 		<Point>
-			<coordinates>2.66306,42.89528,0</coordinates>
+			<coordinates>2.66306,42.89528,917</coordinates>
 		</Point>
 		<Snippet></Snippet>
 		<description><![CDATA[<br>Source: Wikipedia article <a href="https://fr.wikipedia.org/wiki/Mont_Tauch">Mont Tauch</a>]]></description>
@@ -14,7 +14,7 @@
 	<Placemark>
 		<name><![CDATA[Pech de Bugarach]]></name>
 		<Point>
-			<coordinates>2.37917,42.86361,0</coordinates>
+			<coordinates>2.37917,42.86361,1230</coordinates>
 		</Point>
 		<Snippet></Snippet>
 		<description><![CDATA[<br>Source: Wikipedia article <a href="https://fr.wikipedia.org/wiki/Pech_de_Bugarach">Pech de Bugarach</a>]]></description>
@@ -22,7 +22,7 @@
 	<Placemark>
 		<name><![CDATA[Serre de Bec]]></name>
 		<Point>
-			<coordinates>2.29694,42.86889,0</coordinates>
+			<coordinates>2.29694,42.86889,1037</coordinates>
 		</Point>
 		<Snippet></Snippet>
 		<description><![CDATA[<br>Source: Wikipedia article <a href="https://fr.wikipedia.org/wiki/Serre_de_Bec">Serre de Bec</a>]]></description>
@@ -30,7 +30,7 @@
 	<Placemark>
 		<name><![CDATA[Abarratea]]></name>
 		<Point>
-			<coordinates>-1.23306,43.35778,0</coordinates>
+			<coordinates>-1.23306,43.35778,342</coordinates>
 		</Point>
 		<Snippet></Snippet>
 		<description><![CDATA[<br>Source: Wikipedia article <a href="https://fr.wikipedia.org/wiki/Abarratea">Abarratea</a>]]></description>
@@ -38,7 +38,7 @@
 	<Placemark>
 		<name><![CDATA[Adartza]]></name>
 		<Point>
-			<coordinates>-1.33639,43.11306,0</coordinates>
+			<coordinates>-1.33639,43.11306,1250</coordinates>
 		</Point>
 		<Snippet></Snippet>
 		<description><![CDATA[<br>Source: Wikipedia article <a href="https://fr.wikipedia.org/wiki/Adartza">Adartza</a>]]></description>
@@ -46,7 +46,7 @@
 	<Placemark>
 		<name><![CDATA[Ahantziga]]></name>
 		<Point>
-			<coordinates>-0.87139,43.18694,0</coordinates>
+			<coordinates>-0.87139,43.18694,582</coordinates>
 		</Point>
 		<Snippet></Snippet>
 		<description><![CDATA[<br>Source: Wikipedia article <a href="https://fr.wikipedia.org/wiki/Ahantziga">Ahantziga</a>]]></description>
@@ -54,7 +54,7 @@
 	<Placemark>
 		<name><![CDATA[Ahintziaga]]></name>
 		<Point>
-			<coordinates>-1.38139,43.18972,0</coordinates>
+			<coordinates>-1.38139,43.18972,905</coordinates>
 		</Point>
 		<Snippet></Snippet>
 		<description><![CDATA[<br>Source: Wikipedia article <a href="https://fr.wikipedia.org/wiki/Ahintziaga">Ahintziaga</a>]]></description>
@@ -62,7 +62,7 @@
 	<Placemark>
 		<name><![CDATA[Antchola]]></name>
 		<Point>
-			<coordinates>-1.40972,43.14278,0</coordinates>
+			<coordinates>-1.40972,43.14278,1119</coordinates>
 		</Point>
 		<Snippet></Snippet>
 		<description><![CDATA[<br>Source: Wikipedia article <a href="https://fr.wikipedia.org/wiki/Antchola">Antchola</a>]]></description>
@@ -70,7 +70,7 @@
 	<Placemark>
 		<name><![CDATA[Artzamendi]]></name>
 		<Point>
-			<coordinates>-1.4083,43.28306,0</coordinates>
+			<coordinates>-1.4083,43.28306,926</coordinates>
 		</Point>
 		<Snippet></Snippet>
 		<description><![CDATA[<br>Source: Wikipedia article <a href="https://fr.wikipedia.org/wiki/Artzamendi">Artzamendi</a>]]></description>
@@ -78,7 +78,7 @@
 	<Placemark>
 		<name><![CDATA[Belchou]]></name>
 		<Point>
-			<coordinates>-1.04889,43.15056,0</coordinates>
+			<coordinates>-1.04889,43.15056,1129</coordinates>
 		</Point>
 		<Snippet></Snippet>
 		<description><![CDATA[<br>Source: Wikipedia article <a href="https://fr.wikipedia.org/wiki/Belchou">Belchou</a>]]></description>
@@ -86,7 +86,7 @@
 	<Placemark>
 		<name><![CDATA[Capéran de Sesques]]></name>
 		<Point>
-			<coordinates>-0.49556,42.90806,0</coordinates>
+			<coordinates>-0.49556,42.90806,2410</coordinates>
 		</Point>
 		<Snippet></Snippet>
 		<description><![CDATA[<br>Source: Wikipedia article <a href="https://fr.wikipedia.org/wiki/Capéran_de_Sesques">Capéran de Sesques</a>]]></description>
@@ -94,7 +94,7 @@
 	<Placemark>
 		<name><![CDATA[Chapeau de Gendarme (Soule)]]></name>
 		<Point>
-			<coordinates>-0.87917,43.0861,0</coordinates>
+			<coordinates>-0.87917,43.0861,572</coordinates>
 		</Point>
 		<Snippet></Snippet>
 		<description><![CDATA[<br>Source: Wikipedia article <a href="https://fr.wikipedia.org/wiki/Chapeau_de_Gendarme_(Soule)">Chapeau de Gendarme (Soule)</a>]]></description>
@@ -102,7 +102,7 @@
 	<Placemark>
 		<name><![CDATA[Errozate]]></name>
 		<Point>
-			<coordinates>-1.17167,43.0444,0</coordinates>
+			<coordinates>-1.17167,43.0444,1345</coordinates>
 		</Point>
 		<Snippet></Snippet>
 		<description><![CDATA[<br>Source: Wikipedia article <a href="https://fr.wikipedia.org/wiki/Errozate">Errozate</a>]]></description>
@@ -110,7 +110,7 @@
 	<Placemark>
 		<name><![CDATA[Grande aiguille d'Ansabère]]></name>
 		<Point>
-			<coordinates>-0.73167,42.90306,0</coordinates>
+			<coordinates>-0.73167,42.90306,2377</coordinates>
 		</Point>
 		<Snippet></Snippet>
 		<description><![CDATA[<br>Source: Wikipedia article <a href="https://fr.wikipedia.org/wiki/Grande_aiguille_d'Ansabère">Grande aiguille d'Ansabère</a>]]></description>
@@ -118,7 +118,7 @@
 	<Placemark>
 		<name><![CDATA[Hauzkoa]]></name>
 		<Point>
-			<coordinates>-1.06861,43.11722,0</coordinates>
+			<coordinates>-1.06861,43.11722,1268</coordinates>
 		</Point>
 		<Snippet></Snippet>
 		<description><![CDATA[<br>Source: Wikipedia article <a href="https://fr.wikipedia.org/wiki/Hauzkoa">Hauzkoa</a>]]></description>
@@ -126,7 +126,7 @@
 	<Placemark>
 		<name><![CDATA[Ichtauz]]></name>
 		<Point>
-			<coordinates>-1.40944,43.13694,0</coordinates>
+			<coordinates>-1.40944,43.13694,1024</coordinates>
 		</Point>
 		<Snippet></Snippet>
 		<description><![CDATA[<br>Source: Wikipedia article <a href="https://fr.wikipedia.org/wiki/Ichtauz">Ichtauz</a>]]></description>
@@ -134,7 +134,7 @@
 	<Placemark>
 		<name><![CDATA[Iparla]]></name>
 		<Point>
-			<coordinates>-1.37861,43.22833,0</coordinates>
+			<coordinates>-1.37861,43.22833,1044</coordinates>
 		</Point>
 		<Snippet></Snippet>
 		<description><![CDATA[<br>Source: Wikipedia article <a href="https://fr.wikipedia.org/wiki/Iparla">Iparla</a>]]></description>
@@ -142,7 +142,7 @@
 	<Placemark>
 		<name><![CDATA[La Rhune]]></name>
 		<Point>
-			<coordinates>-1.63556,43.30917,0</coordinates>
+			<coordinates>-1.63556,43.30917,905</coordinates>
 		</Point>
 		<Snippet></Snippet>
 		<description><![CDATA[<br>Source: Wikipedia article <a href="https://fr.wikipedia.org/wiki/La_Rhune">La Rhune</a>]]></description>
@@ -158,7 +158,7 @@
 	<Placemark>
 		<name><![CDATA[Mail Arrouy]]></name>
 		<Point>
-			<coordinates>-0.57722,43.09694,0</coordinates>
+			<coordinates>-0.57722,43.09694,2472</coordinates>
 		</Point>
 		<Snippet></Snippet>
 		<description><![CDATA[<br>Source: Wikipedia article <a href="https://fr.wikipedia.org/wiki/Mail_Arrouy">Mail Arrouy</a>]]></description>
@@ -166,7 +166,7 @@
 	<Placemark>
 		<name><![CDATA[Mondarrain]]></name>
 		<Point>
-			<coordinates>-1.43222,43.3028,0</coordinates>
+			<coordinates>-1.43222,43.3028,749</coordinates>
 		</Point>
 		<Snippet></Snippet>
 		<description><![CDATA[<br>Source: Wikipedia article <a href="https://fr.wikipedia.org/wiki/Mondarrain">Mondarrain</a>]]></description>
@@ -174,7 +174,7 @@
 	<Placemark>
 		<name><![CDATA[Mont Baïgura]]></name>
 		<Point>
-			<coordinates>-1.29278,43.29083,0</coordinates>
+			<coordinates>-1.29278,43.29083,897</coordinates>
 		</Point>
 		<Snippet></Snippet>
 		<description><![CDATA[<br>Source: Wikipedia article <a href="https://fr.wikipedia.org/wiki/Mont_Baïgura">Mont Baïgura</a>]]></description>
@@ -182,7 +182,7 @@
 	<Placemark>
 		<name><![CDATA[Mont Ursuya]]></name>
 		<Point>
-			<coordinates>-1.33389,43.34333,0</coordinates>
+			<coordinates>-1.33389,43.34333,678</coordinates>
 		</Point>
 		<Snippet></Snippet>
 		<description><![CDATA[<br>Source: Wikipedia article <a href="https://fr.wikipedia.org/wiki/Mont_Ursuya">Mont Ursuya</a>]]></description>
@@ -190,7 +190,7 @@
 	<Placemark>
 		<name><![CDATA[Munhoa]]></name>
 		<Point>
-			<coordinates>-1.30694,43.14222,0</coordinates>
+			<coordinates>-1.30694,43.14222,1021</coordinates>
 		</Point>
 		<Snippet></Snippet>
 		<description><![CDATA[<br>Source: Wikipedia article <a href="https://fr.wikipedia.org/wiki/Munhoa">Munhoa</a>]]></description>
@@ -198,7 +198,7 @@
 	<Placemark>
 		<name><![CDATA[Okabe]]></name>
 		<Point>
-			<coordinates>-1.10694,43.03444,0</coordinates>
+			<coordinates>-1.10694,43.03444,1456</coordinates>
 		</Point>
 		<Snippet></Snippet>
 		<description><![CDATA[<br>Source: Wikipedia article <a href="https://fr.wikipedia.org/wiki/Okabe">Okabe</a>]]></description>
@@ -206,7 +206,7 @@
 	<Placemark>
 		<name><![CDATA[Petit Gabizos]]></name>
 		<Point>
-			<coordinates>-0.27917,42.93917,0</coordinates>
+			<coordinates>-0.27917,42.93917,2639</coordinates>
 		</Point>
 		<Snippet></Snippet>
 		<description><![CDATA[<br>Source: Wikipedia article <a href="https://fr.wikipedia.org/wiki/Petit_Gabizos">Petit Gabizos</a>]]></description>
@@ -214,7 +214,7 @@
 	<Placemark>
 		<name><![CDATA[Pic Palas]]></name>
 		<Point>
-			<coordinates>-0.31333,42.84944,0</coordinates>
+			<coordinates>-0.31333,42.84944,2974</coordinates>
 		</Point>
 		<Snippet></Snippet>
 		<description><![CDATA[<br>Source: Wikipedia article <a href="https://fr.wikipedia.org/wiki/Pic_Palas">Pic Palas</a>]]></description>
@@ -222,7 +222,7 @@
 	<Placemark>
 		<name><![CDATA[Pic d'Anie]]></name>
 		<Point>
-			<coordinates>-0.72056,42.9444,0</coordinates>
+			<coordinates>-0.72056,42.9444,2504</coordinates>
 		</Point>
 		<Snippet></Snippet>
 		<description><![CDATA[<br>Source: Wikipedia article <a href="https://fr.wikipedia.org/wiki/Pic_d'Anie">Pic d'Anie</a>]]></description>
@@ -230,7 +230,7 @@
 	<Placemark>
 		<name><![CDATA[Pic d'Ansabère]]></name>
 		<Point>
-			<coordinates>-0.7325,42.9028,0</coordinates>
+			<coordinates>-0.7325,42.9028,2377</coordinates>
 		</Point>
 		<Snippet></Snippet>
 		<description><![CDATA[<br>Source: Wikipedia article <a href="https://fr.wikipedia.org/wiki/Pic_d'Ansabère">Pic d'Ansabère</a>]]></description>
@@ -238,7 +238,7 @@
 	<Placemark>
 		<name><![CDATA[Pic d'Arlas]]></name>
 		<Point>
-			<coordinates>-0.75139,42.96694,0</coordinates>
+			<coordinates>-0.75139,42.96694,2044</coordinates>
 		</Point>
 		<Snippet></Snippet>
 		<description><![CDATA[<br>Source: Wikipedia article <a href="https://fr.wikipedia.org/wiki/Pic_d'Arlas">Pic d'Arlas</a>]]></description>
