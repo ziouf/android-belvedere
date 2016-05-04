@@ -9,6 +9,7 @@ import android.os.Handler;
 import android.os.Looper;
 import android.util.Log;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.TextView;
 
 import java.util.Collection;
@@ -35,8 +36,9 @@ public class CameraActivity extends CompassActivity {
 
     private final Handler handler = new Handler(Looper.getMainLooper());
     private final ScheduledExecutorService mScheduler = Executors.newScheduledThreadPool(1);
-    TextView peak_info_tv;
+
     private Camera camera;
+    private TextView peak_info_tv;
     private ScheduledFuture arTask = null;
 
     @Override
@@ -45,19 +47,13 @@ public class CameraActivity extends CompassActivity {
         // Inflate UI
         setContentView(R.layout.activity_camera);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
+        getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
         this.portrait = false;
+        this.locateOnlyOnce = true;
 
         // Init Camera
         this.camera = Camera.getCameraInstance(this);
-        peak_info_tv = (TextView) findViewById(R.id.peak_info_tv);
-
-        this.setOnCompasEvent(new CompassActivity.CompasEventListener() {
-            @Override
-            public void onSensorChanged(float[] data) {
-                updateDebugTextView();
-            }
-        });
-
+        this.peak_info_tv = (TextView) findViewById(R.id.peak_info_tv);
     }
 
     @Override
@@ -77,7 +73,15 @@ public class CameraActivity extends CompassActivity {
         // Resume Camera
         this.camera.resume();
 
-        arTask = mScheduler.scheduleAtFixedRate(new ARTask(), 0, 125, TimeUnit.MILLISECONDS);
+        //
+        this.registerCompasEventListener(new CompassActivity.CompasEventListener() {
+            @Override
+            public void onSensorChanged(float[] data) {
+                updateDebugTextView();
+            }
+        });
+
+        arTask = mScheduler.scheduleAtFixedRate(new ARTask(handler), 0, 125, TimeUnit.MILLISECONDS);
     }
 
     @Override
@@ -88,6 +92,11 @@ public class CameraActivity extends CompassActivity {
         this.camera.pause();
 
         if (arTask != null) arTask.cancel(true);
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
     }
 
     private void updateDebugTextView() {
@@ -106,10 +115,17 @@ public class CameraActivity extends CompassActivity {
     }
 
     private class ARTask implements Runnable {
-        private ARPeakFinder ar = new ARPeakFinder(CameraActivity.this);
-        private double matchLevel;
+        private final Handler handler;
+        private final ARPeakFinder ar;
+
         private float distance;
+        private double matchLevel;
         private Placemark nearest = null;
+
+        public ARTask(Handler handler) {
+            this.handler = handler;
+            this.ar = new ARPeakFinder(CameraActivity.this);
+        }
 
         @Override
         public void run() {
@@ -128,12 +144,16 @@ public class CameraActivity extends CompassActivity {
                     nearest = p;
                 }
             }
-            handler.post(new Runnable() {
+            handler.post(this.updateGUI());
+        }
+
+        private Runnable updateGUI() {
+            return new Runnable() {
                 @Override
                 public void run() {
                     peak_info_tv.setText(String.format(Locale.getDefault(), "[%s : %.2f km]", nearest.getTitle(), distance / 1000f));
                 }
-            });
+            };
         }
     }
 }

@@ -24,7 +24,6 @@ import android.util.Size;
 import android.view.Surface;
 import android.view.TextureView;
 import android.view.View;
-import android.widget.ImageView;
 import android.widget.Toast;
 
 import java.util.Collections;
@@ -66,10 +65,6 @@ final class CameraApi21
         // Close Camera
         if (cameraDevice != null) {
             cameraDevice.close();
-
-            ImageView camera_loading_splash = (ImageView) getContext().findViewById(R.id.camera_loading);
-            if (camera_loading_splash != null)
-                camera_loading_splash.setVisibility(View.VISIBLE);
         }
     }
 
@@ -205,10 +200,6 @@ final class CameraApi21
                 } catch (CameraAccessException ignore) {
 
                 }
-
-                ImageView camera_loading_splash = (ImageView) getContext().findViewById(R.id.camera_loading);
-                if (camera_loading_splash != null)
-                    camera_loading_splash.setVisibility(View.INVISIBLE);
             }
 
             @Override

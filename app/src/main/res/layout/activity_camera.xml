@@ -29,24 +29,17 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="top"
+        android:layout_marginTop="15dp"
         android:textAlignment="center"
         android:textColor="#ffffff" />
+
     <TextView
         android:id="@+id/debug_camera_tv"
         style="@style/DebugTheme"
         android:layout_width="match_parent"
-
         android:layout_height="wrap_content"
-        android:layout_gravity="center_vertical"
-        android:background="@color/background_black"
-        android:elevation="4dp"
+        android:layout_gravity="bottom"
         android:textColor="#ffffffff"
         />
-
-    <ImageView
-        android:id="@+id/camera_loading"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:src="#000000" />
 
 </FrameLayout>

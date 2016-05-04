@@ -18,14 +18,15 @@ import android.support.v4.app.FragmentActivity;
 public class LocationActivity extends FragmentActivity
         implements LocationListener {
 
-    private static final int LOCATION_UPDATE_TIME = 2000;
-    private static final int LOCATION_UPDATE_DISTANCE = 10;
+    private static final int LOCATION_UPDATE_TIME = 5 * 1000; // 5 secondes
+    private static final int LOCATION_UPDATE_DISTANCE = 15;   // 15 metres
+    private static final String LOCATION_PERMISSION = Manifest.permission.ACCESS_FINE_LOCATION;
 
     protected final Criteria locationCriteria = new Criteria();
 
-    protected GeomagneticField geoField;
+    protected boolean locateOnlyOnce = false;
     protected Location location;
-
+    protected GeomagneticField geoField;
     protected LocationManager locationManager;
 
     @Override
@@ -40,18 +41,13 @@ public class LocationActivity extends FragmentActivity
     @Override
     protected void onResume() {
         super.onResume();
-        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
-            this.location = locationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
-            this.locationManager.requestLocationUpdates(locationManager.getBestProvider(locationCriteria, true), LOCATION_UPDATE_TIME, LOCATION_UPDATE_DISTANCE, this);
-        }
+        this.registerUpdates();
     }
 
     @Override
     protected void onPause() {
         super.onPause();
-        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
-            this.locationManager.removeUpdates(this);
-        }
+        this.removeUpdates();
     }
 
     @Override
@@ -61,8 +57,6 @@ public class LocationActivity extends FragmentActivity
 
     @Override
     public void onLocationChanged(Location location) {
-        if (this.location == null) onFirstLocationChanged(location);
-
         this.location = location;
         this.geoField = new GeomagneticField(
                 (float) location.getLatitude(),
@@ -70,10 +64,21 @@ public class LocationActivity extends FragmentActivity
                 (float) location.getAltitude(),
                 System.currentTimeMillis()
         );
+
+        if (locateOnlyOnce) this.removeUpdates();
     }
 
-    protected void onFirstLocationChanged(Location location) {
+    private void registerUpdates() {
+        if (ActivityCompat.checkSelfPermission(this, LOCATION_PERMISSION) == PackageManager.PERMISSION_GRANTED) {
+            this.location = locationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
+            this.locationManager.requestLocationUpdates(locationManager.getBestProvider(locationCriteria, true), LOCATION_UPDATE_TIME, LOCATION_UPDATE_DISTANCE, this);
+        }
+    }
 
+    private void removeUpdates() {
+        if (ActivityCompat.checkSelfPermission(this, LOCATION_PERMISSION) == PackageManager.PERMISSION_GRANTED) {
+            this.locationManager.removeUpdates(this);
+        }
     }
 
     @Override

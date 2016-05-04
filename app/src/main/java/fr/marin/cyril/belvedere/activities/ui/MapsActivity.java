@@ -142,7 +142,7 @@ public class MapsActivity extends CompassActivity
                 .icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_compas_arrow))
         );
 
-        this.setOnCompasEvent(new CompassActivity.CompasEventListener() {
+        this.registerCompasEventListener(new CompassActivity.CompasEventListener() {
             private TextView azimuth_tv = (TextView) findViewById(R.id.debug_azimuth_info);
 
             @Override

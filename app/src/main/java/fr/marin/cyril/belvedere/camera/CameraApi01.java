@@ -46,7 +46,7 @@ final class CameraApi01
 
     @Override
     public void surfaceCreated(SurfaceHolder holder) {
-        getContext().findViewById(R.id.camera_loading).setVisibility(View.GONE);
+
     }
 
     @Override

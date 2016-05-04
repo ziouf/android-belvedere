@@ -8,6 +8,8 @@ import android.hardware.SensorManager;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 
+import java.util.HashSet;
+
 /**
  * Created by CSCM6014 on 25/04/2016.
  *
@@ -23,7 +25,7 @@ public class CompassActivity extends LocationActivity
     protected final float[] data = new float[2];
     protected boolean portrait = true;
 
-    private CompasEventListener compasEventListener;
+    private HashSet<CompasEventListener> compasEventListenerSet;
     private SensorManager sensorManager;
 
     private long lastUpdate = 0;
@@ -45,6 +47,7 @@ public class CompassActivity extends LocationActivity
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        this.compasEventListenerSet = new HashSet<>();
         this.sensorManager = (SensorManager) getSystemService(SENSOR_SERVICE);
     }
 
@@ -87,15 +90,15 @@ public class CompassActivity extends LocationActivity
         if ((lastUpdate + 250) > System.currentTimeMillis()) return;
         lastUpdate = System.currentTimeMillis();
 
-        if (location == null) return;
-        if (location.getExtras() == null) location.setExtras(new Bundle());
-        Bundle bundle = location.getExtras();
-        bundle.putFloat(KEY_AZIMUTH, data[AZIMUTH]);
-        bundle.putFloat(KEY_PITCH, data[PITCH]);
+        if (location != null) {
+            if (location.getExtras() == null) location.setExtras(new Bundle());
+            location.getExtras().putFloat(KEY_AZIMUTH, data[AZIMUTH]);
+            location.getExtras().putFloat(KEY_PITCH, data[PITCH]);
+        }
 
         // Run event
-        if (compasEventListener != null)
-            compasEventListener.run();
+        for (CompasEventListener eventListener : compasEventListenerSet)
+            eventListener.run();
     }
 
     @Override
@@ -103,8 +106,13 @@ public class CompassActivity extends LocationActivity
 
     }
 
-    protected void setOnCompasEvent(CompasEventListener event) {
-        this.compasEventListener = event;
+    protected CompasEventListener registerCompasEventListener(CompasEventListener eventListener) {
+        this.compasEventListenerSet.add(eventListener);
+        return eventListener;
+    }
+
+    protected void unRegisterCompasEventListener(CompasEventListener eventListener) {
+        this.compasEventListenerSet.remove(eventListener);
     }
 
     public abstract class CompasEventListener implements Runnable {

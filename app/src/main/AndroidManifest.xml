@@ -8,7 +8,6 @@
          location permissions for the 'MyLocation' functionality. 
     -->
     <uses-permission android:name="android.permission.CAMERA" />
-    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
 
     <uses-feature
@@ -46,11 +45,15 @@
             </intent-filter>
         </activity>
 
-        <activity android:name="fr.marin.cyril.belvedere.activities.ui.MapsActivity" />
+        <activity
+            android:name="fr.marin.cyril.belvedere.activities.ui.MapsActivity"
+            android:configChanges="keyboardHidden"
+            android:theme="@style/MapsTheme" />
+
         <activity
             android:name="fr.marin.cyril.belvedere.activities.ui.CameraActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
-            android:theme="@android:style/Theme.DeviceDefault.NoActionBar.Fullscreen" />
+            android:theme="@style/CameraTheme" />
 
     </application>
 
