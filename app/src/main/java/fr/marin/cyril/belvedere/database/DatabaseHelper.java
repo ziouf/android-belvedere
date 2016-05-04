@@ -204,14 +204,23 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         }
     }
 
-    public void insertKmlHash(String key, String value) {
-        try (SQLiteDatabase db = this.getWritableDatabase()) {
+    public void insertOrUpdateKmlHash(String key, String value) {
+        String oldValue = this.findKmlHash(key);
 
+        try (SQLiteDatabase db = this.getWritableDatabase()) {
             ContentValues values = new ContentValues();
-            values.put(DatabaseContract.KmlHashEntry.COLUMN_NAME_KEY, key);
             values.put(DatabaseContract.KmlHashEntry.COLUMN_NAME_VALUE, value);
 
-            db.insert(DatabaseContract.KmlHashEntry.TABLE_NAME, null, values);
+            if (oldValue == null) {
+                values.put(DatabaseContract.KmlHashEntry.COLUMN_NAME_KEY, key);
+
+                db.insert(DatabaseContract.KmlHashEntry.TABLE_NAME, null, values);
+            } else {
+                String where = DatabaseContract.KmlHashEntry.COLUMN_NAME_KEY + " = ?";
+                String[] whereArgs = new String[] { key };
+
+                db.update(DatabaseContract.KmlHashEntry.TABLE_NAME, values, where, whereArgs);
+            }
         }
     }
 
@@ -241,7 +250,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 if (!hash.equals(databaseHelper.findKmlHash(key))) {
                     Log.i(TAG, String.format("Importation du fichier : %s (%s)", key, hash));
                     databaseHelper.insertAllPlacemark(parser.parse(id));
-                    databaseHelper.insertKmlHash(key, hash);
+                    databaseHelper.insertOrUpdateKmlHash(key, hash);
                 }
             }
             publishProgress(ta.length(), ta.length());
