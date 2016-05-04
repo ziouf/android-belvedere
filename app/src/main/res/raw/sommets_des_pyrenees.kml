@@ -246,7 +246,7 @@
 	<Placemark>
 		<name><![CDATA[Pic d'Arriel]]></name>
 		<Point>
-			<coordinates>-0.33111,42.83444,0</coordinates>
+			<coordinates>-0.33111,42.83444,2824</coordinates>
 		</Point>
 		<Snippet></Snippet>
 		<description><![CDATA[<br>Source: Wikipedia article <a href="https://fr.wikipedia.org/wiki/Pic_d'Arriel">Pic d'Arriel</a>]]></description>
@@ -254,7 +254,7 @@
 	<Placemark>
 		<name><![CDATA[Pic d'Orhy]]></name>
 		<Point>
-			<coordinates>-1.00611,42.98833,0</coordinates>
+			<coordinates>-1.00611,42.98833,2017</coordinates>
 		</Point>
 		<Snippet></Snippet>
 		<description><![CDATA[<br>Source: Wikipedia article <a href="https://fr.wikipedia.org/wiki/Pic_d'Orhy">Pic d'Orhy</a>]]></description>
@@ -262,7 +262,7 @@
 	<Placemark>
 		<name><![CDATA[Pic de Bizkarzé]]></name>
 		<Point>
-			<coordinates>-1.04389,43.00417,0</coordinates>
+			<coordinates>-1.04389,43.00417,1656</coordinates>
 		</Point>
 		<Snippet></Snippet>
 		<description><![CDATA[<br>Source: Wikipedia article <a href="https://fr.wikipedia.org/wiki/Pic_de_Bizkarzé">Pic de Bizkarzé</a>]]></description>
@@ -270,7 +270,7 @@
 	<Placemark>
 		<name><![CDATA[Pic de Ger]]></name>
 		<Point>
-			<coordinates>-0.35417,42.93667,0</coordinates>
+			<coordinates>-0.35417,42.93667,2613</coordinates>
 		</Point>
 		<Snippet></Snippet>
 		<description><![CDATA[<br>Source: Wikipedia article <a href="https://fr.wikipedia.org/wiki/Pic_de_Ger">Pic de Ger</a>]]></description>
@@ -278,7 +278,7 @@
 	<Placemark>
 		<name><![CDATA[Pic de l'Arraille]]></name>
 		<Point>
-			<coordinates>-0.69889,42.87917,0</coordinates>
+			<coordinates>-0.69889,42.87917,2147</coordinates>
 		</Point>
 		<Snippet></Snippet>
 		<description><![CDATA[<br>Source: Wikipedia article <a href="https://fr.wikipedia.org/wiki/Pic_de_l'Arraille">Pic de l'Arraille</a>]]></description>
