@@ -1,6 +1,7 @@
 package fr.marin.cyril.belvedere.sparql.parser;
 
 import android.util.JsonReader;
+import android.util.Log;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -39,6 +40,7 @@ import fr.marin.cyril.belvedere.sparql.model.PeakInfo;
  *
  */
 public class JsonResponseParser {
+    private static final String TAG = "JsonResponseParser";
 
     public List<PeakInfo> readJsonStream(InputStream is) {
 
@@ -47,7 +49,7 @@ public class JsonResponseParser {
             return readSparQLResponse(reader);
 
         } catch (IOException e) {
-
+            Log.e(TAG, e.getMessage());
         }
         return null;
     }
