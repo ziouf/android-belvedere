@@ -4,13 +4,14 @@ import android.net.Uri;
 import android.os.AsyncTask;
 import android.util.Log;
 
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
+import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.List;
 
 import fr.marin.cyril.belvedere.sparql.model.PeakInfo;
+import fr.marin.cyril.belvedere.sparql.parser.JsonResponseParser;
 
 /**
  * Created by cyril on 08/05/16.
@@ -20,7 +21,7 @@ import fr.marin.cyril.belvedere.sparql.model.PeakInfo;
  * - http://fr.dbpedia.org/sparql
  * - http://git.cm-cloud.fr/MARIN/belvedere/snippets/16
  */
-public class DbPediaQueryManager {
+public class DbPediaQueryManager extends AsyncTask<String, Void, List<PeakInfo>> {
     private static final String TAG = "DbPediaQueryManager";
 
     private static final String API_URL = "http://fr.dbpedia.org/sparql";
@@ -41,14 +42,11 @@ public class DbPediaQueryManager {
                 "&timeout=0");
     }
 
-    public PeakInfo getElevation() {
+    private JsonResponseParser parser = new JsonResponseParser();
 
-        return null;
-    }
-
-    private String downloadUrl(String myurl) {
+    private InputStream queryDbPedia(String peakName) {
         try {
-            URL url = new URL(myurl);
+            URL url = new URL(buildApiUrl(ELEVATION_QUERY, peakName));
             HttpURLConnection conn = (HttpURLConnection) url.openConnection();
             try {
                 conn.setReadTimeout(10000 /* milliseconds */);
@@ -60,16 +58,7 @@ public class DbPediaQueryManager {
                 int response = conn.getResponseCode();
                 if (response != HttpURLConnection.HTTP_OK) return null;
 
-                try (InputStreamReader isr = new InputStreamReader(conn.getInputStream(), "UTF-8")) {
-                    try (BufferedReader reader = new BufferedReader(isr)) {
-                        StringBuilder sb = new StringBuilder();
-
-                        while (reader.ready())
-                            sb.append(reader.readLine());
-
-                        return sb.toString();
-                    }
-                }
+                return conn.getInputStream();
             } finally {
                 conn.disconnect();
             }
@@ -79,20 +68,9 @@ public class DbPediaQueryManager {
         return null;
     }
 
-    private class SparqlQueryTask extends AsyncTask<String, Void, String> {
-        @Override
-        protected void onPreExecute() {
-            super.onPreExecute();
-        }
-
-        @Override
-        protected void onPostExecute(String s) {
-            super.onPostExecute(s);
-        }
-
-        @Override
-        protected String doInBackground(String... params) {
-            return downloadUrl(params[0]);
-        }
+    @Override
+    protected List<PeakInfo> doInBackground(String... params) {
+        return parser.readJsonStream(queryDbPedia(params[0]));
     }
+
 }
