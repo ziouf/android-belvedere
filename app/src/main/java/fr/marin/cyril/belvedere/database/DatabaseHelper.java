@@ -12,8 +12,16 @@ import android.util.Log;
 
 import com.google.android.gms.maps.model.LatLng;
 
+import java.io.BufferedInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 import fr.marin.cyril.belvedere.R;
 import fr.marin.cyril.belvedere.model.Placemark;
@@ -29,9 +37,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     public DatabaseHelper(Context context) {
         super(context, DatabaseContract.DATABASE_NAME, null, DatabaseContract.DATABASE_VERSION);
-
-        if (this.getReadableDatabase().getVersion() < 9)
-            context.deleteDatabase(DatabaseContract.DATABASE_NAME);
     }
 
     @Override
@@ -65,6 +70,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             ContentValues values = new ContentValues();
             values.put(DatabaseContract.MarkerEntry.COLUMN_NAME_TITLE, newPlacemark.getTitle());
             values.put(DatabaseContract.MarkerEntry.COLUMN_NAME_URL, newPlacemark.getWiki_uri());
+            values.put(DatabaseContract.MarkerEntry.COLUMN_NAME_THUMBNAIL_URL, newPlacemark.getThumbnail_uri());
+            values.put(DatabaseContract.MarkerEntry.COLUMN_NAME_THUMBNAIL, newPlacemark.getThumbnailArray());
             values.put(DatabaseContract.MarkerEntry.COLUMN_NAME_ALTITUDE, newPlacemark.getCoordinates().getElevation());
 
             if (oldPlacemark == null) {
@@ -99,6 +106,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             String[] columns = new String[]{
                     DatabaseContract.MarkerEntry.COLUMN_NAME_TITLE,
                     DatabaseContract.MarkerEntry.COLUMN_NAME_URL,
+                    DatabaseContract.MarkerEntry.COLUMN_NAME_THUMBNAIL_URL,
+                    DatabaseContract.MarkerEntry.COLUMN_NAME_THUMBNAIL,
                     DatabaseContract.MarkerEntry.COLUMN_NAME_LATITUDE,
                     DatabaseContract.MarkerEntry.COLUMN_NAME_LONGITUDE,
                     DatabaseContract.MarkerEntry.COLUMN_NAME_ALTITUDE
@@ -119,11 +128,13 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 while (!c.isAfterLast()) {
                     String title = c.getString(0);
                     String wiki_uri = c.getString(1);
-                    double lat = c.getDouble(2);
-                    double lng = c.getDouble(3);
-                    double ele = c.getDouble(4);
+                    String thumbnail_url = c.getString(2);
+                    byte[] thumbnail = c.getBlob(3);
+                    double lat = c.getDouble(4);
+                    double lng = c.getDouble(5);
+                    double ele = c.getDouble(6);
 
-                    markers.add(new Placemark(title, lat, lng, ele, wiki_uri));
+                    markers.add(new Placemark(title, lat, lng, ele, wiki_uri, thumbnail_url, thumbnail));
                     c.moveToNext();
                 }
 
@@ -143,6 +154,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             String[] columns = new String[]{
                     DatabaseContract.MarkerEntry.COLUMN_NAME_TITLE,
                     DatabaseContract.MarkerEntry.COLUMN_NAME_URL,
+                    DatabaseContract.MarkerEntry.COLUMN_NAME_THUMBNAIL_URL,
+                    DatabaseContract.MarkerEntry.COLUMN_NAME_THUMBNAIL,
                     DatabaseContract.MarkerEntry.COLUMN_NAME_LATITUDE,
                     DatabaseContract.MarkerEntry.COLUMN_NAME_LONGITUDE,
                     DatabaseContract.MarkerEntry.COLUMN_NAME_ALTITUDE
@@ -160,11 +173,13 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
                 String title = c.getString(0);
                 String wiki_uri = c.getString(1);
-                double lat = c.getDouble(2);
-                double lng = c.getDouble(3);
-                double ele = c.getDouble(4);
+                String thumbnail_url = c.getString(2);
+                byte[] thumbnail = c.getBlob(3);
+                double lat = c.getDouble(4);
+                double lng = c.getDouble(5);
+                double ele = c.getDouble(6);
 
-                return new Placemark(title, lat, lng, ele, wiki_uri);
+                return new Placemark(title, lat, lng, ele, wiki_uri, thumbnail_url, thumbnail);
             }
         }
     }
@@ -225,6 +240,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     public static class InitDBTask extends AsyncTask<String, Integer, Boolean> {
         protected final Context context;
+        private final ExecutorService pool = Executors.newFixedThreadPool(50);
         private final DatabaseHelper databaseHelper;
         private final JsonResponseParser parser;
 
@@ -258,6 +274,46 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             ta.recycle();
 
             return null;
+        }
+
+        private class DownloadImg implements Runnable {
+            private final Placemark p;
+
+            public DownloadImg(Placemark p) {
+                this.p = p;
+            }
+
+            @Override
+            public void run() {
+
+                try {
+                    URL url = new URL(p.getThumbnail_uri());
+                    HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+                    connection.connect();
+
+                    int status = connection.getResponseCode();
+                    while (status == HttpURLConnection.HTTP_SEE_OTHER
+                            || status == HttpURLConnection.HTTP_MOVED_PERM
+                            || status == HttpURLConnection.HTTP_MOVED_TEMP) {
+                        connection.disconnect();
+                        url = new URL(connection.getHeaderField("Location"));
+                        connection = (HttpURLConnection) url.openConnection();
+                        connection.connect();
+                        status = connection.getResponseCode();
+                    }
+
+                    try (InputStream is = new BufferedInputStream(connection.getInputStream())) {
+                        byte[] buffer = new byte[4096];
+                        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+                        while (is.read(buffer) > 0) {
+                            baos.write(buffer);
+                        }
+                        p.setThmubnail(baos.toByteArray());
+                    }
+                } catch (IOException ignore) {
+                    Log.e("", ignore.getMessage());
+                }
+            }
         }
     }
 }

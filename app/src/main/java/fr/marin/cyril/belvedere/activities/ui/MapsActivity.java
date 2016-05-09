@@ -10,6 +10,7 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.v4.content.ContextCompat;
 import android.util.Log;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -187,9 +188,11 @@ public class MapsActivity extends CompassActivity
 
                 Placemark m = db.findPlacemarkByLatLng(marker.getPosition());
 
+                ImageView imgThumbnail = (ImageView) v.findViewById(R.id.iw_thumbnail);
                 TextView tvTitle = (TextView) v.findViewById(R.id.iw_title);
                 TextView tvAltitude = (TextView) v.findViewById(R.id.iw_altitude);
 
+                imgThumbnail.setImageBitmap(m.getThmubnail());
                 tvTitle.setText(m.getTitle());
                 tvAltitude.setText(m.getCoordinates().getElevationString());
 

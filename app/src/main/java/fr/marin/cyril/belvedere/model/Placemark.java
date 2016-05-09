@@ -1,5 +1,8 @@
 package fr.marin.cyril.belvedere.model;
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
@@ -12,6 +15,7 @@ public class Placemark {
     private String wiki_uri;
     private String thumbnail_uri;
 
+    private byte[] thmubnail = null;
     private double matchLevel = 0d;
 
     public Placemark(String title, double lat, double lng, double elevation, String wiki_uri) {
@@ -21,10 +25,18 @@ public class Placemark {
     }
 
     public Placemark(String title, double lat, double lng, double elevation, String wiki_uri, String thumbnail_uri) {
+        this.title = title;
+        this.coordinates = new Coordinates(new LatLng(lat, lng), elevation);
+        this.wiki_uri = wiki_uri;
+        this.thumbnail_uri = thumbnail_uri;
+    }
+
+    public Placemark(String title, double lat, double lng, double elevation, String wiki_uri, String thumbnail_uri, byte[] thmubnail) {
         this.coordinates = new Coordinates(new LatLng(lat, lng), elevation);
         this.title = title;
         this.wiki_uri = wiki_uri;
         this.thumbnail_uri = thumbnail_uri;
+        this.thmubnail = thmubnail;
     }
 
     public String getTitle() {
@@ -43,6 +55,18 @@ public class Placemark {
         return coordinates;
     }
 
+
+    public Bitmap getThmubnail() {
+        return BitmapFactory.decodeByteArray(thmubnail, 0, thmubnail.length);
+    }
+
+    public void setThmubnail(byte[] thmubnail) {
+        this.thmubnail = thmubnail;
+    }
+
+    public byte[] getThumbnailArray() {
+        return this.thmubnail;
+    }
 
     public double getMatchLevel() {
         return matchLevel;
