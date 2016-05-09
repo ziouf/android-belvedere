@@ -192,7 +192,9 @@ public class MapsActivity extends CompassActivity
                 TextView tvTitle = (TextView) v.findViewById(R.id.iw_title);
                 TextView tvAltitude = (TextView) v.findViewById(R.id.iw_altitude);
 
-                imgThumbnail.setImageBitmap(m.getThmubnail());
+                if (m.getThumbnailArray() != null)
+                    imgThumbnail.setImageBitmap(m.getThmubnail());
+
                 tvTitle.setText(m.getTitle());
                 tvAltitude.setText(m.getCoordinates().getElevationString());
 

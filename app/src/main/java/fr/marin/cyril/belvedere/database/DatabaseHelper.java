@@ -275,44 +275,45 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
             return null;
         }
+    }
 
-        private class DownloadImg implements Runnable {
-            private final Placemark p;
+    // TODO : Revoir la stratégie de récup des thumbnails
+    private class DownloadImg implements Runnable {
+        private final Placemark p;
 
-            public DownloadImg(Placemark p) {
-                this.p = p;
-            }
+        public DownloadImg(Placemark p) {
+            this.p = p;
+        }
 
-            @Override
-            public void run() {
+        @Override
+        public void run() {
 
-                try {
-                    URL url = new URL(p.getThumbnail_uri());
-                    HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+            try {
+                URL url = new URL(p.getThumbnail_uri());
+                HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+                connection.connect();
+
+                int status = connection.getResponseCode();
+                while (status == HttpURLConnection.HTTP_SEE_OTHER
+                        || status == HttpURLConnection.HTTP_MOVED_PERM
+                        || status == HttpURLConnection.HTTP_MOVED_TEMP) {
+                    connection.disconnect();
+                    url = new URL(connection.getHeaderField("Location"));
+                    connection = (HttpURLConnection) url.openConnection();
                     connection.connect();
-
-                    int status = connection.getResponseCode();
-                    while (status == HttpURLConnection.HTTP_SEE_OTHER
-                            || status == HttpURLConnection.HTTP_MOVED_PERM
-                            || status == HttpURLConnection.HTTP_MOVED_TEMP) {
-                        connection.disconnect();
-                        url = new URL(connection.getHeaderField("Location"));
-                        connection = (HttpURLConnection) url.openConnection();
-                        connection.connect();
-                        status = connection.getResponseCode();
-                    }
-
-                    try (InputStream is = new BufferedInputStream(connection.getInputStream())) {
-                        byte[] buffer = new byte[4096];
-                        ByteArrayOutputStream baos = new ByteArrayOutputStream();
-                        while (is.read(buffer) > 0) {
-                            baos.write(buffer);
-                        }
-                        p.setThmubnail(baos.toByteArray());
-                    }
-                } catch (IOException ignore) {
-                    Log.e("", ignore.getMessage());
+                    status = connection.getResponseCode();
                 }
+
+                try (InputStream is = new BufferedInputStream(connection.getInputStream())) {
+                    byte[] buffer = new byte[4096];
+                    ByteArrayOutputStream baos = new ByteArrayOutputStream();
+                    while (is.read(buffer) > 0) {
+                        baos.write(buffer);
+                    }
+                    p.setThmubnail(baos.toByteArray());
+                }
+            } catch (IOException ignore) {
+                Log.e("", ignore.getMessage());
             }
         }
     }
