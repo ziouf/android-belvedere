@@ -1,0 +1,49 @@
+{
+  "head": {
+    "link": [],
+    "vars": [
+      "nom",
+      "altitude",
+      "latitude",
+      "longitude",
+      "thumbnail",
+      "wiki"
+    ]
+  },
+  "results": {
+    "distinct": false,
+    "ordered": true,
+    "bindings": [
+      {
+        "nom": {
+          "type": "literal",
+          "xml:lang": "fr",
+          "value": "Volcan du Diable"
+        },
+        "altitude": {
+          "type": "typed-literal",
+          "datatype": "http://www.w3.org/2001/XMLSchema#integer",
+          "value": "315"
+        },
+        "latitude": {
+          "type": "typed-literal",
+          "datatype": "http://www.w3.org/2001/XMLSchema#double",
+          "value": "-49.4936"
+        },
+        "longitude": {
+          "type": "typed-literal",
+          "datatype": "http://www.w3.org/2001/XMLSchema#double",
+          "value": "69.7245"
+        },
+        "thumbnail": {
+          "type": "uri",
+          "value": "http://commons.wikimedia.org/wiki/Special:FilePath/Kerguelen_VolcanDuDiable.jpg?width=300"
+        },
+        "wiki": {
+          "type": "uri",
+          "value": "http://fr.wikipedia.org/wiki/Volcan_du_Diable"
+        }
+      }
+    ]
+  }
+}

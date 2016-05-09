@@ -6,7 +6,7 @@ import android.provider.BaseColumns;
  * Created by cscm6014 on 30/03/2016.
  */
 final class DatabaseContract {
-    public static final int DATABASE_VERSION = 7;
+    public static final int DATABASE_VERSION = 10;
     public static final String DATABASE_NAME = "database.db";
 
     public static final String TEXT_TYPE = " TEXT";
@@ -60,7 +60,7 @@ final class DatabaseContract {
                 "CREATE TABLE " + TABLE_NAME + " (" +
                         _ID + " INTEGER PRIMARY KEY," +
                         COLUMN_NAME_KEY + TEXT_TYPE + UNIQUE + COMMA_SEP +
-                        COLUMN_NAME_VALUE + TEXT_TYPE + UNIQUE + ")";
+                        COLUMN_NAME_VALUE + TEXT_TYPE + ")";
 
         public static final String DROP_TABLE =
                 "DROP TABLE IF EXISTS " + TABLE_NAME;

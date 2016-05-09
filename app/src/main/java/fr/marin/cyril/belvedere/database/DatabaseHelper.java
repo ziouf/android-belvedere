@@ -4,6 +4,7 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.database.Cursor;
+import android.database.sqlite.SQLiteConstraintException;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.os.AsyncTask;
@@ -15,9 +16,8 @@ import java.util.ArrayList;
 import java.util.Collection;
 
 import fr.marin.cyril.belvedere.R;
-import fr.marin.cyril.belvedere.kml.model.Coordinates;
-import fr.marin.cyril.belvedere.kml.model.Placemark;
-import fr.marin.cyril.belvedere.kml.parser.KmlParser;
+import fr.marin.cyril.belvedere.model.Placemark;
+import fr.marin.cyril.belvedere.sparql.parser.JsonResponseParser;
 import fr.marin.cyril.belvedere.tools.Area;
 import fr.marin.cyril.belvedere.tools.Utils;
 
@@ -61,7 +61,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         try (SQLiteDatabase db = this.getWritableDatabase()) {
             ContentValues values = new ContentValues();
             values.put(DatabaseContract.MarkerEntry.COLUMN_NAME_TITLE, newPlacemark.getTitle());
-            values.put(DatabaseContract.MarkerEntry.COLUMN_NAME_URL, newPlacemark.getUrl());
+            values.put(DatabaseContract.MarkerEntry.COLUMN_NAME_URL, newPlacemark.getWiki_uri());
             values.put(DatabaseContract.MarkerEntry.COLUMN_NAME_ALTITUDE, newPlacemark.getCoordinates().getElevation());
 
             if (oldPlacemark == null) {
@@ -79,6 +79,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
                 db.update(DatabaseContract.MarkerEntry.TABLE_NAME, values, where, whereArgs);
             }
+        } catch (SQLiteConstraintException e) {
+            Log.e("", e.getMessage());
         }
     }
 
@@ -112,18 +114,13 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
                 c.moveToFirst();
                 while (!c.isAfterLast()) {
-                    Placemark m = new Placemark();
-                    m.setTitle(c.getString(0));
-                    m.setUrl(c.getString(1));
+                    String title = c.getString(0);
+                    String wiki_uri = c.getString(1);
+                    double lat = c.getDouble(2);
+                    double lng = c.getDouble(3);
+                    double ele = c.getDouble(4);
 
-                    LatLng latLng = new LatLng(c.getDouble(2), c.getDouble(3));
-                    Coordinates coordinates = new Coordinates(latLng);
-                    coordinates.setElevation(c.getDouble(4));
-
-                    m.setCoordinates(coordinates);
-
-                    markers.add(m);
-
+                    markers.add(new Placemark(title, lat, lng, ele, wiki_uri));
                     c.moveToNext();
                 }
 
@@ -157,15 +154,14 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 if (c.getCount() == 0) return null;
 
                 c.moveToFirst();
-                Placemark marker = new Placemark();
-                marker.setTitle(c.getString(0));
-                marker.setUrl(c.getString(1));
-                Coordinates coordinates = new Coordinates();
-                coordinates.setLatLng(new LatLng(c.getDouble(2), c.getDouble(3)));
-                coordinates.setElevation(c.getDouble(4));
-                marker.setCoordinates(coordinates);
 
-                return marker;
+                String title = c.getString(0);
+                String wiki_uri = c.getString(1);
+                double lat = c.getDouble(2);
+                double lng = c.getDouble(3);
+                double ele = c.getDouble(4);
+
+                return new Placemark(title, lat, lng, ele, wiki_uri);
             }
         }
     }
@@ -182,7 +178,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         }
     }
 
-    public String findKmlHash(String key) {
+    public String findSourceFileHash(String key) {
         try (SQLiteDatabase db = this.getWritableDatabase()) {
 
             Boolean distinct = true;
@@ -205,7 +201,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     }
 
     public void insertOrUpdateKmlHash(String key, String value) {
-        String oldValue = this.findKmlHash(key);
+        String oldValue = this.findSourceFileHash(key);
 
         try (SQLiteDatabase db = this.getWritableDatabase()) {
             ContentValues values = new ContentValues();
@@ -227,19 +223,19 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public static class InitDBTask extends AsyncTask<String, Integer, Boolean> {
         protected final Context context;
         private final DatabaseHelper databaseHelper;
-        private final KmlParser parser;
+        private final JsonResponseParser parser;
 
         public InitDBTask(Context context) {
             this.context = context;
             this.databaseHelper = new DatabaseHelper(context);
-            this.parser = new KmlParser(context);
+            this.parser = new JsonResponseParser();
         }
 
         @Override
         protected Boolean doInBackground(String... params) {
 
             // Obtention des fichiers de resource
-            TypedArray ta = context.getResources().obtainTypedArray(R.array.kml_array);
+            TypedArray ta = context.getResources().obtainTypedArray(R.array.sparql_json_array);
             for (int i = 0; i < ta.length(); ++i) {
                 publishProgress(i, ta.length());
 
@@ -247,9 +243,11 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 String key = ta.getString(i);
                 String hash = Utils.getSHA1FromResource(context, id);
 
-                if (!hash.equals(databaseHelper.findKmlHash(key))) {
+                if (!hash.equals(databaseHelper.findSourceFileHash(key))) {
                     Log.i(TAG, String.format("Importation du fichier : %s (%s)", key, hash));
-                    databaseHelper.insertAllPlacemark(parser.parse(id));
+                    Collection<Placemark> placemarks = parser.readJsonStream(context.getResources().openRawResource(id));
+
+                    databaseHelper.insertAllPlacemark(placemarks);
                     databaseHelper.insertOrUpdateKmlHash(key, hash);
                 }
             }

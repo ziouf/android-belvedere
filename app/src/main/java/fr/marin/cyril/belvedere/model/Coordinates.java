@@ -1,4 +1,4 @@
-package fr.marin.cyril.belvedere.kml.model;
+package fr.marin.cyril.belvedere.model;
 
 import com.google.android.gms.maps.model.LatLng;
 

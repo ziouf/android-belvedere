@@ -1,9 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <array name="kml_array">
-        <item>@raw/sommets_des_alpes_francaises</item>
-        <item>@raw/sommets_des_pyrenees</item>
-        <item>@raw/sommets_du_massif_central</item>
-        <item>@raw/sommets_du_massif_des_vosges</item>
+    <array name="sparql_json_array">
+        <item>@raw/sommets_fr_dbpedia_alpes_maritimes</item>
+        <item>@raw/sommets_fr_dbpedia_alsace</item>
+        <item>@raw/sommets_fr_dbpedia_aquitaine</item>
+        <item>@raw/sommets_fr_dbpedia_auvergne</item>
+        <item>@raw/sommets_fr_dbpedia_basse_normandie</item>
+        <item>@raw/sommets_fr_dbpedia_bourgogne</item>
+        <item>@raw/sommets_fr_dbpedia_champagne_ardenne</item>
+        <item>@raw/sommets_fr_dbpedia_franche_comte</item>
+        <item>@raw/sommets_fr_dbpedia_ile_de_france</item>
+        <item>@raw/sommets_fr_dbpedia_languedoc_roussillon</item>
+        <item>@raw/sommets_fr_dbpedia_limousin</item>
+        <item>@raw/sommets_fr_dbpedia_lorraine</item>
+        <item>@raw/sommets_fr_dbpedia_midi_pyrenees</item>
+        <item>@raw/sommets_fr_dbpedia_nord_pas_de_calais</item>
+        <item>@raw/sommets_fr_dbpedia_nouvelle_caledonie</item>
+        <item>@raw/sommets_fr_dbpedia_pays_de_la_loire</item>
+        <item>@raw/sommets_fr_dbpedia_picardie</item>
+        <item>@raw/sommets_fr_dbpedia_poitou_charentes</item>
+        <item>@raw/sommets_fr_dbpedia_polynesie_francaise</item>
+        <item>@raw/sommets_fr_dbpedia_provence_alpes_cote_d_azur</item>
+        <item>@raw/sommets_fr_dbpedia_region_bretagne</item>
+        <item>@raw/sommets_fr_dbpedia_region_centre</item>
+        <item>@raw/sommets_fr_dbpedia_rhone_alpes</item>
+        <item>@raw/sommets_fr_dbpedia_saint_barthelemy_antilles_francaises</item>
+        <item>@raw/sommets_fr_dbpedia_saint_pierre_et_miquelon</item>
+        <item>@raw/sommets_fr_dbpedia_terres_australes_et_antarctiques_francaises</item>
     </array>
 </resources>

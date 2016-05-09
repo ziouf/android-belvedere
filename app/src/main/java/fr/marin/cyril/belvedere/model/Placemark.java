@@ -1,4 +1,4 @@
-package fr.marin.cyril.belvedere.kml.model;
+package fr.marin.cyril.belvedere.model;
 
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
@@ -7,52 +7,42 @@ import com.google.android.gms.maps.model.MarkerOptions;
  * Created by cscm6014 on 29/03/2016.
  */
 public class Placemark {
-    private Coordinates coordinates;
     private String title;
-    private String url;
+    private Coordinates coordinates;
+    private String wiki_uri;
+    private String thumbnail_uri;
+
     private double matchLevel = 0d;
 
-    public Placemark() {
+    public Placemark(String title, double lat, double lng, double elevation, String wiki_uri) {
+        this.coordinates = new Coordinates(new LatLng(lat, lng), elevation);
+        this.title = title;
+        this.wiki_uri = wiki_uri;
     }
 
-    public Placemark(Coordinates coordinates, String title) {
-        this.coordinates = coordinates;
+    public Placemark(String title, double lat, double lng, double elevation, String wiki_uri, String thumbnail_uri) {
+        this.coordinates = new Coordinates(new LatLng(lat, lng), elevation);
         this.title = title;
-    }
-
-    public Placemark(double lat, double lng, String title) {
-        this.coordinates = new Coordinates(new LatLng(lat, lng));
-        this.title = title;
-    }
-
-    public Placemark(LatLng latLng, String title) {
-        this.coordinates = new Coordinates(latLng);
-        this.title = title;
+        this.wiki_uri = wiki_uri;
+        this.thumbnail_uri = thumbnail_uri;
     }
 
     public String getTitle() {
         return title;
     }
 
-    public void setTitle(String title) {
-        this.title = title;
+    public String getWiki_uri() {
+        return wiki_uri;
     }
 
-    public String getUrl() {
-        return url;
-    }
-
-    public void setUrl(String url) {
-        this.url = url;
+    public String getThumbnail_uri() {
+        return thumbnail_uri;
     }
 
     public Coordinates getCoordinates() {
         return coordinates;
     }
 
-    public void setCoordinates(Coordinates coordinates) {
-        this.coordinates = coordinates;
-    }
 
     public double getMatchLevel() {
         return matchLevel;

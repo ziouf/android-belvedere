@@ -10,8 +10,8 @@ import java.util.Collection;
 import java.util.HashSet;
 
 import fr.marin.cyril.belvedere.database.DatabaseHelper;
-import fr.marin.cyril.belvedere.kml.model.Coordinates;
-import fr.marin.cyril.belvedere.kml.model.Placemark;
+import fr.marin.cyril.belvedere.model.Coordinates;
+import fr.marin.cyril.belvedere.model.Placemark;
 
 /**
  * Created by CSCM6014 on 22/04/2016.

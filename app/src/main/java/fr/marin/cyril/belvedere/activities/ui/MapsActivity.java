@@ -29,7 +29,7 @@ import java.util.HashSet;
 import fr.marin.cyril.belvedere.R;
 import fr.marin.cyril.belvedere.activities.CompassActivity;
 import fr.marin.cyril.belvedere.database.DatabaseHelper;
-import fr.marin.cyril.belvedere.kml.model.Placemark;
+import fr.marin.cyril.belvedere.model.Placemark;
 import fr.marin.cyril.belvedere.tools.Area;
 
 public class MapsActivity extends CompassActivity
@@ -207,7 +207,7 @@ public class MapsActivity extends CompassActivity
             @Override
             public void onInfoWindowClick(Marker marker) {
                 Placemark m = db.findPlacemarkByLatLng(marker.getPosition());
-                startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(m.getUrl())));
+                startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(m.getWiki_uri())));
             }
         };
     }

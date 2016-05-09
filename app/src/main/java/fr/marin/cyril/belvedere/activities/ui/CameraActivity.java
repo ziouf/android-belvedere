@@ -22,7 +22,7 @@ import java.util.concurrent.TimeUnit;
 import fr.marin.cyril.belvedere.R;
 import fr.marin.cyril.belvedere.activities.CompassActivity;
 import fr.marin.cyril.belvedere.camera.Camera;
-import fr.marin.cyril.belvedere.kml.model.Placemark;
+import fr.marin.cyril.belvedere.model.Placemark;
 import fr.marin.cyril.belvedere.tools.ARPeakFinder;
 import fr.marin.cyril.belvedere.tools.Utils;
 
