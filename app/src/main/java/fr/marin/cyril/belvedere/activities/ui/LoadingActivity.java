@@ -96,8 +96,8 @@ public class LoadingActivity extends Activity
             }
 
             @Override
-            protected void onPostExecute(Boolean aBoolean) {
-                super.onPostExecute(aBoolean);
+            protected void onPostExecute(Void v) {
+                super.onPostExecute(v);
                 this.loadingInfoTextView.setText(R.string.loading_application_openning);
                 LoadingActivity.this.startActivity(new Intent(LoadingActivity.this, MapsActivity.class));
                 LoadingActivity.this.finish();

@@ -3,6 +3,7 @@ package fr.marin.cyril.belvedere.activities.ui;
 import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.BitmapFactory;
 import android.location.Location;
 import android.net.Uri;
 import android.os.Bundle;
@@ -188,12 +189,22 @@ public class MapsActivity extends CompassActivity
 
                 Placemark m = db.findPlacemarkByLatLng(marker.getPosition());
 
-                ImageView imgThumbnail = (ImageView) v.findViewById(R.id.iw_thumbnail);
-                TextView tvTitle = (TextView) v.findViewById(R.id.iw_title);
-                TextView tvAltitude = (TextView) v.findViewById(R.id.iw_altitude);
+                final ImageView imgThumbnail = (ImageView) v.findViewById(R.id.iw_thumbnail);
+                final TextView tvTitle = (TextView) v.findViewById(R.id.iw_title);
+                final TextView tvAltitude = (TextView) v.findViewById(R.id.iw_altitude);
 
                 if (m.getThumbnailArray() != null)
                     imgThumbnail.setImageBitmap(m.getThmubnail());
+                else {
+                    DatabaseHelper.DownloadImg dl = new DatabaseHelper.DownloadImg(db) {
+                        @Override
+                        protected void onPostExecute(Placemark placemark) {
+                            super.onPostExecute(placemark);
+                            imgThumbnail.setImageBitmap(placemark.getThmubnail());
+                        }
+                    };
+                    dl.execute(m);
+                }
 
                 tvTitle.setText(m.getTitle());
                 tvAltitude.setText(m.getCoordinates().getElevationString());

@@ -10,6 +10,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 import android.os.AsyncTask;
 import android.util.Log;
 
+import com.google.android.gms.location.places.Place;
 import com.google.android.gms.maps.model.LatLng;
 
 import java.io.BufferedInputStream;
@@ -19,7 +20,9 @@ import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
+import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
@@ -238,9 +241,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         }
     }
 
-    public static class InitDBTask extends AsyncTask<String, Integer, Boolean> {
+    public static class InitDBTask extends AsyncTask<Void, Integer, Void> {
         protected final Context context;
-        private final ExecutorService pool = Executors.newFixedThreadPool(50);
         private final DatabaseHelper databaseHelper;
         private final JsonResponseParser parser;
 
@@ -251,7 +253,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         }
 
         @Override
-        protected Boolean doInBackground(String... params) {
+        protected Void doInBackground(Void... params) {
 
             // Obtention des fichiers de resource
             TypedArray ta = context.getResources().obtainTypedArray(R.array.sparql_json_array);
@@ -264,7 +266,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
                 if (!hash.equals(databaseHelper.findSourceFileHash(key))) {
                     Log.i(TAG, String.format("Importation du fichier : %s (%s)", key, hash));
-                    Collection<Placemark> placemarks = parser.readJsonStream(context.getResources().openRawResource(id));
+                    List<Placemark> placemarks = parser.readJsonStream(context.getResources().openRawResource(id));
 
                     databaseHelper.insertAllPlacemark(placemarks);
                     databaseHelper.insertOrUpdateKmlHash(key, hash);
@@ -278,29 +280,36 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     }
 
     // TODO : Revoir la stratégie de récup des thumbnails
-    private class DownloadImg implements Runnable {
-        private final Placemark p;
+    public static class DownloadImg extends AsyncTask<Placemark, Void, Placemark> {
+        private final DatabaseHelper db;
 
-        public DownloadImg(Placemark p) {
-            this.p = p;
+        public DownloadImg(DatabaseHelper db) {
+            this.db = db;
         }
 
         @Override
-        public void run() {
+        protected void onPostExecute(Placemark placemark) {
+            super.onPostExecute(placemark);
+            db.insertOrUpdatePlacemark(placemark);
+        }
 
+        @Override
+        protected Placemark doInBackground(Placemark... params) {
+            return run(params[0]);
+        }
+
+        private Placemark run(Placemark p) {
             try {
                 URL url = new URL(p.getThumbnail_uri());
                 HttpURLConnection connection = (HttpURLConnection) url.openConnection();
-                connection.connect();
 
                 int status = connection.getResponseCode();
                 while (status == HttpURLConnection.HTTP_SEE_OTHER
                         || status == HttpURLConnection.HTTP_MOVED_PERM
                         || status == HttpURLConnection.HTTP_MOVED_TEMP) {
-                    connection.disconnect();
+
                     url = new URL(connection.getHeaderField("Location"));
                     connection = (HttpURLConnection) url.openConnection();
-                    connection.connect();
                     status = connection.getResponseCode();
                 }
 
@@ -315,6 +324,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             } catch (IOException ignore) {
                 Log.e("", ignore.getMessage());
             }
+
+            return p;
         }
     }
 }
