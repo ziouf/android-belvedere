@@ -3,6 +3,7 @@ package fr.marin.cyril.belvedere.activities.ui;
 import android.annotation.TargetApi;
 import android.app.ActionBar;
 import android.content.pm.ActivityInfo;
+import android.location.Location;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
@@ -51,7 +52,6 @@ public class CameraActivity extends CompassActivity {
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
         this.portrait = false;
-        this.locateOnlyOnce = true;
 
         // Init Camera
         this.camera = Camera.getCameraInstance(this);
@@ -100,6 +100,12 @@ public class CameraActivity extends CompassActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
+    }
+
+    @Override
+    public void onLocationChanged(Location location) {
+        super.onLocationChanged(location);
+        this.removeLocationUpdates();
     }
 
     private void updateDebugTextView() {

@@ -24,7 +24,6 @@ public class LocationActivity extends FragmentActivity
 
     protected final Criteria locationCriteria = new Criteria();
 
-    protected boolean locateOnlyOnce = false;
     protected Location location;
     protected GeomagneticField geoField;
     protected LocationManager locationManager;
@@ -41,13 +40,13 @@ public class LocationActivity extends FragmentActivity
     @Override
     protected void onResume() {
         super.onResume();
-        this.registerUpdates();
+        this.registerLocationUpdates();
     }
 
     @Override
     protected void onPause() {
         super.onPause();
-        this.removeUpdates();
+        this.removeLocationUpdates();
     }
 
     @Override
@@ -64,18 +63,16 @@ public class LocationActivity extends FragmentActivity
                 (float) location.getAltitude(),
                 System.currentTimeMillis()
         );
-
-        if (locateOnlyOnce) this.removeUpdates();
     }
 
-    private void registerUpdates() {
+    protected void registerLocationUpdates() {
         if (ActivityCompat.checkSelfPermission(this, LOCATION_PERMISSION) == PackageManager.PERMISSION_GRANTED) {
             this.location = locationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
             this.locationManager.requestLocationUpdates(locationManager.getBestProvider(locationCriteria, true), LOCATION_UPDATE_TIME, LOCATION_UPDATE_DISTANCE, this);
         }
     }
 
-    private void removeUpdates() {
+    protected void removeLocationUpdates() {
         if (ActivityCompat.checkSelfPermission(this, LOCATION_PERMISSION) == PackageManager.PERMISSION_GRANTED) {
             this.locationManager.removeUpdates(this);
         }

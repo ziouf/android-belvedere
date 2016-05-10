@@ -81,6 +81,7 @@ public class MapsActivity extends CompassActivity
             public void onClick(View v) {
                 Log.i("", "Click myPosButton");
                 MapsActivity.this.centerMapCameraOnMyPosition();
+                MapsActivity.this.registerLocationUpdates();
             }
         });
 
@@ -112,6 +113,8 @@ public class MapsActivity extends CompassActivity
         TextView tv = (TextView) findViewById(R.id.debug_location_info);
         tv.setText(String.format("lat : %s | lng : %s | alt : %s",
                 location.getLatitude(), location.getLongitude(), location.getAltitude()));
+
+        this.removeLocationUpdates();
     }
 
     @Override

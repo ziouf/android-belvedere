@@ -309,7 +309,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                     Log.i(TAG, String.format("Importation du fichier : %s (%s)", key, hash));
                     List<Placemark> placemarks = parser.readJsonStream(context.getResources().openRawResource(id));
 
-                    pool = Executors.newFixedThreadPool(Runtime.getRuntime().availableProcessors() * 2);
+                    pool = Executors.newFixedThreadPool(Runtime.getRuntime().availableProcessors() * 10);
                     for (Placemark p : placemarks) {
                         pool.submit(new DownloadThumbnail(p));
                     }
