@@ -5,16 +5,7 @@
     android:background="@color/background_black"
     tools:context=".activities.ui.CameraActivity">
 
-    <TextureView
-        android:id="@+id/camera_preview_tv"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent" />
-
-    <SurfaceView
-        android:id="@+id/camera_preview_sv"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        />
+    <include layout="@layout/camera_layout" />
 
     <ImageView
         android:id="@+id/camera_binocular_mask"
