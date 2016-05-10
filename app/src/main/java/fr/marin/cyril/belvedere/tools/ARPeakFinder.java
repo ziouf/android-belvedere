@@ -143,7 +143,7 @@ public class ARPeakFinder {
                 double distance = Utils.getDistanceBetween(location, p.getCoordinates().getLatLng());
                 double elevation_delta = Math.abs(p.getCoordinates().getElevation() - location.getAltitude());
                 double azimuth_delta = Math.abs(theoricalAzimuth - oAzimuth);
-                double lvl = distance / elevation_delta * azimuth_delta;
+                double lvl = (distance + elevation_delta) * azimuth_delta;
 
                 p.setMatchLevel(lvl);
                 matchingPlacemark.add(p);
