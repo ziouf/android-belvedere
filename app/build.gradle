@@ -2,7 +2,12 @@ apply plugin: 'com.android.application'
 
 android {
     signingConfigs {
-
+        Belvedere {
+            keyAlias 'belvederekey'
+            keyPassword 'open4range'
+            storeFile file(new File('../_keystore/android.jks'))
+            storePassword 'open4range'
+        }
     }
     compileSdkVersion 23
     buildToolsVersion "23.0.3"
@@ -18,6 +23,27 @@ android {
         release {
             minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.Belvedere
+        }
+        release_alpha {
+            debuggable false
+            jniDebuggable false
+            signingConfig signingConfigs.Belvedere
+            renderscriptDebuggable false
+            renderscriptOptimLevel 3
+            minifyEnabled true
+            versionNameSuffix '_alpha'
+            zipAlignEnabled true
+        }
+        release_beta {
+            debuggable false
+            jniDebuggable false
+            signingConfig signingConfigs.Belvedere
+            renderscriptDebuggable false
+            renderscriptOptimLevel 3
+            minifyEnabled true
+            versionNameSuffix '_beta'
+            zipAlignEnabled true
         }
     }
     compileOptions {
