@@ -159,9 +159,9 @@ public class CameraActivity extends CompassActivity {
                         peak_thumbnail_img.setImageBitmap(nearest.getThmubnail());
 
                     String s = nearest.getTitle() + "\n" +
-                            nearest.getCoordinates().getElevation() + " m\n" +
-                            nearest.getMatchLevel();
+                            nearest.getCoordinates().getElevation() + " m";
                     peak_info_tv.setText(s);
+                    peak_info_tv.setVisibility(View.VISIBLE);
                 }
             };
         }
