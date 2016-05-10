@@ -159,9 +159,7 @@ public class CameraActivity extends CompassActivity {
                         peak_thumbnail_img.setImageBitmap(nearest.getThmubnail());
 
                     String s = nearest.getTitle() + "\n" +
-                            nearest.getCoordinates().getElevation() + " m | " +
-                            String.format(Locale.getDefault(), "%.2f", distance / 1000f) + " km";
-
+                            nearest.getCoordinates().getElevation() + " m";
                     peak_info_tv.setText(s);
                 }
             };
