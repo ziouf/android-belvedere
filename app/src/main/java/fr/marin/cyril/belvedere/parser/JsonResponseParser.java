@@ -1,4 +1,4 @@
-package fr.marin.cyril.belvedere.sparql.parser;
+package fr.marin.cyril.belvedere.parser;
 
 import android.util.JsonReader;
 import android.util.Log;

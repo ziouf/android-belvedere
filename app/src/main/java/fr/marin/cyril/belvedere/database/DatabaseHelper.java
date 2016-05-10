@@ -28,7 +28,7 @@ import java.util.concurrent.TimeUnit;
 
 import fr.marin.cyril.belvedere.R;
 import fr.marin.cyril.belvedere.model.Placemark;
-import fr.marin.cyril.belvedere.sparql.parser.JsonResponseParser;
+import fr.marin.cyril.belvedere.parser.JsonResponseParser;
 import fr.marin.cyril.belvedere.tools.Area;
 import fr.marin.cyril.belvedere.tools.Utils;
 
@@ -37,9 +37,14 @@ import fr.marin.cyril.belvedere.tools.Utils;
  */
 public class DatabaseHelper extends SQLiteOpenHelper {
     private static final String TAG = "DatabaseHelper";
+    private static DatabaseHelper databaseHelper = null;
 
     public DatabaseHelper(Context context) {
         super(context, DatabaseContract.DATABASE_NAME, null, DatabaseContract.DATABASE_VERSION);
+    }
+
+    public static DatabaseHelper getInstance(Context context) {
+        return databaseHelper == null ? new DatabaseHelper(context) : databaseHelper;
     }
 
     @Override
@@ -276,6 +281,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     }
 
     public static class InitDBTask extends AsyncTask<Void, Integer, Void> {
+        private static final String TAG = "InitDBTask";
         protected final Context context;
         private final DatabaseHelper databaseHelper;
         private final JsonResponseParser parser;
@@ -283,7 +289,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
         public InitDBTask(Context context) {
             this.context = context;
-            this.databaseHelper = new DatabaseHelper(context);
+            this.databaseHelper = DatabaseHelper.getInstance(context);
             this.parser = new JsonResponseParser();
         }
 
@@ -303,14 +309,15 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                     Log.i(TAG, String.format("Importation du fichier : %s (%s)", key, hash));
                     List<Placemark> placemarks = parser.readJsonStream(context.getResources().openRawResource(id));
 
-                    pool = Executors.newFixedThreadPool(25);
+                    pool = Executors.newFixedThreadPool(Runtime.getRuntime().availableProcessors() * 2);
                     for (Placemark p : placemarks) {
                         pool.submit(new DownloadThumbnail(p));
                     }
-                    pool.shutdown();
                     try {
+                        pool.shutdown();
                         pool.awaitTermination(Long.MAX_VALUE, TimeUnit.NANOSECONDS);
                     } catch (InterruptedException ignore) {
+                        Log.w(TAG, ignore.getMessage());
                     }
 
                     databaseHelper.insertAllPlacemark(placemarks);

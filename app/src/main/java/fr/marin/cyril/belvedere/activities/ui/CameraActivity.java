@@ -154,7 +154,10 @@ public class CameraActivity extends CompassActivity {
             return new Runnable() {
                 @Override
                 public void run() {
-                    peak_thumbnail_img.setImageBitmap(nearest.getThmubnail());
+                    // Check si thumbnail != null avant de l'afficher
+                    if (nearest.getThumbnailArray() != null)
+                        peak_thumbnail_img.setImageBitmap(nearest.getThmubnail());
+
                     peak_info_tv.setText(String.format(Locale.getDefault(), "[%s | altitude %s m | distance %.2f km]",
                             nearest.getTitle(), nearest.getCoordinates().getElevation(), distance / 1000f));
                 }

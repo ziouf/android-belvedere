@@ -38,15 +38,17 @@ public class MapsActivity extends CompassActivity
         implements OnMapReadyCallback, GoogleMap.OnMapLoadedCallback, GoogleMap.OnCameraChangeListener {
 
     private final Collection<Marker> markersShown = new HashSet<>();
-    private final DatabaseHelper db = new DatabaseHelper(MapsActivity.this);
 
     private Marker compassMarker;
     private GoogleMap mMap;
+    private DatabaseHelper db;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_maps);
+
+        db = DatabaseHelper.getInstance(getApplicationContext());
 
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         MapFragment mapFragment = (MapFragment) getFragmentManager().findFragmentById(R.id.google_maps_fragment);
@@ -183,7 +185,8 @@ public class MapsActivity extends CompassActivity
 
             @Override
             public View getInfoContents(Marker marker) {
-                if (marker.getId().equals(compassMarker.getId())) return null;
+                if (compassMarker != null && marker.getId().equals(compassMarker.getId()))
+                    return null;
 
                 View v = getLayoutInflater().inflate(R.layout.info_window, null);
 
@@ -227,7 +230,10 @@ public class MapsActivity extends CompassActivity
         return new GoogleMap.OnMarkerClickListener() {
             @Override
             public boolean onMarkerClick(Marker marker) {
-                return marker.getId().equals(compassMarker.getId());
+                if (compassMarker != null)
+                    return marker.getId().equals(compassMarker.getId());
+                else
+                    return false;
             }
         };
     }

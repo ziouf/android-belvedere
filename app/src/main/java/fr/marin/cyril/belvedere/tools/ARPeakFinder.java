@@ -31,7 +31,6 @@ public class ARPeakFinder {
     private static final double AZIMUTH_ACCURACY = 0.5d;
     private static final double EARTH_RADIUS = 6371d;
 
-    private final Context context;
     private final DatabaseHelper db;
 
     // Observateur
@@ -41,8 +40,7 @@ public class ARPeakFinder {
     private double oPitch;
 
     public ARPeakFinder(Context context) {
-        this.context = context;
-        this.db = new DatabaseHelper(context);
+        this.db = DatabaseHelper.getInstance(context);
     }
 
     public static double[] getAzimuthAccuracy(double azimuth) {
