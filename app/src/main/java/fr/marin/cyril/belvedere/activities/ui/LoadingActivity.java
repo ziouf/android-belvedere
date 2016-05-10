@@ -113,4 +113,5 @@ public class LoadingActivity extends Activity
 
         initDBTask.execute();
     }
+
 }

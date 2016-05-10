@@ -7,24 +7,24 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteConstraintException;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
 import android.util.Log;
 
-import com.google.android.gms.location.places.Place;
 import com.google.android.gms.maps.model.LatLng;
 
-import java.io.BufferedInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import java.util.concurrent.TimeUnit;
 
 import fr.marin.cyril.belvedere.R;
 import fr.marin.cyril.belvedere.model.Placemark;
@@ -101,6 +101,41 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         for (Placemark m : markers) insertOrUpdatePlacemark(m);
     }
 
+    public Collection<Placemark> findAllPlacemarks() {
+        try (SQLiteDatabase db = this.getReadableDatabase()) {
+            Collection<Placemark> placemarks = new ArrayList<>();
+
+            String[] columns = new String[]{
+                    DatabaseContract.MarkerEntry.COLUMN_NAME_TITLE,
+                    DatabaseContract.MarkerEntry.COLUMN_NAME_URL,
+                    DatabaseContract.MarkerEntry.COLUMN_NAME_THUMBNAIL_URL,
+                    DatabaseContract.MarkerEntry.COLUMN_NAME_THUMBNAIL,
+                    DatabaseContract.MarkerEntry.COLUMN_NAME_LATITUDE,
+                    DatabaseContract.MarkerEntry.COLUMN_NAME_LONGITUDE,
+                    DatabaseContract.MarkerEntry.COLUMN_NAME_ALTITUDE
+            };
+
+            try (Cursor c = db.query(DatabaseContract.MarkerEntry.TABLE_NAME, columns, null, null, null, null, null)) {
+                if (c.getCount() == 0) return placemarks;
+                if (c.moveToFirst()) {
+                    while (!c.isAfterLast()) {
+                        String title = c.getString(0);
+                        String wiki_uri = c.getString(1);
+                        String thumbnail_url = c.getString(2);
+                        byte[] thumbnail = c.getBlob(3);
+                        double lat = c.getDouble(4);
+                        double lng = c.getDouble(5);
+                        double ele = c.getDouble(6);
+
+                        placemarks.add(new Placemark(title, lat, lng, ele, wiki_uri, thumbnail_url, thumbnail));
+                        c.moveToNext();
+                    }
+                }
+            }
+            return placemarks;
+        }
+    }
+
     public Collection<Placemark> findPlacemarkInArea(Double top, Double left, Double right, Double bottom) {
         try (SQLiteDatabase db = this.getReadableDatabase()) {
             Collection<Placemark> markers = new ArrayList<>();
@@ -126,21 +161,20 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                     null, null, DatabaseContract.MarkerEntry.COLUMN_NAME_ALTITUDE + " DESC", "25")) {
 
                 if (c.getCount() == 0) return markers;
+                if (c.moveToFirst()) {
+                    while (!c.isAfterLast()) {
+                        String title = c.getString(0);
+                        String wiki_uri = c.getString(1);
+                        String thumbnail_url = c.getString(2);
+                        byte[] thumbnail = c.getBlob(3);
+                        double lat = c.getDouble(4);
+                        double lng = c.getDouble(5);
+                        double ele = c.getDouble(6);
 
-                c.moveToFirst();
-                while (!c.isAfterLast()) {
-                    String title = c.getString(0);
-                    String wiki_uri = c.getString(1);
-                    String thumbnail_url = c.getString(2);
-                    byte[] thumbnail = c.getBlob(3);
-                    double lat = c.getDouble(4);
-                    double lng = c.getDouble(5);
-                    double ele = c.getDouble(6);
-
-                    markers.add(new Placemark(title, lat, lng, ele, wiki_uri, thumbnail_url, thumbnail));
-                    c.moveToNext();
+                        markers.add(new Placemark(title, lat, lng, ele, wiki_uri, thumbnail_url, thumbnail));
+                        c.moveToNext();
+                    }
                 }
-
                 return markers;
             }
         }
@@ -245,6 +279,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         protected final Context context;
         private final DatabaseHelper databaseHelper;
         private final JsonResponseParser parser;
+        private ExecutorService pool;
 
         public InitDBTask(Context context) {
             this.context = context;
@@ -268,6 +303,16 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                     Log.i(TAG, String.format("Importation du fichier : %s (%s)", key, hash));
                     List<Placemark> placemarks = parser.readJsonStream(context.getResources().openRawResource(id));
 
+                    pool = Executors.newFixedThreadPool(25);
+                    for (Placemark p : placemarks) {
+                        pool.submit(new DownloadThumbnail(p));
+                    }
+                    pool.shutdown();
+                    try {
+                        pool.awaitTermination(Long.MAX_VALUE, TimeUnit.NANOSECONDS);
+                    } catch (InterruptedException ignore) {
+                    }
+
                     databaseHelper.insertAllPlacemark(placemarks);
                     databaseHelper.insertOrUpdateKmlHash(key, hash);
                 }
@@ -277,55 +322,50 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
             return null;
         }
-    }
 
-    // TODO : Revoir la stratégie de récup des thumbnails
-    public static class DownloadImg extends AsyncTask<Placemark, Void, Placemark> {
-        private final DatabaseHelper db;
+        private class DownloadThumbnail implements Runnable {
+            private final Placemark placemark;
 
-        public DownloadImg(DatabaseHelper db) {
-            this.db = db;
-        }
-
-        @Override
-        protected void onPostExecute(Placemark placemark) {
-            super.onPostExecute(placemark);
-            db.insertOrUpdatePlacemark(placemark);
-        }
-
-        @Override
-        protected Placemark doInBackground(Placemark... params) {
-            return run(params[0]);
-        }
-
-        private Placemark run(Placemark p) {
-            try {
-                URL url = new URL(p.getThumbnail_uri());
-                HttpURLConnection connection = (HttpURLConnection) url.openConnection();
-
-                int status = connection.getResponseCode();
-                while (status == HttpURLConnection.HTTP_SEE_OTHER
-                        || status == HttpURLConnection.HTTP_MOVED_PERM
-                        || status == HttpURLConnection.HTTP_MOVED_TEMP) {
-
-                    url = new URL(connection.getHeaderField("Location"));
-                    connection = (HttpURLConnection) url.openConnection();
-                    status = connection.getResponseCode();
-                }
-
-                try (InputStream is = new BufferedInputStream(connection.getInputStream())) {
-                    byte[] buffer = new byte[4096];
-                    ByteArrayOutputStream baos = new ByteArrayOutputStream();
-                    while (is.read(buffer) > 0) {
-                        baos.write(buffer);
-                    }
-                    p.setThmubnail(baos.toByteArray());
-                }
-            } catch (IOException ignore) {
-                Log.e("", ignore.getMessage());
+            public DownloadThumbnail(Placemark placemark) {
+                this.placemark = placemark;
             }
 
-            return p;
+            @Override
+            public void run() {
+                getThumbnail(placemark);
+            }
+
+            private void getThumbnail(Placemark placemark) {
+                try {
+                    URL url = new URL(placemark.getThumbnail_uri());
+                    HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+                    int status = connection.getResponseCode();
+                    while (status == HttpURLConnection.HTTP_SEE_OTHER
+                            || status == HttpURLConnection.HTTP_MOVED_PERM
+                            || status == HttpURLConnection.HTTP_MOVED_TEMP) {
+                        url = new URL(connection.getHeaderField("Location"));
+                        // fermeture de la connexion actuelle
+                        connection.disconnect();
+                        connection = (HttpURLConnection) url.openConnection();
+                        status = connection.getResponseCode();
+                    }
+
+                    try (InputStream is = connection.getInputStream()) {
+                        ByteArrayOutputStream baos = new ByteArrayOutputStream(8192);
+                        Bitmap bitmap = BitmapFactory.decodeStream(is);
+                        bitmap.compress(Bitmap.CompressFormat.WEBP, 85, baos);
+                        placemark.setThmubnail(baos.toByteArray());
+                    } finally {
+                        connection.disconnect();
+                    }
+
+                } catch (IOException ignore) {
+                    Log.e("", ignore.getMessage());
+                }
+            }
         }
+
+
     }
+
 }

@@ -10,6 +10,7 @@ import android.os.Looper;
 import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.Collection;
@@ -38,6 +39,7 @@ public class CameraActivity extends CompassActivity {
     private final ScheduledExecutorService mScheduler = Executors.newScheduledThreadPool(1);
 
     private Camera camera;
+    private ImageView peak_thumbnail_img;
     private TextView peak_info_tv;
     private ScheduledFuture arTask = null;
 
@@ -53,6 +55,7 @@ public class CameraActivity extends CompassActivity {
 
         // Init Camera
         this.camera = Camera.getCameraInstance(this);
+        this.peak_thumbnail_img = (ImageView) findViewById(R.id.peak_thumbnail_img);
         this.peak_info_tv = (TextView) findViewById(R.id.peak_info_tv);
     }
 
@@ -151,7 +154,9 @@ public class CameraActivity extends CompassActivity {
             return new Runnable() {
                 @Override
                 public void run() {
-                    peak_info_tv.setText(String.format(Locale.getDefault(), "[%s : %.2f km]", nearest.getTitle(), distance / 1000f));
+                    peak_thumbnail_img.setImageBitmap(nearest.getThmubnail());
+                    peak_info_tv.setText(String.format(Locale.getDefault(), "[%s | altitude %s m | distance %.2f km]",
+                            nearest.getTitle(), nearest.getCoordinates().getElevation(), distance / 1000f));
                 }
             };
         }

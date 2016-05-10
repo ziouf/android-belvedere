@@ -3,7 +3,7 @@ package fr.marin.cyril.belvedere.activities.ui;
 import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.graphics.BitmapFactory;
+import android.graphics.Bitmap;
 import android.location.Location;
 import android.net.Uri;
 import android.os.Bundle;
@@ -193,17 +193,12 @@ public class MapsActivity extends CompassActivity
                 final TextView tvTitle = (TextView) v.findViewById(R.id.iw_title);
                 final TextView tvAltitude = (TextView) v.findViewById(R.id.iw_altitude);
 
-                if (m.getThumbnailArray() != null)
-                    imgThumbnail.setImageBitmap(m.getThmubnail());
-                else {
-                    DatabaseHelper.DownloadImg dl = new DatabaseHelper.DownloadImg(db) {
-                        @Override
-                        protected void onPostExecute(Placemark placemark) {
-                            super.onPostExecute(placemark);
-                            imgThumbnail.setImageBitmap(placemark.getThmubnail());
-                        }
-                    };
-                    dl.execute(m);
+                if (m.getThumbnailArray() != null) {
+                    Bitmap thumbnail = m.getThmubnail();
+                    imgThumbnail.setImageBitmap(thumbnail);
+                    imgThumbnail.setVisibility(View.VISIBLE);
+                    imgThumbnail.setMaxWidth(thumbnail.getWidth());
+                    imgThumbnail.setMaxHeight(thumbnail.getHeight());
                 }
 
                 tvTitle.setText(m.getTitle());
@@ -270,7 +265,8 @@ public class MapsActivity extends CompassActivity
             markersShown.removeAll(toRemove);
         }
 
-        for (Placemark m : db.findPlacemarkInArea(area))
+        for (Placemark m : db.findPlacemarkInArea(area)) {
             markersShown.add(mMap.addMarker(m.getMarkerOptions()));
+        }
     }
 }
