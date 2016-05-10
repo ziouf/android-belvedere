@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://earth.google.com/kml/2.x">
+	<Placemark>
+		<name><![CDATA[Mont Granier]]></name>
+		<Point>
+			<coordinates>5.92528,45.46472,1933</coordinates>
+		</Point>
+	</Placemark>
+</kml>

@@ -141,7 +141,7 @@ public class CameraActivity extends CompassActivity {
 
             for (Placemark p : placemarks) {
                 if (p.getMatchLevel() < matchLevel) {
-                    Log.i(TAG, "ARTask : new nearest Placemark : " + p.getTitle());
+                    Log.d(TAG, "ARTask : new nearest Placemark : " + p.getTitle());
                     matchLevel = p.getMatchLevel();
                     distance = Utils.getDistanceBetween(location, p.getCoordinates().getLatLng());
                     nearest = p;
@@ -158,8 +158,11 @@ public class CameraActivity extends CompassActivity {
                     if (nearest.getThumbnailArray() != null)
                         peak_thumbnail_img.setImageBitmap(nearest.getThmubnail());
 
-                    peak_info_tv.setText(String.format(Locale.getDefault(), "[%s | altitude %s m | distance %.2f km]",
-                            nearest.getTitle(), nearest.getCoordinates().getElevation(), distance / 1000f));
+                    String s = nearest.getTitle() + "\n" +
+                            getResources().getString(R.string.label_altitude) + " " + nearest.getCoordinates().getElevation() + " m | " +
+                            getResources().getString(R.string.label_distance) + " " + String.format(Locale.getDefault(), "%.2f", distance / 1000f) + " km";
+
+                    peak_info_tv.setText(s);
                 }
             };
         }
