@@ -9,4 +9,6 @@
 
     <string name="menu_maps">Carte</string>
     <string name="menu_about">A propos</string>
+    <string name="label_altitude">altitude</string>
+    <string name="label_distance">distance</string>
 </resources>
