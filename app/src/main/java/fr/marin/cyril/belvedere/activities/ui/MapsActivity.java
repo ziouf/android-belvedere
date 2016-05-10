@@ -188,7 +188,7 @@ public class MapsActivity extends CompassActivity
                 if (compassMarker != null && marker.getId().equals(compassMarker.getId()))
                     return null;
 
-                View v = getLayoutInflater().inflate(R.layout.info_window, null);
+                View v = getLayoutInflater().inflate(R.layout.maps_info_window, null);
 
                 Placemark m = db.findPlacemarkByLatLng(marker.getPosition());
 
