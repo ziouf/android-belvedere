@@ -22,6 +22,7 @@
         android:layout_height="match_parent"
         android:scaleType="fitXY"
         android:src="@drawable/binocular_mask"
+        android:visibility="gone"
         />
 
     <ImageView
