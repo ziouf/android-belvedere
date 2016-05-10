@@ -136,7 +136,7 @@ public class CameraActivity extends CompassActivity {
             ar.setObserverAzimuth(CameraActivity.this.getAzimuth());
             ar.setObserverLocation(CameraActivity.this.location);
 
-            Collection<Placemark> placemarks = ar.getMatchingPlacemark();
+            Collection<Placemark> placemarks = ar.getMatchingPlacemark(location);
             if (placemarks.size() == 0) return;
 
             for (Placemark p : placemarks) {
@@ -159,7 +159,8 @@ public class CameraActivity extends CompassActivity {
                         peak_thumbnail_img.setImageBitmap(nearest.getThmubnail());
 
                     String s = nearest.getTitle() + "\n" +
-                            nearest.getCoordinates().getElevation() + " m";
+                            nearest.getCoordinates().getElevation() + " m\n" +
+                            nearest.getMatchLevel();
                     peak_info_tv.setText(s);
                 }
             };

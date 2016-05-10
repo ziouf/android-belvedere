@@ -28,7 +28,7 @@ public class ARPeakFinder {
     private static final int MAX_VALUE = 1;
     private static final int SEARCH_AREA_LATERAL_KM = 15;
     private static final int SEARCH_AREA_FRONT_KM = 80;
-    private static final double AZIMUTH_ACCURACY = 0.5d;
+    private static final double AZIMUTH_ACCURACY = 1d;
     private static final double EARTH_RADIUS = 6371d;
 
     private final DatabaseHelper db;
@@ -129,7 +129,7 @@ public class ARPeakFinder {
         return new Area(northEast, southWest);
     }
 
-    public Collection<Placemark> getMatchingPlacemark() {
+    public Collection<Placemark> getMatchingPlacemark(Location location) {
         HashSet<Placemark> matchingPlacemark = new HashSet<>();
 
         Area area = getSearchArea();
@@ -139,7 +139,7 @@ public class ARPeakFinder {
             double theoricalAzimuth = getTheoricalAzimuth(p.getCoordinates());
             if (isMatchingAccuracy(theoricalAzimuth)) {
                 Log.i(TAG, "getMatchingPlacemark : Placemark Matching : " + p.getTitle());
-                p.setMatchLevel(Math.abs(theoricalAzimuth - oAzimuth));
+                p.setMatchLevel(Math.abs(theoricalAzimuth - oAzimuth) * Utils.getDistanceBetween(location, p.getCoordinates().getLatLng()));
                 matchingPlacemark.add(p);
             }
         }
