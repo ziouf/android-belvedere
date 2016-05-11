@@ -138,6 +138,7 @@ public class CameraActivity extends CompassActivity {
 
         @Override
         public void run() {
+            nearest = null;
             matchLevel = Float.MAX_VALUE;
             ar.setObserverAzimuth(CameraActivity.this.getAzimuth());
             ar.setObserverLocation(CameraActivity.this.location);
@@ -159,6 +160,11 @@ public class CameraActivity extends CompassActivity {
             return new Runnable() {
                 @Override
                 public void run() {
+                    if (nearest == null) {
+                        peak_thumbnail_img.setVisibility(View.INVISIBLE);
+                        peak_info_tv.setVisibility(View.INVISIBLE);
+                    }
+
                     // Check si thumbnail != null avant de l'afficher
                     if (nearest.hasThumbnail()) {
                         peak_thumbnail_img.setImageBitmap(nearest.getThumbnail());
