@@ -15,8 +15,8 @@ android {
         applicationId "fr.marin.cyril.mapsapp"
         minSdkVersion 19
         targetSdkVersion 23
-        versionCode 108
-        versionName "1.0.8"
+        versionCode 109
+        versionName "1.0.9"
         vectorDrawables.useSupportLibrary = true
     }
     buildTypes {
