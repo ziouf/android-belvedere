@@ -18,6 +18,8 @@
 
     <include layout="@layout/peak_info_layout" />
 
+    <include layout="@layout/reticule_layout" />
+
     <TextView
         android:id="@+id/debug_camera_tv"
         style="@style/DebugTheme"

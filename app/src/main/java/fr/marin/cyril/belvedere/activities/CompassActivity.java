@@ -20,8 +20,8 @@ public class CompassActivity extends LocationActivity
         implements SensorEventListener {
     public static final int AZIMUTH = 0;
     public static final int PITCH = 1;
-    protected static final String KEY_AZIMUTH = "azimuth";
-    protected static final String KEY_PITCH = "pitch";
+    public static final String KEY_AZIMUTH = "azimuth";
+    public static final String KEY_PITCH = "pitch";
     protected final float[] data = new float[2];
     protected boolean portrait = true;
 

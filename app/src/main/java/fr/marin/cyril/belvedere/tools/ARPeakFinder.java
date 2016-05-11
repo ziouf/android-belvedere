@@ -9,6 +9,7 @@ import com.google.android.gms.maps.model.LatLng;
 import java.util.Collection;
 import java.util.HashSet;
 
+import fr.marin.cyril.belvedere.activities.CompassActivity;
 import fr.marin.cyril.belvedere.database.DatabaseHelper;
 import fr.marin.cyril.belvedere.model.Area;
 import fr.marin.cyril.belvedere.model.Coordinates;
@@ -28,10 +29,11 @@ public class ARPeakFinder {
     private static final int MIN_VALUE = 0;
     private static final int MAX_VALUE = 1;
     private static final int SEARCH_AREA_LATERAL_KM = 15;
-    private static final int SEARCH_AREA_FRONT_KM = 80;
+    private static final int SEARCH_AREA_FRONT_KM = 100;
     private static final int[] DISTANCE_STEPS = new int[]{10000, 15000, 20000};
-    private static final double[] AZIMUTH_ACCURACY = new double[]{5d, 2.5d, 1, 0.25d};
-    private static final double EARTH_RADIUS = 6371d;
+    private static final double[] AZIMUTH_ACCURACY = new double[]{4d, 2d, 1d, 0.25d};
+    private static final double PITCH_ACCURACY = 0.75d;
+    private static final double EARTH_RADIUS_KM = 6371d;
 
     private final DatabaseHelper db;
 
@@ -79,8 +81,20 @@ public class ARPeakFinder {
         else return phi;
     }
 
+    /**
+     * Angle entre le sol et la ligne de mire vers le sommet visé
+     *
+     * @param t
+     * @return
+     */
+    private double getTheoricalPitch(Coordinates t) {
+        double h = Math.abs(t.getElevation() - oElevation); // Metres
+        double l = Utils.getDistanceBetween(t.getLatLng(), oLatLng); // Metres
+        return Math.toDegrees(Math.atan(h / l));
+    }
+
     private LatLng getLatLngFromDistanceAndBearing(int distance, double bearing) {
-        double dist = distance / EARTH_RADIUS;
+        double dist = distance / EARTH_RADIUS_KM;
         double brng = Math.toRadians((oAzimuth + bearing + 360) % 360);
         double lat = Math.toRadians(oLatLng.latitude);
         double lng = Math.toRadians(oLatLng.longitude);
@@ -147,14 +161,15 @@ public class ARPeakFinder {
         if (area == null) return matchingPlacemark;
 
         for (Placemark p : db.findPlacemarkInArea(area)) {
-            final double distance = Utils.getDistanceBetween(location, p.getCoordinates().getLatLng());
+            final double distance = Utils.getDistanceBetween(location, p.getCoordinates().getLatLng()) / 1000;
             final double theoricalAzimuth = getTheoricalAzimuth(p.getCoordinates());
+            final double theoricalPitch = getTheoricalPitch(p.getCoordinates());
 
-            if (isMatchingAccuracy(theoricalAzimuth, distance)) {
-                double elevation_delta = Math.abs(p.getCoordinates().getElevation() - location.getAltitude());
-                double lvl = distance * elevation_delta;
+            if (isMatchingAccuracy(theoricalAzimuth, theoricalPitch, distance)) {
+                double elevation_delta = Math.abs(location.getAltitude() - p.getCoordinates().getElevation()) / 1000;
+                double distVue = Math.sqrt(Math.pow(distance, 2) * Math.pow(elevation_delta, 2));
 
-                p.setMatchLevel(lvl);
+                p.setMatchLevel(distVue);
                 matchingPlacemark.add(p);
 
                 Log.i(TAG, "getMatchingPlacemark | Placemark Matching : " + p.getTitle() + " | MatchLevel : " + p.getMatchLevel());
@@ -168,7 +183,12 @@ public class ARPeakFinder {
      * @param targetTheoreticalAzimuth
      * @return
      */
-    public boolean isMatchingAccuracy(double targetTheoreticalAzimuth, double distance) {
+    public boolean isMatchingAccuracy(double targetTheoreticalAzimuth, double theoricalPitch, double distance) {
+        return isMatchingAzimuth(targetTheoreticalAzimuth, distance)
+                && isMatchingPitch(theoricalPitch);
+    }
+
+    private boolean isMatchingAzimuth(double targetTheoreticalAzimuth, double distance) {
         double[] minMax = ARPeakFinder.getAzimuthAccuracy(targetTheoreticalAzimuth, distance);
         if (minMax[MIN_VALUE] > minMax[MAX_VALUE])
             return (oAzimuth > 0 && oAzimuth < minMax[MAX_VALUE])
@@ -177,10 +197,15 @@ public class ARPeakFinder {
             return (oAzimuth > minMax[MIN_VALUE] && oAzimuth < minMax[MAX_VALUE]);
     }
 
+    private boolean isMatchingPitch(double theoricalPitch) {
+        return theoricalPitch < oPitch + PITCH_ACCURACY
+                && theoricalPitch > oPitch - PITCH_ACCURACY;
+    }
 
     public void setObserverLocation(Location l) {
         this.oLatLng = new LatLng(l.getLatitude(), l.getLongitude());
         this.oElevation = l.getAltitude();
+        this.oPitch = Math.abs(l.getExtras().getFloat(CompassActivity.KEY_PITCH));
     }
 
     public void setObserverAzimuth(double azimuth) {
