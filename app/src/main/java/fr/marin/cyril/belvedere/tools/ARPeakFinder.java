@@ -167,7 +167,7 @@ public class ARPeakFinder {
 
             if (isMatchingAccuracy(theoricalAzimuth, theoricalPitch, distance)) {
                 double elevation_delta = Math.abs(location.getAltitude() - p.getCoordinates().getElevation()) / 1000;
-                double distVue = Math.sqrt(Math.pow(distance, 2) * Math.pow(elevation_delta, 2));
+                double distVue = Math.sqrt(Math.pow(distance, 2) + Math.pow(elevation_delta, 2));
 
                 p.setMatchLevel(distVue);
                 matchingPlacemark.add(p);
