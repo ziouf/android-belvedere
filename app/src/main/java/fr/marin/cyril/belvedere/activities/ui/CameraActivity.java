@@ -99,6 +99,7 @@ public class CameraActivity extends CompassActivity {
 
     @Override
     protected void onDestroy() {
+        mScheduler.shutdownNow();
         super.onDestroy();
     }
 
@@ -127,7 +128,6 @@ public class CameraActivity extends CompassActivity {
         private final Handler handler;
         private final ARPeakFinder ar;
 
-        private float distance;
         private double matchLevel;
         private Placemark nearest = null;
 
@@ -149,7 +149,6 @@ public class CameraActivity extends CompassActivity {
                 if (p.getMatchLevel() < matchLevel) {
                     Log.d(TAG, "ARTask : new nearest Placemark : " + p.getTitle());
                     matchLevel = p.getMatchLevel();
-                    distance = Utils.getDistanceBetween(location, p.getCoordinates().getLatLng());
                     nearest = p;
                 }
             }
@@ -161,8 +160,12 @@ public class CameraActivity extends CompassActivity {
                 @Override
                 public void run() {
                     // Check si thumbnail != null avant de l'afficher
-                    if (nearest.getThumbnailArray() != null)
-                        peak_thumbnail_img.setImageBitmap(nearest.getThmubnail());
+                    if (nearest.hasThumbnail()) {
+                        peak_thumbnail_img.setImageBitmap(nearest.getThumbnail());
+                        peak_thumbnail_img.setVisibility(View.VISIBLE);
+                    } else {
+                        peak_thumbnail_img.setVisibility(View.INVISIBLE);
+                    }
 
                     String s = nearest.getTitle() + "\n" +
                             nearest.getCoordinates().getElevation() + " m";

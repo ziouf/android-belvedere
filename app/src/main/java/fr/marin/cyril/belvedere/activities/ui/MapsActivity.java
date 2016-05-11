@@ -200,7 +200,7 @@ public class MapsActivity extends CompassActivity
                 final TextView tvAltitude = (TextView) v.findViewById(R.id.iw_altitude);
 
                 if (m.getThumbnailArray() != null) {
-                    Bitmap thumbnail = m.getThmubnail();
+                    Bitmap thumbnail = m.getThumbnail();
                     imgThumbnail.setImageBitmap(thumbnail);
                     imgThumbnail.setVisibility(View.VISIBLE);
                     imgThumbnail.setMaxWidth(thumbnail.getWidth());

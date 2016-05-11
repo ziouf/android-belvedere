@@ -2,6 +2,7 @@ package fr.marin.cyril.belvedere.activities.ui;
 
 import android.Manifest;
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Build;
@@ -83,35 +84,39 @@ public class LoadingActivity extends Activity
     }
 
     private void start() {
-        DatabaseHelper.InitDBTask initDBTask = new DatabaseHelper.InitDBTask(getApplicationContext()) {
-            private TextView loadingInfoTextView;
-            private ProgressBar progressBar;
-
-            @Override
-            protected void onPreExecute() {
-                super.onPreExecute();
-                this.progressBar = (ProgressBar) LoadingActivity.this.findViewById(R.id.loading_progress);
-                this.loadingInfoTextView = (TextView) LoadingActivity.this.findViewById(R.id.loading_info);
-                this.loadingInfoTextView.setText(R.string.loading_database_init);
-            }
-
-            @Override
-            protected void onPostExecute(Void v) {
-                super.onPostExecute(v);
-                this.loadingInfoTextView.setText(R.string.loading_application_openning);
-                LoadingActivity.this.startActivity(new Intent(LoadingActivity.this, MapsActivity.class));
-                LoadingActivity.this.finish();
-            }
-
-            @Override
-            protected void onProgressUpdate(Integer... values) {
-                super.onProgressUpdate(values);
-                this.progressBar.setProgress(values[0]);
-                this.progressBar.setMax(values[1]);
-            }
-        };
-
+        final InitTask initDBTask = new InitTask(getApplicationContext());
         initDBTask.execute();
     }
 
+    private class InitTask extends DatabaseHelper.InitDBTask {
+        private TextView loadingInfoTextView;
+        private ProgressBar progressBar;
+
+        public InitTask(Context context) {
+            super(context);
+        }
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            this.progressBar = (ProgressBar) LoadingActivity.this.findViewById(R.id.loading_progress);
+            this.loadingInfoTextView = (TextView) LoadingActivity.this.findViewById(R.id.loading_info);
+            this.loadingInfoTextView.setText(R.string.loading_database_init);
+        }
+
+        @Override
+        protected void onPostExecute(Void v) {
+            super.onPostExecute(v);
+            this.loadingInfoTextView.setText(R.string.loading_application_openning);
+            LoadingActivity.this.startActivity(new Intent(LoadingActivity.this, MapsActivity.class));
+            LoadingActivity.this.finish();
+        }
+
+        @Override
+        protected void onProgressUpdate(Integer... values) {
+            super.onProgressUpdate(values);
+            this.progressBar.setProgress(values[0]);
+            this.progressBar.setMax(values[1]);
+        }
+    }
 }

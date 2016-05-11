@@ -15,7 +15,7 @@ public class Placemark {
     private String wiki_uri;
     private String thumbnail_uri;
 
-    private byte[] thmubnail = null;
+    private byte[] thumbnail = null;
     private double matchLevel = 0d;
 
     public Placemark(String title, double lat, double lng, double elevation, String wiki_uri) {
@@ -31,12 +31,12 @@ public class Placemark {
         this.thumbnail_uri = thumbnail_uri;
     }
 
-    public Placemark(String title, double lat, double lng, double elevation, String wiki_uri, String thumbnail_uri, byte[] thmubnail) {
+    public Placemark(String title, double lat, double lng, double elevation, String wiki_uri, String thumbnail_uri, byte[] thumbnail) {
         this.coordinates = new Coordinates(new LatLng(lat, lng), elevation);
         this.title = title;
         this.wiki_uri = wiki_uri;
         this.thumbnail_uri = thumbnail_uri;
-        this.thmubnail = thmubnail;
+        this.thumbnail = thumbnail;
     }
 
     public String getTitle() {
@@ -56,16 +56,20 @@ public class Placemark {
     }
 
 
-    public Bitmap getThmubnail() {
-        return BitmapFactory.decodeByteArray(thmubnail, 0, thmubnail.length);
+    public Bitmap getThumbnail() {
+        return BitmapFactory.decodeByteArray(thumbnail, 0, thumbnail.length);
     }
 
-    public void setThmubnail(byte[] thmubnail) {
-        this.thmubnail = thmubnail;
+    public void setThumbnail(byte[] thumbnail) {
+        this.thumbnail = thumbnail;
     }
 
     public byte[] getThumbnailArray() {
-        return this.thmubnail;
+        return this.thumbnail;
+    }
+
+    public boolean hasThumbnail() {
+        return this.thumbnail != null;
     }
 
     public double getMatchLevel() {

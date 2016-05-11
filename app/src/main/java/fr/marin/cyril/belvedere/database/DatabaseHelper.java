@@ -320,7 +320,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                         Log.w(TAG, ignore.getMessage());
                     }
 
-                    databaseHelper.insertAllPlacemark(placemarks);
                     databaseHelper.insertOrUpdateKmlHash(key, hash);
                 }
             }
@@ -332,6 +331,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
         private class DownloadThumbnail implements Runnable {
             private final Placemark placemark;
+            private final DatabaseHelper db = DatabaseHelper.getInstance(context);
 
             public DownloadThumbnail(Placemark placemark) {
                 this.placemark = placemark;
@@ -361,9 +361,10 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                         ByteArrayOutputStream baos = new ByteArrayOutputStream(8192);
                         Bitmap bitmap = BitmapFactory.decodeStream(is);
                         bitmap.compress(Bitmap.CompressFormat.WEBP, 85, baos);
-                        placemark.setThmubnail(baos.toByteArray());
+                        placemark.setThumbnail(baos.toByteArray());
                     } finally {
                         connection.disconnect();
+                        db.insertOrUpdatePlacemark(placemark);
                     }
 
                 } catch (IOException ignore) {

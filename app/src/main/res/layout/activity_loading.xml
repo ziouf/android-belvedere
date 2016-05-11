@@ -18,7 +18,7 @@
         android:id="@+id/loading_progress"
         style="@style/Widget.AppCompat.ProgressBar.Horizontal"
         android:layout_width="match_parent"
-        android:layout_height="2dp"
+        android:layout_height="@dimen/loading_progress_height"
         android:layout_marginEnd="1dp"
         android:layout_marginStart="1dp" />
 
