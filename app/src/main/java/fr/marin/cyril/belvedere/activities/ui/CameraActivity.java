@@ -133,7 +133,7 @@ public class CameraActivity extends CompassActivity {
 
         public ARTask(Handler handler) {
             this.handler = handler;
-            this.ar = new ARPeakFinder(CameraActivity.this);
+            this.ar = new ARPeakFinder(CameraActivity.this.getApplicationContext());
         }
 
         @Override
