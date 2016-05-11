@@ -128,9 +128,6 @@ public class CameraActivity extends CompassActivity {
         private final Handler handler;
         private final ARPeakFinder ar;
 
-        private double matchLevel;
-        private Placemark nearest = null;
-
         public ARTask(Handler handler) {
             this.handler = handler;
             this.ar = new ARPeakFinder(CameraActivity.this.getApplicationContext());
@@ -138,43 +135,41 @@ public class CameraActivity extends CompassActivity {
 
         @Override
         public void run() {
-            nearest = null;
-            matchLevel = Float.MAX_VALUE;
             ar.setObserverAzimuth(CameraActivity.this.getAzimuth());
             ar.setObserverLocation(CameraActivity.this.location);
 
             Collection<Placemark> placemarks = ar.getMatchingPlacemark(location);
-            if (placemarks.size() == 0) return;
+            if (placemarks.size() == 0) {
+                handler.post(this.updateGUI(null));
+                return;
+            }
 
             for (Placemark p : placemarks) {
-                if (p.getMatchLevel() < matchLevel) {
-                    Log.d(TAG, "ARTask : new nearest Placemark : " + p.getTitle());
-                    matchLevel = p.getMatchLevel();
-                    nearest = p;
-                }
+                Log.d(TAG, "ARTask : new nearest Placemark : " + p.getTitle());
+                handler.post(this.updateGUI(p));
             }
-            handler.post(this.updateGUI());
         }
 
-        private Runnable updateGUI() {
+        private Runnable updateGUI(final Placemark placemark) {
             return new Runnable() {
                 @Override
                 public void run() {
-                    if (nearest == null) {
+                    if (placemark == null) {
                         peak_thumbnail_img.setVisibility(View.INVISIBLE);
                         peak_info_tv.setVisibility(View.INVISIBLE);
+                        return;
                     }
 
                     // Check si thumbnail != null avant de l'afficher
-                    if (nearest.hasThumbnail()) {
-                        peak_thumbnail_img.setImageBitmap(nearest.getThumbnail());
+                    if (placemark.hasThumbnail()) {
+                        peak_thumbnail_img.setImageBitmap(placemark.getThumbnail());
                         peak_thumbnail_img.setVisibility(View.VISIBLE);
                     } else {
                         peak_thumbnail_img.setVisibility(View.INVISIBLE);
                     }
 
-                    String s = nearest.getTitle() + "\n" +
-                            nearest.getCoordinates().getElevation() + " m";
+                    String s = placemark.getTitle() + "\n" +
+                            placemark.getCoordinates().getElevation() + " m";
                     peak_info_tv.setText(s);
                     peak_info_tv.setVisibility(View.VISIBLE);
                 }

@@ -32,7 +32,7 @@ public class ARPeakFinder {
     private static final int SEARCH_AREA_FRONT_KM = 100;
     private static final int[] DISTANCE_STEPS = new int[]{10000, 15000, 20000};
     private static final double[] AZIMUTH_ACCURACY = new double[]{4d, 2d, 1d, 0.25d};
-    private static final double PITCH_ACCURACY = 1.5d;
+    private static final double PITCH_ACCURACY = 4d;
     private static final double EARTH_RADIUS_KM = 6371d;
 
     private final DatabaseHelper db;
@@ -161,15 +161,16 @@ public class ARPeakFinder {
         if (area == null) return matchingPlacemark;
 
         for (Placemark p : db.findPlacemarkInArea(area)) {
-            final double distance = Utils.getDistanceBetween(location, p.getCoordinates().getLatLng()) / 1000;
+            final double distance = Utils.getDistanceBetween(location, p.getCoordinates().getLatLng());
             final double theoricalAzimuth = getTheoricalAzimuth(p.getCoordinates());
             final double theoricalPitch = getTheoricalPitch(p.getCoordinates());
 
             if (isMatchingAccuracy(theoricalAzimuth, theoricalPitch, distance)) {
-                double elevation_delta = Math.abs(location.getAltitude() - p.getCoordinates().getElevation()) / 1000;
+                double elevation_delta = Math.abs(location.getAltitude() - p.getCoordinates().getElevation());
                 double distVue = Math.sqrt(Math.pow(distance, 2) + Math.pow(elevation_delta, 2));
 
-                p.setMatchLevel(distVue);
+                // TODO : Définir une strategie pour différencier les resultats
+                p.setMatchLevel(0d);
                 matchingPlacemark.add(p);
 
                 Log.i(TAG, "getMatchingPlacemark | Placemark Matching : " + p.getTitle() + " | MatchLevel : " + p.getMatchLevel());
