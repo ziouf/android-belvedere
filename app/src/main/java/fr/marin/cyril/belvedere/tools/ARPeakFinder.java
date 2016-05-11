@@ -29,7 +29,7 @@ public class ARPeakFinder {
     private static final int MAX_VALUE = 1;
     private static final int SEARCH_AREA_LATERAL_KM = 15;
     private static final int SEARCH_AREA_FRONT_KM = 80;
-    private static final int[] DISTANCE_STEPS = new int[]{10000, 20000, 30000};
+    private static final int[] DISTANCE_STEPS = new int[]{10000, 15000, 20000};
     private static final double[] AZIMUTH_ACCURACY = new double[]{5d, 2.5d, 1, 0.25d};
     private static final double EARTH_RADIUS = 6371d;
 
