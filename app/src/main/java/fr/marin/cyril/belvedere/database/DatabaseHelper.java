@@ -27,9 +27,9 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 
 import fr.marin.cyril.belvedere.R;
+import fr.marin.cyril.belvedere.model.Area;
 import fr.marin.cyril.belvedere.model.Placemark;
-import fr.marin.cyril.belvedere.parser.JsonResponseParser;
-import fr.marin.cyril.belvedere.tools.Area;
+import fr.marin.cyril.belvedere.parser.DBpediaJsonResponseParser;
 import fr.marin.cyril.belvedere.tools.Utils;
 
 /**
@@ -60,8 +60,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        if (oldVersion == newVersion) return;
-
         db.execSQL(DatabaseContract.KmlHashEntry.DROP_INDEX);
         db.execSQL(DatabaseContract.KmlHashEntry.DROP_TABLE);
 
@@ -72,7 +70,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     }
 
     public void insertOrUpdatePlacemark(Placemark newPlacemark) {
-        Placemark oldPlacemark = this.findPlacemarkByLatLng(newPlacemark.getCoordinates().getLatLng());
+        final Placemark oldPlacemark = this.findPlacemarkByLatLng(newPlacemark.getCoordinates().getLatLng());
 
         try (SQLiteDatabase db = this.getWritableDatabase()) {
             ContentValues values = new ContentValues();
@@ -145,7 +143,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         try (SQLiteDatabase db = this.getReadableDatabase()) {
             Collection<Placemark> markers = new ArrayList<>();
 
-            Boolean distinct = true;
             String[] columns = new String[]{
                     DatabaseContract.MarkerEntry.COLUMN_NAME_TITLE,
                     DatabaseContract.MarkerEntry.COLUMN_NAME_URL,
@@ -162,7 +159,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             String[] args = new String[]{top.toString(), bottom.toString(),
                     right.toString(), left.toString()};
 
-            try (Cursor c = db.query(distinct, DatabaseContract.MarkerEntry.TABLE_NAME, columns, select, args,
+            try (Cursor c = db.query(DatabaseContract.MarkerEntry.TABLE_NAME, columns, select, args,
                     null, null, DatabaseContract.MarkerEntry.COLUMN_NAME_ALTITUDE + " DESC", "25")) {
 
                 if (c.getCount() == 0) return markers;
@@ -192,7 +189,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public Placemark findPlacemarkByLatLng(LatLng latLng) {
         try (SQLiteDatabase db = this.getReadableDatabase()) {
 
-            Boolean distinct = true;
             String[] columns = new String[]{
                     DatabaseContract.MarkerEntry.COLUMN_NAME_TITLE,
                     DatabaseContract.MarkerEntry.COLUMN_NAME_URL,
@@ -206,22 +202,22 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                     + " AND " + DatabaseContract.MarkerEntry.COLUMN_NAME_LONGITUDE + " = ? ";
             String[] args = new String[]{"" + latLng.latitude, "" + latLng.longitude};
 
-            try (Cursor c = db.query(distinct, DatabaseContract.MarkerEntry.TABLE_NAME, columns, select, args,
+            try (Cursor c = db.query(DatabaseContract.MarkerEntry.TABLE_NAME, columns, select, args,
                     null, null, null, null)) {
 
                 if (c.getCount() == 0) return null;
+                if (c.moveToFirst()) {
+                    String title = c.getString(0);
+                    String wiki_uri = c.getString(1);
+                    String thumbnail_url = c.getString(2);
+                    byte[] thumbnail = c.getBlob(3);
+                    double lat = c.getDouble(4);
+                    double lng = c.getDouble(5);
+                    double ele = c.getDouble(6);
 
-                c.moveToFirst();
-
-                String title = c.getString(0);
-                String wiki_uri = c.getString(1);
-                String thumbnail_url = c.getString(2);
-                byte[] thumbnail = c.getBlob(3);
-                double lat = c.getDouble(4);
-                double lng = c.getDouble(5);
-                double ele = c.getDouble(6);
-
-                return new Placemark(title, lat, lng, ele, wiki_uri, thumbnail_url, thumbnail);
+                    return new Placemark(title, lat, lng, ele, wiki_uri, thumbnail_url, thumbnail);
+                }
+                return null;
             }
         }
     }
@@ -240,15 +236,13 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     public String findSourceFileHash(String key) {
         try (SQLiteDatabase db = this.getWritableDatabase()) {
-
-            Boolean distinct = true;
             String[] columns = new String[]{
                     DatabaseContract.KmlHashEntry.COLUMN_NAME_VALUE
             };
             String select = DatabaseContract.KmlHashEntry.COLUMN_NAME_KEY + " = ? ";
             String[] args = new String[]{key};
 
-            try (Cursor c = db.query(distinct, DatabaseContract.KmlHashEntry.TABLE_NAME, columns,
+            try (Cursor c = db.query(DatabaseContract.KmlHashEntry.TABLE_NAME, columns,
                     select, args, null, null, null, null)) {
                 if (c.getCount() == 0)
                     return null;
@@ -261,7 +255,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     }
 
     public void insertOrUpdateKmlHash(String key, String value) {
-        String oldValue = this.findSourceFileHash(key);
+        final String oldValue = this.findSourceFileHash(key);
 
         try (SQLiteDatabase db = this.getWritableDatabase()) {
             ContentValues values = new ContentValues();
@@ -284,30 +278,30 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         private static final String TAG = "InitDBTask";
         protected final Context context;
         private final DatabaseHelper databaseHelper;
-        private final JsonResponseParser parser;
+        private final DBpediaJsonResponseParser parser;
         private ExecutorService pool;
 
         public InitDBTask(Context context) {
             this.context = context;
             this.databaseHelper = DatabaseHelper.getInstance(context);
-            this.parser = new JsonResponseParser();
+            this.parser = new DBpediaJsonResponseParser();
         }
 
         @Override
         protected Void doInBackground(Void... params) {
-
             // Obtention des fichiers de resource
-            TypedArray ta = context.getResources().obtainTypedArray(R.array.sparql_json_array);
+            final TypedArray ta = context.getResources().obtainTypedArray(R.array.sparql_json_array);
+
             for (int i = 0; i < ta.length(); ++i) {
                 publishProgress(i, ta.length());
 
-                int id = ta.getResourceId(i, -1);
-                String key = ta.getString(i);
-                String hash = Utils.getSHA1FromResource(context, id);
+                final int id = ta.getResourceId(i, -1);
+                final String key = ta.getString(i);
+                final String hash = Utils.getSHA1FromResource(context, id);
 
                 if (!hash.equals(databaseHelper.findSourceFileHash(key))) {
                     Log.i(TAG, String.format("Importation du fichier : %s (%s)", key, hash));
-                    List<Placemark> placemarks = parser.readJsonStream(context.getResources().openRawResource(id));
+                    final List<Placemark> placemarks = parser.readJsonStream(context.getResources().openRawResource(id));
 
                     pool = Executors.newFixedThreadPool(Runtime.getRuntime().availableProcessors() * 10);
                     for (Placemark p : placemarks) {
@@ -324,8 +318,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 }
             }
             publishProgress(ta.length(), ta.length());
-            ta.recycle();
 
+            ta.recycle();
             return null;
         }
 

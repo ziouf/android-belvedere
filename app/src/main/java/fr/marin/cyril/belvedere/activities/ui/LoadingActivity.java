@@ -89,8 +89,8 @@ public class LoadingActivity extends Activity
     }
 
     private class InitTask extends DatabaseHelper.InitDBTask {
-        private TextView loadingInfoTextView;
-        private ProgressBar progressBar;
+        private final TextView loadingInfoTextView = (TextView) LoadingActivity.this.findViewById(R.id.loading_info);
+        private final ProgressBar progressBar = (ProgressBar) LoadingActivity.this.findViewById(R.id.loading_progress);
 
         public InitTask(Context context) {
             super(context);
@@ -99,8 +99,6 @@ public class LoadingActivity extends Activity
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-            this.progressBar = (ProgressBar) LoadingActivity.this.findViewById(R.id.loading_progress);
-            this.loadingInfoTextView = (TextView) LoadingActivity.this.findViewById(R.id.loading_info);
             this.loadingInfoTextView.setText(R.string.loading_database_init);
         }
 

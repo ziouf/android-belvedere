@@ -10,6 +10,7 @@ import java.util.Collection;
 import java.util.HashSet;
 
 import fr.marin.cyril.belvedere.database.DatabaseHelper;
+import fr.marin.cyril.belvedere.model.Area;
 import fr.marin.cyril.belvedere.model.Coordinates;
 import fr.marin.cyril.belvedere.model.Placemark;
 
@@ -28,7 +29,8 @@ public class ARPeakFinder {
     private static final int MAX_VALUE = 1;
     private static final int SEARCH_AREA_LATERAL_KM = 15;
     private static final int SEARCH_AREA_FRONT_KM = 80;
-    private static final double AZIMUTH_ACCURACY = 0.25d;
+    private static final int[] DISTANCE_STEPS = new int[]{10000, 20000, 30000};
+    private static final double[] AZIMUTH_ACCURACY = new double[]{5d, 2.5d, 1, 0.25d};
     private static final double EARTH_RADIUS = 6371d;
 
     private final DatabaseHelper db;
@@ -43,8 +45,17 @@ public class ARPeakFinder {
         this.db = DatabaseHelper.getInstance(context);
     }
 
-    public static double[] getAzimuthAccuracy(double azimuth) {
-        double[] minMax = new double[]{azimuth - AZIMUTH_ACCURACY, azimuth + AZIMUTH_ACCURACY};
+    private static double getAzimuthAccuracy(double distance) {
+        for (int step = 0; step < DISTANCE_STEPS.length; ++step)
+            if (distance < DISTANCE_STEPS[step])
+                return AZIMUTH_ACCURACY[step];
+        return AZIMUTH_ACCURACY[DISTANCE_STEPS.length];
+    }
+
+    public static double[] getAzimuthAccuracy(double azimuth, double distance) {
+        double azimuth_accuracy = ARPeakFinder.getAzimuthAccuracy(distance);
+        Log.d(TAG, String.format("Azimuth accuracy : %s", azimuth_accuracy));
+        double[] minMax = new double[]{azimuth - azimuth_accuracy, azimuth + azimuth_accuracy};
         if (minMax[MIN_VALUE] < 0) minMax[MIN_VALUE] += 360;
         if (minMax[MAX_VALUE] >= 360) minMax[MAX_VALUE] -= 360;
         return minMax;
@@ -82,47 +93,47 @@ public class ARPeakFinder {
     }
 
     private Area getSearchArea() {
-        LatLng left = getLatLngFromDistanceAndBearing(SEARCH_AREA_LATERAL_KM, -90);
-        LatLng right = getLatLngFromDistanceAndBearing(SEARCH_AREA_LATERAL_KM, 90);
-        LatLng front = getLatLngFromDistanceAndBearing(SEARCH_AREA_FRONT_KM, 0);
+        final LatLng left = getLatLngFromDistanceAndBearing(SEARCH_AREA_LATERAL_KM, -90);
+        final LatLng right = getLatLngFromDistanceAndBearing(SEARCH_AREA_LATERAL_KM, 90);
+        final LatLng front = getLatLngFromDistanceAndBearing(SEARCH_AREA_FRONT_KM, 0);
 
         LatLng southWest;
         LatLng northEast;
 
         if (left.latitude > right.latitude && oLatLng.latitude < front.latitude) { // on regarde en haut à droite
-            Log.i(TAG, "getSearchArea : North East");
+            Log.d(TAG, "getSearchArea : North East");
             southWest = new LatLng(right.latitude, left.longitude);
             northEast = front;
         } else if (left.latitude > right.latitude && oLatLng.latitude > front.latitude) { // on regarde en bas a droite
-            Log.i(TAG, "getSearchArea : South East");
+            Log.d(TAG, "getSearchArea : South East");
             southWest = new LatLng(front.latitude, right.longitude);
             northEast = new LatLng(left.latitude, front.longitude);
         } else if (left.latitude < right.latitude && oLatLng.latitude < front.latitude) { // on regarde en haut a gauche
-            Log.i(TAG, "getSearchArea : North West");
+            Log.d(TAG, "getSearchArea : North West");
             southWest = new LatLng(left.latitude, front.longitude);
             northEast = new LatLng(front.latitude, right.longitude);
         } else if (left.latitude < right.latitude && oLatLng.latitude > front.latitude) { // on regarde en bas a gauche
-            Log.i(TAG, "getSearchArea : South West");
+            Log.d(TAG, "getSearchArea : South West");
             southWest = front;
             northEast = new LatLng(right.latitude, left.longitude);
         } else if (left.latitude == right.latitude && oLatLng.latitude < front.latitude) {
-            Log.i(TAG, "getSearchArea : North");
+            Log.d(TAG, "getSearchArea : North");
             southWest = left;
             northEast = new LatLng(right.latitude, front.longitude);
         } else if (left.latitude == right.latitude && oLatLng.latitude > front.latitude) {
-            Log.i(TAG, "getSearchArea : South");
+            Log.d(TAG, "getSearchArea : South");
             southWest = new LatLng(right.latitude, front.longitude);
             northEast = left;
         } else if (left.latitude < right.latitude && oLatLng.latitude == front.latitude) {
-            Log.i(TAG, "getSearchArea : East");
+            Log.d(TAG, "getSearchArea : East");
             southWest = right;
             northEast = new LatLng(front.latitude, left.longitude);
         } else if (left.latitude > right.latitude && oLatLng.latitude == front.latitude) {
-            Log.i(TAG, "getSearchArea : West");
+            Log.d(TAG, "getSearchArea : West");
             southWest = new LatLng(front.latitude, left.longitude);
             northEast = right;
         } else {
-            Log.i(TAG, "getSearchArea : ... nowere");
+            Log.d(TAG, "getSearchArea : ... nowere");
             return null;
         }
 
@@ -130,23 +141,23 @@ public class ARPeakFinder {
     }
 
     public Collection<Placemark> getMatchingPlacemark(Location location) {
-        HashSet<Placemark> matchingPlacemark = new HashSet<>();
+        final HashSet<Placemark> matchingPlacemark = new HashSet<>();
+        final Area area = getSearchArea();
 
-        Area area = getSearchArea();
         if (area == null) return matchingPlacemark;
 
         for (Placemark p : db.findPlacemarkInArea(area)) {
-            double theoricalAzimuth = getTheoricalAzimuth(p.getCoordinates());
-            if (isMatchingAccuracy(theoricalAzimuth)) {
-                Log.i(TAG, "getMatchingPlacemark : Placemark Matching : " + p.getTitle());
+            final double distance = Utils.getDistanceBetween(location, p.getCoordinates().getLatLng());
+            final double theoricalAzimuth = getTheoricalAzimuth(p.getCoordinates());
 
-                double distance = Utils.getDistanceBetween(location, p.getCoordinates().getLatLng());
+            if (isMatchingAccuracy(theoricalAzimuth, distance)) {
                 double elevation_delta = Math.abs(p.getCoordinates().getElevation() - location.getAltitude());
-                double azimuth_delta = Math.abs(theoricalAzimuth - oAzimuth);
-                double lvl = (distance + elevation_delta) * azimuth_delta;
+                double lvl = distance * elevation_delta;
 
                 p.setMatchLevel(lvl);
                 matchingPlacemark.add(p);
+
+                Log.i(TAG, "getMatchingPlacemark | Placemark Matching : " + p.getTitle() + " | MatchLevel : " + p.getMatchLevel());
             }
         }
 
@@ -157,8 +168,8 @@ public class ARPeakFinder {
      * @param targetTheoreticalAzimuth
      * @return
      */
-    public boolean isMatchingAccuracy(double targetTheoreticalAzimuth) {
-        double[] minMax = ARPeakFinder.getAzimuthAccuracy(targetTheoreticalAzimuth);
+    public boolean isMatchingAccuracy(double targetTheoreticalAzimuth, double distance) {
+        double[] minMax = ARPeakFinder.getAzimuthAccuracy(targetTheoreticalAzimuth, distance);
         if (minMax[MIN_VALUE] > minMax[MAX_VALUE])
             return (oAzimuth > 0 && oAzimuth < minMax[MAX_VALUE])
                     && (oAzimuth > minMax[MIN_VALUE] && oAzimuth < 360);

@@ -31,8 +31,8 @@ import java.util.HashSet;
 import fr.marin.cyril.belvedere.R;
 import fr.marin.cyril.belvedere.activities.CompassActivity;
 import fr.marin.cyril.belvedere.database.DatabaseHelper;
+import fr.marin.cyril.belvedere.model.Area;
 import fr.marin.cyril.belvedere.model.Placemark;
-import fr.marin.cyril.belvedere.tools.Area;
 
 public class MapsActivity extends CompassActivity
         implements OnMapReadyCallback, GoogleMap.OnMapLoadedCallback, GoogleMap.OnCameraChangeListener {
@@ -107,6 +107,7 @@ public class MapsActivity extends CompassActivity
     @Override
     public void onLocationChanged(Location location) {
         super.onLocationChanged(location);
+        if (location == null) return;
 
         this.compassMarker.setPosition(new LatLng(location.getLatitude(), location.getLongitude()));
 
@@ -233,10 +234,7 @@ public class MapsActivity extends CompassActivity
         return new GoogleMap.OnMarkerClickListener() {
             @Override
             public boolean onMarkerClick(Marker marker) {
-                if (compassMarker != null)
-                    return marker.getId().equals(compassMarker.getId());
-                else
-                    return false;
+                return (compassMarker != null) && marker.getId().equals(compassMarker.getId());
             }
         };
     }

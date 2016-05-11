@@ -3,22 +3,16 @@ package fr.marin.cyril.belvedere.tools;
 import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.location.Location;
-import android.os.AsyncTask;
 import android.os.Build;
 import android.util.Log;
 
 import com.google.android.gms.maps.model.LatLng;
 
 import java.io.BufferedInputStream;
-import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.net.HttpURLConnection;
-import java.net.URL;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
-
-import fr.marin.cyril.belvedere.model.Placemark;
 
 /**
  * Created by CSCM6014 on 13/04/2016.
@@ -32,6 +26,13 @@ public class Utils {
         return result[0];
     }
 
+    /**
+     * Distance en metres
+     *
+     * @param a
+     * @param b
+     * @return
+     */
     public static float getDistanceBetween(Location a, LatLng b) {
         float[] result = new float[3];
         Location.distanceBetween(a.getLatitude(), a.getLongitude(), b.latitude, b.longitude, result);

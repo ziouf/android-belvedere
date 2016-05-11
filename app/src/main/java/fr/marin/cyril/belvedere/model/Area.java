@@ -1,4 +1,4 @@
-package fr.marin.cyril.belvedere.tools;
+package fr.marin.cyril.belvedere.model;
 
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.VisibleRegion;
