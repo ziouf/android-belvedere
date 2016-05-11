@@ -354,7 +354,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                     try (InputStream is = connection.getInputStream()) {
                         ByteArrayOutputStream baos = new ByteArrayOutputStream(8192);
                         Bitmap bitmap = BitmapFactory.decodeStream(is);
-                        bitmap.compress(Bitmap.CompressFormat.WEBP, 85, baos);
+                        bitmap.compress(Bitmap.CompressFormat.WEBP, 75, baos);
                         placemark.setThumbnail(baos.toByteArray());
                     } finally {
                         connection.disconnect();
