@@ -182,25 +182,16 @@ public class ARPeakFinder {
      * @return
      */
     public Placemark getMatchingPlacemark() {
+        Placemark placemark = null;
         for (Placemark p : db.findPlacemarkInArea(this.getSearchArea())) {
             if (this.isMatchingAccuracy(p)) {
                 Log.i(TAG, "getMatchingPlacemark | Placemark Matching : " + p.getTitle());
-                return p;
-                /*
-                final double distance = Utils.getDistanceBetween(oLatLng, p.getCoordinates().getLatLng());
-                final double elevation_delta = Math.abs(oElevation - p.getCoordinates().getElevation());
-
                 // TODO : Définir une strategie pour différencier les resultats
-                p.setMatchLevel(0d);
-
-                if (matchingPlacemark == null
-                        || p.getMatchLevel() < matchingPlacemark.getMatchLevel())
-                    matchingPlacemark = p;
-
-                */
+                if (placemark == null || placemark.getMatchLevel() > p.getMatchLevel())
+                    placemark = p;
             }
         }
-        return null;
+        return placemark;
     }
 
     /**
@@ -208,10 +199,13 @@ public class ARPeakFinder {
      * @param p
      * @return
      */
-    private boolean isMatchingAccuracy(Placemark p) {
+    private boolean isMatchingAccuracy(final Placemark p) {
         final double distance = Utils.getDistanceBetween(oLatLng, p.getCoordinates().getLatLng());
-        return isMatchingAzimuth(this.getTheoricalAzimuth(p.getCoordinates()), distance)
-                && isMatchingPitch(this.getTheoricalPitch(p.getCoordinates()), distance);
+        final double tAzimuth = this.getTheoricalAzimuth(p.getCoordinates());
+        final double tPitch = this.getTheoricalPitch(p.getCoordinates());
+        p.setMatchLevel((tAzimuth - oAzimuth) + (tPitch - oPitch));
+        return isMatchingAzimuth(tAzimuth, distance)
+                && isMatchingPitch(tPitch, distance);
     }
 
     /**
@@ -221,7 +215,7 @@ public class ARPeakFinder {
      * @return
      */
     private boolean isMatchingAzimuth(double targetTheoreticalAzimuth, double distance) {
-        double[] minMax = this.getAzimuthAccuracy(targetTheoreticalAzimuth, distance);
+        final double[] minMax = this.getAzimuthAccuracy(targetTheoreticalAzimuth, distance);
         if (minMax[MIN_VALUE] > minMax[MAX_VALUE])
             return (oAzimuth > 0 && oAzimuth < minMax[MAX_VALUE])
                     && (oAzimuth > minMax[MIN_VALUE] && oAzimuth < 360);
@@ -236,7 +230,7 @@ public class ARPeakFinder {
      * @return
      */
     private boolean isMatchingPitch(double theoricalPitch, double distance) {
-        double angularAccuracy = this.getAngularAccuracy(distance);
+        final double angularAccuracy = this.getAngularAccuracy(distance);
         return oPitch > theoricalPitch - angularAccuracy
                 && oPitch < theoricalPitch + angularAccuracy;
     }
