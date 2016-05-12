@@ -44,7 +44,7 @@ public class ARPeakFinder {
         this.db = DatabaseHelper.getInstance(context);
     }
 
-    public void updateObserverLocation(Location location, double azimuth) {
+    public void updateObserverLocation(final Location location, final double azimuth) {
         this.oLatLng = new LatLng(location.getLatitude(), location.getLongitude());
         this.oElevation = location.getAltitude();
         this.oPitch = Math.abs(location.getExtras().getFloat(CompassActivity.KEY_PITCH));
@@ -55,7 +55,7 @@ public class ARPeakFinder {
      * @param distance
      * @return
      */
-    private double getAngularAccuracy(double distance) {
+    private double getAngularAccuracy(final double distance) {
         for (int step = 0; step < DISTANCE_STEPS.length; ++step)
             if (distance < DISTANCE_STEPS[step])
                 return ANGULAR_ACCURACY[step];
@@ -68,7 +68,7 @@ public class ARPeakFinder {
      * @param distance
      * @return
      */
-    private double[] getAzimuthAccuracy(double azimuth, double distance) {
+    private double[] getAzimuthAccuracy(final double azimuth, final double distance) {
         final double aangularAccuracy = this.getAngularAccuracy(distance);
         Log.d(TAG, String.format("Azimuth accuracy : %s", aangularAccuracy));
         final double[] minMax = new double[]{azimuth - aangularAccuracy, azimuth + aangularAccuracy};
@@ -83,7 +83,7 @@ public class ARPeakFinder {
      * @param t
      * @return
      */
-    private double getTheoricalAzimuth(Coordinates t) {
+    private double getTheoricalAzimuth(final Coordinates t) {
         final double dX = t.getLatLng().latitude - oLatLng.latitude;
         final double dY = t.getLatLng().longitude - oLatLng.longitude;
         final double phi = Math.toDegrees(Math.atan(Math.abs(dY / dX)));
@@ -101,7 +101,7 @@ public class ARPeakFinder {
      * @param t
      * @return
      */
-    private double getTheoricalPitch(Coordinates t) {
+    private double getTheoricalPitch(final Coordinates t) {
         final double h = Math.abs(t.getElevation() - oElevation); // Metres
         final double l = Utils.getDistanceBetween(t.getLatLng(), oLatLng); // Metres
         return Math.toDegrees(Math.atan(h / l));
@@ -113,7 +113,7 @@ public class ARPeakFinder {
      * @param bearing
      * @return
      */
-    private LatLng getLatLngFromDistanceAndBearing(int distance, double bearing) {
+    private LatLng getLatLngFromDistanceAndBearing(final int distance, final double bearing) {
         final double dist = distance / EARTH_RADIUS_KM;
         final double brng = Math.toRadians((oAzimuth + bearing + 360) % 360);
         final double lat = Math.toRadians(oLatLng.latitude);
@@ -214,7 +214,7 @@ public class ARPeakFinder {
      * @param distance
      * @return
      */
-    private boolean isMatchingAzimuth(double targetTheoreticalAzimuth, double distance) {
+    private boolean isMatchingAzimuth(final double targetTheoreticalAzimuth, final double distance) {
         final double[] minMax = this.getAzimuthAccuracy(targetTheoreticalAzimuth, distance);
         if (minMax[MIN_VALUE] > minMax[MAX_VALUE])
             return (oAzimuth > 0 && oAzimuth < minMax[MAX_VALUE])
@@ -229,7 +229,7 @@ public class ARPeakFinder {
      * @param distance
      * @return
      */
-    private boolean isMatchingPitch(double theoricalPitch, double distance) {
+    private boolean isMatchingPitch(final double theoricalPitch, final double distance) {
         final double angularAccuracy = this.getAngularAccuracy(distance);
         return oPitch > theoricalPitch - angularAccuracy
                 && oPitch < theoricalPitch + angularAccuracy;
