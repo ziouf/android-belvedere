@@ -134,10 +134,10 @@ public class CameraActivity extends CompassActivity {
 
         @Override
         public void run() {
-            ar.setObserverAzimuth(CameraActivity.this.getAzimuth());
-            ar.setObserverLocation(CameraActivity.this.location);
+            ar.updateObserverLocation(CameraActivity.this.location, CameraActivity.this.getAzimuth());
 
-            final Placemark placemark = ar.getMatchingPlacemark(location);
+            final Placemark placemark = ar.getMatchingPlacemark();
+
             if (placemark == null)
                 Log.d(TAG, "ARTask : new nearest Placemark null");
             else
