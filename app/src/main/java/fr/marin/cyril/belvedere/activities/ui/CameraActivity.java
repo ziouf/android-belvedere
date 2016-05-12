@@ -14,7 +14,6 @@ import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import java.util.Collection;
 import java.util.Locale;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
@@ -138,16 +137,13 @@ public class CameraActivity extends CompassActivity {
             ar.setObserverAzimuth(CameraActivity.this.getAzimuth());
             ar.setObserverLocation(CameraActivity.this.location);
 
-            Collection<Placemark> placemarks = ar.getMatchingPlacemark(location);
-            if (placemarks.size() == 0) {
-                handler.post(this.updateGUI(null));
-                return;
-            }
+            final Placemark placemark = ar.getMatchingPlacemark(location);
+            if (placemark == null)
+                Log.d(TAG, "ARTask : new nearest Placemark null");
+            else
+                Log.d(TAG, "ARTask : new nearest Placemark : " + placemark.getTitle());
 
-            for (Placemark p : placemarks) {
-                Log.d(TAG, "ARTask : new nearest Placemark : " + p.getTitle());
-                handler.post(this.updateGUI(p));
-            }
+            handler.post(this.updateGUI(placemark));
         }
 
         private Runnable updateGUI(final Placemark placemark) {

@@ -183,6 +183,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     }
 
     public Collection<Placemark> findPlacemarkInArea(Area area) {
+        if (area == null) return null;
         return findPlacemarkInArea(area.getTop(), area.getLeft(), area.getRight(), area.getBottom());
     }
 
