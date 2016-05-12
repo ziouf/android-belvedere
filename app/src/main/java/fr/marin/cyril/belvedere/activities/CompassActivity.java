@@ -99,6 +99,15 @@ public class CompassActivity extends LocationActivity
             eventListener.run();
     }
 
+    private float[] lowPass(float[] input, float[] output) {
+        if (output == null) return input;
+
+        for (int i = 0; i < input.length; ++i)
+            output[i] = output[i] + ALPHA * (input[i] - output[i]);
+
+        return output;
+    }
+
     @Override
     public void onAccuracyChanged(Sensor sensor, int accuracy) {
 
@@ -111,15 +120,6 @@ public class CompassActivity extends LocationActivity
 
     protected void unRegisterCompasEventListener(CompasEventListener eventListener) {
         this.compassEventListenerSet.remove(eventListener);
-    }
-
-    private float[] lowPass(float[] input, float[] output) {
-        if (output == null) return input;
-
-        for (int i = 0; i < input.length; ++i)
-            output[i] = output[i] + ALPHA * (input[i] - output[i]);
-
-        return output;
     }
 
     public abstract class CompasEventListener implements Runnable {

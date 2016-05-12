@@ -69,9 +69,9 @@ public class ARPeakFinder {
      * @return
      */
     private double[] getAzimuthAccuracy(double azimuth, double distance) {
-        double aangularAccuracy = this.getAngularAccuracy(distance);
+        final double aangularAccuracy = this.getAngularAccuracy(distance);
         Log.d(TAG, String.format("Azimuth accuracy : %s", aangularAccuracy));
-        double[] minMax = new double[]{azimuth - aangularAccuracy, azimuth + aangularAccuracy};
+        final double[] minMax = new double[]{azimuth - aangularAccuracy, azimuth + aangularAccuracy};
         if (minMax[MIN_VALUE] < 0) minMax[MIN_VALUE] += 360;
         if (minMax[MAX_VALUE] >= 360) minMax[MAX_VALUE] -= 360;
         return minMax;
@@ -182,10 +182,11 @@ public class ARPeakFinder {
      * @return
      */
     public Placemark getMatchingPlacemark() {
-        Placemark matchingPlacemark = null;
-
         for (Placemark p : db.findPlacemarkInArea(this.getSearchArea())) {
             if (this.isMatchingAccuracy(p)) {
+                Log.i(TAG, "getMatchingPlacemark | Placemark Matching : " + p.getTitle());
+                return p;
+                /*
                 final double distance = Utils.getDistanceBetween(oLatLng, p.getCoordinates().getLatLng());
                 final double elevation_delta = Math.abs(oElevation - p.getCoordinates().getElevation());
 
@@ -196,11 +197,10 @@ public class ARPeakFinder {
                         || p.getMatchLevel() < matchingPlacemark.getMatchLevel())
                     matchingPlacemark = p;
 
-                Log.i(TAG, "getMatchingPlacemark | Placemark Matching : " + p.getTitle() + " | MatchLevel : " + p.getMatchLevel());
+                */
             }
         }
-
-        return matchingPlacemark;
+        return null;
     }
 
     /**
