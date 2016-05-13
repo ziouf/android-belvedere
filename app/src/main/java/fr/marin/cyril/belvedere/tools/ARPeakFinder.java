@@ -29,7 +29,7 @@ public class ARPeakFinder {
     private static final int SEARCH_AREA_LATERAL_KM = 10;
     private static final int SEARCH_AREA_FRONT_KM = 100;
     private static final int[] DISTANCE_STEPS = new int[]{20000};
-    private static final double[] ANGULAR_ACCURACY = new double[]{4d, 2d};
+    private static final double[] ANGULAR_ACCURACY = new double[]{6d, 3d};
     private static final double EARTH_RADIUS_KM = 6371d;
 
     // Db
@@ -187,10 +187,10 @@ public class ARPeakFinder {
             if (this.isMatchingAccuracy(p)) {
                 Log.i(TAG, "getMatchingPlacemark | Placemark Matching : " + p.getTitle());
                 if (placemark == null
-                        // Si le placemark est à l'horizon, on choisit le sommet le plus haut
+                        // Si les placemarks sont à l'horizon, on choisit le sommet le plus haut
                         || (Utils.getDistanceBetween(oLatLng, p.getCoordinates().getLatLng()) > DISTANCE_STEPS[DISTANCE_STEPS.length - 1]
                         && p.getCoordinates().getElevation() > placemark.getCoordinates().getElevation())
-                        // Si le placemark est proche, on choisit le plus proche
+                        // Si les placemarks sont proches, on choisit le plus proche
                         || (Utils.getDistanceBetween(oLatLng, p.getCoordinates().getLatLng()) < DISTANCE_STEPS[DISTANCE_STEPS.length - 1]
                         && p.getMatchLevel() < placemark.getMatchLevel())) {
 
