@@ -26,10 +26,10 @@ public class ARPeakFinder {
 
     private static final int MIN_VALUE = 0;
     private static final int MAX_VALUE = 1;
-    private static final int SEARCH_AREA_LATERAL_KM = 15;
+    private static final int SEARCH_AREA_LATERAL_KM = 10;
     private static final int SEARCH_AREA_FRONT_KM = 100;
-    private static final int[] DISTANCE_STEPS = new int[]{10000, 20000, 30000};
-    private static final double[] ANGULAR_ACCURACY = new double[]{6d, 4d, 2d, 1d};
+    private static final int[] DISTANCE_STEPS = new int[]{20000};
+    private static final double[] ANGULAR_ACCURACY = new double[]{4d, 2d};
     private static final double EARTH_RADIUS_KM = 6371d;
 
     // Db
@@ -186,9 +186,16 @@ public class ARPeakFinder {
         for (Placemark p : db.findPlacemarkInArea(this.getSearchArea())) {
             if (this.isMatchingAccuracy(p)) {
                 Log.i(TAG, "getMatchingPlacemark | Placemark Matching : " + p.getTitle());
-                // TODO : Définir une strategie pour différencier les resultats
-                if (placemark == null || placemark.getMatchLevel() > p.getMatchLevel())
+                if (placemark == null
+                        // Si le placemark est à l'horizon, on choisit le sommet le plus haut
+                        || (Utils.getDistanceBetween(oLatLng, p.getCoordinates().getLatLng()) > DISTANCE_STEPS[DISTANCE_STEPS.length - 1]
+                        && p.getCoordinates().getElevation() > placemark.getCoordinates().getElevation())
+                        // Si le placemark est proche, on choisit le plus proche
+                        || (Utils.getDistanceBetween(oLatLng, p.getCoordinates().getLatLng()) < DISTANCE_STEPS[DISTANCE_STEPS.length - 1]
+                        && p.getMatchLevel() < placemark.getMatchLevel())) {
+
                     placemark = p;
+                }
             }
         }
         return placemark;
