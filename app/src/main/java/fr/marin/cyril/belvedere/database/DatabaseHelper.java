@@ -29,7 +29,7 @@ import java.util.concurrent.TimeUnit;
 import fr.marin.cyril.belvedere.R;
 import fr.marin.cyril.belvedere.model.Area;
 import fr.marin.cyril.belvedere.model.Placemark;
-import fr.marin.cyril.belvedere.parser.DBpediaJsonResponseParser;
+import fr.marin.cyril.belvedere.parser.DbPediaJsonResponseParser;
 import fr.marin.cyril.belvedere.tools.Utils;
 
 /**
@@ -279,13 +279,13 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         private static final String TAG = "InitDBTask";
         protected final Context context;
         private final DatabaseHelper databaseHelper;
-        private final DBpediaJsonResponseParser parser;
+        private final DbPediaJsonResponseParser parser;
         private ExecutorService pool;
 
         public InitDBTask(Context context) {
             this.context = context;
             this.databaseHelper = DatabaseHelper.getInstance(context);
-            this.parser = new DBpediaJsonResponseParser();
+            this.parser = new DbPediaJsonResponseParser();
         }
 
         @Override
