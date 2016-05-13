@@ -188,11 +188,9 @@ public class ARPeakFinder {
                 Log.i(TAG, "getMatchingPlacemark | Placemark Matching : " + p.getTitle());
                 if (placemark == null
                         // Si les placemarks sont à l'horizon, on choisit le sommet le plus haut
-                        || (Utils.getDistanceBetween(oLatLng, p.getCoordinates().getLatLng()) > DISTANCE_STEPS[DISTANCE_STEPS.length - 1]
-                        && p.getCoordinates().getElevation() > placemark.getCoordinates().getElevation())
+                        || (p.getDistance() > DISTANCE_STEPS[DISTANCE_STEPS.length - 1] && p.getCoordinates().getElevation() > placemark.getCoordinates().getElevation())
                         // Si les placemarks sont proches, on choisit le plus proche
-                        || (Utils.getDistanceBetween(oLatLng, p.getCoordinates().getLatLng()) < DISTANCE_STEPS[DISTANCE_STEPS.length - 1]
-                        && p.getMatchLevel() < placemark.getMatchLevel())) {
+                        || (p.getDistance() < DISTANCE_STEPS[DISTANCE_STEPS.length - 1] && p.getMatchLevel() < placemark.getMatchLevel())) {
 
                     placemark = p;
                 }
@@ -210,6 +208,7 @@ public class ARPeakFinder {
         final double distance = Utils.getDistanceBetween(oLatLng, p.getCoordinates().getLatLng());
         final double tAzimuth = this.getTheoricalAzimuth(p.getCoordinates());
         final double tPitch = this.getTheoricalPitch(p.getCoordinates());
+        p.setDistance(distance);
         p.setMatchLevel((tAzimuth - oAzimuth) + (tPitch - oPitch));
         return isMatchingAzimuth(tAzimuth, distance)
                 && isMatchingPitch(tPitch, distance);

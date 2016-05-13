@@ -17,6 +17,7 @@ public class Placemark {
 
     private byte[] thumbnail = null;
     private double matchLevel = 0d;
+    private double distance = 0d;
 
     public Placemark(String title, double lat, double lng, double elevation, String wiki_uri) {
         this.coordinates = new Coordinates(new LatLng(lat, lng), elevation);
@@ -78,6 +79,14 @@ public class Placemark {
 
     public void setMatchLevel(double matchLevel) {
         this.matchLevel = matchLevel;
+    }
+
+    public double getDistance() {
+        return distance;
+    }
+
+    public void setDistance(double distance) {
+        this.distance = distance;
     }
 
     public MarkerOptions getMarkerOptions() {
