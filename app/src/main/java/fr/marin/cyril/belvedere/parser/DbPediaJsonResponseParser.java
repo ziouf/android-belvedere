@@ -39,8 +39,8 @@ import fr.marin.cyril.belvedere.model.Placemark;
  * }
  *
  */
-public class DBpediaJsonResponseParser {
-    private static final String TAG = "DBpediaJsonResponseParser";
+public class DbPediaJsonResponseParser {
+    private static final String TAG = "DbPediaJsonResponsePars";
 
     public List<Placemark> readJsonStream(InputStream is) {
         try (JsonReader reader = new JsonReader(new InputStreamReader(is, "UTF-8"))) {
