@@ -31,4 +31,11 @@
         <item name="android:visibility">gone</item>
     </style>
 
+    <style name="FloatingActionButton">
+        <item name="android:layout_marginLeft">@dimen/fab_margin_left</item>
+        <item name="android:layout_marginTop">@dimen/fab_margin_top</item>
+        <item name="android:layout_marginRight">@dimen/fab_margin_right</item>
+        <item name="android:layout_marginBottom">@dimen/fab_margin_bottom</item>
+    </style>
+    
 </resources>
