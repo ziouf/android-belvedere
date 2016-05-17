@@ -13,7 +13,6 @@ android {
     buildToolsVersion "23.0.3"
     defaultConfig {
         applicationId "fr.marin.cyril.belvedere"
-        /* Changer l'applicationId pour "fr.marin.cyril.belvedere" avant publication en version stable */
         minSdkVersion 19
         targetSdkVersion 23
         versionCode 1013
