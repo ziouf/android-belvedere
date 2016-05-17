@@ -12,7 +12,7 @@ android {
     compileSdkVersion 23
     buildToolsVersion "23.0.3"
     defaultConfig {
-        applicationId "fr.marin.cyril.mapsapp"
+        applicationId "fr.marin.cyril.belvedere"
         /* Changer l'applicationId pour "fr.marin.cyril.belvedere" avant publication en version stable */
         minSdkVersion 19
         targetSdkVersion 23
