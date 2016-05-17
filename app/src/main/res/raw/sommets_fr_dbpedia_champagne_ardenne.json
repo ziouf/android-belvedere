@@ -3,6 +3,7 @@
     "link": [],
     "vars": [
       "nom",
+      "comment",
       "altitude",
       "latitude",
       "longitude",
@@ -18,67 +19,12 @@
         "nom": {
           "type": "literal",
           "xml:lang": "fr",
-          "value": "Mont Aim\u00E9"
-        },
-        "altitude": {
-          "type": "typed-literal",
-          "datatype": "http://www.w3.org/2001/XMLSchema#integer",
-          "value": "240"
-        },
-        "latitude": {
-          "type": "typed-literal",
-          "datatype": "http://www.w3.org/2001/XMLSchema#double",
-          "value": "48.8642"
-        },
-        "longitude": {
-          "type": "typed-literal",
-          "datatype": "http://www.w3.org/2001/XMLSchema#double",
-          "value": "3.99417"
-        },
-        "thumbnail": {
-          "type": "uri",
-          "value": "http://commons.wikimedia.org/wiki/Special:FilePath/FR-51-Mont_Aim\u00E9.JPG?width=300"
-        },
-        "wiki": {
-          "type": "uri",
-          "value": "http://fr.wikipedia.org/wiki/Mont_Aim\u00E9"
-        }
-      },
-      {
-        "nom": {
-          "type": "literal",
-          "xml:lang": "fr",
-          "value": "Mont Sina\u00EF"
-        },
-        "altitude": {
-          "type": "typed-literal",
-          "datatype": "http://www.w3.org/2001/XMLSchema#integer",
-          "value": "286"
-        },
-        "latitude": {
-          "type": "typed-literal",
-          "datatype": "http://www.w3.org/2001/XMLSchema#double",
-          "value": "49.1422"
-        },
-        "longitude": {
-          "type": "typed-literal",
-          "datatype": "http://www.w3.org/2001/XMLSchema#double",
-          "value": "4.14833"
-        },
-        "thumbnail": {
-          "type": "uri",
-          "value": "http://commons.wikimedia.org/wiki/Special:FilePath/Observatoire_du_Mont-Sina\u00EF_00603.JPG?width=300"
-        },
-        "wiki": {
-          "type": "uri",
-          "value": "http://fr.wikipedia.org/wiki/Mont_Sina\u00EF_(Marne)"
-        }
-      },
-      {
-        "nom": {
-          "type": "literal",
-          "xml:lang": "fr",
           "value": "Croix-Scaille"
+        },
+        "comment": {
+          "type": "literal",
+          "xml:lang": "fr",
+          "value": "La Croix-Scaille est un plateau du massif forestier des Ardennes dominant au nord la vall\u00E9e de la Semois et \u00E0 l\u2019est celle de la Meuse."
         },
         "altitude": {
           "type": "typed-literal",
@@ -108,150 +54,70 @@
         "nom": {
           "type": "literal",
           "xml:lang": "fr",
-          "value": "Longnon"
+          "value": "Mont Aim\u00E9"
+        },
+        "comment": {
+          "type": "literal",
+          "xml:lang": "fr",
+          "value": "Le mont Aim\u00E9 (/m\u0254\u0303teme/) est une butte-t\u00E9moin d'une altitude de 240 m\u00E8tres situ\u00E9e sur les communes de Berg\u00E8res-l\u00E8s-Vertus et Coligny qu'elle domine, tout comme le sud de la c\u00F4te des Blancs et la plaine de la Champagne crayeuse alentour."
         },
         "altitude": {
           "type": "typed-literal",
           "datatype": "http://www.w3.org/2001/XMLSchema#integer",
-          "value": "197"
+          "value": "240"
         },
         "latitude": {
           "type": "typed-literal",
           "datatype": "http://www.w3.org/2001/XMLSchema#double",
-          "value": "49.7783"
+          "value": "48.8642"
         },
         "longitude": {
           "type": "typed-literal",
           "datatype": "http://www.w3.org/2001/XMLSchema#double",
-          "value": "4.72583"
+          "value": "3.99417"
         },
         "thumbnail": {
           "type": "uri",
-          "value": "http://commons.wikimedia.org/wiki/Special:FilePath/Charleville_passerelle_du_Mont_Olympe.JPG?width=300"
+          "value": "http://commons.wikimedia.org/wiki/Special:FilePath/FR-51-Mont_Aim\u00E9.JPG?width=300"
         },
         "wiki": {
           "type": "uri",
-          "value": "http://fr.wikipedia.org/wiki/Mont_Olympe_(Charleville-M\u00E9zi\u00E8res)"
+          "value": "http://fr.wikipedia.org/wiki/Mont_Aim\u00E9"
         }
       },
       {
         "nom": {
           "type": "literal",
           "xml:lang": "fr",
-          "value": "Mont Olympe"
+          "value": "Mont Sina\u00EF (Marne)"
         },
-        "altitude": {
-          "type": "typed-literal",
-          "datatype": "http://www.w3.org/2001/XMLSchema#integer",
-          "value": "197"
-        },
-        "latitude": {
-          "type": "typed-literal",
-          "datatype": "http://www.w3.org/2001/XMLSchema#double",
-          "value": "49.7783"
-        },
-        "longitude": {
-          "type": "typed-literal",
-          "datatype": "http://www.w3.org/2001/XMLSchema#double",
-          "value": "4.72583"
-        },
-        "thumbnail": {
-          "type": "uri",
-          "value": "http://commons.wikimedia.org/wiki/Special:FilePath/Charleville_passerelle_du_Mont_Olympe.JPG?width=300"
-        },
-        "wiki": {
-          "type": "uri",
-          "value": "http://fr.wikipedia.org/wiki/Mont_Olympe_(Charleville-M\u00E9zi\u00E8res)"
-        }
-      },
-      {
-        "nom": {
+        "comment": {
           "type": "literal",
           "xml:lang": "fr",
-          "value": "Beno\u00EEt"
+          "value": "Le mont Sina\u00EF est le point culminant de la montagne de Reims et du d\u00E9partement de la Marne, en Champagne. Il est situ\u00E9 sur le territoire de la commune de Verzy. Au sommet, se trouvent un observatoire militaire et une table d'orientation.\u2191 1,0 et 1,1 Site Geoportail de l'IGN"
         },
         "altitude": {
           "type": "typed-literal",
           "datatype": "http://www.w3.org/2001/XMLSchema#integer",
-          "value": "350"
+          "value": "286"
         },
         "latitude": {
           "type": "typed-literal",
           "datatype": "http://www.w3.org/2001/XMLSchema#double",
-          "value": "49.5701"
+          "value": "49.1422"
         },
         "longitude": {
           "type": "typed-literal",
           "datatype": "http://www.w3.org/2001/XMLSchema#double",
-          "value": "5.27345"
+          "value": "4.14833"
         },
         "thumbnail": {
           "type": "uri",
-          "value": "http://commons.wikimedia.org/wiki/Special:FilePath/Paysage_Saint-Walfroy_090.JPG?width=300"
+          "value": "http://commons.wikimedia.org/wiki/Special:FilePath/Observatoire_du_Mont-Sina\u00EF_00603.JPG?width=300"
         },
         "wiki": {
           "type": "uri",
-          "value": "http://fr.wikipedia.org/wiki/Mont_Saint-Walfroy"
-        }
-      },
-      {
-        "nom": {
-          "type": "literal",
-          "xml:lang": "fr",
-          "value": "Hohnadel"
-        },
-        "altitude": {
-          "type": "typed-literal",
-          "datatype": "http://www.w3.org/2001/XMLSchema#integer",
-          "value": "350"
-        },
-        "latitude": {
-          "type": "typed-literal",
-          "datatype": "http://www.w3.org/2001/XMLSchema#double",
-          "value": "49.5701"
-        },
-        "longitude": {
-          "type": "typed-literal",
-          "datatype": "http://www.w3.org/2001/XMLSchema#double",
-          "value": "5.27345"
-        },
-        "thumbnail": {
-          "type": "uri",
-          "value": "http://commons.wikimedia.org/wiki/Special:FilePath/Paysage_Saint-Walfroy_090.JPG?width=300"
-        },
-        "wiki": {
-          "type": "uri",
-          "value": "http://fr.wikipedia.org/wiki/Mont_Saint-Walfroy"
-        }
-      },
-      {
-        "nom": {
-          "type": "literal",
-          "xml:lang": "fr",
-          "value": "Mary"
-        },
-        "altitude": {
-          "type": "typed-literal",
-          "datatype": "http://www.w3.org/2001/XMLSchema#integer",
-          "value": "350"
-        },
-        "latitude": {
-          "type": "typed-literal",
-          "datatype": "http://www.w3.org/2001/XMLSchema#double",
-          "value": "49.5701"
-        },
-        "longitude": {
-          "type": "typed-literal",
-          "datatype": "http://www.w3.org/2001/XMLSchema#double",
-          "value": "5.27345"
-        },
-        "thumbnail": {
-          "type": "uri",
-          "value": "http://commons.wikimedia.org/wiki/Special:FilePath/Paysage_Saint-Walfroy_090.JPG?width=300"
-        },
-        "wiki": {
-          "type": "uri",
-          "value": "http://fr.wikipedia.org/wiki/Mont_Saint-Walfroy"
+          "value": "http://fr.wikipedia.org/wiki/Mont_Sina\u00EF_(Marne)"
         }
       },
       {
@@ -260,35 +126,10 @@
           "xml:lang": "fr",
           "value": "Mont Saint-Walfroy"
         },
-        "altitude": {
-          "type": "typed-literal",
-          "datatype": "http://www.w3.org/2001/XMLSchema#integer",
-          "value": "350"
-        },
-        "latitude": {
-          "type": "typed-literal",
-          "datatype": "http://www.w3.org/2001/XMLSchema#double",
-          "value": "49.5701"
-        },
-        "longitude": {
-          "type": "typed-literal",
-          "datatype": "http://www.w3.org/2001/XMLSchema#double",
-          "value": "5.27345"
-        },
-        "thumbnail": {
-          "type": "uri",
-          "value": "http://commons.wikimedia.org/wiki/Special:FilePath/Paysage_Saint-Walfroy_090.JPG?width=300"
-        },
-        "wiki": {
-          "type": "uri",
-          "value": "http://fr.wikipedia.org/wiki/Mont_Saint-Walfroy"
-        }
-      },
-      {
-        "nom": {
+        "comment": {
           "type": "literal",
           "xml:lang": "fr",
-          "value": "Sicard"
+          "value": "Le mont Saint-Walfroy ou ermitage de Saint-Walfroy est une colline des Ardennes. Son sommet culmine \u00E0 350 m\u00E8tres d'altitude. Pr\u00E8s de 200 m\u00E8tres plus bas s'\u00E9talent les villages dans leurs vall\u00E9es, o\u00F9 serpentent les cours d'eau. Pour arriver \u00E0 Saint-Walfroy, il faut monter par des chemins escarp\u00E9s."
         },
         "altitude": {
           "type": "typed-literal",
@@ -318,30 +159,35 @@
         "nom": {
           "type": "literal",
           "xml:lang": "fr",
-          "value": "Giuliano"
+          "value": "Mont Olympe (Charleville-M\u00E9zi\u00E8res)"
+        },
+        "comment": {
+          "type": "literal",
+          "xml:lang": "fr",
+          "value": "Le mont Olympe est une colline ens\u00E9r\u00E9e aujourd\u2019hui dans la ville de Charleville-M\u00E9zi\u00E8res. Ce fut une implantation romaine puis un lieu fortifi\u00E9, avant de devenir une colline bois\u00E9e \u00E0 la limite de  l\u2019ancienne commune de Montcy-Saint-Pierre, faisant face \u00E0 Charleville. Aujourd'hui Montcy-Saint-Pierre a \u00E9t\u00E9 absorb\u00E9 par Charleville-M\u00E9zi\u00E8res, et ce mont \u00E9galement. Son nom est une r\u00E9miniscence de l\u2019antiquit\u00E9 et lui a \u00E9t\u00E9 attribu\u00E9 par le fondateur de Charleville, Charles de Gonzague."
         },
         "altitude": {
           "type": "typed-literal",
           "datatype": "http://www.w3.org/2001/XMLSchema#integer",
-          "value": "350"
+          "value": "197"
         },
         "latitude": {
           "type": "typed-literal",
           "datatype": "http://www.w3.org/2001/XMLSchema#double",
-          "value": "49.5701"
+          "value": "49.7783"
         },
         "longitude": {
           "type": "typed-literal",
           "datatype": "http://www.w3.org/2001/XMLSchema#double",
-          "value": "5.27345"
+          "value": "4.72583"
         },
         "thumbnail": {
           "type": "uri",
-          "value": "http://commons.wikimedia.org/wiki/Special:FilePath/Paysage_Saint-Walfroy_090.JPG?width=300"
+          "value": "http://commons.wikimedia.org/wiki/Special:FilePath/Charleville_passerelle_du_Mont_Olympe.JPG?width=300"
         },
         "wiki": {
           "type": "uri",
-          "value": "http://fr.wikipedia.org/wiki/Mont_Saint-Walfroy"
+          "value": "http://fr.wikipedia.org/wiki/Mont_Olympe_(Charleville-M\u00E9zi\u00E8res)"
         }
       }
     ]

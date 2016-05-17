@@ -3,6 +3,7 @@
     "link": [],
     "vars": [
       "nom",
+      "comment",
       "altitude",
       "latitude",
       "longitude",
@@ -19,6 +20,11 @@
           "type": "literal",
           "xml:lang": "fr",
           "value": "Mont Pani\u00E9"
+        },
+        "comment": {
+          "type": "literal",
+          "xml:lang": "fr",
+          "value": "Le mont Pani\u00E9 est le point culminant de la Nouvelle-Cal\u00E9donie dans la cha\u00EEne Centrale.\u2191 R\u00E9f\u00E9rences : IGN (carte sur le G\u00E9oportail) et document du gouvernement fran\u00E7ais pr\u00E9sentant la Nouvelle-Cal\u00E9donie (bien que le document annonce des altitudes contradictoires de 1 628 m et 1 629 m)."
         },
         "altitude": {
           "type": "typed-literal",

@@ -199,6 +199,7 @@ public class MapsActivity extends CompassActivity
                 final ImageView imgThumbnail = (ImageView) v.findViewById(R.id.iw_thumbnail);
                 final TextView tvTitle = (TextView) v.findViewById(R.id.iw_title);
                 final TextView tvAltitude = (TextView) v.findViewById(R.id.iw_altitude);
+                final TextView tvComment = (TextView) v.findViewById(R.id.iw_comment);
 
                 if (m.getThumbnailArray() != null) {
                     Bitmap thumbnail = m.getThumbnail();
@@ -210,6 +211,7 @@ public class MapsActivity extends CompassActivity
 
                 tvTitle.setText(m.getTitle());
                 tvAltitude.setText(m.getCoordinates().getElevationString());
+                tvComment.setText(m.getComment());
 
                 return v;
             }

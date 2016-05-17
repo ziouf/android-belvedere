@@ -3,6 +3,7 @@
     "link": [],
     "vars": [
       "nom",
+      "comment",
       "altitude",
       "latitude",
       "longitude",

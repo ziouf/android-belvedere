@@ -3,6 +3,7 @@
     "link": [],
     "vars": [
       "nom",
+      "comment",
       "altitude",
       "latitude",
       "longitude",
@@ -18,7 +19,82 @@
         "nom": {
           "type": "literal",
           "xml:lang": "fr",
+          "value": "Colline de la Bret\u00E8che"
+        },
+        "comment": {
+          "type": "literal",
+          "xml:lang": "fr",
+          "value": "La colline de la Bret\u00E8che est une colline situ\u00E9e \u00E0 Ferc\u00E9, en France, point culminant de la Loire-Atlantique."
+        },
+        "altitude": {
+          "type": "typed-literal",
+          "datatype": "http://www.w3.org/2001/XMLSchema#integer",
+          "value": "116"
+        },
+        "latitude": {
+          "type": "typed-literal",
+          "datatype": "http://www.w3.org/2001/XMLSchema#double",
+          "value": "47.8006"
+        },
+        "longitude": {
+          "type": "typed-literal",
+          "datatype": "http://www.w3.org/2001/XMLSchema#double",
+          "value": "-1.36792"
+        },
+        "thumbnail": {
+          "type": "uri",
+          "value": "http://commons.wikimedia.org/wiki/Special:FilePath/Point_culminant_de_la_Loire-Atlantique.JPG?width=300"
+        },
+        "wiki": {
+          "type": "uri",
+          "value": "http://fr.wikipedia.org/wiki/Colline_de_la_Bret\u00E8che"
+        }
+      },
+      {
+        "nom": {
+          "type": "literal",
+          "xml:lang": "fr",
+          "value": "Montaigu (Mayenne)"
+        },
+        "comment": {
+          "type": "literal",
+          "xml:lang": "fr",
+          "value": "Situ\u00E9 dans le d\u00E9partement de la Mayenne \u00E0 Hambers, le Montaigu est une butte r\u00E9guli\u00E8rement arrondie, avec chapelle au sommet (291 m d'altitude), qu'on aper\u00E7oit non seulement du Maine, mais de la for\u00EAt d'Andaine en Normandie, des collines bretonnes vers Vitr\u00E9 et de toutes les altitudes de 100 m\u00E8tres dans le bassin de la Mayenne, en Anjou."
+        },
+        "altitude": {
+          "type": "typed-literal",
+          "datatype": "http://www.w3.org/2001/XMLSchema#integer",
+          "value": "291"
+        },
+        "latitude": {
+          "type": "typed-literal",
+          "datatype": "http://www.w3.org/2001/XMLSchema#double",
+          "value": "48.2356"
+        },
+        "longitude": {
+          "type": "typed-literal",
+          "datatype": "http://www.w3.org/2001/XMLSchema#double",
+          "value": "-0.4025"
+        },
+        "thumbnail": {
+          "type": "uri",
+          "value": "http://commons.wikimedia.org/wiki/Special:FilePath/Panorama_Montaigu.JPG?width=300"
+        },
+        "wiki": {
+          "type": "uri",
+          "value": "http://fr.wikipedia.org/wiki/Montaigu_(Mayenne)"
+        }
+      },
+      {
+        "nom": {
+          "type": "literal",
+          "xml:lang": "fr",
           "value": "Mont des Alouettes"
+        },
+        "comment": {
+          "type": "literal",
+          "xml:lang": "fr",
+          "value": "Le mont des Alouettes est une colline de Vend\u00E9e culminant \u00E0 232 m\u00E8tres d'altitude, non loin du Puy du Fou, sur la commune des Herbiers. Il offre un vaste panorama sur cette derni\u00E8re et sur les localit\u00E9s environnantes. On y acc\u00E8de par la route d\u00E9partementale 160, reliant Les Herbiers \u00E0 Cholet."
         },
         "altitude": {
           "type": "typed-literal",
@@ -50,6 +126,11 @@
           "xml:lang": "fr",
           "value": "Mont des Avaloirs"
         },
+        "comment": {
+          "type": "literal",
+          "xml:lang": "fr",
+          "value": "Du haut de ses 416 m\u00E8tres, le mont des Avaloirs est le point culminant du Massif armoricain et du Grand Ouest (Normandie, Bretagne, Pays de la Loire). Il est situ\u00E9 dans le d\u00E9partement de la Mayenne, \u00E0 la limite de celui de l'Orne, \u00E0 Pr\u00E9-en-Pail."
+        },
         "altitude": {
           "type": "typed-literal",
           "datatype": "http://www.w3.org/2001/XMLSchema#integer",
@@ -78,67 +159,12 @@
         "nom": {
           "type": "literal",
           "xml:lang": "fr",
-          "value": "Colline de la Bret\u00E8che"
-        },
-        "altitude": {
-          "type": "typed-literal",
-          "datatype": "http://www.w3.org/2001/XMLSchema#integer",
-          "value": "116"
-        },
-        "latitude": {
-          "type": "typed-literal",
-          "datatype": "http://www.w3.org/2001/XMLSchema#double",
-          "value": "47.8006"
-        },
-        "longitude": {
-          "type": "typed-literal",
-          "datatype": "http://www.w3.org/2001/XMLSchema#double",
-          "value": "-1.36792"
-        },
-        "thumbnail": {
-          "type": "uri",
-          "value": "http://commons.wikimedia.org/wiki/Special:FilePath/Point_culminant_de_la_Loire-Atlantique.JPG?width=300"
-        },
-        "wiki": {
-          "type": "uri",
-          "value": "http://fr.wikipedia.org/wiki/Colline_de_la_Bret\u00E8che"
-        }
-      },
-      {
-        "nom": {
-          "type": "literal",
-          "xml:lang": "fr",
-          "value": "Montaigu"
-        },
-        "altitude": {
-          "type": "typed-literal",
-          "datatype": "http://www.w3.org/2001/XMLSchema#integer",
-          "value": "291"
-        },
-        "latitude": {
-          "type": "typed-literal",
-          "datatype": "http://www.w3.org/2001/XMLSchema#double",
-          "value": "48.2356"
-        },
-        "longitude": {
-          "type": "typed-literal",
-          "datatype": "http://www.w3.org/2001/XMLSchema#double",
-          "value": "-0.4025"
-        },
-        "thumbnail": {
-          "type": "uri",
-          "value": "http://commons.wikimedia.org/wiki/Special:FilePath/Panorama_Montaigu.JPG?width=300"
-        },
-        "wiki": {
-          "type": "uri",
-          "value": "http://fr.wikipedia.org/wiki/Montaigu_(Mayenne)"
-        }
-      },
-      {
-        "nom": {
-          "type": "literal",
-          "xml:lang": "fr",
           "value": "Tertre Ganne"
+        },
+        "comment": {
+          "type": "literal",
+          "xml:lang": "fr",
+          "value": "Le Tertre Ganne (ou Gane) est le nom d'une colline situ\u00E9e sur la rive gauche de l'Erve, en bordure de for\u00EAt de Charnie, juste en face de la forteresse de Sainte-Suzanne, et qui joua un r\u00F4le d\u00E9cisif durant la guerre de Cent Ans."
         },
         "altitude": {
           "type": "typed-literal",

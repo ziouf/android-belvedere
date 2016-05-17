@@ -3,6 +3,7 @@
     "link": [],
     "vars": [
       "nom",
+      "comment",
       "altitude",
       "latitude",
       "longitude",
@@ -18,37 +19,12 @@
         "nom": {
           "type": "literal",
           "xml:lang": "fr",
-          "value": "Butte Chaumont"
+          "value": "Signal d'\u00C9couves"
         },
-        "altitude": {
-          "type": "typed-literal",
-          "datatype": "http://www.w3.org/2001/XMLSchema#integer",
-          "value": "378"
-        },
-        "latitude": {
-          "type": "typed-literal",
-          "datatype": "http://www.w3.org/2001/XMLSchema#double",
-          "value": "48.4814"
-        },
-        "longitude": {
-          "type": "typed-literal",
-          "datatype": "http://www.w3.org/2001/XMLSchema#double",
-          "value": "-0.0275"
-        },
-        "thumbnail": {
-          "type": "uri",
-          "value": "http://commons.wikimedia.org/wiki/Special:FilePath/ButteChaumont.JPG?width=300"
-        },
-        "wiki": {
-          "type": "uri",
-          "value": "http://fr.wikipedia.org/wiki/Butte_Chaumont"
-        }
-      },
-      {
-        "nom": {
+        "comment": {
           "type": "literal",
           "xml:lang": "fr",
-          "value": "Signal d'\u00C9couves"
+          "value": "Le signal d'\u00C9couves, d'une altitude de 413 m, est le point culminant de la Normandie. Il est situ\u00E9 dans la for\u00EAt d'\u00C9couves, dans le d\u00E9partement de l'Orne, au nord d'Alen\u00E7on. Il domine de quelques m\u00E8tres les hauteurs voisines, fa\u00E7onn\u00E9es comme lui dans le gr\u00E8s armoricain (gros bancs de quartzite tr\u00E8s durs) et il est enti\u00E8rement recouvert par la for\u00EAt."
         },
         "altitude": {
           "type": "typed-literal",
@@ -78,67 +54,12 @@
         "nom": {
           "type": "literal",
           "xml:lang": "fr",
-          "value": "Mont Doville"
-        },
-        "altitude": {
-          "type": "typed-literal",
-          "datatype": "http://www.w3.org/2001/XMLSchema#integer",
-          "value": "129"
-        },
-        "latitude": {
-          "type": "typed-literal",
-          "datatype": "http://www.w3.org/2001/XMLSchema#double",
-          "value": "49.3267"
-        },
-        "longitude": {
-          "type": "typed-literal",
-          "datatype": "http://www.w3.org/2001/XMLSchema#double",
-          "value": "-1.56417"
-        },
-        "thumbnail": {
-          "type": "uri",
-          "value": "http://commons.wikimedia.org/wiki/Special:FilePath/Vue_depuis_le_mont_Doville_(2).jpg?width=300"
-        },
-        "wiki": {
-          "type": "uri",
-          "value": "http://fr.wikipedia.org/wiki/Mont_Doville"
-        }
-      },
-      {
-        "nom": {
-          "type": "literal",
-          "xml:lang": "fr",
-          "value": "Montagne du Roule"
-        },
-        "altitude": {
-          "type": "typed-literal",
-          "datatype": "http://www.w3.org/2001/XMLSchema#integer",
-          "value": "112"
-        },
-        "latitude": {
-          "type": "typed-literal",
-          "datatype": "http://www.w3.org/2001/XMLSchema#double",
-          "value": "49.6281"
-        },
-        "longitude": {
-          "type": "typed-literal",
-          "datatype": "http://www.w3.org/2001/XMLSchema#double",
-          "value": "-1.6125"
-        },
-        "thumbnail": {
-          "type": "uri",
-          "value": "http://commons.wikimedia.org/wiki/Special:FilePath/Montagne-du-roule.jpg?width=300"
-        },
-        "wiki": {
-          "type": "uri",
-          "value": "http://fr.wikipedia.org/wiki/Montagne_du_Roule"
-        }
-      },
-      {
-        "nom": {
-          "type": "literal",
-          "xml:lang": "fr",
           "value": "Masse de Romont"
+        },
+        "comment": {
+          "type": "literal",
+          "xml:lang": "fr",
+          "value": "La Masse de Romont est une montagne du Massif armoricain. Elle est situ\u00E9e dans le d\u00E9partement de la Manche, \u00E0 cheval sur les communes de Barneville-Carteret et des Moitiers-d'Allonne. Elle culmine \u00E0 99 m d'altitude. Les soldats am\u00E9ricains y ont d\u00E9fait des positions allemandes entre le 16 et le 18 juin 1944 pendant la Coupure du Cotentin. Il fait partie du prolongement du cap de Carteret."
         },
         "altitude": {
           "type": "typed-literal",
@@ -170,6 +91,11 @@
           "xml:lang": "fr",
           "value": "Mont Pin\u00E7on"
         },
+        "comment": {
+          "type": "literal",
+          "xml:lang": "fr",
+          "value": "Le mont Pin\u00E7on est le plus haut point du d\u00E9partement du Calvados en Normandie avec une altitude de 362 m\u00E8tres. Il est situ\u00E9 \u00E0 l'ouest de la Suisse normande \u00E0 une trentaine de kilom\u00E8tres au sud-ouest de Caen, pr\u00E8s du village du Plessis-Grimoult."
+        },
         "altitude": {
           "type": "typed-literal",
           "datatype": "http://www.w3.org/2001/XMLSchema#integer",
@@ -198,7 +124,117 @@
         "nom": {
           "type": "literal",
           "xml:lang": "fr",
+          "value": "Butte Chaumont"
+        },
+        "comment": {
+          "type": "literal",
+          "xml:lang": "fr",
+          "value": "La Butte Chaumont est un des points les plus \u00E9lev\u00E9s de Normandie. Situ\u00E9e dans l'Orne, plus pr\u00E9cis\u00E9ment dans la for\u00EAt d'\u00C9couves au nord-ouest d'Alen\u00E7on, elle culmine \u00E0 378 m.\u2191 Coordonn\u00E9es identifi\u00E9es \u00E0 l'aide de Google Earth"
+        },
+        "altitude": {
+          "type": "typed-literal",
+          "datatype": "http://www.w3.org/2001/XMLSchema#integer",
+          "value": "378"
+        },
+        "latitude": {
+          "type": "typed-literal",
+          "datatype": "http://www.w3.org/2001/XMLSchema#double",
+          "value": "48.4814"
+        },
+        "longitude": {
+          "type": "typed-literal",
+          "datatype": "http://www.w3.org/2001/XMLSchema#double",
+          "value": "-0.0275"
+        },
+        "thumbnail": {
+          "type": "uri",
+          "value": "http://commons.wikimedia.org/wiki/Special:FilePath/ButteChaumont.JPG?width=300"
+        },
+        "wiki": {
+          "type": "uri",
+          "value": "http://fr.wikipedia.org/wiki/Butte_Chaumont"
+        }
+      },
+      {
+        "nom": {
+          "type": "literal",
+          "xml:lang": "fr",
+          "value": "Mont Doville"
+        },
+        "comment": {
+          "type": "literal",
+          "xml:lang": "fr",
+          "value": "Le mont Doville est une montagne du Massif armoricain. Elle est situ\u00E9e dans le d\u00E9partement de la Manche, sur la commune de Doville. Il culmine \u00E0 129 m d'altitude. Les soldats am\u00E9ricains y ont d\u00E9fait des positions allemandes entre le 3 et le 10 juillet 1944 pendant la bataille de La Haye-du-Puits. Il fait partie d'un ensemble de petites montagnes encerclant la ville de La Haye-du-Puits et surnomm\u00E9 \u00AB clos du Cotentin \u00BB."
+        },
+        "altitude": {
+          "type": "typed-literal",
+          "datatype": "http://www.w3.org/2001/XMLSchema#integer",
+          "value": "129"
+        },
+        "latitude": {
+          "type": "typed-literal",
+          "datatype": "http://www.w3.org/2001/XMLSchema#double",
+          "value": "49.3267"
+        },
+        "longitude": {
+          "type": "typed-literal",
+          "datatype": "http://www.w3.org/2001/XMLSchema#double",
+          "value": "-1.56417"
+        },
+        "thumbnail": {
+          "type": "uri",
+          "value": "http://commons.wikimedia.org/wiki/Special:FilePath/Vue_depuis_le_mont_Doville_(2).jpg?width=300"
+        },
+        "wiki": {
+          "type": "uri",
+          "value": "http://fr.wikipedia.org/wiki/Mont_Doville"
+        }
+      },
+      {
+        "nom": {
+          "type": "literal",
+          "xml:lang": "fr",
+          "value": "Montagne du Roule"
+        },
+        "comment": {
+          "type": "literal",
+          "xml:lang": "fr",
+          "value": "La montagne du Roule est une montagne du Massif armoricain. Elle est situ\u00E9e dans le d\u00E9partement de la Manche, dans la commune de Cherbourg-Octeville. Elle culmine \u00E0 112 m d'altitude."
+        },
+        "altitude": {
+          "type": "typed-literal",
+          "datatype": "http://www.w3.org/2001/XMLSchema#integer",
+          "value": "112"
+        },
+        "latitude": {
+          "type": "typed-literal",
+          "datatype": "http://www.w3.org/2001/XMLSchema#double",
+          "value": "49.6281"
+        },
+        "longitude": {
+          "type": "typed-literal",
+          "datatype": "http://www.w3.org/2001/XMLSchema#double",
+          "value": "-1.6125"
+        },
+        "thumbnail": {
+          "type": "uri",
+          "value": "http://commons.wikimedia.org/wiki/Special:FilePath/Montagne-du-roule.jpg?width=300"
+        },
+        "wiki": {
+          "type": "uri",
+          "value": "http://fr.wikipedia.org/wiki/Montagne_du_Roule"
+        }
+      },
+      {
+        "nom": {
+          "type": "literal",
+          "xml:lang": "fr",
           "value": "Mont Ormel"
+        },
+        "comment": {
+          "type": "literal",
+          "xml:lang": "fr",
+          "value": "Le mont Ormel (cote 262) est un sommet de Normandie, situ\u00E9 dans le d\u00E9partement de l'Orne au nord-est d'Argentan, dans le pays d'Auge.Il a donn\u00E9 son nom \u00E0 la commune de Mont-Ormel.Culminant \u00E0 263 m, ce sommet est c\u00E9l\u00E8bre car, le 21 ao\u00FBt 1944, il fut le lieu o\u00F9 la poche de Falaise, ultime \u00E9pisode de la bataille de Normandie, s'est referm\u00E9e."
         },
         "altitude": {
           "type": "typed-literal",

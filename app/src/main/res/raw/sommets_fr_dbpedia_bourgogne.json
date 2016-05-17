@@ -3,6 +3,7 @@
     "link": [],
     "vars": [
       "nom",
+      "comment",
       "altitude",
       "latitude",
       "longitude",
@@ -18,60 +19,140 @@
         "nom": {
           "type": "literal",
           "xml:lang": "fr",
-          "value": "Haut-Folin"
+          "value": "Roche de Vergisson"
+        },
+        "comment": {
+          "type": "literal",
+          "xml:lang": "fr",
+          "value": "La Roche de Vergisson est un sommet calcaire de Sa\u00F4ne-et-Loire."
         },
         "altitude": {
           "type": "typed-literal",
           "datatype": "http://www.w3.org/2001/XMLSchema#integer",
-          "value": "901"
+          "value": "485"
         },
         "latitude": {
           "type": "typed-literal",
           "datatype": "http://www.w3.org/2001/XMLSchema#double",
-          "value": "46.9958"
+          "value": "46.3143"
         },
         "longitude": {
           "type": "typed-literal",
           "datatype": "http://www.w3.org/2001/XMLSchema#double",
-          "value": "4.03722"
+          "value": "4.7161"
         },
         "thumbnail": {
           "type": "uri",
-          "value": "http://commons.wikimedia.org/wiki/Special:FilePath/HautFolin.jpg?width=300"
+          "value": "http://commons.wikimedia.org/wiki/Special:FilePath/Roche_Vergisson.JPG?width=300"
         },
         "wiki": {
           "type": "uri",
-          "value": "http://fr.wikipedia.org/wiki/Haut-Folin"
+          "value": "http://fr.wikipedia.org/wiki/Roche_de_Vergisson"
         }
       },
       {
         "nom": {
           "type": "literal",
           "xml:lang": "fr",
-          "value": "Butte de Thil"
+          "value": "Mont de S\u00E8ne"
+        },
+        "comment": {
+          "type": "literal",
+          "xml:lang": "fr",
+          "value": "Le mont de S\u00E8ne, ou montagne des Trois Croix, est un sommet situ\u00E9 \u00E0 la limite des d\u00E9partements de la C\u00F4te-d'Or et de la Sa\u00F4ne-et-Loire en France. Culminant \u00E0 521 m\u00E8tres, il domine la c\u00F4te de Beaune au nord, la vall\u00E9e de la Sa\u00F4ne \u00E0 l\u2019est, le Clunisois au sud et le Morvan \u00E0 l\u2019ouest.De nombreux vestiges, dont des dolmens fouill\u00E9s plusieurs fois au XIXe si\u00E8cle, t\u00E9moignent d\u2019une occupation intense d\u00E8s le N\u00E9olithique."
         },
         "altitude": {
           "type": "typed-literal",
           "datatype": "http://www.w3.org/2001/XMLSchema#integer",
-          "value": "473"
+          "value": "521"
         },
         "latitude": {
           "type": "typed-literal",
           "datatype": "http://www.w3.org/2001/XMLSchema#double",
-          "value": "47.3869"
+          "value": "46.9194"
         },
         "longitude": {
           "type": "typed-literal",
           "datatype": "http://www.w3.org/2001/XMLSchema#double",
-          "value": "4.33583"
+          "value": "4.66917"
         },
         "thumbnail": {
           "type": "uri",
-          "value": "http://commons.wikimedia.org/wiki/Special:FilePath/Butte_de_Thil-la-Ville.jpg?width=300"
+          "value": "http://commons.wikimedia.org/wiki/Special:FilePath/Croix_du_Mont_de_S\u00E8ne.jpg?width=300"
         },
         "wiki": {
           "type": "uri",
-          "value": "http://fr.wikipedia.org/wiki/Butte_de_Thil"
+          "value": "http://fr.wikipedia.org/wiki/Mont_de_S\u00E8ne"
+        }
+      },
+      {
+        "nom": {
+          "type": "literal",
+          "xml:lang": "fr",
+          "value": "Roche de Solutr\u00E9"
+        },
+        "comment": {
+          "type": "literal",
+          "xml:lang": "fr",
+          "value": "La Roche de Solutr\u00E9, escarpement calcaire surplombant la commune de Solutr\u00E9-Pouilly, 8 km \u00E0 l'ouest de M\u00E2con, est un site embl\u00E9matique de Sa\u00F4ne-et-Loire, au sud de la r\u00E9gion Bourgogne. Prot\u00E9g\u00E9e au titre de la loi sur les sites class\u00E9s et aujourd\u2019hui au c\u0153ur d'une Op\u00E9ration Grand Site, elle est situ\u00E9e sur la commune de Solutr\u00E9-Pouilly."
+        },
+        "altitude": {
+          "type": "typed-literal",
+          "datatype": "http://www.w3.org/2001/XMLSchema#integer",
+          "value": "493"
+        },
+        "latitude": {
+          "type": "typed-literal",
+          "datatype": "http://www.w3.org/2001/XMLSchema#double",
+          "value": "46.2992"
+        },
+        "longitude": {
+          "type": "typed-literal",
+          "datatype": "http://www.w3.org/2001/XMLSchema#double",
+          "value": "4.71917"
+        },
+        "thumbnail": {
+          "type": "uri",
+          "value": "http://commons.wikimedia.org/wiki/Special:FilePath/Roche_Solutr\u00E9_et_vignoble.JPG?width=300"
+        },
+        "wiki": {
+          "type": "uri",
+          "value": "http://fr.wikipedia.org/wiki/Roche_de_Solutr\u00E9"
+        }
+      },
+      {
+        "nom": {
+          "type": "literal",
+          "xml:lang": "fr",
+          "value": "Mont Saint-Cyr"
+        },
+        "comment": {
+          "type": "literal",
+          "xml:lang": "fr",
+          "value": "Le mont Saint-Cyr, avec une altitude de 771 m, est le point culminant des monts du M\u00E2connais."
+        },
+        "altitude": {
+          "type": "typed-literal",
+          "datatype": "http://www.w3.org/2001/XMLSchema#integer",
+          "value": "771"
+        },
+        "latitude": {
+          "type": "typed-literal",
+          "datatype": "http://www.w3.org/2001/XMLSchema#double",
+          "value": "46.3264"
+        },
+        "longitude": {
+          "type": "typed-literal",
+          "datatype": "http://www.w3.org/2001/XMLSchema#double",
+          "value": "4.42806"
+        },
+        "thumbnail": {
+          "type": "uri",
+          "value": "http://commons.wikimedia.org/wiki/Special:FilePath/Mont_Saint_Cyr_1.jpg?width=300"
+        },
+        "wiki": {
+          "type": "uri",
+          "value": "http://fr.wikipedia.org/wiki/Mont_Saint-Cyr"
         }
       },
       {
@@ -79,6 +160,11 @@
           "type": "literal",
           "xml:lang": "fr",
           "value": "Butte de Suin"
+        },
+        "comment": {
+          "type": "literal",
+          "xml:lang": "fr",
+          "value": "La butte de Suin, avec ses 593 m\u00E8tres, se dresse \u00E0 l'extr\u00E9mit\u00E9 ouest du Charolais. Coiff\u00E9e de rochers, elle domine la commune de Suin, dans le d\u00E9partement de la Sa\u00F4ne-et-Loire, \u00E0 peu pr\u00E8s \u00E0 mi-chemin entre Charolles et Cluny. Elle est situ\u00E9e sur la ligne de partage des eaux entre l'oc\u00E9an Atlantique et la mer M\u00E9diterran\u00E9e.Du haut de cette \u00AB sentinelle \u00BB, le panorama s'\u00E9tend sur 360 \u00B0."
         },
         "altitude": {
           "type": "typed-literal",
@@ -110,6 +196,11 @@
           "xml:lang": "fr",
           "value": "Mont Dardon"
         },
+        "comment": {
+          "type": "literal",
+          "xml:lang": "fr",
+          "value": "Le mont Dardon, situ\u00E9 dans le Charolais, est partag\u00E9 entre les trois communes d'Issy-l'\u00C9v\u00EAque, Uxeau et Sainte-Radegonde, en Sa\u00F4ne-et-Loire, dans le sud de la Bourgogne. De son sommet qui culmine \u00E0 506 m\u00E8tres, on aper\u00E7oit entre autres le mont Beuvray, Uchon, Mont-Saint-Vincent, et, par temps clair, le mont Blanc.On y trouve une table d'orientation et trois croix."
+        },
         "altitude": {
           "type": "typed-literal",
           "datatype": "http://www.w3.org/2001/XMLSchema#integer",
@@ -140,6 +231,11 @@
           "xml:lang": "fr",
           "value": "Montagne de Dun"
         },
+        "comment": {
+          "type": "literal",
+          "xml:lang": "fr",
+          "value": "La montagne de Dun, avec ses 708 m\u00E8tres, est situ\u00E9e dans le Brionnais, sur la commune de Saint-Racho, en Sa\u00F4ne-et-Loire, dans le sud de la Bourgogne. Elle domine la vall\u00E9e du Sornin. On trouve \u00E0 son sommet deux tables d'orientation, l'une sur le versant de La Clayette et l'autre sur celui du Chauffailles, d'o\u00F9 l'on peut d\u00E9couvrir plus de 25 clochers. La hauteur voisine, nomm\u00E9e Dunet, est un peu plus \u00E9lev\u00E9e (732 m\u00E8tres).\u2191 Site Geoportail de l'IGN"
+        },
         "altitude": {
           "type": "typed-literal",
           "datatype": "http://www.w3.org/2001/XMLSchema#integer",
@@ -168,37 +264,12 @@
         "nom": {
           "type": "literal",
           "xml:lang": "fr",
-          "value": "Signal d'Uchon"
+          "value": "Mont Rome"
         },
-        "altitude": {
-          "type": "typed-literal",
-          "datatype": "http://www.w3.org/2001/XMLSchema#integer",
-          "value": "681"
-        },
-        "latitude": {
-          "type": "typed-literal",
-          "datatype": "http://www.w3.org/2001/XMLSchema#double",
-          "value": "46.8044"
-        },
-        "longitude": {
-          "type": "typed-literal",
-          "datatype": "http://www.w3.org/2001/XMLSchema#double",
-          "value": "4.25028"
-        },
-        "thumbnail": {
-          "type": "uri",
-          "value": "http://commons.wikimedia.org/wiki/Special:FilePath/Panorama_Morvan.jpg?width=300"
-        },
-        "wiki": {
-          "type": "uri",
-          "value": "http://fr.wikipedia.org/wiki/Signal_d'Uchon"
-        }
-      },
-      {
-        "nom": {
+        "comment": {
           "type": "literal",
           "xml:lang": "fr",
-          "value": "Mont Rome"
+          "value": "Le mont Rome, aussi connu sous le nom de mont de Rome Ch\u00E2teau, est un sommet qui constitue un point strat\u00E9gique dans le Nord du d\u00E9partement de la Sa\u00F4ne-et-Loire.Il est situ\u00E9 \u00E0 5,6 km au sud-sud-ouest de Nolay, sur la commune de Saint-Sernin-du-Plain, et culmine \u00E0 546 m\u00E8tres d'altitude."
         },
         "altitude": {
           "type": "typed-literal",
@@ -228,7 +299,187 @@
         "nom": {
           "type": "literal",
           "xml:lang": "fr",
+          "value": "Montagne d'\u00C9tang"
+        },
+        "comment": {
+          "type": "literal",
+          "xml:lang": "fr",
+          "value": "La montagne d'\u00C9tang est le nom non officiel d'un sommet de C\u00F4te-d'Or situ\u00E9 \u00E0 une dizaine de kilom\u00E8tres au sud-ouest de Dijon. La colline a la particularit\u00E9 de poss\u00E9der une chapelle depuis plusieurs si\u00E8cles, \u00E0 son extr\u00E9mit\u00E9 nord, construite \u00E0 une altitude de 545 m."
+        },
+        "altitude": {
+          "type": "typed-literal",
+          "datatype": "http://www.w3.org/2001/XMLSchema#integer",
+          "value": "578"
+        },
+        "latitude": {
+          "type": "typed-literal",
+          "datatype": "http://www.w3.org/2001/XMLSchema#double",
+          "value": "47.2939"
+        },
+        "longitude": {
+          "type": "typed-literal",
+          "datatype": "http://www.w3.org/2001/XMLSchema#double",
+          "value": "4.90361"
+        },
+        "thumbnail": {
+          "type": "uri",
+          "value": "http://commons.wikimedia.org/wiki/Special:FilePath/Notre-Dame_d'\u00C9tang_578m_-_panoramique.JPG?width=300"
+        },
+        "wiki": {
+          "type": "uri",
+          "value": "http://fr.wikipedia.org/wiki/Montagne_d'\u00C9tang"
+        }
+      },
+      {
+        "nom": {
+          "type": "literal",
+          "xml:lang": "fr",
+          "value": "Mont Touleur"
+        },
+        "comment": {
+          "type": "literal",
+          "xml:lang": "fr",
+          "value": "Le mont Touleur est un sommet du Morvan sur la commune de Larochemillay, dans le d\u00E9partement de la Ni\u00E8vre."
+        },
+        "altitude": {
+          "type": "typed-literal",
+          "datatype": "http://www.w3.org/2001/XMLSchema#integer",
+          "value": "582"
+        },
+        "latitude": {
+          "type": "typed-literal",
+          "datatype": "http://www.w3.org/2001/XMLSchema#double",
+          "value": "46.8812"
+        },
+        "longitude": {
+          "type": "typed-literal",
+          "datatype": "http://www.w3.org/2001/XMLSchema#double",
+          "value": "3.9816"
+        },
+        "thumbnail": {
+          "type": "uri",
+          "value": "http://commons.wikimedia.org/wiki/Special:FilePath/La_Roche_(rivi\u00E8re),_St.Gengoult_(hameau)_et_le_Mont_Touleur.JPG?width=300"
+        },
+        "wiki": {
+          "type": "uri",
+          "value": "http://fr.wikipedia.org/wiki/Mont_Touleur"
+        }
+      },
+      {
+        "nom": {
+          "type": "literal",
+          "xml:lang": "fr",
+          "value": "Haut-Folin"
+        },
+        "comment": {
+          "type": "literal",
+          "xml:lang": "fr",
+          "value": "Le Haut-Folin est le point culminant du massif du Morvan, situ\u00E9 dans la r\u00E9gion Bourgogne, sur le territoire de la commune de Saint-Prix. Il s'\u00E9l\u00E8ve \u00E0 901 m\u00E8tres d'altitude et supporte le relais de t\u00E9l\u00E9vision Autun-Bois-du-Roi."
+        },
+        "altitude": {
+          "type": "typed-literal",
+          "datatype": "http://www.w3.org/2001/XMLSchema#integer",
+          "value": "901"
+        },
+        "latitude": {
+          "type": "typed-literal",
+          "datatype": "http://www.w3.org/2001/XMLSchema#double",
+          "value": "46.9958"
+        },
+        "longitude": {
+          "type": "typed-literal",
+          "datatype": "http://www.w3.org/2001/XMLSchema#double",
+          "value": "4.03722"
+        },
+        "thumbnail": {
+          "type": "uri",
+          "value": "http://commons.wikimedia.org/wiki/Special:FilePath/HautFolin.jpg?width=300"
+        },
+        "wiki": {
+          "type": "uri",
+          "value": "http://fr.wikipedia.org/wiki/Haut-Folin"
+        }
+      },
+      {
+        "nom": {
+          "type": "literal",
+          "xml:lang": "fr",
+          "value": "Butte de Thil"
+        },
+        "comment": {
+          "type": "literal",
+          "xml:lang": "fr",
+          "value": "La butte de Thil est situ\u00E9e sur la commune de Vic-sous-Thil dans le d\u00E9partement de la C\u00F4te-d'Or. Culminant \u00E0 473 m, elle accueille \u00E0 son sommet deux monuments reli\u00E9s par une all\u00E9e d'arbres pluricentenaires : le ch\u00E2teau de Thil ; la coll\u00E9giale de Thil.Portail de la montagne Portail de la montagne Portail du Morvan Portail du Morvan Portail de la C\u00F4te-d'Or Portail de la C\u00F4te-d'Or"
+        },
+        "altitude": {
+          "type": "typed-literal",
+          "datatype": "http://www.w3.org/2001/XMLSchema#integer",
+          "value": "473"
+        },
+        "latitude": {
+          "type": "typed-literal",
+          "datatype": "http://www.w3.org/2001/XMLSchema#double",
+          "value": "47.3869"
+        },
+        "longitude": {
+          "type": "typed-literal",
+          "datatype": "http://www.w3.org/2001/XMLSchema#double",
+          "value": "4.33583"
+        },
+        "thumbnail": {
+          "type": "uri",
+          "value": "http://commons.wikimedia.org/wiki/Special:FilePath/Butte_de_Thil-la-Ville.jpg?width=300"
+        },
+        "wiki": {
+          "type": "uri",
+          "value": "http://fr.wikipedia.org/wiki/Butte_de_Thil"
+        }
+      },
+      {
+        "nom": {
+          "type": "literal",
+          "xml:lang": "fr",
+          "value": "Signal d'Uchon"
+        },
+        "comment": {
+          "type": "literal",
+          "xml:lang": "fr",
+          "value": "Le signal d'Uchon, appel\u00E9 parfois mont Julien, est un sommet du massif du Morvan situ\u00E9 sur la commune d'Uchon en Sa\u00F4ne-et-Loire, dans le sud de la r\u00E9gion Bourgogne."
+        },
+        "altitude": {
+          "type": "typed-literal",
+          "datatype": "http://www.w3.org/2001/XMLSchema#integer",
+          "value": "681"
+        },
+        "latitude": {
+          "type": "typed-literal",
+          "datatype": "http://www.w3.org/2001/XMLSchema#double",
+          "value": "46.8044"
+        },
+        "longitude": {
+          "type": "typed-literal",
+          "datatype": "http://www.w3.org/2001/XMLSchema#double",
+          "value": "4.25028"
+        },
+        "thumbnail": {
+          "type": "uri",
+          "value": "http://commons.wikimedia.org/wiki/Special:FilePath/Panorama_Morvan.jpg?width=300"
+        },
+        "wiki": {
+          "type": "uri",
+          "value": "http://fr.wikipedia.org/wiki/Signal_d'Uchon"
+        }
+      },
+      {
+        "nom": {
+          "type": "literal",
+          "xml:lang": "fr",
           "value": "Mont Beuvray"
+        },
+        "comment": {
+          "type": "literal",
+          "xml:lang": "fr",
+          "value": "Le mont Beuvray qui culmine \u00E0 821 m fait partie du massif du Morvan, en Bourgogne. Il se trouve sur les communes de Saint-L\u00E9ger-sous-Beuvray (Sa\u00F4ne-et-Loire), Glux-en-Glenne et Larochemillay (Ni\u00E8vre). Son sommet correspond \u00E0 l'ancien oppidum gaulois de Bibracte, capitale des \u00C9duens. Sur ses flancs se trouve le mus\u00E9e de la civilisation celtique, ouvert au public en 1996."
         },
         "altitude": {
           "type": "typed-literal",
@@ -260,6 +511,11 @@
           "xml:lang": "fr",
           "value": "Mont Saint-Romain"
         },
+        "comment": {
+          "type": "literal",
+          "xml:lang": "fr",
+          "value": "Le mont Saint-Romain est un sommet situ\u00E9 sur la commune de Blanot en Sa\u00F4ne-et-Loire, dans la Bourgogne du sud. Culminant \u00E0 579 m\u00E8tres, il fait partie des monts du M\u00E2connais. Il poss\u00E8de une table d'orientation."
+        },
         "altitude": {
           "type": "typed-literal",
           "datatype": "http://www.w3.org/2001/XMLSchema#integer",
@@ -288,37 +544,12 @@
         "nom": {
           "type": "literal",
           "xml:lang": "fr",
-          "value": "Roche de Vergisson"
+          "value": "Signal de la M\u00E8re Boitier"
         },
-        "altitude": {
-          "type": "typed-literal",
-          "datatype": "http://www.w3.org/2001/XMLSchema#integer",
-          "value": "485"
-        },
-        "latitude": {
-          "type": "typed-literal",
-          "datatype": "http://www.w3.org/2001/XMLSchema#double",
-          "value": "46.3143"
-        },
-        "longitude": {
-          "type": "typed-literal",
-          "datatype": "http://www.w3.org/2001/XMLSchema#double",
-          "value": "4.7161"
-        },
-        "thumbnail": {
-          "type": "uri",
-          "value": "http://commons.wikimedia.org/wiki/Special:FilePath/Roche_Vergisson.JPG?width=300"
-        },
-        "wiki": {
-          "type": "uri",
-          "value": "http://fr.wikipedia.org/wiki/Roche_de_Vergisson"
-        }
-      },
-      {
-        "nom": {
+        "comment": {
           "type": "literal",
           "xml:lang": "fr",
-          "value": "Signal de la M\u00E8re Boitier"
+          "value": "Le signal de la M\u00E8re Boitier est un sommet situ\u00E9 sur la commune de Tramayes en Sa\u00F4ne-et-Loire, dans la Bourgogne du sud. Du haut de ses 758 m\u00E8tres, il est l'un des points culminants des monts du M\u00E2connais, avec le mont Saint-Cyr dont le sommet se situe \u00E0 Montmelard, sur la bordure orientale du Massif central.Il s'appelait autrefois la mure Boitier, le toponyme mure pouvant d\u00E9signer un site anciennement peupl\u00E9[r\u00E9f. n\u00E9cessaire]."
         },
         "altitude": {
           "type": "typed-literal",
@@ -350,6 +581,11 @@
           "xml:lang": "fr",
           "value": "Mont Afrique"
         },
+        "comment": {
+          "type": "literal",
+          "xml:lang": "fr",
+          "value": "Le mont Afrique est un sommet de la cuesta de C\u00F4te d'Or, dans le d\u00E9partement du m\u00EAme nom. Il est situ\u00E9 sur les communes de Corcelles-les-Monts et Flavignerot, \u00E0 proximit\u00E9 de Dijon."
+        },
         "altitude": {
           "type": "typed-literal",
           "datatype": "http://www.w3.org/2001/XMLSchema#integer",
@@ -372,156 +608,6 @@
         "wiki": {
           "type": "uri",
           "value": "http://fr.wikipedia.org/wiki/Mont_Afrique"
-        }
-      },
-      {
-        "nom": {
-          "type": "literal",
-          "xml:lang": "fr",
-          "value": "Mont de S\u00E8ne"
-        },
-        "altitude": {
-          "type": "typed-literal",
-          "datatype": "http://www.w3.org/2001/XMLSchema#integer",
-          "value": "521"
-        },
-        "latitude": {
-          "type": "typed-literal",
-          "datatype": "http://www.w3.org/2001/XMLSchema#double",
-          "value": "46.9194"
-        },
-        "longitude": {
-          "type": "typed-literal",
-          "datatype": "http://www.w3.org/2001/XMLSchema#double",
-          "value": "4.66917"
-        },
-        "thumbnail": {
-          "type": "uri",
-          "value": "http://commons.wikimedia.org/wiki/Special:FilePath/Croix_du_Mont_de_S\u00E8ne.jpg?width=300"
-        },
-        "wiki": {
-          "type": "uri",
-          "value": "http://fr.wikipedia.org/wiki/Mont_de_S\u00E8ne"
-        }
-      },
-      {
-        "nom": {
-          "type": "literal",
-          "xml:lang": "fr",
-          "value": "Montagne d'\u00C9tang"
-        },
-        "altitude": {
-          "type": "typed-literal",
-          "datatype": "http://www.w3.org/2001/XMLSchema#integer",
-          "value": "578"
-        },
-        "latitude": {
-          "type": "typed-literal",
-          "datatype": "http://www.w3.org/2001/XMLSchema#double",
-          "value": "47.2939"
-        },
-        "longitude": {
-          "type": "typed-literal",
-          "datatype": "http://www.w3.org/2001/XMLSchema#double",
-          "value": "4.90361"
-        },
-        "thumbnail": {
-          "type": "uri",
-          "value": "http://commons.wikimedia.org/wiki/Special:FilePath/Notre-Dame_d'\u00C9tang_578m_-_panoramique.JPG?width=300"
-        },
-        "wiki": {
-          "type": "uri",
-          "value": "http://fr.wikipedia.org/wiki/Montagne_d'\u00C9tang"
-        }
-      },
-      {
-        "nom": {
-          "type": "literal",
-          "xml:lang": "fr",
-          "value": "Roche de Solutr\u00E9"
-        },
-        "altitude": {
-          "type": "typed-literal",
-          "datatype": "http://www.w3.org/2001/XMLSchema#integer",
-          "value": "493"
-        },
-        "latitude": {
-          "type": "typed-literal",
-          "datatype": "http://www.w3.org/2001/XMLSchema#double",
-          "value": "46.2992"
-        },
-        "longitude": {
-          "type": "typed-literal",
-          "datatype": "http://www.w3.org/2001/XMLSchema#double",
-          "value": "4.71917"
-        },
-        "thumbnail": {
-          "type": "uri",
-          "value": "http://commons.wikimedia.org/wiki/Special:FilePath/Roche_Solutr\u00E9_et_vignoble.JPG?width=300"
-        },
-        "wiki": {
-          "type": "uri",
-          "value": "http://fr.wikipedia.org/wiki/Roche_de_Solutr\u00E9"
-        }
-      },
-      {
-        "nom": {
-          "type": "literal",
-          "xml:lang": "fr",
-          "value": "Mont Touleur"
-        },
-        "altitude": {
-          "type": "typed-literal",
-          "datatype": "http://www.w3.org/2001/XMLSchema#integer",
-          "value": "582"
-        },
-        "latitude": {
-          "type": "typed-literal",
-          "datatype": "http://www.w3.org/2001/XMLSchema#double",
-          "value": "46.8812"
-        },
-        "longitude": {
-          "type": "typed-literal",
-          "datatype": "http://www.w3.org/2001/XMLSchema#double",
-          "value": "3.9816"
-        },
-        "thumbnail": {
-          "type": "uri",
-          "value": "http://commons.wikimedia.org/wiki/Special:FilePath/La_Roche_(rivi\u00E8re),_St.Gengoult_(hameau)_et_le_Mont_Touleur.JPG?width=300"
-        },
-        "wiki": {
-          "type": "uri",
-          "value": "http://fr.wikipedia.org/wiki/Mont_Touleur"
-        }
-      },
-      {
-        "nom": {
-          "type": "literal",
-          "xml:lang": "fr",
-          "value": "Mont Saint-Cyr"
-        },
-        "altitude": {
-          "type": "typed-literal",
-          "datatype": "http://www.w3.org/2001/XMLSchema#integer",
-          "value": "771"
-        },
-        "latitude": {
-          "type": "typed-literal",
-          "datatype": "http://www.w3.org/2001/XMLSchema#double",
-          "value": "46.3264"
-        },
-        "longitude": {
-          "type": "typed-literal",
-          "datatype": "http://www.w3.org/2001/XMLSchema#double",
-          "value": "4.42806"
-        },
-        "thumbnail": {
-          "type": "uri",
-          "value": "http://commons.wikimedia.org/wiki/Special:FilePath/Mont_Saint_Cyr_1.jpg?width=300"
-        },
-        "wiki": {
-          "type": "uri",
-          "value": "http://fr.wikipedia.org/wiki/Mont_Saint-Cyr"
         }
       }
     ]

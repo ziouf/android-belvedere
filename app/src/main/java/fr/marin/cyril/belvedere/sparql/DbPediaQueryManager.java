@@ -15,6 +15,27 @@ import java.net.URL;
  * - http://developer.android.com/training/basics/network-ops/connecting.html
  * - http://fr.dbpedia.org/sparql
  * - http://git.cm-cloud.fr/MARIN/belvedere/snippets/16
+ *
+ * Selection de tous les sommets de France, groupés par Region
+ *  SELECT ?regionLabel ?nom ?altitude ?latitude ?longitude ?thumbnail ?wiki
+ WHERE {
+ ?peak rdf:type dbpedia-owl:Mountain .
+ ?peak rdf:type dbpedia-owl:NaturalPlace .
+ ?peak dbpedia-owl:region ?region .
+ ?region dbpedia-owl:country <http://fr.dbpedia.org/resource/France> .
+ ?peak dbpedia-owl:region ?region .
+ ?region rdfs:label ?regionLabel .
+ ?peak rdfs:label ?nom .
+ ?peak prop-fr:altitude ?altitude .
+ ?peak prop-fr:latitude ?latitude .
+ ?peak prop-fr:longitude ?longitude .
+ ?peak dbpedia-owl:thumbnail ?thumbnail .
+ ?peak foaf:isPrimaryTopicOf ?wiki .
+ FILTER(LANGMATCHES(LANG(?nom), "fr") && LANGMATCHES(LANG(?regionLabel), "fr"))
+ }
+ GROUP BY ?region
+ ORDER BY DESC(?region)
+ *
  */
 public class DbPediaQueryManager {
     private static final String TAG = "DbPediaQueryManager";

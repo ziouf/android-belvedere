@@ -3,6 +3,7 @@
     "link": [],
     "vars": [
       "nom",
+      "comment",
       "altitude",
       "latitude",
       "longitude",
@@ -18,7 +19,47 @@
         "nom": {
           "type": "literal",
           "xml:lang": "fr",
+          "value": "C\u00F4te de Cadoudal"
+        },
+        "comment": {
+          "type": "literal",
+          "xml:lang": "fr",
+          "value": "La c\u00F4te de Cadoudal est une portion de la route d\u00E9partementale 126 \u00E0 l'entr\u00E9e du bourg de Plumelec dans le Morbihan. Sa pente prononc\u00E9e, c\u00E9l\u00E8bre dans le milieu du cyclisme, en fait un lieu de passage ou d'arriv\u00E9e r\u00E9gulier des courses r\u00E9gionales, nationales et m\u00EAme du Tour de France \u00E0 plusieurs reprises.\u2191 1,0 et 1,1 V\u00E9rifi\u00E9 sur G\u00E9oportail."
+        },
+        "altitude": {
+          "type": "typed-literal",
+          "datatype": "http://www.w3.org/2001/XMLSchema#integer",
+          "value": "156"
+        },
+        "latitude": {
+          "type": "typed-literal",
+          "datatype": "http://www.w3.org/2001/XMLSchema#double",
+          "value": "47.8303"
+        },
+        "longitude": {
+          "type": "typed-literal",
+          "datatype": "http://www.w3.org/2001/XMLSchema#double",
+          "value": "-2.64944"
+        },
+        "thumbnail": {
+          "type": "uri",
+          "value": "http://commons.wikimedia.org/wiki/Special:FilePath/Manoir_de_Cadoudal_6092.JPG?width=300"
+        },
+        "wiki": {
+          "type": "uri",
+          "value": "http://fr.wikipedia.org/wiki/C\u00F4te_de_Cadoudal"
+        }
+      },
+      {
+        "nom": {
+          "type": "literal",
+          "xml:lang": "fr",
           "value": "Mont Saint-Michel de Brasparts"
+        },
+        "comment": {
+          "type": "literal",
+          "xml:lang": "fr",
+          "value": "Le mont Saint-Michel de Brasparts (menez Mikael-an-Are ou localement menez Sant-Mikael en breton) est l'un des sommets de la cha\u00EEne des Monts d'Arr\u00E9e situ\u00E9e en Bretagne sur la commune de Saint-Rivoal (Finist\u00E8re). Il fait partie du parc naturel r\u00E9gional d'Armorique et domine la cuvette du marais du Yeun Elez."
         },
         "altitude": {
           "type": "typed-literal",
@@ -50,6 +91,11 @@
           "xml:lang": "fr",
           "value": "Menez Lokorn"
         },
+        "comment": {
+          "type": "literal",
+          "xml:lang": "fr",
+          "value": "Le Menez Lokorn ou montagne de Locronan est une colline situ\u00E9e sur les communes de Locronan, Qu\u00E9m\u00E9n\u00E9ven et Plogonnec, dans le d\u00E9partement du Finist\u00E8re, en France.D\u2019une altitude de 289 m\u00E8tres, elle offre un panorama sur la baie de Douarnenez, le cap de la Ch\u00E8vre et le M\u00E9nez-Hom. Elle abrite la chapelle Ar Zonj, d\u00E9di\u00E9e \u00E0 Saint Ronan, et la Chaise de Saint Ronan, constituant toutes deux des \u00E9tapes de la Trom\u00E9nie."
+        },
         "altitude": {
           "type": "typed-literal",
           "datatype": "http://www.w3.org/2001/XMLSchema#integer",
@@ -80,6 +126,11 @@
           "xml:lang": "fr",
           "value": "M\u00E9nez-Hom"
         },
+        "comment": {
+          "type": "literal",
+          "xml:lang": "fr",
+          "value": "Le M\u00E9nez-Hom est une montagne situ\u00E9e en Bretagne, dans le d\u00E9partement du Finist\u00E8re, en pays de Cornouaille, entre l'Aulne et le Porzay, sur le territoire des communes de Plomodiern, Saint-Nic, Tr\u00E9garvan et Din\u00E9ault o\u00F9 elle culmine. Culminant \u00E0 330 m\u00E8tres, elle domine la rade de Brest et la baie de Douarnenez, et termine la cha\u00EEne des Montagnes Noires. Le site a \u00E9t\u00E9 class\u00E9 patrimoine naturel en 2004 pour sa faune et sa flore."
+        },
         "altitude": {
           "type": "typed-literal",
           "datatype": "http://www.w3.org/2001/XMLSchema#integer",
@@ -108,37 +159,12 @@
         "nom": {
           "type": "literal",
           "xml:lang": "fr",
-          "value": "C\u00F4te de Cadoudal"
+          "value": "Frugy"
         },
-        "altitude": {
-          "type": "typed-literal",
-          "datatype": "http://www.w3.org/2001/XMLSchema#integer",
-          "value": "156"
-        },
-        "latitude": {
-          "type": "typed-literal",
-          "datatype": "http://www.w3.org/2001/XMLSchema#double",
-          "value": "47.8303"
-        },
-        "longitude": {
-          "type": "typed-literal",
-          "datatype": "http://www.w3.org/2001/XMLSchema#double",
-          "value": "-2.64944"
-        },
-        "thumbnail": {
-          "type": "uri",
-          "value": "http://commons.wikimedia.org/wiki/Special:FilePath/Manoir_de_Cadoudal_6092.JPG?width=300"
-        },
-        "wiki": {
-          "type": "uri",
-          "value": "http://fr.wikipedia.org/wiki/C\u00F4te_de_Cadoudal"
-        }
-      },
-      {
-        "nom": {
+        "comment": {
           "type": "literal",
           "xml:lang": "fr",
-          "value": "Frugy"
+          "value": "Le Frugy est une colline qui domine la ville de Quimper dans le Finist\u00E8re en France."
         },
         "altitude": {
           "type": "typed-literal",
@@ -169,6 +195,11 @@
           "type": "literal",
           "xml:lang": "fr",
           "value": "Calotte Saint-Joseph"
+        },
+        "comment": {
+          "type": "literal",
+          "xml:lang": "fr",
+          "value": "La Calotte Saint-Joseph est un sommet s'\u00E9levant \u00E0 292 m\u00E8tres d'altitude dans le d\u00E9partement fran\u00E7ais du Morbihan, dont il constitue le point culminant. Il est situ\u00E9 sur la commune de Langonnet. Il constitue le douzi\u00E8me plus haut sommet de Bretagne[r\u00E9f. souhait\u00E9e]<span />. Le panorama s'\u00E9tend jusqu'aux monts d'Arr\u00E9e et au M\u00E9nez-Hom."
         },
         "altitude": {
           "type": "typed-literal",

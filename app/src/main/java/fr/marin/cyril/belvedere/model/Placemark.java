@@ -12,6 +12,7 @@ import com.google.android.gms.maps.model.MarkerOptions;
 public class Placemark {
     private String title;
     private Coordinates coordinates;
+    private String comment;
     private String wiki_uri;
     private String thumbnail_uri;
 
@@ -19,22 +20,18 @@ public class Placemark {
     private double matchLevel = 0d;
     private double distance = 0d;
 
-    public Placemark(String title, double lat, double lng, double elevation, String wiki_uri) {
+    public Placemark(String title, String comment, double lat, double lng, double elevation, String wiki_uri, String thumbnail_uri) {
         this.coordinates = new Coordinates(new LatLng(lat, lng), elevation);
         this.title = title;
-        this.wiki_uri = wiki_uri;
-    }
-
-    public Placemark(String title, double lat, double lng, double elevation, String wiki_uri, String thumbnail_uri) {
-        this.title = title;
-        this.coordinates = new Coordinates(new LatLng(lat, lng), elevation);
+        this.comment = comment;
         this.wiki_uri = wiki_uri;
         this.thumbnail_uri = thumbnail_uri;
     }
 
-    public Placemark(String title, double lat, double lng, double elevation, String wiki_uri, String thumbnail_uri, byte[] thumbnail) {
+    public Placemark(String title, String comment, double lat, double lng, double elevation, String wiki_uri, String thumbnail_uri, byte[] thumbnail) {
         this.coordinates = new Coordinates(new LatLng(lat, lng), elevation);
         this.title = title;
+        this.comment = comment;
         this.wiki_uri = wiki_uri;
         this.thumbnail_uri = thumbnail_uri;
         this.thumbnail = thumbnail;
@@ -52,10 +49,13 @@ public class Placemark {
         return thumbnail_uri;
     }
 
+    public String getComment() {
+        return comment;
+    }
+
     public Coordinates getCoordinates() {
         return coordinates;
     }
-
 
     public Bitmap getThumbnail() {
         return BitmapFactory.decodeByteArray(thumbnail, 0, thumbnail.length);

@@ -3,6 +3,7 @@
     "link": [],
     "vars": [
       "nom",
+      "comment",
       "altitude",
       "latitude",
       "longitude",
@@ -18,7 +19,12 @@
         "nom": {
           "type": "literal",
           "xml:lang": "fr",
-          "value": "Rocher aux Oiseaux"
+          "value": "Rocher aux Oiseaux (Charente)"
+        },
+        "comment": {
+          "type": "literal",
+          "xml:lang": "fr",
+          "value": "Le rocher aux Oiseaux, est le point culminant du d\u00E9partement de la Charente et de la r\u00E9gion Poitou-Charentes avec une altitude de 368,63 m. Il est situ\u00E9 sur la commune de Montrollet en Charente limousine, \u00E0 70 km au nord-est d'Angoul\u00EAme.\u2191 1,0, 1,1 et 1,2 Carte IGN sur G\u00E9oportail \u00E0 l'\u00E9chelle 1:25 000\u2191 [PDF] Conseil g\u00E9n\u00E9ral de la Charente, \u00AB Magazine Tonus Charente no 69, p.22 \u00BB,\u200E ao\u00FBt 2008 (consult\u00E9 le 9 d\u00E9cembre 2011)\u2191 Panneau sur site\u2191 Distances orthodromiques prises sous ACME Mapper"
         },
         "altitude": {
           "type": "typed-literal",

@@ -3,6 +3,7 @@
     "link": [],
     "vars": [
       "nom",
+      "comment",
       "altitude",
       "latitude",
       "longitude",
@@ -19,6 +20,11 @@
           "type": "literal",
           "xml:lang": "fr",
           "value": "Morne de Vitet"
+        },
+        "comment": {
+          "type": "literal",
+          "xml:lang": "fr",
+          "value": "Le morne de Vitet est le point culminant de l'\u00EEle de Saint-Barth\u00E9lemy."
         },
         "altitude": {
           "type": "typed-literal",

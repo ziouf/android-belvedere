@@ -16,8 +16,8 @@ android {
         /* Changer l'applicationId pour "fr.marin.cyril.belvedere" avant publication en version stable */
         minSdkVersion 19
         targetSdkVersion 23
-        versionCode 1011
-        versionName "1.0.11"
+        versionCode 1012
+        versionName "1.0.12"
         vectorDrawables.useSupportLibrary = true
     }
     buildTypes {

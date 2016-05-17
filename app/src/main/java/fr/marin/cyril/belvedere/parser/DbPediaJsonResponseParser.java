@@ -107,6 +107,7 @@ public class DbPediaJsonResponseParser {
         double latitude = 0d;
         double longitude = 0d;
         double elevation = 0d;
+        String comment = null;
         String thumbnail_uri = null;
         String wiki_uri = null;
 
@@ -125,17 +126,22 @@ public class DbPediaJsonResponseParser {
                 case "nom":
                     name = readStringValue(reader);
                     break;
+                case "comment":
+                    comment = readStringValue(reader);
+                    break;
                 case "thumbnail":
                     thumbnail_uri = readStringValue(reader);
                     break;
                 case "wiki":
                     wiki_uri = readStringValue(reader);
                     break;
+                default:
+                    reader.skipValue();
             }
         }
         reader.endObject();
 
-        return new Placemark(name, latitude, longitude, elevation, wiki_uri, thumbnail_uri);
+        return new Placemark(name, comment, latitude, longitude, elevation, wiki_uri, thumbnail_uri);
     }
 
     private String readStringValue(JsonReader reader) throws IOException {

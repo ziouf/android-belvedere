@@ -3,6 +3,7 @@
     "link": [],
     "vars": [
       "nom",
+      "comment",
       "altitude",
       "latitude",
       "longitude",
@@ -19,6 +20,11 @@
           "type": "literal",
           "xml:lang": "fr",
           "value": "Volcan du Diable"
+        },
+        "comment": {
+          "type": "literal",
+          "xml:lang": "fr",
+          "value": "Le volcan du Diable est une montagne de l'archipel des Kerguelen, un archipel de la France situ\u00E9 dans l'oc\u00E9an Indien et faisant partie des Terres australes et antarctiques fran\u00E7aises.Le sommet culminant \u00E0 315 m\u00E8tres d'altitude se trouve sur Grande Terre, au nord-ouest de l'isthme permettant d'acc\u00E9der \u00E0 la presqu'\u00EEle Jeanne d'Arc."
         },
         "altitude": {
           "type": "typed-literal",

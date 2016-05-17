@@ -76,6 +76,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             ContentValues values = new ContentValues();
             values.put(DatabaseContract.MarkerEntry.COLUMN_NAME_TITLE, newPlacemark.getTitle());
             values.put(DatabaseContract.MarkerEntry.COLUMN_NAME_URL, newPlacemark.getWiki_uri());
+            values.put(DatabaseContract.MarkerEntry.COLUMN_NAME_COMMENT, newPlacemark.getComment());
             values.put(DatabaseContract.MarkerEntry.COLUMN_NAME_THUMBNAIL_URL, newPlacemark.getThumbnail_uri());
             values.put(DatabaseContract.MarkerEntry.COLUMN_NAME_THUMBNAIL, newPlacemark.getThumbnailArray());
             values.put(DatabaseContract.MarkerEntry.COLUMN_NAME_ALTITUDE, newPlacemark.getCoordinates().getElevation());
@@ -111,6 +112,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             String[] columns = new String[]{
                     DatabaseContract.MarkerEntry.COLUMN_NAME_TITLE,
                     DatabaseContract.MarkerEntry.COLUMN_NAME_URL,
+                    DatabaseContract.MarkerEntry.COLUMN_NAME_COMMENT,
                     DatabaseContract.MarkerEntry.COLUMN_NAME_THUMBNAIL_URL,
                     DatabaseContract.MarkerEntry.COLUMN_NAME_THUMBNAIL,
                     DatabaseContract.MarkerEntry.COLUMN_NAME_LATITUDE,
@@ -122,15 +124,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 if (c.getCount() == 0) return placemarks;
                 if (c.moveToFirst()) {
                     while (!c.isAfterLast()) {
-                        String title = c.getString(0);
-                        String wiki_uri = c.getString(1);
-                        String thumbnail_url = c.getString(2);
-                        byte[] thumbnail = c.getBlob(3);
-                        double lat = c.getDouble(4);
-                        double lng = c.getDouble(5);
-                        double ele = c.getDouble(6);
-
-                        placemarks.add(new Placemark(title, lat, lng, ele, wiki_uri, thumbnail_url, thumbnail));
+                        placemarks.add(getPlacemarkFromCursor(c));
                         c.moveToNext();
                     }
                 }
@@ -146,6 +140,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             String[] columns = new String[]{
                     DatabaseContract.MarkerEntry.COLUMN_NAME_TITLE,
                     DatabaseContract.MarkerEntry.COLUMN_NAME_URL,
+                    DatabaseContract.MarkerEntry.COLUMN_NAME_COMMENT,
                     DatabaseContract.MarkerEntry.COLUMN_NAME_THUMBNAIL_URL,
                     DatabaseContract.MarkerEntry.COLUMN_NAME_THUMBNAIL,
                     DatabaseContract.MarkerEntry.COLUMN_NAME_LATITUDE,
@@ -165,15 +160,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 if (c.getCount() == 0) return markers;
                 if (c.moveToFirst()) {
                     while (!c.isAfterLast()) {
-                        String title = c.getString(0);
-                        String wiki_uri = c.getString(1);
-                        String thumbnail_url = c.getString(2);
-                        byte[] thumbnail = c.getBlob(3);
-                        double lat = c.getDouble(4);
-                        double lng = c.getDouble(5);
-                        double ele = c.getDouble(6);
-
-                        markers.add(new Placemark(title, lat, lng, ele, wiki_uri, thumbnail_url, thumbnail));
+                        markers.add(getPlacemarkFromCursor(c));
                         c.moveToNext();
                     }
                 }
@@ -193,6 +180,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             String[] columns = new String[]{
                     DatabaseContract.MarkerEntry.COLUMN_NAME_TITLE,
                     DatabaseContract.MarkerEntry.COLUMN_NAME_URL,
+                    DatabaseContract.MarkerEntry.COLUMN_NAME_COMMENT,
                     DatabaseContract.MarkerEntry.COLUMN_NAME_THUMBNAIL_URL,
                     DatabaseContract.MarkerEntry.COLUMN_NAME_THUMBNAIL,
                     DatabaseContract.MarkerEntry.COLUMN_NAME_LATITUDE,
@@ -208,15 +196,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
                 if (c.getCount() == 0) return null;
                 if (c.moveToFirst()) {
-                    String title = c.getString(0);
-                    String wiki_uri = c.getString(1);
-                    String thumbnail_url = c.getString(2);
-                    byte[] thumbnail = c.getBlob(3);
-                    double lat = c.getDouble(4);
-                    double lng = c.getDouble(5);
-                    double ele = c.getDouble(6);
-
-                    return new Placemark(title, lat, lng, ele, wiki_uri, thumbnail_url, thumbnail);
+                    return getPlacemarkFromCursor(c);
                 }
                 return null;
             }
@@ -233,6 +213,19 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 return 0L;
             }
         }
+    }
+
+    private Placemark getPlacemarkFromCursor(Cursor c) {
+        String title = c.getString(0);
+        String wiki_uri = c.getString(1);
+        String comment = c.getString(2);
+        String thumbnail_url = c.getString(3);
+        byte[] thumbnail = c.getBlob(4);
+        double lat = c.getDouble(5);
+        double lng = c.getDouble(6);
+        double ele = c.getDouble(7);
+
+        return new Placemark(title, comment, lat, lng, ele, wiki_uri, thumbnail_url, thumbnail);
     }
 
     public String findSourceFileHash(String key) {
