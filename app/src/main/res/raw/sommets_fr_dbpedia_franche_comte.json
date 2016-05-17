@@ -54,391 +54,6 @@
         "nom": {
           "type": "literal",
           "xml:lang": "fr",
-          "value": "Colline de Bourl\u00E9mont"
-        },
-        "comment": {
-          "type": "literal",
-          "xml:lang": "fr",
-          "value": "La colline de Bourl\u00E9mont est un sommet du massif des Vosges culminant \u00E0 474 m\u00E8tres d'altitude, situ\u00E9 au-dessus de la commune de Ronchamp dans la vall\u00E9e du Rahin en Haute-Sa\u00F4ne et r\u00E9gion Franche-Comt\u00E9.Int\u00E9gr\u00E9e dans le parc naturel r\u00E9gional des Ballons des Vosges, elle est aujourd'hui connue pour le tourisme culturel et p\u00E9destre gr\u00E2ce \u00E0 son patrimoine religieux (chapelle Notre-Dame-du-Haut \u0153uvre de l'architecte franco-suisse Le Corbusier) et minier (chevalement du puits Sainte-Marie), inscrit et class\u00E9 au titre des monuments historiques avec le label \u00AB Patrimoine du XXe si\u00E8cle \u00BB.\u2191"
-        },
-        "altitude": {
-          "type": "typed-literal",
-          "datatype": "http://www.w3.org/2001/XMLSchema#integer",
-          "value": "474"
-        },
-        "latitude": {
-          "type": "typed-literal",
-          "datatype": "http://www.w3.org/2001/XMLSchema#double",
-          "value": "47.7047"
-        },
-        "longitude": {
-          "type": "typed-literal",
-          "datatype": "http://www.w3.org/2001/XMLSchema#double",
-          "value": "6.61996"
-        },
-        "thumbnail": {
-          "type": "uri",
-          "value": "http://commons.wikimedia.org/wiki/Special:FilePath/Colline_de_Bourl\u00E9mont_01.JPG?width=300"
-        },
-        "wiki": {
-          "type": "uri",
-          "value": "http://fr.wikipedia.org/wiki/Colline_de_Bourl\u00E9mont"
-        }
-      },
-      {
-        "nom": {
-          "type": "literal",
-          "xml:lang": "fr",
-          "value": "Oliferne"
-        },
-        "comment": {
-          "type": "literal",
-          "xml:lang": "fr",
-          "value": "Le pic d'Oliferne est une montagne de 807 m\u00E8tres d'altitude situ\u00E9e en France dans le d\u00E9partement du Jura. Il est sur la commune de Vescles, dans le canton d'Arinthod.Plus pr\u00E9cis\u00E9ment Oliferne domine la vall\u00E9e de l'Ain et est donc situ\u00E9 sur la limite entre les d\u00E9partements de l'Ain et du Jura."
-        },
-        "altitude": {
-          "type": "typed-literal",
-          "datatype": "http://www.w3.org/2001/XMLSchema#integer",
-          "value": "807"
-        },
-        "latitude": {
-          "type": "typed-literal",
-          "datatype": "http://www.w3.org/2001/XMLSchema#double",
-          "value": "46.3189"
-        },
-        "longitude": {
-          "type": "typed-literal",
-          "datatype": "http://www.w3.org/2001/XMLSchema#double",
-          "value": "5.58833"
-        },
-        "thumbnail": {
-          "type": "uri",
-          "value": "http://commons.wikimedia.org/wiki/Special:FilePath/Chateau_oliferne.jpg?width=300"
-        },
-        "wiki": {
-          "type": "uri",
-          "value": "http://fr.wikipedia.org/wiki/Oliferne"
-        }
-      },
-      {
-        "nom": {
-          "type": "literal",
-          "xml:lang": "fr",
-          "value": "Plateau de Cita"
-        },
-        "comment": {
-          "type": "literal",
-          "xml:lang": "fr",
-          "value": "Le plateau de Cita est une colline situ\u00E9e sur les communes de Neurey-l\u00E8s-la-Demie, Navenne et \u00C9chenoz-la-M\u00E9line dans la Haute-Sa\u00F4ne. Le plateau abritait autrefois un camp romain.\u2191 \u00AB Pr\u00E9sentation du plateau \u00BB, sur http://www.vesoul.fr/ (consult\u00E9 en 7ao\u00FBt 2012)"
-        },
-        "altitude": {
-          "type": "typed-literal",
-          "datatype": "http://www.w3.org/2001/XMLSchema#integer",
-          "value": "447"
-        },
-        "latitude": {
-          "type": "typed-literal",
-          "datatype": "http://www.w3.org/2001/XMLSchema#double",
-          "value": "47.5892"
-        },
-        "longitude": {
-          "type": "typed-literal",
-          "datatype": "http://www.w3.org/2001/XMLSchema#double",
-          "value": "6.15694"
-        },
-        "thumbnail": {
-          "type": "uri",
-          "value": "http://commons.wikimedia.org/wiki/Special:FilePath/Vesoul_Plateau_de_Cita.jpg?width=300"
-        },
-        "wiki": {
-          "type": "uri",
-          "value": "http://fr.wikipedia.org/wiki/Plateau_de_Cita"
-        }
-      },
-      {
-        "nom": {
-          "type": "literal",
-          "xml:lang": "fr",
-          "value": "Cr\u00EAt Pela"
-        },
-        "comment": {
-          "type": "literal",
-          "xml:lang": "fr",
-          "value": "Le cr\u00EAt Pela est un sommet du massif du Jura culminant \u00E0 1 495 m\u00E8tres d'altitude. C'est le point culminant de la r\u00E9gion Franche-Comt\u00E9 et du d\u00E9partement du Jura.\u2191 1,0 et 1,1 Carte IGN sur le G\u00E9oportail, consult\u00E9 le 18 juillet 2007"
-        },
-        "altitude": {
-          "type": "typed-literal",
-          "datatype": "http://www.w3.org/2001/XMLSchema#integer",
-          "value": "1495"
-        },
-        "latitude": {
-          "type": "typed-literal",
-          "datatype": "http://www.w3.org/2001/XMLSchema#double",
-          "value": "46.4136"
-        },
-        "longitude": {
-          "type": "typed-literal",
-          "datatype": "http://www.w3.org/2001/XMLSchema#double",
-          "value": "6.02222"
-        },
-        "thumbnail": {
-          "type": "uri",
-          "value": "http://commons.wikimedia.org/wiki/Special:FilePath/Cret_Pela.jpg?width=300"
-        },
-        "wiki": {
-          "type": "uri",
-          "value": "http://fr.wikipedia.org/wiki/Cr\u00EAt_Pela"
-        }
-      },
-      {
-        "nom": {
-          "type": "literal",
-          "xml:lang": "fr",
-          "value": "Les Tuffes"
-        },
-        "comment": {
-          "type": "literal",
-          "xml:lang": "fr",
-          "value": "Les Tuffes ou la Montagne des Tuffes sont un sommet de 1 417 m\u00E8tres d'altitude dans le massif du Jura, au-dessus des Rousses. Il y a des pistes de ski et un relais TV. Le championnat de Suisse de combin\u00E9 nordique y a \u00E9t\u00E9 organis\u00E9 en 2002.\u2191 Carte IGN sur G\u00E9oportail, consult\u00E9 le 18 juillet 2007"
-        },
-        "altitude": {
-          "type": "typed-literal",
-          "datatype": "http://www.w3.org/2001/XMLSchema#integer",
-          "value": "1417"
-        },
-        "latitude": {
-          "type": "typed-literal",
-          "datatype": "http://www.w3.org/2001/XMLSchema#double",
-          "value": "46.4453"
-        },
-        "longitude": {
-          "type": "typed-literal",
-          "datatype": "http://www.w3.org/2001/XMLSchema#double",
-          "value": "6.06472"
-        },
-        "thumbnail": {
-          "type": "uri",
-          "value": "http://commons.wikimedia.org/wiki/Special:FilePath/Les_Tuffes.jpg?width=300"
-        },
-        "wiki": {
-          "type": "uri",
-          "value": "http://fr.wikipedia.org/wiki/Les_Tuffes"
-        }
-      },
-      {
-        "nom": {
-          "type": "literal",
-          "xml:lang": "fr",
-          "value": "Ballon de Servance"
-        },
-        "comment": {
-          "type": "literal",
-          "xml:lang": "fr",
-          "value": "Le ballon de Servance est un sommet du massif des Vosges."
-        },
-        "altitude": {
-          "type": "typed-literal",
-          "datatype": "http://www.w3.org/2001/XMLSchema#integer",
-          "value": "1216"
-        },
-        "latitude": {
-          "type": "typed-literal",
-          "datatype": "http://www.w3.org/2001/XMLSchema#double",
-          "value": "47.83"
-        },
-        "longitude": {
-          "type": "typed-literal",
-          "datatype": "http://www.w3.org/2001/XMLSchema#double",
-          "value": "6.79278"
-        },
-        "thumbnail": {
-          "type": "uri",
-          "value": "http://commons.wikimedia.org/wiki/Special:FilePath/Le_Ballon_de_Servance_vu_du_Ballon_d'Alsace.JPG?width=300"
-        },
-        "wiki": {
-          "type": "uri",
-          "value": "http://fr.wikipedia.org/wiki/Ballon_de_Servance"
-        }
-      },
-      {
-        "nom": {
-          "type": "literal",
-          "xml:lang": "fr",
-          "value": "Mont Bayard"
-        },
-        "comment": {
-          "type": "literal",
-          "xml:lang": "fr",
-          "value": "Le mont Bayard est un sommet du massif du Jura, culminant \u00E0 907 m d'altitude qui, avec ses belv\u00E9d\u00E8res, offre diff\u00E9rents points de vue de la ville de Saint-Claude.\u2191 1,0 et 1,1 Cartes IGN consult\u00E9es sur G\u00E9oportail."
-        },
-        "altitude": {
-          "type": "typed-literal",
-          "datatype": "http://www.w3.org/2001/XMLSchema#integer",
-          "value": "907"
-        },
-        "latitude": {
-          "type": "typed-literal",
-          "datatype": "http://www.w3.org/2001/XMLSchema#double",
-          "value": "46.3919"
-        },
-        "longitude": {
-          "type": "typed-literal",
-          "datatype": "http://www.w3.org/2001/XMLSchema#double",
-          "value": "5.87778"
-        },
-        "thumbnail": {
-          "type": "uri",
-          "value": "http://commons.wikimedia.org/wiki/Special:FilePath/S1klod.JPG?width=300"
-        },
-        "wiki": {
-          "type": "uri",
-          "value": "http://fr.wikipedia.org/wiki/Mont_Bayard"
-        }
-      },
-      {
-        "nom": {
-          "type": "literal",
-          "xml:lang": "fr",
-          "value": "Fay\u00E9"
-        },
-        "comment": {
-          "type": "literal",
-          "xml:lang": "fr",
-          "value": "Le Fay\u00E9 est un sommet du massif des Vosges culminant 916 m\u00E8tres d'altitude."
-        },
-        "altitude": {
-          "type": "typed-literal",
-          "datatype": "http://www.w3.org/2001/XMLSchema#integer",
-          "value": "916"
-        },
-        "latitude": {
-          "type": "typed-literal",
-          "datatype": "http://www.w3.org/2001/XMLSchema#double",
-          "value": "47.74"
-        },
-        "longitude": {
-          "type": "typed-literal",
-          "datatype": "http://www.w3.org/2001/XMLSchema#double",
-          "value": "6.89667"
-        },
-        "thumbnail": {
-          "type": "uri",
-          "value": "http://commons.wikimedia.org/wiki/Special:FilePath/Bourg-90-village.jpg?width=300"
-        },
-        "wiki": {
-          "type": "uri",
-          "value": "http://fr.wikipedia.org/wiki/Fay\u00E9"
-        }
-      },
-      {
-        "nom": {
-          "type": "literal",
-          "xml:lang": "fr",
-          "value": "Pic de l'Aigle"
-        },
-        "comment": {
-          "type": "literal",
-          "xml:lang": "fr",
-          "value": "Le pic de l'Aigle est un sommet du massif du Jura culminant \u00E0 993 m\u00E8tres. Il est situ\u00E9 dans le d\u00E9partement du Jura, sur la commune de la Chaux-du-Dombief. Il domine la vall\u00E9e des 4 lacs et offre un beau panorama sur la cha\u00EEne du Jura, et sur le mont Blanc par temps clair.Le pic de l'Aigle marque la bordure occidentale de la Haute-Cha\u00EEne du massif du Jura, il est situ\u00E9 sur un pli synclinal qui chevauche le synclinal des lacs situ\u00E9s \u00E0 l'ouest."
-        },
-        "altitude": {
-          "type": "typed-literal",
-          "datatype": "http://www.w3.org/2001/XMLSchema#integer",
-          "value": "993"
-        },
-        "latitude": {
-          "type": "typed-literal",
-          "datatype": "http://www.w3.org/2001/XMLSchema#double",
-          "value": "46.6153"
-        },
-        "longitude": {
-          "type": "typed-literal",
-          "datatype": "http://www.w3.org/2001/XMLSchema#double",
-          "value": "5.90306"
-        },
-        "thumbnail": {
-          "type": "uri",
-          "value": "http://commons.wikimedia.org/wiki/Special:FilePath/La_Chaux-du-Dombief.jpg?width=300"
-        },
-        "wiki": {
-          "type": "uri",
-          "value": "http://fr.wikipedia.org/wiki/Pic_de_l'Aigle"
-        }
-      },
-      {
-        "nom": {
-          "type": "literal",
-          "xml:lang": "fr",
-          "value": "Mont Poupet"
-        },
-        "comment": {
-          "type": "literal",
-          "xml:lang": "fr",
-          "value": "Le mont Poupet est une montagne s'\u00E9levant \u00E0 851 m\u00E8tres d\u2019altitude situ\u00E9e en France, dans le d\u00E9partement du Jura. Site naturel, touristique et sportif, il s'agit du point culminant du Jura externe."
-        },
-        "altitude": {
-          "type": "typed-literal",
-          "datatype": "http://www.w3.org/2001/XMLSchema#integer",
-          "value": "851"
-        },
-        "latitude": {
-          "type": "typed-literal",
-          "datatype": "http://www.w3.org/2001/XMLSchema#double",
-          "value": "46.9722"
-        },
-        "longitude": {
-          "type": "typed-literal",
-          "datatype": "http://www.w3.org/2001/XMLSchema#double",
-          "value": "5.88694"
-        },
-        "thumbnail": {
-          "type": "uri",
-          "value": "http://commons.wikimedia.org/wiki/Special:FilePath/Poupet.JPG?width=300"
-        },
-        "wiki": {
-          "type": "uri",
-          "value": "http://fr.wikipedia.org/wiki/Mont_Poupet"
-        }
-      },
-      {
-        "nom": {
-          "type": "literal",
-          "xml:lang": "fr",
-          "value": "C\u00F4te de l'Heute"
-        },
-        "comment": {
-          "type": "literal",
-          "xml:lang": "fr",
-          "value": "La c\u00F4te de l'Heute (appel\u00E9e \u00E9galement faisceau de l'Heute en g\u00E9ologie) est un faisceau long de 40 km situ\u00E9 dans le centre du d\u00E9partement du Jura, dont le point culminant est situ\u00E9 \u00E0 754 m d'altitude \u00E0 cheval sur les communes de Bonnefontaine, Montigny-sur-l'Ain et Pont-du-Navoy. Il coupe le premier plateau du Jura de la combe d'Ain et du second plateau."
-        },
-        "altitude": {
-          "type": "typed-literal",
-          "datatype": "http://www.w3.org/2001/XMLSchema#integer",
-          "value": "754"
-        },
-        "latitude": {
-          "type": "typed-literal",
-          "datatype": "http://www.w3.org/2001/XMLSchema#double",
-          "value": "46.7239"
-        },
-        "longitude": {
-          "type": "typed-literal",
-          "datatype": "http://www.w3.org/2001/XMLSchema#double",
-          "value": "5.75556"
-        },
-        "thumbnail": {
-          "type": "uri",
-          "value": "http://commons.wikimedia.org/wiki/Special:FilePath/Besain_(39)_-_lac_2.JPG?width=300"
-        },
-        "wiki": {
-          "type": "uri",
-          "value": "http://fr.wikipedia.org/wiki/C\u00F4te_de_l'Heute"
-        }
-      },
-      {
-        "nom": {
-          "type": "literal",
-          "xml:lang": "fr",
           "value": "Mont Rivel"
         },
         "comment": {
@@ -509,41 +124,6 @@
         "nom": {
           "type": "literal",
           "xml:lang": "fr",
-          "value": "Ballon d'Alsace"
-        },
-        "comment": {
-          "type": "literal",
-          "xml:lang": "fr",
-          "value": "Le ballon d\u2019Alsace (Els\u00E4sser Belchen en allemand) est un sommet situ\u00E9 dans la partie m\u00E9ridionale de la cha\u00EEne des Vosges, aux confins des r\u00E9gions d'Alsace, de Franche-Comt\u00E9 et de Lorraine."
-        },
-        "altitude": {
-          "type": "typed-literal",
-          "datatype": "http://www.w3.org/2001/XMLSchema#integer",
-          "value": "1247"
-        },
-        "latitude": {
-          "type": "typed-literal",
-          "datatype": "http://www.w3.org/2001/XMLSchema#double",
-          "value": "47.8222"
-        },
-        "longitude": {
-          "type": "typed-literal",
-          "datatype": "http://www.w3.org/2001/XMLSchema#double",
-          "value": "6.84528"
-        },
-        "thumbnail": {
-          "type": "uri",
-          "value": "http://commons.wikimedia.org/wiki/Special:FilePath/Sommetduballond'alsace.jpg?width=300"
-        },
-        "wiki": {
-          "type": "uri",
-          "value": "http://fr.wikipedia.org/wiki/Ballon_d'Alsace"
-        }
-      },
-      {
-        "nom": {
-          "type": "literal",
-          "xml:lang": "fr",
           "value": "Mont Ch\u00E2teleu"
         },
         "comment": {
@@ -579,140 +159,140 @@
         "nom": {
           "type": "literal",
           "xml:lang": "fr",
-          "value": "Mont Chabot"
+          "value": "Pic de l'Aigle"
         },
         "comment": {
           "type": "literal",
           "xml:lang": "fr",
-          "value": "Le mont Chabot est un sommet du massif du Jura, culminant \u00E0 911 m d'altitude.\u2191 1,0 et 1,1 Cartes IGN consult\u00E9es sur G\u00E9oportail."
+          "value": "Le pic de l'Aigle est un sommet du massif du Jura culminant \u00E0 993 m\u00E8tres. Il est situ\u00E9 dans le d\u00E9partement du Jura, sur la commune de la Chaux-du-Dombief. Il domine la vall\u00E9e des 4 lacs et offre un beau panorama sur la cha\u00EEne du Jura, et sur le mont Blanc par temps clair.Le pic de l'Aigle marque la bordure occidentale de la Haute-Cha\u00EEne du massif du Jura, il est situ\u00E9 sur un pli synclinal qui chevauche le synclinal des lacs situ\u00E9s \u00E0 l'ouest."
         },
         "altitude": {
           "type": "typed-literal",
           "datatype": "http://www.w3.org/2001/XMLSchema#integer",
-          "value": "911"
+          "value": "993"
         },
         "latitude": {
           "type": "typed-literal",
           "datatype": "http://www.w3.org/2001/XMLSchema#double",
-          "value": "46.3636"
+          "value": "46.6153"
         },
         "longitude": {
           "type": "typed-literal",
           "datatype": "http://www.w3.org/2001/XMLSchema#double",
-          "value": "5.845"
+          "value": "5.90306"
         },
         "thumbnail": {
           "type": "uri",
-          "value": "http://commons.wikimedia.org/wiki/Special:FilePath/Vue_du_mont_chabot.JPG?width=300"
+          "value": "http://commons.wikimedia.org/wiki/Special:FilePath/La_Chaux-du-Dombief.jpg?width=300"
         },
         "wiki": {
           "type": "uri",
-          "value": "http://fr.wikipedia.org/wiki/Mont_Chabot"
+          "value": "http://fr.wikipedia.org/wiki/Pic_de_l'Aigle"
         }
       },
       {
         "nom": {
           "type": "literal",
           "xml:lang": "fr",
-          "value": "La Motte (Vesoul)"
+          "value": "Plateau de Cita"
         },
         "comment": {
           "type": "literal",
           "xml:lang": "fr",
-          "value": "La Motte de Vesoul est une colline de calcaire qui surplombe Vesoul et la vall\u00E9e du Durgeon, \u00E0 371 m\u00E8tres d'altitude. Avec une ascension de plus d'un kilom\u00E8tre, on y trouve au sommet une vue sur la plaine de Vesoul, les Vosges, le Jura et m\u00EAme les Alpes, par temps clair.La chapelle de Notre-Dame-de-la-Motte culmine au sommet de la Motte depuis 1857."
+          "value": "Le plateau de Cita est une colline situ\u00E9e sur les communes de Neurey-l\u00E8s-la-Demie, Navenne et \u00C9chenoz-la-M\u00E9line dans la Haute-Sa\u00F4ne. Le plateau abritait autrefois un camp romain.\u2191 \u00AB Pr\u00E9sentation du plateau \u00BB, sur http://www.vesoul.fr/ (consult\u00E9 en 7ao\u00FBt 2012)"
         },
         "altitude": {
           "type": "typed-literal",
           "datatype": "http://www.w3.org/2001/XMLSchema#integer",
-          "value": "371"
+          "value": "447"
         },
         "latitude": {
           "type": "typed-literal",
           "datatype": "http://www.w3.org/2001/XMLSchema#double",
-          "value": "47.6294"
+          "value": "47.5892"
         },
         "longitude": {
           "type": "typed-literal",
           "datatype": "http://www.w3.org/2001/XMLSchema#double",
-          "value": "6.15278"
+          "value": "6.15694"
         },
         "thumbnail": {
           "type": "uri",
-          "value": "http://commons.wikimedia.org/wiki/Special:FilePath/Vesoul_La_Motte_2.jpg?width=300"
+          "value": "http://commons.wikimedia.org/wiki/Special:FilePath/Vesoul_Plateau_de_Cita.jpg?width=300"
         },
         "wiki": {
           "type": "uri",
-          "value": "http://fr.wikipedia.org/wiki/La_Motte_(Vesoul)"
+          "value": "http://fr.wikipedia.org/wiki/Plateau_de_Cita"
         }
       },
       {
         "nom": {
           "type": "literal",
           "xml:lang": "fr",
-          "value": "Wissgrut"
+          "value": "Oliferne"
         },
         "comment": {
           "type": "literal",
           "xml:lang": "fr",
-          "value": "Le Wissgrut est un sommet du massif des Vosges culminant \u00E0 1 124 m\u00E8tres d'altitude."
+          "value": "Le pic d'Oliferne est une montagne de 807 m\u00E8tres d'altitude situ\u00E9e en France dans le d\u00E9partement du Jura. Il est sur la commune de Vescles, dans le canton d'Arinthod.Plus pr\u00E9cis\u00E9ment Oliferne domine la vall\u00E9e de l'Ain et est donc situ\u00E9 sur la limite entre les d\u00E9partements de l'Ain et du Jura."
         },
         "altitude": {
           "type": "typed-literal",
           "datatype": "http://www.w3.org/2001/XMLSchema#integer",
-          "value": "1124"
+          "value": "807"
         },
         "latitude": {
           "type": "typed-literal",
           "datatype": "http://www.w3.org/2001/XMLSchema#double",
-          "value": "47.7928"
+          "value": "46.3189"
         },
         "longitude": {
           "type": "typed-literal",
           "datatype": "http://www.w3.org/2001/XMLSchema#double",
-          "value": "6.86167"
+          "value": "5.58833"
         },
         "thumbnail": {
           "type": "uri",
-          "value": "http://commons.wikimedia.org/wiki/Special:FilePath/Wissgrutt_vu_du_Tremontkopf_juillet2011.JPG?width=300"
+          "value": "http://commons.wikimedia.org/wiki/Special:FilePath/Chateau_oliferne.jpg?width=300"
         },
         "wiki": {
           "type": "uri",
-          "value": "http://fr.wikipedia.org/wiki/Wissgrut"
+          "value": "http://fr.wikipedia.org/wiki/Oliferne"
         }
       },
       {
         "nom": {
           "type": "literal",
           "xml:lang": "fr",
-          "value": "Mont Fier"
+          "value": "Ballon de Servance"
         },
         "comment": {
           "type": "literal",
           "xml:lang": "fr",
-          "value": "Le mont Fier est sommet du massif du Jura culminant \u00E0 1 282 m d'altitude, situ\u00E9 sur la commune de Pr\u00E9manon, dans le d\u00E9partement du Jura. Il a la particularit\u00E9 d'\u00E9chapper \u00E0 la r\u00E8gle de la formation d'un mont, il est l'exemple unique du synclinal perch\u00E9 jurassien."
+          "value": "Le ballon de Servance est un sommet du massif des Vosges."
         },
         "altitude": {
           "type": "typed-literal",
           "datatype": "http://www.w3.org/2001/XMLSchema#integer",
-          "value": "1282"
+          "value": "1216"
         },
         "latitude": {
           "type": "typed-literal",
           "datatype": "http://www.w3.org/2001/XMLSchema#double",
-          "value": "46.4617"
+          "value": "47.83"
         },
         "longitude": {
           "type": "typed-literal",
           "datatype": "http://www.w3.org/2001/XMLSchema#double",
-          "value": "6.00167"
+          "value": "6.79278"
         },
         "thumbnail": {
           "type": "uri",
-          "value": "http://commons.wikimedia.org/wiki/Special:FilePath/Mont-Fier.jpg?width=300"
+          "value": "http://commons.wikimedia.org/wiki/Special:FilePath/Le_Ballon_de_Servance_vu_du_Ballon_d'Alsace.JPG?width=300"
         },
         "wiki": {
           "type": "uri",
-          "value": "http://fr.wikipedia.org/wiki/Mont_Fier"
+          "value": "http://fr.wikipedia.org/wiki/Ballon_de_Servance"
         }
       },
       {
@@ -754,105 +334,140 @@
         "nom": {
           "type": "literal",
           "xml:lang": "fr",
-          "value": "Miotte"
+          "value": "Les Tuffes"
         },
         "comment": {
           "type": "literal",
           "xml:lang": "fr",
-          "value": "La colline de la Miotte est un mont situ\u00E9 dans le nord-est de la ville de Belfort et appartenant au massif du Jura. Elle abrite un fort, comprenant une tour (vestige d'un ch\u00E2teau m\u00E9di\u00E9val), qui fut longtemps le principal symbole de la ville, avant d'\u00EAtre supplant\u00E9e par le Lion de Belfort ; elle reste cependant un symbole de la ville. Elle a \u00E9t\u00E9 d\u00E9truite en 1945 durant la Seconde Guerre mondiale et reconstruite en 1947."
+          "value": "Les Tuffes ou la Montagne des Tuffes sont un sommet de 1 417 m\u00E8tres d'altitude dans le massif du Jura, au-dessus des Rousses. Il y a des pistes de ski et un relais TV. Le championnat de Suisse de combin\u00E9 nordique y a \u00E9t\u00E9 organis\u00E9 en 2002.\u2191 Carte IGN sur G\u00E9oportail, consult\u00E9 le 18 juillet 2007"
         },
         "altitude": {
           "type": "typed-literal",
           "datatype": "http://www.w3.org/2001/XMLSchema#integer",
-          "value": "459"
+          "value": "1417"
         },
         "latitude": {
           "type": "typed-literal",
           "datatype": "http://www.w3.org/2001/XMLSchema#double",
-          "value": "47.6481"
+          "value": "46.4453"
         },
         "longitude": {
           "type": "typed-literal",
           "datatype": "http://www.w3.org/2001/XMLSchema#double",
-          "value": "6.875"
+          "value": "6.06472"
         },
         "thumbnail": {
           "type": "uri",
-          "value": "http://commons.wikimedia.org/wiki/Special:FilePath/2013-Belfort_07.JPG?width=300"
+          "value": "http://commons.wikimedia.org/wiki/Special:FilePath/Les_Tuffes.jpg?width=300"
         },
         "wiki": {
           "type": "uri",
-          "value": "http://fr.wikipedia.org/wiki/Miotte"
+          "value": "http://fr.wikipedia.org/wiki/Les_Tuffes"
         }
       },
       {
         "nom": {
           "type": "literal",
           "xml:lang": "fr",
-          "value": "Roche d'Antre"
+          "value": "Mont Fier"
         },
         "comment": {
           "type": "literal",
           "xml:lang": "fr",
-          "value": "La roche d'Antre est un sommet du massif du Jura, culminant \u00E0 962 m d'altitude.\u2191 1,0 et 1,1 Cartes IGN consult\u00E9es sur G\u00E9oportail."
+          "value": "Le mont Fier est sommet du massif du Jura culminant \u00E0 1 282 m d'altitude, situ\u00E9 sur la commune de Pr\u00E9manon, dans le d\u00E9partement du Jura. Il a la particularit\u00E9 d'\u00E9chapper \u00E0 la r\u00E8gle de la formation d'un mont, il est l'exemple unique du synclinal perch\u00E9 jurassien."
         },
         "altitude": {
           "type": "typed-literal",
           "datatype": "http://www.w3.org/2001/XMLSchema#integer",
-          "value": "962"
+          "value": "1282"
         },
         "latitude": {
           "type": "typed-literal",
           "datatype": "http://www.w3.org/2001/XMLSchema#double",
-          "value": "46.4181"
+          "value": "46.4617"
         },
         "longitude": {
           "type": "typed-literal",
           "datatype": "http://www.w3.org/2001/XMLSchema#double",
-          "value": "5.75278"
+          "value": "6.00167"
         },
         "thumbnail": {
           "type": "uri",
-          "value": "http://commons.wikimedia.org/wiki/Special:FilePath/Lac_Antre.JPG?width=300"
+          "value": "http://commons.wikimedia.org/wiki/Special:FilePath/Mont-Fier.jpg?width=300"
         },
         "wiki": {
           "type": "uri",
-          "value": "http://fr.wikipedia.org/wiki/Roche_d'Antre"
+          "value": "http://fr.wikipedia.org/wiki/Mont_Fier"
         }
       },
       {
         "nom": {
           "type": "literal",
           "xml:lang": "fr",
-          "value": "Cha\u00EEne du Lomont"
+          "value": "C\u00F4te de l'Heute"
         },
         "comment": {
           "type": "literal",
           "xml:lang": "fr",
-          "value": "La cha\u00EEne du Lomont est une cha\u00EEne montagneuse (835 m) du massif du Jura, situ\u00E9e dans le d\u00E9partement du Doubs en France.\u2191 1,0 et 1,1 Cartes IGN consult\u00E9es sur G\u00E9oportail."
+          "value": "La c\u00F4te de l'Heute (appel\u00E9e \u00E9galement faisceau de l'Heute en g\u00E9ologie) est un faisceau long de 40 km situ\u00E9 dans le centre du d\u00E9partement du Jura, dont le point culminant est situ\u00E9 \u00E0 754 m d'altitude \u00E0 cheval sur les communes de Bonnefontaine, Montigny-sur-l'Ain et Pont-du-Navoy. Il coupe le premier plateau du Jura de la combe d'Ain et du second plateau."
         },
         "altitude": {
           "type": "typed-literal",
           "datatype": "http://www.w3.org/2001/XMLSchema#integer",
-          "value": "835"
+          "value": "754"
         },
         "latitude": {
           "type": "typed-literal",
           "datatype": "http://www.w3.org/2001/XMLSchema#double",
-          "value": "47.3581"
+          "value": "46.7239"
         },
         "longitude": {
           "type": "typed-literal",
           "datatype": "http://www.w3.org/2001/XMLSchema#double",
-          "value": "6.63472"
+          "value": "5.75556"
         },
         "thumbnail": {
           "type": "uri",
-          "value": "http://commons.wikimedia.org/wiki/Special:FilePath/EoliennesduLomont.JPG?width=300"
+          "value": "http://commons.wikimedia.org/wiki/Special:FilePath/Besain_(39)_-_lac_2.JPG?width=300"
         },
         "wiki": {
           "type": "uri",
-          "value": "http://fr.wikipedia.org/wiki/Cha\u00EEne_du_Lomont"
+          "value": "http://fr.wikipedia.org/wiki/C\u00F4te_de_l'Heute"
+        }
+      },
+      {
+        "nom": {
+          "type": "literal",
+          "xml:lang": "fr",
+          "value": "Cr\u00EAt Pela"
+        },
+        "comment": {
+          "type": "literal",
+          "xml:lang": "fr",
+          "value": "Le cr\u00EAt Pela est un sommet du massif du Jura culminant \u00E0 1 495 m\u00E8tres d'altitude. C'est le point culminant de la r\u00E9gion Franche-Comt\u00E9 et du d\u00E9partement du Jura.\u2191 1,0 et 1,1 Carte IGN sur le G\u00E9oportail, consult\u00E9 le 18 juillet 2007"
+        },
+        "altitude": {
+          "type": "typed-literal",
+          "datatype": "http://www.w3.org/2001/XMLSchema#integer",
+          "value": "1495"
+        },
+        "latitude": {
+          "type": "typed-literal",
+          "datatype": "http://www.w3.org/2001/XMLSchema#double",
+          "value": "46.4136"
+        },
+        "longitude": {
+          "type": "typed-literal",
+          "datatype": "http://www.w3.org/2001/XMLSchema#double",
+          "value": "6.02222"
+        },
+        "thumbnail": {
+          "type": "uri",
+          "value": "http://commons.wikimedia.org/wiki/Special:FilePath/Cret_Pela.jpg?width=300"
+        },
+        "wiki": {
+          "type": "uri",
+          "value": "http://fr.wikipedia.org/wiki/Cr\u00EAt_Pela"
         }
       },
       {
@@ -894,70 +509,105 @@
         "nom": {
           "type": "literal",
           "xml:lang": "fr",
-          "value": "Cr\u00EAt Monniot"
+          "value": "Miotte"
         },
         "comment": {
           "type": "literal",
           "xml:lang": "fr",
-          "value": "Le cr\u00EAt Monniot est un sommet de la cha\u00EEne du Jura qui domine les communes d'Arc-sous-Cicon, de Gilley, de La Chaux et de Bugny. Il culmine \u00E0 1 141 m\u00E8tres d'altitude. L'ensemble de cette cr\u00EAte est couvert par des p\u00E2turages et ses flancs par des for\u00EAts."
+          "value": "La colline de la Miotte est un mont situ\u00E9 dans le nord-est de la ville de Belfort et appartenant au massif du Jura. Elle abrite un fort, comprenant une tour (vestige d'un ch\u00E2teau m\u00E9di\u00E9val), qui fut longtemps le principal symbole de la ville, avant d'\u00EAtre supplant\u00E9e par le Lion de Belfort ; elle reste cependant un symbole de la ville. Elle a \u00E9t\u00E9 d\u00E9truite en 1945 durant la Seconde Guerre mondiale et reconstruite en 1947."
         },
         "altitude": {
           "type": "typed-literal",
           "datatype": "http://www.w3.org/2001/XMLSchema#integer",
-          "value": "1141"
+          "value": "459"
         },
         "latitude": {
           "type": "typed-literal",
           "datatype": "http://www.w3.org/2001/XMLSchema#double",
-          "value": "47.0361"
+          "value": "47.6481"
         },
         "longitude": {
           "type": "typed-literal",
           "datatype": "http://www.w3.org/2001/XMLSchema#double",
-          "value": "6.4125"
+          "value": "6.875"
         },
         "thumbnail": {
           "type": "uri",
-          "value": "http://commons.wikimedia.org/wiki/Special:FilePath/Cret_Monniot_sommet_face_sud.jpg?width=300"
+          "value": "http://commons.wikimedia.org/wiki/Special:FilePath/2013-Belfort_07.JPG?width=300"
         },
         "wiki": {
           "type": "uri",
-          "value": "http://fr.wikipedia.org/wiki/Cr\u00EAt_Monniot"
+          "value": "http://fr.wikipedia.org/wiki/Miotte"
         }
       },
       {
         "nom": {
           "type": "literal",
           "xml:lang": "fr",
-          "value": "Sabot de Frotey"
+          "value": "Ballon d'Alsace"
         },
         "comment": {
           "type": "literal",
           "xml:lang": "fr",
-          "value": "Le Sabot de Frotey est une roche calcaire qui a \u00E9t\u00E9 sculpt\u00E9e avec le temps en forme de sabot."
+          "value": "Le ballon d\u2019Alsace (Els\u00E4sser Belchen en allemand) est un sommet situ\u00E9 dans la partie m\u00E9ridionale de la cha\u00EEne des Vosges, aux confins des r\u00E9gions d'Alsace, de Franche-Comt\u00E9 et de Lorraine."
         },
         "altitude": {
           "type": "typed-literal",
           "datatype": "http://www.w3.org/2001/XMLSchema#integer",
-          "value": "342"
+          "value": "1247"
         },
         "latitude": {
           "type": "typed-literal",
           "datatype": "http://www.w3.org/2001/XMLSchema#double",
-          "value": "47.6321"
+          "value": "47.8222"
         },
         "longitude": {
           "type": "typed-literal",
           "datatype": "http://www.w3.org/2001/XMLSchema#double",
-          "value": "6.18553"
+          "value": "6.84528"
         },
         "thumbnail": {
           "type": "uri",
-          "value": "http://commons.wikimedia.org/wiki/Special:FilePath/Sabot-Frotey.jpg?width=300"
+          "value": "http://commons.wikimedia.org/wiki/Special:FilePath/Sommetduballond'alsace.jpg?width=300"
         },
         "wiki": {
           "type": "uri",
-          "value": "http://fr.wikipedia.org/wiki/Sabot_de_Frotey"
+          "value": "http://fr.wikipedia.org/wiki/Ballon_d'Alsace"
+        }
+      },
+      {
+        "nom": {
+          "type": "literal",
+          "xml:lang": "fr",
+          "value": "Cha\u00EEne du Lomont"
+        },
+        "comment": {
+          "type": "literal",
+          "xml:lang": "fr",
+          "value": "La cha\u00EEne du Lomont est une cha\u00EEne montagneuse (835 m) du massif du Jura, situ\u00E9e dans le d\u00E9partement du Doubs en France.\u2191 1,0 et 1,1 Cartes IGN consult\u00E9es sur G\u00E9oportail."
+        },
+        "altitude": {
+          "type": "typed-literal",
+          "datatype": "http://www.w3.org/2001/XMLSchema#integer",
+          "value": "835"
+        },
+        "latitude": {
+          "type": "typed-literal",
+          "datatype": "http://www.w3.org/2001/XMLSchema#double",
+          "value": "47.3581"
+        },
+        "longitude": {
+          "type": "typed-literal",
+          "datatype": "http://www.w3.org/2001/XMLSchema#double",
+          "value": "6.63472"
+        },
+        "thumbnail": {
+          "type": "uri",
+          "value": "http://commons.wikimedia.org/wiki/Special:FilePath/EoliennesduLomont.JPG?width=300"
+        },
+        "wiki": {
+          "type": "uri",
+          "value": "http://fr.wikipedia.org/wiki/Cha\u00EEne_du_Lomont"
         }
       },
       {
@@ -993,6 +643,356 @@
         "wiki": {
           "type": "uri",
           "value": "http://fr.wikipedia.org/wiki/Ballon_Saint-Antoine"
+        }
+      },
+      {
+        "nom": {
+          "type": "literal",
+          "xml:lang": "fr",
+          "value": "Roche d'Antre"
+        },
+        "comment": {
+          "type": "literal",
+          "xml:lang": "fr",
+          "value": "La roche d'Antre est un sommet du massif du Jura, culminant \u00E0 962 m d'altitude.\u2191 1,0 et 1,1 Cartes IGN consult\u00E9es sur G\u00E9oportail."
+        },
+        "altitude": {
+          "type": "typed-literal",
+          "datatype": "http://www.w3.org/2001/XMLSchema#integer",
+          "value": "962"
+        },
+        "latitude": {
+          "type": "typed-literal",
+          "datatype": "http://www.w3.org/2001/XMLSchema#double",
+          "value": "46.4181"
+        },
+        "longitude": {
+          "type": "typed-literal",
+          "datatype": "http://www.w3.org/2001/XMLSchema#double",
+          "value": "5.75278"
+        },
+        "thumbnail": {
+          "type": "uri",
+          "value": "http://commons.wikimedia.org/wiki/Special:FilePath/Lac_Antre.JPG?width=300"
+        },
+        "wiki": {
+          "type": "uri",
+          "value": "http://fr.wikipedia.org/wiki/Roche_d'Antre"
+        }
+      },
+      {
+        "nom": {
+          "type": "literal",
+          "xml:lang": "fr",
+          "value": "Cr\u00EAt Monniot"
+        },
+        "comment": {
+          "type": "literal",
+          "xml:lang": "fr",
+          "value": "Le cr\u00EAt Monniot est un sommet de la cha\u00EEne du Jura qui domine les communes d'Arc-sous-Cicon, de Gilley, de La Chaux et de Bugny. Il culmine \u00E0 1 141 m\u00E8tres d'altitude. L'ensemble de cette cr\u00EAte est couvert par des p\u00E2turages et ses flancs par des for\u00EAts."
+        },
+        "altitude": {
+          "type": "typed-literal",
+          "datatype": "http://www.w3.org/2001/XMLSchema#integer",
+          "value": "1141"
+        },
+        "latitude": {
+          "type": "typed-literal",
+          "datatype": "http://www.w3.org/2001/XMLSchema#double",
+          "value": "47.0361"
+        },
+        "longitude": {
+          "type": "typed-literal",
+          "datatype": "http://www.w3.org/2001/XMLSchema#double",
+          "value": "6.4125"
+        },
+        "thumbnail": {
+          "type": "uri",
+          "value": "http://commons.wikimedia.org/wiki/Special:FilePath/Cret_Monniot_sommet_face_sud.jpg?width=300"
+        },
+        "wiki": {
+          "type": "uri",
+          "value": "http://fr.wikipedia.org/wiki/Cr\u00EAt_Monniot"
+        }
+      },
+      {
+        "nom": {
+          "type": "literal",
+          "xml:lang": "fr",
+          "value": "Mont Chabot"
+        },
+        "comment": {
+          "type": "literal",
+          "xml:lang": "fr",
+          "value": "Le mont Chabot est un sommet du massif du Jura, culminant \u00E0 911 m d'altitude.\u2191 1,0 et 1,1 Cartes IGN consult\u00E9es sur G\u00E9oportail."
+        },
+        "altitude": {
+          "type": "typed-literal",
+          "datatype": "http://www.w3.org/2001/XMLSchema#integer",
+          "value": "911"
+        },
+        "latitude": {
+          "type": "typed-literal",
+          "datatype": "http://www.w3.org/2001/XMLSchema#double",
+          "value": "46.3636"
+        },
+        "longitude": {
+          "type": "typed-literal",
+          "datatype": "http://www.w3.org/2001/XMLSchema#double",
+          "value": "5.845"
+        },
+        "thumbnail": {
+          "type": "uri",
+          "value": "http://commons.wikimedia.org/wiki/Special:FilePath/Vue_du_mont_chabot.JPG?width=300"
+        },
+        "wiki": {
+          "type": "uri",
+          "value": "http://fr.wikipedia.org/wiki/Mont_Chabot"
+        }
+      },
+      {
+        "nom": {
+          "type": "literal",
+          "xml:lang": "fr",
+          "value": "Fay\u00E9"
+        },
+        "comment": {
+          "type": "literal",
+          "xml:lang": "fr",
+          "value": "Le Fay\u00E9 est un sommet du massif des Vosges culminant 916 m\u00E8tres d'altitude."
+        },
+        "altitude": {
+          "type": "typed-literal",
+          "datatype": "http://www.w3.org/2001/XMLSchema#integer",
+          "value": "916"
+        },
+        "latitude": {
+          "type": "typed-literal",
+          "datatype": "http://www.w3.org/2001/XMLSchema#double",
+          "value": "47.74"
+        },
+        "longitude": {
+          "type": "typed-literal",
+          "datatype": "http://www.w3.org/2001/XMLSchema#double",
+          "value": "6.89667"
+        },
+        "thumbnail": {
+          "type": "uri",
+          "value": "http://commons.wikimedia.org/wiki/Special:FilePath/Bourg-90-village.jpg?width=300"
+        },
+        "wiki": {
+          "type": "uri",
+          "value": "http://fr.wikipedia.org/wiki/Fay\u00E9"
+        }
+      },
+      {
+        "nom": {
+          "type": "literal",
+          "xml:lang": "fr",
+          "value": "Colline de Bourl\u00E9mont"
+        },
+        "comment": {
+          "type": "literal",
+          "xml:lang": "fr",
+          "value": "La colline de Bourl\u00E9mont est un sommet du massif des Vosges culminant \u00E0 474 m\u00E8tres d'altitude, situ\u00E9 au-dessus de la commune de Ronchamp dans la vall\u00E9e du Rahin en Haute-Sa\u00F4ne et r\u00E9gion Franche-Comt\u00E9.Int\u00E9gr\u00E9e dans le parc naturel r\u00E9gional des Ballons des Vosges, elle est aujourd'hui connue pour le tourisme culturel et p\u00E9destre gr\u00E2ce \u00E0 son patrimoine religieux (chapelle Notre-Dame-du-Haut \u0153uvre de l'architecte franco-suisse Le Corbusier) et minier (chevalement du puits Sainte-Marie), inscrit et class\u00E9 au titre des monuments historiques avec le label \u00AB Patrimoine du XXe si\u00E8cle \u00BB.\u2191"
+        },
+        "altitude": {
+          "type": "typed-literal",
+          "datatype": "http://www.w3.org/2001/XMLSchema#integer",
+          "value": "474"
+        },
+        "latitude": {
+          "type": "typed-literal",
+          "datatype": "http://www.w3.org/2001/XMLSchema#double",
+          "value": "47.7047"
+        },
+        "longitude": {
+          "type": "typed-literal",
+          "datatype": "http://www.w3.org/2001/XMLSchema#double",
+          "value": "6.61996"
+        },
+        "thumbnail": {
+          "type": "uri",
+          "value": "http://commons.wikimedia.org/wiki/Special:FilePath/Colline_de_Bourl\u00E9mont_01.JPG?width=300"
+        },
+        "wiki": {
+          "type": "uri",
+          "value": "http://fr.wikipedia.org/wiki/Colline_de_Bourl\u00E9mont"
+        }
+      },
+      {
+        "nom": {
+          "type": "literal",
+          "xml:lang": "fr",
+          "value": "Wissgrut"
+        },
+        "comment": {
+          "type": "literal",
+          "xml:lang": "fr",
+          "value": "Le Wissgrut est un sommet du massif des Vosges culminant \u00E0 1 124 m\u00E8tres d'altitude."
+        },
+        "altitude": {
+          "type": "typed-literal",
+          "datatype": "http://www.w3.org/2001/XMLSchema#integer",
+          "value": "1124"
+        },
+        "latitude": {
+          "type": "typed-literal",
+          "datatype": "http://www.w3.org/2001/XMLSchema#double",
+          "value": "47.7928"
+        },
+        "longitude": {
+          "type": "typed-literal",
+          "datatype": "http://www.w3.org/2001/XMLSchema#double",
+          "value": "6.86167"
+        },
+        "thumbnail": {
+          "type": "uri",
+          "value": "http://commons.wikimedia.org/wiki/Special:FilePath/Wissgrutt_vu_du_Tremontkopf_juillet2011.JPG?width=300"
+        },
+        "wiki": {
+          "type": "uri",
+          "value": "http://fr.wikipedia.org/wiki/Wissgrut"
+        }
+      },
+      {
+        "nom": {
+          "type": "literal",
+          "xml:lang": "fr",
+          "value": "La Motte (Vesoul)"
+        },
+        "comment": {
+          "type": "literal",
+          "xml:lang": "fr",
+          "value": "La Motte de Vesoul est une colline de calcaire qui surplombe Vesoul et la vall\u00E9e du Durgeon, \u00E0 371 m\u00E8tres d'altitude. Avec une ascension de plus d'un kilom\u00E8tre, on y trouve au sommet une vue sur la plaine de Vesoul, les Vosges, le Jura et m\u00EAme les Alpes, par temps clair.La chapelle de Notre-Dame-de-la-Motte culmine au sommet de la Motte depuis 1857."
+        },
+        "altitude": {
+          "type": "typed-literal",
+          "datatype": "http://www.w3.org/2001/XMLSchema#integer",
+          "value": "371"
+        },
+        "latitude": {
+          "type": "typed-literal",
+          "datatype": "http://www.w3.org/2001/XMLSchema#double",
+          "value": "47.6294"
+        },
+        "longitude": {
+          "type": "typed-literal",
+          "datatype": "http://www.w3.org/2001/XMLSchema#double",
+          "value": "6.15278"
+        },
+        "thumbnail": {
+          "type": "uri",
+          "value": "http://commons.wikimedia.org/wiki/Special:FilePath/Vesoul_La_Motte_2.jpg?width=300"
+        },
+        "wiki": {
+          "type": "uri",
+          "value": "http://fr.wikipedia.org/wiki/La_Motte_(Vesoul)"
+        }
+      },
+      {
+        "nom": {
+          "type": "literal",
+          "xml:lang": "fr",
+          "value": "Mont Poupet"
+        },
+        "comment": {
+          "type": "literal",
+          "xml:lang": "fr",
+          "value": "Le mont Poupet est une montagne s'\u00E9levant \u00E0 851 m\u00E8tres d\u2019altitude situ\u00E9e en France, dans le d\u00E9partement du Jura. Site naturel, touristique et sportif, il s'agit du point culminant du Jura externe."
+        },
+        "altitude": {
+          "type": "typed-literal",
+          "datatype": "http://www.w3.org/2001/XMLSchema#integer",
+          "value": "851"
+        },
+        "latitude": {
+          "type": "typed-literal",
+          "datatype": "http://www.w3.org/2001/XMLSchema#double",
+          "value": "46.9722"
+        },
+        "longitude": {
+          "type": "typed-literal",
+          "datatype": "http://www.w3.org/2001/XMLSchema#double",
+          "value": "5.88694"
+        },
+        "thumbnail": {
+          "type": "uri",
+          "value": "http://commons.wikimedia.org/wiki/Special:FilePath/Poupet.JPG?width=300"
+        },
+        "wiki": {
+          "type": "uri",
+          "value": "http://fr.wikipedia.org/wiki/Mont_Poupet"
+        }
+      },
+      {
+        "nom": {
+          "type": "literal",
+          "xml:lang": "fr",
+          "value": "Mont Bayard"
+        },
+        "comment": {
+          "type": "literal",
+          "xml:lang": "fr",
+          "value": "Le mont Bayard est un sommet du massif du Jura, culminant \u00E0 907 m d'altitude qui, avec ses belv\u00E9d\u00E8res, offre diff\u00E9rents points de vue de la ville de Saint-Claude.\u2191 1,0 et 1,1 Cartes IGN consult\u00E9es sur G\u00E9oportail."
+        },
+        "altitude": {
+          "type": "typed-literal",
+          "datatype": "http://www.w3.org/2001/XMLSchema#integer",
+          "value": "907"
+        },
+        "latitude": {
+          "type": "typed-literal",
+          "datatype": "http://www.w3.org/2001/XMLSchema#double",
+          "value": "46.3919"
+        },
+        "longitude": {
+          "type": "typed-literal",
+          "datatype": "http://www.w3.org/2001/XMLSchema#double",
+          "value": "5.87778"
+        },
+        "thumbnail": {
+          "type": "uri",
+          "value": "http://commons.wikimedia.org/wiki/Special:FilePath/S1klod.JPG?width=300"
+        },
+        "wiki": {
+          "type": "uri",
+          "value": "http://fr.wikipedia.org/wiki/Mont_Bayard"
+        }
+      },
+      {
+        "nom": {
+          "type": "literal",
+          "xml:lang": "fr",
+          "value": "Sabot de Frotey"
+        },
+        "comment": {
+          "type": "literal",
+          "xml:lang": "fr",
+          "value": "Le Sabot de Frotey est une roche calcaire qui a \u00E9t\u00E9 sculpt\u00E9e avec le temps en forme de sabot."
+        },
+        "altitude": {
+          "type": "typed-literal",
+          "datatype": "http://www.w3.org/2001/XMLSchema#integer",
+          "value": "342"
+        },
+        "latitude": {
+          "type": "typed-literal",
+          "datatype": "http://www.w3.org/2001/XMLSchema#double",
+          "value": "47.6321"
+        },
+        "longitude": {
+          "type": "typed-literal",
+          "datatype": "http://www.w3.org/2001/XMLSchema#double",
+          "value": "6.18553"
+        },
+        "thumbnail": {
+          "type": "uri",
+          "value": "http://commons.wikimedia.org/wiki/Special:FilePath/Sabot-Frotey.jpg?width=300"
+        },
+        "wiki": {
+          "type": "uri",
+          "value": "http://fr.wikipedia.org/wiki/Sabot_de_Frotey"
         }
       }
     ]

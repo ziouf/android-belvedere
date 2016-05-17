@@ -19,6 +19,41 @@
         "nom": {
           "type": "literal",
           "xml:lang": "fr",
+          "value": "Mont Sina\u00EF (Marne)"
+        },
+        "comment": {
+          "type": "literal",
+          "xml:lang": "fr",
+          "value": "Le mont Sina\u00EF est le point culminant de la montagne de Reims et du d\u00E9partement de la Marne, en Champagne. Il est situ\u00E9 sur le territoire de la commune de Verzy. Au sommet, se trouvent un observatoire militaire et une table d'orientation.\u2191 1,0 et 1,1 Site Geoportail de l'IGN"
+        },
+        "altitude": {
+          "type": "typed-literal",
+          "datatype": "http://www.w3.org/2001/XMLSchema#integer",
+          "value": "286"
+        },
+        "latitude": {
+          "type": "typed-literal",
+          "datatype": "http://www.w3.org/2001/XMLSchema#double",
+          "value": "49.1422"
+        },
+        "longitude": {
+          "type": "typed-literal",
+          "datatype": "http://www.w3.org/2001/XMLSchema#double",
+          "value": "4.14833"
+        },
+        "thumbnail": {
+          "type": "uri",
+          "value": "http://commons.wikimedia.org/wiki/Special:FilePath/Observatoire_du_Mont-Sina\u00EF_00603.JPG?width=300"
+        },
+        "wiki": {
+          "type": "uri",
+          "value": "http://fr.wikipedia.org/wiki/Mont_Sina\u00EF_(Marne)"
+        }
+      },
+      {
+        "nom": {
+          "type": "literal",
+          "xml:lang": "fr",
           "value": "Croix-Scaille"
         },
         "comment": {
@@ -48,6 +83,41 @@
         "wiki": {
           "type": "uri",
           "value": "http://fr.wikipedia.org/wiki/Croix-Scaille"
+        }
+      },
+      {
+        "nom": {
+          "type": "literal",
+          "xml:lang": "fr",
+          "value": "Mont Olympe (Charleville-M\u00E9zi\u00E8res)"
+        },
+        "comment": {
+          "type": "literal",
+          "xml:lang": "fr",
+          "value": "Le mont Olympe est une colline ens\u00E9r\u00E9e aujourd\u2019hui dans la ville de Charleville-M\u00E9zi\u00E8res. Ce fut une implantation romaine puis un lieu fortifi\u00E9, avant de devenir une colline bois\u00E9e \u00E0 la limite de  l\u2019ancienne commune de Montcy-Saint-Pierre, faisant face \u00E0 Charleville. Aujourd'hui Montcy-Saint-Pierre a \u00E9t\u00E9 absorb\u00E9 par Charleville-M\u00E9zi\u00E8res, et ce mont \u00E9galement. Son nom est une r\u00E9miniscence de l\u2019antiquit\u00E9 et lui a \u00E9t\u00E9 attribu\u00E9 par le fondateur de Charleville, Charles de Gonzague."
+        },
+        "altitude": {
+          "type": "typed-literal",
+          "datatype": "http://www.w3.org/2001/XMLSchema#integer",
+          "value": "197"
+        },
+        "latitude": {
+          "type": "typed-literal",
+          "datatype": "http://www.w3.org/2001/XMLSchema#double",
+          "value": "49.7783"
+        },
+        "longitude": {
+          "type": "typed-literal",
+          "datatype": "http://www.w3.org/2001/XMLSchema#double",
+          "value": "4.72583"
+        },
+        "thumbnail": {
+          "type": "uri",
+          "value": "http://commons.wikimedia.org/wiki/Special:FilePath/Charleville_passerelle_du_Mont_Olympe.JPG?width=300"
+        },
+        "wiki": {
+          "type": "uri",
+          "value": "http://fr.wikipedia.org/wiki/Mont_Olympe_(Charleville-M\u00E9zi\u00E8res)"
         }
       },
       {
@@ -89,41 +159,6 @@
         "nom": {
           "type": "literal",
           "xml:lang": "fr",
-          "value": "Mont Sina\u00EF (Marne)"
-        },
-        "comment": {
-          "type": "literal",
-          "xml:lang": "fr",
-          "value": "Le mont Sina\u00EF est le point culminant de la montagne de Reims et du d\u00E9partement de la Marne, en Champagne. Il est situ\u00E9 sur le territoire de la commune de Verzy. Au sommet, se trouvent un observatoire militaire et une table d'orientation.\u2191 1,0 et 1,1 Site Geoportail de l'IGN"
-        },
-        "altitude": {
-          "type": "typed-literal",
-          "datatype": "http://www.w3.org/2001/XMLSchema#integer",
-          "value": "286"
-        },
-        "latitude": {
-          "type": "typed-literal",
-          "datatype": "http://www.w3.org/2001/XMLSchema#double",
-          "value": "49.1422"
-        },
-        "longitude": {
-          "type": "typed-literal",
-          "datatype": "http://www.w3.org/2001/XMLSchema#double",
-          "value": "4.14833"
-        },
-        "thumbnail": {
-          "type": "uri",
-          "value": "http://commons.wikimedia.org/wiki/Special:FilePath/Observatoire_du_Mont-Sina\u00EF_00603.JPG?width=300"
-        },
-        "wiki": {
-          "type": "uri",
-          "value": "http://fr.wikipedia.org/wiki/Mont_Sina\u00EF_(Marne)"
-        }
-      },
-      {
-        "nom": {
-          "type": "literal",
-          "xml:lang": "fr",
           "value": "Mont Saint-Walfroy"
         },
         "comment": {
@@ -153,41 +188,6 @@
         "wiki": {
           "type": "uri",
           "value": "http://fr.wikipedia.org/wiki/Mont_Saint-Walfroy"
-        }
-      },
-      {
-        "nom": {
-          "type": "literal",
-          "xml:lang": "fr",
-          "value": "Mont Olympe (Charleville-M\u00E9zi\u00E8res)"
-        },
-        "comment": {
-          "type": "literal",
-          "xml:lang": "fr",
-          "value": "Le mont Olympe est une colline ens\u00E9r\u00E9e aujourd\u2019hui dans la ville de Charleville-M\u00E9zi\u00E8res. Ce fut une implantation romaine puis un lieu fortifi\u00E9, avant de devenir une colline bois\u00E9e \u00E0 la limite de  l\u2019ancienne commune de Montcy-Saint-Pierre, faisant face \u00E0 Charleville. Aujourd'hui Montcy-Saint-Pierre a \u00E9t\u00E9 absorb\u00E9 par Charleville-M\u00E9zi\u00E8res, et ce mont \u00E9galement. Son nom est une r\u00E9miniscence de l\u2019antiquit\u00E9 et lui a \u00E9t\u00E9 attribu\u00E9 par le fondateur de Charleville, Charles de Gonzague."
-        },
-        "altitude": {
-          "type": "typed-literal",
-          "datatype": "http://www.w3.org/2001/XMLSchema#integer",
-          "value": "197"
-        },
-        "latitude": {
-          "type": "typed-literal",
-          "datatype": "http://www.w3.org/2001/XMLSchema#double",
-          "value": "49.7783"
-        },
-        "longitude": {
-          "type": "typed-literal",
-          "datatype": "http://www.w3.org/2001/XMLSchema#double",
-          "value": "4.72583"
-        },
-        "thumbnail": {
-          "type": "uri",
-          "value": "http://commons.wikimedia.org/wiki/Special:FilePath/Charleville_passerelle_du_Mont_Olympe.JPG?width=300"
-        },
-        "wiki": {
-          "type": "uri",
-          "value": "http://fr.wikipedia.org/wiki/Mont_Olympe_(Charleville-M\u00E9zi\u00E8res)"
         }
       }
     ]

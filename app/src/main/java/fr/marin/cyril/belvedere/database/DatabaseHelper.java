@@ -43,8 +43,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         super(context, DatabaseContract.DATABASE_NAME, null, DatabaseContract.DATABASE_VERSION);
     }
 
-    public static DatabaseHelper getInstance(Context context) {
-        return databaseHelper == null ? new DatabaseHelper(context) : databaseHelper;
+    public static synchronized DatabaseHelper getInstance(Context context) {
+        return databaseHelper == null ? new DatabaseHelper(context.getApplicationContext()) : databaseHelper;
     }
 
     @Override
@@ -85,7 +85,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 values.put(DatabaseContract.MarkerEntry.COLUMN_NAME_LATITUDE, newPlacemark.getCoordinates().getLatLng().latitude);
                 values.put(DatabaseContract.MarkerEntry.COLUMN_NAME_LONGITUDE, newPlacemark.getCoordinates().getLatLng().longitude);
 
-                db.insert(DatabaseContract.MarkerEntry.TABLE_NAME, null, values);
+                db.insertOrThrow(DatabaseContract.MarkerEntry.TABLE_NAME, null, values);
             } else {
                 String where = DatabaseContract.MarkerEntry.COLUMN_NAME_LATITUDE + " = ?"
                         + " AND " + DatabaseContract.MarkerEntry.COLUMN_NAME_LONGITUDE + " = ?";
@@ -258,7 +258,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             if (oldValue == null) {
                 values.put(DatabaseContract.KmlHashEntry.COLUMN_NAME_KEY, key);
 
-                db.insert(DatabaseContract.KmlHashEntry.TABLE_NAME, null, values);
+                db.insertOrThrow(DatabaseContract.KmlHashEntry.TABLE_NAME, null, values);
             } else {
                 String where = DatabaseContract.KmlHashEntry.COLUMN_NAME_KEY + " = ?";
                 String[] whereArgs = new String[] { key };
@@ -299,7 +299,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
                     pool = Executors.newFixedThreadPool(Runtime.getRuntime().availableProcessors() * 10);
                     for (Placemark p : placemarks) {
-                        pool.submit(new DownloadThumbnail(p));
+                        pool.submit(new DownloadThumbnail(context, p));
                     }
                     try {
                         pool.shutdown();
@@ -319,9 +319,10 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
         private class DownloadThumbnail implements Runnable {
             private final Placemark placemark;
-            private final DatabaseHelper db = DatabaseHelper.getInstance(context);
+            private final DatabaseHelper db;
 
-            public DownloadThumbnail(Placemark placemark) {
+            public DownloadThumbnail(Context context, Placemark placemark) {
+                this.db = DatabaseHelper.getInstance(context);
                 this.placemark = placemark;
             }
 
@@ -356,7 +357,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                     }
 
                 } catch (IOException ignore) {
-                    Log.e("", ignore.getMessage());
+                    Log.e(TAG, ignore.getMessage());
                 }
             }
         }

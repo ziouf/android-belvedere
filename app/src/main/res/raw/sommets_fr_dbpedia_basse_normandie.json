@@ -19,41 +19,6 @@
         "nom": {
           "type": "literal",
           "xml:lang": "fr",
-          "value": "Signal d'\u00C9couves"
-        },
-        "comment": {
-          "type": "literal",
-          "xml:lang": "fr",
-          "value": "Le signal d'\u00C9couves, d'une altitude de 413 m, est le point culminant de la Normandie. Il est situ\u00E9 dans la for\u00EAt d'\u00C9couves, dans le d\u00E9partement de l'Orne, au nord d'Alen\u00E7on. Il domine de quelques m\u00E8tres les hauteurs voisines, fa\u00E7onn\u00E9es comme lui dans le gr\u00E8s armoricain (gros bancs de quartzite tr\u00E8s durs) et il est enti\u00E8rement recouvert par la for\u00EAt."
-        },
-        "altitude": {
-          "type": "typed-literal",
-          "datatype": "http://www.w3.org/2001/XMLSchema#integer",
-          "value": "413"
-        },
-        "latitude": {
-          "type": "typed-literal",
-          "datatype": "http://www.w3.org/2001/XMLSchema#double",
-          "value": "48.55"
-        },
-        "longitude": {
-          "type": "typed-literal",
-          "datatype": "http://www.w3.org/2001/XMLSchema#double",
-          "value": "0.0341667"
-        },
-        "thumbnail": {
-          "type": "uri",
-          "value": "http://commons.wikimedia.org/wiki/Special:FilePath/Signal_d_Ecouve.jpg?width=300"
-        },
-        "wiki": {
-          "type": "uri",
-          "value": "http://fr.wikipedia.org/wiki/Signal_d'\u00C9couves"
-        }
-      },
-      {
-        "nom": {
-          "type": "literal",
-          "xml:lang": "fr",
           "value": "Masse de Romont"
         },
         "comment": {
@@ -83,41 +48,6 @@
         "wiki": {
           "type": "uri",
           "value": "http://fr.wikipedia.org/wiki/Masse_de_Romont"
-        }
-      },
-      {
-        "nom": {
-          "type": "literal",
-          "xml:lang": "fr",
-          "value": "Mont Pin\u00E7on"
-        },
-        "comment": {
-          "type": "literal",
-          "xml:lang": "fr",
-          "value": "Le mont Pin\u00E7on est le plus haut point du d\u00E9partement du Calvados en Normandie avec une altitude de 362 m\u00E8tres. Il est situ\u00E9 \u00E0 l'ouest de la Suisse normande \u00E0 une trentaine de kilom\u00E8tres au sud-ouest de Caen, pr\u00E8s du village du Plessis-Grimoult."
-        },
-        "altitude": {
-          "type": "typed-literal",
-          "datatype": "http://www.w3.org/2001/XMLSchema#integer",
-          "value": "362"
-        },
-        "latitude": {
-          "type": "typed-literal",
-          "datatype": "http://www.w3.org/2001/XMLSchema#double",
-          "value": "48.9714"
-        },
-        "longitude": {
-          "type": "typed-literal",
-          "datatype": "http://www.w3.org/2001/XMLSchema#double",
-          "value": "-0.626667"
-        },
-        "thumbnail": {
-          "type": "uri",
-          "value": "http://commons.wikimedia.org/wiki/Special:FilePath/Vue_sur_le_Mont_Pin\u00E7on.JPG?width=300"
-        },
-        "wiki": {
-          "type": "uri",
-          "value": "http://fr.wikipedia.org/wiki/Mont_Pin\u00E7on"
         }
       },
       {
@@ -159,35 +89,35 @@
         "nom": {
           "type": "literal",
           "xml:lang": "fr",
-          "value": "Mont Doville"
+          "value": "Signal d'\u00C9couves"
         },
         "comment": {
           "type": "literal",
           "xml:lang": "fr",
-          "value": "Le mont Doville est une montagne du Massif armoricain. Elle est situ\u00E9e dans le d\u00E9partement de la Manche, sur la commune de Doville. Il culmine \u00E0 129 m d'altitude. Les soldats am\u00E9ricains y ont d\u00E9fait des positions allemandes entre le 3 et le 10 juillet 1944 pendant la bataille de La Haye-du-Puits. Il fait partie d'un ensemble de petites montagnes encerclant la ville de La Haye-du-Puits et surnomm\u00E9 \u00AB clos du Cotentin \u00BB."
+          "value": "Le signal d'\u00C9couves, d'une altitude de 413 m, est le point culminant de la Normandie. Il est situ\u00E9 dans la for\u00EAt d'\u00C9couves, dans le d\u00E9partement de l'Orne, au nord d'Alen\u00E7on. Il domine de quelques m\u00E8tres les hauteurs voisines, fa\u00E7onn\u00E9es comme lui dans le gr\u00E8s armoricain (gros bancs de quartzite tr\u00E8s durs) et il est enti\u00E8rement recouvert par la for\u00EAt."
         },
         "altitude": {
           "type": "typed-literal",
           "datatype": "http://www.w3.org/2001/XMLSchema#integer",
-          "value": "129"
+          "value": "413"
         },
         "latitude": {
           "type": "typed-literal",
           "datatype": "http://www.w3.org/2001/XMLSchema#double",
-          "value": "49.3267"
+          "value": "48.55"
         },
         "longitude": {
           "type": "typed-literal",
           "datatype": "http://www.w3.org/2001/XMLSchema#double",
-          "value": "-1.56417"
+          "value": "0.0341667"
         },
         "thumbnail": {
           "type": "uri",
-          "value": "http://commons.wikimedia.org/wiki/Special:FilePath/Vue_depuis_le_mont_Doville_(2).jpg?width=300"
+          "value": "http://commons.wikimedia.org/wiki/Special:FilePath/Signal_d_Ecouve.jpg?width=300"
         },
         "wiki": {
           "type": "uri",
-          "value": "http://fr.wikipedia.org/wiki/Mont_Doville"
+          "value": "http://fr.wikipedia.org/wiki/Signal_d'\u00C9couves"
         }
       },
       {
@@ -229,6 +159,41 @@
         "nom": {
           "type": "literal",
           "xml:lang": "fr",
+          "value": "Mont Doville"
+        },
+        "comment": {
+          "type": "literal",
+          "xml:lang": "fr",
+          "value": "Le mont Doville est une montagne du Massif armoricain. Elle est situ\u00E9e dans le d\u00E9partement de la Manche, sur la commune de Doville. Il culmine \u00E0 129 m d'altitude. Les soldats am\u00E9ricains y ont d\u00E9fait des positions allemandes entre le 3 et le 10 juillet 1944 pendant la bataille de La Haye-du-Puits. Il fait partie d'un ensemble de petites montagnes encerclant la ville de La Haye-du-Puits et surnomm\u00E9 \u00AB clos du Cotentin \u00BB."
+        },
+        "altitude": {
+          "type": "typed-literal",
+          "datatype": "http://www.w3.org/2001/XMLSchema#integer",
+          "value": "129"
+        },
+        "latitude": {
+          "type": "typed-literal",
+          "datatype": "http://www.w3.org/2001/XMLSchema#double",
+          "value": "49.3267"
+        },
+        "longitude": {
+          "type": "typed-literal",
+          "datatype": "http://www.w3.org/2001/XMLSchema#double",
+          "value": "-1.56417"
+        },
+        "thumbnail": {
+          "type": "uri",
+          "value": "http://commons.wikimedia.org/wiki/Special:FilePath/Vue_depuis_le_mont_Doville_(2).jpg?width=300"
+        },
+        "wiki": {
+          "type": "uri",
+          "value": "http://fr.wikipedia.org/wiki/Mont_Doville"
+        }
+      },
+      {
+        "nom": {
+          "type": "literal",
+          "xml:lang": "fr",
           "value": "Mont Ormel"
         },
         "comment": {
@@ -258,6 +223,41 @@
         "wiki": {
           "type": "uri",
           "value": "http://fr.wikipedia.org/wiki/Mont_Ormel"
+        }
+      },
+      {
+        "nom": {
+          "type": "literal",
+          "xml:lang": "fr",
+          "value": "Mont Pin\u00E7on"
+        },
+        "comment": {
+          "type": "literal",
+          "xml:lang": "fr",
+          "value": "Le mont Pin\u00E7on est le plus haut point du d\u00E9partement du Calvados en Normandie avec une altitude de 362 m\u00E8tres. Il est situ\u00E9 \u00E0 l'ouest de la Suisse normande \u00E0 une trentaine de kilom\u00E8tres au sud-ouest de Caen, pr\u00E8s du village du Plessis-Grimoult."
+        },
+        "altitude": {
+          "type": "typed-literal",
+          "datatype": "http://www.w3.org/2001/XMLSchema#integer",
+          "value": "362"
+        },
+        "latitude": {
+          "type": "typed-literal",
+          "datatype": "http://www.w3.org/2001/XMLSchema#double",
+          "value": "48.9714"
+        },
+        "longitude": {
+          "type": "typed-literal",
+          "datatype": "http://www.w3.org/2001/XMLSchema#double",
+          "value": "-0.626667"
+        },
+        "thumbnail": {
+          "type": "uri",
+          "value": "http://commons.wikimedia.org/wiki/Special:FilePath/Vue_sur_le_Mont_Pin\u00E7on.JPG?width=300"
+        },
+        "wiki": {
+          "type": "uri",
+          "value": "http://fr.wikipedia.org/wiki/Mont_Pin\u00E7on"
         }
       }
     ]

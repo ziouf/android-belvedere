@@ -19,57 +19,22 @@
         "nom": {
           "type": "literal",
           "xml:lang": "fr",
-          "value": "Mont Orohena"
+          "value": "Mont Mokoto"
         },
         "comment": {
           "type": "literal",
           "xml:lang": "fr",
-          "value": "Le mont Orohena est le plus haut sommet de l'\u00EEle de Tahiti et de l'ensemble de la Polyn\u00E9sie fran\u00E7aise. Culminant \u00E0 2 241 m il est par ailleurs le sommet fran\u00E7ais ayant le plus grand isolement topographique.\u2191 Si Tahiti m\u2019\u00E9tait cont\u00E9 - Cinematamua 27, 4 ao\u00FBt 2006\u2191 L\u2019ascension de l\u2019Orohena. Si Tahiti m\u2019\u00E9tait cont\u00E9\u2191 L\u2019histoire des ascensions du plus sommet de l\u2019\u00EEle de Tahiti : L\u2019Orohena, 5 novembre 2009\u2191 4,0 et 4,1 A. Hildenbrand et P.-Y."
+          "value": "Le mont Mokoto est le second sommet avec 423 m de l'\u00EEle de Mangareva aux \u00EEles Gambier en Polyn\u00E9sie fran\u00E7aise. En arriere-plan les \u00EEles d'Agakauitai et de Taravai. Portail de la montagne Portail de la montagne Portail de la Polyn\u00E9sie fran\u00E7aise Portail de la Polyn\u00E9sie fran\u00E7aise"
         },
         "altitude": {
           "type": "typed-literal",
           "datatype": "http://www.w3.org/2001/XMLSchema#integer",
-          "value": "2241"
+          "value": "423"
         },
         "latitude": {
           "type": "typed-literal",
           "datatype": "http://www.w3.org/2001/XMLSchema#double",
-          "value": "-17.62"
-        },
-        "longitude": {
-          "type": "typed-literal",
-          "datatype": "http://www.w3.org/2001/XMLSchema#integer",
-          "value": "149"
-        },
-        "thumbnail": {
-          "type": "uri",
-          "value": "http://commons.wikimedia.org/wiki/Special:FilePath/Mont.Orohena.JPG?width=300"
-        },
-        "wiki": {
-          "type": "uri",
-          "value": "http://fr.wikipedia.org/wiki/Mont_Orohena"
-        }
-      },
-      {
-        "nom": {
-          "type": "literal",
-          "xml:lang": "fr",
-          "value": "Mont Duff"
-        },
-        "comment": {
-          "type": "literal",
-          "xml:lang": "fr",
-          "value": "Le mont Duff, aussi appel\u00E9 Auorotini en mangar\u00E9vien, est le plus haut sommet avec 441 m de l'\u00EEle de Mangareva aux \u00EEles Gambier en Polyn\u00E9sie fran\u00E7aise.Portail de la montagne Portail de la montagne Portail de la Polyn\u00E9sie fran\u00E7aise Portail de la Polyn\u00E9sie fran\u00E7aise"
-        },
-        "altitude": {
-          "type": "typed-literal",
-          "datatype": "http://www.w3.org/2001/XMLSchema#integer",
-          "value": "441"
-        },
-        "latitude": {
-          "type": "typed-literal",
-          "datatype": "http://www.w3.org/2001/XMLSchema#double",
-          "value": "-23.1286"
+          "value": "-23.1264"
         },
         "longitude": {
           "type": "typed-literal",
@@ -78,46 +43,11 @@
         },
         "thumbnail": {
           "type": "uri",
-          "value": "http://commons.wikimedia.org/wiki/Special:FilePath/Vue.Mangareva.JPG?width=300"
+          "value": "http://commons.wikimedia.org/wiki/Special:FilePath/PanoMontMokoto.jpg?width=300"
         },
         "wiki": {
           "type": "uri",
-          "value": "http://fr.wikipedia.org/wiki/Mont_Duff"
-        }
-      },
-      {
-        "nom": {
-          "type": "literal",
-          "xml:lang": "fr",
-          "value": "Mont Tekao"
-        },
-        "comment": {
-          "type": "literal",
-          "xml:lang": "fr",
-          "value": "Le mont Tekao est le point culminant de l\u2019\u00EEle de Nuku Hiva, dans l\u2019archipel des Marquises. D\u2019une altitude de 1 224 m, il se trouve au nord-ouest de l\u2019\u00EEle, sur une des deux lignes de cr\u00EAte concentriques qui forment la g\u00E9ographie caract\u00E9ristique de l\u2019\u00EEle, en bordure du plateau T\u014Dvi\u2018i.Portail de la montagne Portail de la montagne Portail de la Polyn\u00E9sie fran\u00E7aise Portail de la Polyn\u00E9sie fran\u00E7aise"
-        },
-        "altitude": {
-          "type": "typed-literal",
-          "datatype": "http://www.w3.org/2001/XMLSchema#integer",
-          "value": "1224"
-        },
-        "latitude": {
-          "type": "typed-literal",
-          "datatype": "http://www.w3.org/2001/XMLSchema#double",
-          "value": "-8.84417"
-        },
-        "longitude": {
-          "type": "typed-literal",
-          "datatype": "http://www.w3.org/2001/XMLSchema#integer",
-          "value": "140"
-        },
-        "thumbnail": {
-          "type": "uri",
-          "value": "http://commons.wikimedia.org/wiki/Special:FilePath/Mont_Tekao_AKK_2192.jpg?width=300"
-        },
-        "wiki": {
-          "type": "uri",
-          "value": "http://fr.wikipedia.org/wiki/Mont_Tekao"
+          "value": "http://fr.wikipedia.org/wiki/Mont_Mokoto"
         }
       },
       {
@@ -159,6 +89,41 @@
         "nom": {
           "type": "literal",
           "xml:lang": "fr",
+          "value": "Mont Oave"
+        },
+        "comment": {
+          "type": "literal",
+          "xml:lang": "fr",
+          "value": "Le mont Oave est le point culminant de l'\u00EEle d'\u2018Ua Pou, dans l'archipel des Marquises. D'une altitude de 1 230 m, il constitue l'une des colonnes basaltiques qui dessinent le relief tr\u00E8s caract\u00E9ristique de l'\u00EEle, sans \u00EAtre pour autant g\u00E9om\u00E9triquement \u00AB la mieux dessin\u00E9e \u00BB."
+        },
+        "altitude": {
+          "type": "typed-literal",
+          "datatype": "http://www.w3.org/2001/XMLSchema#integer",
+          "value": "1230"
+        },
+        "latitude": {
+          "type": "typed-literal",
+          "datatype": "http://www.w3.org/2001/XMLSchema#double",
+          "value": "-9.39167"
+        },
+        "longitude": {
+          "type": "typed-literal",
+          "datatype": "http://www.w3.org/2001/XMLSchema#integer",
+          "value": "140"
+        },
+        "thumbnail": {
+          "type": "uri",
+          "value": "http://commons.wikimedia.org/wiki/Special:FilePath/Ua_Pou_-_Tapageuse.jpg?width=300"
+        },
+        "wiki": {
+          "type": "uri",
+          "value": "http://fr.wikipedia.org/wiki/Mont_Oave"
+        }
+      },
+      {
+        "nom": {
+          "type": "literal",
+          "xml:lang": "fr",
           "value": "Mont Aorai"
         },
         "comment": {
@@ -194,70 +159,35 @@
         "nom": {
           "type": "literal",
           "xml:lang": "fr",
-          "value": "Mont Mokoto"
+          "value": "Mont Orohena"
         },
         "comment": {
           "type": "literal",
           "xml:lang": "fr",
-          "value": "Le mont Mokoto est le second sommet avec 423 m de l'\u00EEle de Mangareva aux \u00EEles Gambier en Polyn\u00E9sie fran\u00E7aise. En arriere-plan les \u00EEles d'Agakauitai et de Taravai. Portail de la montagne Portail de la montagne Portail de la Polyn\u00E9sie fran\u00E7aise Portail de la Polyn\u00E9sie fran\u00E7aise"
+          "value": "Le mont Orohena est le plus haut sommet de l'\u00EEle de Tahiti et de l'ensemble de la Polyn\u00E9sie fran\u00E7aise. Culminant \u00E0 2 241 m il est par ailleurs le sommet fran\u00E7ais ayant le plus grand isolement topographique.\u2191 Si Tahiti m\u2019\u00E9tait cont\u00E9 - Cinematamua 27, 4 ao\u00FBt 2006\u2191 L\u2019ascension de l\u2019Orohena. Si Tahiti m\u2019\u00E9tait cont\u00E9\u2191 L\u2019histoire des ascensions du plus sommet de l\u2019\u00EEle de Tahiti : L\u2019Orohena, 5 novembre 2009\u2191 4,0 et 4,1 A. Hildenbrand et P.-Y."
         },
         "altitude": {
           "type": "typed-literal",
           "datatype": "http://www.w3.org/2001/XMLSchema#integer",
-          "value": "423"
+          "value": "2241"
         },
         "latitude": {
           "type": "typed-literal",
           "datatype": "http://www.w3.org/2001/XMLSchema#double",
-          "value": "-23.1264"
+          "value": "-17.62"
         },
         "longitude": {
           "type": "typed-literal",
           "datatype": "http://www.w3.org/2001/XMLSchema#integer",
-          "value": "134"
+          "value": "149"
         },
         "thumbnail": {
           "type": "uri",
-          "value": "http://commons.wikimedia.org/wiki/Special:FilePath/PanoMontMokoto.jpg?width=300"
+          "value": "http://commons.wikimedia.org/wiki/Special:FilePath/Mont.Orohena.JPG?width=300"
         },
         "wiki": {
           "type": "uri",
-          "value": "http://fr.wikipedia.org/wiki/Mont_Mokoto"
-        }
-      },
-      {
-        "nom": {
-          "type": "literal",
-          "xml:lang": "fr",
-          "value": "Mont Oave"
-        },
-        "comment": {
-          "type": "literal",
-          "xml:lang": "fr",
-          "value": "Le mont Oave est le point culminant de l'\u00EEle d'\u2018Ua Pou, dans l'archipel des Marquises. D'une altitude de 1 230 m, il constitue l'une des colonnes basaltiques qui dessinent le relief tr\u00E8s caract\u00E9ristique de l'\u00EEle, sans \u00EAtre pour autant g\u00E9om\u00E9triquement \u00AB la mieux dessin\u00E9e \u00BB."
-        },
-        "altitude": {
-          "type": "typed-literal",
-          "datatype": "http://www.w3.org/2001/XMLSchema#integer",
-          "value": "1230"
-        },
-        "latitude": {
-          "type": "typed-literal",
-          "datatype": "http://www.w3.org/2001/XMLSchema#double",
-          "value": "-9.39167"
-        },
-        "longitude": {
-          "type": "typed-literal",
-          "datatype": "http://www.w3.org/2001/XMLSchema#integer",
-          "value": "140"
-        },
-        "thumbnail": {
-          "type": "uri",
-          "value": "http://commons.wikimedia.org/wiki/Special:FilePath/Ua_Pou_-_Tapageuse.jpg?width=300"
-        },
-        "wiki": {
-          "type": "uri",
-          "value": "http://fr.wikipedia.org/wiki/Mont_Oave"
+          "value": "http://fr.wikipedia.org/wiki/Mont_Orohena"
         }
       },
       {
@@ -299,6 +229,41 @@
         "nom": {
           "type": "literal",
           "xml:lang": "fr",
+          "value": "Mont Tekao"
+        },
+        "comment": {
+          "type": "literal",
+          "xml:lang": "fr",
+          "value": "Le mont Tekao est le point culminant de l\u2019\u00EEle de Nuku Hiva, dans l\u2019archipel des Marquises. D\u2019une altitude de 1 224 m, il se trouve au nord-ouest de l\u2019\u00EEle, sur une des deux lignes de cr\u00EAte concentriques qui forment la g\u00E9ographie caract\u00E9ristique de l\u2019\u00EEle, en bordure du plateau T\u014Dvi\u2018i.Portail de la montagne Portail de la montagne Portail de la Polyn\u00E9sie fran\u00E7aise Portail de la Polyn\u00E9sie fran\u00E7aise"
+        },
+        "altitude": {
+          "type": "typed-literal",
+          "datatype": "http://www.w3.org/2001/XMLSchema#integer",
+          "value": "1224"
+        },
+        "latitude": {
+          "type": "typed-literal",
+          "datatype": "http://www.w3.org/2001/XMLSchema#double",
+          "value": "-8.84417"
+        },
+        "longitude": {
+          "type": "typed-literal",
+          "datatype": "http://www.w3.org/2001/XMLSchema#integer",
+          "value": "140"
+        },
+        "thumbnail": {
+          "type": "uri",
+          "value": "http://commons.wikimedia.org/wiki/Special:FilePath/Mont_Tekao_AKK_2192.jpg?width=300"
+        },
+        "wiki": {
+          "type": "uri",
+          "value": "http://fr.wikipedia.org/wiki/Mont_Tekao"
+        }
+      },
+      {
+        "nom": {
+          "type": "literal",
+          "xml:lang": "fr",
           "value": "Mont Tohiea"
         },
         "comment": {
@@ -328,6 +293,41 @@
         "wiki": {
           "type": "uri",
           "value": "http://fr.wikipedia.org/wiki/Mont_Tohiea"
+        }
+      },
+      {
+        "nom": {
+          "type": "literal",
+          "xml:lang": "fr",
+          "value": "Mont Duff"
+        },
+        "comment": {
+          "type": "literal",
+          "xml:lang": "fr",
+          "value": "Le mont Duff, aussi appel\u00E9 Auorotini en mangar\u00E9vien, est le plus haut sommet avec 441 m de l'\u00EEle de Mangareva aux \u00EEles Gambier en Polyn\u00E9sie fran\u00E7aise.Portail de la montagne Portail de la montagne Portail de la Polyn\u00E9sie fran\u00E7aise Portail de la Polyn\u00E9sie fran\u00E7aise"
+        },
+        "altitude": {
+          "type": "typed-literal",
+          "datatype": "http://www.w3.org/2001/XMLSchema#integer",
+          "value": "441"
+        },
+        "latitude": {
+          "type": "typed-literal",
+          "datatype": "http://www.w3.org/2001/XMLSchema#double",
+          "value": "-23.1286"
+        },
+        "longitude": {
+          "type": "typed-literal",
+          "datatype": "http://www.w3.org/2001/XMLSchema#integer",
+          "value": "134"
+        },
+        "thumbnail": {
+          "type": "uri",
+          "value": "http://commons.wikimedia.org/wiki/Special:FilePath/Vue.Mangareva.JPG?width=300"
+        },
+        "wiki": {
+          "type": "uri",
+          "value": "http://fr.wikipedia.org/wiki/Mont_Duff"
         }
       }
     ]

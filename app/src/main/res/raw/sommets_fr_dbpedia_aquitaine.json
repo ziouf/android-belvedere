@@ -19,41 +19,6 @@
         "nom": {
           "type": "literal",
           "xml:lang": "fr",
-          "value": "Petit Gabizos"
-        },
-        "comment": {
-          "type": "literal",
-          "xml:lang": "fr",
-          "value": "Le Petit Gabizos ou pic de Gabizos est un sommet pyr\u00E9n\u00E9en situ\u00E9 enti\u00E8rement en France. S'\u00E9levant \u00E0 cheval sur les d\u00E9partements des Pyr\u00E9n\u00E9es-Atlantiques et des Hautes-Pyr\u00E9n\u00E9es, ce sommet, remarquable depuis la plaine du fait de son profil \u00E9lanc\u00E9, culmine \u00E0 2 639 m\u00E8tres d'altitude. Il domine le col du Soulor au nord, dans le val d'Azun."
-        },
-        "altitude": {
-          "type": "typed-literal",
-          "datatype": "http://www.w3.org/2001/XMLSchema#integer",
-          "value": "2639"
-        },
-        "latitude": {
-          "type": "typed-literal",
-          "datatype": "http://www.w3.org/2001/XMLSchema#double",
-          "value": "42.9392"
-        },
-        "longitude": {
-          "type": "typed-literal",
-          "datatype": "http://www.w3.org/2001/XMLSchema#double",
-          "value": "-0.279167"
-        },
-        "thumbnail": {
-          "type": "uri",
-          "value": "http://commons.wikimedia.org/wiki/Special:FilePath/Pn145x101.jpg?width=300"
-        },
-        "wiki": {
-          "type": "uri",
-          "value": "http://fr.wikipedia.org/wiki/Petit_Gabizos"
-        }
-      },
-      {
-        "nom": {
-          "type": "literal",
-          "xml:lang": "fr",
           "value": "Dune du Pilat"
         },
         "comment": {
@@ -83,216 +48,6 @@
         "wiki": {
           "type": "uri",
           "value": "http://fr.wikipedia.org/wiki/Dune_du_Pilat"
-        }
-      },
-      {
-        "nom": {
-          "type": "literal",
-          "xml:lang": "fr",
-          "value": "Pic d'Arriel"
-        },
-        "comment": {
-          "type": "literal",
-          "xml:lang": "fr",
-          "value": "Le pic d'Arriel est un sommet des Pyr\u00E9n\u00E9es situ\u00E9 sur la fronti\u00E8re franco-espagnole et la ligne de partage des eaux.\u2191 IGN Top 25 1647 OT Vignemale - Ossau"
-        },
-        "altitude": {
-          "type": "typed-literal",
-          "datatype": "http://www.w3.org/2001/XMLSchema#integer",
-          "value": "2824"
-        },
-        "latitude": {
-          "type": "typed-literal",
-          "datatype": "http://www.w3.org/2001/XMLSchema#double",
-          "value": "42.8344"
-        },
-        "longitude": {
-          "type": "typed-literal",
-          "datatype": "http://www.w3.org/2001/XMLSchema#double",
-          "value": "-0.331111"
-        },
-        "thumbnail": {
-          "type": "uri",
-          "value": "http://commons.wikimedia.org/wiki/Special:FilePath/Arriel.jpg?width=300"
-        },
-        "wiki": {
-          "type": "uri",
-          "value": "http://fr.wikipedia.org/wiki/Pic_d'Arriel"
-        }
-      },
-      {
-        "nom": {
-          "type": "literal",
-          "xml:lang": "fr",
-          "value": "Grande aiguille d'Ansab\u00E8re"
-        },
-        "comment": {
-          "type": "literal",
-          "xml:lang": "fr",
-          "value": "La Grande Aiguille d'Ansab\u00E8re est situ\u00E9e dans les Pyr\u00E9n\u00E9es-Atlantiques, en vall\u00E9e d'Aspe dans la commune de Lescun. Elle est s\u00E9par\u00E9e du Grand Pic par une profonde br\u00E8che. L'aiguille d'Ansab\u00E8re est situ\u00E9e enti\u00E8rement en territoire fran\u00E7ais, \u00E0 quelques m\u00E8tres de la fronti\u00E8re franco-espagnole."
-        },
-        "altitude": {
-          "type": "typed-literal",
-          "datatype": "http://www.w3.org/2001/XMLSchema#integer",
-          "value": "2377"
-        },
-        "latitude": {
-          "type": "typed-literal",
-          "datatype": "http://www.w3.org/2001/XMLSchema#double",
-          "value": "42.9031"
-        },
-        "longitude": {
-          "type": "typed-literal",
-          "datatype": "http://www.w3.org/2001/XMLSchema#double",
-          "value": "-0.731667"
-        },
-        "thumbnail": {
-          "type": "uri",
-          "value": "http://commons.wikimedia.org/wiki/Special:FilePath/Cirque_de_Lescun_Aiguilles_d_Ansabere.jpg?width=300"
-        },
-        "wiki": {
-          "type": "uri",
-          "value": "http://fr.wikipedia.org/wiki/Grande_aiguille_d'Ansab\u00E8re"
-        }
-      },
-      {
-        "nom": {
-          "type": "literal",
-          "xml:lang": "fr",
-          "value": "Artzamendi"
-        },
-        "comment": {
-          "type": "literal",
-          "xml:lang": "fr",
-          "value": "L'Artzamendi /arts\u032Aamendi/, 926 m, est un mont du Pays basque fran\u00E7ais (province du Labourd) situ\u00E9 au sud de Itxassou et \u00E0 l'ouest de Bidarray."
-        },
-        "altitude": {
-          "type": "typed-literal",
-          "datatype": "http://www.w3.org/2001/XMLSchema#integer",
-          "value": "926"
-        },
-        "latitude": {
-          "type": "typed-literal",
-          "datatype": "http://www.w3.org/2001/XMLSchema#double",
-          "value": "43.2831"
-        },
-        "longitude": {
-          "type": "typed-literal",
-          "datatype": "http://www.w3.org/2001/XMLSchema#double",
-          "value": "-1.40833"
-        },
-        "thumbnail": {
-          "type": "uri",
-          "value": "http://commons.wikimedia.org/wiki/Special:FilePath/Bidarray_Iparla_Artzamendi.jpg?width=300"
-        },
-        "wiki": {
-          "type": "uri",
-          "value": "http://fr.wikipedia.org/wiki/Artzamendi"
-        }
-      },
-      {
-        "nom": {
-          "type": "literal",
-          "xml:lang": "fr",
-          "value": "Iparla"
-        },
-        "comment": {
-          "type": "literal",
-          "xml:lang": "fr",
-          "value": "L'Iparla est un sommet des Pyr\u00E9n\u00E9es au Pays basque, sur la fronti\u00E8re franco-espagnole culminant \u00E0 1 044 m au-dessus de Bidarray, entre les Pyr\u00E9n\u00E9es-Atlantiques et la province de Navarre. C'est le premier sommet fran\u00E7ais de plus de 1 000 m\u00E8tres en venant de l'oc\u00E9an Atlantique.\u2191 1,0 et 1,1 Source : G\u00E9oportail avec carte IGN \u00E0 l'\u00E9chelle 1:25000"
-        },
-        "altitude": {
-          "type": "typed-literal",
-          "datatype": "http://www.w3.org/2001/XMLSchema#integer",
-          "value": "1044"
-        },
-        "latitude": {
-          "type": "typed-literal",
-          "datatype": "http://www.w3.org/2001/XMLSchema#double",
-          "value": "43.2283"
-        },
-        "longitude": {
-          "type": "typed-literal",
-          "datatype": "http://www.w3.org/2001/XMLSchema#double",
-          "value": "-1.37861"
-        },
-        "thumbnail": {
-          "type": "uri",
-          "value": "http://commons.wikimedia.org/wiki/Special:FilePath/Saint_Etienne_de_Ba\u00EFgorry_Iparla.jpg?width=300"
-        },
-        "wiki": {
-          "type": "uri",
-          "value": "http://fr.wikipedia.org/wiki/Iparla"
-        }
-      },
-      {
-        "nom": {
-          "type": "literal",
-          "xml:lang": "fr",
-          "value": "Chapeau de Gendarme (Soule)"
-        },
-        "comment": {
-          "type": "literal",
-          "xml:lang": "fr",
-          "value": "Le Chapeau de Gendarme, en basque Lexantz\u00FCmendi, est une colline situ\u00E9e au nord de Licq-Atherey (France).Le nom a \u00E9t\u00E9 donn\u00E9e par analogie de forme avec le bicorne \u00E9quipant les gendarmes de la gendarmerie de Napol\u00E9on Ier.Portail de la montagne Portail de la montagne Portail des Pyr\u00E9n\u00E9es Portail des Pyr\u00E9n\u00E9es Portail des Pyr\u00E9n\u00E9es-Atlantiques Portail des Pyr\u00E9n\u00E9es-Atlantiques Portail du Pays basque Portail du Pays basque"
-        },
-        "altitude": {
-          "type": "typed-literal",
-          "datatype": "http://www.w3.org/2001/XMLSchema#integer",
-          "value": "572"
-        },
-        "latitude": {
-          "type": "typed-literal",
-          "datatype": "http://www.w3.org/2001/XMLSchema#double",
-          "value": "43.0861"
-        },
-        "longitude": {
-          "type": "typed-literal",
-          "datatype": "http://www.w3.org/2001/XMLSchema#double",
-          "value": "-0.879167"
-        },
-        "thumbnail": {
-          "type": "uri",
-          "value": "http://commons.wikimedia.org/wiki/Special:FilePath/Ath\u00E9ry_(Licq-Ath\u00E9ry,_Pyr-Atl,_Fr)_fronton_avec_vue_sur_le_Chapeau_de_Gendarme.JPG?width=300"
-        },
-        "wiki": {
-          "type": "uri",
-          "value": "http://fr.wikipedia.org/wiki/Chapeau_de_Gendarme_(Soule)"
-        }
-      },
-      {
-        "nom": {
-          "type": "literal",
-          "xml:lang": "fr",
-          "value": "La Rhune"
-        },
-        "comment": {
-          "type": "literal",
-          "xml:lang": "fr",
-          "value": "La Rhune ou Larrun en basque est un sommet situ\u00E9 dans les Pyr\u00E9n\u00E9es, au Pays basque. Son altitude est de 905 m.Le massif de la Rhune est travers\u00E9 par la ligne de fronti\u00E8re franco-espagnole, qui est aussi la fronti\u00E8re entre les provinces basques du Labourd et de la Navarre.\u2191 1,0 et 1,1 Source : G\u00E9oportail avec cartes IGN \u00E0 l'\u00E9chelle 1:25000 ou 1:50000\u2191 2,0 et 2,1 Source : cartes g\u00E9ologiques \u00E0 l'\u00E9chelle 1:50000 du Bureau de recherches g\u00E9ologiques et mini\u00E8res (site en ligne)."
-        },
-        "altitude": {
-          "type": "typed-literal",
-          "datatype": "http://www.w3.org/2001/XMLSchema#integer",
-          "value": "905"
-        },
-        "latitude": {
-          "type": "typed-literal",
-          "datatype": "http://www.w3.org/2001/XMLSchema#double",
-          "value": "43.3092"
-        },
-        "longitude": {
-          "type": "typed-literal",
-          "datatype": "http://www.w3.org/2001/XMLSchema#double",
-          "value": "-1.63556"
-        },
-        "thumbnail": {
-          "type": "uri",
-          "value": "http://commons.wikimedia.org/wiki/Special:FilePath/La_Rhune_Neige.jpg?width=300"
-        },
-        "wiki": {
-          "type": "uri",
-          "value": "http://fr.wikipedia.org/wiki/La_Rhune"
         }
       },
       {
@@ -334,251 +89,6 @@
         "nom": {
           "type": "literal",
           "xml:lang": "fr",
-          "value": "Pic de Ger"
-        },
-        "comment": {
-          "type": "literal",
-          "xml:lang": "fr",
-          "value": "Le pic de Ger est un sommet pyr\u00E9n\u00E9en de la vall\u00E9e d'Ossau dans le d\u00E9partement des  Pyr\u00E9n\u00E9es-Atlantiques."
-        },
-        "altitude": {
-          "type": "typed-literal",
-          "datatype": "http://www.w3.org/2001/XMLSchema#integer",
-          "value": "2613"
-        },
-        "latitude": {
-          "type": "typed-literal",
-          "datatype": "http://www.w3.org/2001/XMLSchema#double",
-          "value": "42.9367"
-        },
-        "longitude": {
-          "type": "typed-literal",
-          "datatype": "http://www.w3.org/2001/XMLSchema#double",
-          "value": "-0.354167"
-        },
-        "thumbnail": {
-          "type": "uri",
-          "value": "http://commons.wikimedia.org/wiki/Special:FilePath/044_le_pic_du_ger.jpg?width=300"
-        },
-        "wiki": {
-          "type": "uri",
-          "value": "http://fr.wikipedia.org/wiki/Pic_de_Ger"
-        }
-      },
-      {
-        "nom": {
-          "type": "literal",
-          "xml:lang": "fr",
-          "value": "Pic du Midi d'Ossau"
-        },
-        "comment": {
-          "type": "literal",
-          "xml:lang": "fr",
-          "value": "Le pic du Midi d'Ossau, surnomm\u00E9 Jean-Pierre, est un sommet des Pyr\u00E9n\u00E9es fran\u00E7aises (Pyr\u00E9n\u00E9es-Atlantiques) dont la forme caract\u00E9ristique rappelle celle d'une dent."
-        },
-        "altitude": {
-          "type": "typed-literal",
-          "datatype": "http://www.w3.org/2001/XMLSchema#integer",
-          "value": "2884"
-        },
-        "latitude": {
-          "type": "typed-literal",
-          "datatype": "http://www.w3.org/2001/XMLSchema#double",
-          "value": "42.8431"
-        },
-        "longitude": {
-          "type": "typed-literal",
-          "datatype": "http://www.w3.org/2001/XMLSchema#double",
-          "value": "-0.438056"
-        },
-        "thumbnail": {
-          "type": "uri",
-          "value": "http://commons.wikimedia.org/wiki/Special:FilePath/Ossau.jpg?width=300"
-        },
-        "wiki": {
-          "type": "uri",
-          "value": "http://fr.wikipedia.org/wiki/Pic_du_Midi_d'Ossau"
-        }
-      },
-      {
-        "nom": {
-          "type": "literal",
-          "xml:lang": "fr",
-          "value": "Okabe"
-        },
-        "comment": {
-          "type": "literal",
-          "xml:lang": "fr",
-          "value": "Okabe ou Occabe, 1 456 m d'altitude, est un mont du Pays basque fran\u00E7ais (Basse-Navarre)."
-        },
-        "altitude": {
-          "type": "typed-literal",
-          "datatype": "http://www.w3.org/2001/XMLSchema#integer",
-          "value": "1456"
-        },
-        "latitude": {
-          "type": "typed-literal",
-          "datatype": "http://www.w3.org/2001/XMLSchema#double",
-          "value": "43.0344"
-        },
-        "longitude": {
-          "type": "typed-literal",
-          "datatype": "http://www.w3.org/2001/XMLSchema#double",
-          "value": "-1.10694"
-        },
-        "thumbnail": {
-          "type": "uri",
-          "value": "http://commons.wikimedia.org/wiki/Special:FilePath/Harrespil_Okabe.jpg?width=300"
-        },
-        "wiki": {
-          "type": "uri",
-          "value": "http://fr.wikipedia.org/wiki/Okabe"
-        }
-      },
-      {
-        "nom": {
-          "type": "literal",
-          "xml:lang": "fr",
-          "value": "Urkulu"
-        },
-        "comment": {
-          "type": "literal",
-          "xml:lang": "fr",
-          "value": "L'Urkulu ou Urculu est une montagne des Pyr\u00E9n\u00E9es culminant \u00E0 une altitude de 1 419 m\u00E8tres et situ\u00E9e sur la fronti\u00E8re franco-espagnole, entre Saint-Michel dans les Pyr\u00E9n\u00E9es-Atlantiques au nord et Orbaitzeta en Navarre au sud. \u00C0 proximit\u00E9 du sommet se situent les vestiges d'une tour ainsi que la borne fronti\u00E8re 206."
-        },
-        "altitude": {
-          "type": "typed-literal",
-          "datatype": "http://www.w3.org/2001/XMLSchema#integer",
-          "value": "1419"
-        },
-        "latitude": {
-          "type": "typed-literal",
-          "datatype": "http://www.w3.org/2001/XMLSchema#double",
-          "value": "43.0469"
-        },
-        "longitude": {
-          "type": "typed-literal",
-          "datatype": "http://www.w3.org/2001/XMLSchema#double",
-          "value": "-1.24056"
-        },
-        "thumbnail": {
-          "type": "uri",
-          "value": "http://commons.wikimedia.org/wiki/Special:FilePath/Urkuluko_Dorrea.JPG?width=300"
-        },
-        "wiki": {
-          "type": "uri",
-          "value": "http://fr.wikipedia.org/wiki/Urkulu"
-        }
-      },
-      {
-        "nom": {
-          "type": "literal",
-          "xml:lang": "fr",
-          "value": "Mont Ba\u00EFgura"
-        },
-        "comment": {
-          "type": "literal",
-          "xml:lang": "fr",
-          "value": "Le Ba\u00EFgura, mont Baygoura ou Baighoura (897 m) est un mont du Pays basque fran\u00E7ais. Des \u00E9metteurs hertziens sont implant\u00E9s \u00E0 son sommet.\u2191 Philippe Veyrin, Les Basques de Labourd, de Soule et de Basse Navarre : leur histoire et leurs traditions, Pau, Cairn,\u200E 2012 (1re \u00E9d. 1947), 347 p. (ISBN 9782350682617 et 2350682617, OCLC 826784280), p. 24"
-        },
-        "altitude": {
-          "type": "typed-literal",
-          "datatype": "http://www.w3.org/2001/XMLSchema#integer",
-          "value": "897"
-        },
-        "latitude": {
-          "type": "typed-literal",
-          "datatype": "http://www.w3.org/2001/XMLSchema#double",
-          "value": "43.2908"
-        },
-        "longitude": {
-          "type": "typed-literal",
-          "datatype": "http://www.w3.org/2001/XMLSchema#double",
-          "value": "-1.29278"
-        },
-        "thumbnail": {
-          "type": "uri",
-          "value": "http://commons.wikimedia.org/wiki/Special:FilePath/Baigura_Paragliding.jpg?width=300"
-        },
-        "wiki": {
-          "type": "uri",
-          "value": "http://fr.wikipedia.org/wiki/Mont_Ba\u00EFgura"
-        }
-      },
-      {
-        "nom": {
-          "type": "literal",
-          "xml:lang": "fr",
-          "value": "Belchou"
-        },
-        "comment": {
-          "type": "literal",
-          "xml:lang": "fr",
-          "value": "Le pic de Belchou, ou de Beltxu en basque, est un sommet pyr\u00E9n\u00E9en culminant \u00E0 1 129 m d'altitude dans le massif des Arbailles.\u2191 1,0 et 1,1 Carte IGN sur geoportail.fr"
-        },
-        "altitude": {
-          "type": "typed-literal",
-          "datatype": "http://www.w3.org/2001/XMLSchema#integer",
-          "value": "1129"
-        },
-        "latitude": {
-          "type": "typed-literal",
-          "datatype": "http://www.w3.org/2001/XMLSchema#double",
-          "value": "43.1506"
-        },
-        "longitude": {
-          "type": "typed-literal",
-          "datatype": "http://www.w3.org/2001/XMLSchema#double",
-          "value": "-1.04889"
-        },
-        "thumbnail": {
-          "type": "uri",
-          "value": "http://commons.wikimedia.org/wiki/Special:FilePath/Belchou.jpg?width=300"
-        },
-        "wiki": {
-          "type": "uri",
-          "value": "http://fr.wikipedia.org/wiki/Belchou"
-        }
-      },
-      {
-        "nom": {
-          "type": "literal",
-          "xml:lang": "fr",
-          "value": "Tuc de Biscarrague"
-        },
-        "comment": {
-          "type": "literal",
-          "xml:lang": "fr",
-          "value": "Le tuc de Biscarrague ou Biskaraya est une montagne des Pyr\u00E9n\u00E9es-Atlantiques (France), culminant \u00E0 91 ou 92 m\u00E8tres selon les sources.\u2191 Selon les cartes, l'IGN donne des noms et des altitudes diff\u00E9rentes au sommet."
-        },
-        "altitude": {
-          "type": "typed-literal",
-          "datatype": "http://www.w3.org/2001/XMLSchema#integer",
-          "value": "91"
-        },
-        "latitude": {
-          "type": "typed-literal",
-          "datatype": "http://www.w3.org/2001/XMLSchema#double",
-          "value": "43.4831"
-        },
-        "longitude": {
-          "type": "typed-literal",
-          "datatype": "http://www.w3.org/2001/XMLSchema#double",
-          "value": "-1.31556"
-        },
-        "thumbnail": {
-          "type": "uri",
-          "value": "http://commons.wikimedia.org/wiki/Special:FilePath/Tuc_de_Biscarrague_Urt.JPG?width=300"
-        },
-        "wiki": {
-          "type": "uri",
-          "value": "http://fr.wikipedia.org/wiki/Tuc_de_Biscarrague"
-        }
-      },
-      {
-        "nom": {
-          "type": "literal",
-          "xml:lang": "fr",
           "value": "Pic Palas"
         },
         "comment": {
@@ -608,111 +118,6 @@
         "wiki": {
           "type": "uri",
           "value": "http://fr.wikipedia.org/wiki/Pic_Palas"
-        }
-      },
-      {
-        "nom": {
-          "type": "literal",
-          "xml:lang": "fr",
-          "value": "Pic d'Anie"
-        },
-        "comment": {
-          "type": "literal",
-          "xml:lang": "fr",
-          "value": "Le pic d'Anie est un sommet des Pyr\u00E9n\u00E9es fran\u00E7aises d'une altitude de 2 504 m\u00E8tres. C'est le plus haut sommet du cirque de Lescun, en vall\u00E9e d'Aspe. Il est connu au Pays basque sous le nom Ahu\u00F1amendi ou Au\u00F1amendi, \u00AB montagne des chevrettes \u00BB.\u2191 Ah\u00FC\u00F1emendi en souletin, P\u00E8re Pierre Lhande, Dictionnaire basque-fran\u00E7ais et fran\u00E7ais-basque, 1926."
-        },
-        "altitude": {
-          "type": "typed-literal",
-          "datatype": "http://www.w3.org/2001/XMLSchema#integer",
-          "value": "2504"
-        },
-        "latitude": {
-          "type": "typed-literal",
-          "datatype": "http://www.w3.org/2001/XMLSchema#double",
-          "value": "42.9444"
-        },
-        "longitude": {
-          "type": "typed-literal",
-          "datatype": "http://www.w3.org/2001/XMLSchema#double",
-          "value": "-0.720556"
-        },
-        "thumbnail": {
-          "type": "uri",
-          "value": "http://commons.wikimedia.org/wiki/Special:FilePath/Pic_d'Anie_lapiaz_2007.png?width=300"
-        },
-        "wiki": {
-          "type": "uri",
-          "value": "http://fr.wikipedia.org/wiki/Pic_d'Anie"
-        }
-      },
-      {
-        "nom": {
-          "type": "literal",
-          "xml:lang": "fr",
-          "value": "Abarratea"
-        },
-        "comment": {
-          "type": "literal",
-          "xml:lang": "fr",
-          "value": "L'Abarratea, prononc\u00E9 Abarratia /abaratija/, culminant \u00E0 342 m d'altitude, est un mont du Pays basque fran\u00E7ais situ\u00E9 entre les communes d'Ayherre et d'Isturits dans la province de Basse-Navarre."
-        },
-        "altitude": {
-          "type": "typed-literal",
-          "datatype": "http://www.w3.org/2001/XMLSchema#integer",
-          "value": "342"
-        },
-        "latitude": {
-          "type": "typed-literal",
-          "datatype": "http://www.w3.org/2001/XMLSchema#double",
-          "value": "43.3578"
-        },
-        "longitude": {
-          "type": "typed-literal",
-          "datatype": "http://www.w3.org/2001/XMLSchema#double",
-          "value": "-1.23306"
-        },
-        "thumbnail": {
-          "type": "uri",
-          "value": "http://commons.wikimedia.org/wiki/Special:FilePath/Abarratia.jpg?width=300"
-        },
-        "wiki": {
-          "type": "uri",
-          "value": "http://fr.wikipedia.org/wiki/Abarratea"
-        }
-      },
-      {
-        "nom": {
-          "type": "literal",
-          "xml:lang": "fr",
-          "value": "Mondarrain"
-        },
-        "comment": {
-          "type": "literal",
-          "xml:lang": "fr",
-          "value": "Le Mondarrain (Arranomendi en basque) est un mont du Pays basque fran\u00E7ais, au sud d'Espelette et au sud-ouest d'Itxassou, dans la province du Labourd, culminant \u00E0 749 m d'altitude."
-        },
-        "altitude": {
-          "type": "typed-literal",
-          "datatype": "http://www.w3.org/2001/XMLSchema#integer",
-          "value": "749"
-        },
-        "latitude": {
-          "type": "typed-literal",
-          "datatype": "http://www.w3.org/2001/XMLSchema#double",
-          "value": "43.3028"
-        },
-        "longitude": {
-          "type": "typed-literal",
-          "datatype": "http://www.w3.org/2001/XMLSchema#double",
-          "value": "-1.43222"
-        },
-        "thumbnail": {
-          "type": "uri",
-          "value": "http://commons.wikimedia.org/wiki/Special:FilePath/Espelette_Mondarrain.jpg?width=300"
-        },
-        "wiki": {
-          "type": "uri",
-          "value": "http://fr.wikipedia.org/wiki/Mondarrain"
         }
       },
       {
@@ -754,6 +159,181 @@
         "nom": {
           "type": "literal",
           "xml:lang": "fr",
+          "value": "Table des Trois Rois"
+        },
+        "comment": {
+          "type": "literal",
+          "xml:lang": "fr",
+          "value": "La Table des Trois Rois, ou Mesa de los Tres Reyes en espagnol, ou Hiru Errege Mahaia en basque, ou Meseta d'os Tres Reis en aragonais, est le sommet le plus \u00E9lev\u00E9 de Navarre, d'une altitude de 2 421 m, et pr\u00E9sentant un d\u00E9nivel\u00E9 de 1 114 m.\u2191 1,0 et 1,1 Source : G\u00E9oportail avec carte IGN \u00E0 l'\u00E9chelle 1:25000"
+        },
+        "altitude": {
+          "type": "typed-literal",
+          "datatype": "http://www.w3.org/2001/XMLSchema#integer",
+          "value": "2421"
+        },
+        "latitude": {
+          "type": "typed-literal",
+          "datatype": "http://www.w3.org/2001/XMLSchema#double",
+          "value": "42.9192"
+        },
+        "longitude": {
+          "type": "typed-literal",
+          "datatype": "http://www.w3.org/2001/XMLSchema#double",
+          "value": "-0.725556"
+        },
+        "thumbnail": {
+          "type": "uri",
+          "value": "http://commons.wikimedia.org/wiki/Special:FilePath/Pic_and_table_de_trois_rois.jpg?width=300"
+        },
+        "wiki": {
+          "type": "uri",
+          "value": "http://fr.wikipedia.org/wiki/Table_des_Trois_Rois"
+        }
+      },
+      {
+        "nom": {
+          "type": "literal",
+          "xml:lang": "fr",
+          "value": "La Rhune"
+        },
+        "comment": {
+          "type": "literal",
+          "xml:lang": "fr",
+          "value": "La Rhune ou Larrun en basque est un sommet situ\u00E9 dans les Pyr\u00E9n\u00E9es, au Pays basque. Son altitude est de 905 m.Le massif de la Rhune est travers\u00E9 par la ligne de fronti\u00E8re franco-espagnole, qui est aussi la fronti\u00E8re entre les provinces basques du Labourd et de la Navarre.\u2191 1,0 et 1,1 Source : G\u00E9oportail avec cartes IGN \u00E0 l'\u00E9chelle 1:25000 ou 1:50000\u2191 2,0 et 2,1 Source : cartes g\u00E9ologiques \u00E0 l'\u00E9chelle 1:50000 du Bureau de recherches g\u00E9ologiques et mini\u00E8res (site en ligne)."
+        },
+        "altitude": {
+          "type": "typed-literal",
+          "datatype": "http://www.w3.org/2001/XMLSchema#integer",
+          "value": "905"
+        },
+        "latitude": {
+          "type": "typed-literal",
+          "datatype": "http://www.w3.org/2001/XMLSchema#double",
+          "value": "43.3092"
+        },
+        "longitude": {
+          "type": "typed-literal",
+          "datatype": "http://www.w3.org/2001/XMLSchema#double",
+          "value": "-1.63556"
+        },
+        "thumbnail": {
+          "type": "uri",
+          "value": "http://commons.wikimedia.org/wiki/Special:FilePath/La_Rhune_Neige.jpg?width=300"
+        },
+        "wiki": {
+          "type": "uri",
+          "value": "http://fr.wikipedia.org/wiki/La_Rhune"
+        }
+      },
+      {
+        "nom": {
+          "type": "literal",
+          "xml:lang": "fr",
+          "value": "Chapeau de Gendarme (Soule)"
+        },
+        "comment": {
+          "type": "literal",
+          "xml:lang": "fr",
+          "value": "Le Chapeau de Gendarme, en basque Lexantz\u00FCmendi, est une colline situ\u00E9e au nord de Licq-Atherey (France).Le nom a \u00E9t\u00E9 donn\u00E9e par analogie de forme avec le bicorne \u00E9quipant les gendarmes de la gendarmerie de Napol\u00E9on Ier.Portail de la montagne Portail de la montagne Portail des Pyr\u00E9n\u00E9es Portail des Pyr\u00E9n\u00E9es Portail des Pyr\u00E9n\u00E9es-Atlantiques Portail des Pyr\u00E9n\u00E9es-Atlantiques Portail du Pays basque Portail du Pays basque"
+        },
+        "altitude": {
+          "type": "typed-literal",
+          "datatype": "http://www.w3.org/2001/XMLSchema#integer",
+          "value": "572"
+        },
+        "latitude": {
+          "type": "typed-literal",
+          "datatype": "http://www.w3.org/2001/XMLSchema#double",
+          "value": "43.0861"
+        },
+        "longitude": {
+          "type": "typed-literal",
+          "datatype": "http://www.w3.org/2001/XMLSchema#double",
+          "value": "-0.879167"
+        },
+        "thumbnail": {
+          "type": "uri",
+          "value": "http://commons.wikimedia.org/wiki/Special:FilePath/Ath\u00E9ry_(Licq-Ath\u00E9ry,_Pyr-Atl,_Fr)_fronton_avec_vue_sur_le_Chapeau_de_Gendarme.JPG?width=300"
+        },
+        "wiki": {
+          "type": "uri",
+          "value": "http://fr.wikipedia.org/wiki/Chapeau_de_Gendarme_(Soule)"
+        }
+      },
+      {
+        "nom": {
+          "type": "literal",
+          "xml:lang": "fr",
+          "value": "Artzamendi"
+        },
+        "comment": {
+          "type": "literal",
+          "xml:lang": "fr",
+          "value": "L'Artzamendi /arts\u032Aamendi/, 926 m, est un mont du Pays basque fran\u00E7ais (province du Labourd) situ\u00E9 au sud de Itxassou et \u00E0 l'ouest de Bidarray."
+        },
+        "altitude": {
+          "type": "typed-literal",
+          "datatype": "http://www.w3.org/2001/XMLSchema#integer",
+          "value": "926"
+        },
+        "latitude": {
+          "type": "typed-literal",
+          "datatype": "http://www.w3.org/2001/XMLSchema#double",
+          "value": "43.2831"
+        },
+        "longitude": {
+          "type": "typed-literal",
+          "datatype": "http://www.w3.org/2001/XMLSchema#double",
+          "value": "-1.40833"
+        },
+        "thumbnail": {
+          "type": "uri",
+          "value": "http://commons.wikimedia.org/wiki/Special:FilePath/Bidarray_Iparla_Artzamendi.jpg?width=300"
+        },
+        "wiki": {
+          "type": "uri",
+          "value": "http://fr.wikipedia.org/wiki/Artzamendi"
+        }
+      },
+      {
+        "nom": {
+          "type": "literal",
+          "xml:lang": "fr",
+          "value": "Belchou"
+        },
+        "comment": {
+          "type": "literal",
+          "xml:lang": "fr",
+          "value": "Le pic de Belchou, ou de Beltxu en basque, est un sommet pyr\u00E9n\u00E9en culminant \u00E0 1 129 m d'altitude dans le massif des Arbailles.\u2191 1,0 et 1,1 Carte IGN sur geoportail.fr"
+        },
+        "altitude": {
+          "type": "typed-literal",
+          "datatype": "http://www.w3.org/2001/XMLSchema#integer",
+          "value": "1129"
+        },
+        "latitude": {
+          "type": "typed-literal",
+          "datatype": "http://www.w3.org/2001/XMLSchema#double",
+          "value": "43.1506"
+        },
+        "longitude": {
+          "type": "typed-literal",
+          "datatype": "http://www.w3.org/2001/XMLSchema#double",
+          "value": "-1.04889"
+        },
+        "thumbnail": {
+          "type": "uri",
+          "value": "http://commons.wikimedia.org/wiki/Special:FilePath/Belchou.jpg?width=300"
+        },
+        "wiki": {
+          "type": "uri",
+          "value": "http://fr.wikipedia.org/wiki/Belchou"
+        }
+      },
+      {
+        "nom": {
+          "type": "literal",
+          "xml:lang": "fr",
           "value": "Pic de Bizkarz\u00E9"
         },
         "comment": {
@@ -783,6 +363,216 @@
         "wiki": {
           "type": "uri",
           "value": "http://fr.wikipedia.org/wiki/Pic_de_Bizkarz\u00E9"
+        }
+      },
+      {
+        "nom": {
+          "type": "literal",
+          "xml:lang": "fr",
+          "value": "Mondarrain"
+        },
+        "comment": {
+          "type": "literal",
+          "xml:lang": "fr",
+          "value": "Le Mondarrain (Arranomendi en basque) est un mont du Pays basque fran\u00E7ais, au sud d'Espelette et au sud-ouest d'Itxassou, dans la province du Labourd, culminant \u00E0 749 m d'altitude."
+        },
+        "altitude": {
+          "type": "typed-literal",
+          "datatype": "http://www.w3.org/2001/XMLSchema#integer",
+          "value": "749"
+        },
+        "latitude": {
+          "type": "typed-literal",
+          "datatype": "http://www.w3.org/2001/XMLSchema#double",
+          "value": "43.3028"
+        },
+        "longitude": {
+          "type": "typed-literal",
+          "datatype": "http://www.w3.org/2001/XMLSchema#double",
+          "value": "-1.43222"
+        },
+        "thumbnail": {
+          "type": "uri",
+          "value": "http://commons.wikimedia.org/wiki/Special:FilePath/Espelette_Mondarrain.jpg?width=300"
+        },
+        "wiki": {
+          "type": "uri",
+          "value": "http://fr.wikipedia.org/wiki/Mondarrain"
+        }
+      },
+      {
+        "nom": {
+          "type": "literal",
+          "xml:lang": "fr",
+          "value": "Pic d'Anie"
+        },
+        "comment": {
+          "type": "literal",
+          "xml:lang": "fr",
+          "value": "Le pic d'Anie est un sommet des Pyr\u00E9n\u00E9es fran\u00E7aises d'une altitude de 2 504 m\u00E8tres. C'est le plus haut sommet du cirque de Lescun, en vall\u00E9e d'Aspe. Il est connu au Pays basque sous le nom Ahu\u00F1amendi ou Au\u00F1amendi, \u00AB montagne des chevrettes \u00BB.\u2191 Ah\u00FC\u00F1emendi en souletin, P\u00E8re Pierre Lhande, Dictionnaire basque-fran\u00E7ais et fran\u00E7ais-basque, 1926."
+        },
+        "altitude": {
+          "type": "typed-literal",
+          "datatype": "http://www.w3.org/2001/XMLSchema#integer",
+          "value": "2504"
+        },
+        "latitude": {
+          "type": "typed-literal",
+          "datatype": "http://www.w3.org/2001/XMLSchema#double",
+          "value": "42.9444"
+        },
+        "longitude": {
+          "type": "typed-literal",
+          "datatype": "http://www.w3.org/2001/XMLSchema#double",
+          "value": "-0.720556"
+        },
+        "thumbnail": {
+          "type": "uri",
+          "value": "http://commons.wikimedia.org/wiki/Special:FilePath/Pic_d'Anie_lapiaz_2007.png?width=300"
+        },
+        "wiki": {
+          "type": "uri",
+          "value": "http://fr.wikipedia.org/wiki/Pic_d'Anie"
+        }
+      },
+      {
+        "nom": {
+          "type": "literal",
+          "xml:lang": "fr",
+          "value": "Okabe"
+        },
+        "comment": {
+          "type": "literal",
+          "xml:lang": "fr",
+          "value": "Okabe ou Occabe, 1 456 m d'altitude, est un mont du Pays basque fran\u00E7ais (Basse-Navarre)."
+        },
+        "altitude": {
+          "type": "typed-literal",
+          "datatype": "http://www.w3.org/2001/XMLSchema#integer",
+          "value": "1456"
+        },
+        "latitude": {
+          "type": "typed-literal",
+          "datatype": "http://www.w3.org/2001/XMLSchema#double",
+          "value": "43.0344"
+        },
+        "longitude": {
+          "type": "typed-literal",
+          "datatype": "http://www.w3.org/2001/XMLSchema#double",
+          "value": "-1.10694"
+        },
+        "thumbnail": {
+          "type": "uri",
+          "value": "http://commons.wikimedia.org/wiki/Special:FilePath/Harrespil_Okabe.jpg?width=300"
+        },
+        "wiki": {
+          "type": "uri",
+          "value": "http://fr.wikipedia.org/wiki/Okabe"
+        }
+      },
+      {
+        "nom": {
+          "type": "literal",
+          "xml:lang": "fr",
+          "value": "Mont Ba\u00EFgura"
+        },
+        "comment": {
+          "type": "literal",
+          "xml:lang": "fr",
+          "value": "Le Ba\u00EFgura, mont Baygoura ou Baighoura (897 m) est un mont du Pays basque fran\u00E7ais. Des \u00E9metteurs hertziens sont implant\u00E9s \u00E0 son sommet.\u2191 Philippe Veyrin, Les Basques de Labourd, de Soule et de Basse Navarre : leur histoire et leurs traditions, Pau, Cairn,\u200E 2012 (1re \u00E9d. 1947), 347 p. (ISBN 9782350682617 et 2350682617, OCLC 826784280), p. 24"
+        },
+        "altitude": {
+          "type": "typed-literal",
+          "datatype": "http://www.w3.org/2001/XMLSchema#integer",
+          "value": "897"
+        },
+        "latitude": {
+          "type": "typed-literal",
+          "datatype": "http://www.w3.org/2001/XMLSchema#double",
+          "value": "43.2908"
+        },
+        "longitude": {
+          "type": "typed-literal",
+          "datatype": "http://www.w3.org/2001/XMLSchema#double",
+          "value": "-1.29278"
+        },
+        "thumbnail": {
+          "type": "uri",
+          "value": "http://commons.wikimedia.org/wiki/Special:FilePath/Baigura_Paragliding.jpg?width=300"
+        },
+        "wiki": {
+          "type": "uri",
+          "value": "http://fr.wikipedia.org/wiki/Mont_Ba\u00EFgura"
+        }
+      },
+      {
+        "nom": {
+          "type": "literal",
+          "xml:lang": "fr",
+          "value": "Tuc de Biscarrague"
+        },
+        "comment": {
+          "type": "literal",
+          "xml:lang": "fr",
+          "value": "Le tuc de Biscarrague ou Biskaraya est une montagne des Pyr\u00E9n\u00E9es-Atlantiques (France), culminant \u00E0 91 ou 92 m\u00E8tres selon les sources.\u2191 Selon les cartes, l'IGN donne des noms et des altitudes diff\u00E9rentes au sommet."
+        },
+        "altitude": {
+          "type": "typed-literal",
+          "datatype": "http://www.w3.org/2001/XMLSchema#integer",
+          "value": "91"
+        },
+        "latitude": {
+          "type": "typed-literal",
+          "datatype": "http://www.w3.org/2001/XMLSchema#double",
+          "value": "43.4831"
+        },
+        "longitude": {
+          "type": "typed-literal",
+          "datatype": "http://www.w3.org/2001/XMLSchema#double",
+          "value": "-1.31556"
+        },
+        "thumbnail": {
+          "type": "uri",
+          "value": "http://commons.wikimedia.org/wiki/Special:FilePath/Tuc_de_Biscarrague_Urt.JPG?width=300"
+        },
+        "wiki": {
+          "type": "uri",
+          "value": "http://fr.wikipedia.org/wiki/Tuc_de_Biscarrague"
+        }
+      },
+      {
+        "nom": {
+          "type": "literal",
+          "xml:lang": "fr",
+          "value": "Urkulu"
+        },
+        "comment": {
+          "type": "literal",
+          "xml:lang": "fr",
+          "value": "L'Urkulu ou Urculu est une montagne des Pyr\u00E9n\u00E9es culminant \u00E0 une altitude de 1 419 m\u00E8tres et situ\u00E9e sur la fronti\u00E8re franco-espagnole, entre Saint-Michel dans les Pyr\u00E9n\u00E9es-Atlantiques au nord et Orbaitzeta en Navarre au sud. \u00C0 proximit\u00E9 du sommet se situent les vestiges d'une tour ainsi que la borne fronti\u00E8re 206."
+        },
+        "altitude": {
+          "type": "typed-literal",
+          "datatype": "http://www.w3.org/2001/XMLSchema#integer",
+          "value": "1419"
+        },
+        "latitude": {
+          "type": "typed-literal",
+          "datatype": "http://www.w3.org/2001/XMLSchema#double",
+          "value": "43.0469"
+        },
+        "longitude": {
+          "type": "typed-literal",
+          "datatype": "http://www.w3.org/2001/XMLSchema#double",
+          "value": "-1.24056"
+        },
+        "thumbnail": {
+          "type": "uri",
+          "value": "http://commons.wikimedia.org/wiki/Special:FilePath/Urkuluko_Dorrea.JPG?width=300"
+        },
+        "wiki": {
+          "type": "uri",
+          "value": "http://fr.wikipedia.org/wiki/Urkulu"
         }
       },
       {
@@ -824,35 +614,245 @@
         "nom": {
           "type": "literal",
           "xml:lang": "fr",
-          "value": "Table des Trois Rois"
+          "value": "Grande aiguille d'Ansab\u00E8re"
         },
         "comment": {
           "type": "literal",
           "xml:lang": "fr",
-          "value": "La Table des Trois Rois, ou Mesa de los Tres Reyes en espagnol, ou Hiru Errege Mahaia en basque, ou Meseta d'os Tres Reis en aragonais, est le sommet le plus \u00E9lev\u00E9 de Navarre, d'une altitude de 2 421 m, et pr\u00E9sentant un d\u00E9nivel\u00E9 de 1 114 m.\u2191 1,0 et 1,1 Source : G\u00E9oportail avec carte IGN \u00E0 l'\u00E9chelle 1:25000"
+          "value": "La Grande Aiguille d'Ansab\u00E8re est situ\u00E9e dans les Pyr\u00E9n\u00E9es-Atlantiques, en vall\u00E9e d'Aspe dans la commune de Lescun. Elle est s\u00E9par\u00E9e du Grand Pic par une profonde br\u00E8che. L'aiguille d'Ansab\u00E8re est situ\u00E9e enti\u00E8rement en territoire fran\u00E7ais, \u00E0 quelques m\u00E8tres de la fronti\u00E8re franco-espagnole."
         },
         "altitude": {
           "type": "typed-literal",
           "datatype": "http://www.w3.org/2001/XMLSchema#integer",
-          "value": "2421"
+          "value": "2377"
         },
         "latitude": {
           "type": "typed-literal",
           "datatype": "http://www.w3.org/2001/XMLSchema#double",
-          "value": "42.9192"
+          "value": "42.9031"
         },
         "longitude": {
           "type": "typed-literal",
           "datatype": "http://www.w3.org/2001/XMLSchema#double",
-          "value": "-0.725556"
+          "value": "-0.731667"
         },
         "thumbnail": {
           "type": "uri",
-          "value": "http://commons.wikimedia.org/wiki/Special:FilePath/Pic_and_table_de_trois_rois.jpg?width=300"
+          "value": "http://commons.wikimedia.org/wiki/Special:FilePath/Cirque_de_Lescun_Aiguilles_d_Ansabere.jpg?width=300"
         },
         "wiki": {
           "type": "uri",
-          "value": "http://fr.wikipedia.org/wiki/Table_des_Trois_Rois"
+          "value": "http://fr.wikipedia.org/wiki/Grande_aiguille_d'Ansab\u00E8re"
+        }
+      },
+      {
+        "nom": {
+          "type": "literal",
+          "xml:lang": "fr",
+          "value": "Petit Gabizos"
+        },
+        "comment": {
+          "type": "literal",
+          "xml:lang": "fr",
+          "value": "Le Petit Gabizos ou pic de Gabizos est un sommet pyr\u00E9n\u00E9en situ\u00E9 enti\u00E8rement en France. S'\u00E9levant \u00E0 cheval sur les d\u00E9partements des Pyr\u00E9n\u00E9es-Atlantiques et des Hautes-Pyr\u00E9n\u00E9es, ce sommet, remarquable depuis la plaine du fait de son profil \u00E9lanc\u00E9, culmine \u00E0 2 639 m\u00E8tres d'altitude. Il domine le col du Soulor au nord, dans le val d'Azun."
+        },
+        "altitude": {
+          "type": "typed-literal",
+          "datatype": "http://www.w3.org/2001/XMLSchema#integer",
+          "value": "2639"
+        },
+        "latitude": {
+          "type": "typed-literal",
+          "datatype": "http://www.w3.org/2001/XMLSchema#double",
+          "value": "42.9392"
+        },
+        "longitude": {
+          "type": "typed-literal",
+          "datatype": "http://www.w3.org/2001/XMLSchema#double",
+          "value": "-0.279167"
+        },
+        "thumbnail": {
+          "type": "uri",
+          "value": "http://commons.wikimedia.org/wiki/Special:FilePath/Pn145x101.jpg?width=300"
+        },
+        "wiki": {
+          "type": "uri",
+          "value": "http://fr.wikipedia.org/wiki/Petit_Gabizos"
+        }
+      },
+      {
+        "nom": {
+          "type": "literal",
+          "xml:lang": "fr",
+          "value": "Iparla"
+        },
+        "comment": {
+          "type": "literal",
+          "xml:lang": "fr",
+          "value": "L'Iparla est un sommet des Pyr\u00E9n\u00E9es au Pays basque, sur la fronti\u00E8re franco-espagnole culminant \u00E0 1 044 m au-dessus de Bidarray, entre les Pyr\u00E9n\u00E9es-Atlantiques et la province de Navarre. C'est le premier sommet fran\u00E7ais de plus de 1 000 m\u00E8tres en venant de l'oc\u00E9an Atlantique.\u2191 1,0 et 1,1 Source : G\u00E9oportail avec carte IGN \u00E0 l'\u00E9chelle 1:25000"
+        },
+        "altitude": {
+          "type": "typed-literal",
+          "datatype": "http://www.w3.org/2001/XMLSchema#integer",
+          "value": "1044"
+        },
+        "latitude": {
+          "type": "typed-literal",
+          "datatype": "http://www.w3.org/2001/XMLSchema#double",
+          "value": "43.2283"
+        },
+        "longitude": {
+          "type": "typed-literal",
+          "datatype": "http://www.w3.org/2001/XMLSchema#double",
+          "value": "-1.37861"
+        },
+        "thumbnail": {
+          "type": "uri",
+          "value": "http://commons.wikimedia.org/wiki/Special:FilePath/Saint_Etienne_de_Ba\u00EFgorry_Iparla.jpg?width=300"
+        },
+        "wiki": {
+          "type": "uri",
+          "value": "http://fr.wikipedia.org/wiki/Iparla"
+        }
+      },
+      {
+        "nom": {
+          "type": "literal",
+          "xml:lang": "fr",
+          "value": "Pic du Midi d'Ossau"
+        },
+        "comment": {
+          "type": "literal",
+          "xml:lang": "fr",
+          "value": "Le pic du Midi d'Ossau, surnomm\u00E9 Jean-Pierre, est un sommet des Pyr\u00E9n\u00E9es fran\u00E7aises (Pyr\u00E9n\u00E9es-Atlantiques) dont la forme caract\u00E9ristique rappelle celle d'une dent."
+        },
+        "altitude": {
+          "type": "typed-literal",
+          "datatype": "http://www.w3.org/2001/XMLSchema#integer",
+          "value": "2884"
+        },
+        "latitude": {
+          "type": "typed-literal",
+          "datatype": "http://www.w3.org/2001/XMLSchema#double",
+          "value": "42.8431"
+        },
+        "longitude": {
+          "type": "typed-literal",
+          "datatype": "http://www.w3.org/2001/XMLSchema#double",
+          "value": "-0.438056"
+        },
+        "thumbnail": {
+          "type": "uri",
+          "value": "http://commons.wikimedia.org/wiki/Special:FilePath/Ossau.jpg?width=300"
+        },
+        "wiki": {
+          "type": "uri",
+          "value": "http://fr.wikipedia.org/wiki/Pic_du_Midi_d'Ossau"
+        }
+      },
+      {
+        "nom": {
+          "type": "literal",
+          "xml:lang": "fr",
+          "value": "Pic de Ger"
+        },
+        "comment": {
+          "type": "literal",
+          "xml:lang": "fr",
+          "value": "Le pic de Ger est un sommet pyr\u00E9n\u00E9en de la vall\u00E9e d'Ossau dans le d\u00E9partement des  Pyr\u00E9n\u00E9es-Atlantiques."
+        },
+        "altitude": {
+          "type": "typed-literal",
+          "datatype": "http://www.w3.org/2001/XMLSchema#integer",
+          "value": "2613"
+        },
+        "latitude": {
+          "type": "typed-literal",
+          "datatype": "http://www.w3.org/2001/XMLSchema#double",
+          "value": "42.9367"
+        },
+        "longitude": {
+          "type": "typed-literal",
+          "datatype": "http://www.w3.org/2001/XMLSchema#double",
+          "value": "-0.354167"
+        },
+        "thumbnail": {
+          "type": "uri",
+          "value": "http://commons.wikimedia.org/wiki/Special:FilePath/044_le_pic_du_ger.jpg?width=300"
+        },
+        "wiki": {
+          "type": "uri",
+          "value": "http://fr.wikipedia.org/wiki/Pic_de_Ger"
+        }
+      },
+      {
+        "nom": {
+          "type": "literal",
+          "xml:lang": "fr",
+          "value": "Abarratea"
+        },
+        "comment": {
+          "type": "literal",
+          "xml:lang": "fr",
+          "value": "L'Abarratea, prononc\u00E9 Abarratia /abaratija/, culminant \u00E0 342 m d'altitude, est un mont du Pays basque fran\u00E7ais situ\u00E9 entre les communes d'Ayherre et d'Isturits dans la province de Basse-Navarre."
+        },
+        "altitude": {
+          "type": "typed-literal",
+          "datatype": "http://www.w3.org/2001/XMLSchema#integer",
+          "value": "342"
+        },
+        "latitude": {
+          "type": "typed-literal",
+          "datatype": "http://www.w3.org/2001/XMLSchema#double",
+          "value": "43.3578"
+        },
+        "longitude": {
+          "type": "typed-literal",
+          "datatype": "http://www.w3.org/2001/XMLSchema#double",
+          "value": "-1.23306"
+        },
+        "thumbnail": {
+          "type": "uri",
+          "value": "http://commons.wikimedia.org/wiki/Special:FilePath/Abarratia.jpg?width=300"
+        },
+        "wiki": {
+          "type": "uri",
+          "value": "http://fr.wikipedia.org/wiki/Abarratea"
+        }
+      },
+      {
+        "nom": {
+          "type": "literal",
+          "xml:lang": "fr",
+          "value": "Pic d'Arriel"
+        },
+        "comment": {
+          "type": "literal",
+          "xml:lang": "fr",
+          "value": "Le pic d'Arriel est un sommet des Pyr\u00E9n\u00E9es situ\u00E9 sur la fronti\u00E8re franco-espagnole et la ligne de partage des eaux.\u2191 IGN Top 25 1647 OT Vignemale - Ossau"
+        },
+        "altitude": {
+          "type": "typed-literal",
+          "datatype": "http://www.w3.org/2001/XMLSchema#integer",
+          "value": "2824"
+        },
+        "latitude": {
+          "type": "typed-literal",
+          "datatype": "http://www.w3.org/2001/XMLSchema#double",
+          "value": "42.8344"
+        },
+        "longitude": {
+          "type": "typed-literal",
+          "datatype": "http://www.w3.org/2001/XMLSchema#double",
+          "value": "-0.331111"
+        },
+        "thumbnail": {
+          "type": "uri",
+          "value": "http://commons.wikimedia.org/wiki/Special:FilePath/Arriel.jpg?width=300"
+        },
+        "wiki": {
+          "type": "uri",
+          "value": "http://fr.wikipedia.org/wiki/Pic_d'Arriel"
         }
       }
     ]

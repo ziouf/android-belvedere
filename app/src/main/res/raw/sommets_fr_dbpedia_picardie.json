@@ -19,41 +19,6 @@
         "nom": {
           "type": "literal",
           "xml:lang": "fr",
-          "value": "Mont Ganelon"
-        },
-        "comment": {
-          "type": "literal",
-          "xml:lang": "fr",
-          "value": "Le mont Ganelon, situ\u00E9 dans le d\u00E9partement fran\u00E7ais de l'Oise, couvre une superficie de 537 ha et culmine \u00E0 155 m\u00E8tres d'altitude."
-        },
-        "altitude": {
-          "type": "typed-literal",
-          "datatype": "http://www.w3.org/2001/XMLSchema#integer",
-          "value": "155"
-        },
-        "latitude": {
-          "type": "typed-literal",
-          "datatype": "http://www.w3.org/2001/XMLSchema#double",
-          "value": "49.4581"
-        },
-        "longitude": {
-          "type": "typed-literal",
-          "datatype": "http://www.w3.org/2001/XMLSchema#double",
-          "value": "2.83778"
-        },
-        "thumbnail": {
-          "type": "uri",
-          "value": "http://commons.wikimedia.org/wiki/Special:FilePath/Mont_Ganelon.JPG?width=300"
-        },
-        "wiki": {
-          "type": "uri",
-          "value": "http://fr.wikipedia.org/wiki/Mont_Ganelon"
-        }
-      },
-      {
-        "nom": {
-          "type": "literal",
-          "xml:lang": "fr",
           "value": "Buttes de Rosne"
         },
         "comment": {
@@ -83,6 +48,41 @@
         "wiki": {
           "type": "uri",
           "value": "http://fr.wikipedia.org/wiki/Buttes_de_Rosne"
+        }
+      },
+      {
+        "nom": {
+          "type": "literal",
+          "xml:lang": "fr",
+          "value": "Mont Ganelon"
+        },
+        "comment": {
+          "type": "literal",
+          "xml:lang": "fr",
+          "value": "Le mont Ganelon, situ\u00E9 dans le d\u00E9partement fran\u00E7ais de l'Oise, couvre une superficie de 537 ha et culmine \u00E0 155 m\u00E8tres d'altitude."
+        },
+        "altitude": {
+          "type": "typed-literal",
+          "datatype": "http://www.w3.org/2001/XMLSchema#integer",
+          "value": "155"
+        },
+        "latitude": {
+          "type": "typed-literal",
+          "datatype": "http://www.w3.org/2001/XMLSchema#double",
+          "value": "49.4581"
+        },
+        "longitude": {
+          "type": "typed-literal",
+          "datatype": "http://www.w3.org/2001/XMLSchema#double",
+          "value": "2.83778"
+        },
+        "thumbnail": {
+          "type": "uri",
+          "value": "http://commons.wikimedia.org/wiki/Special:FilePath/Mont_Ganelon.JPG?width=300"
+        },
+        "wiki": {
+          "type": "uri",
+          "value": "http://fr.wikipedia.org/wiki/Mont_Ganelon"
         }
       }
     ]

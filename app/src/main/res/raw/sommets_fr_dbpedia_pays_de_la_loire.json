@@ -54,41 +54,6 @@
         "nom": {
           "type": "literal",
           "xml:lang": "fr",
-          "value": "Montaigu (Mayenne)"
-        },
-        "comment": {
-          "type": "literal",
-          "xml:lang": "fr",
-          "value": "Situ\u00E9 dans le d\u00E9partement de la Mayenne \u00E0 Hambers, le Montaigu est une butte r\u00E9guli\u00E8rement arrondie, avec chapelle au sommet (291 m d'altitude), qu'on aper\u00E7oit non seulement du Maine, mais de la for\u00EAt d'Andaine en Normandie, des collines bretonnes vers Vitr\u00E9 et de toutes les altitudes de 100 m\u00E8tres dans le bassin de la Mayenne, en Anjou."
-        },
-        "altitude": {
-          "type": "typed-literal",
-          "datatype": "http://www.w3.org/2001/XMLSchema#integer",
-          "value": "291"
-        },
-        "latitude": {
-          "type": "typed-literal",
-          "datatype": "http://www.w3.org/2001/XMLSchema#double",
-          "value": "48.2356"
-        },
-        "longitude": {
-          "type": "typed-literal",
-          "datatype": "http://www.w3.org/2001/XMLSchema#double",
-          "value": "-0.4025"
-        },
-        "thumbnail": {
-          "type": "uri",
-          "value": "http://commons.wikimedia.org/wiki/Special:FilePath/Panorama_Montaigu.JPG?width=300"
-        },
-        "wiki": {
-          "type": "uri",
-          "value": "http://fr.wikipedia.org/wiki/Montaigu_(Mayenne)"
-        }
-      },
-      {
-        "nom": {
-          "type": "literal",
-          "xml:lang": "fr",
           "value": "Mont des Alouettes"
         },
         "comment": {
@@ -153,6 +118,41 @@
         "wiki": {
           "type": "uri",
           "value": "http://fr.wikipedia.org/wiki/Mont_des_Avaloirs"
+        }
+      },
+      {
+        "nom": {
+          "type": "literal",
+          "xml:lang": "fr",
+          "value": "Montaigu (Mayenne)"
+        },
+        "comment": {
+          "type": "literal",
+          "xml:lang": "fr",
+          "value": "Situ\u00E9 dans le d\u00E9partement de la Mayenne \u00E0 Hambers, le Montaigu est une butte r\u00E9guli\u00E8rement arrondie, avec chapelle au sommet (291 m d'altitude), qu'on aper\u00E7oit non seulement du Maine, mais de la for\u00EAt d'Andaine en Normandie, des collines bretonnes vers Vitr\u00E9 et de toutes les altitudes de 100 m\u00E8tres dans le bassin de la Mayenne, en Anjou."
+        },
+        "altitude": {
+          "type": "typed-literal",
+          "datatype": "http://www.w3.org/2001/XMLSchema#integer",
+          "value": "291"
+        },
+        "latitude": {
+          "type": "typed-literal",
+          "datatype": "http://www.w3.org/2001/XMLSchema#double",
+          "value": "48.2356"
+        },
+        "longitude": {
+          "type": "typed-literal",
+          "datatype": "http://www.w3.org/2001/XMLSchema#double",
+          "value": "-0.4025"
+        },
+        "thumbnail": {
+          "type": "uri",
+          "value": "http://commons.wikimedia.org/wiki/Special:FilePath/Panorama_Montaigu.JPG?width=300"
+        },
+        "wiki": {
+          "type": "uri",
+          "value": "http://fr.wikipedia.org/wiki/Montaigu_(Mayenne)"
         }
       },
       {

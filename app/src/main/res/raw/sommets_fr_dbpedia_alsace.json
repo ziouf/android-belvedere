@@ -19,181 +19,6 @@
         "nom": {
           "type": "literal",
           "xml:lang": "fr",
-          "value": "Le Tanet"
-        },
-        "comment": {
-          "type": "literal",
-          "xml:lang": "fr",
-          "value": "Le Tanet est une montagne de la cr\u00EAte vosgienne. Elle a donn\u00E9 son nom \u00E0 une petite station de ski accroch\u00E9e \u00E0 son flanc alsacien.\u2191 1,0 et 1,1 Cartes IGN disponibles sur G\u00E9oportail"
-        },
-        "altitude": {
-          "type": "typed-literal",
-          "datatype": "http://www.w3.org/2001/XMLSchema#integer",
-          "value": "1292"
-        },
-        "latitude": {
-          "type": "typed-literal",
-          "datatype": "http://www.w3.org/2001/XMLSchema#double",
-          "value": "48.0833"
-        },
-        "longitude": {
-          "type": "typed-literal",
-          "datatype": "http://www.w3.org/2001/XMLSchema#double",
-          "value": "7.05194"
-        },
-        "thumbnail": {
-          "type": "uri",
-          "value": "http://commons.wikimedia.org/wiki/Special:FilePath/LETANET.JPG?width=300"
-        },
-        "wiki": {
-          "type": "uri",
-          "value": "http://fr.wikipedia.org/wiki/Le_Tanet"
-        }
-      },
-      {
-        "nom": {
-          "type": "literal",
-          "xml:lang": "fr",
-          "value": "Reisberg"
-        },
-        "comment": {
-          "type": "literal",
-          "xml:lang": "fr",
-          "value": "Le Reisberg est une colline situ\u00E9e dans le d\u00E9partement du Bas-Rhin, au c\u0153ur des Vosges du Nord. Elle se situe sur la commune de Niederbronn-les-Bains. C'est sur cette colline que se trouve le ch\u00E2teau de la Wasenburg.Portail de l\u2019Alsace Portail de l\u2019Alsace Portail de la montagne Portail de la montagne"
-        },
-        "altitude": {
-          "type": "typed-literal",
-          "datatype": "http://www.w3.org/2001/XMLSchema#integer",
-          "value": "481"
-        },
-        "latitude": {
-          "type": "typed-literal",
-          "datatype": "http://www.w3.org/2001/XMLSchema#double",
-          "value": "48.9572"
-        },
-        "longitude": {
-          "type": "typed-literal",
-          "datatype": "http://www.w3.org/2001/XMLSchema#double",
-          "value": "7.60944"
-        },
-        "thumbnail": {
-          "type": "uri",
-          "value": "http://commons.wikimedia.org/wiki/Special:FilePath/Reisberg.jpg?width=300"
-        },
-        "wiki": {
-          "type": "uri",
-          "value": "http://fr.wikipedia.org/wiki/Reisberg"
-        }
-      },
-      {
-        "nom": {
-          "type": "literal",
-          "xml:lang": "fr",
-          "value": "Kastelberg"
-        },
-        "comment": {
-          "type": "literal",
-          "xml:lang": "fr",
-          "value": "Le Kastelberg est le quatri\u00E8me plus haut sommet du massif des Vosges avec 1 350 m\u00E8tres d'altitude formant la limite r\u00E9gionale entre l'Alsace (Haut-Rhin) et la Lorraine (Vosges)."
-        },
-        "altitude": {
-          "type": "typed-literal",
-          "datatype": "http://www.w3.org/2001/XMLSchema#integer",
-          "value": "1350"
-        },
-        "latitude": {
-          "type": "typed-literal",
-          "datatype": "http://www.w3.org/2001/XMLSchema#double",
-          "value": "48.0211"
-        },
-        "longitude": {
-          "type": "typed-literal",
-          "datatype": "http://www.w3.org/2001/XMLSchema#double",
-          "value": "7.00139"
-        },
-        "thumbnail": {
-          "type": "uri",
-          "value": "http://commons.wikimedia.org/wiki/Special:FilePath/Kastelberg_sud.jpg?width=300"
-        },
-        "wiki": {
-          "type": "uri",
-          "value": "http://fr.wikipedia.org/wiki/Kastelberg"
-        }
-      },
-      {
-        "nom": {
-          "type": "literal",
-          "xml:lang": "fr",
-          "value": "Brotschberg"
-        },
-        "comment": {
-          "type": "literal",
-          "xml:lang": "fr",
-          "value": "Le Brotschberg est un sommet vosgien qui culmine \u00E0 542 m\u00E8tres d'altitude. En son sommet fut \u00E9rig\u00E9 la tour du Brotsch qui offre une vue sur la plaine d'Alsace. En contrebas se trouve le village de Haegen."
-        },
-        "altitude": {
-          "type": "typed-literal",
-          "datatype": "http://www.w3.org/2001/XMLSchema#integer",
-          "value": "542"
-        },
-        "latitude": {
-          "type": "typed-literal",
-          "datatype": "http://www.w3.org/2001/XMLSchema#double",
-          "value": "48.7067"
-        },
-        "longitude": {
-          "type": "typed-literal",
-          "datatype": "http://www.w3.org/2001/XMLSchema#double",
-          "value": "7.32472"
-        },
-        "thumbnail": {
-          "type": "uri",
-          "value": "http://commons.wikimedia.org/wiki/Special:FilePath/Brotschberg_et_Tour_du_Brotsch.JPG?width=300"
-        },
-        "wiki": {
-          "type": "uri",
-          "value": "http://fr.wikipedia.org/wiki/Brotschberg"
-        }
-      },
-      {
-        "nom": {
-          "type": "literal",
-          "xml:lang": "fr",
-          "value": "Hartmannswillerkopf"
-        },
-        "comment": {
-          "type": "literal",
-          "xml:lang": "fr",
-          "value": "Le Hartmannswillerkopf rebaptis\u00E9 Vieil-Armand apr\u00E8s la Premi\u00E8re Guerre mondiale (nomm\u00E9 l'Hartmann, la \u00AB mangeuse d'hommes \u00BB ou la \u00AB montagne de la Mort \u00BB par les Poilus), est un \u00E9peron rocheux pyramidal, dans le massif des Vosges, surplombant de ses 956 m\u00E8tres la plaine d\u2019Alsace du Haut-Rhin.Un monument national y est \u00E9rig\u00E9 en souvenir des combats qui s'y d\u00E9roul\u00E8rent durant le premier conflit mondial, en 1915 surtout."
-        },
-        "altitude": {
-          "type": "typed-literal",
-          "datatype": "http://www.w3.org/2001/XMLSchema#integer",
-          "value": "956"
-        },
-        "latitude": {
-          "type": "typed-literal",
-          "datatype": "http://www.w3.org/2001/XMLSchema#double",
-          "value": "47.8611"
-        },
-        "longitude": {
-          "type": "typed-literal",
-          "datatype": "http://www.w3.org/2001/XMLSchema#double",
-          "value": "7.16111"
-        },
-        "thumbnail": {
-          "type": "uri",
-          "value": "http://commons.wikimedia.org/wiki/Special:FilePath/Vieil_Armand.jpg?width=300"
-        },
-        "wiki": {
-          "type": "uri",
-          "value": "http://fr.wikipedia.org/wiki/Hartmannswillerkopf"
-        }
-      },
-      {
-        "nom": {
-          "type": "literal",
-          "xml:lang": "fr",
           "value": "Climont"
         },
         "comment": {
@@ -223,776 +48,6 @@
         "wiki": {
           "type": "uri",
           "value": "http://fr.wikipedia.org/wiki/Climont"
-        }
-      },
-      {
-        "nom": {
-          "type": "literal",
-          "xml:lang": "fr",
-          "value": "Mont Sainte-Odile"
-        },
-        "comment": {
-          "type": "literal",
-          "xml:lang": "fr",
-          "value": "Le mont Sainte-Odile (Odilienberg en allemand) est un mont vosgien, situ\u00E9 dans le d\u00E9partement du Bas-Rhin, culminant \u00E0 764 m\u00E8tres d'altitude. Il est surmont\u00E9 par l'abbaye de Hohenbourg, couvent qui surplombe la plaine d'Alsace, fond\u00E9 par sainte Odile, patronne de l'Alsace, fille du duc d'Etichon. Haut lieu de la culture alsacienne, ce couvent est un site de p\u00E8lerinage tr\u00E8s fr\u00E9quent\u00E9 (1 300 000 visiteurs par an). Par temps clair, la vue s'\u00E9tend jusqu'\u00E0 la For\u00EAt-Noire."
-        },
-        "altitude": {
-          "type": "typed-literal",
-          "datatype": "http://www.w3.org/2001/XMLSchema#integer",
-          "value": "764"
-        },
-        "latitude": {
-          "type": "typed-literal",
-          "datatype": "http://www.w3.org/2001/XMLSchema#double",
-          "value": "48.4369"
-        },
-        "longitude": {
-          "type": "typed-literal",
-          "datatype": "http://www.w3.org/2001/XMLSchema#double",
-          "value": "7.40333"
-        },
-        "thumbnail": {
-          "type": "uri",
-          "value": "http://commons.wikimedia.org/wiki/Special:FilePath/Mont_Sainte-Odile_BW_6.JPG?width=300"
-        },
-        "wiki": {
-          "type": "uri",
-          "value": "http://fr.wikipedia.org/wiki/Mont_Sainte-Odile"
-        }
-      },
-      {
-        "nom": {
-          "type": "literal",
-          "xml:lang": "fr",
-          "value": "Spitzkoepfe"
-        },
-        "comment": {
-          "type": "literal",
-          "xml:lang": "fr",
-          "value": "Les Spitzkoepfe sont une ar\u00EAte rocheuse du massif des Vosges dont la partie sommitale culmine \u00E0 1 290 m\u00E8tres d'altitude."
-        },
-        "altitude": {
-          "type": "typed-literal",
-          "datatype": "http://www.w3.org/2001/XMLSchema#integer",
-          "value": "1290"
-        },
-        "latitude": {
-          "type": "typed-literal",
-          "datatype": "http://www.w3.org/2001/XMLSchema#double",
-          "value": "48.0317"
-        },
-        "longitude": {
-          "type": "typed-literal",
-          "datatype": "http://www.w3.org/2001/XMLSchema#double",
-          "value": "7.01444"
-        },
-        "thumbnail": {
-          "type": "uri",
-          "value": "http://commons.wikimedia.org/wiki/Special:FilePath/Spitzkopf.jpg?width=300"
-        },
-        "wiki": {
-          "type": "uri",
-          "value": "http://fr.wikipedia.org/wiki/Spitzkoepfe"
-        }
-      },
-      {
-        "nom": {
-          "type": "literal",
-          "xml:lang": "fr",
-          "value": "Taennchel"
-        },
-        "comment": {
-          "type": "literal",
-          "xml:lang": "fr",
-          "value": "Le Taennchel est un des sommets du massif des Vosges culminant \u00E0 988 m\u00E8tres. Le Taennchel s'\u00E9l\u00E8ve dans la partie est de la France, dans le d\u00E9partement du Haut-Rhin (r\u00E9gion Alsace), \u00E0 mi-chemin entre Strasbourg au nord et Mulhouse au sud, soit \u00E0 une soixantaine de kilom\u00E8tres de chacune des deux villes.Il existe peu d'endroits aussi \u00E9nigmatiques dans le massif que cette cr\u00EAte de six kilom\u00E8tres de longueur."
-        },
-        "altitude": {
-          "type": "typed-literal",
-          "datatype": "http://www.w3.org/2001/XMLSchema#integer",
-          "value": "988"
-        },
-        "latitude": {
-          "type": "typed-literal",
-          "datatype": "http://www.w3.org/2001/XMLSchema#double",
-          "value": "48.2347"
-        },
-        "longitude": {
-          "type": "typed-literal",
-          "datatype": "http://www.w3.org/2001/XMLSchema#double",
-          "value": "7.25889"
-        },
-        "thumbnail": {
-          "type": "uri",
-          "value": "http://commons.wikimedia.org/wiki/Special:FilePath/Rombach-le-Franc_301.JPG?width=300"
-        },
-        "wiki": {
-          "type": "uri",
-          "value": "http://fr.wikipedia.org/wiki/Taennchel"
-        }
-      },
-      {
-        "nom": {
-          "type": "literal",
-          "xml:lang": "fr",
-          "value": "Mohnenberg"
-        },
-        "comment": {
-          "type": "literal",
-          "xml:lang": "fr",
-          "value": "Le Mohnenberg est un sommet des Vosges du Nord en Alsace situ\u00E9 \u00E0 proximit\u00E9 de la fronti\u00E8re allemande."
-        },
-        "altitude": {
-          "type": "typed-literal",
-          "datatype": "http://www.w3.org/2001/XMLSchema#integer",
-          "value": "547"
-        },
-        "latitude": {
-          "type": "typed-literal",
-          "datatype": "http://www.w3.org/2001/XMLSchema#double",
-          "value": "49.0178"
-        },
-        "longitude": {
-          "type": "typed-literal",
-          "datatype": "http://www.w3.org/2001/XMLSchema#double",
-          "value": "7.71361"
-        },
-        "thumbnail": {
-          "type": "uri",
-          "value": "http://commons.wikimedia.org/wiki/Special:FilePath/Mohnenberg2.jpg?width=300"
-        },
-        "wiki": {
-          "type": "uri",
-          "value": "http://fr.wikipedia.org/wiki/Mohnenberg"
-        }
-      },
-      {
-        "nom": {
-          "type": "literal",
-          "xml:lang": "fr",
-          "value": "Hohnack"
-        },
-        "comment": {
-          "type": "literal",
-          "xml:lang": "fr",
-          "value": "Le Hohnack est une montagne situ\u00E9e dans les Vosges alsaciennes, dans le d\u00E9partement fran\u00E7ais du Haut-Rhin. Elle est constitu\u00E9e de deux sommets : le Petit Hohnack culminant \u00E0 927 m d'altitude et le le Grand Hohnack culminant \u00E0 982 m. On y trouve des roches \u00E0 cupules et les ruines du ch\u00E2teau m\u00E9di\u00E9val du Petit Hohnack (ou Hohenack), plus haut ch\u00E2teau d'Alsace, situ\u00E9 \u00E0 940 m d'altitude.Actuellement ces sommets sont tr\u00E8s arpent\u00E9s par les randonneurs durant leurs parcours des balades en Alsace."
-        },
-        "altitude": {
-          "type": "typed-literal",
-          "datatype": "http://www.w3.org/2001/XMLSchema#integer",
-          "value": "982"
-        },
-        "latitude": {
-          "type": "typed-literal",
-          "datatype": "http://www.w3.org/2001/XMLSchema#double",
-          "value": "48.0864"
-        },
-        "longitude": {
-          "type": "typed-literal",
-          "datatype": "http://www.w3.org/2001/XMLSchema#double",
-          "value": "7.19028"
-        },
-        "thumbnail": {
-          "type": "uri",
-          "value": "http://commons.wikimedia.org/wiki/Special:FilePath/Hohnack3.jpg?width=300"
-        },
-        "wiki": {
-          "type": "uri",
-          "value": "http://fr.wikipedia.org/wiki/Hohnack"
-        }
-      },
-      {
-        "nom": {
-          "type": "literal",
-          "xml:lang": "fr",
-          "value": "Jungfrauenkopf"
-        },
-        "comment": {
-          "type": "literal",
-          "xml:lang": "fr",
-          "value": "Le Jungfrauenkopf est un sommet du massif des Vosges culminant \u00E0 1 268 m\u00E8tres d'altitude, situ\u00E9 sur la route des Cr\u00EAtes sur le site du Markstein."
-        },
-        "altitude": {
-          "type": "typed-literal",
-          "datatype": "http://www.w3.org/2001/XMLSchema#integer",
-          "value": "1268"
-        },
-        "latitude": {
-          "type": "typed-literal",
-          "datatype": "http://www.w3.org/2001/XMLSchema#double",
-          "value": "47.9261"
-        },
-        "longitude": {
-          "type": "typed-literal",
-          "datatype": "http://www.w3.org/2001/XMLSchema#double",
-          "value": "7.02444"
-        },
-        "thumbnail": {
-          "type": "uri",
-          "value": "http://commons.wikimedia.org/wiki/Special:FilePath/Markstein_2005.JPG?width=300"
-        },
-        "wiki": {
-          "type": "uri",
-          "value": "http://fr.wikipedia.org/wiki/Jungfrauenkopf"
-        }
-      },
-      {
-        "nom": {
-          "type": "literal",
-          "xml:lang": "fr",
-          "value": "Thannerhubel"
-        },
-        "comment": {
-          "type": "literal",
-          "xml:lang": "fr",
-          "value": "Le Jungfrauenkopf est un sommet du massif des Vosges culminant \u00E0 1 183 m\u00E8tres d'altitude, situ\u00E9 \u00E0 Thann."
-        },
-        "altitude": {
-          "type": "typed-literal",
-          "datatype": "http://www.w3.org/2001/XMLSchema#integer",
-          "value": "1183"
-        },
-        "latitude": {
-          "type": "typed-literal",
-          "datatype": "http://www.w3.org/2001/XMLSchema#double",
-          "value": "47.8244"
-        },
-        "longitude": {
-          "type": "typed-literal",
-          "datatype": "http://www.w3.org/2001/XMLSchema#double",
-          "value": "7.02556"
-        },
-        "thumbnail": {
-          "type": "uri",
-          "value": "http://commons.wikimedia.org/wiki/Special:FilePath/Thann_vue_depuis_le_Rangen.jpg?width=300"
-        },
-        "wiki": {
-          "type": "uri",
-          "value": "http://fr.wikipedia.org/wiki/Thannerhubel"
-        }
-      },
-      {
-        "nom": {
-          "type": "literal",
-          "xml:lang": "fr",
-          "value": "Wissgrut"
-        },
-        "comment": {
-          "type": "literal",
-          "xml:lang": "fr",
-          "value": "Le Wissgrut est un sommet du massif des Vosges culminant \u00E0 1 124 m\u00E8tres d'altitude."
-        },
-        "altitude": {
-          "type": "typed-literal",
-          "datatype": "http://www.w3.org/2001/XMLSchema#integer",
-          "value": "1124"
-        },
-        "latitude": {
-          "type": "typed-literal",
-          "datatype": "http://www.w3.org/2001/XMLSchema#double",
-          "value": "47.7928"
-        },
-        "longitude": {
-          "type": "typed-literal",
-          "datatype": "http://www.w3.org/2001/XMLSchema#double",
-          "value": "6.86167"
-        },
-        "thumbnail": {
-          "type": "uri",
-          "value": "http://commons.wikimedia.org/wiki/Special:FilePath/Wissgrutt_vu_du_Tremontkopf_juillet2011.JPG?width=300"
-        },
-        "wiki": {
-          "type": "uri",
-          "value": "http://fr.wikipedia.org/wiki/Wissgrut"
-        }
-      },
-      {
-        "nom": {
-          "type": "literal",
-          "xml:lang": "fr",
-          "value": "Marksteinkopf"
-        },
-        "comment": {
-          "type": "literal",
-          "xml:lang": "fr",
-          "value": "Le Marksteinkopf est un sommet du massif des Vosges culminant \u00E0 1 241 m\u00E8tres d'altitude."
-        },
-        "altitude": {
-          "type": "typed-literal",
-          "datatype": "http://www.w3.org/2001/XMLSchema#integer",
-          "value": "1241"
-        },
-        "latitude": {
-          "type": "typed-literal",
-          "datatype": "http://www.w3.org/2001/XMLSchema#double",
-          "value": "47.9178"
-        },
-        "longitude": {
-          "type": "typed-literal",
-          "datatype": "http://www.w3.org/2001/XMLSchema#double",
-          "value": "7.04417"
-        },
-        "thumbnail": {
-          "type": "uri",
-          "value": "http://commons.wikimedia.org/wiki/Special:FilePath/Markstein.Stork.jpg?width=300"
-        },
-        "wiki": {
-          "type": "uri",
-          "value": "http://fr.wikipedia.org/wiki/Marksteinkopf"
-        }
-      },
-      {
-        "nom": {
-          "type": "literal",
-          "xml:lang": "fr",
-          "value": "Rainkopf"
-        },
-        "comment": {
-          "type": "literal",
-          "xml:lang": "fr",
-          "value": "Le Rainkopf est un sommet du massif des Vosges situ\u00E9 quatre kilom\u00E8tres au sud du Hohneck. Cette montagne borde la route des Cr\u00EAtes et se caract\u00E9rise par un sommet arrondi dont le flanc est, abrupt et sauvage est un ancien cirque glaciaire, paradis de la flore alpestre et de la faune (chamois). Le sommet se situe exactement au point o\u00F9 la cha\u00EEne se scinde en deux : une branche en arc de cercle vers le sud-est culmine au Grand Ballon, l'autre vers le sud aboutit au Ballon d'Alsace."
-        },
-        "altitude": {
-          "type": "typed-literal",
-          "datatype": "http://www.w3.org/2001/XMLSchema#integer",
-          "value": "1305"
-        },
-        "latitude": {
-          "type": "typed-literal",
-          "datatype": "http://www.w3.org/2001/XMLSchema#double",
-          "value": "48.0097"
-        },
-        "longitude": {
-          "type": "typed-literal",
-          "datatype": "http://www.w3.org/2001/XMLSchema#double",
-          "value": "6.98278"
-        },
-        "thumbnail": {
-          "type": "uri",
-          "value": "http://commons.wikimedia.org/wiki/Special:FilePath/Rainkopf_versant_est.jpg?width=300"
-        },
-        "wiki": {
-          "type": "uri",
-          "value": "http://fr.wikipedia.org/wiki/Rainkopf"
-        }
-      },
-      {
-        "nom": {
-          "type": "literal",
-          "xml:lang": "fr",
-          "value": "Ungersberg"
-        },
-        "comment": {
-          "type": "literal",
-          "xml:lang": "fr",
-          "value": "Le Ungersberg est un sommet vosgien qui culmine \u00E0 901 m\u00E8tres d'altitude, \u00E0 l'ouest du village de Reichsfeld dans le Bas-Rhin. Le Club vosgien a \u00E9rig\u00E9 la tour H\u00E9ring en son sommet, offrant ainsi une large vue sur la plaine d'Alsace et les sommets avoisinants.\u2191 Carte IGN"
-        },
-        "altitude": {
-          "type": "typed-literal",
-          "datatype": "http://www.w3.org/2001/XMLSchema#integer",
-          "value": "901"
-        },
-        "latitude": {
-          "type": "typed-literal",
-          "datatype": "http://www.w3.org/2001/XMLSchema#double",
-          "value": "48.3628"
-        },
-        "longitude": {
-          "type": "typed-literal",
-          "datatype": "http://www.w3.org/2001/XMLSchema#double",
-          "value": "7.35861"
-        },
-        "thumbnail": {
-          "type": "uri",
-          "value": "http://commons.wikimedia.org/wiki/Special:FilePath/Ungersberg.jpg?width=300"
-        },
-        "wiki": {
-          "type": "uri",
-          "value": "http://fr.wikipedia.org/wiki/Ungersberg"
-        }
-      },
-      {
-        "nom": {
-          "type": "literal",
-          "xml:lang": "fr",
-          "value": "Rothenbachkopf"
-        },
-        "comment": {
-          "type": "literal",
-          "xml:lang": "fr",
-          "value": "Le Rothenbachkopf est un sommet du massif des Vosges situ\u00E9 \u00E0 cinq kilom\u00E8tres au sud du Hohneck, et \u00E0 une altitude de 1 316 m. La cr\u00EAte du Rothenbachkopf, situ\u00E9e entre Wildenstein et Mittlach dans le Haut-Rhin (Alsace), se prolonge jusqu'au Rainkopf au nord, \u00E0 la limite avec le d\u00E9partement des Vosges."
-        },
-        "altitude": {
-          "type": "typed-literal",
-          "datatype": "http://www.w3.org/2001/XMLSchema#integer",
-          "value": "1316"
-        },
-        "latitude": {
-          "type": "typed-literal",
-          "datatype": "http://www.w3.org/2001/XMLSchema#double",
-          "value": "48.0003"
-        },
-        "longitude": {
-          "type": "typed-literal",
-          "datatype": "http://www.w3.org/2001/XMLSchema#double",
-          "value": "6.98111"
-        },
-        "thumbnail": {
-          "type": "uri",
-          "value": "http://commons.wikimedia.org/wiki/Special:FilePath/Rothenbach.jpg?width=300"
-        },
-        "wiki": {
-          "type": "uri",
-          "value": "http://fr.wikipedia.org/wiki/Rothenbachkopf"
-        }
-      },
-      {
-        "nom": {
-          "type": "literal",
-          "xml:lang": "fr",
-          "value": "Petit Donon"
-        },
-        "comment": {
-          "type": "literal",
-          "xml:lang": "fr",
-          "value": "Le Petit Donon est, comme le Donon, un des sommets septentrionaux des Vosges gr\u00E8seuses. Il se trouve dans le Bas-Rhin, dans les for\u00EAts domaniales de la commune de Wisches \u00E0 7 km au nord-ouest du centre de celle-ci, et \u00E0 3,2 km de la commune de Grandfontaine.\u2191 1,0 et 1,1 IGN TOP 25 3616 ET"
-        },
-        "altitude": {
-          "type": "typed-literal",
-          "datatype": "http://www.w3.org/2001/XMLSchema#integer",
-          "value": "961"
-        },
-        "latitude": {
-          "type": "typed-literal",
-          "datatype": "http://www.w3.org/2001/XMLSchema#double",
-          "value": "48.5164"
-        },
-        "longitude": {
-          "type": "typed-literal",
-          "datatype": "http://www.w3.org/2001/XMLSchema#double",
-          "value": "7.17583"
-        },
-        "thumbnail": {
-          "type": "uri",
-          "value": "http://commons.wikimedia.org/wiki/Special:FilePath/Sommet_pdn.JPG?width=300"
-        },
-        "wiki": {
-          "type": "uri",
-          "value": "http://fr.wikipedia.org/wiki/Petit_Donon"
-        }
-      },
-      {
-        "nom": {
-          "type": "literal",
-          "xml:lang": "fr",
-          "value": "Haute Bers"
-        },
-        "comment": {
-          "type": "literal",
-          "xml:lang": "fr",
-          "value": "La Haute Bers est un sommet du massif des Vosges culminant \u00E0 1 252 m\u00E8tres d'altitude, \u00E0 la limite entre les d\u00E9partements du Haut-Rhin et des Vosges, en France. C'est aussi le nom d'un petit massif comprenant plusieurs sommets :  celui de la Haute Bers proprement dit ; la T\u00EAte des Perches ou des Bers (1 227 m\u00E8tres) ; la T\u00EAte des Charbonniers (1 138 m\u00E8tres) ; et le petit sommet de la Moyenne Bers (1 116 m\u00E8tres) ;ainsi que trois lacs : le lac des Perches ; les lacs des Grand et Petit Neuweiher."
-        },
-        "altitude": {
-          "type": "typed-literal",
-          "datatype": "http://www.w3.org/2001/XMLSchema#integer",
-          "value": "1252"
-        },
-        "latitude": {
-          "type": "typed-literal",
-          "datatype": "http://www.w3.org/2001/XMLSchema#double",
-          "value": "47.8461"
-        },
-        "longitude": {
-          "type": "typed-literal",
-          "datatype": "http://www.w3.org/2001/XMLSchema#double",
-          "value": "6.91194"
-        },
-        "thumbnail": {
-          "type": "uri",
-          "value": "http://commons.wikimedia.org/wiki/Special:FilePath/Massif_de_la_Haute_Bers_vu_depuis_le_Ballon_d'Alsace.jpg?width=300"
-        },
-        "wiki": {
-          "type": "uri",
-          "value": "http://fr.wikipedia.org/wiki/Haute_Bers"
-        }
-      },
-      {
-        "nom": {
-          "type": "literal",
-          "xml:lang": "fr",
-          "value": "Rossberg (France)"
-        },
-        "comment": {
-          "type": "literal",
-          "xml:lang": "fr",
-          "value": "Le Rossberg d\u00E9signe \u00E0 la fois un sommet culminant \u00E0 1 191 m d'altitude et un petit massif relativement bien individualis\u00E9, \u00E0 l'extr\u00E9mit\u00E9 sud-est du massif des Vosges, entre Thann et Masevaux dans le Haut-Rhin."
-        },
-        "altitude": {
-          "type": "typed-literal",
-          "datatype": "http://www.w3.org/2001/XMLSchema#integer",
-          "value": "1191"
-        },
-        "latitude": {
-          "type": "typed-literal",
-          "datatype": "http://www.w3.org/2001/XMLSchema#double",
-          "value": "47.8208"
-        },
-        "longitude": {
-          "type": "typed-literal",
-          "datatype": "http://www.w3.org/2001/XMLSchema#double",
-          "value": "7.00944"
-        },
-        "thumbnail": {
-          "type": "uri",
-          "value": "http://commons.wikimedia.org/wiki/Special:FilePath/Massif_du_Rossberg.jpg?width=300"
-        },
-        "wiki": {
-          "type": "uri",
-          "value": "http://fr.wikipedia.org/wiki/Rossberg_(France)"
-        }
-      },
-      {
-        "nom": {
-          "type": "literal",
-          "xml:lang": "fr",
-          "value": "Donon"
-        },
-        "comment": {
-          "type": "literal",
-          "xml:lang": "fr",
-          "value": "Le Donon se trouve dans les Vosges gr\u00E9seuses ; il est le plus septentrional des sommets majeurs du massif. Situ\u00E9 sur la commune de Grandfontaine, dans le d\u00E9partement fran\u00E7ais du Bas-Rhin, au nord-ouest de Schirmeck, il est riche d'une histoire humaine plusieurs fois mill\u00E9naire.Le Donon est accessible par la route du col du Donon, la RD 392."
-        },
-        "altitude": {
-          "type": "typed-literal",
-          "datatype": "http://www.w3.org/2001/XMLSchema#integer",
-          "value": "1009"
-        },
-        "latitude": {
-          "type": "typed-literal",
-          "datatype": "http://www.w3.org/2001/XMLSchema#double",
-          "value": "48.5133"
-        },
-        "longitude": {
-          "type": "typed-literal",
-          "datatype": "http://www.w3.org/2001/XMLSchema#double",
-          "value": "7.165"
-        },
-        "thumbnail": {
-          "type": "uri",
-          "value": "http://commons.wikimedia.org/wiki/Special:FilePath/TempleDonon.jpg?width=300"
-        },
-        "wiki": {
-          "type": "uri",
-          "value": "http://fr.wikipedia.org/wiki/Donon"
-        }
-      },
-      {
-        "nom": {
-          "type": "literal",
-          "xml:lang": "fr",
-          "value": "Grand Wintersberg"
-        },
-        "comment": {
-          "type": "literal",
-          "xml:lang": "fr",
-          "value": "Le Grand Wintersberg est avec ses 581 m\u00E8tres le point culminant du massif des Vosges du Nord. Il se situe sur la commune de Niederbronn-les-Bains, dans le d\u00E9partement du Bas-Rhin. Il est couronn\u00E9 d'une tour panoramique offrant aux randonneurs un beau panorama sur les doux moutonnements bois\u00E9s des Vosges du Nord et du proche Palatinat allemand. La plaine d'Alsace ainsi que la ligne bleut\u00E9e de la For\u00EAt-Noire (\u00E0 l'horizon) sont \u00E9galement visibles, par temps clair et d\u00E9gag\u00E9, vers l'est."
-        },
-        "altitude": {
-          "type": "typed-literal",
-          "datatype": "http://www.w3.org/2001/XMLSchema#integer",
-          "value": "581"
-        },
-        "latitude": {
-          "type": "typed-literal",
-          "datatype": "http://www.w3.org/2001/XMLSchema#double",
-          "value": "48.9786"
-        },
-        "longitude": {
-          "type": "typed-literal",
-          "datatype": "http://www.w3.org/2001/XMLSchema#double",
-          "value": "7.61472"
-        },
-        "thumbnail": {
-          "type": "uri",
-          "value": "http://commons.wikimedia.org/wiki/Special:FilePath/Tour-du-grand-wintersberg.JPG?width=300"
-        },
-        "wiki": {
-          "type": "uri",
-          "value": "http://fr.wikipedia.org/wiki/Grand_Wintersberg"
-        }
-      },
-      {
-        "nom": {
-          "type": "literal",
-          "xml:lang": "fr",
-          "value": "Br\u00E9zouard"
-        },
-        "comment": {
-          "type": "literal",
-          "xml:lang": "fr",
-          "value": "Le Br\u00E9zouard est un sommet du massif des Vosges qui fait partie du canton de Lapoutroie et qui est situ\u00E9 \u00E0 huit kilom\u00E8tres de Sainte-Marie-aux-Mines que l'on peut rejoindre par la route en prenant la petite route d'\u00C9chery."
-        },
-        "altitude": {
-          "type": "typed-literal",
-          "datatype": "http://www.w3.org/2001/XMLSchema#integer",
-          "value": "1229"
-        },
-        "latitude": {
-          "type": "typed-literal",
-          "datatype": "http://www.w3.org/2001/XMLSchema#double",
-          "value": "48.1894"
-        },
-        "longitude": {
-          "type": "typed-literal",
-          "datatype": "http://www.w3.org/2001/XMLSchema#double",
-          "value": "7.15"
-        },
-        "thumbnail": {
-          "type": "uri",
-          "value": "http://commons.wikimedia.org/wiki/Special:FilePath/Br\u00E9zouard_(13).jpg?width=300"
-        },
-        "wiki": {
-          "type": "uri",
-          "value": "http://fr.wikipedia.org/wiki/Br\u00E9zouard"
-        }
-      },
-      {
-        "nom": {
-          "type": "literal",
-          "xml:lang": "fr",
-          "value": "Chalmont"
-        },
-        "comment": {
-          "type": "literal",
-          "xml:lang": "fr",
-          "value": "Le Chalmont (en allemand :  Schalenberg ou Karlsberg) est une montagne qui se trouve au-dessus des villages de Li\u00E8pvre et de La Vancelle et sur le flanc gauche derri\u00E8re ce sommet se trouve le village de Rombach-le-Franc.La montagne du Chalmont fait partie du ban de Li\u00E8pvre.\u2191 Carte IGN"
-        },
-        "altitude": {
-          "type": "typed-literal",
-          "datatype": "http://www.w3.org/2001/XMLSchema#integer",
-          "value": "702"
-        },
-        "latitude": {
-          "type": "typed-literal",
-          "datatype": "http://www.w3.org/2001/XMLSchema#double",
-          "value": "48.2839"
-        },
-        "longitude": {
-          "type": "typed-literal",
-          "datatype": "http://www.w3.org/2001/XMLSchema#double",
-          "value": "7.28972"
-        },
-        "thumbnail": {
-          "type": "uri",
-          "value": "http://commons.wikimedia.org/wiki/Special:FilePath/Le_Chalmont_203.JPG?width=300"
-        },
-        "wiki": {
-          "type": "uri",
-          "value": "http://fr.wikipedia.org/wiki/Chalmont"
-        }
-      },
-      {
-        "nom": {
-          "type": "literal",
-          "xml:lang": "fr",
-          "value": "Gazon de Fa\u00EEte"
-        },
-        "comment": {
-          "type": "literal",
-          "xml:lang": "fr",
-          "value": "Le Gazon de Fa\u00EEte d\u00E9signe une montagne et son sommet granitique du massif des Vosges situ\u00E9 sur la ligne de cr\u00EAte entre le col du Bonhomme et le col de la Schlucht, au sud du Gazon du Faing et au nord du Tanet ou du Haut-Fourneau."
-        },
-        "altitude": {
-          "type": "typed-literal",
-          "datatype": "http://www.w3.org/2001/XMLSchema#integer",
-          "value": "1303"
-        },
-        "latitude": {
-          "type": "typed-literal",
-          "datatype": "http://www.w3.org/2001/XMLSchema#double",
-          "value": "48.1019"
-        },
-        "longitude": {
-          "type": "typed-literal",
-          "datatype": "http://www.w3.org/2001/XMLSchema#double",
-          "value": "7.06833"
-        },
-        "thumbnail": {
-          "type": "uri",
-          "value": "http://commons.wikimedia.org/wiki/Special:FilePath/Versant_alsacien_du_Gazon_de_Fa\u00EEte.jpg?width=300"
-        },
-        "wiki": {
-          "type": "uri",
-          "value": "http://fr.wikipedia.org/wiki/Gazon_de_Fa\u00EEte"
-        }
-      },
-      {
-        "nom": {
-          "type": "literal",
-          "xml:lang": "fr",
-          "value": "Haut de Falimont"
-        },
-        "comment": {
-          "type": "literal",
-          "xml:lang": "fr",
-          "value": "Le Haut de Falimont est un sommet du massif des Vosges culminant \u00E0 1 306 m\u00E8tres d\u2019altitude."
-        },
-        "altitude": {
-          "type": "typed-literal",
-          "datatype": "http://www.w3.org/2001/XMLSchema#integer",
-          "value": "1306"
-        },
-        "latitude": {
-          "type": "typed-literal",
-          "datatype": "http://www.w3.org/2001/XMLSchema#double",
-          "value": "48.0428"
-        },
-        "longitude": {
-          "type": "typed-literal",
-          "datatype": "http://www.w3.org/2001/XMLSchema#double",
-          "value": "7.00972"
-        },
-        "thumbnail": {
-          "type": "uri",
-          "value": "http://commons.wikimedia.org/wiki/Special:FilePath/Falimont.jpg?width=300"
-        },
-        "wiki": {
-          "type": "uri",
-          "value": "http://fr.wikipedia.org/wiki/Haut_de_Falimont"
-        }
-      },
-      {
-        "nom": {
-          "type": "literal",
-          "xml:lang": "fr",
-          "value": "Breitfirst"
-        },
-        "comment": {
-          "type": "literal",
-          "xml:lang": "fr",
-          "value": "Le Breitfirst est un sommet du massif des Vosges culminant \u00E0 1 280 m\u00E8tres d'altitude, situ\u00E9 sur le c\u00F4t\u00E9 est de la route des Cr\u00EAtes."
-        },
-        "altitude": {
-          "type": "typed-literal",
-          "datatype": "http://www.w3.org/2001/XMLSchema#integer",
-          "value": "1280"
-        },
-        "latitude": {
-          "type": "typed-literal",
-          "datatype": "http://www.w3.org/2001/XMLSchema#double",
-          "value": "47.9478"
-        },
-        "longitude": {
-          "type": "typed-literal",
-          "datatype": "http://www.w3.org/2001/XMLSchema#double",
-          "value": "7.02722"
-        },
-        "thumbnail": {
-          "type": "uri",
-          "value": "http://commons.wikimedia.org/wiki/Special:FilePath/Breitfirst_D27.JPG?width=300"
-        },
-        "wiki": {
-          "type": "uri",
-          "value": "http://fr.wikipedia.org/wiki/Breitfirst"
         }
       },
       {
@@ -1034,321 +89,6 @@
         "nom": {
           "type": "literal",
           "xml:lang": "fr",
-          "value": "Bastberg"
-        },
-        "comment": {
-          "type": "literal",
-          "xml:lang": "fr",
-          "value": "Le Bastberg (en fran\u00E7ais mont Saint-S\u00E9bastien), aussi appel\u00E9 Petit-Bastberg, est un sommet situ\u00E9 non loin du parc naturel r\u00E9gional des Vosges du Nord, sur la commune de Bouxwiller. Il culmine \u00E0 326 m\u00E8tres. Constitu\u00E9 de deux \u00E9l\u00E9ments, le Bastberg abrite une faune et une flore typique du fait de son origine g\u00E9ologique et de son orientation. L'\u00E9cosyst\u00E8me est fragile du fait des intrusions humaines et naturelles, et fait l'objet de mesures de conservation depuis 1989."
-        },
-        "altitude": {
-          "type": "typed-literal",
-          "datatype": "http://www.w3.org/2001/XMLSchema#integer",
-          "value": "326"
-        },
-        "latitude": {
-          "type": "typed-literal",
-          "datatype": "http://www.w3.org/2001/XMLSchema#double",
-          "value": "48.8117"
-        },
-        "longitude": {
-          "type": "typed-literal",
-          "datatype": "http://www.w3.org/2001/XMLSchema#double",
-          "value": "7.45111"
-        },
-        "thumbnail": {
-          "type": "uri",
-          "value": "http://commons.wikimedia.org/wiki/Special:FilePath/Alsace_Bastberg_sommet.jpg?width=300"
-        },
-        "wiki": {
-          "type": "uri",
-          "value": "http://fr.wikipedia.org/wiki/Bastberg"
-        }
-      },
-      {
-        "nom": {
-          "type": "literal",
-          "xml:lang": "fr",
-          "value": "Mont Saint-Michel (Bas-Rhin)"
-        },
-        "comment": {
-          "type": "literal",
-          "xml:lang": "fr",
-          "value": "Le mont Saint-Michel est un sommet situ\u00E9 dans le parc naturel r\u00E9gional des Vosges du Nord, sur la commune de Saint-Jean-Saverne. Il culmine \u00E0 437 m\u00E8tres.Ce lieu offre un panorama sur les villages environnants, et fait l'objet d'une occupation humaine depuis au moins le quatri\u00E8me mill\u00E9naire avant J.-C.\u2191 1,0 et 1,1 Cartes de l'IGN disponibles sur G\u00E9oportail"
-        },
-        "altitude": {
-          "type": "typed-literal",
-          "datatype": "http://www.w3.org/2001/XMLSchema#integer",
-          "value": "437"
-        },
-        "latitude": {
-          "type": "typed-literal",
-          "datatype": "http://www.w3.org/2001/XMLSchema#double",
-          "value": "48.7744"
-        },
-        "longitude": {
-          "type": "typed-literal",
-          "datatype": "http://www.w3.org/2001/XMLSchema#double",
-          "value": "7.3475"
-        },
-        "thumbnail": {
-          "type": "uri",
-          "value": "http://commons.wikimedia.org/wiki/Special:FilePath/Mont-St_Michel_St_Jean_vue_g\u00E9n\u00E9rale.JPG?width=300"
-        },
-        "wiki": {
-          "type": "uri",
-          "value": "http://fr.wikipedia.org/wiki/Mont_Saint-Michel_(Bas-Rhin)"
-        }
-      },
-      {
-        "nom": {
-          "type": "literal",
-          "xml:lang": "fr",
-          "value": "Grand Ventron"
-        },
-        "comment": {
-          "type": "literal",
-          "xml:lang": "fr",
-          "value": "Le Grand Ventron est un sommet du massif des Vosges partag\u00E9 entre Ventron et Cornimont du c\u00F4t\u00E9 lorrain et Kruth du c\u00F4t\u00E9 alsacien. Plus au sud de 500 m\u00E8tres se trouve le Petit Ventron qui culmine \u00E0 1 155 m\u00E8tres d'altitude.Le sommet est d\u00E9pourvu de v\u00E9g\u00E9tation. On voit parfaitement le trac\u00E9 de la route des Cr\u00EAtes par-del\u00E0 la vall\u00E9e de la Thur. Par beau temps froid, les Alpes suisses \u00E9mergent d'une mer de brume. La table d'orientation annonce le Cervin \u00E0 seulement 227 km \u00E0 vol d'oiseau."
-        },
-        "altitude": {
-          "type": "typed-literal",
-          "datatype": "http://www.w3.org/2001/XMLSchema#integer",
-          "value": "1204"
-        },
-        "latitude": {
-          "type": "typed-literal",
-          "datatype": "http://www.w3.org/2001/XMLSchema#double",
-          "value": "47.9594"
-        },
-        "longitude": {
-          "type": "typed-literal",
-          "datatype": "http://www.w3.org/2001/XMLSchema#double",
-          "value": "6.92556"
-        },
-        "thumbnail": {
-          "type": "uri",
-          "value": "http://commons.wikimedia.org/wiki/Special:FilePath/GRAND_VENTRON.JPG?width=300"
-        },
-        "wiki": {
-          "type": "uri",
-          "value": "http://fr.wikipedia.org/wiki/Grand_Ventron"
-        }
-      },
-      {
-        "nom": {
-          "type": "literal",
-          "xml:lang": "fr",
-          "value": "Batteriekopf"
-        },
-        "comment": {
-          "type": "literal",
-          "xml:lang": "fr",
-          "value": "Le Batteriekopf est un sommet du massif des Vosges culminant \u00E0 1 311 m\u00E8tres. Cette montagne borde la route des Cr\u00EAtes et est situ\u00E9e imm\u00E9diatement au sud du Rothenbachkopf, \u00E0 cheval sur les communes de Wildenstein et de Metzeral."
-        },
-        "altitude": {
-          "type": "typed-literal",
-          "datatype": "http://www.w3.org/2001/XMLSchema#integer",
-          "value": "1311"
-        },
-        "latitude": {
-          "type": "typed-literal",
-          "datatype": "http://www.w3.org/2001/XMLSchema#double",
-          "value": "47.9939"
-        },
-        "longitude": {
-          "type": "typed-literal",
-          "datatype": "http://www.w3.org/2001/XMLSchema#double",
-          "value": "6.98056"
-        },
-        "thumbnail": {
-          "type": "uri",
-          "value": "http://commons.wikimedia.org/wiki/Special:FilePath/Batteriekopf.jpg?width=300"
-        },
-        "wiki": {
-          "type": "uri",
-          "value": "http://fr.wikipedia.org/wiki/Batteriekopf"
-        }
-      },
-      {
-        "nom": {
-          "type": "literal",
-          "xml:lang": "fr",
-          "value": "Grand Ballon"
-        },
-        "comment": {
-          "type": "literal",
-          "xml:lang": "fr",
-          "value": "Le Grand Ballon (en alsacien : Grosser Belchen) est le point culminant du massif des Vosges, de la r\u00E9gion Alsace et du d\u00E9partement du Haut-Rhin. Il est situ\u00E9 \u00E0 25 km au nord-ouest de Mulhouse.Certains l'appellent encore  Ballon de Guebwiller, du nom de la ville la plus proche, situ\u00E9e \u00E0 8 km \u00E0 l'est, \u00E0 vol d'oiseau. Il s'\u00E9l\u00E8ve \u00E0 1 424 m\u00E8tres (1 423,7 m IGN)."
-        },
-        "altitude": {
-          "type": "typed-literal",
-          "datatype": "http://www.w3.org/2001/XMLSchema#integer",
-          "value": "1424"
-        },
-        "latitude": {
-          "type": "typed-literal",
-          "datatype": "http://www.w3.org/2001/XMLSchema#double",
-          "value": "47.9008"
-        },
-        "longitude": {
-          "type": "typed-literal",
-          "datatype": "http://www.w3.org/2001/XMLSchema#double",
-          "value": "7.09806"
-        },
-        "thumbnail": {
-          "type": "uri",
-          "value": "http://commons.wikimedia.org/wiki/Special:FilePath/Vosges_063.jpg?width=300"
-        },
-        "wiki": {
-          "type": "uri",
-          "value": "http://fr.wikipedia.org/wiki/Grand_Ballon"
-        }
-      },
-      {
-        "nom": {
-          "type": "literal",
-          "xml:lang": "fr",
-          "value": "Hohneck"
-        },
-        "comment": {
-          "type": "literal",
-          "xml:lang": "fr",
-          "value": "Le Hohneck, troisi\u00E8me sommet du massif des Vosges avec 1 363 m\u00E8tres d'altitude, domine la ligne de cr\u00EAtes qui s\u00E9pare l'Alsace de la Lorraine. Il constitue le point culminant de cette derni\u00E8re r\u00E9gion. En contrebas du sommet est am\u00E9nag\u00E9e la station de ski de La Bresse Hohneck. Un ballon voisin, situ\u00E9 \u00E0 1,5 kilom\u00E8tre \u00E0 l'est et culminant \u00E0 1 289 m\u00E8tres, est d\u00E9nomm\u00E9 Petit Hohneck.\u2191 1,0, 1,1 et 1,2 Cartes IGN disponibles sur G\u00E9oportail\u2191 [PDF] Tourisme durable en Lorraine, dossier de presse 2010"
-        },
-        "altitude": {
-          "type": "typed-literal",
-          "datatype": "http://www.w3.org/2001/XMLSchema#integer",
-          "value": "1363"
-        },
-        "latitude": {
-          "type": "typed-literal",
-          "datatype": "http://www.w3.org/2001/XMLSchema#double",
-          "value": "48.0375"
-        },
-        "longitude": {
-          "type": "typed-literal",
-          "datatype": "http://www.w3.org/2001/XMLSchema#double",
-          "value": "7.01639"
-        },
-        "thumbnail": {
-          "type": "uri",
-          "value": "http://commons.wikimedia.org/wiki/Special:FilePath/Hohneck.jpg?width=300"
-        },
-        "wiki": {
-          "type": "uri",
-          "value": "http://fr.wikipedia.org/wiki/Hohneck"
-        }
-      },
-      {
-        "nom": {
-          "type": "literal",
-          "xml:lang": "fr",
-          "value": "Klintzkopf"
-        },
-        "comment": {
-          "type": "literal",
-          "xml:lang": "fr",
-          "value": "Le Klintzkopf est le cinqui\u00E8me sommet des Vosges avec 1 330 m\u00E8tres d'altitude.Il fait partie d'une zone naturelle prot\u00E9g\u00E9e, faune et flore remarquable, dont l'acc\u00E8s est autoris\u00E9 du 1er juillet au 30 novembre. La montagne est le si\u00E8ge de la plus haute for\u00EAt d'Alsace et du massif des Vosges. Son acc\u00E8s est exclusivement p\u00E9destre depuis la route des Cr\u00EAtes."
-        },
-        "altitude": {
-          "type": "typed-literal",
-          "datatype": "http://www.w3.org/2001/XMLSchema#integer",
-          "value": "1330"
-        },
-        "latitude": {
-          "type": "typed-literal",
-          "datatype": "http://www.w3.org/2001/XMLSchema#double",
-          "value": "47.9494"
-        },
-        "longitude": {
-          "type": "typed-literal",
-          "datatype": "http://www.w3.org/2001/XMLSchema#double",
-          "value": "7.05611"
-        },
-        "thumbnail": {
-          "type": "uri",
-          "value": "http://commons.wikimedia.org/wiki/Special:FilePath/Klinskopf.jpg?width=300"
-        },
-        "wiki": {
-          "type": "uri",
-          "value": "http://fr.wikipedia.org/wiki/Klintzkopf"
-        }
-      },
-      {
-        "nom": {
-          "type": "literal",
-          "xml:lang": "fr",
-          "value": "Storkenkopf"
-        },
-        "comment": {
-          "type": "literal",
-          "xml:lang": "fr",
-          "value": "Le Storkenkopf (\u00AB t\u00EAte des cigognes \u00BB en allemand et alsacien) est le deuxi\u00E8me sommet des Vosges avec 1 366 m\u00E8tres d'altitude. Il se situe \u00E0 proximit\u00E9 du Grand Ballon. \u00C0 son pied se trouve la ferme du Haag \u00E0 1 250 m\u00E8tres d'altitude."
-        },
-        "altitude": {
-          "type": "typed-literal",
-          "datatype": "http://www.w3.org/2001/XMLSchema#integer",
-          "value": "1366"
-        },
-        "latitude": {
-          "type": "typed-literal",
-          "datatype": "http://www.w3.org/2001/XMLSchema#double",
-          "value": "47.9047"
-        },
-        "longitude": {
-          "type": "typed-literal",
-          "datatype": "http://www.w3.org/2001/XMLSchema#double",
-          "value": "7.08222"
-        },
-        "thumbnail": {
-          "type": "uri",
-          "value": "http://commons.wikimedia.org/wiki/Special:FilePath/Storkenkopf_02.jpg?width=300"
-        },
-        "wiki": {
-          "type": "uri",
-          "value": "http://fr.wikipedia.org/wiki/Storkenkopf"
-        }
-      },
-      {
-        "nom": {
-          "type": "literal",
-          "xml:lang": "fr",
-          "value": "Petit Ballon"
-        },
-        "comment": {
-          "type": "literal",
-          "xml:lang": "fr",
-          "value": "Le Petit Ballon (Kahler Wasen ou Kleiner Belchen en allemand) est un sommet secondaire du massif des Vosges situ\u00E9 dans le d\u00E9partement du Haut-Rhin (Alsace). Il culmine \u00E0 1 272 m\u00E8tres d'altitude. Son sommet donne un point de vue panoramique. On y trouve une ferme-auberge sur le versant Est (Strohberg) et une seconde sur le versant Ouest (Rothenbrunnen), une statue de la Vierge et une antenne-relais radio. Aucune route ne permet d'acc\u00E9der directement au sommet."
-        },
-        "altitude": {
-          "type": "typed-literal",
-          "datatype": "http://www.w3.org/2001/XMLSchema#integer",
-          "value": "1272"
-        },
-        "latitude": {
-          "type": "typed-literal",
-          "datatype": "http://www.w3.org/2001/XMLSchema#double",
-          "value": "47.9806"
-        },
-        "longitude": {
-          "type": "typed-literal",
-          "datatype": "http://www.w3.org/2001/XMLSchema#double",
-          "value": "7.12611"
-        },
-        "thumbnail": {
-          "type": "uri",
-          "value": "http://commons.wikimedia.org/wiki/Special:FilePath/Petit_Ballon_depuis_le_Hohneck.JPG?width=300"
-        },
-        "wiki": {
-          "type": "uri",
-          "value": "http://fr.wikipedia.org/wiki/Petit_Ballon"
-        }
-      },
-      {
-        "nom": {
-          "type": "literal",
-          "xml:lang": "fr",
           "value": "Champ du Feu"
         },
         "comment": {
@@ -1384,152 +124,82 @@
         "nom": {
           "type": "literal",
           "xml:lang": "fr",
-          "value": "Ballon d'Alsace"
+          "value": "Wissgrut"
         },
         "comment": {
           "type": "literal",
           "xml:lang": "fr",
-          "value": "Le ballon d\u2019Alsace (Els\u00E4sser Belchen en allemand) est un sommet situ\u00E9 dans la partie m\u00E9ridionale de la cha\u00EEne des Vosges, aux confins des r\u00E9gions d'Alsace, de Franche-Comt\u00E9 et de Lorraine."
+          "value": "Le Wissgrut est un sommet du massif des Vosges culminant \u00E0 1 124 m\u00E8tres d'altitude."
         },
         "altitude": {
           "type": "typed-literal",
           "datatype": "http://www.w3.org/2001/XMLSchema#integer",
-          "value": "1247"
+          "value": "1124"
         },
         "latitude": {
           "type": "typed-literal",
           "datatype": "http://www.w3.org/2001/XMLSchema#double",
-          "value": "47.8222"
+          "value": "47.7928"
         },
         "longitude": {
           "type": "typed-literal",
           "datatype": "http://www.w3.org/2001/XMLSchema#double",
-          "value": "6.84528"
+          "value": "6.86167"
         },
         "thumbnail": {
           "type": "uri",
-          "value": "http://commons.wikimedia.org/wiki/Special:FilePath/Sommetduballond'alsace.jpg?width=300"
+          "value": "http://commons.wikimedia.org/wiki/Special:FilePath/Wissgrutt_vu_du_Tremontkopf_juillet2011.JPG?width=300"
         },
         "wiki": {
           "type": "uri",
-          "value": "http://fr.wikipedia.org/wiki/Ballon_d'Alsace"
+          "value": "http://fr.wikipedia.org/wiki/Wissgrut"
         }
       },
       {
         "nom": {
           "type": "literal",
           "xml:lang": "fr",
-          "value": "Rocher du Coucou"
+          "value": "Heidenkopf"
         },
         "comment": {
           "type": "literal",
           "xml:lang": "fr",
-          "value": "Le rocher du Coucou fait partie du massif de l'Altenberg et est situ\u00E9 \u00E0 856 m\u00E8tres d'altitude sur le territoire de la commune de Neubois. C'est un sommet qui est visible de tr\u00E8s loin. Sur l'un des contreforts, \u00E0 proximit\u00E9 se trouve le ch\u00E2teau du Frankenbourg. Sur ce sommet on aper\u00E7oit un relais de t\u00E9l\u00E9vision et de radiodiffusion appartenant \u00E0 T\u00E9l\u00E9diffusion de France qui \u00AB arrose \u00BB la r\u00E9gion de S\u00E9lestat, le Val de Vill\u00E9 et le Val de Li\u00E8pvre."
+          "value": "Le Heidenkopf est un sommet vosgien qui culmine \u00E0 787 m\u00E8tres d'altitude, \u00E0 l'ouest du village de Klingenthal dans le Bas-Rhin. Le Club vosgien a \u00E9rig\u00E9 une tour (M\u00FCndel-turm) en son sommet qui offre une large vue sur la plaine d'Alsace et les sommets avoisinants.\u2191 Carte IGN"
         },
         "altitude": {
           "type": "typed-literal",
           "datatype": "http://www.w3.org/2001/XMLSchema#integer",
-          "value": "856"
+          "value": "787"
         },
         "latitude": {
           "type": "typed-literal",
           "datatype": "http://www.w3.org/2001/XMLSchema#double",
-          "value": "48.2953"
+          "value": "48.4694"
         },
         "longitude": {
           "type": "typed-literal",
           "datatype": "http://www.w3.org/2001/XMLSchema#double",
-          "value": "7.31278"
+          "value": "7.37083"
         },
         "thumbnail": {
           "type": "uri",
-          "value": "http://commons.wikimedia.org/wiki/Special:FilePath/Rocher_du_Coucou_026.JPG?width=300"
+          "value": "http://commons.wikimedia.org/wiki/Special:FilePath/France_Bas-Rhin_M\u00FCndel-Turm.jpg?width=300"
         },
         "wiki": {
           "type": "uri",
-          "value": "http://fr.wikipedia.org/wiki/Rocher_du_Coucou"
+          "value": "http://fr.wikipedia.org/wiki/Heidenkopf"
         }
       },
       {
         "nom": {
           "type": "literal",
           "xml:lang": "fr",
-          "value": "Molkenrain"
+          "value": "Petit Donon"
         },
         "comment": {
           "type": "literal",
           "xml:lang": "fr",
-          "value": "Le Molkenrain (1 125 m\u00E8tres) est un sommet secondaire des Vosges dans le Haut-Rhin situ\u00E9 au-dessus de Cernay. Une ferme auberge, un relais hertzien et un refuge sont pr\u00E9sents au sommet. Cette ferme a servi de cadre \u00E0 des sc\u00E8nes tourn\u00E9es en 1962 pour le film Jules et Jim de Fran\u00E7ois Truffaut."
-        },
-        "altitude": {
-          "type": "typed-literal",
-          "datatype": "http://www.w3.org/2001/XMLSchema#integer",
-          "value": "1125"
-        },
-        "latitude": {
-          "type": "typed-literal",
-          "datatype": "http://www.w3.org/2001/XMLSchema#double",
-          "value": "47.8539"
-        },
-        "longitude": {
-          "type": "typed-literal",
-          "datatype": "http://www.w3.org/2001/XMLSchema#double",
-          "value": "7.13"
-        },
-        "thumbnail": {
-          "type": "uri",
-          "value": "http://commons.wikimedia.org/wiki/Special:FilePath/Le_Molkenrain.JPG?width=300"
-        },
-        "wiki": {
-          "type": "uri",
-          "value": "http://fr.wikipedia.org/wiki/Molkenrain"
-        }
-      },
-      {
-        "nom": {
-          "type": "literal",
-          "xml:lang": "fr",
-          "value": "Gazon du Faing"
-        },
-        "comment": {
-          "type": "literal",
-          "xml:lang": "fr",
-          "value": "Le Gazon du Faing est un sommet granitique du massif des Vosges situ\u00E9 sur la ligne de cr\u00EAte entre le col du Bonhomme et le col de la Schlucht. Ce sommet presque plan aux abords arrondis qui compte parmi les dix plus hauts du massif, pr\u00E9sente un flanc assez abrupt du c\u00F4t\u00E9 alsacien, donnant naissance \u00E0 une auge glaciaire qui abrite le lac Noir 350 m\u00E8tres en contrebas."
-        },
-        "altitude": {
-          "type": "typed-literal",
-          "datatype": "http://www.w3.org/2001/XMLSchema#integer",
-          "value": "1306"
-        },
-        "latitude": {
-          "type": "typed-literal",
-          "datatype": "http://www.w3.org/2001/XMLSchema#double",
-          "value": "48.1139"
-        },
-        "longitude": {
-          "type": "typed-literal",
-          "datatype": "http://www.w3.org/2001/XMLSchema#double",
-          "value": "7.07944"
-        },
-        "thumbnail": {
-          "type": "uri",
-          "value": "http://commons.wikimedia.org/wiki/Special:FilePath/Hautes_chaumes_gazon_du_faing_vosges.jpg?width=300"
-        },
-        "wiki": {
-          "type": "uri",
-          "value": "http://fr.wikipedia.org/wiki/Gazon_du_Faing"
-        }
-      },
-      {
-        "nom": {
-          "type": "literal",
-          "xml:lang": "fr",
-          "value": "Schneeberg (Vosges)"
-        },
-        "comment": {
-          "type": "literal",
-          "xml:lang": "fr",
-          "value": "Le Schneeberg d\u00E9signe une montagne gr\u00E9seuse du massif des Vosges, la plus septentrionale des Vosges gr\u00E9seuses d\u00E9passant largement 800 m\u00E8tres d'altitude. Ce sommet en fin d'une longue ligne de cr\u00EAte r\u00E9sistante \u00E0 l'\u00E9rosion glaciaire et post-glaciaire en gr\u00E8s triasique est situ\u00E9 en Alsace dans le d\u00E9partement du Bas-Rhin, \u00E0 plus d'un kilom\u00E8tre \u00E0 l'est du vallon de Windsbourg formant la limite avec la Moselle."
+          "value": "Le Petit Donon est, comme le Donon, un des sommets septentrionaux des Vosges gr\u00E8seuses. Il se trouve dans le Bas-Rhin, dans les for\u00EAts domaniales de la commune de Wisches \u00E0 7 km au nord-ouest du centre de celle-ci, et \u00E0 3,2 km de la commune de Grandfontaine.\u2191 1,0 et 1,1 IGN TOP 25 3616 ET"
         },
         "altitude": {
           "type": "typed-literal",
@@ -1539,20 +209,90 @@
         "latitude": {
           "type": "typed-literal",
           "datatype": "http://www.w3.org/2001/XMLSchema#double",
-          "value": "48.6011"
+          "value": "48.5164"
         },
         "longitude": {
           "type": "typed-literal",
           "datatype": "http://www.w3.org/2001/XMLSchema#double",
-          "value": "7.28667"
+          "value": "7.17583"
         },
         "thumbnail": {
           "type": "uri",
-          "value": "http://commons.wikimedia.org/wiki/Special:FilePath/Schneeberg-vue_du_Himbeerfels.jpg?width=300"
+          "value": "http://commons.wikimedia.org/wiki/Special:FilePath/Sommet_pdn.JPG?width=300"
         },
         "wiki": {
           "type": "uri",
-          "value": "http://fr.wikipedia.org/wiki/Schneeberg_(Vosges)"
+          "value": "http://fr.wikipedia.org/wiki/Petit_Donon"
+        }
+      },
+      {
+        "nom": {
+          "type": "literal",
+          "xml:lang": "fr",
+          "value": "Mont Sainte-Odile"
+        },
+        "comment": {
+          "type": "literal",
+          "xml:lang": "fr",
+          "value": "Le mont Sainte-Odile (Odilienberg en allemand) est un mont vosgien, situ\u00E9 dans le d\u00E9partement du Bas-Rhin, culminant \u00E0 764 m\u00E8tres d'altitude. Il est surmont\u00E9 par l'abbaye de Hohenbourg, couvent qui surplombe la plaine d'Alsace, fond\u00E9 par sainte Odile, patronne de l'Alsace, fille du duc d'Etichon. Haut lieu de la culture alsacienne, ce couvent est un site de p\u00E8lerinage tr\u00E8s fr\u00E9quent\u00E9 (1 300 000 visiteurs par an). Par temps clair, la vue s'\u00E9tend jusqu'\u00E0 la For\u00EAt-Noire."
+        },
+        "altitude": {
+          "type": "typed-literal",
+          "datatype": "http://www.w3.org/2001/XMLSchema#integer",
+          "value": "764"
+        },
+        "latitude": {
+          "type": "typed-literal",
+          "datatype": "http://www.w3.org/2001/XMLSchema#double",
+          "value": "48.4369"
+        },
+        "longitude": {
+          "type": "typed-literal",
+          "datatype": "http://www.w3.org/2001/XMLSchema#double",
+          "value": "7.40333"
+        },
+        "thumbnail": {
+          "type": "uri",
+          "value": "http://commons.wikimedia.org/wiki/Special:FilePath/Mont_Sainte-Odile_BW_6.JPG?width=300"
+        },
+        "wiki": {
+          "type": "uri",
+          "value": "http://fr.wikipedia.org/wiki/Mont_Sainte-Odile"
+        }
+      },
+      {
+        "nom": {
+          "type": "literal",
+          "xml:lang": "fr",
+          "value": "Taennchel"
+        },
+        "comment": {
+          "type": "literal",
+          "xml:lang": "fr",
+          "value": "Le Taennchel est un des sommets du massif des Vosges culminant \u00E0 988 m\u00E8tres. Le Taennchel s'\u00E9l\u00E8ve dans la partie est de la France, dans le d\u00E9partement du Haut-Rhin (r\u00E9gion Alsace), \u00E0 mi-chemin entre Strasbourg au nord et Mulhouse au sud, soit \u00E0 une soixantaine de kilom\u00E8tres de chacune des deux villes.Il existe peu d'endroits aussi \u00E9nigmatiques dans le massif que cette cr\u00EAte de six kilom\u00E8tres de longueur."
+        },
+        "altitude": {
+          "type": "typed-literal",
+          "datatype": "http://www.w3.org/2001/XMLSchema#integer",
+          "value": "988"
+        },
+        "latitude": {
+          "type": "typed-literal",
+          "datatype": "http://www.w3.org/2001/XMLSchema#double",
+          "value": "48.2347"
+        },
+        "longitude": {
+          "type": "typed-literal",
+          "datatype": "http://www.w3.org/2001/XMLSchema#double",
+          "value": "7.25889"
+        },
+        "thumbnail": {
+          "type": "uri",
+          "value": "http://commons.wikimedia.org/wiki/Special:FilePath/Rombach-le-Franc_301.JPG?width=300"
+        },
+        "wiki": {
+          "type": "uri",
+          "value": "http://fr.wikipedia.org/wiki/Taennchel"
         }
       },
       {
@@ -1594,35 +334,1295 @@
         "nom": {
           "type": "literal",
           "xml:lang": "fr",
-          "value": "Heidenkopf"
+          "value": "Ungersberg"
         },
         "comment": {
           "type": "literal",
           "xml:lang": "fr",
-          "value": "Le Heidenkopf est un sommet vosgien qui culmine \u00E0 787 m\u00E8tres d'altitude, \u00E0 l'ouest du village de Klingenthal dans le Bas-Rhin. Le Club vosgien a \u00E9rig\u00E9 une tour (M\u00FCndel-turm) en son sommet qui offre une large vue sur la plaine d'Alsace et les sommets avoisinants.\u2191 Carte IGN"
+          "value": "Le Ungersberg est un sommet vosgien qui culmine \u00E0 901 m\u00E8tres d'altitude, \u00E0 l'ouest du village de Reichsfeld dans le Bas-Rhin. Le Club vosgien a \u00E9rig\u00E9 la tour H\u00E9ring en son sommet, offrant ainsi une large vue sur la plaine d'Alsace et les sommets avoisinants.\u2191 Carte IGN"
         },
         "altitude": {
           "type": "typed-literal",
           "datatype": "http://www.w3.org/2001/XMLSchema#integer",
-          "value": "787"
+          "value": "901"
         },
         "latitude": {
           "type": "typed-literal",
           "datatype": "http://www.w3.org/2001/XMLSchema#double",
-          "value": "48.4694"
+          "value": "48.3628"
         },
         "longitude": {
           "type": "typed-literal",
           "datatype": "http://www.w3.org/2001/XMLSchema#double",
-          "value": "7.37083"
+          "value": "7.35861"
         },
         "thumbnail": {
           "type": "uri",
-          "value": "http://commons.wikimedia.org/wiki/Special:FilePath/France_Bas-Rhin_M\u00FCndel-Turm.jpg?width=300"
+          "value": "http://commons.wikimedia.org/wiki/Special:FilePath/Ungersberg.jpg?width=300"
         },
         "wiki": {
           "type": "uri",
-          "value": "http://fr.wikipedia.org/wiki/Heidenkopf"
+          "value": "http://fr.wikipedia.org/wiki/Ungersberg"
+        }
+      },
+      {
+        "nom": {
+          "type": "literal",
+          "xml:lang": "fr",
+          "value": "Donon"
+        },
+        "comment": {
+          "type": "literal",
+          "xml:lang": "fr",
+          "value": "Le Donon se trouve dans les Vosges gr\u00E9seuses ; il est le plus septentrional des sommets majeurs du massif. Situ\u00E9 sur la commune de Grandfontaine, dans le d\u00E9partement fran\u00E7ais du Bas-Rhin, au nord-ouest de Schirmeck, il est riche d'une histoire humaine plusieurs fois mill\u00E9naire.Le Donon est accessible par la route du col du Donon, la RD 392."
+        },
+        "altitude": {
+          "type": "typed-literal",
+          "datatype": "http://www.w3.org/2001/XMLSchema#integer",
+          "value": "1009"
+        },
+        "latitude": {
+          "type": "typed-literal",
+          "datatype": "http://www.w3.org/2001/XMLSchema#double",
+          "value": "48.5133"
+        },
+        "longitude": {
+          "type": "typed-literal",
+          "datatype": "http://www.w3.org/2001/XMLSchema#double",
+          "value": "7.165"
+        },
+        "thumbnail": {
+          "type": "uri",
+          "value": "http://commons.wikimedia.org/wiki/Special:FilePath/TempleDonon.jpg?width=300"
+        },
+        "wiki": {
+          "type": "uri",
+          "value": "http://fr.wikipedia.org/wiki/Donon"
+        }
+      },
+      {
+        "nom": {
+          "type": "literal",
+          "xml:lang": "fr",
+          "value": "Marksteinkopf"
+        },
+        "comment": {
+          "type": "literal",
+          "xml:lang": "fr",
+          "value": "Le Marksteinkopf est un sommet du massif des Vosges culminant \u00E0 1 241 m\u00E8tres d'altitude."
+        },
+        "altitude": {
+          "type": "typed-literal",
+          "datatype": "http://www.w3.org/2001/XMLSchema#integer",
+          "value": "1241"
+        },
+        "latitude": {
+          "type": "typed-literal",
+          "datatype": "http://www.w3.org/2001/XMLSchema#double",
+          "value": "47.9178"
+        },
+        "longitude": {
+          "type": "typed-literal",
+          "datatype": "http://www.w3.org/2001/XMLSchema#double",
+          "value": "7.04417"
+        },
+        "thumbnail": {
+          "type": "uri",
+          "value": "http://commons.wikimedia.org/wiki/Special:FilePath/Markstein.Stork.jpg?width=300"
+        },
+        "wiki": {
+          "type": "uri",
+          "value": "http://fr.wikipedia.org/wiki/Marksteinkopf"
+        }
+      },
+      {
+        "nom": {
+          "type": "literal",
+          "xml:lang": "fr",
+          "value": "Rothenbachkopf"
+        },
+        "comment": {
+          "type": "literal",
+          "xml:lang": "fr",
+          "value": "Le Rothenbachkopf est un sommet du massif des Vosges situ\u00E9 \u00E0 cinq kilom\u00E8tres au sud du Hohneck, et \u00E0 une altitude de 1 316 m. La cr\u00EAte du Rothenbachkopf, situ\u00E9e entre Wildenstein et Mittlach dans le Haut-Rhin (Alsace), se prolonge jusqu'au Rainkopf au nord, \u00E0 la limite avec le d\u00E9partement des Vosges."
+        },
+        "altitude": {
+          "type": "typed-literal",
+          "datatype": "http://www.w3.org/2001/XMLSchema#integer",
+          "value": "1316"
+        },
+        "latitude": {
+          "type": "typed-literal",
+          "datatype": "http://www.w3.org/2001/XMLSchema#double",
+          "value": "48.0003"
+        },
+        "longitude": {
+          "type": "typed-literal",
+          "datatype": "http://www.w3.org/2001/XMLSchema#double",
+          "value": "6.98111"
+        },
+        "thumbnail": {
+          "type": "uri",
+          "value": "http://commons.wikimedia.org/wiki/Special:FilePath/Rothenbach.jpg?width=300"
+        },
+        "wiki": {
+          "type": "uri",
+          "value": "http://fr.wikipedia.org/wiki/Rothenbachkopf"
+        }
+      },
+      {
+        "nom": {
+          "type": "literal",
+          "xml:lang": "fr",
+          "value": "Bastberg"
+        },
+        "comment": {
+          "type": "literal",
+          "xml:lang": "fr",
+          "value": "Le Bastberg (en fran\u00E7ais mont Saint-S\u00E9bastien), aussi appel\u00E9 Petit-Bastberg, est un sommet situ\u00E9 non loin du parc naturel r\u00E9gional des Vosges du Nord, sur la commune de Bouxwiller. Il culmine \u00E0 326 m\u00E8tres. Constitu\u00E9 de deux \u00E9l\u00E9ments, le Bastberg abrite une faune et une flore typique du fait de son origine g\u00E9ologique et de son orientation. L'\u00E9cosyst\u00E8me est fragile du fait des intrusions humaines et naturelles, et fait l'objet de mesures de conservation depuis 1989."
+        },
+        "altitude": {
+          "type": "typed-literal",
+          "datatype": "http://www.w3.org/2001/XMLSchema#integer",
+          "value": "326"
+        },
+        "latitude": {
+          "type": "typed-literal",
+          "datatype": "http://www.w3.org/2001/XMLSchema#double",
+          "value": "48.8117"
+        },
+        "longitude": {
+          "type": "typed-literal",
+          "datatype": "http://www.w3.org/2001/XMLSchema#double",
+          "value": "7.45111"
+        },
+        "thumbnail": {
+          "type": "uri",
+          "value": "http://commons.wikimedia.org/wiki/Special:FilePath/Alsace_Bastberg_sommet.jpg?width=300"
+        },
+        "wiki": {
+          "type": "uri",
+          "value": "http://fr.wikipedia.org/wiki/Bastberg"
+        }
+      },
+      {
+        "nom": {
+          "type": "literal",
+          "xml:lang": "fr",
+          "value": "Haute Bers"
+        },
+        "comment": {
+          "type": "literal",
+          "xml:lang": "fr",
+          "value": "La Haute Bers est un sommet du massif des Vosges culminant \u00E0 1 252 m\u00E8tres d'altitude, \u00E0 la limite entre les d\u00E9partements du Haut-Rhin et des Vosges, en France. C'est aussi le nom d'un petit massif comprenant plusieurs sommets :  celui de la Haute Bers proprement dit ; la T\u00EAte des Perches ou des Bers (1 227 m\u00E8tres) ; la T\u00EAte des Charbonniers (1 138 m\u00E8tres) ; et le petit sommet de la Moyenne Bers (1 116 m\u00E8tres) ;ainsi que trois lacs : le lac des Perches ; les lacs des Grand et Petit Neuweiher."
+        },
+        "altitude": {
+          "type": "typed-literal",
+          "datatype": "http://www.w3.org/2001/XMLSchema#integer",
+          "value": "1252"
+        },
+        "latitude": {
+          "type": "typed-literal",
+          "datatype": "http://www.w3.org/2001/XMLSchema#double",
+          "value": "47.8461"
+        },
+        "longitude": {
+          "type": "typed-literal",
+          "datatype": "http://www.w3.org/2001/XMLSchema#double",
+          "value": "6.91194"
+        },
+        "thumbnail": {
+          "type": "uri",
+          "value": "http://commons.wikimedia.org/wiki/Special:FilePath/Massif_de_la_Haute_Bers_vu_depuis_le_Ballon_d'Alsace.jpg?width=300"
+        },
+        "wiki": {
+          "type": "uri",
+          "value": "http://fr.wikipedia.org/wiki/Haute_Bers"
+        }
+      },
+      {
+        "nom": {
+          "type": "literal",
+          "xml:lang": "fr",
+          "value": "Kastelberg"
+        },
+        "comment": {
+          "type": "literal",
+          "xml:lang": "fr",
+          "value": "Le Kastelberg est le quatri\u00E8me plus haut sommet du massif des Vosges avec 1 350 m\u00E8tres d'altitude formant la limite r\u00E9gionale entre l'Alsace (Haut-Rhin) et la Lorraine (Vosges)."
+        },
+        "altitude": {
+          "type": "typed-literal",
+          "datatype": "http://www.w3.org/2001/XMLSchema#integer",
+          "value": "1350"
+        },
+        "latitude": {
+          "type": "typed-literal",
+          "datatype": "http://www.w3.org/2001/XMLSchema#double",
+          "value": "48.0211"
+        },
+        "longitude": {
+          "type": "typed-literal",
+          "datatype": "http://www.w3.org/2001/XMLSchema#double",
+          "value": "7.00139"
+        },
+        "thumbnail": {
+          "type": "uri",
+          "value": "http://commons.wikimedia.org/wiki/Special:FilePath/Kastelberg_sud.jpg?width=300"
+        },
+        "wiki": {
+          "type": "uri",
+          "value": "http://fr.wikipedia.org/wiki/Kastelberg"
+        }
+      },
+      {
+        "nom": {
+          "type": "literal",
+          "xml:lang": "fr",
+          "value": "Thannerhubel"
+        },
+        "comment": {
+          "type": "literal",
+          "xml:lang": "fr",
+          "value": "Le Jungfrauenkopf est un sommet du massif des Vosges culminant \u00E0 1 183 m\u00E8tres d'altitude, situ\u00E9 \u00E0 Thann."
+        },
+        "altitude": {
+          "type": "typed-literal",
+          "datatype": "http://www.w3.org/2001/XMLSchema#integer",
+          "value": "1183"
+        },
+        "latitude": {
+          "type": "typed-literal",
+          "datatype": "http://www.w3.org/2001/XMLSchema#double",
+          "value": "47.8244"
+        },
+        "longitude": {
+          "type": "typed-literal",
+          "datatype": "http://www.w3.org/2001/XMLSchema#double",
+          "value": "7.02556"
+        },
+        "thumbnail": {
+          "type": "uri",
+          "value": "http://commons.wikimedia.org/wiki/Special:FilePath/Thann_vue_depuis_le_Rangen.jpg?width=300"
+        },
+        "wiki": {
+          "type": "uri",
+          "value": "http://fr.wikipedia.org/wiki/Thannerhubel"
+        }
+      },
+      {
+        "nom": {
+          "type": "literal",
+          "xml:lang": "fr",
+          "value": "Schneeberg (Vosges)"
+        },
+        "comment": {
+          "type": "literal",
+          "xml:lang": "fr",
+          "value": "Le Schneeberg d\u00E9signe une montagne gr\u00E9seuse du massif des Vosges, la plus septentrionale des Vosges gr\u00E9seuses d\u00E9passant largement 800 m\u00E8tres d'altitude. Ce sommet en fin d'une longue ligne de cr\u00EAte r\u00E9sistante \u00E0 l'\u00E9rosion glaciaire et post-glaciaire en gr\u00E8s triasique est situ\u00E9 en Alsace dans le d\u00E9partement du Bas-Rhin, \u00E0 plus d'un kilom\u00E8tre \u00E0 l'est du vallon de Windsbourg formant la limite avec la Moselle."
+        },
+        "altitude": {
+          "type": "typed-literal",
+          "datatype": "http://www.w3.org/2001/XMLSchema#integer",
+          "value": "961"
+        },
+        "latitude": {
+          "type": "typed-literal",
+          "datatype": "http://www.w3.org/2001/XMLSchema#double",
+          "value": "48.6011"
+        },
+        "longitude": {
+          "type": "typed-literal",
+          "datatype": "http://www.w3.org/2001/XMLSchema#double",
+          "value": "7.28667"
+        },
+        "thumbnail": {
+          "type": "uri",
+          "value": "http://commons.wikimedia.org/wiki/Special:FilePath/Schneeberg-vue_du_Himbeerfels.jpg?width=300"
+        },
+        "wiki": {
+          "type": "uri",
+          "value": "http://fr.wikipedia.org/wiki/Schneeberg_(Vosges)"
+        }
+      },
+      {
+        "nom": {
+          "type": "literal",
+          "xml:lang": "fr",
+          "value": "Gazon du Faing"
+        },
+        "comment": {
+          "type": "literal",
+          "xml:lang": "fr",
+          "value": "Le Gazon du Faing est un sommet granitique du massif des Vosges situ\u00E9 sur la ligne de cr\u00EAte entre le col du Bonhomme et le col de la Schlucht. Ce sommet presque plan aux abords arrondis qui compte parmi les dix plus hauts du massif, pr\u00E9sente un flanc assez abrupt du c\u00F4t\u00E9 alsacien, donnant naissance \u00E0 une auge glaciaire qui abrite le lac Noir 350 m\u00E8tres en contrebas."
+        },
+        "altitude": {
+          "type": "typed-literal",
+          "datatype": "http://www.w3.org/2001/XMLSchema#integer",
+          "value": "1306"
+        },
+        "latitude": {
+          "type": "typed-literal",
+          "datatype": "http://www.w3.org/2001/XMLSchema#double",
+          "value": "48.1139"
+        },
+        "longitude": {
+          "type": "typed-literal",
+          "datatype": "http://www.w3.org/2001/XMLSchema#double",
+          "value": "7.07944"
+        },
+        "thumbnail": {
+          "type": "uri",
+          "value": "http://commons.wikimedia.org/wiki/Special:FilePath/Hautes_chaumes_gazon_du_faing_vosges.jpg?width=300"
+        },
+        "wiki": {
+          "type": "uri",
+          "value": "http://fr.wikipedia.org/wiki/Gazon_du_Faing"
+        }
+      },
+      {
+        "nom": {
+          "type": "literal",
+          "xml:lang": "fr",
+          "value": "Hohnack"
+        },
+        "comment": {
+          "type": "literal",
+          "xml:lang": "fr",
+          "value": "Le Hohnack est une montagne situ\u00E9e dans les Vosges alsaciennes, dans le d\u00E9partement fran\u00E7ais du Haut-Rhin. Elle est constitu\u00E9e de deux sommets : le Petit Hohnack culminant \u00E0 927 m d'altitude et le le Grand Hohnack culminant \u00E0 982 m. On y trouve des roches \u00E0 cupules et les ruines du ch\u00E2teau m\u00E9di\u00E9val du Petit Hohnack (ou Hohenack), plus haut ch\u00E2teau d'Alsace, situ\u00E9 \u00E0 940 m d'altitude.Actuellement ces sommets sont tr\u00E8s arpent\u00E9s par les randonneurs durant leurs parcours des balades en Alsace."
+        },
+        "altitude": {
+          "type": "typed-literal",
+          "datatype": "http://www.w3.org/2001/XMLSchema#integer",
+          "value": "982"
+        },
+        "latitude": {
+          "type": "typed-literal",
+          "datatype": "http://www.w3.org/2001/XMLSchema#double",
+          "value": "48.0864"
+        },
+        "longitude": {
+          "type": "typed-literal",
+          "datatype": "http://www.w3.org/2001/XMLSchema#double",
+          "value": "7.19028"
+        },
+        "thumbnail": {
+          "type": "uri",
+          "value": "http://commons.wikimedia.org/wiki/Special:FilePath/Hohnack3.jpg?width=300"
+        },
+        "wiki": {
+          "type": "uri",
+          "value": "http://fr.wikipedia.org/wiki/Hohnack"
+        }
+      },
+      {
+        "nom": {
+          "type": "literal",
+          "xml:lang": "fr",
+          "value": "Klintzkopf"
+        },
+        "comment": {
+          "type": "literal",
+          "xml:lang": "fr",
+          "value": "Le Klintzkopf est le cinqui\u00E8me sommet des Vosges avec 1 330 m\u00E8tres d'altitude.Il fait partie d'une zone naturelle prot\u00E9g\u00E9e, faune et flore remarquable, dont l'acc\u00E8s est autoris\u00E9 du 1er juillet au 30 novembre. La montagne est le si\u00E8ge de la plus haute for\u00EAt d'Alsace et du massif des Vosges. Son acc\u00E8s est exclusivement p\u00E9destre depuis la route des Cr\u00EAtes."
+        },
+        "altitude": {
+          "type": "typed-literal",
+          "datatype": "http://www.w3.org/2001/XMLSchema#integer",
+          "value": "1330"
+        },
+        "latitude": {
+          "type": "typed-literal",
+          "datatype": "http://www.w3.org/2001/XMLSchema#double",
+          "value": "47.9494"
+        },
+        "longitude": {
+          "type": "typed-literal",
+          "datatype": "http://www.w3.org/2001/XMLSchema#double",
+          "value": "7.05611"
+        },
+        "thumbnail": {
+          "type": "uri",
+          "value": "http://commons.wikimedia.org/wiki/Special:FilePath/Klinskopf.jpg?width=300"
+        },
+        "wiki": {
+          "type": "uri",
+          "value": "http://fr.wikipedia.org/wiki/Klintzkopf"
+        }
+      },
+      {
+        "nom": {
+          "type": "literal",
+          "xml:lang": "fr",
+          "value": "Hohneck"
+        },
+        "comment": {
+          "type": "literal",
+          "xml:lang": "fr",
+          "value": "Le Hohneck, troisi\u00E8me sommet du massif des Vosges avec 1 363 m\u00E8tres d'altitude, domine la ligne de cr\u00EAtes qui s\u00E9pare l'Alsace de la Lorraine. Il constitue le point culminant de cette derni\u00E8re r\u00E9gion. En contrebas du sommet est am\u00E9nag\u00E9e la station de ski de La Bresse Hohneck. Un ballon voisin, situ\u00E9 \u00E0 1,5 kilom\u00E8tre \u00E0 l'est et culminant \u00E0 1 289 m\u00E8tres, est d\u00E9nomm\u00E9 Petit Hohneck.\u2191 1,0, 1,1 et 1,2 Cartes IGN disponibles sur G\u00E9oportail\u2191 [PDF] Tourisme durable en Lorraine, dossier de presse 2010"
+        },
+        "altitude": {
+          "type": "typed-literal",
+          "datatype": "http://www.w3.org/2001/XMLSchema#integer",
+          "value": "1363"
+        },
+        "latitude": {
+          "type": "typed-literal",
+          "datatype": "http://www.w3.org/2001/XMLSchema#double",
+          "value": "48.0375"
+        },
+        "longitude": {
+          "type": "typed-literal",
+          "datatype": "http://www.w3.org/2001/XMLSchema#double",
+          "value": "7.01639"
+        },
+        "thumbnail": {
+          "type": "uri",
+          "value": "http://commons.wikimedia.org/wiki/Special:FilePath/Hohneck.jpg?width=300"
+        },
+        "wiki": {
+          "type": "uri",
+          "value": "http://fr.wikipedia.org/wiki/Hohneck"
+        }
+      },
+      {
+        "nom": {
+          "type": "literal",
+          "xml:lang": "fr",
+          "value": "Batteriekopf"
+        },
+        "comment": {
+          "type": "literal",
+          "xml:lang": "fr",
+          "value": "Le Batteriekopf est un sommet du massif des Vosges culminant \u00E0 1 311 m\u00E8tres. Cette montagne borde la route des Cr\u00EAtes et est situ\u00E9e imm\u00E9diatement au sud du Rothenbachkopf, \u00E0 cheval sur les communes de Wildenstein et de Metzeral."
+        },
+        "altitude": {
+          "type": "typed-literal",
+          "datatype": "http://www.w3.org/2001/XMLSchema#integer",
+          "value": "1311"
+        },
+        "latitude": {
+          "type": "typed-literal",
+          "datatype": "http://www.w3.org/2001/XMLSchema#double",
+          "value": "47.9939"
+        },
+        "longitude": {
+          "type": "typed-literal",
+          "datatype": "http://www.w3.org/2001/XMLSchema#double",
+          "value": "6.98056"
+        },
+        "thumbnail": {
+          "type": "uri",
+          "value": "http://commons.wikimedia.org/wiki/Special:FilePath/Batteriekopf.jpg?width=300"
+        },
+        "wiki": {
+          "type": "uri",
+          "value": "http://fr.wikipedia.org/wiki/Batteriekopf"
+        }
+      },
+      {
+        "nom": {
+          "type": "literal",
+          "xml:lang": "fr",
+          "value": "Le Tanet"
+        },
+        "comment": {
+          "type": "literal",
+          "xml:lang": "fr",
+          "value": "Le Tanet est une montagne de la cr\u00EAte vosgienne. Elle a donn\u00E9 son nom \u00E0 une petite station de ski accroch\u00E9e \u00E0 son flanc alsacien.\u2191 1,0 et 1,1 Cartes IGN disponibles sur G\u00E9oportail"
+        },
+        "altitude": {
+          "type": "typed-literal",
+          "datatype": "http://www.w3.org/2001/XMLSchema#integer",
+          "value": "1292"
+        },
+        "latitude": {
+          "type": "typed-literal",
+          "datatype": "http://www.w3.org/2001/XMLSchema#double",
+          "value": "48.0833"
+        },
+        "longitude": {
+          "type": "typed-literal",
+          "datatype": "http://www.w3.org/2001/XMLSchema#double",
+          "value": "7.05194"
+        },
+        "thumbnail": {
+          "type": "uri",
+          "value": "http://commons.wikimedia.org/wiki/Special:FilePath/LETANET.JPG?width=300"
+        },
+        "wiki": {
+          "type": "uri",
+          "value": "http://fr.wikipedia.org/wiki/Le_Tanet"
+        }
+      },
+      {
+        "nom": {
+          "type": "literal",
+          "xml:lang": "fr",
+          "value": "Breitfirst"
+        },
+        "comment": {
+          "type": "literal",
+          "xml:lang": "fr",
+          "value": "Le Breitfirst est un sommet du massif des Vosges culminant \u00E0 1 280 m\u00E8tres d'altitude, situ\u00E9 sur le c\u00F4t\u00E9 est de la route des Cr\u00EAtes."
+        },
+        "altitude": {
+          "type": "typed-literal",
+          "datatype": "http://www.w3.org/2001/XMLSchema#integer",
+          "value": "1280"
+        },
+        "latitude": {
+          "type": "typed-literal",
+          "datatype": "http://www.w3.org/2001/XMLSchema#double",
+          "value": "47.9478"
+        },
+        "longitude": {
+          "type": "typed-literal",
+          "datatype": "http://www.w3.org/2001/XMLSchema#double",
+          "value": "7.02722"
+        },
+        "thumbnail": {
+          "type": "uri",
+          "value": "http://commons.wikimedia.org/wiki/Special:FilePath/Breitfirst_D27.JPG?width=300"
+        },
+        "wiki": {
+          "type": "uri",
+          "value": "http://fr.wikipedia.org/wiki/Breitfirst"
+        }
+      },
+      {
+        "nom": {
+          "type": "literal",
+          "xml:lang": "fr",
+          "value": "Petit Ballon"
+        },
+        "comment": {
+          "type": "literal",
+          "xml:lang": "fr",
+          "value": "Le Petit Ballon (Kahler Wasen ou Kleiner Belchen en allemand) est un sommet secondaire du massif des Vosges situ\u00E9 dans le d\u00E9partement du Haut-Rhin (Alsace). Il culmine \u00E0 1 272 m\u00E8tres d'altitude. Son sommet donne un point de vue panoramique. On y trouve une ferme-auberge sur le versant Est (Strohberg) et une seconde sur le versant Ouest (Rothenbrunnen), une statue de la Vierge et une antenne-relais radio. Aucune route ne permet d'acc\u00E9der directement au sommet."
+        },
+        "altitude": {
+          "type": "typed-literal",
+          "datatype": "http://www.w3.org/2001/XMLSchema#integer",
+          "value": "1272"
+        },
+        "latitude": {
+          "type": "typed-literal",
+          "datatype": "http://www.w3.org/2001/XMLSchema#double",
+          "value": "47.9806"
+        },
+        "longitude": {
+          "type": "typed-literal",
+          "datatype": "http://www.w3.org/2001/XMLSchema#double",
+          "value": "7.12611"
+        },
+        "thumbnail": {
+          "type": "uri",
+          "value": "http://commons.wikimedia.org/wiki/Special:FilePath/Petit_Ballon_depuis_le_Hohneck.JPG?width=300"
+        },
+        "wiki": {
+          "type": "uri",
+          "value": "http://fr.wikipedia.org/wiki/Petit_Ballon"
+        }
+      },
+      {
+        "nom": {
+          "type": "literal",
+          "xml:lang": "fr",
+          "value": "Mohnenberg"
+        },
+        "comment": {
+          "type": "literal",
+          "xml:lang": "fr",
+          "value": "Le Mohnenberg est un sommet des Vosges du Nord en Alsace situ\u00E9 \u00E0 proximit\u00E9 de la fronti\u00E8re allemande."
+        },
+        "altitude": {
+          "type": "typed-literal",
+          "datatype": "http://www.w3.org/2001/XMLSchema#integer",
+          "value": "547"
+        },
+        "latitude": {
+          "type": "typed-literal",
+          "datatype": "http://www.w3.org/2001/XMLSchema#double",
+          "value": "49.0178"
+        },
+        "longitude": {
+          "type": "typed-literal",
+          "datatype": "http://www.w3.org/2001/XMLSchema#double",
+          "value": "7.71361"
+        },
+        "thumbnail": {
+          "type": "uri",
+          "value": "http://commons.wikimedia.org/wiki/Special:FilePath/Mohnenberg2.jpg?width=300"
+        },
+        "wiki": {
+          "type": "uri",
+          "value": "http://fr.wikipedia.org/wiki/Mohnenberg"
+        }
+      },
+      {
+        "nom": {
+          "type": "literal",
+          "xml:lang": "fr",
+          "value": "Storkenkopf"
+        },
+        "comment": {
+          "type": "literal",
+          "xml:lang": "fr",
+          "value": "Le Storkenkopf (\u00AB t\u00EAte des cigognes \u00BB en allemand et alsacien) est le deuxi\u00E8me sommet des Vosges avec 1 366 m\u00E8tres d'altitude. Il se situe \u00E0 proximit\u00E9 du Grand Ballon. \u00C0 son pied se trouve la ferme du Haag \u00E0 1 250 m\u00E8tres d'altitude."
+        },
+        "altitude": {
+          "type": "typed-literal",
+          "datatype": "http://www.w3.org/2001/XMLSchema#integer",
+          "value": "1366"
+        },
+        "latitude": {
+          "type": "typed-literal",
+          "datatype": "http://www.w3.org/2001/XMLSchema#double",
+          "value": "47.9047"
+        },
+        "longitude": {
+          "type": "typed-literal",
+          "datatype": "http://www.w3.org/2001/XMLSchema#double",
+          "value": "7.08222"
+        },
+        "thumbnail": {
+          "type": "uri",
+          "value": "http://commons.wikimedia.org/wiki/Special:FilePath/Storkenkopf_02.jpg?width=300"
+        },
+        "wiki": {
+          "type": "uri",
+          "value": "http://fr.wikipedia.org/wiki/Storkenkopf"
+        }
+      },
+      {
+        "nom": {
+          "type": "literal",
+          "xml:lang": "fr",
+          "value": "Molkenrain"
+        },
+        "comment": {
+          "type": "literal",
+          "xml:lang": "fr",
+          "value": "Le Molkenrain (1 125 m\u00E8tres) est un sommet secondaire des Vosges dans le Haut-Rhin situ\u00E9 au-dessus de Cernay. Une ferme auberge, un relais hertzien et un refuge sont pr\u00E9sents au sommet. Cette ferme a servi de cadre \u00E0 des sc\u00E8nes tourn\u00E9es en 1962 pour le film Jules et Jim de Fran\u00E7ois Truffaut."
+        },
+        "altitude": {
+          "type": "typed-literal",
+          "datatype": "http://www.w3.org/2001/XMLSchema#integer",
+          "value": "1125"
+        },
+        "latitude": {
+          "type": "typed-literal",
+          "datatype": "http://www.w3.org/2001/XMLSchema#double",
+          "value": "47.8539"
+        },
+        "longitude": {
+          "type": "typed-literal",
+          "datatype": "http://www.w3.org/2001/XMLSchema#double",
+          "value": "7.13"
+        },
+        "thumbnail": {
+          "type": "uri",
+          "value": "http://commons.wikimedia.org/wiki/Special:FilePath/Le_Molkenrain.JPG?width=300"
+        },
+        "wiki": {
+          "type": "uri",
+          "value": "http://fr.wikipedia.org/wiki/Molkenrain"
+        }
+      },
+      {
+        "nom": {
+          "type": "literal",
+          "xml:lang": "fr",
+          "value": "Brotschberg"
+        },
+        "comment": {
+          "type": "literal",
+          "xml:lang": "fr",
+          "value": "Le Brotschberg est un sommet vosgien qui culmine \u00E0 542 m\u00E8tres d'altitude. En son sommet fut \u00E9rig\u00E9 la tour du Brotsch qui offre une vue sur la plaine d'Alsace. En contrebas se trouve le village de Haegen."
+        },
+        "altitude": {
+          "type": "typed-literal",
+          "datatype": "http://www.w3.org/2001/XMLSchema#integer",
+          "value": "542"
+        },
+        "latitude": {
+          "type": "typed-literal",
+          "datatype": "http://www.w3.org/2001/XMLSchema#double",
+          "value": "48.7067"
+        },
+        "longitude": {
+          "type": "typed-literal",
+          "datatype": "http://www.w3.org/2001/XMLSchema#double",
+          "value": "7.32472"
+        },
+        "thumbnail": {
+          "type": "uri",
+          "value": "http://commons.wikimedia.org/wiki/Special:FilePath/Brotschberg_et_Tour_du_Brotsch.JPG?width=300"
+        },
+        "wiki": {
+          "type": "uri",
+          "value": "http://fr.wikipedia.org/wiki/Brotschberg"
+        }
+      },
+      {
+        "nom": {
+          "type": "literal",
+          "xml:lang": "fr",
+          "value": "Ballon d'Alsace"
+        },
+        "comment": {
+          "type": "literal",
+          "xml:lang": "fr",
+          "value": "Le ballon d\u2019Alsace (Els\u00E4sser Belchen en allemand) est un sommet situ\u00E9 dans la partie m\u00E9ridionale de la cha\u00EEne des Vosges, aux confins des r\u00E9gions d'Alsace, de Franche-Comt\u00E9 et de Lorraine."
+        },
+        "altitude": {
+          "type": "typed-literal",
+          "datatype": "http://www.w3.org/2001/XMLSchema#integer",
+          "value": "1247"
+        },
+        "latitude": {
+          "type": "typed-literal",
+          "datatype": "http://www.w3.org/2001/XMLSchema#double",
+          "value": "47.8222"
+        },
+        "longitude": {
+          "type": "typed-literal",
+          "datatype": "http://www.w3.org/2001/XMLSchema#double",
+          "value": "6.84528"
+        },
+        "thumbnail": {
+          "type": "uri",
+          "value": "http://commons.wikimedia.org/wiki/Special:FilePath/Sommetduballond'alsace.jpg?width=300"
+        },
+        "wiki": {
+          "type": "uri",
+          "value": "http://fr.wikipedia.org/wiki/Ballon_d'Alsace"
+        }
+      },
+      {
+        "nom": {
+          "type": "literal",
+          "xml:lang": "fr",
+          "value": "Jungfrauenkopf"
+        },
+        "comment": {
+          "type": "literal",
+          "xml:lang": "fr",
+          "value": "Le Jungfrauenkopf est un sommet du massif des Vosges culminant \u00E0 1 268 m\u00E8tres d'altitude, situ\u00E9 sur la route des Cr\u00EAtes sur le site du Markstein."
+        },
+        "altitude": {
+          "type": "typed-literal",
+          "datatype": "http://www.w3.org/2001/XMLSchema#integer",
+          "value": "1268"
+        },
+        "latitude": {
+          "type": "typed-literal",
+          "datatype": "http://www.w3.org/2001/XMLSchema#double",
+          "value": "47.9261"
+        },
+        "longitude": {
+          "type": "typed-literal",
+          "datatype": "http://www.w3.org/2001/XMLSchema#double",
+          "value": "7.02444"
+        },
+        "thumbnail": {
+          "type": "uri",
+          "value": "http://commons.wikimedia.org/wiki/Special:FilePath/Markstein_2005.JPG?width=300"
+        },
+        "wiki": {
+          "type": "uri",
+          "value": "http://fr.wikipedia.org/wiki/Jungfrauenkopf"
+        }
+      },
+      {
+        "nom": {
+          "type": "literal",
+          "xml:lang": "fr",
+          "value": "Mont Saint-Michel (Bas-Rhin)"
+        },
+        "comment": {
+          "type": "literal",
+          "xml:lang": "fr",
+          "value": "Le mont Saint-Michel est un sommet situ\u00E9 dans le parc naturel r\u00E9gional des Vosges du Nord, sur la commune de Saint-Jean-Saverne. Il culmine \u00E0 437 m\u00E8tres.Ce lieu offre un panorama sur les villages environnants, et fait l'objet d'une occupation humaine depuis au moins le quatri\u00E8me mill\u00E9naire avant J.-C.\u2191 1,0 et 1,1 Cartes de l'IGN disponibles sur G\u00E9oportail"
+        },
+        "altitude": {
+          "type": "typed-literal",
+          "datatype": "http://www.w3.org/2001/XMLSchema#integer",
+          "value": "437"
+        },
+        "latitude": {
+          "type": "typed-literal",
+          "datatype": "http://www.w3.org/2001/XMLSchema#double",
+          "value": "48.7744"
+        },
+        "longitude": {
+          "type": "typed-literal",
+          "datatype": "http://www.w3.org/2001/XMLSchema#double",
+          "value": "7.3475"
+        },
+        "thumbnail": {
+          "type": "uri",
+          "value": "http://commons.wikimedia.org/wiki/Special:FilePath/Mont-St_Michel_St_Jean_vue_g\u00E9n\u00E9rale.JPG?width=300"
+        },
+        "wiki": {
+          "type": "uri",
+          "value": "http://fr.wikipedia.org/wiki/Mont_Saint-Michel_(Bas-Rhin)"
+        }
+      },
+      {
+        "nom": {
+          "type": "literal",
+          "xml:lang": "fr",
+          "value": "Grand Wintersberg"
+        },
+        "comment": {
+          "type": "literal",
+          "xml:lang": "fr",
+          "value": "Le Grand Wintersberg est avec ses 581 m\u00E8tres le point culminant du massif des Vosges du Nord. Il se situe sur la commune de Niederbronn-les-Bains, dans le d\u00E9partement du Bas-Rhin. Il est couronn\u00E9 d'une tour panoramique offrant aux randonneurs un beau panorama sur les doux moutonnements bois\u00E9s des Vosges du Nord et du proche Palatinat allemand. La plaine d'Alsace ainsi que la ligne bleut\u00E9e de la For\u00EAt-Noire (\u00E0 l'horizon) sont \u00E9galement visibles, par temps clair et d\u00E9gag\u00E9, vers l'est."
+        },
+        "altitude": {
+          "type": "typed-literal",
+          "datatype": "http://www.w3.org/2001/XMLSchema#integer",
+          "value": "581"
+        },
+        "latitude": {
+          "type": "typed-literal",
+          "datatype": "http://www.w3.org/2001/XMLSchema#double",
+          "value": "48.9786"
+        },
+        "longitude": {
+          "type": "typed-literal",
+          "datatype": "http://www.w3.org/2001/XMLSchema#double",
+          "value": "7.61472"
+        },
+        "thumbnail": {
+          "type": "uri",
+          "value": "http://commons.wikimedia.org/wiki/Special:FilePath/Tour-du-grand-wintersberg.JPG?width=300"
+        },
+        "wiki": {
+          "type": "uri",
+          "value": "http://fr.wikipedia.org/wiki/Grand_Wintersberg"
+        }
+      },
+      {
+        "nom": {
+          "type": "literal",
+          "xml:lang": "fr",
+          "value": "Gazon de Fa\u00EEte"
+        },
+        "comment": {
+          "type": "literal",
+          "xml:lang": "fr",
+          "value": "Le Gazon de Fa\u00EEte d\u00E9signe une montagne et son sommet granitique du massif des Vosges situ\u00E9 sur la ligne de cr\u00EAte entre le col du Bonhomme et le col de la Schlucht, au sud du Gazon du Faing et au nord du Tanet ou du Haut-Fourneau."
+        },
+        "altitude": {
+          "type": "typed-literal",
+          "datatype": "http://www.w3.org/2001/XMLSchema#integer",
+          "value": "1303"
+        },
+        "latitude": {
+          "type": "typed-literal",
+          "datatype": "http://www.w3.org/2001/XMLSchema#double",
+          "value": "48.1019"
+        },
+        "longitude": {
+          "type": "typed-literal",
+          "datatype": "http://www.w3.org/2001/XMLSchema#double",
+          "value": "7.06833"
+        },
+        "thumbnail": {
+          "type": "uri",
+          "value": "http://commons.wikimedia.org/wiki/Special:FilePath/Versant_alsacien_du_Gazon_de_Fa\u00EEte.jpg?width=300"
+        },
+        "wiki": {
+          "type": "uri",
+          "value": "http://fr.wikipedia.org/wiki/Gazon_de_Fa\u00EEte"
+        }
+      },
+      {
+        "nom": {
+          "type": "literal",
+          "xml:lang": "fr",
+          "value": "Chalmont"
+        },
+        "comment": {
+          "type": "literal",
+          "xml:lang": "fr",
+          "value": "Le Chalmont (en allemand :  Schalenberg ou Karlsberg) est une montagne qui se trouve au-dessus des villages de Li\u00E8pvre et de La Vancelle et sur le flanc gauche derri\u00E8re ce sommet se trouve le village de Rombach-le-Franc.La montagne du Chalmont fait partie du ban de Li\u00E8pvre.\u2191 Carte IGN"
+        },
+        "altitude": {
+          "type": "typed-literal",
+          "datatype": "http://www.w3.org/2001/XMLSchema#integer",
+          "value": "702"
+        },
+        "latitude": {
+          "type": "typed-literal",
+          "datatype": "http://www.w3.org/2001/XMLSchema#double",
+          "value": "48.2839"
+        },
+        "longitude": {
+          "type": "typed-literal",
+          "datatype": "http://www.w3.org/2001/XMLSchema#double",
+          "value": "7.28972"
+        },
+        "thumbnail": {
+          "type": "uri",
+          "value": "http://commons.wikimedia.org/wiki/Special:FilePath/Le_Chalmont_203.JPG?width=300"
+        },
+        "wiki": {
+          "type": "uri",
+          "value": "http://fr.wikipedia.org/wiki/Chalmont"
+        }
+      },
+      {
+        "nom": {
+          "type": "literal",
+          "xml:lang": "fr",
+          "value": "Rocher du Coucou"
+        },
+        "comment": {
+          "type": "literal",
+          "xml:lang": "fr",
+          "value": "Le rocher du Coucou fait partie du massif de l'Altenberg et est situ\u00E9 \u00E0 856 m\u00E8tres d'altitude sur le territoire de la commune de Neubois. C'est un sommet qui est visible de tr\u00E8s loin. Sur l'un des contreforts, \u00E0 proximit\u00E9 se trouve le ch\u00E2teau du Frankenbourg. Sur ce sommet on aper\u00E7oit un relais de t\u00E9l\u00E9vision et de radiodiffusion appartenant \u00E0 T\u00E9l\u00E9diffusion de France qui \u00AB arrose \u00BB la r\u00E9gion de S\u00E9lestat, le Val de Vill\u00E9 et le Val de Li\u00E8pvre."
+        },
+        "altitude": {
+          "type": "typed-literal",
+          "datatype": "http://www.w3.org/2001/XMLSchema#integer",
+          "value": "856"
+        },
+        "latitude": {
+          "type": "typed-literal",
+          "datatype": "http://www.w3.org/2001/XMLSchema#double",
+          "value": "48.2953"
+        },
+        "longitude": {
+          "type": "typed-literal",
+          "datatype": "http://www.w3.org/2001/XMLSchema#double",
+          "value": "7.31278"
+        },
+        "thumbnail": {
+          "type": "uri",
+          "value": "http://commons.wikimedia.org/wiki/Special:FilePath/Rocher_du_Coucou_026.JPG?width=300"
+        },
+        "wiki": {
+          "type": "uri",
+          "value": "http://fr.wikipedia.org/wiki/Rocher_du_Coucou"
+        }
+      },
+      {
+        "nom": {
+          "type": "literal",
+          "xml:lang": "fr",
+          "value": "Br\u00E9zouard"
+        },
+        "comment": {
+          "type": "literal",
+          "xml:lang": "fr",
+          "value": "Le Br\u00E9zouard est un sommet du massif des Vosges qui fait partie du canton de Lapoutroie et qui est situ\u00E9 \u00E0 huit kilom\u00E8tres de Sainte-Marie-aux-Mines que l'on peut rejoindre par la route en prenant la petite route d'\u00C9chery."
+        },
+        "altitude": {
+          "type": "typed-literal",
+          "datatype": "http://www.w3.org/2001/XMLSchema#integer",
+          "value": "1229"
+        },
+        "latitude": {
+          "type": "typed-literal",
+          "datatype": "http://www.w3.org/2001/XMLSchema#double",
+          "value": "48.1894"
+        },
+        "longitude": {
+          "type": "typed-literal",
+          "datatype": "http://www.w3.org/2001/XMLSchema#double",
+          "value": "7.15"
+        },
+        "thumbnail": {
+          "type": "uri",
+          "value": "http://commons.wikimedia.org/wiki/Special:FilePath/Br\u00E9zouard_(13).jpg?width=300"
+        },
+        "wiki": {
+          "type": "uri",
+          "value": "http://fr.wikipedia.org/wiki/Br\u00E9zouard"
+        }
+      },
+      {
+        "nom": {
+          "type": "literal",
+          "xml:lang": "fr",
+          "value": "Rossberg (France)"
+        },
+        "comment": {
+          "type": "literal",
+          "xml:lang": "fr",
+          "value": "Le Rossberg d\u00E9signe \u00E0 la fois un sommet culminant \u00E0 1 191 m d'altitude et un petit massif relativement bien individualis\u00E9, \u00E0 l'extr\u00E9mit\u00E9 sud-est du massif des Vosges, entre Thann et Masevaux dans le Haut-Rhin."
+        },
+        "altitude": {
+          "type": "typed-literal",
+          "datatype": "http://www.w3.org/2001/XMLSchema#integer",
+          "value": "1191"
+        },
+        "latitude": {
+          "type": "typed-literal",
+          "datatype": "http://www.w3.org/2001/XMLSchema#double",
+          "value": "47.8208"
+        },
+        "longitude": {
+          "type": "typed-literal",
+          "datatype": "http://www.w3.org/2001/XMLSchema#double",
+          "value": "7.00944"
+        },
+        "thumbnail": {
+          "type": "uri",
+          "value": "http://commons.wikimedia.org/wiki/Special:FilePath/Massif_du_Rossberg.jpg?width=300"
+        },
+        "wiki": {
+          "type": "uri",
+          "value": "http://fr.wikipedia.org/wiki/Rossberg_(France)"
+        }
+      },
+      {
+        "nom": {
+          "type": "literal",
+          "xml:lang": "fr",
+          "value": "Hartmannswillerkopf"
+        },
+        "comment": {
+          "type": "literal",
+          "xml:lang": "fr",
+          "value": "Le Hartmannswillerkopf rebaptis\u00E9 Vieil-Armand apr\u00E8s la Premi\u00E8re Guerre mondiale (nomm\u00E9 l'Hartmann, la \u00AB mangeuse d'hommes \u00BB ou la \u00AB montagne de la Mort \u00BB par les Poilus), est un \u00E9peron rocheux pyramidal, dans le massif des Vosges, surplombant de ses 956 m\u00E8tres la plaine d\u2019Alsace du Haut-Rhin.Un monument national y est \u00E9rig\u00E9 en souvenir des combats qui s'y d\u00E9roul\u00E8rent durant le premier conflit mondial, en 1915 surtout."
+        },
+        "altitude": {
+          "type": "typed-literal",
+          "datatype": "http://www.w3.org/2001/XMLSchema#integer",
+          "value": "956"
+        },
+        "latitude": {
+          "type": "typed-literal",
+          "datatype": "http://www.w3.org/2001/XMLSchema#double",
+          "value": "47.8611"
+        },
+        "longitude": {
+          "type": "typed-literal",
+          "datatype": "http://www.w3.org/2001/XMLSchema#double",
+          "value": "7.16111"
+        },
+        "thumbnail": {
+          "type": "uri",
+          "value": "http://commons.wikimedia.org/wiki/Special:FilePath/Vieil_Armand.jpg?width=300"
+        },
+        "wiki": {
+          "type": "uri",
+          "value": "http://fr.wikipedia.org/wiki/Hartmannswillerkopf"
+        }
+      },
+      {
+        "nom": {
+          "type": "literal",
+          "xml:lang": "fr",
+          "value": "Spitzkoepfe"
+        },
+        "comment": {
+          "type": "literal",
+          "xml:lang": "fr",
+          "value": "Les Spitzkoepfe sont une ar\u00EAte rocheuse du massif des Vosges dont la partie sommitale culmine \u00E0 1 290 m\u00E8tres d'altitude."
+        },
+        "altitude": {
+          "type": "typed-literal",
+          "datatype": "http://www.w3.org/2001/XMLSchema#integer",
+          "value": "1290"
+        },
+        "latitude": {
+          "type": "typed-literal",
+          "datatype": "http://www.w3.org/2001/XMLSchema#double",
+          "value": "48.0317"
+        },
+        "longitude": {
+          "type": "typed-literal",
+          "datatype": "http://www.w3.org/2001/XMLSchema#double",
+          "value": "7.01444"
+        },
+        "thumbnail": {
+          "type": "uri",
+          "value": "http://commons.wikimedia.org/wiki/Special:FilePath/Spitzkopf.jpg?width=300"
+        },
+        "wiki": {
+          "type": "uri",
+          "value": "http://fr.wikipedia.org/wiki/Spitzkoepfe"
+        }
+      },
+      {
+        "nom": {
+          "type": "literal",
+          "xml:lang": "fr",
+          "value": "Reisberg"
+        },
+        "comment": {
+          "type": "literal",
+          "xml:lang": "fr",
+          "value": "Le Reisberg est une colline situ\u00E9e dans le d\u00E9partement du Bas-Rhin, au c\u0153ur des Vosges du Nord. Elle se situe sur la commune de Niederbronn-les-Bains. C'est sur cette colline que se trouve le ch\u00E2teau de la Wasenburg.Portail de l\u2019Alsace Portail de l\u2019Alsace Portail de la montagne Portail de la montagne"
+        },
+        "altitude": {
+          "type": "typed-literal",
+          "datatype": "http://www.w3.org/2001/XMLSchema#integer",
+          "value": "481"
+        },
+        "latitude": {
+          "type": "typed-literal",
+          "datatype": "http://www.w3.org/2001/XMLSchema#double",
+          "value": "48.9572"
+        },
+        "longitude": {
+          "type": "typed-literal",
+          "datatype": "http://www.w3.org/2001/XMLSchema#double",
+          "value": "7.60944"
+        },
+        "thumbnail": {
+          "type": "uri",
+          "value": "http://commons.wikimedia.org/wiki/Special:FilePath/Reisberg.jpg?width=300"
+        },
+        "wiki": {
+          "type": "uri",
+          "value": "http://fr.wikipedia.org/wiki/Reisberg"
+        }
+      },
+      {
+        "nom": {
+          "type": "literal",
+          "xml:lang": "fr",
+          "value": "Haut de Falimont"
+        },
+        "comment": {
+          "type": "literal",
+          "xml:lang": "fr",
+          "value": "Le Haut de Falimont est un sommet du massif des Vosges culminant \u00E0 1 306 m\u00E8tres d\u2019altitude."
+        },
+        "altitude": {
+          "type": "typed-literal",
+          "datatype": "http://www.w3.org/2001/XMLSchema#integer",
+          "value": "1306"
+        },
+        "latitude": {
+          "type": "typed-literal",
+          "datatype": "http://www.w3.org/2001/XMLSchema#double",
+          "value": "48.0428"
+        },
+        "longitude": {
+          "type": "typed-literal",
+          "datatype": "http://www.w3.org/2001/XMLSchema#double",
+          "value": "7.00972"
+        },
+        "thumbnail": {
+          "type": "uri",
+          "value": "http://commons.wikimedia.org/wiki/Special:FilePath/Falimont.jpg?width=300"
+        },
+        "wiki": {
+          "type": "uri",
+          "value": "http://fr.wikipedia.org/wiki/Haut_de_Falimont"
+        }
+      },
+      {
+        "nom": {
+          "type": "literal",
+          "xml:lang": "fr",
+          "value": "Rainkopf"
+        },
+        "comment": {
+          "type": "literal",
+          "xml:lang": "fr",
+          "value": "Le Rainkopf est un sommet du massif des Vosges situ\u00E9 quatre kilom\u00E8tres au sud du Hohneck. Cette montagne borde la route des Cr\u00EAtes et se caract\u00E9rise par un sommet arrondi dont le flanc est, abrupt et sauvage est un ancien cirque glaciaire, paradis de la flore alpestre et de la faune (chamois). Le sommet se situe exactement au point o\u00F9 la cha\u00EEne se scinde en deux : une branche en arc de cercle vers le sud-est culmine au Grand Ballon, l'autre vers le sud aboutit au Ballon d'Alsace."
+        },
+        "altitude": {
+          "type": "typed-literal",
+          "datatype": "http://www.w3.org/2001/XMLSchema#integer",
+          "value": "1305"
+        },
+        "latitude": {
+          "type": "typed-literal",
+          "datatype": "http://www.w3.org/2001/XMLSchema#double",
+          "value": "48.0097"
+        },
+        "longitude": {
+          "type": "typed-literal",
+          "datatype": "http://www.w3.org/2001/XMLSchema#double",
+          "value": "6.98278"
+        },
+        "thumbnail": {
+          "type": "uri",
+          "value": "http://commons.wikimedia.org/wiki/Special:FilePath/Rainkopf_versant_est.jpg?width=300"
+        },
+        "wiki": {
+          "type": "uri",
+          "value": "http://fr.wikipedia.org/wiki/Rainkopf"
+        }
+      },
+      {
+        "nom": {
+          "type": "literal",
+          "xml:lang": "fr",
+          "value": "Grand Ventron"
+        },
+        "comment": {
+          "type": "literal",
+          "xml:lang": "fr",
+          "value": "Le Grand Ventron est un sommet du massif des Vosges partag\u00E9 entre Ventron et Cornimont du c\u00F4t\u00E9 lorrain et Kruth du c\u00F4t\u00E9 alsacien. Plus au sud de 500 m\u00E8tres se trouve le Petit Ventron qui culmine \u00E0 1 155 m\u00E8tres d'altitude.Le sommet est d\u00E9pourvu de v\u00E9g\u00E9tation. On voit parfaitement le trac\u00E9 de la route des Cr\u00EAtes par-del\u00E0 la vall\u00E9e de la Thur. Par beau temps froid, les Alpes suisses \u00E9mergent d'une mer de brume. La table d'orientation annonce le Cervin \u00E0 seulement 227 km \u00E0 vol d'oiseau."
+        },
+        "altitude": {
+          "type": "typed-literal",
+          "datatype": "http://www.w3.org/2001/XMLSchema#integer",
+          "value": "1204"
+        },
+        "latitude": {
+          "type": "typed-literal",
+          "datatype": "http://www.w3.org/2001/XMLSchema#double",
+          "value": "47.9594"
+        },
+        "longitude": {
+          "type": "typed-literal",
+          "datatype": "http://www.w3.org/2001/XMLSchema#double",
+          "value": "6.92556"
+        },
+        "thumbnail": {
+          "type": "uri",
+          "value": "http://commons.wikimedia.org/wiki/Special:FilePath/GRAND_VENTRON.JPG?width=300"
+        },
+        "wiki": {
+          "type": "uri",
+          "value": "http://fr.wikipedia.org/wiki/Grand_Ventron"
+        }
+      },
+      {
+        "nom": {
+          "type": "literal",
+          "xml:lang": "fr",
+          "value": "Grand Ballon"
+        },
+        "comment": {
+          "type": "literal",
+          "xml:lang": "fr",
+          "value": "Le Grand Ballon (en alsacien : Grosser Belchen) est le point culminant du massif des Vosges, de la r\u00E9gion Alsace et du d\u00E9partement du Haut-Rhin. Il est situ\u00E9 \u00E0 25 km au nord-ouest de Mulhouse.Certains l'appellent encore  Ballon de Guebwiller, du nom de la ville la plus proche, situ\u00E9e \u00E0 8 km \u00E0 l'est, \u00E0 vol d'oiseau. Il s'\u00E9l\u00E8ve \u00E0 1 424 m\u00E8tres (1 423,7 m IGN)."
+        },
+        "altitude": {
+          "type": "typed-literal",
+          "datatype": "http://www.w3.org/2001/XMLSchema#integer",
+          "value": "1424"
+        },
+        "latitude": {
+          "type": "typed-literal",
+          "datatype": "http://www.w3.org/2001/XMLSchema#double",
+          "value": "47.9008"
+        },
+        "longitude": {
+          "type": "typed-literal",
+          "datatype": "http://www.w3.org/2001/XMLSchema#double",
+          "value": "7.09806"
+        },
+        "thumbnail": {
+          "type": "uri",
+          "value": "http://commons.wikimedia.org/wiki/Special:FilePath/Vosges_063.jpg?width=300"
+        },
+        "wiki": {
+          "type": "uri",
+          "value": "http://fr.wikipedia.org/wiki/Grand_Ballon"
         }
       }
     ]
