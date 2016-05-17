@@ -192,10 +192,9 @@ public class MapsActivity extends CompassActivity
                 if (compassMarker != null && marker.getId().equals(compassMarker.getId()))
                     return null;
 
-                View v = getLayoutInflater().inflate(R.layout.maps_info_window, null);
+                final Placemark m = db.findPlacemarkByLatLng(marker.getPosition());
 
-                Placemark m = db.findPlacemarkByLatLng(marker.getPosition());
-
+                final View v = getLayoutInflater().inflate(R.layout.maps_info_window, null);
                 final ImageView imgThumbnail = (ImageView) v.findViewById(R.id.iw_thumbnail);
                 final TextView tvTitle = (TextView) v.findViewById(R.id.iw_title);
                 final TextView tvAltitude = (TextView) v.findViewById(R.id.iw_altitude);
