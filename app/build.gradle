@@ -27,6 +27,11 @@ android {
             debuggable true
             signingConfig signingConfigs.Belvedere
         }
+        beta {
+            versionNameSuffix '_beta'
+            debuggable true
+            signingConfig signingConfigs.Belvedere
+        }
         release {
             minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
