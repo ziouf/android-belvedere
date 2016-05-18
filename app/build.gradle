@@ -24,6 +24,8 @@ android {
         }
         alpha {
             versionNameSuffix '_alpha'
+            debuggable true
+            signingConfig signingConfigs.Belvedere
         }
         release {
             minifyEnabled true
