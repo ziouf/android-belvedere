@@ -19,7 +19,7 @@ import android.widget.Toast;
 import java.util.Arrays;
 
 import fr.marin.cyril.belvedere.R;
-import fr.marin.cyril.belvedere.database.DatabaseHelper;
+import fr.marin.cyril.belvedere.database.DatabaseInitializer;
 
 public class LoadingActivity extends Activity
         implements ActivityCompat.OnRequestPermissionsResultCallback {
@@ -84,11 +84,11 @@ public class LoadingActivity extends Activity
     }
 
     private void start() {
-        final InitTask initDBTask = new InitTask(getApplicationContext());
+        final InitTask initDBTask = new InitTask(this);
         initDBTask.execute();
     }
 
-    private class InitTask extends DatabaseHelper.InitDBTask {
+    private class InitTask extends DatabaseInitializer {
         private final TextView loadingInfoTextView = (TextView) LoadingActivity.this.findViewById(R.id.loading_info);
         private final ProgressBar progressBar = (ProgressBar) LoadingActivity.this.findViewById(R.id.loading_progress);
 

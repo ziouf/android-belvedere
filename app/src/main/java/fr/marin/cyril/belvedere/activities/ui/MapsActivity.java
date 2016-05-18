@@ -9,6 +9,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.content.ContextCompat;
+import android.text.method.ScrollingMovementMethod;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
@@ -48,7 +49,7 @@ public class MapsActivity extends CompassActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_maps);
 
-        db = DatabaseHelper.getInstance(getApplicationContext());
+        db = DatabaseHelper.getInstance(this);
 
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         MapFragment mapFragment = (MapFragment) getFragmentManager().findFragmentById(R.id.google_maps_fragment);
@@ -211,6 +212,7 @@ public class MapsActivity extends CompassActivity
                 tvTitle.setText(m.getTitle());
                 tvAltitude.setText(m.getCoordinates().getElevationString());
                 tvComment.setText(m.getComment());
+                tvComment.setMovementMethod(new ScrollingMovementMethod());
 
                 return v;
             }

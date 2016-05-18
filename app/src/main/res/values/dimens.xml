@@ -6,5 +6,10 @@
     <dimen name="activity_horizontal_margin">16dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>
 
+    <!-- Loading Activity -->
     <dimen name="loading_progress_height">3dp</dimen>
+
+    <!-- Maps Info window -->
+    <dimen name="maps_info_window_layout_padding">3dp</dimen>
+    <dimen name="maps_info_window_comment_max_width">250dp</dimen>
 </resources>
