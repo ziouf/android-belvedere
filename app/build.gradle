@@ -12,11 +12,8 @@ android {
     compileSdkVersion 23
     buildToolsVersion "23.0.3"
     defaultConfig {
-        applicationId "fr.marin.cyril.belvedere"
         minSdkVersion 19
         targetSdkVersion 23
-        versionCode 1014
-        versionName "1.0.14"
         vectorDrawables.useSupportLibrary = true
     }
     buildTypes {
@@ -28,30 +25,22 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
             signingConfig signingConfigs.Belvedere
         }
-        release_alpha {
-            debuggable false
-            jniDebuggable false
-            signingConfig signingConfigs.Belvedere
-            renderscriptDebuggable false
-            renderscriptOptimLevel 3
-            minifyEnabled true
-            versionNameSuffix '_alpha'
-            zipAlignEnabled true
-        }
-        release_beta {
-            debuggable false
-            jniDebuggable false
-            signingConfig signingConfigs.Belvedere
-            renderscriptDebuggable false
-            renderscriptOptimLevel 3
-            minifyEnabled true
-            versionNameSuffix '_beta'
-            zipAlignEnabled true
-        }
     }
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_7
         targetCompatibility JavaVersion.VERSION_1_7
+    }
+    productFlavors {
+        Belvedere_ {
+            applicationId "fr.marin.cyril.belvedere"
+            versionCode 1014
+            versionName "1.0.14"
+        }
+        Mapsapp_ {
+            applicationId 'fr.marin.cyril.mapsapp'
+            versionCode 1015
+            versionName '1.0.15_alpha'
+        }
     }
 }
 
