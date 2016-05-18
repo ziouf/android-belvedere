@@ -20,6 +20,9 @@ android {
         debug {
             versionNameSuffix '_debug'
         }
+        alpha {
+            versionNameSuffix '_alpha'
+        }
         release {
             minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
@@ -31,15 +34,15 @@ android {
         targetCompatibility JavaVersion.VERSION_1_7
     }
     productFlavors {
-        Belvedere_ {
+        Belvedere {
             applicationId "fr.marin.cyril.belvedere"
             versionCode 1014
             versionName "1.0.14"
         }
-        Mapsapp_ {
+        Mapsapp {
             applicationId 'fr.marin.cyril.mapsapp'
             versionCode 1015
-            versionName '1.0.15_alpha'
+            versionName '1.0.15'
         }
     }
 }
