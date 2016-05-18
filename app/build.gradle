@@ -14,6 +14,8 @@ android {
     defaultConfig {
         minSdkVersion 19
         targetSdkVersion 23
+        versionCode 1014
+        versionName "1.0.14"
         vectorDrawables.useSupportLibrary = true
     }
     buildTypes {
@@ -36,13 +38,9 @@ android {
     productFlavors {
         Belvedere {
             applicationId "fr.marin.cyril.belvedere"
-            versionCode 1014
-            versionName "1.0.14"
         }
         Mapsapp {
             applicationId 'fr.marin.cyril.mapsapp'
-            versionCode 1015
-            versionName '1.0.15'
         }
     }
 }
