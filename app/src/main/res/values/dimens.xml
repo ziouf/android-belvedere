@@ -1,15 +1,16 @@
 <resources>
-    <!-- Default screen margins, per the Android Design guidelines. -->
-    <dimen name="nav_header_vertical_spacing">16dp</dimen>
-    <dimen name="nav_header_height">160dp</dimen>
-    <!-- Default screen margins, per the Android Design guidelines. -->
-    <dimen name="activity_horizontal_margin">16dp</dimen>
-    <dimen name="activity_vertical_margin">16dp</dimen>
-
     <!-- Loading Activity -->
     <dimen name="loading_progress_height">3dp</dimen>
 
     <!-- Maps Info window -->
     <dimen name="maps_info_window_layout_padding">3dp</dimen>
     <dimen name="maps_info_window_comment_max_width">250dp</dimen>
+
+    <!-- Floating Action Button -->
+    <dimen name="fab_margin">0dp</dimen>
+    <dimen name="fab_margin_right">0dp</dimen>
+    <dimen name="fab_margin_top">0dp</dimen>
+    <dimen name="fab_margin_left">0dp</dimen>
+    <dimen name="fab_margin_bottom">0dp</dimen>
+
 </resources>
