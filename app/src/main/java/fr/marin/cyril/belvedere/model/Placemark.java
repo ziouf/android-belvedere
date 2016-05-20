@@ -7,7 +7,7 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
 /**
- * Created by cscm6014 on 29/03/2016.
+ * Created by Cyril on 29/03/2016.
  */
 public class Placemark {
     private String title;

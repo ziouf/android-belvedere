@@ -13,7 +13,7 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentActivity;
 
 /**
- * Created by CSCM6014 on 27/04/2016.
+ * Created by Cyril on 27/04/2016.
  */
 public class LocationActivity extends FragmentActivity
         implements LocationListener {

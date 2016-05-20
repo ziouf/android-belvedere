@@ -4,7 +4,7 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.VisibleRegion;
 
 /**
- * Created by cscm6014 on 29/03/2016.
+ * Created by Cyril on 29/03/2016.
  */
 public class Area {
     private LatLng northeast;

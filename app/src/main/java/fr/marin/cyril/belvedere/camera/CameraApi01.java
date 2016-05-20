@@ -12,7 +12,7 @@ import java.io.IOException;
 import fr.marin.cyril.belvedere.R;
 
 /**
- * Created by CSCM6014 on 21/04/2016.
+ * Created by Cyril on 21/04/2016.
  */
 final class CameraApi01
         extends Camera

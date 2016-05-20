@@ -24,7 +24,7 @@ import fr.marin.cyril.belvedere.tools.ConnectivityStatus;
 import fr.marin.cyril.belvedere.tools.Utils;
 
 /**
- * Created by CSCM6014 on 18/05/2016.
+ * Created by Cyril on 18/05/2016.
  */
 public class DatabaseInitializer extends AsyncTask<Void, Integer, Void> {
     private static final String TAG = "InitDBTask";

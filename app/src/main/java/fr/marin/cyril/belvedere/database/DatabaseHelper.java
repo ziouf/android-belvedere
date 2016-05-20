@@ -17,7 +17,7 @@ import fr.marin.cyril.belvedere.model.Area;
 import fr.marin.cyril.belvedere.model.Placemark;
 
 /**
- * Created by cscm6014 on 30/03/2016.
+ * Created by Cyril on 30/03/2016.
  */
 public class DatabaseHelper extends SQLiteOpenHelper {
     private static final String TAG = "DatabaseHelper";

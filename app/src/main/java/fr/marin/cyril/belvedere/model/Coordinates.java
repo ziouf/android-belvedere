@@ -3,7 +3,7 @@ package fr.marin.cyril.belvedere.model;
 import com.google.android.gms.maps.model.LatLng;
 
 /**
- * Created by cscm6014 on 30/03/2016.
+ * Created by Cyril on 30/03/2016.
  */
 public class Coordinates {
     private LatLng latLng;

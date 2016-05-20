@@ -4,7 +4,7 @@ import android.app.Activity;
 import android.os.Build;
 
 /**
- * Created by CSCM6014 on 21/04/2016.
+ * Created by Cyril on 21/04/2016.
  */
 public abstract class Camera {
 

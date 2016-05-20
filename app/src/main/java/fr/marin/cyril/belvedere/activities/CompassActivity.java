@@ -11,7 +11,7 @@ import android.support.annotation.Nullable;
 import java.util.HashSet;
 
 /**
- * Created by CSCM6014 on 25/04/2016.
+ * Created by Cyril on 25/04/2016.
  *
  * See : http://stackoverflow.com/a/16386066/4287785
  *

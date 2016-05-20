@@ -15,7 +15,7 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
 /**
- * Created by CSCM6014 on 13/04/2016.
+ * Created by Cyril on 13/04/2016.
  */
 public class Utils {
     private static final String TAG = "Utils";

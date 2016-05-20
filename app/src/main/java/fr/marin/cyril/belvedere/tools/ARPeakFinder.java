@@ -13,7 +13,7 @@ import fr.marin.cyril.belvedere.model.Coordinates;
 import fr.marin.cyril.belvedere.model.Placemark;
 
 /**
- * Created by CSCM6014 on 22/04/2016.
+ * Created by Cyril on 22/04/2016.
  * <p/>
  * Etapes de recherche des sommets ciblés par l'utilisateur:
  * - Calcul de l'azimuth théorique entre l'utilisateur et chaque élément de la base de données

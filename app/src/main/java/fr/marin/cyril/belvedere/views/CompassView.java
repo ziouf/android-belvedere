@@ -7,7 +7,10 @@ import android.util.AttributeSet;
 import android.view.View;
 
 /**
- * Created by CSCM6014 on 04/05/2016.
+ * Created by Cyril on 04/05/2016.
+ *
+ *
+ *
  */
 public class CompassView extends View {
     private final Context context;

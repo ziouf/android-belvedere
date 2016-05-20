@@ -3,7 +3,7 @@ package fr.marin.cyril.belvedere.database;
 import android.provider.BaseColumns;
 
 /**
- * Created by cscm6014 on 30/03/2016.
+ * Created by Cyril on 30/03/2016.
  */
 final class DatabaseContract {
     public static final int DATABASE_VERSION = 13;
