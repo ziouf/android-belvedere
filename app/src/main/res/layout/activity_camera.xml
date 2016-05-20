@@ -29,4 +29,10 @@
         android:textColor="#ffffffff"
         />
 
+    <fr.marin.cyril.belvedere.views.CompassView
+        android:id="@+id/camera_compass_view"
+        android:layout_width="match_parent"
+        android:layout_height="25dp"
+        android:layout_gravity="bottom" />
+
 </FrameLayout>

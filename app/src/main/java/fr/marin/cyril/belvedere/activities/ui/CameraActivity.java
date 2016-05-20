@@ -26,6 +26,7 @@ import fr.marin.cyril.belvedere.camera.Camera;
 import fr.marin.cyril.belvedere.model.Placemark;
 import fr.marin.cyril.belvedere.tools.ARPeakFinder;
 import fr.marin.cyril.belvedere.tools.Utils;
+import fr.marin.cyril.belvedere.views.CompassView;
 
 /**
  * An example full-screen activity that shows and hides the system UI (i.e.
@@ -80,6 +81,7 @@ public class CameraActivity extends CompassActivity {
             @Override
             public void onSensorChanged(float[] data) {
                 updateDebugTextView();
+                updateCompassView(data[0]);
             }
         });
 
@@ -121,6 +123,11 @@ public class CameraActivity extends CompassActivity {
 
         cameraTextView.setText(String.format(Locale.getDefault(), s, lat, lng,
                 alt, azimuth, Utils.getDirectionFromMinus180to180Degrees(azimuth), pitch));
+    }
+
+    private void updateCompassView(float azimuth) {
+        CompassView compassView = (CompassView) this.findViewById(R.id.camera_compass_view);
+        compassView.updateAzimuthAndRedraw(azimuth);
     }
 
     private class ARTask implements Runnable {
