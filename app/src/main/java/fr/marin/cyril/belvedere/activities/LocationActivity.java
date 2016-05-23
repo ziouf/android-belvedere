@@ -22,7 +22,8 @@ public class LocationActivity extends FragmentActivity
     private static final int LOCATION_UPDATE_DISTANCE = 15;   // 15 metres
     private static final String LOCATION_PERMISSION = Manifest.permission.ACCESS_FINE_LOCATION;
 
-    protected final Criteria locationCriteria = new Criteria();
+    protected final Criteria fineLocationCriteria = new Criteria();
+    protected final Criteria coarseLocationCriteria = new Criteria();
 
     protected Location location;
     protected GeomagneticField geoField;
@@ -33,8 +34,12 @@ public class LocationActivity extends FragmentActivity
         super.onCreate(savedInstanceState);
 
         this.locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
-        this.locationCriteria.setAccuracy(Criteria.ACCURACY_FINE);
-        this.locationCriteria.setPowerRequirement(Criteria.POWER_MEDIUM);
+
+        this.fineLocationCriteria.setAccuracy(Criteria.ACCURACY_FINE);
+        this.fineLocationCriteria.setPowerRequirement(Criteria.POWER_MEDIUM);
+
+        this.coarseLocationCriteria.setAccuracy(Criteria.ACCURACY_COARSE);
+        this.coarseLocationCriteria.setPowerRequirement(Criteria.POWER_LOW);
     }
 
     @Override
@@ -68,7 +73,7 @@ public class LocationActivity extends FragmentActivity
     protected void registerLocationUpdates() {
         if (ActivityCompat.checkSelfPermission(this, LOCATION_PERMISSION) == PackageManager.PERMISSION_GRANTED) {
             this.location = locationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
-            this.locationManager.requestLocationUpdates(locationManager.getBestProvider(locationCriteria, true), LOCATION_UPDATE_TIME, LOCATION_UPDATE_DISTANCE, this);
+            this.locationManager.requestLocationUpdates(locationManager.getBestProvider(fineLocationCriteria, true), LOCATION_UPDATE_TIME, LOCATION_UPDATE_DISTANCE, this);
         }
     }
 

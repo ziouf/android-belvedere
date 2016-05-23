@@ -32,7 +32,8 @@
     <fr.marin.cyril.belvedere.views.CompassView
         android:id="@+id/camera_compass_view"
         android:layout_width="match_parent"
-        android:layout_height="25dp"
-        android:layout_gravity="bottom" />
+        android:layout_height="15dp"
+        android:layout_gravity="bottom"
+        android:background="#80000000" />
 
 </FrameLayout>

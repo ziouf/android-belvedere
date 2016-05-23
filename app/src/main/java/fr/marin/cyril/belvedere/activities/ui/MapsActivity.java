@@ -171,7 +171,7 @@ public class MapsActivity extends CompassActivity
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED)
             return;
         if (location == null)
-            location = locationManager.getLastKnownLocation(locationManager.getBestProvider(locationCriteria, true));
+            location = locationManager.getLastKnownLocation(locationManager.getBestProvider(fineLocationCriteria, true));
 
         LatLng latLng = new LatLng(location.getLatitude(), location.getLongitude());
         mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, 12));
