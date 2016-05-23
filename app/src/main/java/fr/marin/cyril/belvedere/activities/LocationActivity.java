@@ -70,6 +70,7 @@ public class LocationActivity extends FragmentActivity
         );
     }
 
+    // TODO : Fallback vers NETWORK_PROVIDER quand GPS off.
     protected void registerLocationUpdates() {
         if (ActivityCompat.checkSelfPermission(this, LOCATION_PERMISSION) == PackageManager.PERMISSION_GRANTED) {
             this.location = locationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
