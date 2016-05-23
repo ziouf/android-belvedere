@@ -80,10 +80,13 @@ public class CameraActivity extends CompassActivity {
         this.registerCompasEventListener(new CompassActivity.CompasEventListener() {
             @Override
             public void onSensorChanged(float[] data) {
-                updateDebugTextView();
+                //updateDebugTextView();
                 updateCompassView(data[0]);
             }
         });
+
+        //
+        this.registerLocationUpdates();
 
         arTask = mScheduler.scheduleAtFixedRate(new ARTask(handler), 0, 125, TimeUnit.MILLISECONDS);
     }
@@ -141,6 +144,7 @@ public class CameraActivity extends CompassActivity {
 
         @Override
         public void run() {
+            if (CameraActivity.this.location == null) return;
             ar.updateObserverLocation(CameraActivity.this.location, CameraActivity.this.getAzimuth());
 
             final Placemark placemark = ar.getMatchingPlacemark();

@@ -22,9 +22,6 @@ public class LocationActivity extends FragmentActivity
     private static final int LOCATION_UPDATE_DISTANCE = 15;   // 15 metres
     private static final String LOCATION_PERMISSION = Manifest.permission.ACCESS_FINE_LOCATION;
 
-    protected final Criteria fineLocationCriteria = new Criteria();
-    protected final Criteria coarseLocationCriteria = new Criteria();
-
     protected Location location;
     protected GeomagneticField geoField;
     protected LocationManager locationManager;
@@ -34,12 +31,6 @@ public class LocationActivity extends FragmentActivity
         super.onCreate(savedInstanceState);
 
         this.locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
-
-        this.fineLocationCriteria.setAccuracy(Criteria.ACCURACY_FINE);
-        this.fineLocationCriteria.setPowerRequirement(Criteria.POWER_MEDIUM);
-
-        this.coarseLocationCriteria.setAccuracy(Criteria.ACCURACY_COARSE);
-        this.coarseLocationCriteria.setPowerRequirement(Criteria.POWER_LOW);
     }
 
     @Override
@@ -70,11 +61,22 @@ public class LocationActivity extends FragmentActivity
         );
     }
 
+    protected String getLocationProvider() {
+        if (this.locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER))
+            return LocationManager.GPS_PROVIDER;
+
+        else if (this.locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER))
+            return LocationManager.NETWORK_PROVIDER;
+
+        else
+            return LocationManager.PASSIVE_PROVIDER;
+    }
+
     // TODO : Fallback vers NETWORK_PROVIDER quand GPS off.
     protected void registerLocationUpdates() {
         if (ActivityCompat.checkSelfPermission(this, LOCATION_PERMISSION) == PackageManager.PERMISSION_GRANTED) {
-            this.location = locationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
-            this.locationManager.requestLocationUpdates(locationManager.getBestProvider(fineLocationCriteria, true), LOCATION_UPDATE_TIME, LOCATION_UPDATE_DISTANCE, this);
+            //this.location = locationManager.getLastKnownLocation(getLocationProvider());
+            this.locationManager.requestLocationUpdates(this.getLocationProvider(), LOCATION_UPDATE_TIME, LOCATION_UPDATE_DISTANCE, this);
         }
     }
 

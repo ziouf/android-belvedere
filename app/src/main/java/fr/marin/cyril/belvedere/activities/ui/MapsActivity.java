@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.location.Location;
+import android.location.LocationManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -108,14 +109,17 @@ public class MapsActivity extends CompassActivity
     @Override
     public void onLocationChanged(Location location) {
         super.onLocationChanged(location);
-        if (location == null) return;
 
-        this.compassMarker.setPosition(new LatLng(location.getLatitude(), location.getLongitude()));
+        if (compassMarker == null)
+            this.initCompassMarkerIcon();
+        else
+            compassMarker.setPosition(new LatLng(location.getLatitude(), location.getLongitude()));
 
         TextView tv = (TextView) findViewById(R.id.debug_location_info);
         tv.setText(String.format("lat : %s | lng : %s | alt : %s",
                 location.getLatitude(), location.getLongitude(), location.getAltitude()));
 
+        this.centerMapCameraOnMyPosition();
         this.removeLocationUpdates();
     }
 
@@ -138,8 +142,6 @@ public class MapsActivity extends CompassActivity
         mMap.setOnMarkerClickListener(this.getOnMarkerClickListener());
         mMap.setOnInfoWindowClickListener(this.getOnInfoWindowClickListener());
 
-        this.initCompassMarkerIcon();
-        this.centerMapCameraOnMyPosition();
         this.updateMarkersOnMap();
     }
 
@@ -171,7 +173,7 @@ public class MapsActivity extends CompassActivity
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED)
             return;
         if (location == null)
-            location = locationManager.getLastKnownLocation(locationManager.getBestProvider(fineLocationCriteria, true));
+            location = locationManager.getLastKnownLocation(this.getLocationProvider());
 
         LatLng latLng = new LatLng(location.getLatitude(), location.getLongitude());
         mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, 12));
