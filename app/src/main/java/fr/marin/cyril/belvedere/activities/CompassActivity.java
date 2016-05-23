@@ -22,7 +22,7 @@ public class CompassActivity extends LocationActivity
     public static final int PITCH = 1;
     public static final String KEY_AZIMUTH = "azimuth";
     public static final String KEY_PITCH = "pitch";
-    private static final float ALPHA = 0.15f;
+    private static final float ALPHA = 0.025f;
     protected final float[] data = new float[2];
     protected boolean portrait = true;
 
