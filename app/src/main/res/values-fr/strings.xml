@@ -11,4 +11,9 @@
     <string name="menu_about">A propos</string>
     <string name="label_altitude">altitude</string>
     <string name="label_distance">distance</string>
+    <string name="location_service_not_enabled">Localisation désactivée</string>
+    <string name="open_location_settings">Ouvrir les paramêtres de localisation</string>
+    <string name="cancel">Annuler</string>
+    <string name="exit_application">Quitter l\'application</string>
+    <string name="ok">Ok</string>
 </resources>
