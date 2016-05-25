@@ -150,6 +150,7 @@ public class MapsActivity extends CompassActivity
 
     private void initCompassMarkerIcon() {
         if (!isCompassCompatible()) return;
+        if (location == null) return;
 
         this.compassMarker = mMap.addMarker(new MarkerOptions()
                 .position(new LatLng(location.getLatitude(), location.getLongitude()))

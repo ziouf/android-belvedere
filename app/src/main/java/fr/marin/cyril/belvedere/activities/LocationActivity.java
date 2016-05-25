@@ -29,27 +29,27 @@ public class LocationActivity extends FragmentActivity
     private static final int LOCATION_UPDATE_TIME = 5 * 1000; // 5 secondes
     private static final int LOCATION_UPDATE_DISTANCE = 15;   // 15 metres
     private static final String LOCATION_PERMISSION = Manifest.permission.ACCESS_FINE_LOCATION;
-
     protected Location location;
     protected GeomagneticField geoField;
     protected LocationManager locationManager;
+    private boolean locationServicesOn = false;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         this.locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
-
-        this.checkLocationEnabled();
-
-        if (ActivityCompat.checkSelfPermission(this, LOCATION_PERMISSION) == PackageManager.PERMISSION_GRANTED) {
-            this.location = locationManager.getLastKnownLocation(LocationManager.PASSIVE_PROVIDER);
-        }
     }
 
     @Override
     protected void onResume() {
         super.onResume();
+        this.checkLocationEnabled();
         this.registerLocationUpdates();
+
+        if (ActivityCompat.checkSelfPermission(this, LOCATION_PERMISSION) == PackageManager.PERMISSION_GRANTED
+                && locationServicesOn) {
+            this.location = locationManager.getLastKnownLocation(LocationManager.PASSIVE_PROVIDER);
+        }
     }
 
     @Override
@@ -75,14 +75,16 @@ public class LocationActivity extends FragmentActivity
     }
 
     protected void registerLocationUpdates() {
-        if (ActivityCompat.checkSelfPermission(this, LOCATION_PERMISSION) == PackageManager.PERMISSION_GRANTED) {
+        if (ActivityCompat.checkSelfPermission(this, LOCATION_PERMISSION) == PackageManager.PERMISSION_GRANTED
+                && locationServicesOn) {
             this.locationManager.requestLocationUpdates(locationManager.getBestProvider(new Criteria(), true),
                     LOCATION_UPDATE_TIME, LOCATION_UPDATE_DISTANCE, this);
         }
     }
 
     protected void removeLocationUpdates() {
-        if (ActivityCompat.checkSelfPermission(this, LOCATION_PERMISSION) == PackageManager.PERMISSION_GRANTED) {
+        if (ActivityCompat.checkSelfPermission(this, LOCATION_PERMISSION) == PackageManager.PERMISSION_GRANTED
+                && locationServicesOn) {
             this.locationManager.removeUpdates(this);
         }
     }
@@ -108,8 +110,10 @@ public class LocationActivity extends FragmentActivity
         Collection<String> providers = locationManager.getProviders(true);
 
         if (providers.contains(LocationManager.GPS_PROVIDER)
-                || providers.contains(LocationManager.NETWORK_PROVIDER))
+                || providers.contains(LocationManager.NETWORK_PROVIDER)) {
+            this.locationServicesOn = true;
             return;
+        }
 
         final AlertDialog.Builder dialog = new AlertDialog.Builder(this);
         dialog.setTitle(getResources().getString(R.string.location_service_not_enabled));
