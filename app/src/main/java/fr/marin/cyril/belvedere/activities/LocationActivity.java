@@ -29,8 +29,11 @@ public class LocationActivity extends FragmentActivity
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         this.locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
+
+        if (ActivityCompat.checkSelfPermission(this, LOCATION_PERMISSION) == PackageManager.PERMISSION_GRANTED) {
+            this.location = locationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
+        }
     }
 
     @Override
@@ -57,26 +60,23 @@ public class LocationActivity extends FragmentActivity
                 (float) location.getLatitude(),
                 (float) location.getLongitude(),
                 (float) location.getAltitude(),
-                System.currentTimeMillis()
+                location.getTime()
         );
     }
 
-    protected String getLocationProvider() {
-        if (this.locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER))
-            return LocationManager.GPS_PROVIDER;
-
-        else if (this.locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER))
-            return LocationManager.NETWORK_PROVIDER;
-
-        else
-            return LocationManager.PASSIVE_PROVIDER;
+    protected String getBestProvider() {
+        return locationManager.getBestProvider(new Criteria(), true);
     }
 
-    // TODO : Fallback vers NETWORK_PROVIDER quand GPS off.
+    protected void initLocation() {
+        if (ActivityCompat.checkSelfPermission(this, LOCATION_PERMISSION) == PackageManager.PERMISSION_GRANTED) {
+            this.location = locationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
+        }
+    }
+
     protected void registerLocationUpdates() {
         if (ActivityCompat.checkSelfPermission(this, LOCATION_PERMISSION) == PackageManager.PERMISSION_GRANTED) {
-            //this.location = locationManager.getLastKnownLocation(getLocationProvider());
-            this.locationManager.requestLocationUpdates(this.getLocationProvider(), LOCATION_UPDATE_TIME, LOCATION_UPDATE_DISTANCE, this);
+            this.locationManager.requestLocationUpdates(this.getBestProvider(), LOCATION_UPDATE_TIME, LOCATION_UPDATE_DISTANCE, this);
         }
     }
 
@@ -93,11 +93,13 @@ public class LocationActivity extends FragmentActivity
 
     @Override
     public void onProviderEnabled(String provider) {
-
+        this.removeLocationUpdates();
+        this.registerLocationUpdates();
     }
 
     @Override
     public void onProviderDisabled(String provider) {
-
+        this.removeLocationUpdates();
+        this.registerLocationUpdates();
     }
 }
