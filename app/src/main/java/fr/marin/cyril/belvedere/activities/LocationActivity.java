@@ -32,7 +32,7 @@ public class LocationActivity extends FragmentActivity
         this.locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
 
         if (ActivityCompat.checkSelfPermission(this, LOCATION_PERMISSION) == PackageManager.PERMISSION_GRANTED) {
-            this.location = locationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
+            this.location = locationManager.getLastKnownLocation(LocationManager.PASSIVE_PROVIDER);
         }
     }
 
@@ -64,19 +64,10 @@ public class LocationActivity extends FragmentActivity
         );
     }
 
-    protected String getBestProvider() {
-        return locationManager.getBestProvider(new Criteria(), true);
-    }
-
-    protected void initLocation() {
-        if (ActivityCompat.checkSelfPermission(this, LOCATION_PERMISSION) == PackageManager.PERMISSION_GRANTED) {
-            this.location = locationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
-        }
-    }
-
     protected void registerLocationUpdates() {
         if (ActivityCompat.checkSelfPermission(this, LOCATION_PERMISSION) == PackageManager.PERMISSION_GRANTED) {
-            this.locationManager.requestLocationUpdates(this.getBestProvider(), LOCATION_UPDATE_TIME, LOCATION_UPDATE_DISTANCE, this);
+            this.locationManager.requestLocationUpdates(locationManager.getBestProvider(new Criteria(), true),
+                    LOCATION_UPDATE_TIME, LOCATION_UPDATE_DISTANCE, this);
         }
     }
 

@@ -142,6 +142,10 @@ public class MapsActivity extends CompassActivity
         mMap.setOnInfoWindowClickListener(this.getOnInfoWindowClickListener());
 
         this.updateMarkersOnMap();
+
+        this.centerMapCameraOnMyPosition();
+        if (compassMarker == null)
+            this.initCompassMarkerIcon();
     }
 
     private void initCompassMarkerIcon() {
