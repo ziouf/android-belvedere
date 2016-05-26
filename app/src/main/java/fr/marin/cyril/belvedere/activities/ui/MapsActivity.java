@@ -92,7 +92,9 @@ public class MapsActivity extends CompassActivity
     @Override
     protected void onResume() {
         super.onResume();
-        this.centerMapCameraOnMyPosition();
+
+        if (isLocationServiceEnabled())
+            this.centerMapCameraOnMyPosition();
     }
 
     @Override
@@ -144,7 +146,7 @@ public class MapsActivity extends CompassActivity
         this.updateMarkersOnMap();
 
         this.centerMapCameraOnMyPosition();
-        if (compassMarker == null)
+        if (compassMarker == null && isLocationServiceEnabled())
             this.initCompassMarkerIcon();
     }
 

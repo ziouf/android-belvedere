@@ -32,7 +32,6 @@ public class LocationActivity extends FragmentActivity
     protected Location location;
     protected GeomagneticField geoField;
     protected LocationManager locationManager;
-    private boolean locationServicesOn = false;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -43,12 +42,11 @@ public class LocationActivity extends FragmentActivity
     @Override
     protected void onResume() {
         super.onResume();
-        this.checkLocationEnabled();
-        this.registerLocationUpdates();
-
-        if (ActivityCompat.checkSelfPermission(this, LOCATION_PERMISSION) == PackageManager.PERMISSION_GRANTED
-                && locationServicesOn) {
-            this.location = locationManager.getLastKnownLocation(LocationManager.PASSIVE_PROVIDER);
+        if (this.isLocationServiceEnabled()) {
+            this.initLocation();
+            this.registerLocationUpdates();
+        } else {
+            this.askForLocationServiceActivation();
         }
     }
 
@@ -74,17 +72,21 @@ public class LocationActivity extends FragmentActivity
         );
     }
 
+    private void initLocation() {
+        if (ActivityCompat.checkSelfPermission(this, LOCATION_PERMISSION) == PackageManager.PERMISSION_GRANTED) {
+            this.location = locationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
+        }
+    }
+
     protected void registerLocationUpdates() {
-        if (ActivityCompat.checkSelfPermission(this, LOCATION_PERMISSION) == PackageManager.PERMISSION_GRANTED
-                && locationServicesOn) {
+        if (ActivityCompat.checkSelfPermission(this, LOCATION_PERMISSION) == PackageManager.PERMISSION_GRANTED) {
             this.locationManager.requestLocationUpdates(locationManager.getBestProvider(new Criteria(), true),
                     LOCATION_UPDATE_TIME, LOCATION_UPDATE_DISTANCE, this);
         }
     }
 
     protected void removeLocationUpdates() {
-        if (ActivityCompat.checkSelfPermission(this, LOCATION_PERMISSION) == PackageManager.PERMISSION_GRANTED
-                && locationServicesOn) {
+        if (ActivityCompat.checkSelfPermission(this, LOCATION_PERMISSION) == PackageManager.PERMISSION_GRANTED) {
             this.locationManager.removeUpdates(this);
         }
     }
@@ -106,25 +108,25 @@ public class LocationActivity extends FragmentActivity
         this.registerLocationUpdates();
     }
 
-    private void checkLocationEnabled() {
+    protected boolean isLocationServiceEnabled() {
         Collection<String> providers = locationManager.getProviders(true);
 
-        if (providers.contains(LocationManager.GPS_PROVIDER)
-                || providers.contains(LocationManager.NETWORK_PROVIDER)) {
-            this.locationServicesOn = true;
-            return;
-        }
+        return (providers.contains(LocationManager.GPS_PROVIDER)
+                || providers.contains(LocationManager.NETWORK_PROVIDER));
+    }
 
+    private void askForLocationServiceActivation() {
         final AlertDialog.Builder dialog = new AlertDialog.Builder(this);
         dialog.setTitle(getResources().getString(R.string.location_service_not_enabled));
         dialog.setMessage(getResources().getString(R.string.open_location_settings));
+
         dialog.setPositiveButton(getResources().getString(R.string.ok), new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                Intent myIntent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
-                LocationActivity.this.startActivity(myIntent);
+                LocationActivity.this.startActivity(new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS));
             }
         });
+
         dialog.setNegativeButton(getResources().getString(R.string.cancel), new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
@@ -133,6 +135,5 @@ public class LocationActivity extends FragmentActivity
         });
 
         dialog.show();
-
     }
 }
