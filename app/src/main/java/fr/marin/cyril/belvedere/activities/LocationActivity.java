@@ -41,29 +41,7 @@ public class LocationActivity extends FragmentActivity
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         this.locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
-
-        this.dialog = new AlertDialog.Builder(this)
-                .setTitle(getString(R.string.location_service_not_enabled))
-                .setMessage(getString(R.string.open_location_settings))
-                .setPositiveButton(getString(R.string.yes), new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        startActivity(new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS));
-                        dialog.dismiss();
-                        dialogOpened = false;
-                        dialogAlreadyShown = true;
-                    }
-                })
-                .setNegativeButton(getString(R.string.no), new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        //LocationActivity.this.finish();
-                        dialog.dismiss();
-                        dialogOpened = false;
-                        dialogAlreadyShown = true;
-                    }
-                })
-                .create();
+        this.dialog = this.initLocationServiceDialog();
     }
 
     @Override
@@ -163,5 +141,35 @@ public class LocationActivity extends FragmentActivity
             dialog.show();
             this.dialogOpened = true;
         }
+    }
+
+    /**
+     * Initialisation de la popup
+     *
+     * @return
+     */
+    private AlertDialog initLocationServiceDialog() {
+        return new AlertDialog.Builder(this)
+                .setTitle(getString(R.string.location_service_not_enabled))
+                .setMessage(getString(R.string.open_location_settings))
+                .setPositiveButton(getString(R.string.yes), new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        startActivity(new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS));
+                        dialog.dismiss();
+                        dialogOpened = false;
+                        dialogAlreadyShown = true;
+                    }
+                })
+                .setNegativeButton(getString(R.string.no), new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        //LocationActivity.this.finish();
+                        dialog.dismiss();
+                        dialogOpened = false;
+                        dialogAlreadyShown = true;
+                    }
+                })
+                .create();
     }
 }
