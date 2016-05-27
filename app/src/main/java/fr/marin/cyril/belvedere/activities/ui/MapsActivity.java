@@ -61,7 +61,7 @@ public class MapsActivity extends CompassActivity
 
         if (!isCompassCompatible()) cameraButton.setVisibility(View.GONE);
 
-        // Désactivation du module AR si api < LOLLIPOP ou si Permission CAMERA  refusée
+        // Désactivation du module AR si le terminal de dispose pas de CAMERA ou si Permission CAMERA refusée
         if (!getPackageManager().hasSystemFeature(PackageManager.FEATURE_CAMERA)
                 || ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
             cameraButton.setVisibility(View.GONE);
