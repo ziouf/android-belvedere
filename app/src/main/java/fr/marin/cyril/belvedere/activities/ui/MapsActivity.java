@@ -81,7 +81,12 @@ public class MapsActivity extends CompassActivity
             @Override
             public void onClick(View v) {
                 Log.i("", "Click myPosButton");
+                // Demande d'activation des services de geolocalisation si désactivés
+                if (!MapsActivity.this.isLocationServiceEnabled())
+                    MapsActivity.this.askForLocationServiceActivation();
+                // Centrage de la vue sur la geolocalisation de l'utilisateur
                 MapsActivity.this.centerMapCameraOnMyPosition();
+                // Abonnement au trigger de geolocalisation
                 MapsActivity.this.registerLocationUpdates();
             }
         });

@@ -33,10 +33,37 @@ public class LocationActivity extends FragmentActivity
     protected GeomagneticField geoField;
     protected LocationManager locationManager;
 
+    private AlertDialog dialog;
+    private boolean dialogOpened = false;
+    private boolean dialogAlreadyShown = false;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         this.locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
+
+        this.dialog = new AlertDialog.Builder(this)
+                .setTitle(getString(R.string.location_service_not_enabled))
+                .setMessage(getString(R.string.open_location_settings))
+                .setPositiveButton(getString(R.string.yes), new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        startActivity(new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS));
+                        dialog.dismiss();
+                        dialogOpened = false;
+                        dialogAlreadyShown = true;
+                    }
+                })
+                .setNegativeButton(getString(R.string.no), new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        //LocationActivity.this.finish();
+                        dialog.dismiss();
+                        dialogOpened = false;
+                        dialogAlreadyShown = true;
+                    }
+                })
+                .create();
     }
 
     @Override
@@ -45,7 +72,7 @@ public class LocationActivity extends FragmentActivity
         if (this.isLocationServiceEnabled()) {
             this.initLocation();
             this.registerLocationUpdates();
-        } else {
+        } else if (!dialogAlreadyShown) {
             this.askForLocationServiceActivation();
         }
     }
@@ -72,12 +99,18 @@ public class LocationActivity extends FragmentActivity
         );
     }
 
+    /**
+     * Initialisation de la localisation
+     */
     private void initLocation() {
         if (ActivityCompat.checkSelfPermission(this, LOCATION_PERMISSION) == PackageManager.PERMISSION_GRANTED) {
             this.location = locationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
         }
     }
 
+    /**
+     * Inscription au trigger de geolocalisation
+     */
     protected void registerLocationUpdates() {
         if (ActivityCompat.checkSelfPermission(this, LOCATION_PERMISSION) == PackageManager.PERMISSION_GRANTED) {
             this.locationManager.requestLocationUpdates(locationManager.getBestProvider(new Criteria(), true),
@@ -85,6 +118,9 @@ public class LocationActivity extends FragmentActivity
         }
     }
 
+    /**
+     * Désinscription au trigger de geolocalisation
+     */
     protected void removeLocationUpdates() {
         if (ActivityCompat.checkSelfPermission(this, LOCATION_PERMISSION) == PackageManager.PERMISSION_GRANTED) {
             this.locationManager.removeUpdates(this);
@@ -108,32 +144,24 @@ public class LocationActivity extends FragmentActivity
         this.registerLocationUpdates();
     }
 
+    /**
+     * Vérification de l'activation des services de géolocalisation
+     *
+     * @return
+     */
     protected boolean isLocationServiceEnabled() {
-        Collection<String> providers = locationManager.getProviders(true);
-
+        final Collection<String> providers = locationManager.getProviders(true);
         return (providers.contains(LocationManager.GPS_PROVIDER)
                 || providers.contains(LocationManager.NETWORK_PROVIDER));
     }
 
-    private void askForLocationServiceActivation() {
-        final AlertDialog.Builder dialog = new AlertDialog.Builder(this);
-        dialog.setTitle(getResources().getString(R.string.location_service_not_enabled));
-        dialog.setMessage(getResources().getString(R.string.open_location_settings));
-
-        dialog.setPositiveButton(getResources().getString(R.string.ok), new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                LocationActivity.this.startActivity(new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS));
-            }
-        });
-
-        dialog.setNegativeButton(getResources().getString(R.string.cancel), new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                LocationActivity.this.finish();
-            }
-        });
-
-        dialog.show();
+    /**
+     * Affichage de la popup de demande d'activation des services de geolocalisation
+     */
+    protected void askForLocationServiceActivation() {
+        if (!dialogOpened) {
+            dialog.show();
+            this.dialogOpened = true;
+        }
     }
 }

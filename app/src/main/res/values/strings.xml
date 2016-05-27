@@ -12,9 +12,11 @@
     <string name="label_altitude">altitude</string>
     <string name="label_distance">distance</string>
     <string name="location_service_not_enabled">Location not enabled</string>
-    <string name="open_location_settings">Open location settings</string>
+    <string name="open_location_settings">I need location services activated to give you the best user experience. \nOpen location settings ?</string>
     <string name="cancel">Cancel</string>
     <string name="exit_application">Exit application</string>
     <string name="ok">Ok</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
 
 </resources>
