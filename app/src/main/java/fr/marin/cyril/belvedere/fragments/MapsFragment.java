@@ -1,7 +1,6 @@
 package fr.marin.cyril.belvedere.fragments;
 
 import android.Manifest;
-import android.app.Fragment;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
@@ -11,9 +10,12 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.content.ContextCompat;
 import android.text.method.ScrollingMovementMethod;
 import android.util.Log;
+import android.view.InflateException;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,8 +24,8 @@ import android.widget.TextView;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
-import com.google.android.gms.maps.MapFragment;
 import com.google.android.gms.maps.OnMapReadyCallback;
+import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
@@ -50,9 +52,8 @@ import static fr.marin.cyril.belvedere.services.CompassService.getInstance;
  */
 public class MapsFragment extends Fragment implements OnMapReadyCallback {
     private static final String TAG = "MapsFragment";
-
+    private static View view;
     private final Collection<Marker> markersShown = new HashSet<>();
-
     private Marker compassMarker;
     private GoogleMap mMap;
     private DatabaseHelper db;
@@ -65,22 +66,36 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        if (container == null) return null;
 
-        db = DatabaseHelper.getInstance(getActivity().getApplicationContext());
-        locationService = LocationService.getInstance(getActivity());
-        compassService = getInstance(getActivity());
+        if (view != null) {
+            ViewGroup parent = (ViewGroup) view.getParent();
+            if (parent != null)
+                parent.removeView(view);
+        }
 
-        return inflater.inflate(R.layout.fragment_maps, container, false);
+        try {
+            view = inflater.inflate(R.layout.fragment_maps, container, false);
+        } catch (InflateException e) {
+            // Ignore
+        }
+
+        return view;
     }
 
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
+        db = DatabaseHelper.getInstance(getActivity().getApplicationContext());
+        locationService = LocationService.getInstance(getActivity());
+        compassService = getInstance(getActivity());
+
+        FragmentManager childFragmentManager = getChildFragmentManager();
+
         // Initialisation du fragment Maps
-        MapFragment mapFragment = (MapFragment) getChildFragmentManager().findFragmentById(R.id.google_maps_fragment);
-        mapFragment.getMapAsync(this);
+        SupportMapFragment mapFragment = (SupportMapFragment) childFragmentManager.findFragmentById(R.id.google_maps_fragment);
+        if (mapFragment != null)
+            mapFragment.getMapAsync(this);
 
         // Initialisation des FAB
         initFloatingActionButtons();

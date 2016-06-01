@@ -13,4 +13,7 @@
     <dimen name="fab_margin_left">0dp</dimen>
     <dimen name="fab_margin_bottom">0dp</dimen>
 
+    <!-- Nav Header -->
+    <dimen name="nav_header_padding">5dp</dimen>
+
 </resources>

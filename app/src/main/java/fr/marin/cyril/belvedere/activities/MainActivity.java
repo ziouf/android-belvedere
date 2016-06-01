@@ -1,25 +1,23 @@
 package fr.marin.cyril.belvedere.activities;
 
-import android.app.Fragment;
-import android.app.FragmentManager;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
+import android.support.v4.app.Fragment;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 
 import fr.marin.cyril.belvedere.R;
-import fr.marin.cyril.belvedere.activities.old.CompassActivity;
-import fr.marin.cyril.belvedere.fragments.AboutFragment;
 import fr.marin.cyril.belvedere.fragments.MapsFragment;
 import fr.marin.cyril.belvedere.fragments.SettingsFragment;
 
 /**
  * Created by cyril on 31/05/16.
  */
-public class MainActivity extends CompassActivity {
+public class MainActivity extends AppCompatActivity {
 
-    public static FragmentManager fragmentManager;
+    public static android.support.v4.app.FragmentManager fragmentManager;
 
     private ActionBarDrawerToggle toggle;
     private DrawerLayout drawerLayout;
@@ -49,7 +47,7 @@ public class MainActivity extends CompassActivity {
         );
 
         // Fragment manager
-        fragmentManager = getFragmentManager();
+        fragmentManager = getSupportFragmentManager();
 
         // Fragment par défaut
         fragmentManager.beginTransaction()
@@ -69,9 +67,6 @@ public class MainActivity extends CompassActivity {
             case R.id.menu_settings:
                 fragmentClass = SettingsFragment.class;
                 break;
-            case R.id.menu_about:
-                fragmentClass = AboutFragment.class;
-                break;
             default:
                 fragmentClass = MapsFragment.class;
         }
@@ -83,7 +78,9 @@ public class MainActivity extends CompassActivity {
         }
 
         // Insert the fragment by replacing any existing fragment
-        fragmentManager.beginTransaction().replace(R.id.main_activity_fragment_placeholder, fragment).commit();
+        fragmentManager.beginTransaction()
+                .replace(R.id.main_activity_fragment_placeholder, fragment)
+                .commit();
 
         // Close the navigation drawer
         drawerLayout.closeDrawers();
