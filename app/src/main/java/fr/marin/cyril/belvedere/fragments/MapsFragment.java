@@ -276,7 +276,10 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback {
     @Override
     public void onPause() {
         super.onPause();
-        if (locationService != null) locationService.pause();
+        if (locationService != null) {
+            locationService.pause();
+            locationService.unRegisterLocationEventListener(locationEventListener);
+        }
         if (compassService != null) {
             compassService.pause();
             compassService.unRegisterCompassEventListener(compassServiceEventListener);
@@ -286,7 +289,11 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback {
     @Override
     public void onResume() {
         super.onResume();
-        if (locationService != null) locationService.resume();
+        if (locationService != null) {
+            locationService.resume();
+            if (locationEventListener != null)
+                locationService.registerLocationEventListener(locationEventListener);
+        }
         if (compassService != null) {
             compassService.resume();
             compassService.setOrientation(Orientation.PORTRAIT);

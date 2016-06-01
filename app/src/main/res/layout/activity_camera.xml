@@ -16,9 +16,9 @@
         android:visibility="gone"
         />
 
-    <include layout="@layout/peak_info_layout" />
+    <include layout="@layout/camera_peak_info_layout" />
 
-    <include layout="@layout/reticule_layout" />
+    <include layout="@layout/camera_reticule_layout" />
 
     <TextView
         android:id="@+id/debug_camera_tv"
