@@ -1,4 +1,4 @@
-package fr.marin.cyril.belvedere.activities.ui;
+package fr.marin.cyril.belvedere.activities;
 
 import android.annotation.TargetApi;
 import android.app.ActionBar;
@@ -21,7 +21,7 @@ import java.util.concurrent.ScheduledFuture;
 import java.util.concurrent.TimeUnit;
 
 import fr.marin.cyril.belvedere.R;
-import fr.marin.cyril.belvedere.activities.CompassActivity;
+import fr.marin.cyril.belvedere.activities.old.CompassActivity;
 import fr.marin.cyril.belvedere.camera.Camera;
 import fr.marin.cyril.belvedere.model.Placemark;
 import fr.marin.cyril.belvedere.tools.ARPeakFinder;

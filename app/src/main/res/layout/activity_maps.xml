@@ -2,7 +2,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/camera_layout"
+    android:id="@+id/maps_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     >
@@ -12,7 +12,7 @@
         android:name="com.google.android.gms.maps.MapFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".activities.ui.MapsActivity" />
+        tools:context=".activities.old.MapsActivity" />
 
     <TextView
         android:id="@+id/debug_location_info"
@@ -31,25 +31,25 @@
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
         android:layout_gravity="bottom|end"
+        android:orientation="vertical"
         >
         <android.support.design.widget.FloatingActionButton
             android:id="@+id/camera_button"
+            style="@style/FloatingActionButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/ic_camera"
-            style="@style/FloatingActionButton"
             />
 
         <android.support.design.widget.FloatingActionButton
             android:id="@+id/myPosition_button"
+            style="@style/FloatingActionButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom|end"
             android:src="@android:drawable/ic_menu_mylocation"
             app:backgroundTint="@color/myPosition_button"
-            style="@style/FloatingActionButton"
             />
     </LinearLayout>
 

@@ -6,7 +6,7 @@ import android.util.Log;
 
 import com.google.android.gms.maps.model.LatLng;
 
-import fr.marin.cyril.belvedere.activities.CompassActivity;
+import fr.marin.cyril.belvedere.activities.old.CompassActivity;
 import fr.marin.cyril.belvedere.database.DatabaseHelper;
 import fr.marin.cyril.belvedere.model.Area;
 import fr.marin.cyril.belvedere.model.Coordinates;

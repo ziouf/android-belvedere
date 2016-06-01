@@ -34,7 +34,7 @@
             android:value="@string/google_maps_key" />
 
         <activity
-            android:name="fr.marin.cyril.belvedere.activities.ui.LoadingActivity"
+            android:name=".activities.LoadingActivity"
             android:theme="@style/SplashTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -43,14 +43,16 @@
         </activity>
 
         <activity
-            android:name="fr.marin.cyril.belvedere.activities.ui.MapsActivity"
+            android:name=".activities.old.MapsActivity"
             android:configChanges="keyboardHidden"
             android:theme="@style/MapsTheme" />
 
         <activity
-            android:name="fr.marin.cyril.belvedere.activities.ui.CameraActivity"
+            android:name=".activities.CameraActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:theme="@style/CameraTheme" />
+
+        <activity android:name=".activities.MainActivity" />
 
     </application>
 

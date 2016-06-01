@@ -1,4 +1,4 @@
-package fr.marin.cyril.belvedere.activities;
+package fr.marin.cyril.belvedere.activities.old;
 
 import android.content.pm.PackageManager;
 import android.hardware.Sensor;

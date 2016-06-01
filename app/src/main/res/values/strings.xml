@@ -18,5 +18,8 @@
     <string name="ok">Ok</string>
     <string name="yes">Yes</string>
     <string name="no">No</string>
+    <string name="menu_settings">Settings</string>
+    <string name="close">Close</string>
+    <string name="open">Open</string>
 
 </resources>

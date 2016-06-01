@@ -1,4 +1,4 @@
-package fr.marin.cyril.belvedere.activities;
+package fr.marin.cyril.belvedere.activities.old;
 
 import android.Manifest;
 import android.content.DialogInterface;
@@ -13,8 +13,8 @@ import android.os.Bundle;
 import android.provider.Settings;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
-import android.support.v4.app.FragmentActivity;
 import android.support.v7.app.AlertDialog;
+import android.support.v7.app.AppCompatActivity;
 
 import java.util.Collection;
 
@@ -23,7 +23,7 @@ import fr.marin.cyril.belvedere.R;
 /**
  * Created by Cyril on 27/04/2016.
  */
-public class LocationActivity extends FragmentActivity
+public class LocationActivity extends AppCompatActivity
         implements LocationListener {
 
     private static final int LOCATION_UPDATE_TIME = 5 * 1000; // 5 secondes

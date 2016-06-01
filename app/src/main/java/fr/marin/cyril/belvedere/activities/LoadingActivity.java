@@ -1,4 +1,4 @@
-package fr.marin.cyril.belvedere.activities.ui;
+package fr.marin.cyril.belvedere.activities;
 
 import android.Manifest;
 import android.app.Activity;
@@ -106,7 +106,7 @@ public class LoadingActivity extends Activity
         protected void onPostExecute(Void v) {
             super.onPostExecute(v);
             this.loadingInfoTextView.setText(R.string.loading_application_openning);
-            LoadingActivity.this.startActivity(new Intent(LoadingActivity.this, MapsActivity.class));
+            LoadingActivity.this.startActivity(new Intent(LoadingActivity.this, MainActivity.class));
             LoadingActivity.this.finish();
         }
 

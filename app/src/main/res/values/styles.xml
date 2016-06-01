@@ -10,6 +10,11 @@
         <!-- Statusbar -->
         <item name="android:windowTranslucentStatus">@bool/translucentStatusBar</item>
         <item name="android:windowTranslucentNavigation">@bool/translucentNavBar</item>
+
+        <!-- Actionbar -->
+        <item name="android:actionBarStyle">@style/MyActionBar</item>
+        <!-- Support library compatibility -->
+        <item name="actionBarStyle">@style/MyActionBar</item>
     </style>
 
     <style name="MapsTheme.NoActionBar">
@@ -37,5 +42,17 @@
         <item name="android:layout_marginRight">@dimen/fab_margin_right</item>
         <item name="android:layout_marginBottom">@dimen/fab_margin_bottom</item>
     </style>
-    
+
+    <!-- ACTION BAR STYLES -->
+    <style name="MyActionBar" parent="@style/Widget.AppCompat.ActionBar">
+        <item name="android:background">@drawable/actionbar_background</item>
+        <item name="android:windowActionBarOverlay">true</item>
+        <item name="android:displayOptions">showHome|useLogo</item>
+
+        <!-- Support library compatibility -->
+        <item name="background">@drawable/actionbar_background</item>
+        <item name="windowActionBarOverlay">true</item>
+        <item name="displayOptions">showHome|useLogo</item>
+    </style>
+
 </resources>
