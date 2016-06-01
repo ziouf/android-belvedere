@@ -47,7 +47,7 @@ public class MapsActivity extends CompassActivity
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_maps);
+        setContentView(R.layout.fragment_maps);
 
         db = DatabaseHelper.getInstance(this);
 

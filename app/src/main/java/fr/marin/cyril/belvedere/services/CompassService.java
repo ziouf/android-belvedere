@@ -1,4 +1,4 @@
-package fr.marin.cyril.belvedere.tools;
+package fr.marin.cyril.belvedere.services;
 
 import android.content.Context;
 import android.content.pm.PackageManager;
@@ -8,6 +8,8 @@ import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 
 import java.util.HashSet;
+
+import fr.marin.cyril.belvedere.tools.Orientation;
 
 /**
  * Created by cyril on 31/05/16.
@@ -20,7 +22,7 @@ public class CompassService
     private static CompassService singleton;
 
     private final Context context;
-    private final HashSet<CompasEventListener> compassEventListenerSet;
+    private final HashSet<CompassEventListener> compassEventListenerSet;
     private final SensorManager sensorManager;
 
     private Orientation orientation = Orientation.PORTRAIT;
@@ -76,8 +78,8 @@ public class CompassService
                 SensorManager.getOrientation(R, oMat);
 
                 // Run event
-                for (CompasEventListener eventListener : compassEventListenerSet)
-                    eventListener.run();
+                for (CompassEventListener e : compassEventListenerSet)
+                    e.run();
             }
         }
     }
@@ -96,17 +98,17 @@ public class CompassService
         return output;
     }
 
-    public CompasEventListener registerCompasEventListener(CompasEventListener eventListener) {
+    public CompassEventListener registerCompassEventListener(CompassEventListener eventListener) {
         this.compassEventListenerSet.add(eventListener);
         return eventListener;
     }
 
-    public void unRegisterCompasEventListener(CompasEventListener eventListener) {
+    public void unRegisterCompassEventListener(CompassEventListener eventListener) {
         this.compassEventListenerSet.remove(eventListener);
     }
 
 
-    public static abstract class CompasEventListener implements Runnable {
+    public static abstract class CompassEventListener implements Runnable {
         @Override
         public void run() {
             float azimuth = (float) Math.toDegrees(singleton.oMat[0]);

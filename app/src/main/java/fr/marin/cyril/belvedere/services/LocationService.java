@@ -1,4 +1,4 @@
-package fr.marin.cyril.belvedere.tools;
+package fr.marin.cyril.belvedere.services;
 
 import android.Manifest;
 import android.content.Context;
@@ -16,6 +16,7 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AlertDialog;
 
 import java.util.Collection;
+import java.util.HashSet;
 
 import fr.marin.cyril.belvedere.R;
 
@@ -29,6 +30,7 @@ public class LocationService implements LocationListener {
 
     private static LocationService singleton = null;
     private final Context context;
+    private final HashSet<LocationEventListener> locationEventListenerSet;
 
     private Location location;
     private GeomagneticField geoField;
@@ -42,6 +44,7 @@ public class LocationService implements LocationListener {
         this.context = context;
         this.locationManager = (LocationManager) context.getSystemService(Context.LOCATION_SERVICE);
         this.dialog = this.initLocationServiceDialog(context);
+        this.locationEventListenerSet = new HashSet<>();
     }
 
     public static LocationService getInstance(Context context) {
@@ -100,6 +103,9 @@ public class LocationService implements LocationListener {
                 (float) location.getAltitude(),
                 location.getTime()
         );
+
+        for (LocationEventListener e : locationEventListenerSet)
+            e.run();
     }
 
     @Override
@@ -175,5 +181,27 @@ public class LocationService implements LocationListener {
                     }
                 })
                 .create();
+    }
+
+
+    public LocationEventListener registerLocationEventListener(LocationEventListener eventListener) {
+        this.locationEventListenerSet.add(eventListener);
+        return eventListener;
+    }
+
+    public void unRegisterLocationEventListener(LocationEventListener eventListener) {
+        this.locationEventListenerSet.remove(eventListener);
+    }
+
+    /**
+     *
+     */
+    public static abstract class LocationEventListener implements Runnable {
+        @Override
+        public void run() {
+            this.onSensorChanged(singleton.location);
+        }
+
+        public abstract void onSensorChanged(Location location);
     }
 }

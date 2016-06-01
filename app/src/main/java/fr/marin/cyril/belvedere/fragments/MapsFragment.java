@@ -39,11 +39,11 @@ import fr.marin.cyril.belvedere.activities.CameraActivity;
 import fr.marin.cyril.belvedere.database.DatabaseHelper;
 import fr.marin.cyril.belvedere.model.Area;
 import fr.marin.cyril.belvedere.model.Placemark;
-import fr.marin.cyril.belvedere.tools.CompassService;
-import fr.marin.cyril.belvedere.tools.LocationService;
+import fr.marin.cyril.belvedere.services.CompassService;
+import fr.marin.cyril.belvedere.services.LocationService;
 import fr.marin.cyril.belvedere.tools.Orientation;
 
-import static fr.marin.cyril.belvedere.tools.CompassService.getInstance;
+import static fr.marin.cyril.belvedere.services.CompassService.getInstance;
 
 /**
  * Created by cyril on 31/05/16.
@@ -58,8 +58,9 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback {
     private DatabaseHelper db;
 
     private LocationService locationService;
+    private LocationService.LocationEventListener locationEventListener;
     private CompassService compassService;
-    private CompassService.CompasEventListener compassServiceEventListener;
+    private CompassService.CompassEventListener compassServiceEventListener;
 
     @Nullable
     @Override
@@ -70,7 +71,7 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback {
         locationService = LocationService.getInstance(getActivity());
         compassService = getInstance(getActivity());
 
-        return inflater.inflate(R.layout.activity_maps, container, false);
+        return inflater.inflate(R.layout.fragment_maps, container, false);
     }
 
     @Override
@@ -155,22 +156,29 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback {
         mMap.setOnInfoWindowClickListener(this.getOnInfoWindowClickListener());
 
         this.updateMarkersOnMap();
-
         this.centerMapCameraOnMyPosition();
 
         final PackageManager pm = getActivity().getPackageManager();
-        final Location location = locationService.getLocation();
-        if (compassMarker == null && location != null
+        if (compassMarker == null
                 && (pm.hasSystemFeature(PackageManager.FEATURE_SENSOR_ACCELEROMETER)
                 && pm.hasSystemFeature(PackageManager.FEATURE_SENSOR_COMPASS))) {
 
             this.compassMarker = mMap.addMarker(new MarkerOptions()
-                    .position(new LatLng(location.getLatitude(), location.getLongitude()))
+                    .position(new LatLng(0f, 0f))
                     .icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_compas_arrow))
             );
 
-            compassServiceEventListener = compassService.registerCompasEventListener(
-                    new CompassService.CompasEventListener() {
+            locationEventListener = locationService.registerLocationEventListener(
+                    new LocationService.LocationEventListener() {
+                        @Override
+                        public void onSensorChanged(Location location) {
+                            compassMarker.setPosition(new LatLng(location.getLatitude(), location.getLongitude()));
+                        }
+                    }
+            );
+
+            compassServiceEventListener = compassService.registerCompassEventListener(
+                    new CompassService.CompassEventListener() {
                         @Override
                         public void onSensorChanged(float azimuth, float pitch) {
                             if (compassMarker == null || locationService == null) return;
@@ -271,7 +279,7 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback {
         if (locationService != null) locationService.pause();
         if (compassService != null) {
             compassService.pause();
-            compassService.unRegisterCompasEventListener(compassServiceEventListener);
+            compassService.unRegisterCompassEventListener(compassServiceEventListener);
         }
     }
 
@@ -283,13 +291,8 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback {
             compassService.resume();
             compassService.setOrientation(Orientation.PORTRAIT);
             if (compassServiceEventListener != null)
-                compassService.registerCompasEventListener(compassServiceEventListener);
+                compassService.registerCompassEventListener(compassServiceEventListener);
         }
-    }
-
-
-    private void initCompassMarkerIcon() {
-
     }
 
     /**
