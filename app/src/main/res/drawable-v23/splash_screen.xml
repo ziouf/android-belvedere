@@ -2,7 +2,7 @@
 <layer-list xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item android:gravity="fill_vertical">
-        <color android:color="@color/wallet_bright_foreground_holo_dark" />
+        <color android:color="@android:color/white" />
     </item>
 
     <item android:gravity="center">

@@ -1,24 +1,15 @@
 <resources>
 
-    <style name="MainTheme" parent="Theme.AppCompat.Light">
-        <item name="android:windowTranslucentStatus">true</item>
+    <style name="AppTheme.Main.Compat">
+        <!-- Statusbar -->
         <item name="android:statusBarColor">@android:color/transparent</item>
-
-        <item name="actionBarStyle">@style/MainTheme.ActionBar.Transparent</item>
-        <item name="android:actionBarStyle">@style/MainTheme.ActionBar.Transparent</item>
     </style>
 
-    <style name="MainTheme.ActionBar.Transparent" parent="MainTheme">
-        <item name="colorPrimary">@android:color/transparent</item>
+    <style name="AppTheme.Splash.Compat">
+        <item name="android:navigationBarColor">@android:color/white</item>
     </style>
 
-    <style name="SplashTheme" parent="android:Theme.DeviceDefault.NoActionBar.Fullscreen">
-        <item name="android:textColor">@color/loading_text</item>
-        <item name="android:windowBackground">@drawable/splash_screen</item>
-        <item name="android:navigationBarColor">@color/wallet_bright_foreground_holo_dark</item>
-    </style>
-
-    <style name="FloatingActionButton">
+    <style name="AppTheme.FloatingActionButton.Compat">
         <item name="android:elevation">4dp</item>
         <item name="android:layout_margin">@dimen/fab_margin</item>
     </style>

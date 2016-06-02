@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <style name="DebugTheme">
+    <style name="AppTheme.Debug">
         <item name="android:visibility">visible</item>
     </style>
 

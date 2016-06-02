@@ -1,13 +1,16 @@
 package fr.marin.cyril.belvedere.activities;
 
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.MenuItem;
 
 import fr.marin.cyril.belvedere.R;
@@ -19,9 +22,9 @@ import fr.marin.cyril.belvedere.fragments.SettingsFragment;
  */
 public class MainActivity extends AppCompatActivity {
 
-    public static android.support.v4.app.FragmentManager fragmentManager;
+    private static final String TAG = "MainActivity";
+    public static FragmentManager fragmentManager;
 
-    private Toolbar toolbar;
     private ActionBarDrawerToggle toggle;
     private DrawerLayout drawerLayout;
     private NavigationView navigationView;
@@ -34,19 +37,23 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         // Set a Toolbar to replace the ActionBar.
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayOptions(ActionBar.DISPLAY_HOME_AS_UP | ActionBar.DISPLAY_USE_LOGO);
         // Configuration de l'Actionbar
+        /*
         final ActionBar actionBar = getSupportActionBar();
         if (actionBar != null) {
             actionBar.setDisplayOptions(ActionBar.DISPLAY_HOME_AS_UP | ActionBar.DISPLAY_USE_LOGO);
-            actionBar.setHomeButtonEnabled(true);
+            //actionBar.setHomeButtonEnabled(true);
         }
+        */
 
         // Init Menu Drawer
         drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         navigationView = (NavigationView) findViewById(R.id.navigation_view);
         toggle = new ActionBarDrawerToggle(this, drawerLayout, R.string.open, R.string.close);
         drawerLayout.addDrawerListener(toggle);
-        toggle.syncState();
 
         // Init
         navigationView.setNavigationItemSelectedListener(
@@ -63,9 +70,16 @@ public class MainActivity extends AppCompatActivity {
 
         // Fragment par défaut
         fragmentManager.beginTransaction()
-                .add(R.id.main_activity_fragment_placeholder, new MapsFragment())
+                .add(R.id.fragment_placeholder, new MapsFragment())
                 .commit();
 
+    }
+
+    @Override
+    protected void onPostCreate(@Nullable Bundle savedInstanceState) {
+        super.onPostCreate(savedInstanceState);
+
+        toggle.syncState();
     }
 
     private boolean selectDrawerItem(MenuItem item) {
@@ -86,14 +100,17 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private Fragment addFragment(Class fragmentClass) {
-        Fragment fragment = null;
+        Fragment fragment;
         try {
             fragment = (Fragment) fragmentClass.newInstance();
-        } catch (Exception ignore) {
+        } catch (Exception e) {
+            Log.e(TAG, "Erreur lors de l'instanciation du fragment", e);
+            return null;
         }
 
-        fragmentManager.beginTransaction()
-                .add(R.id.main_activity_fragment_placeholder, fragment)
+        if (fragment != null)
+            fragmentManager.beginTransaction()
+                    .add(R.id.fragment_placeholder, fragment)
                 .commit();
 
         return fragment;

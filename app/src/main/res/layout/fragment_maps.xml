@@ -16,14 +16,14 @@
 
     <TextView
         android:id="@+id/debug_location_info"
-        style="@style/DebugTheme"
+        style="@style/AppTheme.Debug"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp" />
 
     <TextView
         android:id="@+id/debug_azimuth_info"
-        style="@style/DebugTheme"
+        style="@style/AppTheme.Debug"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/debug_location_info" />
@@ -36,7 +36,7 @@
         >
         <android.support.design.widget.FloatingActionButton
             android:id="@+id/camera_button"
-            style="@style/FloatingActionButton"
+            style="@style/AppTheme.FloatingActionButton.Compat"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/ic_camera"
@@ -44,7 +44,7 @@
 
         <android.support.design.widget.FloatingActionButton
             android:id="@+id/myPosition_button"
-            style="@style/FloatingActionButton"
+            style="@style/AppTheme.FloatingActionButton.Compat"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom|end"
