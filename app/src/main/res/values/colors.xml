@@ -10,4 +10,5 @@
     <color name="loading_text">#404040</color>
 
     <color name="myPosition_button">#ededed</color>
+    <color name="translucent">#00000000</color>
 </resources>

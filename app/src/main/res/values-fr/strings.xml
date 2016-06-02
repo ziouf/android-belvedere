@@ -19,4 +19,6 @@
     <string name="yes">Oui</string>
     <string name="no">Non</string>
     <string name="menu_settings">Paramètres</string>
+    <string name="close">Fermer</string>
+    <string name="open">Ouvrir</string>
 </resources>

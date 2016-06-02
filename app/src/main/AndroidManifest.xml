@@ -19,7 +19,7 @@
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
         android:supportsRtl="true"
-        android:theme="@style/MapsTheme">
+        android:theme="@style/MainTheme">
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"
@@ -34,14 +34,11 @@
             </intent-filter>
         </activity>
 
-        <activity
-            android:name=".activities.MainActivity"
-            android:theme="@style/MapsTheme" />
+        <activity android:name=".activities.MainActivity" />
 
         <activity
             android:name=".activities.old.MapsActivity"
-            android:configChanges="keyboardHidden"
-            android:theme="@style/MapsTheme" />
+            android:configChanges="keyboardHidden" />
 
         <activity
             android:name=".activities.CameraActivity"

@@ -1,10 +1,15 @@
 <resources>
 
-    <style name="MapsTheme.NoActionBar">
-        <item name="windowActionBar">false</item>
-        <item name="windowNoTitle">true</item>
-        <item name="android:windowDrawsSystemBarBackgrounds">true</item>
+    <style name="MainTheme" parent="Theme.AppCompat.Light">
+        <item name="android:windowTranslucentStatus">true</item>
         <item name="android:statusBarColor">@android:color/transparent</item>
+
+        <item name="actionBarStyle">@style/MainTheme.ActionBar.Transparent</item>
+        <item name="android:actionBarStyle">@style/MainTheme.ActionBar.Transparent</item>
+    </style>
+
+    <style name="MainTheme.ActionBar.Transparent" parent="MainTheme">
+        <item name="colorPrimary">@android:color/transparent</item>
     </style>
 
     <style name="SplashTheme" parent="android:Theme.DeviceDefault.NoActionBar.Fullscreen">
