@@ -85,6 +85,7 @@ public class MainActivity extends AppCompatActivity {
                 popFragment(currentFragment);
                 break;
             case R.id.menu_settings:
+                popFragment(currentFragment);
                 currentFragment = addFragment(SettingsFragment.class);
                 break;
         }
