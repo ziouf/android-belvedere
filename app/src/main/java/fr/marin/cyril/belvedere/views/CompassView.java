@@ -122,7 +122,7 @@ public class CompassView extends View {
 
         invalidate();
 
-        Log.i(TAG, "Update azimuth and redraw view");
+        Log.v(TAG, "Update azimuth and redraw view");
     }
 
 }

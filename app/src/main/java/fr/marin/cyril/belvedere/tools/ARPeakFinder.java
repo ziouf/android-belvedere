@@ -6,7 +6,6 @@ import android.util.Log;
 
 import com.google.android.gms.maps.model.LatLng;
 
-import fr.marin.cyril.belvedere.activities.old.CompassActivity;
 import fr.marin.cyril.belvedere.database.DatabaseHelper;
 import fr.marin.cyril.belvedere.model.Area;
 import fr.marin.cyril.belvedere.model.Coordinates;
@@ -32,6 +31,8 @@ public class ARPeakFinder {
     private static final double[] ANGULAR_ACCURACY = new double[]{6d, 3d};
     private static final double EARTH_RADIUS_KM = 6371d;
 
+    private static ARPeakFinder singleton;
+
     // Db
     private final DatabaseHelper db;
     // Observateur
@@ -44,11 +45,20 @@ public class ARPeakFinder {
         this.db = DatabaseHelper.getInstance(context);
     }
 
-    public void updateObserverLocation(final Location location, final double azimuth) {
+    public static ARPeakFinder getInstance(Context context) {
+        if (singleton == null) singleton = new ARPeakFinder(context);
+        return singleton;
+    }
+
+    public void updateObserverLocation(final Location location) {
         this.oLatLng = new LatLng(location.getLatitude(), location.getLongitude());
         this.oElevation = location.getAltitude();
-        this.oPitch = Math.abs(location.getExtras().getFloat(CompassActivity.KEY_PITCH));
+        Log.v(TAG, "Update Observer Location");
+    }
+    public void updateObserverOrientation(final double azimuth, final double pitch) {
+        this.oPitch = pitch;
         this.oAzimuth = azimuth;
+        Log.v(TAG, "Update Observer Orientation");
     }
 
     /**

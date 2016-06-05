@@ -1,31 +1,33 @@
 package fr.marin.cyril.belvedere.activities;
 
 import android.annotation.TargetApi;
-import android.app.ActionBar;
+import android.content.Context;
 import android.content.pm.ActivityInfo;
 import android.location.Location;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
+import android.support.v7.app.ActionBar;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import java.util.Locale;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.ScheduledFuture;
 import java.util.concurrent.TimeUnit;
 
 import fr.marin.cyril.belvedere.R;
-import fr.marin.cyril.belvedere.activities.old.CompassActivity;
 import fr.marin.cyril.belvedere.camera.Camera;
 import fr.marin.cyril.belvedere.model.Placemark;
+import fr.marin.cyril.belvedere.services.CompassService;
+import fr.marin.cyril.belvedere.services.LocationService;
 import fr.marin.cyril.belvedere.tools.ARPeakFinder;
-import fr.marin.cyril.belvedere.tools.Utils;
+import fr.marin.cyril.belvedere.tools.Orientation;
 import fr.marin.cyril.belvedere.views.CompassView;
 
 /**
@@ -33,38 +35,54 @@ import fr.marin.cyril.belvedere.views.CompassView;
  * status bar and navigation/system bar) with user interaction.
  */
 @TargetApi(Build.VERSION_CODES.LOLLIPOP)
-public class CameraActivity extends CompassActivity {
+public class CameraActivity extends AppCompatActivity {
     private static final String TAG = "CameraActivity";
 
     private final Handler handler = new Handler(Looper.getMainLooper());
-    private final ScheduledExecutorService mScheduler = Executors.newScheduledThreadPool(1);
+
+    private ScheduledExecutorService mScheduler;
+
+    private CompassService compassService;
+    private CompassService.CompassEventListener compassEventListener;
+    private LocationService locationService;
+    private LocationService.LocationEventListener locationEventListener;
 
     private Camera camera;
     private ImageView peak_thumbnail_img;
     private TextView peak_info_tv;
     private ScheduledFuture arTask = null;
+    private ARPeakFinder arPeakFinder;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Log.i(TAG, "onCreate");
+
         // Inflate UI
         setContentView(R.layout.activity_camera);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
-        this.portrait = false;
+
+        // Init services
+        this.compassService = CompassService.getInstance(getApplicationContext());
+        this.locationService = LocationService.getInstance(getApplicationContext());
 
         // Init Camera
         this.camera = Camera.getCameraInstance(this);
         this.peak_thumbnail_img = (ImageView) findViewById(R.id.peak_thumbnail_img);
         this.peak_info_tv = (TextView) findViewById(R.id.peak_info_tv);
+
+        // Init AR
+        this.arPeakFinder = ARPeakFinder.getInstance(getApplicationContext());
     }
 
     @Override
     protected void onResume() {
         super.onResume();
+        Log.i(TAG, "onResume");
 
         // Hide action bar
-        ActionBar actionBar = getActionBar();
+        ActionBar actionBar = getSupportActionBar();
         if (actionBar != null) actionBar.hide();
 
         // Configuration du mode immersif
@@ -74,21 +92,46 @@ public class CameraActivity extends CompassActivity {
                         | View.SYSTEM_UI_FLAG_FULLSCREEN);
 
         // Resume Camera
+        Log.i(TAG, "Camera Service init");
         this.camera.resume();
 
-        //
-        this.registerCompasEventListener(new CompassActivity.CompasEventListener() {
-            @Override
-            public void onSensorChanged(float[] data) {
-                //updateDebugTextView();
-                updateCompassView(data[0]);
-            }
-        });
+        // Compass Service
+        Log.i(TAG, "Compass Service init");
+        this.compassService.setOrientation(Orientation.PAYSAGE);
+        this.compassService.resume();
+        this.compassEventListener = compassService.registerCompassEventListener(
+                new CompassService.CompassEventListener() {
+                    @Override
+                    public void onSensorChanged(float azimuth, float pitch) {
+                        updateCompassView(azimuth);
+                        arPeakFinder.updateObserverOrientation(azimuth, pitch);
+                    }
+                }
+        );
 
-        //
-        this.registerLocationUpdates();
+        // Location Service
+        Log.i(TAG, "Location Service init");
+        this.locationService.resume();
+        this.locationEventListener = locationService.registerLocationEventListener(
+                new LocationService.LocationEventListener() {
+                    @Override
+                    public void onSensorChanged(Location location) {
+                        locationService.removeLocationUpdates();
+                        arPeakFinder.updateObserverLocation(location);
+                    }
+                }
+        );
 
-        arTask = mScheduler.scheduleAtFixedRate(new ARTask(handler), 0, 125, TimeUnit.MILLISECONDS);
+    }
+
+    @Override
+    protected void onPostResume() {
+        super.onPostResume();
+
+        mScheduler = Executors.newSingleThreadScheduledExecutor();
+        Log.i(TAG, "ArTask init");
+        arTask = mScheduler.scheduleAtFixedRate(new ARTask(handler, this), 500, 125, TimeUnit.MILLISECONDS);
+        Log.i(TAG, "ArTask scheduled");
     }
 
     @Override
@@ -97,56 +140,43 @@ public class CameraActivity extends CompassActivity {
 
         // Pause Camera
         this.camera.pause();
+        // Location Service
+        this.locationService.pause();
+        this.locationService.unRegisterLocationEventListener(locationEventListener);
+        // Compass Service
+        this.compassService.pause();
+        this.compassService.unRegisterCompassEventListener(compassEventListener);
 
-        if (arTask != null) arTask.cancel(true);
+        //if (arTask != null) arTask.cancel(true);
+        mScheduler.shutdownNow();
     }
 
     @Override
     protected void onDestroy() {
-        mScheduler.shutdownNow();
         super.onDestroy();
-    }
-
-    @Override
-    public void onLocationChanged(Location location) {
-        super.onLocationChanged(location);
-        this.removeLocationUpdates();
-    }
-
-    private void updateDebugTextView() {
-        String s = "Lat : %s | Lng : %s | Alt : %.0fm\nAzimuth : %.2f deg (%s)\nPitch : %.2f deg";
-        TextView cameraTextView = (TextView) findViewById(R.id.debug_camera_tv);
-        if (cameraTextView == null) return;
-
-        double lat = location.getLatitude();
-        double lng = location.getLongitude();
-        double alt = location.getAltitude();
-        float azimuth = location.getExtras().getFloat(CompassActivity.KEY_AZIMUTH);
-        float pitch = location.getExtras().getFloat(CompassActivity.KEY_PITCH);
-
-        cameraTextView.setText(String.format(Locale.getDefault(), s, lat, lng,
-                alt, azimuth, Utils.getDirectionFromMinus180to180Degrees(azimuth), pitch));
     }
 
     private void updateCompassView(float azimuth) {
         CompassView compassView = (CompassView) this.findViewById(R.id.camera_compass_view);
-        compassView.updateAzimuthAndRedraw(azimuth);
+        if (compassView != null)
+            compassView.updateAzimuthAndRedraw(azimuth);
     }
 
     private class ARTask implements Runnable {
+        private static final String TAG = "ARTask";
         private final Handler handler;
         private final ARPeakFinder ar;
 
-        public ARTask(Handler handler) {
+        public ARTask(Handler handler, Context context) {
             this.handler = handler;
-            this.ar = new ARPeakFinder(CameraActivity.this.getApplicationContext());
+            this.ar = new ARPeakFinder(context);
+
+            Log.i(TAG, "Constructor");
         }
 
         @Override
         public void run() {
-            if (CameraActivity.this.location == null) return;
-            ar.updateObserverLocation(CameraActivity.this.location, CameraActivity.this.getAzimuth());
-
+            Log.i(TAG, "Run");
             final Placemark placemark = ar.getMatchingPlacemark();
 
             if (placemark == null)
@@ -154,14 +184,20 @@ public class CameraActivity extends CompassActivity {
             else
                 Log.d(TAG, "ARTask : new nearest Placemark : " + placemark.getTitle());
 
+            Log.d(TAG, "Send to GUI");
             handler.post(this.updateGUI(placemark));
+            Log.i(TAG, "End Run");
         }
 
         private Runnable updateGUI(final Placemark placemark) {
             return new Runnable() {
+                private static final String TAG = "UpdateGUI";
+
                 @Override
                 public void run() {
+                    Log.i(TAG, "RUN");
                     if (placemark == null) {
+                        Log.i(TAG, "Placemark null");
                         peak_thumbnail_img.setVisibility(View.INVISIBLE);
                         peak_info_tv.setVisibility(View.INVISIBLE);
                         return;

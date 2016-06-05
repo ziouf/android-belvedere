@@ -88,7 +88,7 @@ public class LocationService implements LocationListener {
     /**
      * Désinscription au trigger de geolocalisation
      */
-    protected void removeLocationUpdates() {
+    public void removeLocationUpdates() {
         if (ActivityCompat.checkSelfPermission(context, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
             this.locationManager.removeUpdates(this);
         }
