@@ -18,9 +18,9 @@ import android.widget.TextView;
 
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
-import java.util.concurrent.ScheduledFuture;
 import java.util.concurrent.TimeUnit;
 
+import fr.marin.cyril.belvedere.Config;
 import fr.marin.cyril.belvedere.R;
 import fr.marin.cyril.belvedere.camera.Camera;
 import fr.marin.cyril.belvedere.model.Placemark;
@@ -50,13 +50,18 @@ public class CameraActivity extends AppCompatActivity {
     private Camera camera;
     private ImageView peak_thumbnail_img;
     private TextView peak_info_tv;
-    private ScheduledFuture arTask = null;
-    private ARPeakFinder arPeakFinder;
+
+    private Location oLocation;
+    private float oAzimuth;
+    private float oPitch;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Log.i(TAG, "onCreate");
+
+        // Get location from MainActivity
+        this.oLocation = getIntent().getParcelableExtra(Config.BundleKeys.LOCATION);
 
         // Inflate UI
         setContentView(R.layout.activity_camera);
@@ -71,9 +76,6 @@ public class CameraActivity extends AppCompatActivity {
         this.camera = Camera.getCameraInstance(this);
         this.peak_thumbnail_img = (ImageView) findViewById(R.id.peak_thumbnail_img);
         this.peak_info_tv = (TextView) findViewById(R.id.peak_info_tv);
-
-        // Init AR
-        this.arPeakFinder = ARPeakFinder.getInstance(getApplicationContext());
     }
 
     @Override
@@ -82,8 +84,8 @@ public class CameraActivity extends AppCompatActivity {
         Log.i(TAG, "onResume");
 
         // Hide action bar
-        ActionBar actionBar = getSupportActionBar();
-        if (actionBar != null) actionBar.hide();
+        final ActionBar actionBar = getSupportActionBar();
+        if (actionBar != null && actionBar.isShowing()) actionBar.hide();
 
         // Configuration du mode immersif
         getWindow().getDecorView()
@@ -104,7 +106,8 @@ public class CameraActivity extends AppCompatActivity {
                     @Override
                     public void onSensorChanged(float azimuth, float pitch) {
                         updateCompassView(azimuth);
-                        arPeakFinder.updateObserverOrientation(azimuth, pitch);
+                        oAzimuth = azimuth;
+                        oPitch = pitch;
                     }
                 }
         );
@@ -117,20 +120,19 @@ public class CameraActivity extends AppCompatActivity {
                     @Override
                     public void onSensorChanged(Location location) {
                         locationService.removeLocationUpdates();
-                        arPeakFinder.updateObserverLocation(location);
+                        oLocation = location;
                     }
                 }
         );
-
     }
 
     @Override
     protected void onPostResume() {
         super.onPostResume();
-
-        mScheduler = Executors.newSingleThreadScheduledExecutor();
+        // Init AR
+        this.mScheduler = Executors.newScheduledThreadPool(4);
         Log.i(TAG, "ArTask init");
-        arTask = mScheduler.scheduleAtFixedRate(new ARTask(handler, this), 500, 125, TimeUnit.MILLISECONDS);
+        mScheduler.scheduleAtFixedRate(new ARTask(handler, this), 0, 25, TimeUnit.MILLISECONDS);
         Log.i(TAG, "ArTask scheduled");
     }
 
@@ -157,66 +159,61 @@ public class CameraActivity extends AppCompatActivity {
     }
 
     private void updateCompassView(float azimuth) {
-        CompassView compassView = (CompassView) this.findViewById(R.id.camera_compass_view);
+        final CompassView compassView = (CompassView) findViewById(R.id.camera_compass_view);
         if (compassView != null)
             compassView.updateAzimuthAndRedraw(azimuth);
+    }
+
+    private Runnable updateGUI(final Placemark placemark) {
+        return new Runnable() {
+            private static final String TAG = "UpdateGUI";
+
+            @Override
+            public void run() {
+                if (placemark == null) {
+                    Log.d(TAG, "Placemark null");
+                    peak_thumbnail_img.setVisibility(View.INVISIBLE);
+                    peak_info_tv.setVisibility(View.INVISIBLE);
+                    return;
+                }
+                Log.i(TAG, "Placemark not null : " + placemark.getTitle());
+
+                // Check si thumbnail != null avant de l'afficher
+                if (placemark.hasThumbnail()) {
+                    peak_thumbnail_img.setImageBitmap(placemark.getThumbnail());
+                    peak_thumbnail_img.setVisibility(View.VISIBLE);
+                } else {
+                    peak_thumbnail_img.setVisibility(View.INVISIBLE);
+                }
+
+                peak_info_tv.setText(String.format("%s\n%s m", placemark.getTitle(), placemark.getCoordinates().getElevation()));
+                peak_info_tv.setVisibility(View.VISIBLE);
+            }
+        };
     }
 
     private class ARTask implements Runnable {
         private static final String TAG = "ARTask";
         private final Handler handler;
-        private final ARPeakFinder ar;
+        private final Context context;
 
         public ARTask(Handler handler, Context context) {
             this.handler = handler;
-            this.ar = new ARPeakFinder(context);
-
-            Log.i(TAG, "Constructor");
+            this.context = context;
         }
 
         @Override
         public void run() {
-            Log.i(TAG, "Run");
-            final Placemark placemark = ar.getMatchingPlacemark();
+            Log.d(TAG, "Run");
+            if (oLocation == null) return;
 
-            if (placemark == null)
-                Log.d(TAG, "ARTask : new nearest Placemark null");
-            else
-                Log.d(TAG, "ARTask : new nearest Placemark : " + placemark.getTitle());
+            Log.d(TAG, "Run with Azimuth : " + oAzimuth + " Pitch : " + oPitch);
+            final ARPeakFinder ar = new ARPeakFinder(context, oLocation, oAzimuth, oPitch);
 
             Log.d(TAG, "Send to GUI");
-            handler.post(this.updateGUI(placemark));
-            Log.i(TAG, "End Run");
+            handler.post(updateGUI(ar.getMatchingPlacemark()));
+            Log.d(TAG, "End Run");
         }
 
-        private Runnable updateGUI(final Placemark placemark) {
-            return new Runnable() {
-                private static final String TAG = "UpdateGUI";
-
-                @Override
-                public void run() {
-                    Log.i(TAG, "RUN");
-                    if (placemark == null) {
-                        Log.i(TAG, "Placemark null");
-                        peak_thumbnail_img.setVisibility(View.INVISIBLE);
-                        peak_info_tv.setVisibility(View.INVISIBLE);
-                        return;
-                    }
-
-                    // Check si thumbnail != null avant de l'afficher
-                    if (placemark.hasThumbnail()) {
-                        peak_thumbnail_img.setImageBitmap(placemark.getThumbnail());
-                        peak_thumbnail_img.setVisibility(View.VISIBLE);
-                    } else {
-                        peak_thumbnail_img.setVisibility(View.INVISIBLE);
-                    }
-
-                    String s = placemark.getTitle() + "\n" +
-                            placemark.getCoordinates().getElevation() + " m";
-                    peak_info_tv.setText(s);
-                    peak_info_tv.setVisibility(View.VISIBLE);
-                }
-            };
-        }
     }
 }

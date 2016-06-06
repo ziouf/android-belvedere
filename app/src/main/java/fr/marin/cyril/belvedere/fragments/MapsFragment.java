@@ -36,6 +36,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
 
+import fr.marin.cyril.belvedere.Config;
 import fr.marin.cyril.belvedere.R;
 import fr.marin.cyril.belvedere.activities.CameraActivity;
 import fr.marin.cyril.belvedere.database.DatabaseHelper;
@@ -57,6 +58,7 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback {
     private Marker compassMarker;
     private GoogleMap mMap;
     private DatabaseHelper db;
+    private Location location;
 
     private LocationService locationService;
     private LocationService.LocationEventListener locationEventListener;
@@ -76,7 +78,7 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback {
         try {
             view = inflater.inflate(R.layout.fragment_maps, container, false);
         } catch (InflateException e) {
-            // Ignore
+            Log.w(TAG, "Error when inflating UI", e);
         }
 
         return view;
@@ -121,7 +123,9 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback {
             @Override
             public void onClick(View v) {
                 Log.i(TAG, "Click cameraButton");
-                startActivity(new Intent(getActivity().getApplicationContext(), CameraActivity.class));
+                final Intent intent = new Intent(getActivity().getApplicationContext(), CameraActivity.class);
+                intent.putExtra(Config.BundleKeys.LOCATION, MapsFragment.this.location);
+                startActivity(intent);
             }
         });
 
@@ -187,6 +191,7 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback {
                     new LocationService.LocationEventListener() {
                         @Override
                         public void onSensorChanged(Location location) {
+                            MapsFragment.this.location = location;
                             compassMarker.setPosition(new LatLng(location.getLatitude(), location.getLongitude()));
                         }
                     }

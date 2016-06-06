@@ -45,6 +45,14 @@ public class ARPeakFinder {
         this.db = DatabaseHelper.getInstance(context);
     }
 
+    public ARPeakFinder(Context context, Location location, double azimuth, double pitch) {
+        this.db = DatabaseHelper.getInstance(context);
+        this.oLatLng = new LatLng(location.getLatitude(), location.getLongitude());
+        this.oElevation = location.getAltitude();
+        this.oAzimuth = (azimuth + 360) % 360;
+        this.oPitch = Math.abs(pitch);
+    }
+
     public static ARPeakFinder getInstance(Context context) {
         if (singleton == null) singleton = new ARPeakFinder(context);
         return singleton;
