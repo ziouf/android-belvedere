@@ -6,6 +6,6 @@
     android:layout_height="wrap_content"
     android:fitsSystemWindows="true"
     android:minHeight="?attr/actionBarSize"
-    app:theme="@style/AppTheme.Main.ActionBar.Compat">
+    app:theme="@style/AppTheme.Main.ActionBar.Transparent">
 
 </android.support.v7.widget.Toolbar>

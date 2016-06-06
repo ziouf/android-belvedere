@@ -6,10 +6,8 @@ import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.MenuItem;
 
@@ -21,7 +19,6 @@ import fr.marin.cyril.belvedere.fragments.SettingsFragment;
  * Created by cyril on 31/05/16.
  */
 public class MainActivity extends AppCompatActivity {
-
     private static final String TAG = "MainActivity";
     public static FragmentManager fragmentManager;
 
@@ -35,15 +32,6 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-        // Set a Toolbar to replace the ActionBar.
-        final Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-        // Configuration de l'Actionbar
-        final ActionBar actionBar = getSupportActionBar();
-        if (actionBar != null) {
-            actionBar.setDisplayOptions(ActionBar.DISPLAY_HOME_AS_UP | ActionBar.DISPLAY_USE_LOGO);
-        }
 
         // Init Menu Drawer
         drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -74,7 +62,6 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onPostCreate(@Nullable Bundle savedInstanceState) {
         super.onPostCreate(savedInstanceState);
-
         toggle.syncState();
     }
 

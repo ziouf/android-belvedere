@@ -39,10 +39,6 @@
             android:theme="@style/AppTheme.Main.Compat" />
 
         <activity
-            android:name=".activities.old.MapsActivity"
-            android:configChanges="keyboardHidden" />
-
-        <activity
             android:name=".activities.CameraActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:theme="@style/AppTheme.Camera.Compat" />

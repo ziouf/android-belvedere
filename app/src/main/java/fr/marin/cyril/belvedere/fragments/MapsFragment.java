@@ -13,6 +13,9 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.content.ContextCompat;
+import android.support.v7.app.ActionBar;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.text.method.ScrollingMovementMethod;
 import android.util.Log;
 import android.view.InflateException;
@@ -55,6 +58,8 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback {
     private static final String TAG = "MapsFragment";
     private static View view;
     private final Collection<Marker> markersShown = new HashSet<>();
+    private AppCompatActivity activity;
+    private ActionBar actionBar;
     private Marker compassMarker;
     private GoogleMap mMap;
     private DatabaseHelper db;
@@ -79,6 +84,16 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback {
             view = inflater.inflate(R.layout.fragment_maps, container, false);
         } catch (InflateException e) {
             Log.w(TAG, "Error when inflating UI", e);
+        }
+
+        activity = (AppCompatActivity) getActivity();
+        // Set a Toolbar to replace the ActionBar.
+        activity.setSupportActionBar((Toolbar) view.findViewById(R.id.toolbar));
+
+        // Configuration de l'Actionbar
+        actionBar = activity.getSupportActionBar();
+        if (actionBar != null) {
+            actionBar.setDisplayOptions(ActionBar.DISPLAY_HOME_AS_UP | ActionBar.DISPLAY_USE_LOGO);
         }
 
         return view;
@@ -106,8 +121,8 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback {
 
     private void initFloatingActionButtons() {
         // Initialisation des FAB
-        FloatingActionButton cameraButton = (FloatingActionButton) getActivity().findViewById(R.id.camera_button);
-        FloatingActionButton myPosButton = (FloatingActionButton) getActivity().findViewById(R.id.myPosition_button);
+        final FloatingActionButton cameraButton = (FloatingActionButton) getActivity().findViewById(R.id.camera_button);
+        final FloatingActionButton myPosButton = (FloatingActionButton) getActivity().findViewById(R.id.myPosition_button);
 
         // Désactivation du bouton AR si le terminal ne dispose pas des capteurs ou autorisations suffisantes
         PackageManager pm = getActivity().getPackageManager();

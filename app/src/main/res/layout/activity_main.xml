@@ -6,19 +6,12 @@
     android:layout_height="match_parent">
 
     <!-- The main content view -->
+    <!-- Fragment Placeholder -->
     <FrameLayout
+        android:id="@+id/fragment_placeholder"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="match_parent" />
 
-        <!-- Fragment Placeholder -->
-        <FrameLayout
-            android:id="@+id/fragment_placeholder"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" />
-
-        <!-- ActionBar -->
-        <include layout="@layout/toolbar" />
-    </FrameLayout>
 
     <!-- The navigation drawer -->
     <android.support.design.widget.NavigationView

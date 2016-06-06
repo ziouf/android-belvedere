@@ -1,32 +1,17 @@
-<android.support.design.widget.CoordinatorLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/maps_layout"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    >
+    android:layout_height="match_parent">
 
     <fragment
         android:id="@+id/google_maps_fragment"
         android:name="com.google.android.gms.maps.SupportMapFragment"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        tools:context=".activities.old.MapsActivity" />
+        android:layout_height="match_parent" />
 
-    <TextView
-        android:id="@+id/debug_location_info"
-        style="@style/AppTheme.Debug"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="24dp" />
-
-    <TextView
-        android:id="@+id/debug_azimuth_info"
-        style="@style/AppTheme.Debug"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/debug_location_info" />
+    <!-- ActionBar -->
+    <include layout="@layout/toolbar" />
 
     <LinearLayout
         android:layout_width="wrap_content"

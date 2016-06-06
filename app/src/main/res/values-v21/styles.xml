@@ -3,6 +3,10 @@
     <style name="AppTheme.Main.Compat">
         <!-- Statusbar -->
         <item name="android:statusBarColor">@android:color/transparent</item>
+
+        <!-- Toolbar -->
+        <item name="toolbarStyle">@style/AppTheme.Main.ActionBar.Transparent</item>
+        <item name="android:toolbarStyle">@style/AppTheme.Main.ActionBar.Transparent</item>
     </style>
 
     <style name="AppTheme.Splash.Compat">
