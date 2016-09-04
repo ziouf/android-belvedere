@@ -71,6 +71,9 @@ public class MainActivity extends AppCompatActivity {
             case R.id.menu_maps:
                 popFragment(currentFragment);
                 break;
+            case R.id.menu_refresh:
+                // TODO : Add call to refresh data from dbpedia.org
+                break;
             case R.id.menu_settings:
                 popFragment(currentFragment);
                 currentFragment = addFragment(SettingsFragment.class);

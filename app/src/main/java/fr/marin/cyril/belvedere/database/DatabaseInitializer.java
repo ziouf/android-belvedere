@@ -97,7 +97,7 @@ public class DatabaseInitializer extends AsyncTask<Void, Integer, Void> {
                 final HttpURLConnection connection = getRedirectedConnection(new URL(placemark.getThumbnail_uri()));
                 try (InputStream is = connection.getInputStream()) {
                     ByteArrayOutputStream baos = new ByteArrayOutputStream(4096);
-                    Bitmap bitmap = BitmapFactory.decodeStream(is);
+                    final Bitmap bitmap = BitmapFactory.decodeStream(is);
                     bitmap.compress(Bitmap.CompressFormat.WEBP, 50, baos);
                     placemark.setThumbnail(baos.toByteArray());
                 } finally {
