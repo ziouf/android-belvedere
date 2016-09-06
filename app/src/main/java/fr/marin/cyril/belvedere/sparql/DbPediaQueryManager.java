@@ -44,39 +44,49 @@ public class DbPediaQueryManager {
     private static final String API_URL = "http://fr.dbpedia.org/sparql";
 
     private static final String RDF_PREFIX = "PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>";
+    public static final String ELEVATION_QUERY =
+            RDF_PREFIX + " " +
+                    "SELECT ?altitude WHERE { " +
+                    "?peak rdf:type dbpedia-owl:Mountain . " +
+                    "?peak rdf:type dbpedia-owl:NaturalPlace . " +
+                    "?peak prop-fr:nom \"%s\"@fr . " +
+                    "?peak prop-fr:altitude ?altitude } LIMIT 1";
     private static final String DBPEDIA_OWL_PREFIX = "PREFIX dbpedia-owl: <http://dbpedia.org/ontology/>";
     private static final String PROP_FR_PREFIX = "PREFIX prop-fr: <http://fr.dbpedia.org/property/>";
     private static final String FOAF_PREFIX = "PREFIX foaf: <http://xmlns.com/foaf/0.1/>";
-
-    private static final String FRENCH_PEAKS_QUERY =
+    public static final String FRENCH_PEAKS_QUERY =
             RDF_PREFIX + SEP + DBPEDIA_OWL_PREFIX + SEP + PROP_FR_PREFIX + SEP + FOAF_PREFIX + SEP +
-                    "SELECT ?nom ?altitude ?latitude ?longitude ?thumbnail ?wiki" + SEP +
+                    "SELECT ?regionLabel ?nom ?altitude ?latitude ?longitude ?thumbnail ?wiki" + SEP +
                     "WHERE {" +
-                    "?peak dbpedia-owl:region ?region ." + SEP +
-                    "?region dbpedia-owl:country <http://fr.dbpedia.org/resource/France> ." + SEP +
                     "?peak rdf:type dbpedia-owl:Mountain ." + SEP +
                     "?peak rdf:type dbpedia-owl:NaturalPlace ." + SEP +
-                    "?peak prop-fr:nom ?nom ." + SEP +
+                    "?peak dbpedia-owl:region ?region ." + SEP +
+                    "?region dbpedia-owl:country <http://fr.dbpedia.org/resource/France> ." + SEP +
+                    "?peak dbpedia-owl:region ?region ." + SEP +
+                    "?region rdfs:label ?regionLabel ." + SEP +
+                    "?peak rdfs:label ?nom ." + SEP +
                     "?peak prop-fr:altitude ?altitude ." + SEP +
                     "?peak prop-fr:latitude ?latitude ." + SEP +
                     "?peak prop-fr:longitude ?longitude ." + SEP +
                     "?peak dbpedia-owl:thumbnail ?thumbnail ." + SEP +
-                    "?peak foaf:isPrimaryTopicOf ?wiki" +
-                    "}";
+                    "?peak foaf:isPrimaryTopicOf ?wiki ." + SEP +
+                    "FILTER(LANGMATCHES(LANG(?nom), \"fr\") && LANGMATCHES(LANG(?regionLabel), \"fr\"))" +
+                    "}" +
+                    " GROUP BY ?region " +
+                    " ORDER BY DESC(?region)";
 
-    private static final String ELEVATION_QUERY =
-            RDF_PREFIX + " " +
-                "SELECT ?altitude WHERE { " +
-                "?peak rdf:type dbpedia-owl:Mountain . " +
-                "?peak rdf:type dbpedia-owl:NaturalPlace . " +
-                "?peak prop-fr:nom \"%s\"@fr . " +
-                "?peak prop-fr:altitude ?altitude } LIMIT 1";
-
-    private String buildApiUrl(String query, String peakName) {
-        return Uri.encode(API_URL + "?default-graph-uri=" +
-                "&query=" + String.format(query, peakName) +
+    public static String buildApiUrl(String query) {
+        return API_URL + "?default-graph-uri=" +
+                "&query=" + Uri.encode(query) +
                 "&format=application%2Fsparql-results%2Bjson" +
-                "&timeout=0");
+                "&timeout=0";
+    }
+
+    public String buildApiUrl(String query, String peakName) {
+        return API_URL + "?default-graph-uri=" +
+                "&query=" + Uri.encode(String.format(query, peakName)) +
+                "&format=application%2Fsparql-results%2Bjson" +
+                "&timeout=0";
     }
 
     private InputStream queryDbPedia(String peakName) {
