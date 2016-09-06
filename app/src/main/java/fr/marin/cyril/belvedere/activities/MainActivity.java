@@ -17,10 +17,14 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.List;
 
 import fr.marin.cyril.belvedere.R;
+import fr.marin.cyril.belvedere.database.DatabaseHelper;
 import fr.marin.cyril.belvedere.fragments.MapsFragment;
 import fr.marin.cyril.belvedere.fragments.SettingsFragment;
+import fr.marin.cyril.belvedere.model.Placemark;
+import fr.marin.cyril.belvedere.parser.DbPediaJsonResponseParser;
 import fr.marin.cyril.belvedere.sparql.DbPediaQueryManager;
 
 /**
@@ -81,9 +85,9 @@ public class MainActivity extends AppCompatActivity {
                 break;
             case R.id.menu_refresh:
                 // TODO : Add call to refresh data from dbpedia.org
-                AsyncTask<Void, Void, Void> at = new AsyncTask<Void, Void, Void>() {
+                final AsyncTask<Void, Void, String> at = new AsyncTask<Void, Void, String>() {
                     @Override
-                    protected Void doInBackground(Void[] params) {
+                    protected String doInBackground(Void[] params) {
                         Log.i(TAG, "TOTO !! -- doInBackground");
                         try {
                             String url = DbPediaQueryManager.buildApiUrl(DbPediaQueryManager.FRENCH_PEAKS_QUERY);
@@ -95,13 +99,12 @@ public class MainActivity extends AppCompatActivity {
 
                             try (BufferedReader reader = new BufferedReader(new InputStreamReader(conn.getInputStream()))) {
                                 Log.i(TAG, "TOTO !! -- " + conn.getResponseCode());
-                                Log.i(TAG, "TOTO !! -- br create");
-                                StringBuilder sb = new StringBuilder();
+                                final StringBuilder sb = new StringBuilder();
                                 String buffer;
                                 while ((buffer = reader.readLine()) != null)
                                     sb.append(buffer);
 
-                                Log.i(TAG, sb.toString());
+                                return sb.toString();
                             } finally {
                                 conn.disconnect();
                             }
@@ -110,6 +113,21 @@ public class MainActivity extends AppCompatActivity {
                             Log.e(TAG, e.getMessage());
                         }
                         return null;
+                    }
+
+                    @Override
+                    protected void onPostExecute(String result) {
+                        Log.i(TAG, result);
+                        final DbPediaJsonResponseParser parser = new DbPediaJsonResponseParser();
+                        final List<Placemark> placemarks = parser.readJsonString(result);
+
+                        Log.i(TAG, "Downloaded " + placemarks.size() + " placemarks");
+
+                        for (Placemark p : placemarks) {
+                            DatabaseHelper.getInstance(getApplicationContext()).insertOrUpdatePlacemark(p);
+                        }
+
+                        Log.i(TAG, "Finish");
                     }
                 };
                 at.execute();

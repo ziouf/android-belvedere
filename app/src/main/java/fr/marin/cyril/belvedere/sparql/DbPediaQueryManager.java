@@ -56,7 +56,7 @@ public class DbPediaQueryManager {
     private static final String FOAF_PREFIX = "PREFIX foaf: <http://xmlns.com/foaf/0.1/>";
     public static final String FRENCH_PEAKS_QUERY =
             RDF_PREFIX + SEP + DBPEDIA_OWL_PREFIX + SEP + PROP_FR_PREFIX + SEP + FOAF_PREFIX + SEP +
-                    "SELECT ?regionLabel ?nom ?altitude ?latitude ?longitude ?thumbnail ?wiki" + SEP +
+                    "SELECT ?regionLabel ?nom ?altitude ?latitude ?longitude ?thumbnail ?wiki ?comment" + SEP +
                     "WHERE {" +
                     "?peak rdf:type dbpedia-owl:Mountain ." + SEP +
                     "?peak rdf:type dbpedia-owl:NaturalPlace ." + SEP +
@@ -70,10 +70,15 @@ public class DbPediaQueryManager {
                     "?peak prop-fr:longitude ?longitude ." + SEP +
                     "?peak dbpedia-owl:thumbnail ?thumbnail ." + SEP +
                     "?peak foaf:isPrimaryTopicOf ?wiki ." + SEP +
-                    "FILTER(LANGMATCHES(LANG(?nom), \"fr\") && LANGMATCHES(LANG(?regionLabel), \"fr\"))" +
+                    "?peak dbpedia-owl:abstract ?comment ." + SEP +
+                    "FILTER(" +
+                    "LANGMATCHES(LANG(?nom), \"fr\") && " +
+                    "LANGMATCHES(LANG(?regionLabel), \"fr\") && " +
+                    "LANGMATCHES(LANG(?comment), \"fr\")" +
+                    ")" +
                     "}" +
                     " GROUP BY ?region " +
-                    " ORDER BY DESC(?region)";
+                    " ORDER BY ASC(?region)";
 
     public static String buildApiUrl(String query) {
         return API_URL + "?default-graph-uri=" +

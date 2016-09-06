@@ -61,11 +61,11 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             values.put(DatabaseContract.MarkerEntry.COLUMN_NAME_TITLE, newPlacemark.getTitle());
             values.put(DatabaseContract.MarkerEntry.COLUMN_NAME_URL, newPlacemark.getWiki_uri());
             values.put(DatabaseContract.MarkerEntry.COLUMN_NAME_COMMENT, newPlacemark.getComment());
-            values.put(DatabaseContract.MarkerEntry.COLUMN_NAME_THUMBNAIL_URL, newPlacemark.getThumbnail_uri());
-            values.put(DatabaseContract.MarkerEntry.COLUMN_NAME_THUMBNAIL, newPlacemark.getThumbnailArray());
             values.put(DatabaseContract.MarkerEntry.COLUMN_NAME_ALTITUDE, newPlacemark.getCoordinates().getElevation());
 
             if (oldPlacemark == null) {
+                values.put(DatabaseContract.MarkerEntry.COLUMN_NAME_THUMBNAIL_URL, newPlacemark.getThumbnail_uri());
+                values.put(DatabaseContract.MarkerEntry.COLUMN_NAME_THUMBNAIL, newPlacemark.getThumbnailArray());
                 values.put(DatabaseContract.MarkerEntry.COLUMN_NAME_LATITUDE, newPlacemark.getCoordinates().getLatLng().latitude);
                 values.put(DatabaseContract.MarkerEntry.COLUMN_NAME_LONGITUDE, newPlacemark.getCoordinates().getLatLng().longitude);
 

@@ -6,6 +6,7 @@ import android.util.Log;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.StringReader;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -44,6 +45,16 @@ public class DbPediaJsonResponseParser {
 
     public List<Placemark> readJsonStream(InputStream is) {
         try (JsonReader reader = new JsonReader(new InputStreamReader(is, "UTF-8"))) {
+            return readSparQLResponse(reader);
+
+        } catch (IOException e) {
+            Log.e(TAG, e.getMessage());
+        }
+        return null;
+    }
+
+    public List<Placemark> readJsonString(String json) {
+        try (JsonReader reader = new JsonReader(new StringReader(json))) {
             return readSparQLResponse(reader);
 
         } catch (IOException e) {
