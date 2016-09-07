@@ -70,7 +70,7 @@ public class DbPediaQueryManager {
                     "?peak prop-fr:longitude ?longitude ." + SEP +
                     "?peak dbpedia-owl:thumbnail ?thumbnail ." + SEP +
                     "?peak foaf:isPrimaryTopicOf ?wiki ." + SEP +
-                    "?peak dbpedia-owl:abstract ?comment ." + SEP +
+                    "?peak rdfs:comment ?comment ." + SEP +
                     "FILTER(" +
                     "LANGMATCHES(LANG(?nom), \"fr\") && " +
                     "LANGMATCHES(LANG(?regionLabel), \"fr\") && " +
