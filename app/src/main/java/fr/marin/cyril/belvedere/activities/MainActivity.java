@@ -23,10 +23,10 @@ import java.util.List;
 import fr.marin.cyril.belvedere.R;
 import fr.marin.cyril.belvedere.activities.settings.SettingsActivity;
 import fr.marin.cyril.belvedere.database.DatabaseHelper;
+import fr.marin.cyril.belvedere.datasources.DbPediaQueryManager;
 import fr.marin.cyril.belvedere.fragments.MapsFragment;
 import fr.marin.cyril.belvedere.model.Placemark;
 import fr.marin.cyril.belvedere.parser.DbPediaJsonResponseParser;
-import fr.marin.cyril.belvedere.sparql.DbPediaQueryManager;
 
 /**
  * Created by cyril on 31/05/16.
@@ -37,9 +37,6 @@ public class MainActivity extends AppCompatActivity {
 
     private ActionBarDrawerToggle toggle;
     private DrawerLayout drawerLayout;
-    private NavigationView navigationView;
-
-    private Fragment currentFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,11 +45,12 @@ public class MainActivity extends AppCompatActivity {
 
         // Init Menu Drawer
         drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
-        navigationView = (NavigationView) findViewById(R.id.navigation_view);
+        final NavigationView navigationView = (NavigationView) findViewById(R.id.navigation_view);
         toggle = new ActionBarDrawerToggle(this, drawerLayout, R.string.open, R.string.close);
         drawerLayout.addDrawerListener(toggle);
 
         // Init
+        assert navigationView != null;
         navigationView.setNavigationItemSelectedListener(
                 new NavigationView.OnNavigationItemSelectedListener() {
                     @Override
@@ -69,7 +67,6 @@ public class MainActivity extends AppCompatActivity {
         fragmentManager.beginTransaction()
                 .add(R.id.fragment_placeholder, new MapsFragment())
                 .commit();
-
     }
 
     @Override

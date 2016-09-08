@@ -1,4 +1,4 @@
-package fr.marin.cyril.belvedere.sparql;
+package fr.marin.cyril.belvedere.datasources;
 
 import android.net.Uri;
 import android.util.Log;
