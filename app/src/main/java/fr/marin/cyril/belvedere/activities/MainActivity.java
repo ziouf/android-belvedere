@@ -1,5 +1,6 @@
 package fr.marin.cyril.belvedere.activities;
 
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -20,9 +21,9 @@ import java.net.URL;
 import java.util.List;
 
 import fr.marin.cyril.belvedere.R;
+import fr.marin.cyril.belvedere.activities.settings.SettingsActivity;
 import fr.marin.cyril.belvedere.database.DatabaseHelper;
 import fr.marin.cyril.belvedere.fragments.MapsFragment;
-import fr.marin.cyril.belvedere.fragments.SettingsFragment;
 import fr.marin.cyril.belvedere.model.Placemark;
 import fr.marin.cyril.belvedere.parser.DbPediaJsonResponseParser;
 import fr.marin.cyril.belvedere.sparql.DbPediaQueryManager;
@@ -81,7 +82,6 @@ public class MainActivity extends AppCompatActivity {
         // Create a new fragment and specify the fragment to show based on nav item clicked
         switch (item.getItemId()) {
             case R.id.menu_maps:
-                popFragment(currentFragment);
                 break;
             case R.id.menu_refresh:
                 // TODO : Add call to refresh data from dbpedia.org
@@ -134,8 +134,7 @@ public class MainActivity extends AppCompatActivity {
 
                 break;
             case R.id.menu_settings:
-                popFragment(currentFragment);
-                currentFragment = addFragment(SettingsFragment.class);
+                startActivity(new Intent(this, SettingsActivity.class));
                 break;
         }
 
