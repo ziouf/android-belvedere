@@ -79,6 +79,25 @@ public class DbPediaQueryManager {
                     "}" +
                     " GROUP BY ?region " +
                     " ORDER BY ASC(?region)";
+    public static final String PEAKS_QUERY =
+            RDF_PREFIX + SEP + DBPEDIA_OWL_PREFIX + SEP + FOAF_PREFIX + SEP +
+                    "SELECT ?nom ?altitude ?latitude ?longitude ?thumbnail ?wiki ?comment" + SEP +
+                    "WHERE {" +
+                    " ?peak rdf:type dbpedia-owl:Mountain ." + SEP +
+                    " ?peak rdf:type dbpedia-owl:NaturalPlace ." + SEP +
+                    " ?peak rdfs:label ?nom ." + SEP +
+                    " ?peak dbpedia-owl:altitude ?alt ." + SEP +
+                    " ?alt  dbpedia-owl:value ?altitude ." + SEP +
+                    " ?peak geo:lat ?latitude ." + SEP +
+                    " ?peak geo:long ?longitude ." + SEP +
+                    " ?peak dbpedia-owl:thumbnail ?thumbnail ." + SEP +
+                    " ?peak foaf:isPrimaryTopicOf ?wiki ." + SEP +
+                    " ?peak rdfs:comment ?comment ." + SEP +
+                    " FILTER(LANGMATCHES(LANG(?nom), \"fr\") && LANGMATCHES(LANG(?comment), \"fr\"))" +
+                    "}" + SEP +
+                    "GROUP BY ?region" + SEP +
+                    "ORDER BY ASC(?region)";
+    private static final String GEO_PREFIX = "PREFIX geo: <http://www.w3.org/2003/01/geo/>";
 
     public static String buildApiUrl(String query) {
         return API_URL + "?default-graph-uri=" +

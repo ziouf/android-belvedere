@@ -14,22 +14,24 @@ android {
     defaultConfig {
         minSdkVersion 19
         targetSdkVersion 23
-        versionCode 1018
-        versionName "1.0.18"
+        versionCode 1019
+        versionName "1.0.19"
         vectorDrawables.useSupportLibrary = true
+        multiDexEnabled true
     }
     buildTypes {
         debug {
             versionNameSuffix '_debug'
+            debuggable true
         }
         alpha {
             versionNameSuffix '_alpha'
-            debuggable true
+            debuggable false
             signingConfig signingConfigs.Belvedere
         }
         beta {
             versionNameSuffix '_beta'
-            debuggable true
+            debuggable false
             signingConfig signingConfigs.Belvedere
         }
         release {
@@ -60,4 +62,5 @@ dependencies {
     compile 'com.android.support:support-v4:23.4.0'
     compile 'com.android.support:appcompat-v7:23.4.0'
     compile 'com.google.android.gms:play-services:9.4.0'
+    compile 'com.android.support:multidex:+'
 }

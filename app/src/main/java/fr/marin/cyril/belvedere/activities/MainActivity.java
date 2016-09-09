@@ -1,7 +1,6 @@
 package fr.marin.cyril.belvedere.activities;
 
 import android.content.Intent;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.NavigationView;
@@ -13,20 +12,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.MenuItem;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
-import java.net.URL;
-import java.util.List;
-
 import fr.marin.cyril.belvedere.R;
-import fr.marin.cyril.belvedere.activities.settings.SettingsActivity;
-import fr.marin.cyril.belvedere.database.DatabaseHelper;
-import fr.marin.cyril.belvedere.datasources.DbPediaQueryManager;
 import fr.marin.cyril.belvedere.fragments.MapsFragment;
-import fr.marin.cyril.belvedere.model.Placemark;
-import fr.marin.cyril.belvedere.parser.DbPediaJsonResponseParser;
+import fr.marin.cyril.belvedere.services.UpdateDataService;
 
 /**
  * Created by cyril on 31/05/16.
@@ -81,57 +69,10 @@ public class MainActivity extends AppCompatActivity {
             case R.id.menu_maps:
                 break;
             case R.id.menu_refresh:
-                // TODO : Add call to refresh data from dbpedia.org
-                final AsyncTask<Void, Void, String> at = new AsyncTask<Void, Void, String>() {
-                    @Override
-                    protected String doInBackground(Void[] params) {
-                        Log.i(TAG, "TOTO !! -- doInBackground");
-                        try {
-                            String url = DbPediaQueryManager.buildApiUrl(DbPediaQueryManager.FRENCH_PEAKS_QUERY);
-                            Log.i(TAG, "TOTO !! -- url : " + url);
-                            HttpURLConnection conn = (HttpURLConnection) new URL(url).openConnection();
-                            conn.setRequestMethod("GET");
-                            conn.setDoInput(true);
-                            conn.connect();
-
-                            try (BufferedReader reader = new BufferedReader(new InputStreamReader(conn.getInputStream()))) {
-                                Log.i(TAG, "TOTO !! -- " + conn.getResponseCode());
-                                final StringBuilder sb = new StringBuilder();
-                                String buffer;
-                                while ((buffer = reader.readLine()) != null)
-                                    sb.append(buffer);
-
-                                return sb.toString();
-                            } finally {
-                                conn.disconnect();
-                            }
-
-                        } catch (IOException e) {
-                            Log.e(TAG, e.getMessage());
-                        }
-                        return null;
-                    }
-
-                    @Override
-                    protected void onPostExecute(String result) {
-                        Log.i(TAG, result);
-                        final DbPediaJsonResponseParser parser = new DbPediaJsonResponseParser();
-                        final List<Placemark> placemarks = parser.readJsonString(result);
-
-                        Log.i(TAG, "Downloaded " + placemarks.size() + " placemarks");
-
-                        for (Placemark p : placemarks) {
-                            DatabaseHelper.getInstance(getApplicationContext()).insertOrUpdatePlacemark(p);
-                        }
-
-                        Log.i(TAG, "Finish");
-                    }
-                };
-                at.execute();
-
+                // TODO : Ajouter un warning sur la conso de DATA avec demande de confirmation
+                startService(new Intent(this, UpdateDataService.class));
                 break;
             case R.id.menu_settings:
-                startActivity(new Intent(this, SettingsActivity.class));
                 break;
         }
 

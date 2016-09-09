@@ -22,4 +22,5 @@
     <string name="close">Fermer</string>
     <string name="open">Ouvrir</string>
     <string name="menu_refresh">Mise à jour des données</string>
+    <string name="title_activity_settings">Parametres</string>
 </resources>
