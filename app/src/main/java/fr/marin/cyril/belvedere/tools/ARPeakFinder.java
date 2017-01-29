@@ -9,6 +9,7 @@ import com.google.android.gms.maps.model.LatLng;
 import fr.marin.cyril.belvedere.database.RealmDbHelper;
 import fr.marin.cyril.belvedere.model.Area;
 import fr.marin.cyril.belvedere.model.Placemark;
+import io.realm.Realm;
 
 /**
  * Created by Cyril on 22/04/2016.
@@ -33,7 +34,8 @@ public class ARPeakFinder {
     private static ARPeakFinder singleton;
 
     // Db
-    private final RealmDbHelper db = RealmDbHelper.getInstance();
+    // TODO : Instancier dans onCreate + Fermer dans onDestroy
+    private Realm realm = Realm.getDefaultInstance();
     // Observateur
     private LatLng oLatLng;
     private double oElevation;
@@ -96,7 +98,7 @@ public class ARPeakFinder {
     /**
      * Calcul de l'azimuth théorique entre l'observateur et la cible
      *
-     * @param t
+     * @param latLng
      * @return
      */
     private double getTheoricalAzimuth(final LatLng latLng) {
@@ -114,7 +116,8 @@ public class ARPeakFinder {
     /**
      * Angle entre le sol et la ligne de mire vers le sommet visé
      *
-     * @param t
+     * @param latLng
+     * @param elevation
      * @return
      */
     private double getTheoricalPitch(final LatLng latLng, final Double elevation) {
@@ -199,7 +202,7 @@ public class ARPeakFinder {
      */
     public Placemark getMatchingPlacemark() {
         Placemark placemark = null;
-        for (Placemark p : db.findInArea(this.getSearchArea(), Placemark.class)) {
+        for (Placemark p : RealmDbHelper.findInArea(realm, this.getSearchArea(), Placemark.class)) {
             if (this.isMatchingAccuracy(p)) {
                 Log.i(TAG, "getMatchingPlacemark | Placemark Matching : " + p.getTitle());
                 if (placemark == null

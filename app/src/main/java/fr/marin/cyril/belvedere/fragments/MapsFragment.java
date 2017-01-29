@@ -3,7 +3,6 @@ package fr.marin.cyril.belvedere.fragments;
 import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.graphics.Bitmap;
 import android.hardware.GeomagneticField;
 import android.location.Location;
 import android.net.Uri;
@@ -30,18 +29,12 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
-import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.HashSet;
-import java.util.concurrent.Callable;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-import java.util.concurrent.FutureTask;
 
 import fr.marin.cyril.belvedere.Config;
 import fr.marin.cyril.belvedere.R;
@@ -52,6 +45,7 @@ import fr.marin.cyril.belvedere.model.Placemark;
 import fr.marin.cyril.belvedere.services.CompassService;
 import fr.marin.cyril.belvedere.services.LocationService;
 import fr.marin.cyril.belvedere.tools.Orientation;
+import io.realm.Realm;
 
 import static fr.marin.cyril.belvedere.services.CompassService.getInstance;
 
@@ -61,13 +55,14 @@ import static fr.marin.cyril.belvedere.services.CompassService.getInstance;
 public class MapsFragment extends Fragment implements OnMapReadyCallback {
     private static final String TAG = "MapsFragment";
     private static View view;
-    private final Collection<Marker> markersShown = new HashSet<>();
+
+    private final Collection<Marker> markersShown = new ArrayList<>();
+
     private AppCompatActivity activity;
     private ActionBar actionBar;
     private Marker compassMarker;
     private GoogleMap mMap;
-    //private DbHelper db;
-    private RealmDbHelper realmDbHelper = RealmDbHelper.getInstance();
+    private Realm realm;
     private Location location;
 
     private LocationService locationService;
@@ -78,6 +73,7 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        this.realm = Realm.getDefaultInstance();
 
         if (view != null) {
             ViewGroup parent = (ViewGroup) view.getParent();
@@ -102,6 +98,12 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback {
         }
 
         return view;
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        this.realm.close();
     }
 
     @Override
@@ -172,15 +174,10 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback {
         if (ContextCompat.checkSelfPermission(getActivity().getApplicationContext(), Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED)
             mMap.setMyLocationEnabled(true);
 
-        mMap.setOnMapLoadedCallback(new GoogleMap.OnMapLoadedCallback() {
+        // Update markers on Map
+        mMap.setOnCameraIdleListener(new GoogleMap.OnCameraIdleListener() {
             @Override
-            public void onMapLoaded() {
-                MapsFragment.this.updateMarkersOnMap();
-            }
-        });
-        mMap.setOnCameraChangeListener(new GoogleMap.OnCameraChangeListener() {
-            @Override
-            public void onCameraChange(CameraPosition cameraPosition) {
+            public void onCameraIdle() {
                 MapsFragment.this.updateMarkersOnMap();
             }
         });
@@ -193,7 +190,6 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback {
         mMap.setOnMarkerClickListener(this.getOnMarkerClickListener());
         mMap.setOnInfoWindowClickListener(this.getOnInfoWindowClickListener());
 
-        this.updateMarkersOnMap();
         this.centerMapCameraOnMyPosition();
 
         final PackageManager pm = getActivity().getPackageManager();
@@ -250,22 +246,13 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback {
                 if (compassMarker != null && marker.getId().equals(compassMarker.getId()))
                     return null;
 
-                final Placemark m = realmDbHelper.findByLatLng(marker.getPosition(), Placemark.class);
-                //final Placemark m = db.findPlacemarkByLatLng(marker.getPosition());
+                final Placemark m = RealmDbHelper.findByLatLng(realm, marker.getPosition(), Placemark.class);
 
                 final View v = getActivity().getLayoutInflater().inflate(R.layout.maps_info_window, null);
                 final ImageView imgThumbnail = (ImageView) v.findViewById(R.id.iw_thumbnail);
                 final TextView tvTitle = (TextView) v.findViewById(R.id.iw_title);
                 final TextView tvAltitude = (TextView) v.findViewById(R.id.iw_altitude);
                 final TextView tvComment = (TextView) v.findViewById(R.id.iw_comment);
-
-                if (m.getThumbnailArray() != null) {
-                    Bitmap thumbnail = m.getThumbnail();
-                    imgThumbnail.setImageBitmap(thumbnail);
-                    imgThumbnail.setVisibility(View.VISIBLE);
-                    imgThumbnail.setMaxWidth(thumbnail.getWidth());
-                    imgThumbnail.setMaxHeight(thumbnail.getHeight());
-                }
 
                 tvTitle.setText(m.getTitle());
                 tvAltitude.setText(m.getElevationString());
@@ -284,7 +271,7 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback {
         return new GoogleMap.OnInfoWindowClickListener() {
             @Override
             public void onInfoWindowClick(Marker marker) {
-                final Placemark m = realmDbHelper.findByLatLng(marker.getPosition(), Placemark.class);
+                final Placemark m = RealmDbHelper.findByLatLng(realm, marker.getPosition(), Placemark.class);
                 startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(m.getWiki_uri())));
             }
         };
@@ -348,51 +335,20 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback {
     private void updateMarkersOnMap() {
         final Area area = new Area(mMap.getProjection().getVisibleRegion());
 
-        if (markersShown.size() > 0) {
+        if (!markersShown.isEmpty()) {
             final Collection<Marker> toRemove = new ArrayList<>();
-            for (Marker m : markersShown)
-                if (!area.isInArea(m.getPosition())) {
-                    toRemove.add(m);
-                    m.remove();
+            for (Marker marker : markersShown) {
+                if (!area.isInArea(marker.getPosition())) {
+                    toRemove.add(marker);
+                    marker.remove();
                 }
+            }
             markersShown.removeAll(toRemove);
         }
 
-        final ExecutorService executor = Executors.newFixedThreadPool(Runtime.getRuntime().availableProcessors());
-        final Collection<Placemark> placemarks = realmDbHelper.findInArea(area, Placemark.class);
+        Collection<Placemark> placemarks = RealmDbHelper.findInArea(realm, area, Placemark.class);
         for (Placemark p : placemarks) {
             markersShown.add(mMap.addMarker(p.getMarkerOptions()));
-            if (p.getThumbnail() == null) {
-                executor.submit(new ThumbFuture(new LatLng(p.getLatitude(), p.getLongitude())));
-            }
-        }
-    }
-
-    private class ThumbTask implements Callable<LatLng> {
-        private final LatLng latLng;
-        private final RealmDbHelper db = RealmDbHelper.getInstance();
-
-        public ThumbTask(LatLng latLng) {
-            this.latLng = latLng;
-        }
-
-        @Override
-        public LatLng call() throws Exception {
-            final Placemark placemark = db.findByLatLng(latLng, Placemark.class);
-            placemark.downloadThumbnail();
-            db.update(placemark);
-            return latLng;
-        }
-    }
-
-    private class ThumbFuture extends FutureTask<LatLng> {
-        public ThumbFuture(LatLng latLng) {
-            super(new MapsFragment.ThumbTask(latLng));
-        }
-
-        @Override
-        protected void done() {
-            super.done();
         }
     }
 }

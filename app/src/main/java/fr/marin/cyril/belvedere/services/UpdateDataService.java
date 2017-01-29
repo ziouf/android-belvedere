@@ -15,6 +15,7 @@ import fr.marin.cyril.belvedere.database.RealmDbHelper;
 import fr.marin.cyril.belvedere.dbpedia.JsonResponseParser;
 import fr.marin.cyril.belvedere.dbpedia.QueryManager;
 import fr.marin.cyril.belvedere.model.Placemark;
+import io.realm.Realm;
 
 /**
  * Created by CSCM6014 on 09/09/2016.
@@ -23,6 +24,7 @@ public class UpdateDataService extends IntentService {
     private static final String TAG = "UpdateDataService";
 
     private int max = 0;
+    private Realm realm;
 
     /**
      * Creates an IntentService.  Invoked by your subclass's constructor.
@@ -31,27 +33,27 @@ public class UpdateDataService extends IntentService {
         super(TAG);
     }
 
+
     @Override
     protected void onHandleIntent(Intent intent) {
         Log.i(TAG, "HandleIntent");
+        this.realm = Realm.getDefaultInstance();
 
         Log.i(TAG, "Querying dbpedia.org");
-        final String result = this.queryDbPedia(QueryManager.PEAKS_QUERY);
+        final String result = this.queryDbPedia(QueryManager.FRENCH_PEAKS_QUERY);
 
         Log.i(TAG, "Parsing results");
         final JsonResponseParser parser = new JsonResponseParser();
         final Collection<Placemark> placemarks = parser.readJsonString(result);
-
         this.max = placemarks.size();
-
         Log.i(TAG, "Parsed " + placemarks.size() + " placemarks");
 
         Log.i(TAG, "Insertion en Base des " + placemarks.size() + " derniers éléments");
-        RealmDbHelper.getInstance().insertAll(placemarks);
+        long begin = System.currentTimeMillis();
+        RealmDbHelper.saveAll(realm, placemarks);
+        Log.i(TAG, "insertion en base réalisée en " + (System.currentTimeMillis() - begin) + "ms");
 
-        Log.i(TAG, "Reset placemark list");
-        placemarks.clear();
-
+        this.realm.close();
         Log.i(TAG, "Update finished, stoping service");
         this.stopSelf();
     }
@@ -81,20 +83,5 @@ public class UpdateDataService extends IntentService {
             Log.e(TAG, e.getMessage());
         }
         return null;
-    }
-
-    private HttpURLConnection getRedirectedConnection(URL url) throws IOException {
-        HttpURLConnection connection = (HttpURLConnection) url.openConnection();
-        int status = connection.getResponseCode();
-        while (status == HttpURLConnection.HTTP_SEE_OTHER
-                || status == HttpURLConnection.HTTP_MOVED_PERM
-                || status == HttpURLConnection.HTTP_MOVED_TEMP) {
-            url = new URL(connection.getHeaderField("Location"));
-            // fermeture de la connexion actuelle
-            connection.disconnect();
-            connection = (HttpURLConnection) url.openConnection();
-            status = connection.getResponseCode();
-        }
-        return connection;
     }
 }

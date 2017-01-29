@@ -16,34 +16,25 @@ import io.realm.Sort;
 
 public class RealmDbHelper {
 
-    private final Realm realm;
-
-    private RealmDbHelper() {
-        this.realm = Realm.getDefaultInstance();
-    }
-
-    public static RealmDbHelper getInstance() {
-        return new RealmDbHelper();
-    }
-
-    public <T extends RealmModel> T findById(Long id, Class<T> clazz) {
+    public static <T extends RealmModel> T findByFileName(Realm realm, String fileName, Class<T> clazz) {
         return realm.where(clazz)
-                .equalTo("id", id)
+                .equalTo("fileName", fileName)
                 .findFirst();
     }
 
-    public <T extends RealmModel> T findByLatLng(LatLng latLng, Class<T> clazz) {
+    public static <T extends RealmModel> T findByLatLng(Realm realm, LatLng latLng, Class<T> clazz) {
         return realm.where(clazz)
                 .equalTo("latitude", latLng.latitude)
                 .equalTo("longitude", latLng.longitude)
                 .findFirst();
     }
 
-    public <T extends RealmModel> Collection<T> findInArea(Area area, Class<T> clazz) {
+    public static <T extends RealmModel> Collection<T> findInArea(Realm realm, Area area, Class<T> clazz) {
         RealmResults<T> results = realm.where(clazz)
                 .between("latitude", area.getBottom(), area.getTop())
                 .between("longitude", area.getLeft(), area.getRight())
-                .findAllSorted("elevation", Sort.DESCENDING);
+                .findAllSorted("elevation", Sort.DESCENDING)
+                .distinct("id");
 
         int size = results.size() > 0 ? results.size() : 0;
         int limit = Math.min(size, 50);
@@ -51,29 +42,21 @@ public class RealmDbHelper {
         return results.subList(0, limit);
     }
 
-    public <T extends RealmModel> void insertAll(Collection<T> data) {
-        realm.beginTransaction();
-        realm.copyToRealm(data);
-        realm.commitTransaction();
+    public static <T extends RealmModel> void saveAll(Realm realm, final Collection<T> data) {
+        realm.executeTransaction(new Realm.Transaction() {
+            @Override
+            public void execute(Realm realm) {
+                realm.copyToRealmOrUpdate(data);
+            }
+        });
     }
 
-    public <T extends RealmModel> void insert(T data) {
-        realm.beginTransaction();
-        realm.copyToRealm(data);
-        realm.commitTransaction();
-    }
-
-    public <T extends RealmModel> T update(T data) {
-        realm.beginTransaction();
-        realm.copyToRealmOrUpdate(data);
-        realm.commitTransaction();
-        return data;
-    }
-
-    public <T extends RealmModel> Collection<T> update(Collection<T> data) {
-        realm.beginTransaction();
-        realm.copyToRealmOrUpdate(data);
-        realm.commitTransaction();
-        return data;
+    public static <T extends RealmModel> void save(Realm realm, final T data) {
+        realm.executeTransaction(new Realm.Transaction() {
+            @Override
+            public void execute(Realm realm) {
+                realm.copyToRealmOrUpdate(data);
+            }
+        });
     }
 }

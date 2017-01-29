@@ -178,14 +178,6 @@ public class CameraActivity extends AppCompatActivity {
                 }
                 Log.i(TAG, "Placemark not null : " + placemark.getTitle());
 
-                // Check si thumbnail != null avant de l'afficher
-                if (placemark.hasThumbnail()) {
-                    peak_thumbnail_img.setImageBitmap(placemark.getThumbnail());
-                    peak_thumbnail_img.setVisibility(View.VISIBLE);
-                } else {
-                    peak_thumbnail_img.setVisibility(View.INVISIBLE);
-                }
-
                 peak_info_tv.setText(String.format("%s\n%s m", placemark.getTitle(), placemark.getElevation()));
                 peak_info_tv.setVisibility(View.VISIBLE);
             }

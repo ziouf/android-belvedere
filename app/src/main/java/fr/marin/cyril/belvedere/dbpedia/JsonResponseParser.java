@@ -118,7 +118,6 @@ public class JsonResponseParser {
         double longitude = 0d;
         double elevation = 0d;
         String comment = null;
-        String thumbnail_uri = null;
         String wiki_uri = null;
 
         reader.beginObject();
@@ -139,9 +138,6 @@ public class JsonResponseParser {
                 case "comment":
                     comment = readStringValue(reader);
                     break;
-                case "thumbnail":
-                    thumbnail_uri = readStringValue(reader);
-                    break;
                 case "wiki":
                     wiki_uri = readStringValue(reader);
                     break;
@@ -151,7 +147,7 @@ public class JsonResponseParser {
         }
         reader.endObject();
 
-        return new Placemark(name, comment, latitude, longitude, elevation, wiki_uri, thumbnail_uri);
+        return new Placemark(name, comment, latitude, longitude, elevation, wiki_uri);
     }
 
     private String readStringValue(JsonReader reader) throws IOException {
