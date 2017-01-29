@@ -5,21 +5,22 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
+import android.telephony.TelephonyManager;
 import android.view.View;
-import android.widget.ProgressBar;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.Arrays;
 
 import fr.marin.cyril.belvedere.R;
-import fr.marin.cyril.belvedere.database.DatabaseInitializer;
+import fr.marin.cyril.belvedere.services.UpdateDataService;
 
 public class LoadingActivity extends Activity
         implements ActivityCompat.OnRequestPermissionsResultCallback {
@@ -33,6 +34,7 @@ public class LoadingActivity extends Activity
             | View.SYSTEM_UI_FLAG_FULLSCREEN;
 
     private View decorView;
+    private ConnectivityManager cm;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,6 +48,8 @@ public class LoadingActivity extends Activity
     @Override
     protected void onPostCreate(@Nullable Bundle savedInstanceState) {
         super.onPostCreate(savedInstanceState);
+
+        cm = (ConnectivityManager) getApplicationContext().getSystemService(Context.CONNECTIVITY_SERVICE);
 
         // Check permissions
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED
@@ -84,11 +88,21 @@ public class LoadingActivity extends Activity
     }
 
     private void start() {
+        /*
         final InitTask initDBTask = new InitTask(this);
         initDBTask.execute();
+        */
+        final NetworkInfo netInfo = cm.getActiveNetworkInfo();
+        if (netInfo.getType() == ConnectivityManager.TYPE_WIFI
+                || (netInfo.getType() == ConnectivityManager.TYPE_MOBILE && netInfo.getSubtype() == TelephonyManager.NETWORK_TYPE_LTE))
+            this.startService(new Intent(LoadingActivity.this, UpdateDataService.class));
+
+        this.startActivity(new Intent(LoadingActivity.this, MainActivity.class));
+        this.finish();
     }
 
-    private class InitTask extends DatabaseInitializer {
+    /*
+    private class InitTask extends DbInitializer {
         private final TextView loadingInfoTextView = (TextView) LoadingActivity.this.findViewById(R.id.loading_info);
         private final ProgressBar progressBar = (ProgressBar) LoadingActivity.this.findViewById(R.id.loading_progress);
 
@@ -117,4 +131,5 @@ public class LoadingActivity extends Activity
             this.progressBar.setMax(values[1]);
         }
     }
+    */
 }

@@ -1,4 +1,5 @@
 apply plugin: 'com.android.application'
+apply plugin: 'realm-android'
 
 android {
     signingConfigs {
@@ -48,9 +49,6 @@ android {
     productFlavors {
         Belvedere {
             applicationId "fr.marin.cyril.belvedere"
-        }
-        Mapsapp {
-            applicationId 'fr.marin.cyril.mapsapp'
         }
     }
 }

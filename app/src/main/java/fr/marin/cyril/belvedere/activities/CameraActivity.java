@@ -186,7 +186,7 @@ public class CameraActivity extends AppCompatActivity {
                     peak_thumbnail_img.setVisibility(View.INVISIBLE);
                 }
 
-                peak_info_tv.setText(String.format("%s\n%s m", placemark.getTitle(), placemark.getCoordinates().getElevation()));
+                peak_info_tv.setText(String.format("%s\n%s m", placemark.getTitle(), placemark.getElevation()));
                 peak_info_tv.setVisibility(View.VISIBLE);
             }
         };

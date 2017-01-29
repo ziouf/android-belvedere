@@ -38,11 +38,15 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
+import java.util.concurrent.Callable;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.FutureTask;
 
 import fr.marin.cyril.belvedere.Config;
 import fr.marin.cyril.belvedere.R;
 import fr.marin.cyril.belvedere.activities.CameraActivity;
-import fr.marin.cyril.belvedere.database.DatabaseHelper;
+import fr.marin.cyril.belvedere.database.RealmDbHelper;
 import fr.marin.cyril.belvedere.model.Area;
 import fr.marin.cyril.belvedere.model.Placemark;
 import fr.marin.cyril.belvedere.services.CompassService;
@@ -62,7 +66,8 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback {
     private ActionBar actionBar;
     private Marker compassMarker;
     private GoogleMap mMap;
-    private DatabaseHelper db;
+    //private DbHelper db;
+    private RealmDbHelper realmDbHelper = RealmDbHelper.getInstance();
     private Location location;
 
     private LocationService locationService;
@@ -103,7 +108,6 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback {
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-        db = DatabaseHelper.getInstance(getActivity().getApplicationContext());
         locationService = LocationService.getInstance(getActivity());
         compassService = getInstance(getActivity());
 
@@ -246,7 +250,8 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback {
                 if (compassMarker != null && marker.getId().equals(compassMarker.getId()))
                     return null;
 
-                final Placemark m = db.findPlacemarkByLatLng(marker.getPosition());
+                final Placemark m = realmDbHelper.findByLatLng(marker.getPosition(), Placemark.class);
+                //final Placemark m = db.findPlacemarkByLatLng(marker.getPosition());
 
                 final View v = getActivity().getLayoutInflater().inflate(R.layout.maps_info_window, null);
                 final ImageView imgThumbnail = (ImageView) v.findViewById(R.id.iw_thumbnail);
@@ -263,7 +268,7 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback {
                 }
 
                 tvTitle.setText(m.getTitle());
-                tvAltitude.setText(m.getCoordinates().getElevationString());
+                tvAltitude.setText(m.getElevationString());
                 tvComment.setText(m.getComment());
                 tvComment.setMovementMethod(new ScrollingMovementMethod());
 
@@ -279,7 +284,7 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback {
         return new GoogleMap.OnInfoWindowClickListener() {
             @Override
             public void onInfoWindowClick(Marker marker) {
-                Placemark m = db.findPlacemarkByLatLng(marker.getPosition());
+                final Placemark m = realmDbHelper.findByLatLng(marker.getPosition(), Placemark.class);
                 startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(m.getWiki_uri())));
             }
         };
@@ -341,10 +346,10 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback {
      *
      */
     private void updateMarkersOnMap() {
-        Area area = new Area(mMap.getProjection().getVisibleRegion());
+        final Area area = new Area(mMap.getProjection().getVisibleRegion());
 
         if (markersShown.size() > 0) {
-            Collection<Marker> toRemove = new ArrayList<>();
+            final Collection<Marker> toRemove = new ArrayList<>();
             for (Marker m : markersShown)
                 if (!area.isInArea(m.getPosition())) {
                     toRemove.add(m);
@@ -353,9 +358,41 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback {
             markersShown.removeAll(toRemove);
         }
 
-        for (Placemark m : db.findPlacemarkInArea(area)) {
-            markersShown.add(mMap.addMarker(m.getMarkerOptions()));
+        final ExecutorService executor = Executors.newFixedThreadPool(Runtime.getRuntime().availableProcessors());
+        final Collection<Placemark> placemarks = realmDbHelper.findInArea(area, Placemark.class);
+        for (Placemark p : placemarks) {
+            markersShown.add(mMap.addMarker(p.getMarkerOptions()));
+            if (p.getThumbnail() == null) {
+                executor.submit(new ThumbFuture(new LatLng(p.getLatitude(), p.getLongitude())));
+            }
         }
     }
 
+    private class ThumbTask implements Callable<LatLng> {
+        private final LatLng latLng;
+        private final RealmDbHelper db = RealmDbHelper.getInstance();
+
+        public ThumbTask(LatLng latLng) {
+            this.latLng = latLng;
+        }
+
+        @Override
+        public LatLng call() throws Exception {
+            final Placemark placemark = db.findByLatLng(latLng, Placemark.class);
+            placemark.downloadThumbnail();
+            db.update(placemark);
+            return latLng;
+        }
+    }
+
+    private class ThumbFuture extends FutureTask<LatLng> {
+        public ThumbFuture(LatLng latLng) {
+            super(new MapsFragment.ThumbTask(latLng));
+        }
+
+        @Override
+        protected void done() {
+            super.done();
+        }
+    }
 }

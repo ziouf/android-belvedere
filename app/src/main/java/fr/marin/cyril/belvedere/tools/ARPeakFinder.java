@@ -6,9 +6,8 @@ import android.util.Log;
 
 import com.google.android.gms.maps.model.LatLng;
 
-import fr.marin.cyril.belvedere.database.DatabaseHelper;
+import fr.marin.cyril.belvedere.database.RealmDbHelper;
 import fr.marin.cyril.belvedere.model.Area;
-import fr.marin.cyril.belvedere.model.Coordinates;
 import fr.marin.cyril.belvedere.model.Placemark;
 
 /**
@@ -34,7 +33,7 @@ public class ARPeakFinder {
     private static ARPeakFinder singleton;
 
     // Db
-    private final DatabaseHelper db;
+    private final RealmDbHelper db = RealmDbHelper.getInstance();
     // Observateur
     private LatLng oLatLng;
     private double oElevation;
@@ -42,11 +41,10 @@ public class ARPeakFinder {
     private double oPitch;
 
     public ARPeakFinder(Context context) {
-        this.db = DatabaseHelper.getInstance(context);
+
     }
 
     public ARPeakFinder(Context context, Location location, double azimuth, double pitch) {
-        this.db = DatabaseHelper.getInstance(context);
         this.oLatLng = new LatLng(location.getLatitude(), location.getLongitude());
         this.oElevation = location.getAltitude();
         this.oAzimuth = (azimuth + 360) % 360;
@@ -101,9 +99,9 @@ public class ARPeakFinder {
      * @param t
      * @return
      */
-    private double getTheoricalAzimuth(final Coordinates t) {
-        final double dX = t.getLatLng().latitude - oLatLng.latitude;
-        final double dY = t.getLatLng().longitude - oLatLng.longitude;
+    private double getTheoricalAzimuth(final LatLng latLng) {
+        final double dX = latLng.latitude - oLatLng.latitude;
+        final double dY = latLng.longitude - oLatLng.longitude;
         final double phi = Math.toDegrees(Math.atan(Math.abs(dY / dX)));
 
         if (dX > 0 && dY > 0) return phi;
@@ -119,9 +117,9 @@ public class ARPeakFinder {
      * @param t
      * @return
      */
-    private double getTheoricalPitch(final Coordinates t) {
-        final double h = Math.abs(t.getElevation() - oElevation); // Metres
-        final double l = Utils.getDistanceBetween(t.getLatLng(), oLatLng); // Metres
+    private double getTheoricalPitch(final LatLng latLng, final Double elevation) {
+        final double h = Math.abs(elevation - oElevation); // Metres
+        final double l = Utils.getDistanceBetween(latLng, oLatLng); // Metres
         return Math.toDegrees(Math.atan(h / l));
     }
 
@@ -201,12 +199,12 @@ public class ARPeakFinder {
      */
     public Placemark getMatchingPlacemark() {
         Placemark placemark = null;
-        for (Placemark p : db.findPlacemarkInArea(this.getSearchArea())) {
+        for (Placemark p : db.findInArea(this.getSearchArea(), Placemark.class)) {
             if (this.isMatchingAccuracy(p)) {
                 Log.i(TAG, "getMatchingPlacemark | Placemark Matching : " + p.getTitle());
                 if (placemark == null
                         // Si les placemarks sont à l'horizon, on choisit le sommet le plus haut
-                        || (p.getDistance() > DISTANCE_STEPS[DISTANCE_STEPS.length - 1] && p.getCoordinates().getElevation() > placemark.getCoordinates().getElevation())
+                        || (p.getDistance() > DISTANCE_STEPS[DISTANCE_STEPS.length - 1] && p.getElevation() > placemark.getElevation())
                         // Si les placemarks sont proches, on choisit le plus proche
                         || (p.getDistance() < DISTANCE_STEPS[DISTANCE_STEPS.length - 1] && p.getMatchLevel() < placemark.getMatchLevel())) {
 
@@ -223,9 +221,9 @@ public class ARPeakFinder {
      * @return
      */
     private boolean isMatchingAccuracy(final Placemark p) {
-        final double distance = Utils.getDistanceBetween(oLatLng, p.getCoordinates().getLatLng());
-        final double tAzimuth = this.getTheoricalAzimuth(p.getCoordinates());
-        final double tPitch = this.getTheoricalPitch(p.getCoordinates());
+        final double distance = Utils.getDistanceBetween(oLatLng, p.getLatLng());
+        final double tAzimuth = this.getTheoricalAzimuth(p.getLatLng());
+        final double tPitch = this.getTheoricalPitch(p.getLatLng(), p.getElevation());
         p.setDistance(distance);
         p.setMatchLevel((tAzimuth - oAzimuth) + (tPitch - oPitch));
         return isMatchingAzimuth(tAzimuth, distance)

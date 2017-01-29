@@ -2,29 +2,27 @@ package fr.marin.cyril.belvedere.services;
 
 import android.app.IntentService;
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.util.Log;
 
 import java.io.BufferedReader;
-import java.io.ByteArrayOutputStream;
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.util.List;
+import java.util.Collection;
 
-import fr.marin.cyril.belvedere.database.DatabaseHelper;
-import fr.marin.cyril.belvedere.datasources.DbPediaQueryManager;
+import fr.marin.cyril.belvedere.database.RealmDbHelper;
+import fr.marin.cyril.belvedere.dbpedia.JsonResponseParser;
+import fr.marin.cyril.belvedere.dbpedia.QueryManager;
 import fr.marin.cyril.belvedere.model.Placemark;
-import fr.marin.cyril.belvedere.parser.DbPediaJsonResponseParser;
 
 /**
  * Created by CSCM6014 on 09/09/2016.
  */
 public class UpdateDataService extends IntentService {
     private static final String TAG = "UpdateDataService";
+
+    private int max = 0;
 
     /**
      * Creates an IntentService.  Invoked by your subclass's constructor.
@@ -38,30 +36,21 @@ public class UpdateDataService extends IntentService {
         Log.i(TAG, "HandleIntent");
 
         Log.i(TAG, "Querying dbpedia.org");
-        final String result = this.queryDbPedia(DbPediaQueryManager.PEAKS_QUERY);
+        final String result = this.queryDbPedia(QueryManager.PEAKS_QUERY);
 
         Log.i(TAG, "Parsing results");
-        final DbPediaJsonResponseParser parser = new DbPediaJsonResponseParser();
-        final List<Placemark> placemarks = parser.readJsonString(result);
+        final JsonResponseParser parser = new JsonResponseParser();
+        final Collection<Placemark> placemarks = parser.readJsonString(result);
+
+        this.max = placemarks.size();
 
         Log.i(TAG, "Parsed " + placemarks.size() + " placemarks");
-        for (Placemark p : placemarks) {
-            try {
-                final HttpURLConnection connection = getRedirectedConnection(new URL(p.getThumbnail_uri()));
-                try (InputStream is = connection.getInputStream()) {
-                    final ByteArrayOutputStream baos = new ByteArrayOutputStream(4096);
-                    final Bitmap bitmap = BitmapFactory.decodeStream(is);
-                    bitmap.compress(Bitmap.CompressFormat.WEBP, 45, baos);
-                    p.setThumbnail(baos.toByteArray());
-                } finally {
-                    connection.disconnect();
-                }
-            } catch (IOException ignore) {
-                Log.e(TAG, ignore.getMessage());
-            }
 
-            DatabaseHelper.getInstance(getApplicationContext()).insertOrUpdatePlacemark(p);
-        }
+        Log.i(TAG, "Insertion en Base des " + placemarks.size() + " derniers éléments");
+        RealmDbHelper.getInstance().insertAll(placemarks);
+
+        Log.i(TAG, "Reset placemark list");
+        placemarks.clear();
 
         Log.i(TAG, "Update finished, stoping service");
         this.stopSelf();
@@ -69,15 +58,15 @@ public class UpdateDataService extends IntentService {
 
     private String queryDbPedia(String query) {
         try {
-            String url = DbPediaQueryManager.buildApiUrl(query);
+            final String url = QueryManager.buildApiUrl(query);
             Log.i(TAG, "url : " + url);
-            HttpURLConnection conn = (HttpURLConnection) new URL(url).openConnection();
+            final HttpURLConnection conn = (HttpURLConnection) new URL(url).openConnection();
             conn.setRequestMethod("GET");
             conn.setDoInput(true);
             conn.connect();
+            Log.i(TAG, "dbPedia response code : " + conn.getResponseCode());
 
             try (BufferedReader reader = new BufferedReader(new InputStreamReader(conn.getInputStream()))) {
-                Log.i(TAG, "dbPedia response code : " + conn.getResponseCode());
                 final StringBuilder sb = new StringBuilder();
                 String buffer;
                 while ((buffer = reader.readLine()) != null)

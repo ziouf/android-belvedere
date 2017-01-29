@@ -12,10 +12,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.util.List;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-import java.util.concurrent.TimeUnit;
 
 import fr.marin.cyril.belvedere.R;
 import fr.marin.cyril.belvedere.model.Placemark;
@@ -30,13 +26,12 @@ public class DatabaseInitializer extends AsyncTask<Void, Integer, Void> {
     private static final String TAG = "InitDBTask";
 
     private final Context context;
-    private final DatabaseHelper db;
+    private final RealmDbHelper db = RealmDbHelper.getInstance();
     private final DbPediaJsonResponseParser parser;
     private final ConnectivityStatus connectivityStatus;
 
     public DatabaseInitializer(Context context) {
         this.context = context;
-        this.db = DatabaseHelper.getInstance(context);
         this.parser = new DbPediaJsonResponseParser();
         this.connectivityStatus = new ConnectivityStatus(context);
     }
@@ -52,7 +47,7 @@ public class DatabaseInitializer extends AsyncTask<Void, Integer, Void> {
             final int id = ta.getResourceId(i, -1);
             final String key = ta.getString(i);
             final String hash = Utils.getSHA1FromResource(context, id);
-
+/*
             if (!hash.equals(db.findSourceFileHash(key))) {
                 Log.i(TAG, String.format("Importation du fichier : %s (%s)", key, hash));
                 final List<Placemark> placemarks = parser.readJsonStream(context.getResources().openRawResource(id));
@@ -73,6 +68,7 @@ public class DatabaseInitializer extends AsyncTask<Void, Integer, Void> {
                 db.insertAllPlacemark(placemarks);
                 db.insertOrUpdateKmlHash(key, hash);
             }
+            */
         }
         publishProgress(ta.length(), ta.length());
 
