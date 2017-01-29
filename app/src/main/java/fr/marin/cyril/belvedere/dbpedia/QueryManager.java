@@ -55,15 +55,15 @@ public class QueryManager {
     private static final String FOAF_PREFIX = "PREFIX foaf: <http://xmlns.com/foaf/0.1/>";
     public static final String FRENCH_PEAKS_QUERY =
             RDF_PREFIX + SEP + DBPEDIA_OWL_PREFIX + SEP + PROP_FR_PREFIX + SEP + FOAF_PREFIX + SEP +
-                    "SELECT ?regionLabel ?nom ?altitude ?latitude ?longitude ?thumbnail ?wiki ?comment" + SEP +
+                    "SELECT ?id ?regionLabel ?nom ?altitude ?latitude ?longitude ?thumbnail ?wiki ?comment" + SEP +
                     "WHERE {" +
                     "?peak rdf:type dbpedia-owl:Mountain ." + SEP +
                     "?peak rdf:type dbpedia-owl:NaturalPlace ." + SEP +
                     "?peak dbpedia-owl:region ?region ." + SEP +
                     "?region dbpedia-owl:country <http://fr.dbpedia.org/resource/France> ." + SEP +
-                    "?peak dbpedia-owl:region ?region ." + SEP +
                     "?region rdfs:label ?regionLabel ." + SEP +
                     "?peak rdfs:label ?nom ." + SEP +
+                    "?peak dbpedia-owl:wikiPageID ?id ." + SEP +
                     "?peak prop-fr:altitude ?altitude ." + SEP +
                     "?peak prop-fr:latitude ?latitude ." + SEP +
                     "?peak prop-fr:longitude ?longitude ." + SEP +
@@ -79,23 +79,29 @@ public class QueryManager {
                     " GROUP BY ?region " +
                     " ORDER BY ASC(?region)";
     public static final String PEAKS_QUERY =
-            RDF_PREFIX + SEP + DBPEDIA_OWL_PREFIX + SEP + FOAF_PREFIX + SEP +
-                    "SELECT ?nom ?altitude ?latitude ?longitude ?thumbnail ?wiki ?comment" + SEP +
+            RDF_PREFIX + SEP + DBPEDIA_OWL_PREFIX + SEP + PROP_FR_PREFIX + SEP + FOAF_PREFIX + SEP +
+                    "SELECT ?id ?regionLabel ?nom ?altitude ?latitude ?longitude ?thumbnail ?wiki ?comment" + SEP +
                     "WHERE {" +
-                    " ?peak rdf:type dbpedia-owl:Mountain ." + SEP +
-                    " ?peak rdf:type dbpedia-owl:NaturalPlace ." + SEP +
-                    " ?peak rdfs:label ?nom ." + SEP +
-                    " ?peak dbpedia-owl:altitude ?alt ." + SEP +
-                    " ?alt  dbpedia-owl:value ?altitude ." + SEP +
-                    " ?peak geo:lat ?latitude ." + SEP +
-                    " ?peak geo:long ?longitude ." + SEP +
-                    " ?peak dbpedia-owl:thumbnail ?thumbnail ." + SEP +
-                    " ?peak foaf:isPrimaryTopicOf ?wiki ." + SEP +
-                    " ?peak rdfs:comment ?comment ." + SEP +
-                    " FILTER(LANGMATCHES(LANG(?nom), \"fr\") && LANGMATCHES(LANG(?comment), \"fr\"))" +
-                    "}" + SEP +
-                    "GROUP BY ?region" + SEP +
-                    "ORDER BY ASC(?region)";
+                    "?peak rdf:type dbpedia-owl:Mountain ." + SEP +
+                    "?peak rdf:type dbpedia-owl:NaturalPlace ." + SEP +
+                    "?peak dbpedia-owl:region ?region ." + SEP +
+                    "?region rdfs:label ?regionLabel ." + SEP +
+                    "?peak rdfs:label ?nom ." + SEP +
+                    "?peak dbpedia-owl:wikiPageID ?id ." + SEP +
+                    "?peak prop-fr:altitude ?altitude ." + SEP +
+                    "?peak prop-fr:latitude ?latitude ." + SEP +
+                    "?peak prop-fr:longitude ?longitude ." + SEP +
+                    "?peak dbpedia-owl:thumbnail ?thumbnail ." + SEP +
+                    "?peak foaf:isPrimaryTopicOf ?wiki ." + SEP +
+                    "?peak rdfs:comment ?comment ." + SEP +
+                    "FILTER(" +
+                    "LANGMATCHES(LANG(?nom), \"fr\") && " +
+                    "LANGMATCHES(LANG(?regionLabel), \"fr\") && " +
+                    "LANGMATCHES(LANG(?comment), \"fr\")" +
+                    ")" +
+                    "}" +
+                    " GROUP BY ?region " +
+                    " ORDER BY ASC(?region)";
     private static final String GEO_PREFIX = "PREFIX geo: <http://www.w3.org/2003/01/geo/>";
 
     public static String buildApiUrl(String query) {

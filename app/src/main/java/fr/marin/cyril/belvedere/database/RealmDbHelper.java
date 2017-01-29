@@ -42,21 +42,23 @@ public class RealmDbHelper {
         return results.subList(0, limit);
     }
 
-    public static <T extends RealmModel> void saveAll(Realm realm, final Collection<T> data) {
+    public static <T extends RealmModel> Collection<T> saveAll(Realm realm, final Collection<T> data) {
         realm.executeTransaction(new Realm.Transaction() {
             @Override
             public void execute(Realm realm) {
                 realm.copyToRealmOrUpdate(data);
             }
         });
+        return data;
     }
 
-    public static <T extends RealmModel> void save(Realm realm, final T data) {
+    public static <T extends RealmModel> T save(Realm realm, final T data) {
         realm.executeTransaction(new Realm.Transaction() {
             @Override
             public void execute(Realm realm) {
                 realm.copyToRealmOrUpdate(data);
             }
         });
+        return data;
     }
 }

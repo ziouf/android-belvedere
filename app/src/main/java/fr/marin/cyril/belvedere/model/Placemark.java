@@ -13,7 +13,7 @@ import io.realm.annotations.PrimaryKey;
 public class Placemark extends RealmObject {
 
     @PrimaryKey
-    private String id;
+    private int id;
 
     private Double latitude;
     private Double longitude;
@@ -31,8 +31,8 @@ public class Placemark extends RealmObject {
     public Placemark() {
     }
 
-    public Placemark(String title, String comment, double lat, double lng, double elevation, String wiki_uri) {
-        this.id = "" + lat + lng + elevation;
+    public Placemark(int id, String title, String comment, double lat, double lng, double elevation, String wiki_uri) {
+        this.id = id;
         this.latitude = lat;
         this.longitude = lng;
         this.elevation = elevation;
@@ -42,11 +42,11 @@ public class Placemark extends RealmObject {
         this.wiki_uri = wiki_uri;
     }
 
-    public String getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(int id) {
         this.id = id;
     }
 

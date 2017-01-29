@@ -21,7 +21,6 @@ import android.view.InflateException;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -190,7 +189,6 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback {
         mMap.setOnMarkerClickListener(this.getOnMarkerClickListener());
         mMap.setOnInfoWindowClickListener(this.getOnInfoWindowClickListener());
 
-        this.updateMarkersOnMap();
         this.centerMapCameraOnMyPosition();
 
         final PackageManager pm = getActivity().getPackageManager();
@@ -250,7 +248,6 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback {
                 final Placemark m = RealmDbHelper.findByLatLng(realm, marker.getPosition(), Placemark.class);
 
                 final View v = getActivity().getLayoutInflater().inflate(R.layout.maps_info_window, null);
-                final ImageView imgThumbnail = (ImageView) v.findViewById(R.id.iw_thumbnail);
                 final TextView tvTitle = (TextView) v.findViewById(R.id.iw_title);
                 final TextView tvAltitude = (TextView) v.findViewById(R.id.iw_altitude);
                 final TextView tvComment = (TextView) v.findViewById(R.id.iw_comment);
@@ -347,8 +344,7 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback {
             markersShown.removeAll(toRemove);
         }
 
-        Collection<Placemark> placemarks = RealmDbHelper.findInArea(realm, area, Placemark.class);
-        for (Placemark p : placemarks) {
+        for (Placemark p : RealmDbHelper.findInArea(realm, area, Placemark.class)) {
             markersShown.add(mMap.addMarker(p.getMarkerOptions()));
         }
     }

@@ -113,6 +113,7 @@ public class JsonResponseParser {
     }
 
     private Placemark readBinding(JsonReader reader) throws IOException {
+        int id = 0;
         String name = null;
         double latitude = 0d;
         double longitude = 0d;
@@ -123,6 +124,9 @@ public class JsonResponseParser {
         reader.beginObject();
         while (reader.hasNext()) {
             switch (reader.nextName()) {
+                case "id":
+                    id = readIntegerValue(reader);
+                    break;
                 case "altitude":
                     elevation = readDoubleValue(reader);
                     break;
@@ -147,7 +151,21 @@ public class JsonResponseParser {
         }
         reader.endObject();
 
-        return new Placemark(name, comment, latitude, longitude, elevation, wiki_uri);
+        return new Placemark(id, name, comment, latitude, longitude, elevation, wiki_uri);
+    }
+
+    private int readIntegerValue(JsonReader reader) throws IOException {
+        int value = 0;
+        reader.beginObject();
+        while (reader.hasNext()) {
+            if (reader.nextName().equals("value")) {
+                value = reader.nextInt();
+            } else {
+                reader.skipValue();
+            }
+        }
+        reader.endObject();
+        return value;
     }
 
     private String readStringValue(JsonReader reader) throws IOException {

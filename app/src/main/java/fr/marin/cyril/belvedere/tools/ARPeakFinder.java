@@ -33,9 +33,6 @@ public class ARPeakFinder {
 
     private static ARPeakFinder singleton;
 
-    // Db
-    // TODO : Instancier dans onCreate + Fermer dans onDestroy
-    private Realm realm = Realm.getDefaultInstance();
     // Observateur
     private LatLng oLatLng;
     private double oElevation;
@@ -201,6 +198,8 @@ public class ARPeakFinder {
      * @return
      */
     public Placemark getMatchingPlacemark() {
+        final Realm realm = Realm.getDefaultInstance();
+
         Placemark placemark = null;
         for (Placemark p : RealmDbHelper.findInArea(realm, this.getSearchArea(), Placemark.class)) {
             if (this.isMatchingAccuracy(p)) {
@@ -215,6 +214,8 @@ public class ARPeakFinder {
                 }
             }
         }
+
+        realm.close();
         return placemark;
     }
 

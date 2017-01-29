@@ -40,7 +40,7 @@ public class UpdateDataService extends IntentService {
         this.realm = Realm.getDefaultInstance();
 
         Log.i(TAG, "Querying dbpedia.org");
-        final String result = this.queryDbPedia(QueryManager.FRENCH_PEAKS_QUERY);
+        final String result = this.queryDbPedia(QueryManager.PEAKS_QUERY);
 
         Log.i(TAG, "Parsing results");
         final JsonResponseParser parser = new JsonResponseParser();
