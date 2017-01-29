@@ -190,6 +190,7 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback {
         mMap.setOnMarkerClickListener(this.getOnMarkerClickListener());
         mMap.setOnInfoWindowClickListener(this.getOnInfoWindowClickListener());
 
+        this.updateMarkersOnMap();
         this.centerMapCameraOnMyPosition();
 
         final PackageManager pm = getActivity().getPackageManager();
