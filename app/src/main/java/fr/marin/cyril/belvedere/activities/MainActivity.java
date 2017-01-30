@@ -73,6 +73,7 @@ public class MainActivity extends AppCompatActivity {
                 startService(new Intent(this, UpdateDataService.class));
                 break;
             case R.id.menu_settings:
+                startActivity(new Intent(this, SettingsActivity.class));
                 break;
         }
 
