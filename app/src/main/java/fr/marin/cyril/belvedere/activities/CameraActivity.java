@@ -23,12 +23,14 @@ import java.util.concurrent.TimeUnit;
 import fr.marin.cyril.belvedere.Config;
 import fr.marin.cyril.belvedere.R;
 import fr.marin.cyril.belvedere.camera.Camera;
+import fr.marin.cyril.belvedere.database.RealmDbHelper;
 import fr.marin.cyril.belvedere.model.Placemark;
 import fr.marin.cyril.belvedere.services.CompassService;
 import fr.marin.cyril.belvedere.services.LocationService;
 import fr.marin.cyril.belvedere.tools.ARPeakFinder;
 import fr.marin.cyril.belvedere.tools.Orientation;
 import fr.marin.cyril.belvedere.views.CompassView;
+import io.realm.Realm;
 
 /**
  * An example full-screen activity that shows and hides the system UI (i.e.
@@ -164,12 +166,14 @@ public class CameraActivity extends AppCompatActivity {
             compassView.updateAzimuthAndRedraw(azimuth);
     }
 
-    private Runnable updateGUI(final Placemark placemark) {
+    private Runnable updateGUI(final Integer placemarkId) {
         return new Runnable() {
             private static final String TAG = "UpdateGUI";
 
             @Override
             public void run() {
+                Realm realm = Realm.getDefaultInstance();
+                Placemark placemark = RealmDbHelper.findById(realm, placemarkId, Placemark.class);
                 if (placemark == null) {
                     Log.d(TAG, "Placemark null");
                     peak_thumbnail_img.setVisibility(View.INVISIBLE);
@@ -180,6 +184,7 @@ public class CameraActivity extends AppCompatActivity {
 
                 peak_info_tv.setText(String.format("%s\n%s m", placemark.getTitle(), placemark.getElevation()));
                 peak_info_tv.setVisibility(View.VISIBLE);
+                realm.close();
             }
         };
     }
@@ -196,15 +201,18 @@ public class CameraActivity extends AppCompatActivity {
 
         @Override
         public void run() {
+            Realm realm = Realm.getDefaultInstance();
             Log.d(TAG, "Run");
             if (oLocation == null) return;
 
             Log.d(TAG, "Run with Azimuth : " + oAzimuth + " Pitch : " + oPitch);
             final ARPeakFinder ar = new ARPeakFinder(context, oLocation, oAzimuth, oPitch);
+            ar.setPlacemarks(RealmDbHelper.findInArea(realm, ar.getSearchArea(), Placemark.class));
 
             Log.d(TAG, "Send to GUI");
             handler.post(updateGUI(ar.getMatchingPlacemark()));
             Log.d(TAG, "End Run");
+            realm.close();
         }
 
     }

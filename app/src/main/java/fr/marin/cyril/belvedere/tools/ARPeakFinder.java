@@ -6,10 +6,10 @@ import android.util.Log;
 
 import com.google.android.gms.maps.model.LatLng;
 
-import fr.marin.cyril.belvedere.database.RealmDbHelper;
+import java.util.Collection;
+
 import fr.marin.cyril.belvedere.model.Area;
 import fr.marin.cyril.belvedere.model.Placemark;
-import io.realm.Realm;
 
 /**
  * Created by Cyril on 22/04/2016.
@@ -38,6 +38,8 @@ public class ARPeakFinder {
     private double oElevation;
     private double oAzimuth;
     private double oPitch;
+
+    private Collection<Placemark> placemarks;
 
     public ARPeakFinder(Context context) {
 
@@ -146,7 +148,7 @@ public class ARPeakFinder {
      *
      * @return
      */
-    private Area getSearchArea() {
+    public Area getSearchArea() {
         final LatLng left = getLatLngFromDistanceAndBearing(SEARCH_AREA_LATERAL_KM, -90);
         final LatLng right = getLatLngFromDistanceAndBearing(SEARCH_AREA_LATERAL_KM, 90);
         final LatLng front = getLatLngFromDistanceAndBearing(SEARCH_AREA_FRONT_KM, 0);
@@ -197,11 +199,9 @@ public class ARPeakFinder {
     /**
      * @return
      */
-    public Placemark getMatchingPlacemark() {
-        final Realm realm = Realm.getDefaultInstance();
-
+    public int getMatchingPlacemark() {
         Placemark placemark = null;
-        for (Placemark p : RealmDbHelper.findInArea(realm, this.getSearchArea(), Placemark.class)) {
+        for (Placemark p : placemarks) {
             if (this.isMatchingAccuracy(p)) {
                 Log.i(TAG, "getMatchingPlacemark | Placemark Matching : " + p.getTitle());
                 if (placemark == null
@@ -214,9 +214,7 @@ public class ARPeakFinder {
                 }
             }
         }
-
-        realm.close();
-        return placemark;
+        return placemark == null ? 0 : placemark.getId();
     }
 
     /**
@@ -261,4 +259,11 @@ public class ARPeakFinder {
                 && oPitch < theoricalPitch + angularAccuracy;
     }
 
+    public Collection<Placemark> getPlacemarks() {
+        return placemarks;
+    }
+
+    public void setPlacemarks(Collection<Placemark> placemarks) {
+        this.placemarks = placemarks;
+    }
 }

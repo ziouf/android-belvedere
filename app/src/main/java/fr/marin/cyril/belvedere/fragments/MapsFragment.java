@@ -10,7 +10,6 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
@@ -60,16 +59,16 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback {
 
     private final Map<Marker, Placemark> markersShown = new HashMap<>();
 
-    private AppCompatActivity activity;
-    private ActionBar actionBar;
     private Marker compassMarker;
     private Marker lastOpenedInfoWindowMarker;
-    private GoogleMap mMap;
+
     private Realm realm;
+    private GoogleMap mMap;
     private Location location;
 
     private LocationService locationService;
     private LocationService.LocationEventListener locationEventListener;
+
     private CompassService compassService;
     private CompassService.CompassEventListener compassServiceEventListener;
 
@@ -90,12 +89,12 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback {
             Log.w(TAG, "Error when inflating UI", e);
         }
 
-        activity = (AppCompatActivity) getActivity();
+        AppCompatActivity activity = (AppCompatActivity) getActivity();
         // Set a Toolbar to replace the ActionBar.
         activity.setSupportActionBar((Toolbar) view.findViewById(R.id.toolbar));
 
         // Configuration de l'Actionbar
-        actionBar = activity.getSupportActionBar();
+        ActionBar actionBar = activity.getSupportActionBar();
         if (actionBar != null) {
             actionBar.setDisplayOptions(ActionBar.DISPLAY_HOME_AS_UP | ActionBar.DISPLAY_USE_LOGO);
         }
@@ -116,15 +115,13 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback {
         locationService = LocationService.getInstance(getActivity());
         compassService = getInstance(getActivity());
 
-        FragmentManager childFragmentManager = getChildFragmentManager();
-
         // Initialisation du fragment Maps
-        SupportMapFragment mapFragment = (SupportMapFragment) childFragmentManager.findFragmentById(R.id.google_maps_fragment);
+        SupportMapFragment mapFragment = (SupportMapFragment) getChildFragmentManager().findFragmentById(R.id.google_maps_fragment);
         if (mapFragment != null)
             mapFragment.getMapAsync(this);
 
         // Initialisation des FAB
-        initFloatingActionButtons();
+        this.initFloatingActionButtons();
 
     }
 
@@ -281,7 +278,6 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback {
         return new GoogleMap.OnInfoWindowClickListener() {
             @Override
             public void onInfoWindowClick(Marker marker) {
-                //final Placemark p = RealmDbHelper.findByLatLng(realm, marker.getPosition(), Placemark.class);
                 final Placemark p = markersShown.get(marker);
                 startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(p.getWiki_uri())));
             }
