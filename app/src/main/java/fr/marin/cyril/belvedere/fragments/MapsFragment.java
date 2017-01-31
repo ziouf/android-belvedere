@@ -334,14 +334,10 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback {
         final Area area = new Area(mMap.getProjection().getVisibleRegion());
 
         if (!markersShown.isEmpty()) {
-            final Collection<Marker> toRemove = new ArrayList<>();
             for (Marker marker : markersShown) {
-                if (!area.isInArea(marker.getPosition())) {
-                    toRemove.add(marker);
-                    marker.remove();
-                }
+                marker.remove();
             }
-            markersShown.removeAll(toRemove);
+            markersShown.clear();
         }
 
         for (Placemark p : RealmDbHelper.findInArea(realm, area, Placemark.class)) {
