@@ -37,7 +37,7 @@ public class RealmDbHelper {
                 .distinct("id");
 
         int size = results.size() > 0 ? results.size() : 0;
-        int limit = Math.min(size, 50);
+        int limit = Math.min(size, Runtime.getRuntime().availableProcessors() * 20);
 
         return results.subList(0, limit);
     }

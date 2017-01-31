@@ -34,6 +34,8 @@ import com.google.android.gms.maps.model.MarkerOptions;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashMap;
+import java.util.Map;
 
 import fr.marin.cyril.belvedere.Config;
 import fr.marin.cyril.belvedere.R;
@@ -45,6 +47,7 @@ import fr.marin.cyril.belvedere.services.CompassService;
 import fr.marin.cyril.belvedere.services.LocationService;
 import fr.marin.cyril.belvedere.tools.Orientation;
 import io.realm.Realm;
+import io.realm.RealmChangeListener;
 
 import static fr.marin.cyril.belvedere.services.CompassService.getInstance;
 
@@ -55,11 +58,12 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback {
     private static final String TAG = "MapsFragment";
     private static View view;
 
-    private final Collection<Marker> markersShown = new ArrayList<>();
+    private final Map<Marker, Placemark> markersShown = new HashMap<>();
 
     private AppCompatActivity activity;
     private ActionBar actionBar;
     private Marker compassMarker;
+    private Marker lastOpenedInfoWindowMarker;
     private GoogleMap mMap;
     private Realm realm;
     private Location location;
@@ -168,6 +172,12 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback {
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
+        realm.addChangeListener(new RealmChangeListener<Realm>() {
+            @Override
+            public void onChange(Realm element) {
+                MapsFragment.this.updateMarkersOnMap();
+            }
+        });
 
         // For showing a move to my loction button
         if (ContextCompat.checkSelfPermission(getActivity().getApplicationContext(), Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED)
@@ -245,17 +255,19 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback {
                 if (compassMarker != null && marker.getId().equals(compassMarker.getId()))
                     return null;
 
-                final Placemark m = RealmDbHelper.findByLatLng(realm, marker.getPosition(), Placemark.class);
+                final Placemark p = markersShown.get(marker);
 
                 final View v = getActivity().getLayoutInflater().inflate(R.layout.maps_info_window, null);
                 final TextView tvTitle = (TextView) v.findViewById(R.id.iw_title);
                 final TextView tvAltitude = (TextView) v.findViewById(R.id.iw_altitude);
                 final TextView tvComment = (TextView) v.findViewById(R.id.iw_comment);
 
-                tvTitle.setText(m.getTitle());
-                tvAltitude.setText(m.getElevationString());
-                tvComment.setText(m.getComment());
+                tvTitle.setText(p.getTitle());
+                tvAltitude.setText(p.getElevationString());
+                tvComment.setText(p.getComment());
                 tvComment.setMovementMethod(new ScrollingMovementMethod());
+
+                lastOpenedInfoWindowMarker = marker;
 
                 return v;
             }
@@ -269,8 +281,9 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback {
         return new GoogleMap.OnInfoWindowClickListener() {
             @Override
             public void onInfoWindowClick(Marker marker) {
-                final Placemark m = RealmDbHelper.findByLatLng(realm, marker.getPosition(), Placemark.class);
-                startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(m.getWiki_uri())));
+                //final Placemark p = RealmDbHelper.findByLatLng(realm, marker.getPosition(), Placemark.class);
+                final Placemark p = markersShown.get(marker);
+                startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(p.getWiki_uri())));
             }
         };
     }
@@ -334,14 +347,28 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback {
         final Area area = new Area(mMap.getProjection().getVisibleRegion());
 
         if (!markersShown.isEmpty()) {
-            for (Marker marker : markersShown) {
+            final Collection<Marker> toRemove = new ArrayList<>();
+            for (Marker marker : markersShown.keySet()) {
+                if (marker.isInfoWindowShown() && area.isInArea(marker.getPosition())) continue;
+                if (marker == lastOpenedInfoWindowMarker) lastOpenedInfoWindowMarker = null;
+                toRemove.add(marker);
+            }
+            for (Marker marker : toRemove) {
+                markersShown.remove(marker);
                 marker.remove();
             }
-            markersShown.clear();
         }
 
         for (Placemark p : RealmDbHelper.findInArea(realm, area, Placemark.class)) {
-            markersShown.add(mMap.addMarker(p.getMarkerOptions()));
+            if (lastOpenedInfoWindowMarker != null
+                    && lastOpenedInfoWindowMarker.isInfoWindowShown()
+                    && markersShown.get(lastOpenedInfoWindowMarker).getId() == p.getId())
+                continue;
+
+            final Marker marker = mMap.addMarker(p.getMarkerOptions());
+            markersShown.put(marker, p);
         }
+
+        Log.i(TAG, "markerShown contain " + markersShown.size() + " item(s)");
     }
 }
