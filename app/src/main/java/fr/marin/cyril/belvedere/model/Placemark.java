@@ -14,7 +14,6 @@ import io.realm.annotations.Required;
 public class Placemark extends RealmObject {
 
     @PrimaryKey
-    @Required
     private int id;
 
     @Required
