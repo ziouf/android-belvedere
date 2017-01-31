@@ -6,6 +6,7 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import io.realm.RealmObject;
 import io.realm.annotations.Ignore;
 import io.realm.annotations.PrimaryKey;
+import io.realm.annotations.Required;
 
 /**
  * Created by Cyril on 29/03/2016.
@@ -13,13 +14,19 @@ import io.realm.annotations.PrimaryKey;
 public class Placemark extends RealmObject {
 
     @PrimaryKey
+    @Required
     private int id;
 
+    @Required
     private Double latitude;
+    @Required
     private Double longitude;
+    @Required
     private Double elevation;
 
+    @Required
     private String title;
+
     private String comment;
     private String wiki_uri;
 
