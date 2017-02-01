@@ -23,7 +23,6 @@ import io.realm.Realm;
 public class UpdateDataService extends IntentService {
     private static final String TAG = "UpdateDataService";
 
-    private int max = 0;
     private Realm realm;
 
     /**
@@ -32,7 +31,6 @@ public class UpdateDataService extends IntentService {
     public UpdateDataService() {
         super(TAG);
     }
-
 
     @Override
     protected void onHandleIntent(Intent intent) {
@@ -45,7 +43,6 @@ public class UpdateDataService extends IntentService {
         Log.i(TAG, "Parsing results");
         final JsonResponseParser parser = new JsonResponseParser();
         final Collection<Placemark> placemarks = parser.readJsonString(result);
-        this.max = placemarks.size();
         Log.i(TAG, "Parsed " + placemarks.size() + " placemarks");
 
         Log.i(TAG, "Insertion en Base des " + placemarks.size() + " derniers éléments");
