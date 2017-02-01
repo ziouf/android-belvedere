@@ -199,7 +199,7 @@ public class ARPeakFinder {
     /**
      * @return
      */
-    public int getMatchingPlacemark() {
+    public Placemark getMatchingPlacemark() {
         Placemark placemark = null;
         for (Placemark p : placemarks) {
             if (this.isMatchingAccuracy(p)) {
@@ -214,7 +214,7 @@ public class ARPeakFinder {
                 }
             }
         }
-        return placemark == null ? 0 : placemark.getId();
+        return placemark;
     }
 
     /**

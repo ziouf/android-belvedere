@@ -44,6 +44,8 @@ public class CameraActivity extends AppCompatActivity {
 
     private ScheduledExecutorService mScheduler;
 
+    private Realm realm;
+
     private CompassService compassService;
     private CompassService.CompassEventListener compassEventListener;
     private LocationService locationService;
@@ -61,6 +63,8 @@ public class CameraActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Log.i(TAG, "onCreate");
+
+        this.realm = Realm.getDefaultInstance();
 
         // Get location from MainActivity
         this.oLocation = getIntent().getParcelableExtra(Config.BundleKeys.LOCATION);
@@ -132,7 +136,7 @@ public class CameraActivity extends AppCompatActivity {
     protected void onPostResume() {
         super.onPostResume();
         // Init AR
-        this.mScheduler = Executors.newScheduledThreadPool(4);
+        this.mScheduler = Executors.newScheduledThreadPool(1);
         Log.i(TAG, "ArTask init");
         mScheduler.scheduleAtFixedRate(new ARTask(handler, this), 0, 25, TimeUnit.MILLISECONDS);
         Log.i(TAG, "ArTask scheduled");
@@ -158,6 +162,7 @@ public class CameraActivity extends AppCompatActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
+        this.realm.close();
     }
 
     private void updateCompassView(float azimuth) {
@@ -166,14 +171,12 @@ public class CameraActivity extends AppCompatActivity {
             compassView.updateAzimuthAndRedraw(azimuth);
     }
 
-    private Runnable updateGUI(final Integer placemarkId) {
+    private Runnable updateGUI(final Placemark placemark) {
         return new Runnable() {
             private static final String TAG = "UpdateGUI";
 
             @Override
             public void run() {
-                Realm realm = Realm.getDefaultInstance();
-                Placemark placemark = RealmDbHelper.findById(realm, placemarkId, Placemark.class);
                 if (placemark == null) {
                     Log.d(TAG, "Placemark null");
                     peak_thumbnail_img.setVisibility(View.INVISIBLE);
@@ -184,7 +187,6 @@ public class CameraActivity extends AppCompatActivity {
 
                 peak_info_tv.setText(String.format("%s\n%s m", placemark.getTitle(), placemark.getElevation()));
                 peak_info_tv.setVisibility(View.VISIBLE);
-                realm.close();
             }
         };
     }
@@ -209,11 +211,12 @@ public class CameraActivity extends AppCompatActivity {
             final ARPeakFinder ar = new ARPeakFinder(context, oLocation, oAzimuth, oPitch);
             ar.setPlacemarks(RealmDbHelper.findInArea(realm, ar.getSearchArea(), Placemark.class));
 
+            Placemark placemark = realm.copyFromRealm(ar.getMatchingPlacemark());
+
             Log.d(TAG, "Send to GUI");
-            handler.post(updateGUI(ar.getMatchingPlacemark()));
+            handler.post(updateGUI(placemark));
             Log.d(TAG, "End Run");
             realm.close();
         }
-
     }
 }
