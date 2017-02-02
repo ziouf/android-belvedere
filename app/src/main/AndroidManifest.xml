@@ -28,12 +28,15 @@
             android:name="com.google.android.geo.API_KEY"
             android:value="@string/google_maps_key" />
 
+        <service
+            android:name=".services.UpdateDataService"
+            android:exported="false" />
+
         <activity
             android:name=".activities.LoadingActivity"
             android:theme="@style/AppTheme.Splash.Compat">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
@@ -44,14 +47,18 @@
             android:name=".activities.CameraActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:theme="@style/AppTheme.Camera.Compat" />
-
-        <service
-            android:name=".services.UpdateDataService"
-            android:exported="false" />
-
         <activity
             android:name=".activities.SettingsActivity"
             android:label="@string/title_activity_settings"
+            android:parentActivityName=".activities.MainActivity"
+            android:theme="@style/Theme.AppCompat.Light">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="fr.marin.cyril.belvedere.activities.MainActivity" />
+        </activity>
+        <activity
+            android:name=".activities.AboutActivity"
+            android:label="@string/title_activity_about"
             android:parentActivityName=".activities.MainActivity"
             android:theme="@style/Theme.AppCompat.Light">
             <meta-data

@@ -11,7 +11,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 
 import fr.marin.cyril.belvedere.R;
-import fr.marin.cyril.belvedere.fragments.AboutFragment;
 import fr.marin.cyril.belvedere.fragments.MapsFragment;
 
 /**
@@ -70,10 +69,7 @@ public class MainActivity extends AppCompatActivity {
                 fragmentManager.popBackStack();
                 break;
             case R.id.menu_info:
-                fragmentManager.beginTransaction()
-                        .addToBackStack(MapsFragment.class.getSimpleName())
-                        .replace(R.id.fragment_placeholder, AboutFragment.getInstance())
-                        .commit();
+                startActivity(new Intent(this, AboutActivity.class));
                 break;
             case R.id.menu_settings:
                 startActivity(new Intent(this, SettingsActivity.class));
