@@ -4,17 +4,15 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.NavigationView;
-import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.MenuItem;
 
 import fr.marin.cyril.belvedere.R;
+import fr.marin.cyril.belvedere.fragments.AboutFragment;
 import fr.marin.cyril.belvedere.fragments.MapsFragment;
-import fr.marin.cyril.belvedere.services.UpdateDataService;
 
 /**
  * Created by cyril on 31/05/16.
@@ -25,6 +23,8 @@ public class MainActivity extends AppCompatActivity {
 
     private ActionBarDrawerToggle toggle;
     private DrawerLayout drawerLayout;
+
+    private Bundle fragmentBundle = new Bundle();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,7 +53,7 @@ public class MainActivity extends AppCompatActivity {
 
         // Fragment par défaut
         fragmentManager.beginTransaction()
-                .add(R.id.fragment_placeholder, new MapsFragment())
+                .replace(R.id.fragment_placeholder, MapsFragment.getInstance(), MapsFragment.class.getSimpleName())
                 .commit();
     }
 
@@ -67,10 +67,13 @@ public class MainActivity extends AppCompatActivity {
         // Create a new fragment and specify the fragment to show based on nav item clicked
         switch (item.getItemId()) {
             case R.id.menu_maps:
+                fragmentManager.popBackStack();
                 break;
-            case R.id.menu_refresh:
-                // TODO : Ajouter un warning sur la conso de DATA avec demande de confirmation
-                startService(new Intent(this, UpdateDataService.class));
+            case R.id.menu_info:
+                fragmentManager.beginTransaction()
+                        .addToBackStack(MapsFragment.class.getSimpleName())
+                        .replace(R.id.fragment_placeholder, AboutFragment.getInstance())
+                        .commit();
                 break;
             case R.id.menu_settings:
                 startActivity(new Intent(this, SettingsActivity.class));
@@ -83,34 +86,8 @@ public class MainActivity extends AppCompatActivity {
         return false;
     }
 
-    private Fragment addFragment(Class fragmentClass) {
-        Fragment fragment;
-        try {
-            fragment = (Fragment) fragmentClass.newInstance();
-        } catch (Exception e) {
-            Log.e(TAG, "Erreur lors de l'instanciation du fragment", e);
-            return null;
-        }
-
-        if (fragment != null)
-            fragmentManager.beginTransaction()
-                    .add(R.id.fragment_placeholder, fragment)
-                .commit();
-
-        return fragment;
-    }
-
-    private void popFragment(Fragment fragment) {
-        if (fragment != null)
-            fragmentManager.beginTransaction()
-                    .detach(fragment).remove(fragment)
-                    .commit();
-    }
-
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         return toggle.onOptionsItemSelected(item) || super.onOptionsItemSelected(item);
     }
-
-
 }

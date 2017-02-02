@@ -16,7 +16,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.text.method.ScrollingMovementMethod;
 import android.util.Log;
-import android.view.InflateException;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -48,17 +47,14 @@ import fr.marin.cyril.belvedere.tools.Orientation;
 import io.realm.Realm;
 import io.realm.RealmChangeListener;
 
-import static fr.marin.cyril.belvedere.services.CompassService.getInstance;
-
 /**
  * Created by cyril on 31/05/16.
  */
 public class MapsFragment extends Fragment implements OnMapReadyCallback {
     private static final String TAG = "MapsFragment";
-    private static View view;
-
     private final Map<Marker, Placemark> markersShown = new HashMap<>();
-
+    private View rootView;
+    private SupportMapFragment mapFragment;
     private Marker compassMarker;
     private Marker lastOpenedInfoWindowMarker;
 
@@ -72,40 +68,45 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback {
     private CompassService compassService;
     private CompassService.CompassEventListener compassServiceEventListener;
 
+    // Cette classe ne fonctionne pas en singleton à cause du fragment GoogleMaps
+    public static MapsFragment getInstance() {
+        return new MapsFragment();
+    }
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        this.realm = Realm.getDefaultInstance();
+    }
+
+    @Override
+    public void onDestroy() {
+        this.realm.close();
+        super.onDestroy();
+    }
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        this.realm = Realm.getDefaultInstance();
+        if (this.rootView == null)
+            this.rootView = inflater.inflate(R.layout.fragment_maps, container, false);
 
-        if (view != null) {
-            ViewGroup parent = (ViewGroup) view.getParent();
-            if (parent != null)
-                parent.removeView(view);
-        }
+        this.initActionBar();
+        return rootView;
+    }
 
-        try {
-            view = inflater.inflate(R.layout.fragment_maps, container, false);
-        } catch (InflateException e) {
-            Log.w(TAG, "Error when inflating UI", e);
-        }
+    private void initActionBar() {
+        if (rootView == null) return;
 
         AppCompatActivity activity = (AppCompatActivity) getActivity();
         // Set a Toolbar to replace the ActionBar.
-        activity.setSupportActionBar((Toolbar) view.findViewById(R.id.toolbar));
+        activity.setSupportActionBar((Toolbar) rootView.findViewById(R.id.toolbar));
 
         // Configuration de l'Actionbar
         ActionBar actionBar = activity.getSupportActionBar();
         if (actionBar != null) {
             actionBar.setDisplayOptions(ActionBar.DISPLAY_HOME_AS_UP | ActionBar.DISPLAY_USE_LOGO);
         }
-
-        return view;
-    }
-
-    @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-        this.realm.close();
     }
 
     @Override
@@ -113,16 +114,14 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback {
         super.onActivityCreated(savedInstanceState);
 
         locationService = LocationService.getInstance(getActivity());
-        compassService = getInstance(getActivity());
+        compassService = CompassService.getInstance(getActivity());
 
         // Initialisation du fragment Maps
-        SupportMapFragment mapFragment = (SupportMapFragment) getChildFragmentManager().findFragmentById(R.id.google_maps_fragment);
-        if (mapFragment != null)
-            mapFragment.getMapAsync(this);
+        mapFragment = (SupportMapFragment) getChildFragmentManager().findFragmentById(R.id.google_maps_fragment);
+        mapFragment.getMapAsync(this);
 
         // Initialisation des FAB
         this.initFloatingActionButtons();
-
     }
 
     private void initFloatingActionButtons() {
