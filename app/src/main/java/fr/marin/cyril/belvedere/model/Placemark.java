@@ -1,17 +1,21 @@
 package fr.marin.cyril.belvedere.model;
 
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
-import io.realm.RealmObject;
+import fr.marin.cyril.belvedere.R;
+import io.realm.RealmModel;
 import io.realm.annotations.Ignore;
 import io.realm.annotations.PrimaryKey;
+import io.realm.annotations.RealmClass;
 import io.realm.annotations.Required;
 
 /**
  * Created by Cyril on 29/03/2016.
  */
-public class Placemark extends RealmObject {
+@RealmClass
+public class Placemark implements RealmModel {
 
     @PrimaryKey
     private int id;
@@ -29,24 +33,13 @@ public class Placemark extends RealmObject {
     private String comment;
     private String wiki_uri;
 
+    @Required
+    private String type;
+
     @Ignore
     private double matchLevel = 0d;
     @Ignore
     private double distance = 0d;
-
-    public Placemark() {
-    }
-
-    public Placemark(int id, String title, String comment, double lat, double lng, double elevation, String wiki_uri) {
-        this.id = id;
-        this.latitude = lat;
-        this.longitude = lng;
-        this.elevation = elevation;
-
-        this.title = title;
-        this.comment = comment;
-        this.wiki_uri = wiki_uri;
-    }
 
     public int getId() {
         return id;
@@ -92,12 +85,32 @@ public class Placemark extends RealmObject {
         return title;
     }
 
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
     public String getWiki_uri() {
         return wiki_uri;
     }
 
+    public void setWiki_uri(String wiki_uri) {
+        this.wiki_uri = wiki_uri;
+    }
+
+    public PlacemarkType getType() {
+        return PlacemarkType.valueOf(type);
+    }
+
+    public void setType(PlacemarkType type) {
+        this.type = type.name();
+    }
+
     public String getComment() {
         return comment;
+    }
+
+    public void setComment(String comment) {
+        this.comment = comment;
     }
 
     public double getMatchLevel() {
@@ -117,10 +130,20 @@ public class Placemark extends RealmObject {
     }
 
     public MarkerOptions getMarkerOptions() {
-        return new MarkerOptions()
+        MarkerOptions markerOptions = new MarkerOptions()
                 .position(new LatLng(this.latitude, this.longitude))
                 .title(this.title)
-                .snippet(this.elevation + "m")
-                ;
+                .snippet(this.elevation + "m");
+
+        switch (this.getType()) {
+            case MOUNTAIN:
+                markerOptions.icon(BitmapDescriptorFactory.fromResource(R.drawable.google_maps_marker_mount));
+                break;
+            case PEAK:
+                markerOptions.icon(BitmapDescriptorFactory.fromResource(R.drawable.google_maps_marker_peak));
+                break;
+        }
+
+        return markerOptions;
     }
 }

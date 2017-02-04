@@ -203,15 +203,15 @@ public class CameraActivity extends AppCompatActivity {
 
         @Override
         public void run() {
-            Realm realm = Realm.getDefaultInstance();
+            RealmDbHelper realm = RealmDbHelper.getInstance();
             Log.d(TAG, "Run");
             if (oLocation == null) return;
 
             Log.d(TAG, "Run with Azimuth : " + oAzimuth + " Pitch : " + oPitch);
             final ARPeakFinder ar = new ARPeakFinder(context, oLocation, oAzimuth, oPitch);
-            ar.setPlacemarks(RealmDbHelper.findInArea(realm, ar.getSearchArea(), Placemark.class));
+            ar.setPlacemarks(realm.findInArea(ar.getSearchArea(), Placemark.class));
 
-            Placemark placemark = realm.copyFromRealm(ar.getMatchingPlacemark());
+            Placemark placemark = realm.getRealm().copyFromRealm(ar.getMatchingPlacemark());
 
             Log.d(TAG, "Send to GUI");
             handler.post(updateGUI(placemark));

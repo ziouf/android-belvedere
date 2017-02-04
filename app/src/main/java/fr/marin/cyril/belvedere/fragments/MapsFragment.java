@@ -58,7 +58,7 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback {
     private Marker compassMarker;
     private Marker lastOpenedInfoWindowMarker;
 
-    private Realm realm;
+    private RealmDbHelper realm;
     private GoogleMap mMap;
     private Location location;
 
@@ -76,7 +76,7 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        this.realm = Realm.getDefaultInstance();
+        this.realm = RealmDbHelper.getInstance();
     }
 
     @Override
@@ -168,7 +168,7 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback {
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
-        realm.addChangeListener(new RealmChangeListener<Realm>() {
+        realm.getRealm().addChangeListener(new RealmChangeListener<Realm>() {
             @Override
             public void onChange(Realm element) {
                 MapsFragment.this.updateMarkersOnMap();
@@ -354,7 +354,7 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback {
             }
         }
 
-        for (Placemark p : RealmDbHelper.findInArea(realm, area, Placemark.class)) {
+        for (Placemark p : realm.findInArea(area, Placemark.class)) {
             if (lastOpenedInfoWindowMarker != null
                     && lastOpenedInfoWindowMarker.isInfoWindowShown()
                     && markersShown.get(lastOpenedInfoWindowMarker).getId() == p.getId())

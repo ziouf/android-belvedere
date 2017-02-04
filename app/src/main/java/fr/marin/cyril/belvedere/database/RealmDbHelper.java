@@ -1,9 +1,5 @@
 package fr.marin.cyril.belvedere.database;
 
-import android.support.annotation.NonNull;
-
-import com.google.android.gms.maps.model.LatLng;
-
 import java.util.Collection;
 
 import fr.marin.cyril.belvedere.model.Area;
@@ -18,26 +14,23 @@ import io.realm.Sort;
 
 public class RealmDbHelper {
 
-    public static <T extends RealmModel> T findByFileName(Realm realm, String fileName, Class<T> clazz) {
-        return realm.where(clazz)
-                .equalTo("fileName", fileName)
-                .findFirst();
+    private Realm realm;
+
+    public static RealmDbHelper getInstance() {
+        final RealmDbHelper dbHelper = new RealmDbHelper();
+        dbHelper.realm = Realm.getDefaultInstance();
+        return dbHelper;
     }
 
-    public static <T extends RealmModel> T findByLatLng(Realm realm, LatLng latLng, Class<T> clazz) {
-        return realm.where(clazz)
-                .equalTo("latitude", latLng.latitude)
-                .equalTo("longitude", latLng.longitude)
-                .findFirst();
+    public void close() {
+        this.realm.close();
     }
 
-    public static <T extends RealmModel> T findById(Realm realm, @NonNull Integer id, Class<T> clazz) {
-        return realm.where(clazz)
-                .equalTo("id", id)
-                .findFirst();
+    public Realm getRealm() {
+        return realm;
     }
 
-    public static <T extends RealmModel> Collection<T> findInArea(Realm realm, Area area, Class<T> clazz) {
+    public <T extends RealmModel> Collection<T> findInArea(Area area, Class<T> clazz) {
         RealmResults<T> results = realm.where(clazz)
                 .between("latitude", area.getBottom(), area.getTop())
                 .between("longitude", area.getLeft(), area.getRight())
@@ -45,22 +38,12 @@ public class RealmDbHelper {
                 .distinct("id");
 
         int size = results.size() > 0 ? results.size() : 0;
-        int limit = Math.min(size, Runtime.getRuntime().availableProcessors() * 50);
+        int limit = Math.min(size, Runtime.getRuntime().availableProcessors() * 30);
 
         return results.subList(0, limit);
     }
 
-    public static <T extends RealmModel> Collection<T> saveAll(Realm realm, final Collection<T> data) {
-        realm.executeTransaction(new Realm.Transaction() {
-            @Override
-            public void execute(Realm realm) {
-                realm.copyToRealmOrUpdate(data);
-            }
-        });
-        return data;
-    }
-
-    public static <T extends RealmModel> T save(Realm realm, final T data) {
+    public <T extends RealmModel> Collection<T> saveAll(final Collection<T> data) {
         realm.executeTransaction(new Realm.Transaction() {
             @Override
             public void execute(Realm realm) {

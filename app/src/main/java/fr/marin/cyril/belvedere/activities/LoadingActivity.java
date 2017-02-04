@@ -21,6 +21,7 @@ import java.util.Arrays;
 
 import fr.marin.cyril.belvedere.R;
 import fr.marin.cyril.belvedere.services.UpdateDataService;
+import io.realm.Realm;
 
 public class LoadingActivity extends Activity
         implements ActivityCompat.OnRequestPermissionsResultCallback {
@@ -36,11 +37,14 @@ public class LoadingActivity extends Activity
     private View decorView;
     private ConnectivityManager cm;
 
+    private Realm realm;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         decorView = getWindow().getDecorView();
         decorView.setSystemUiVisibility(SYSTEM_UI_VISIBILITY);
+        realm = Realm.getDefaultInstance();
 
         this.setContentView(R.layout.activity_loading);
     }
@@ -62,6 +66,12 @@ public class LoadingActivity extends Activity
         } else {
             this.start();
         }
+    }
+
+    @Override
+    protected void onDestroy() {
+        realm.close();
+        super.onDestroy();
     }
 
     @Override
@@ -93,9 +103,11 @@ public class LoadingActivity extends Activity
         initDBTask.execute();
         */
         final NetworkInfo netInfo = cm.getActiveNetworkInfo();
-        if (netInfo.getType() == ConnectivityManager.TYPE_WIFI
-                || (netInfo.getType() == ConnectivityManager.TYPE_MOBILE && netInfo.getSubtype() == TelephonyManager.NETWORK_TYPE_LTE))
+        if (netInfo != null && netInfo.isConnected()) {
+            if (netInfo.getType() == ConnectivityManager.TYPE_WIFI
+                    || (netInfo.getType() == ConnectivityManager.TYPE_MOBILE && netInfo.getSubtype() == TelephonyManager.NETWORK_TYPE_LTE))
             this.startService(new Intent(LoadingActivity.this, UpdateDataService.class));
+        }
 
         this.startActivity(new Intent(LoadingActivity.this, MainActivity.class));
         this.finish();

@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import fr.marin.cyril.belvedere.model.Placemark;
+import fr.marin.cyril.belvedere.model.PlacemarkType;
 
 /**
  * Created by cyril on 08/05/16.
@@ -39,12 +40,12 @@ import fr.marin.cyril.belvedere.model.Placemark;
  * }
  * }
  */
-public class JsonResponseParser {
+public class JsonResponseParser<T> {
     private static final String TAG = "DbPediaJsonResponsePars";
 
-    public List<Placemark> readJsonStream(InputStream is) {
+    public <T extends Placemark> List<T> readJsonStream(InputStream is, PlacemarkType type, Class<T> clazz) {
         try (JsonReader reader = new JsonReader(new InputStreamReader(is, "UTF-8"))) {
-            return readSparQLResponse(reader);
+            return readSparQLResponse(reader, type, clazz);
 
         } catch (IOException e) {
             Log.e(TAG, e.getMessage());
@@ -52,9 +53,9 @@ public class JsonResponseParser {
         return null;
     }
 
-    public List<Placemark> readJsonString(String json) {
+    public <T extends Placemark> List<T> readJsonString(String json, PlacemarkType type, Class<T> clazz) {
         try (JsonReader reader = new JsonReader(new StringReader(json))) {
-            return readSparQLResponse(reader);
+            return readSparQLResponse(reader, type, clazz);
 
         } catch (IOException e) {
             Log.e(TAG, e.getMessage());
@@ -62,15 +63,15 @@ public class JsonResponseParser {
         return null;
     }
 
-    private List<Placemark> readSparQLResponse(JsonReader reader) throws IOException {
-        List<Placemark> results = null;
+    private <T extends Placemark> List<T> readSparQLResponse(JsonReader reader, PlacemarkType type, Class<T> clazz) throws IOException {
+        List<T> results = null;
 
         reader.beginObject();
 
         while (reader.hasNext()) {
             String name = reader.nextName();
             if (name.equals("results")) {
-                results = readResults(reader);
+                results = readResults(reader, type, clazz);
             } else {
                 reader.skipValue();
             }
@@ -81,15 +82,15 @@ public class JsonResponseParser {
         return results;
     }
 
-    private List<Placemark> readResults(JsonReader reader) throws IOException {
-        List<Placemark> results = null;
+    private <T extends Placemark> List<T> readResults(JsonReader reader, PlacemarkType type, Class<T> clazz) throws IOException {
+        List<T> results = null;
 
         reader.beginObject();
 
         while (reader.hasNext()) {
             String name = reader.nextName();
             if (name.equals("bindings")) {
-                results = readBindingsArray(reader);
+                results = readBindingsArray(reader, type, clazz);
             } else {
                 reader.skipValue();
             }
@@ -100,19 +101,19 @@ public class JsonResponseParser {
         return results;
     }
 
-    private List<Placemark> readBindingsArray(JsonReader reader) throws IOException {
-        List<Placemark> results = new ArrayList<>();
+    private <T extends Placemark> List<T> readBindingsArray(JsonReader reader, PlacemarkType type, Class<T> clazz) throws IOException {
+        List<T> results = new ArrayList<>();
 
         reader.beginArray();
         while (reader.hasNext()) {
-            results.add(readBinding(reader));
+            results.add(readBinding(reader, type, clazz));
         }
         reader.endArray();
 
         return results;
     }
 
-    private Placemark readBinding(JsonReader reader) throws IOException {
+    private <T extends Placemark> T readBinding(JsonReader reader, PlacemarkType type, Class<T> clazz) throws IOException {
         int id = 0;
         String name = null;
         double latitude = 0d;
@@ -127,7 +128,7 @@ public class JsonResponseParser {
                 case "id":
                     id = readIntegerValue(reader);
                     break;
-                case "altitude":
+                case "elevation":
                     elevation = readDoubleValue(reader);
                     break;
                 case "latitude":
@@ -142,7 +143,7 @@ public class JsonResponseParser {
                 case "comment":
                     comment = readStringValue(reader);
                     break;
-                case "wiki":
+                case "wiki_url":
                     wiki_uri = readStringValue(reader);
                     break;
                 default:
@@ -151,7 +152,23 @@ public class JsonResponseParser {
         }
         reader.endObject();
 
-        return new Placemark(id, name, comment, latitude, longitude, elevation, wiki_uri);
+        try {
+            T item = clazz.newInstance();
+            item.setId(id);
+            item.setTitle(name);
+            item.setComment(comment);
+            item.setLatitude(latitude);
+            item.setLongitude(longitude);
+            item.setElevation(elevation);
+            item.setWiki_uri(wiki_uri);
+            item.setType(type);
+
+            return item;
+        } catch (InstantiationException | IllegalAccessException e) {
+            Log.e(JsonResponseParser.class.getSimpleName(), "Exception lors de l'instenciation de l'item parsé", e);
+        }
+
+        return null;
     }
 
     private int readIntegerValue(JsonReader reader) throws IOException {
