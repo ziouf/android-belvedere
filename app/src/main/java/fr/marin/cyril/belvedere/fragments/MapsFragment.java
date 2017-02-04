@@ -168,7 +168,7 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback {
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
-        realm.getRealm().addChangeListener(new RealmChangeListener<Realm>() {
+        realm.addChangeListener(new RealmChangeListener<Realm>() {
             @Override
             public void onChange(Realm element) {
                 MapsFragment.this.updateMarkersOnMap();

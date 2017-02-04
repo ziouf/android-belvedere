@@ -1,9 +1,11 @@
 package fr.marin.cyril.belvedere.database;
 
+import java.io.Closeable;
 import java.util.Collection;
 
 import fr.marin.cyril.belvedere.model.Area;
 import io.realm.Realm;
+import io.realm.RealmChangeListener;
 import io.realm.RealmModel;
 import io.realm.RealmResults;
 import io.realm.Sort;
@@ -12,7 +14,7 @@ import io.realm.Sort;
  * Created by marin on 28/01/2017.
  */
 
-public class RealmDbHelper {
+public class RealmDbHelper implements Closeable {
 
     private Realm realm;
 
@@ -22,12 +24,17 @@ public class RealmDbHelper {
         return dbHelper;
     }
 
+    @Override
     public void close() {
         this.realm.close();
     }
 
-    public Realm getRealm() {
-        return realm;
+    public void addChangeListener(RealmChangeListener<Realm> listener) {
+        realm.addChangeListener(listener);
+    }
+
+    public <T extends RealmModel> T copyFromRealm(T data) {
+        return realm.copyFromRealm(data);
     }
 
     public <T extends RealmModel> Collection<T> findInArea(Area area, Class<T> clazz) {
@@ -51,5 +58,15 @@ public class RealmDbHelper {
             }
         });
         return data;
+    }
+
+    public <T extends RealmModel> Long count(Class<T> clazz) {
+        return realm.where(clazz).count();
+    }
+
+    public <T extends RealmModel> Long countByType(String type, Class<T> clazz) {
+        return realm.where(clazz)
+                .equalTo("type", type)
+                .count();
     }
 }

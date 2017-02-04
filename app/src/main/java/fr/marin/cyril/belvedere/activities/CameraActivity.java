@@ -211,7 +211,7 @@ public class CameraActivity extends AppCompatActivity {
             final ARPeakFinder ar = new ARPeakFinder(context, oLocation, oAzimuth, oPitch);
             ar.setPlacemarks(realm.findInArea(ar.getSearchArea(), Placemark.class));
 
-            Placemark placemark = realm.getRealm().copyFromRealm(ar.getMatchingPlacemark());
+            Placemark placemark = realm.copyFromRealm(ar.getMatchingPlacemark());
 
             Log.d(TAG, "Send to GUI");
             handler.post(updateGUI(placemark));
