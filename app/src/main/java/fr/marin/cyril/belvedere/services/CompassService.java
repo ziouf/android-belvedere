@@ -31,7 +31,7 @@ public class CompassService
     private float[] geoMat;
     private float[] oMat;
 
-    public CompassService(Context context) {
+    private CompassService(Context context) {
         this.context = context;
         this.compassEventListenerSet = new HashSet<>();
         this.sensorManager = (SensorManager) context.getSystemService(Context.SENSOR_SERVICE);
@@ -50,8 +50,8 @@ public class CompassService
         final PackageManager pm = context.getPackageManager();
         if (pm.hasSystemFeature(PackageManager.FEATURE_SENSOR_ACCELEROMETER)
                 && pm.hasSystemFeature(PackageManager.FEATURE_SENSOR_COMPASS)) {
-            this.sensorManager.registerListener(this, sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER), SensorManager.SENSOR_DELAY_NORMAL);
-            this.sensorManager.registerListener(this, sensorManager.getDefaultSensor(Sensor.TYPE_MAGNETIC_FIELD), SensorManager.SENSOR_DELAY_FASTEST);
+            this.sensorManager.registerListener(this, sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER), SensorManager.SENSOR_DELAY_UI);
+            this.sensorManager.registerListener(this, sensorManager.getDefaultSensor(Sensor.TYPE_MAGNETIC_FIELD), SensorManager.SENSOR_DELAY_UI);
         }
     }
 

@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import fr.marin.cyril.belvedere.Preferences;
 import fr.marin.cyril.belvedere.R;
 import fr.marin.cyril.belvedere.database.RealmDbHelper;
 import fr.marin.cyril.belvedere.model.Placemark;
@@ -25,11 +26,12 @@ public class AboutActivity extends AppCompatActivity {
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
 
         LinearLayout about_list_layout = (LinearLayout) findViewById(R.id.activity_about_list);
-        about_list_layout.addView(inflateAboutItem("Dernière mise à jour des data", sharedPreferences.getString("last_bdd_update", "jamais")));
-        about_list_layout.addView(inflateAboutItem("Nombre total de sommet", realm.countByType(PlacemarkType.PEAK.name(), Placemark.class).toString()));
-        about_list_layout.addView(inflateAboutItem("Nombre total de massif", realm.countByType(PlacemarkType.MOUNTAIN.name(), Placemark.class).toString()));
+        about_list_layout.addView(inflateAboutItem(getString(R.string.last_data_update_date), sharedPreferences.getString(Preferences.LAST_UPDATE_DATE.name(), getString(R.string.never))));
+        about_list_layout.addView(inflateAboutItem(getString(R.string.total_peak_count), realm.countByType(PlacemarkType.PEAK.name(), Placemark.class).toString()));
+        about_list_layout.addView(inflateAboutItem(getString(R.string.total_mount_count), realm.countByType(PlacemarkType.MOUNTAIN.name(), Placemark.class).toString()));
 
     }
+
 
     private View inflateAboutItem(String label, String value) {
         View about_item = getLayoutInflater().inflate(R.layout.about_item, null);

@@ -40,7 +40,7 @@ public class LocationService implements LocationListener {
     private boolean dialogOpened = false;
     private boolean dialogAlreadyShown = false;
 
-    public LocationService(Context context) {
+    private LocationService(Context context) {
         this.context = context;
         this.locationManager = (LocationManager) context.getSystemService(Context.LOCATION_SERVICE);
         this.dialog = this.initLocationServiceDialog(context);

@@ -23,4 +23,8 @@
     <string name="open">Ouvrir</string>
     <string name="menu_refresh">Mise à jour des données</string>
     <string name="title_activity_settings">Parametres</string>
+    <string name="last_data_update_date">Dernière mise à jour des data</string>
+    <string name="total_peak_count">Nombre total de sommet</string>
+    <string name="total_mount_count">Nombre total de massif</string>
+    <string name="never">jamais</string>
 </resources>
