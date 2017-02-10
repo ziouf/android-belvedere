@@ -44,6 +44,7 @@ import fr.marin.cyril.belvedere.model.Placemark;
 import fr.marin.cyril.belvedere.services.CompassService;
 import fr.marin.cyril.belvedere.services.LocationService;
 import fr.marin.cyril.belvedere.tools.Orientation;
+import fr.marin.cyril.belvedere.tools.WikiUrlGetterAsync;
 import io.realm.Realm;
 import io.realm.RealmChangeListener;
 
@@ -278,7 +279,14 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback {
             @Override
             public void onInfoWindowClick(Marker marker) {
                 final Placemark p = markersShown.get(marker);
-                startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(p.getWiki_uri())));
+
+                WikiUrlGetterAsync.getInstance(new WikiUrlGetterAsync.OnPostExecuteListener() {
+                    @Override
+                    public void onPostExecute(String response) {
+                        String url = WikiUrlGetterAsync.getLangUrlFromResponse(response);
+                        startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(url)));
+                    }
+                }).execute(realm.copyFromRealm(p));
             }
         };
     }

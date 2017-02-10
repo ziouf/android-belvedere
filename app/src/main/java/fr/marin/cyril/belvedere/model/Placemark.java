@@ -31,7 +31,6 @@ public class Placemark implements RealmModel {
     private String title;
 
     private String comment;
-    private String wiki_uri;
 
     @Required
     private String type;
@@ -87,14 +86,6 @@ public class Placemark implements RealmModel {
 
     public void setTitle(String title) {
         this.title = title;
-    }
-
-    public String getWiki_uri() {
-        return wiki_uri;
-    }
-
-    public void setWiki_uri(String wiki_uri) {
-        this.wiki_uri = wiki_uri;
     }
 
     public PlacemarkType getType() {
