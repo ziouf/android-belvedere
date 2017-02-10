@@ -139,7 +139,9 @@ public final class DbpediaDataGetterAsync extends AsyncTask<DbpediaDataGetterAsy
         else
             Toast.makeText(context, R.string.toast_init_database_finished, Toast.LENGTH_SHORT).show();
 
-        sharedPreferences.edit().putLong(Preferences.LAST_UPDATE_DATE.name(), new Date().getTime()).apply();
+        sharedPreferences.edit()
+                .putLong(Preferences.LAST_UPDATE_DATE.name(), new Date().getTime())
+                .apply();
 
         onPostExecuteListener.onPostExecute();
     }
