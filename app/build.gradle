@@ -14,7 +14,7 @@ android {
     buildToolsVersion '24.0.0'
     defaultConfig {
         minSdkVersion 19
-        targetSdkVersion 23
+        targetSdkVersion 25
         versionCode 1019
         versionName "1.0.19"
         vectorDrawables.useSupportLibrary = true
