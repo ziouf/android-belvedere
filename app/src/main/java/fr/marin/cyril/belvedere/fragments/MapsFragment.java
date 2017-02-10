@@ -38,13 +38,13 @@ import java.util.Map;
 import fr.marin.cyril.belvedere.Config;
 import fr.marin.cyril.belvedere.R;
 import fr.marin.cyril.belvedere.activities.CameraActivity;
+import fr.marin.cyril.belvedere.async.WikiUrlGetterAsync;
 import fr.marin.cyril.belvedere.database.RealmDbHelper;
 import fr.marin.cyril.belvedere.model.Area;
 import fr.marin.cyril.belvedere.model.Placemark;
 import fr.marin.cyril.belvedere.services.CompassService;
 import fr.marin.cyril.belvedere.services.LocationService;
 import fr.marin.cyril.belvedere.tools.Orientation;
-import fr.marin.cyril.belvedere.tools.WikiUrlGetterAsync;
 import io.realm.Realm;
 import io.realm.RealmChangeListener;
 

@@ -1,8 +1,8 @@
-package fr.marin.cyril.belvedere.services;
+package fr.marin.cyril.belvedere.async;
 
-import android.app.IntentService;
-import android.content.Intent;
+import android.content.Context;
 import android.content.SharedPreferences;
+import android.os.AsyncTask;
 import android.preference.PreferenceManager;
 import android.util.Log;
 
@@ -28,40 +28,51 @@ import fr.marin.cyril.belvedere.model.Placemark;
 import fr.marin.cyril.belvedere.model.PlacemarkType;
 
 /**
- * Created by CSCM6014 on 09/09/2016.
+ * Created by cscm6014 on 10/02/2017.
  */
-public class UpdateDataService extends IntentService {
-    private static final String TAG = UpdateDataService.class.getSimpleName();
-    private static final SimpleDateFormat SIMPLE_DATE_FORMAT = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault());
 
-    /**
-     * Creates an IntentService.  Invoked by your subclass's constructor.
-     */
-    public UpdateDataService() {
-        super(TAG);
+public final class DbpediaDataGetterAsync extends AsyncTask<DbpediaDataGetterAsync.Param, Void, Void> {
+    private static final String TAG = DbpediaDataGetterAsync.class.getSimpleName();
+    private static final SimpleDateFormat SIMPLE_DATE_FORMAT = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault());
+    private Context context;
+    private OnPostExecuteListener onPostExecuteListener;
+
+    private DbpediaDataGetterAsync() {
+    }
+
+    public static DbpediaDataGetterAsync getInstance(Context applicationContext) {
+        DbpediaDataGetterAsync async = new DbpediaDataGetterAsync();
+        async.context = applicationContext;
+        return async;
     }
 
     @Override
-    protected void onHandleIntent(Intent intent) {
-        Log.i(TAG, "HandleIntent");
-        RealmDbHelper realm = RealmDbHelper.getInstance();
-        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+    protected void onPreExecute() {
+        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
         sharedPreferences.edit().putString(Preferences.LAST_UPDATE_DATE.name(), SIMPLE_DATE_FORMAT.format(new Date())).apply();
+    }
 
-        Log.i(TAG, "Querying dbpedia.org");
-        final String peaks_query_result = this.queryDbPedia(QueryManager.PEAKS_QUERY);
-        final String mounts_query_result = this.queryDbPedia(QueryManager.MOUNTAINS_QUERY);
+    @Override
+    protected Void doInBackground(Param... params) {
+        for (Param p : params)
+            this.doInBackground(p);
 
-        Log.i(TAG, "Parsing results");
+        return null;
+    }
+
+    private void doInBackground(Param param) {
+        final RealmDbHelper realm = RealmDbHelper.getInstance();
+        final PlacemarkType type = param.type;
+        final String query = this.queryDbPedia(param.query);
+
         try {
-            final Collection<Placemark> peaks = getPlacemarksFromJSON(peaks_query_result, PlacemarkType.PEAK);
-            final Collection<Placemark> mounts = getPlacemarksFromJSON(mounts_query_result, PlacemarkType.MOUNTAIN);
-            Log.i(TAG, "Parsed " + peaks.size() + " placemarks");
+            final Collection<Placemark> items = getPlacemarksFromJSON(query, type);
+            Log.i(TAG, "Parsed " + items.size() + " placemarks");
 
-            Log.i(TAG, "Insertion en Base des " + peaks.size() + " derniers éléments");
+            Log.i(TAG, "Insertion en Base des " + items.size() + " derniers éléments");
             long begin = System.currentTimeMillis();
-            realm.saveAll(peaks);
-            realm.saveAll(mounts);
+            realm.saveAll(items);
+
             Log.i(TAG, "insertion en base réalisée en " + (System.currentTimeMillis() - begin) + "ms");
 
         } catch (JSONException e) {
@@ -70,12 +81,11 @@ public class UpdateDataService extends IntentService {
 
         realm.close();
         Log.i(TAG, "Update finished, stoping service");
-        this.stopSelf();
     }
 
-    private Collection<Placemark> getPlacemarksFromJSON(String json, PlacemarkType type) throws JSONException {
-        Collection<Placemark> placemarks = new ArrayList<>();
-        JSONArray bindings = new JSONObject(json).getJSONObject("results").getJSONArray("bindings");
+    private final Collection<Placemark> getPlacemarksFromJSON(String json, PlacemarkType type) throws JSONException {
+        final Collection<Placemark> placemarks = new ArrayList<>();
+        final JSONArray bindings = new JSONObject(json).getJSONObject("results").getJSONArray("bindings");
         for (int i = 0; i < bindings.length(); ++i) {
             JSONObject o = bindings.getJSONObject(i);
             JSONObject id = o.getJSONObject("id");
@@ -99,9 +109,9 @@ public class UpdateDataService extends IntentService {
         return placemarks;
     }
 
-    private String queryDbPedia(String query) {
+    private final String queryDbPedia(String query) {
         try {
-            final String url = QueryManager.buildApiUrl(query);
+            final String url = QueryManager.buildApiUrl(query, Locale.getDefault().getLanguage());
             Log.i(TAG, "url : " + url);
             final HttpURLConnection conn = (HttpURLConnection) new URL(url).openConnection();
             conn.setRequestMethod("GET");
@@ -125,4 +135,32 @@ public class UpdateDataService extends IntentService {
         }
         return null;
     }
+
+    @Override
+    protected void onPostExecute(Void aVoid) {
+        onPostExecuteListener.onPostExecute();
+    }
+
+    public void setOnPostExecuteListener(OnPostExecuteListener onPostExecuteListener) {
+        this.onPostExecuteListener = onPostExecuteListener;
+    }
+
+    public interface OnPostExecuteListener {
+        void onPostExecute();
+    }
+
+    public static final class Param {
+        private final String query;
+        private final PlacemarkType type;
+
+        private Param(String query, PlacemarkType type) {
+            this.query = query;
+            this.type = type;
+        }
+
+        public static Param of(String query, PlacemarkType type) {
+            return new Param(query, type);
+        }
+    }
+
 }

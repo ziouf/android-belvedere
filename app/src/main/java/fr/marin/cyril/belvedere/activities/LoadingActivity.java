@@ -20,7 +20,9 @@ import android.widget.Toast;
 import java.util.Arrays;
 
 import fr.marin.cyril.belvedere.R;
-import fr.marin.cyril.belvedere.services.UpdateDataService;
+import fr.marin.cyril.belvedere.async.DbpediaDataGetterAsync;
+import fr.marin.cyril.belvedere.dbpedia.QueryManager;
+import fr.marin.cyril.belvedere.model.PlacemarkType;
 import io.realm.Realm;
 
 public class LoadingActivity extends Activity
@@ -98,50 +100,26 @@ public class LoadingActivity extends Activity
     }
 
     private void start() {
-        /*
-        final InitTask initDBTask = new InitTask(this);
-        initDBTask.execute();
-        */
         final NetworkInfo netInfo = cm.getActiveNetworkInfo();
+
         if (netInfo != null && netInfo.isConnected()) {
             if (netInfo.getType() == ConnectivityManager.TYPE_WIFI
-                    || (netInfo.getType() == ConnectivityManager.TYPE_MOBILE && netInfo.getSubtype() == TelephonyManager.NETWORK_TYPE_LTE))
-            this.startService(new Intent(LoadingActivity.this, UpdateDataService.class));
+                    || (netInfo.getType() == ConnectivityManager.TYPE_MOBILE && netInfo.getSubtype() == TelephonyManager.NETWORK_TYPE_LTE)) {
+
+                final DbpediaDataGetterAsync async = DbpediaDataGetterAsync.getInstance(getApplicationContext());
+                async.setOnPostExecuteListener(new DbpediaDataGetterAsync.OnPostExecuteListener() {
+                    @Override
+                    public void onPostExecute() {
+                        LoadingActivity.this.startActivity(new Intent(LoadingActivity.this, MainActivity.class));
+                        LoadingActivity.this.finish();
+                    }
+                });
+                async.execute(
+                        DbpediaDataGetterAsync.Param.of(QueryManager.MOUNTAINS_QUERY, PlacemarkType.MOUNTAIN),
+                        DbpediaDataGetterAsync.Param.of(QueryManager.PEAKS_QUERY, PlacemarkType.PEAK)
+                );
+            }
         }
 
-        this.startActivity(new Intent(LoadingActivity.this, MainActivity.class));
-        this.finish();
     }
-
-    /*
-    private class InitTask extends DbInitializer {
-        private final TextView loadingInfoTextView = (TextView) LoadingActivity.this.findViewById(R.id.loading_info);
-        private final ProgressBar progressBar = (ProgressBar) LoadingActivity.this.findViewById(R.id.loading_progress);
-
-        public InitTask(Context context) {
-            super(context);
-        }
-
-        @Override
-        protected void onPreExecute() {
-            super.onPreExecute();
-            this.loadingInfoTextView.setText(R.string.loading_database_init);
-        }
-
-        @Override
-        protected void onPostExecute(Void v) {
-            super.onPostExecute(v);
-            this.loadingInfoTextView.setText(R.string.loading_application_openning);
-            LoadingActivity.this.startActivity(new Intent(LoadingActivity.this, MainActivity.class));
-            LoadingActivity.this.finish();
-        }
-
-        @Override
-        protected void onProgressUpdate(Integer... values) {
-            super.onProgressUpdate(values);
-            this.progressBar.setProgress(values[0]);
-            this.progressBar.setMax(values[1]);
-        }
-    }
-    */
 }

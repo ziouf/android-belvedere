@@ -2,8 +2,6 @@ package fr.marin.cyril.belvedere.dbpedia;
 
 import android.net.Uri;
 
-import java.util.Locale;
-
 /**
  * Created by cyril on 08/05/16.
  * <p>
@@ -14,7 +12,6 @@ import java.util.Locale;
  * <p>
  */
 public class QueryManager {
-    private static final String lang = Locale.getDefault().getLanguage();
     private static final String SEP = " ";
     private static final String RDF_PREFIX = "PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>";
     private static final String GEO_PREFIX = "PREFIX geo: <http://www.w3.org/2003/01/geo/wgs84_pos#>";
@@ -32,7 +29,7 @@ public class QueryManager {
                     "?peak geo:long ?longitude ." + SEP +
                     "?peak foaf:isPrimaryTopicOf ?wiki_url ." + SEP +
                     "?peak rdfs:comment ?comment ." + SEP +
-                    "FILTER(LANGMATCHES(LANG(?nom), \"" + lang + "\") && LANGMATCHES(LANG(?comment), \"" + lang + "\"))" + SEP +
+                    "FILTER(LANGMATCHES(LANG(?nom), \"%1$s\") && LANGMATCHES(LANG(?comment), \"%1$s\"))" + SEP +
                     "}";
     public static final String MOUNTAINS_QUERY =
             RDF_PREFIX + SEP + DBO_PREFIX + SEP + GEO_PREFIX + SEP + FOAF_PREFIX + SEP +
@@ -47,10 +44,14 @@ public class QueryManager {
                     "?massif geo:lat ?latitude ." + SEP +
                     "?massif geo:long ?longitude ." + SEP +
                     "?massif foaf:isPrimaryTopicOf ?wiki_url ." + SEP +
-                    "FILTER(LANGMATCHES(LANG(?nom), \"" + lang + "\") && LANGMATCHES(LANG(?comment), \"" + lang + "\"))" + SEP +
+                    "FILTER(LANGMATCHES(LANG(?nom), \"%1$s\") && LANGMATCHES(LANG(?comment), \"%1$s\"))" + SEP +
                     "}";
 
-    public static String buildApiUrl(String query) {
+    private static String getQuery(String query, String lang) {
+        return String.format(query, lang);
+    }
+
+    public static String buildApiUrl(String query, String lang) {
         return new Uri.Builder()
                 .scheme("http")
                 .authority("dbpedia.org")
@@ -58,7 +59,7 @@ public class QueryManager {
                 .appendQueryParameter("default-graph-uri", "")
                 .appendQueryParameter("format", "application/sparql-results+json")
                 .appendQueryParameter("timeout", "0")
-                .appendQueryParameter("query", query)
+                .appendQueryParameter("query", getQuery(query, lang))
                 .build()
                 .toString();
     }
