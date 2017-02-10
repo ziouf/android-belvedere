@@ -36,7 +36,6 @@ public final class DbpediaDataGetterAsync extends AsyncTask<DbpediaDataGetterAsy
     private static final String TAG = DbpediaDataGetterAsync.class.getSimpleName();
     private Context context;
     private OnPostExecuteListener onPostExecuteListener;
-    private SharedPreferences sharedPreferences;
 
     private DbpediaDataGetterAsync() {
     }
@@ -45,12 +44,6 @@ public final class DbpediaDataGetterAsync extends AsyncTask<DbpediaDataGetterAsy
         DbpediaDataGetterAsync async = new DbpediaDataGetterAsync();
         async.context = applicationContext;
         return async;
-    }
-
-    @Override
-    protected void onPreExecute() {
-        sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
-        sharedPreferences.edit().putLong(Preferences.LAST_UPDATE_DATE.name(), new Date().getTime()).apply();
     }
 
     @Override
@@ -139,17 +132,20 @@ public final class DbpediaDataGetterAsync extends AsyncTask<DbpediaDataGetterAsy
 
     @Override
     protected void onPostExecute(Void aVoid) {
+        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
+
+        if (sharedPreferences.contains(Preferences.LAST_UPDATE_DATE.name()))
+            Toast.makeText(context, R.string.toast_update_database_finished, Toast.LENGTH_SHORT).show();
+        else
+            Toast.makeText(context, R.string.toast_init_database_finished, Toast.LENGTH_SHORT).show();
+
+        sharedPreferences.edit().putLong(Preferences.LAST_UPDATE_DATE.name(), new Date().getTime()).apply();
+
         onPostExecuteListener.onPostExecute();
     }
 
     public void setOnPostExecuteListener(OnPostExecuteListener onPostExecuteListener) {
         this.onPostExecuteListener = onPostExecuteListener;
-
-        if (sharedPreferences.getLong(Preferences.LAST_UPDATE_DATE.name(), 0) > 0)
-            Toast.makeText(context, R.string.toast_update_database_finished, Toast.LENGTH_SHORT).show();
-        else
-            Toast.makeText(context, R.string.toast_init_database_finished, Toast.LENGTH_SHORT).show();
-
     }
 
     public interface OnPostExecuteListener {
