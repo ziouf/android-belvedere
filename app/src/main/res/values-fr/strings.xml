@@ -27,4 +27,6 @@
     <string name="total_peak_count">Nombre total de sommet</string>
     <string name="total_mount_count">Nombre total de massif</string>
     <string name="never">jamais</string>
+    <string name="toast_update_database_finished">Mise à jour de la base de données terminée</string>
+    <string name="toast_init_database_finished">Initialisation de la base de données terminée</string>
 </resources>

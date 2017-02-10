@@ -118,19 +118,21 @@ public class LoadingActivity extends Activity
                 if (last_update_long > 0) {
                     Log.i(TAG, "Le jeu de données a déja été initialisé. ");
                     LoadingActivity.this.startMainActivity();
-                }
 
-                final DbpediaDataGetterAsync async = DbpediaDataGetterAsync.getInstance(getApplicationContext());
-                async.setOnPostExecuteListener(new DbpediaDataGetterAsync.OnPostExecuteListener() {
-                    @Override
-                    public void onPostExecute() {
-                        LoadingActivity.this.startMainActivity();
-                    }
-                });
-                async.execute(
-                        DbpediaDataGetterAsync.Param.of(QueryManager.MOUNTAINS_QUERY, PlacemarkType.MOUNTAIN),
-                        DbpediaDataGetterAsync.Param.of(QueryManager.PEAKS_QUERY, PlacemarkType.PEAK)
-                );
+                } else {
+                    // Initialisation du jeu de données
+                    final DbpediaDataGetterAsync async = DbpediaDataGetterAsync.getInstance(getApplicationContext());
+                    async.setOnPostExecuteListener(new DbpediaDataGetterAsync.OnPostExecuteListener() {
+                        @Override
+                        public void onPostExecute() {
+                            LoadingActivity.this.startMainActivity();
+                        }
+                    });
+                    async.execute(
+                            DbpediaDataGetterAsync.Param.of(QueryManager.MOUNTAINS_QUERY, PlacemarkType.MOUNTAIN),
+                            DbpediaDataGetterAsync.Param.of(QueryManager.PEAKS_QUERY, PlacemarkType.PEAK)
+                    );
+                }
             }
         }
 

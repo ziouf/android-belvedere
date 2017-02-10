@@ -5,6 +5,7 @@ import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.preference.PreferenceManager;
 import android.util.Log;
+import android.widget.Toast;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -21,6 +22,7 @@ import java.util.Date;
 import java.util.Locale;
 
 import fr.marin.cyril.belvedere.Preferences;
+import fr.marin.cyril.belvedere.R;
 import fr.marin.cyril.belvedere.database.RealmDbHelper;
 import fr.marin.cyril.belvedere.dbpedia.QueryManager;
 import fr.marin.cyril.belvedere.model.Placemark;
@@ -34,6 +36,7 @@ public final class DbpediaDataGetterAsync extends AsyncTask<DbpediaDataGetterAsy
     private static final String TAG = DbpediaDataGetterAsync.class.getSimpleName();
     private Context context;
     private OnPostExecuteListener onPostExecuteListener;
+    private SharedPreferences sharedPreferences;
 
     private DbpediaDataGetterAsync() {
     }
@@ -46,7 +49,7 @@ public final class DbpediaDataGetterAsync extends AsyncTask<DbpediaDataGetterAsy
 
     @Override
     protected void onPreExecute() {
-        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
+        sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
         sharedPreferences.edit().putLong(Preferences.LAST_UPDATE_DATE.name(), new Date().getTime()).apply();
     }
 
@@ -141,6 +144,12 @@ public final class DbpediaDataGetterAsync extends AsyncTask<DbpediaDataGetterAsy
 
     public void setOnPostExecuteListener(OnPostExecuteListener onPostExecuteListener) {
         this.onPostExecuteListener = onPostExecuteListener;
+
+        if (sharedPreferences.getLong(Preferences.LAST_UPDATE_DATE.name(), 0) > 0)
+            Toast.makeText(context, R.string.toast_update_database_finished, Toast.LENGTH_SHORT).show();
+        else
+            Toast.makeText(context, R.string.toast_init_database_finished, Toast.LENGTH_SHORT).show();
+
     }
 
     public interface OnPostExecuteListener {
