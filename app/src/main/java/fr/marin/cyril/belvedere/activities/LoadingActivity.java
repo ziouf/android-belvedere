@@ -4,21 +4,25 @@ import android.Manifest;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Build;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.telephony.TelephonyManager;
+import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
 import java.util.Arrays;
 
+import fr.marin.cyril.belvedere.Preferences;
 import fr.marin.cyril.belvedere.R;
 import fr.marin.cyril.belvedere.async.DbpediaDataGetterAsync;
 import fr.marin.cyril.belvedere.dbpedia.QueryManager;
@@ -27,6 +31,7 @@ import io.realm.Realm;
 
 public class LoadingActivity extends Activity
         implements ActivityCompat.OnRequestPermissionsResultCallback {
+    private static final String TAG = LoadingActivity.class.getSimpleName();
 
     private static final int PERMISSIONS_CODE = 0;
     private static final String[] PERMISSIONS = new String[]{
@@ -106,12 +111,20 @@ public class LoadingActivity extends Activity
             if (netInfo.getType() == ConnectivityManager.TYPE_WIFI
                     || (netInfo.getType() == ConnectivityManager.TYPE_MOBILE && netInfo.getSubtype() == TelephonyManager.NETWORK_TYPE_LTE)) {
 
+
+                SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+                long last_update_long = sharedPreferences.getLong(Preferences.LAST_UPDATE_DATE.name(), 0);
+
+                if (last_update_long > 0) {
+                    Log.i(TAG, "Le jeu de données a déja été initialisé. ");
+                    LoadingActivity.this.startMainActivity();
+                }
+
                 final DbpediaDataGetterAsync async = DbpediaDataGetterAsync.getInstance(getApplicationContext());
                 async.setOnPostExecuteListener(new DbpediaDataGetterAsync.OnPostExecuteListener() {
                     @Override
                     public void onPostExecute() {
-                        LoadingActivity.this.startActivity(new Intent(LoadingActivity.this, MainActivity.class));
-                        LoadingActivity.this.finish();
+                        LoadingActivity.this.startMainActivity();
                     }
                 });
                 async.execute(
@@ -121,5 +134,10 @@ public class LoadingActivity extends Activity
             }
         }
 
+    }
+
+    private void startMainActivity() {
+        LoadingActivity.this.startActivity(new Intent(LoadingActivity.this, MainActivity.class));
+        LoadingActivity.this.finish();
     }
 }

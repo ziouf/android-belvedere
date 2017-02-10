@@ -15,7 +15,6 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
@@ -33,7 +32,6 @@ import fr.marin.cyril.belvedere.model.PlacemarkType;
 
 public final class DbpediaDataGetterAsync extends AsyncTask<DbpediaDataGetterAsync.Param, Void, Void> {
     private static final String TAG = DbpediaDataGetterAsync.class.getSimpleName();
-    private static final SimpleDateFormat SIMPLE_DATE_FORMAT = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault());
     private Context context;
     private OnPostExecuteListener onPostExecuteListener;
 
@@ -49,7 +47,7 @@ public final class DbpediaDataGetterAsync extends AsyncTask<DbpediaDataGetterAsy
     @Override
     protected void onPreExecute() {
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
-        sharedPreferences.edit().putString(Preferences.LAST_UPDATE_DATE.name(), SIMPLE_DATE_FORMAT.format(new Date())).apply();
+        sharedPreferences.edit().putLong(Preferences.LAST_UPDATE_DATE.name(), new Date().getTime()).apply();
     }
 
     @Override
