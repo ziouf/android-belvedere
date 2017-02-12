@@ -30,6 +30,7 @@ public final class WikiUrlGetterAsync extends AsyncTask<Placemark, Void, String>
     }
 
     public static String getLangUrlFromResponse(String response) {
+        if (response == null || response.isEmpty()) return null;
         try {
             JSONObject json = new JSONObject(response);
             JSONObject pages = json.getJSONObject("query").getJSONObject("pages");
