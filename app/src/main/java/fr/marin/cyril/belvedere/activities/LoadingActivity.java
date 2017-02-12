@@ -143,8 +143,8 @@ public class LoadingActivity extends Activity
         Calendar update_limit_cal = Calendar.getInstance();
         update_limit_cal.add(Calendar.DAY_OF_YEAR, -1 * update_frequency_days_int);
 
-        if (last_update_long != Preferences.LAST_UPDATE_DATE.defaultValue()
-                && last_update_cal.before(update_limit_cal)) {
+        if (last_update_long == Preferences.LAST_UPDATE_DATE.defaultValue()
+                || last_update_cal.before(update_limit_cal)) {
             Log.i(TAG, "Mise à jour des données nécessaire");
             return true;
         } else {
