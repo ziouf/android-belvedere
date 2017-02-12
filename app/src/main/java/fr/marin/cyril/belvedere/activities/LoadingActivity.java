@@ -21,6 +21,8 @@ import android.view.View;
 import android.widget.Toast;
 
 import java.util.Arrays;
+import java.util.Calendar;
+import java.util.Collection;
 
 import fr.marin.cyril.belvedere.Preferences;
 import fr.marin.cyril.belvedere.R;
@@ -105,37 +107,82 @@ public class LoadingActivity extends Activity
     }
 
     private void start() {
-        final NetworkInfo netInfo = cm.getActiveNetworkInfo();
+        // Test de la connectivité réseau du terminal
+        if (!this.isNetworkOk()) return;
 
-        if (netInfo != null && netInfo.isConnected()) {
-            if (netInfo.getType() == ConnectivityManager.TYPE_WIFI
-                    || (netInfo.getType() == ConnectivityManager.TYPE_MOBILE && netInfo.getSubtype() == TelephonyManager.NETWORK_TYPE_LTE)) {
+        if (!this.shouldUpdateData()) {
+            // Ouverture de l'activité principale
+            LoadingActivity.this.startMainActivity();
 
-
-                SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
-                long last_update_long = sharedPreferences.getLong(Preferences.LAST_UPDATE_DATE.name(), 0);
-
-                if (last_update_long > 0) {
-                    Log.i(TAG, "Le jeu de données a déja été initialisé. ");
+        } else {
+            // Initialisation du jeu de données
+            final DbpediaDataGetterAsync async = DbpediaDataGetterAsync.getInstance(getApplicationContext());
+            async.setOnPostExecuteListener(new DbpediaDataGetterAsync.OnPostExecuteListener() {
+                @Override
+                public void onPostExecute() {
                     LoadingActivity.this.startMainActivity();
-
-                } else {
-                    // Initialisation du jeu de données
-                    final DbpediaDataGetterAsync async = DbpediaDataGetterAsync.getInstance(getApplicationContext());
-                    async.setOnPostExecuteListener(new DbpediaDataGetterAsync.OnPostExecuteListener() {
-                        @Override
-                        public void onPostExecute() {
-                            LoadingActivity.this.startMainActivity();
-                        }
-                    });
-                    async.execute(
-                            DbpediaDataGetterAsync.Param.of(QueryManager.MOUNTAINS_QUERY, PlacemarkType.MOUNTAIN),
-                            DbpediaDataGetterAsync.Param.of(QueryManager.PEAKS_QUERY, PlacemarkType.PEAK)
-                    );
                 }
-            }
+            });
+            async.execute(
+                    DbpediaDataGetterAsync.Param.of(QueryManager.MOUNTAINS_QUERY, PlacemarkType.MOUNTAIN),
+                    DbpediaDataGetterAsync.Param.of(QueryManager.PEAKS_QUERY, PlacemarkType.PEAK)
+            );
         }
+    }
 
+    private boolean shouldUpdateData() {
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+        // Obtention de la date de la dernière mise à jour
+        long last_update_long = preferences.getLong(Preferences.LAST_UPDATE_DATE.name(), Preferences.LAST_UPDATE_DATE.defaultValue());
+        // Obtention de la fréquence de mise à jour des données
+        long update_frequency_days = preferences.getLong(Preferences.UPDATE_FREQUENCY_DAYS.name(), Preferences.UPDATE_FREQUENCY_DAYS.defaultValue());
+        int update_frequency_days_int = Long.valueOf(update_frequency_days).intValue();
+
+        Calendar last_update_cal = Calendar.getInstance();
+        last_update_cal.setTimeInMillis(last_update_long);
+        Calendar update_limit_cal = Calendar.getInstance();
+        update_limit_cal.add(Calendar.DAY_OF_YEAR, -1 * update_frequency_days_int);
+
+        if (last_update_long != Preferences.LAST_UPDATE_DATE.defaultValue()
+                && last_update_cal.before(update_limit_cal)) {
+            Log.i(TAG, "Mise à jour des données nécessaire");
+            return true;
+        } else {
+            Log.i(TAG, "Mise à jour des données inutile");
+            return false;
+        }
+    }
+
+    private boolean isNetworkOk() {
+        final NetworkInfo netInfo = cm.getActiveNetworkInfo();
+        final Collection<Integer> netTypes = Arrays.asList(
+                ConnectivityManager.TYPE_MOBILE,
+                ConnectivityManager.TYPE_MOBILE_DUN,
+                ConnectivityManager.TYPE_WIMAX,
+                ConnectivityManager.TYPE_ETHERNET
+        );
+        final Collection<Integer> netSubTypes = Arrays.asList(
+                TelephonyManager.NETWORK_TYPE_HSDPA,
+                TelephonyManager.NETWORK_TYPE_HSPA,
+                TelephonyManager.NETWORK_TYPE_HSPAP,
+                TelephonyManager.NETWORK_TYPE_HSUPA,
+                TelephonyManager.NETWORK_TYPE_LTE
+        );
+
+        if (netInfo == null) return false;
+        if (!netInfo.isConnected()) return false;
+
+        if (netInfo.getType() == ConnectivityManager.TYPE_WIFI)
+            return true;
+
+        if (netTypes.contains(netInfo.getType()) && netSubTypes.contains(netInfo.getSubtype()))
+            return true;
+
+        if (Build.VERSION.PREVIEW_SDK_INT >= 25)
+            if (netInfo.getType() == ConnectivityManager.TYPE_VPN)
+                return true;
+
+        return false;
     }
 
     private void startMainActivity() {
