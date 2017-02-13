@@ -15,8 +15,8 @@ android {
     defaultConfig {
         minSdkVersion 19
         targetSdkVersion 25
-        versionCode 1019
-        versionName "1.0.19"
+        versionCode 1020
+        versionName "v1 BETA"
         vectorDrawables.useSupportLibrary = true
         multiDexEnabled true
     }
