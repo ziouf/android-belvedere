@@ -29,6 +29,7 @@ import fr.marin.cyril.belvedere.Preferences;
 import fr.marin.cyril.belvedere.R;
 import fr.marin.cyril.belvedere.async.DbpediaDataGetterAsync;
 import fr.marin.cyril.belvedere.dbpedia.QueryManager;
+import fr.marin.cyril.belvedere.model.Placemark;
 import fr.marin.cyril.belvedere.model.PlacemarkType;
 import io.realm.Realm;
 
@@ -145,6 +146,11 @@ public class LoadingActivity extends Activity
     }
 
     private boolean shouldUpdateData() {
+
+        // Si la base est vide alors => true
+        if (realm.where(Placemark.class).count() == 0)
+            return true;
+
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
         // Obtention de la date de la dernière mise à jour
         long last_update_long = preferences.getLong(Preferences.LAST_UPDATE_DATE.name(), Preferences.LAST_UPDATE_DATE.defaultValue());

@@ -23,11 +23,11 @@
     <string name="open">Ouvrir</string>
     <string name="menu_refresh">Mise à jour des données</string>
     <string name="title_activity_settings">Parametres</string>
-    <string name="last_data_update_date">Dernière mise à jour des data</string>
+    <string name="last_data_update_date">Dernière mise à jour des données</string>
+    <string name="data_update_frequency">Fréquence de rafraichissement des données (en jours)</string>
     <string name="total_peak_count">Nombre total de sommet</string>
     <string name="total_mount_count">Nombre total de massif</string>
     <string name="never">jamais</string>
     <string name="toast_update_database_finished">Mise à jour de la base de données terminée</string>
     <string name="toast_init_database_finished">Initialisation de la base de données terminée</string>
-    <string name="data_update_frequency">Fréquence de mise à jour des data</string>
 </resources>
