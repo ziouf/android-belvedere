@@ -56,7 +56,6 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback {
     private static final String TAG = "MapsFragment";
     private final Map<Marker, Placemark> markersShown = new HashMap<>();
     private View rootView;
-    private SupportMapFragment mapFragment;
     private Marker compassMarker;
     private Marker lastOpenedInfoWindowMarker;
 
@@ -119,7 +118,7 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback {
         compassService = CompassService.getInstance(getActivity());
 
         // Initialisation du fragment Maps
-        mapFragment = (SupportMapFragment) getChildFragmentManager().findFragmentById(R.id.google_maps_fragment);
+        SupportMapFragment mapFragment = (SupportMapFragment) getChildFragmentManager().findFragmentById(R.id.google_maps_fragment);
         mapFragment.getMapAsync(this);
 
         // Initialisation des FAB
@@ -287,7 +286,7 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback {
                         String url = WikiUrlGetterAsync.getLangUrlFromResponse(response);
 
                         if (url == null || url.isEmpty()) {
-                            Toast.makeText(MapsFragment.this.getActivity(), "Cet item ne dispose pas d'article Wikipedia dans votre langue", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(MapsFragment.this.getActivity(), R.string.toast_wiki_url_not_found, Toast.LENGTH_SHORT).show();
                             return;
                         }
 

@@ -125,11 +125,7 @@ public class LoadingActivity extends Activity
         // Test de la connectivité réseau du terminal
         if (!this.isNetworkOk()) return;
 
-        if (!this.shouldUpdateData()) {
-            // Ouverture de l'activité principale
-            LoadingActivity.this.startMainActivity();
-
-        } else {
+        if (this.shouldUpdateData()) {
             // Initialisation du jeu de données
             final DbpediaDataGetterAsync async = DbpediaDataGetterAsync.getInstance(getApplicationContext());
             async.setOnPostExecuteListener(new DbpediaDataGetterAsync.OnPostExecuteListener() {
@@ -142,6 +138,9 @@ public class LoadingActivity extends Activity
                     DbpediaDataGetterAsync.Param.of(QueryManager.MOUNTAINS_QUERY, PlacemarkType.MOUNTAIN),
                     DbpediaDataGetterAsync.Param.of(QueryManager.PEAKS_QUERY, PlacemarkType.PEAK)
             );
+        } else {
+            // Ouverture de l'activité principale
+            LoadingActivity.this.startMainActivity();
         }
     }
 
@@ -185,7 +184,7 @@ public class LoadingActivity extends Activity
         if (NET_TYPES.contains(netInfo.getType()) && NET_SUB_TYPES.contains(netInfo.getSubtype()))
             return true;
 
-        if (Build.VERSION.PREVIEW_SDK_INT >= 25)
+        if (Build.VERSION.PREVIEW_SDK_INT >= Build.VERSION_CODES.LOLLIPOP)
             if (netInfo.getType() == ConnectivityManager.TYPE_VPN)
                 return true;
 
