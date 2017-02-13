@@ -14,7 +14,7 @@
         android:layout_height="wrap_content"
         android:elevation="0.5dp">
 
-        <LinearLayout
+        <android.support.v7.widget.ListViewCompat
             android:id="@+id/activity_about_list"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -24,7 +24,7 @@
             android:layout_marginTop="8dp"
             android:orientation="vertical">
 
-        </LinearLayout>
+        </android.support.v7.widget.ListViewCompat>
 
     </android.support.v7.widget.CardView>
 

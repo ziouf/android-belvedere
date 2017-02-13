@@ -4,7 +4,7 @@
 
     <!-- Maps Info window -->
     <dimen name="maps_info_window_layout_padding">3dp</dimen>
-    <dimen name="maps_info_window_comment_max_width">250dp</dimen>
+    <dimen name="maps_info_window_max_width">250dp</dimen>
 
     <!-- Floating Action Button -->
     <dimen name="fab_margin">0dp</dimen>

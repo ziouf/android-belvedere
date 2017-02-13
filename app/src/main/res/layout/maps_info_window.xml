@@ -33,6 +33,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
-        android:maxWidth="@dimen/maps_info_window_comment_max_width" />
+        android:maxWidth="@dimen/maps_info_window_max_width" />
 
 </LinearLayout>
