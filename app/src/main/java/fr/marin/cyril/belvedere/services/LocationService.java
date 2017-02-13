@@ -24,6 +24,7 @@ import fr.marin.cyril.belvedere.R;
  * Created by cyril on 31/05/16.
  */
 public class LocationService implements LocationListener {
+    private static final String TAG = LocationService.class.getSimpleName();
 
     private static final int LOCATION_UPDATE_TIME = 5 * 1000; // 5 secondes
     private static final int LOCATION_UPDATE_DISTANCE = 15;   // 15 metres

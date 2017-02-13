@@ -77,7 +77,7 @@ public final class DbpediaDataGetterAsync extends AsyncTask<DbpediaDataGetterAsy
         Log.i(TAG, "Update finished, stoping service");
     }
 
-    private final Collection<Placemark> getPlacemarksFromJSON(String json, PlacemarkType type) throws JSONException {
+    private Collection<Placemark> getPlacemarksFromJSON(String json, PlacemarkType type) throws JSONException {
         final Collection<Placemark> placemarks = new ArrayList<>();
         final JSONArray bindings = new JSONObject(json).getJSONObject("results").getJSONArray("bindings");
         for (int i = 0; i < bindings.length(); ++i) {
@@ -103,7 +103,7 @@ public final class DbpediaDataGetterAsync extends AsyncTask<DbpediaDataGetterAsy
         return placemarks;
     }
 
-    private final String queryDbPedia(String query) {
+    private String queryDbPedia(String query) {
         try {
             final String url = QueryManager.buildApiUrl(query, Locale.getDefault().getLanguage());
             Log.i(TAG, "url : " + url);
@@ -135,9 +135,9 @@ public final class DbpediaDataGetterAsync extends AsyncTask<DbpediaDataGetterAsy
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
 
         if (sharedPreferences.contains(Preferences.LAST_UPDATE_DATE.name()))
-            Toast.makeText(context, R.string.toast_update_database_finished, Toast.LENGTH_SHORT).show();
+            Toast.makeText(context, R.string.toast_update_database_finished, Toast.LENGTH_LONG).show();
         else
-            Toast.makeText(context, R.string.toast_init_database_finished, Toast.LENGTH_SHORT).show();
+            Toast.makeText(context, R.string.toast_init_database_finished, Toast.LENGTH_LONG).show();
 
         sharedPreferences.edit()
                 .putLong(Preferences.LAST_UPDATE_DATE.name(), new Date().getTime())

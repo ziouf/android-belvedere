@@ -23,6 +23,7 @@ import android.widget.Toast;
 import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Collection;
+import java.util.UUID;
 
 import fr.marin.cyril.belvedere.Preferences;
 import fr.marin.cyril.belvedere.R;
@@ -35,7 +36,7 @@ public class LoadingActivity extends Activity
         implements ActivityCompat.OnRequestPermissionsResultCallback {
     private static final String TAG = LoadingActivity.class.getSimpleName();
 
-    private static final int PERMISSIONS_CODE = 0;
+    private static final int PERMISSIONS_CODE = UUID.randomUUID().hashCode();
     private static final String[] PERMISSIONS = new String[]{
             Manifest.permission.ACCESS_FINE_LOCATION,
             Manifest.permission.CAMERA
@@ -43,9 +44,22 @@ public class LoadingActivity extends Activity
     private static final int SYSTEM_UI_VISIBILITY = View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY
             | View.SYSTEM_UI_FLAG_FULLSCREEN;
 
+    private static final Collection<Integer> NET_TYPES = Arrays.asList(
+            ConnectivityManager.TYPE_MOBILE,
+            ConnectivityManager.TYPE_MOBILE_DUN,
+            ConnectivityManager.TYPE_WIMAX,
+            ConnectivityManager.TYPE_ETHERNET
+    );
+    private static final Collection<Integer> NET_SUB_TYPES = Arrays.asList(
+            TelephonyManager.NETWORK_TYPE_HSDPA,
+            TelephonyManager.NETWORK_TYPE_HSPA,
+            TelephonyManager.NETWORK_TYPE_HSPAP,
+            TelephonyManager.NETWORK_TYPE_HSUPA,
+            TelephonyManager.NETWORK_TYPE_LTE
+    );
+
     private View decorView;
     private ConnectivityManager cm;
-
     private Realm realm;
 
     @Override
@@ -155,19 +169,6 @@ public class LoadingActivity extends Activity
 
     private boolean isNetworkOk() {
         final NetworkInfo netInfo = cm.getActiveNetworkInfo();
-        final Collection<Integer> netTypes = Arrays.asList(
-                ConnectivityManager.TYPE_MOBILE,
-                ConnectivityManager.TYPE_MOBILE_DUN,
-                ConnectivityManager.TYPE_WIMAX,
-                ConnectivityManager.TYPE_ETHERNET
-        );
-        final Collection<Integer> netSubTypes = Arrays.asList(
-                TelephonyManager.NETWORK_TYPE_HSDPA,
-                TelephonyManager.NETWORK_TYPE_HSPA,
-                TelephonyManager.NETWORK_TYPE_HSPAP,
-                TelephonyManager.NETWORK_TYPE_HSUPA,
-                TelephonyManager.NETWORK_TYPE_LTE
-        );
 
         if (netInfo == null) return false;
         if (!netInfo.isConnected()) return false;
@@ -175,7 +176,7 @@ public class LoadingActivity extends Activity
         if (netInfo.getType() == ConnectivityManager.TYPE_WIFI)
             return true;
 
-        if (netTypes.contains(netInfo.getType()) && netSubTypes.contains(netInfo.getSubtype()))
+        if (NET_TYPES.contains(netInfo.getType()) && NET_SUB_TYPES.contains(netInfo.getSubtype()))
             return true;
 
         if (Build.VERSION.PREVIEW_SDK_INT >= 25)

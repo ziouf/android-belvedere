@@ -16,7 +16,7 @@ import fr.marin.cyril.belvedere.tools.Orientation;
  */
 public class CompassService
         implements SensorEventListener {
-    private static final String TAG = "CompassService";
+    private static final String TAG = CompassService.class.getSimpleName();
     private static final float ALPHA = 0.025f;
 
     private static CompassService singleton;

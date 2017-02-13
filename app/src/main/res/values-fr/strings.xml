@@ -29,4 +29,5 @@
     <string name="never">jamais</string>
     <string name="toast_update_database_finished">Mise à jour de la base de données terminée</string>
     <string name="toast_init_database_finished">Initialisation de la base de données terminée</string>
+    <string name="data_update_frequency">Fréquence de mise à jour des data</string>
 </resources>

@@ -19,6 +19,7 @@ import fr.marin.cyril.belvedere.model.Placemark;
 import fr.marin.cyril.belvedere.model.PlacemarkType;
 
 public class AboutActivity extends AppCompatActivity {
+    private static final String TAG = AboutActivity.class.getSimpleName();
     private static final SimpleDateFormat SIMPLE_DATE_FORMAT = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault());
 
     private RealmDbHelper realm;
@@ -29,10 +30,12 @@ public class AboutActivity extends AppCompatActivity {
         setContentView(R.layout.activity_about);
         this.realm = RealmDbHelper.getInstance();
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
-        long last_update = sharedPreferences.getLong(Preferences.LAST_UPDATE_DATE.name(), 0);
+        long last_update = sharedPreferences.getLong(Preferences.LAST_UPDATE_DATE.name(), Preferences.LAST_UPDATE_DATE.defaultValue());
+        long update_frequency_days = sharedPreferences.getLong(Preferences.UPDATE_FREQUENCY_DAYS.name(), Preferences.UPDATE_FREQUENCY_DAYS.defaultValue());
 
         LinearLayout about_list_layout = (LinearLayout) findViewById(R.id.activity_about_list);
-        about_list_layout.addView(inflateAboutItem(getString(R.string.last_data_update_date), last_update > 0 ? SIMPLE_DATE_FORMAT.format(new Date(last_update)) : getString(R.string.never)));
+        about_list_layout.addView(inflateAboutItem(getString(R.string.last_data_update_date), last_update != Preferences.LAST_UPDATE_DATE.defaultValue() ? SIMPLE_DATE_FORMAT.format(new Date(last_update)) : getString(R.string.never)));
+        about_list_layout.addView(inflateAboutItem(getString(R.string.data_update_frequency), Long.valueOf(update_frequency_days).toString()));
         about_list_layout.addView(inflateAboutItem(getString(R.string.total_peak_count), realm.countByType(PlacemarkType.PEAK.name(), Placemark.class).toString()));
         about_list_layout.addView(inflateAboutItem(getString(R.string.total_mount_count), realm.countByType(PlacemarkType.MOUNTAIN.name(), Placemark.class).toString()));
 
