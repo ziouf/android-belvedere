@@ -34,5 +34,5 @@
     <string name="toast_init_database_finished">Database initialization finished</string>
     <string name="toast_update_database_finished">Database update finished</string>
     <string name="data_update_frequency">Data update frequency</string>
-    <string name="toast_wiki_url_not_found">Cet item ne dispose pas d\'article Wikipedia dans votre langue</string>
+    <string name="toast_wiki_url_not_found">No Wikipedia article found for your language</string>
 </resources>
