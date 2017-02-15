@@ -34,6 +34,8 @@ import fr.marin.cyril.belvedere.model.PlacemarkType;
 
 public final class DbpediaDataGetterAsync extends AsyncTask<DbpediaDataGetterAsync.Param, Void, Void> {
     private static final String TAG = DbpediaDataGetterAsync.class.getSimpleName();
+    private static final int BATCH_SIZE = 250;
+    private RealmDbHelper realm;
     private Context context;
     private OnPostExecuteListener onPostExecuteListener;
 
@@ -48,59 +50,60 @@ public final class DbpediaDataGetterAsync extends AsyncTask<DbpediaDataGetterAsy
 
     @Override
     protected Void doInBackground(Param... params) {
+        realm = RealmDbHelper.getInstance();
+
+        long begin = System.currentTimeMillis();
+
         for (Param p : params)
             this.doInBackground(p);
 
+        Log.i(TAG, "Parsing + Insertion en base réalisé en " + (System.currentTimeMillis() - begin) + "ms");
+
+        realm.close();
         return null;
     }
 
     private void doInBackground(Param param) {
-        final RealmDbHelper realm = RealmDbHelper.getInstance();
         final PlacemarkType type = param.type;
-        final String query = this.queryDbPedia(param.query);
+        final String json = this.queryDbPedia(param.query);
 
         try {
-            final Collection<Placemark> items = getPlacemarksFromJSON(query, type);
-            Log.i(TAG, "Parsed " + items.size() + " placemarks");
+            final JSONArray bindings = new JSONObject(json).getJSONObject("results").getJSONArray("bindings");
+            Log.i(TAG, "Parsed " + bindings.length() + " placemarks");
 
-            Log.i(TAG, "Insertion en Base des " + items.size() + " derniers éléments");
-            long begin = System.currentTimeMillis();
-            realm.saveAll(items);
+            Collection<Placemark> placemarks = new ArrayList<>();
 
-            Log.i(TAG, "insertion en base réalisée en " + (System.currentTimeMillis() - begin) + "ms");
+            for (int i = 0; i < bindings.length(); ++i) {
+                JSONObject o = bindings.getJSONObject(i);
+                JSONObject id = o.getJSONObject("id");
+                JSONObject title = o.getJSONObject("nom");
+                JSONObject comment = o.getJSONObject("comment");
+                JSONObject elevation = o.getJSONObject("elevation");
+                JSONObject latitude = o.getJSONObject("latitude");
+                JSONObject longitude = o.getJSONObject("longitude");
+
+                Placemark placemark = new Placemark();
+                placemark.setType(type);
+                placemark.setId(id.getInt("value"));
+                placemark.setTitle(title.getString("value"));
+                placemark.setComment(comment.getString("value"));
+                placemark.setElevation(elevation.getDouble("value"));
+                placemark.setLatitude(latitude.getDouble("value"));
+                placemark.setLongitude(longitude.getDouble("value"));
+
+                placemarks.add(placemark);
+
+                if (placemarks.size() > BATCH_SIZE) {
+                    realm.saveAll(placemarks);
+                    placemarks = new ArrayList<>();
+                }
+            }
+
+            realm.saveAll(placemarks);
 
         } catch (JSONException e) {
-            e.printStackTrace();
+            Log.e(TAG, "Erreur de parsing JSON", e);
         }
-
-        realm.close();
-        Log.i(TAG, "Update finished, stoping service");
-    }
-
-    private Collection<Placemark> getPlacemarksFromJSON(String json, PlacemarkType type) throws JSONException {
-        final Collection<Placemark> placemarks = new ArrayList<>();
-        final JSONArray bindings = new JSONObject(json).getJSONObject("results").getJSONArray("bindings");
-        for (int i = 0; i < bindings.length(); ++i) {
-            JSONObject o = bindings.getJSONObject(i);
-            JSONObject id = o.getJSONObject("id");
-            JSONObject title = o.getJSONObject("nom");
-            JSONObject comment = o.getJSONObject("comment");
-            JSONObject elevation = o.getJSONObject("elevation");
-            JSONObject latitude = o.getJSONObject("latitude");
-            JSONObject longitude = o.getJSONObject("longitude");
-
-            Placemark placemark = new Placemark();
-            placemark.setType(type);
-            placemark.setId(id.getInt("value"));
-            placemark.setTitle(title.getString("value"));
-            placemark.setComment(comment.getString("value"));
-            placemark.setElevation(elevation.getDouble("value"));
-            placemark.setLatitude(latitude.getDouble("value"));
-            placemark.setLongitude(longitude.getDouble("value"));
-
-            placemarks.add(placemark);
-        }
-        return placemarks;
     }
 
     private String queryDbPedia(String query) {

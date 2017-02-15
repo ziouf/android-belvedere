@@ -6,7 +6,7 @@ package fr.marin.cyril.belvedere;
 
 public enum Preferences {
     LAST_UPDATE_DATE(0),
-    UPDATE_FREQUENCY_DAYS(30);
+    UPDATE_FREQUENCY_DAYS(2);
 
     private final long defaultValue;
 

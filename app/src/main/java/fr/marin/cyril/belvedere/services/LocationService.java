@@ -22,6 +22,8 @@ import fr.marin.cyril.belvedere.R;
 
 /**
  * Created by cyril on 31/05/16.
+ * TODO : Utiliser les Google API au lieu des capteurs de l'appareil
+ * https://developer.android.com/training/location/receive-location-updates.html
  */
 public class LocationService implements LocationListener {
     private static final String TAG = LocationService.class.getSimpleName();
