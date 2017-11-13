@@ -42,7 +42,7 @@ public class RealmDbHelper implements Closeable {
                 .between("latitude", area.getBottom(), area.getTop())
                 .between("longitude", area.getLeft(), area.getRight())
                 .findAllSorted("elevation", Sort.DESCENDING)
-                .distinct("id");
+                .where().distinct("id");
 
         int size = results.size() > 0 ? results.size() : 0;
         int limit = Math.min(size, Runtime.getRuntime().availableProcessors() * 30);

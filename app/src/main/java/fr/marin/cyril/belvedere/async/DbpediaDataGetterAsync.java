@@ -19,12 +19,11 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
-import java.util.Locale;
 
 import fr.marin.cyril.belvedere.Preferences;
 import fr.marin.cyril.belvedere.R;
 import fr.marin.cyril.belvedere.database.RealmDbHelper;
-import fr.marin.cyril.belvedere.dbpedia.QueryManager;
+import fr.marin.cyril.belvedere.datasource.WikiDataQueryManager;
 import fr.marin.cyril.belvedere.model.Placemark;
 import fr.marin.cyril.belvedere.model.PlacemarkType;
 
@@ -39,12 +38,11 @@ public final class DbpediaDataGetterAsync extends AsyncTask<DbpediaDataGetterAsy
     private Context context;
     private OnPostExecuteListener onPostExecuteListener;
 
-    private DbpediaDataGetterAsync() {
+    private DbpediaDataGetterAsync(Context context) {
     }
 
     public static DbpediaDataGetterAsync getInstance(Context applicationContext) {
-        DbpediaDataGetterAsync async = new DbpediaDataGetterAsync();
-        async.context = applicationContext;
+        final DbpediaDataGetterAsync async = new DbpediaDataGetterAsync(applicationContext);
         return async;
     }
 
@@ -83,8 +81,7 @@ public final class DbpediaDataGetterAsync extends AsyncTask<DbpediaDataGetterAsy
                 JSONObject longitude = o.getJSONObject("longitude");
 
                 Placemark placemark = new Placemark();
-                placemark.setType(type);
-                placemark.setId(id.getInt("value"));
+                placemark.setId(id.getString("value"));
                 placemark.setTitle(title.getString("value"));
                 placemark.setComment(comment.getString("value"));
                 placemark.setElevation(elevation.getDouble("value"));
@@ -108,11 +105,12 @@ public final class DbpediaDataGetterAsync extends AsyncTask<DbpediaDataGetterAsy
 
     private String queryDbPedia(String query) {
         try {
-            final String url = QueryManager.buildApiUrl(query, Locale.getDefault().getLanguage());
+//            final String url = DbpediaQueryManager.buildApiUrl(query, Locale.getDefault().getLanguage());
+            final String url = WikiDataQueryManager.query(WikiDataQueryManager.WikiDataQueries.GET_ALL_MOUNTAINS.getQuery(0, 5000));
             Log.i(TAG, "url : " + url);
             final HttpURLConnection conn = (HttpURLConnection) new URL(url).openConnection();
             conn.setRequestMethod("GET");
-            conn.setDoInput(true);
+//            conn.setDoInput(true);
             conn.connect();
             Log.i(TAG, "dbPedia response code : " + conn.getResponseCode());
 

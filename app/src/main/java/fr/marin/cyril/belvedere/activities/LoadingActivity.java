@@ -23,14 +23,13 @@ import android.widget.Toast;
 import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Collection;
+import java.util.Date;
 import java.util.UUID;
 
 import fr.marin.cyril.belvedere.Preferences;
 import fr.marin.cyril.belvedere.R;
-import fr.marin.cyril.belvedere.async.DbpediaDataGetterAsync;
-import fr.marin.cyril.belvedere.dbpedia.QueryManager;
+import fr.marin.cyril.belvedere.async.DataGetterAsync;
 import fr.marin.cyril.belvedere.model.Placemark;
-import fr.marin.cyril.belvedere.model.PlacemarkType;
 import io.realm.Realm;
 
 public class LoadingActivity extends Activity
@@ -127,17 +126,16 @@ public class LoadingActivity extends Activity
 
         if (this.shouldUpdateData()) {
             // Initialisation du jeu de données
-            final DbpediaDataGetterAsync async = DbpediaDataGetterAsync.getInstance(getApplicationContext());
-            async.setOnPostExecuteListener(new DbpediaDataGetterAsync.OnPostExecuteListener() {
-                @Override
-                public void onPostExecute() {
-                    LoadingActivity.this.startMainActivity();
-                }
-            });
-            async.execute(
-                    DbpediaDataGetterAsync.Param.of(QueryManager.MOUNTAINS_QUERY, PlacemarkType.MOUNTAIN),
-                    DbpediaDataGetterAsync.Param.of(QueryManager.PEAKS_QUERY, PlacemarkType.PEAK)
-            );
+            final DataGetterAsync async = new DataGetterAsync();
+            async.setOnPostExecuteListener(LoadingActivity.this::startMainActivity);
+            async.execute();
+
+//            final DbpediaDataGetterAsync async = DbpediaDataGetterAsync.getInstance(getApplicationContext());
+//            async.setOnPostExecuteListener(() -> LoadingActivity.this.startMainActivity());
+//            async.execute(
+//                    DbpediaDataGetterAsync.Param.of(DbpediaQueryManager.MOUNTAINS_QUERY, PlacemarkType.MOUNTAIN),
+//                    DbpediaDataGetterAsync.Param.of(DbpediaQueryManager.PEAKS_QUERY, PlacemarkType.PEAK)
+//            );
         } else {
             // Ouverture de l'activité principale
             LoadingActivity.this.startMainActivity();
@@ -192,6 +190,17 @@ public class LoadingActivity extends Activity
     }
 
     private void startMainActivity() {
+        final SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+
+        if (sharedPreferences.contains(Preferences.LAST_UPDATE_DATE.name()))
+            Toast.makeText(getApplicationContext(), R.string.toast_update_database_finished, Toast.LENGTH_LONG).show();
+        else
+            Toast.makeText(getApplicationContext(), R.string.toast_init_database_finished, Toast.LENGTH_LONG).show();
+
+        sharedPreferences.edit()
+                .putLong(Preferences.LAST_UPDATE_DATE.name(), new Date().getTime())
+                .apply();
+
         LoadingActivity.this.startActivity(new Intent(LoadingActivity.this, MainActivity.class));
         LoadingActivity.this.finish();
     }

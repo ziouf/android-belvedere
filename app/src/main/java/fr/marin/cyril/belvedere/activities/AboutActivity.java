@@ -24,7 +24,6 @@ import fr.marin.cyril.belvedere.Preferences;
 import fr.marin.cyril.belvedere.R;
 import fr.marin.cyril.belvedere.database.RealmDbHelper;
 import fr.marin.cyril.belvedere.model.Placemark;
-import fr.marin.cyril.belvedere.model.PlacemarkType;
 
 public class AboutActivity extends AppCompatActivity {
     private static final String TAG = AboutActivity.class.getSimpleName();
@@ -47,9 +46,7 @@ public class AboutActivity extends AppCompatActivity {
         about_items.add(Pair.create(getString(R.string.data_update_frequency),
                 Long.valueOf(update_frequency_days).toString()));
         about_items.add(Pair.create(getString(R.string.total_peak_count),
-                realm.countByType(PlacemarkType.PEAK.name(), Placemark.class).toString()));
-        about_items.add(Pair.create(getString(R.string.total_mount_count),
-                realm.countByType(PlacemarkType.MOUNTAIN.name(), Placemark.class).toString()));
+                realm.count(Placemark.class).toString()));
 
         AboutItemAdapter arrayAdapter = new AboutItemAdapter(this, R.layout.about_item, about_items);
 

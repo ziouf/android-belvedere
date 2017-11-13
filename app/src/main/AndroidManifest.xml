@@ -9,7 +9,7 @@
 
     <uses-feature
         android:name="android.hardware.camera"
-        android:required="true" />
+        android:required="false" />
     <uses-feature
         android:name="android.hardware.camera.autofocus"
         android:required="false" />
@@ -40,18 +40,13 @@
             android:name=".activities.MainActivity"
             android:theme="@style/AppTheme.Main.Compat" />
         <activity
+            android:name=".activities.WikiDataActivity"
+            android:exported="true"
+            android:theme="@style/AppTheme.Main.Compat"></activity>
+        <activity
             android:name=".activities.CameraActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:theme="@style/AppTheme.Camera.Compat" />
-        <activity
-            android:name=".activities.SettingsActivity"
-            android:label="@string/title_activity_settings"
-            android:parentActivityName=".activities.MainActivity"
-            android:theme="@style/Theme.AppCompat.Light">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="fr.marin.cyril.belvedere.activities.MainActivity" />
-        </activity>
         <activity
             android:name=".activities.AboutActivity"
             android:label="@string/title_activity_about"
@@ -61,6 +56,7 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="fr.marin.cyril.belvedere.activities.MainActivity" />
         </activity>
+
     </application>
 
 </manifest>

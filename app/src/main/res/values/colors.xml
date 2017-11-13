@@ -11,4 +11,6 @@
 
     <color name="myPosition_button">#ededed</color>
     <color name="translucent">#00000000</color>
+
+    <color name="camera_reticule">#00bfff</color>
 </resources>

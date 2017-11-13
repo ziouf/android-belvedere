@@ -1,4 +1,4 @@
-package fr.marin.cyril.belvedere.dbpedia;
+package fr.marin.cyril.belvedere.datasource;
 
 import android.net.Uri;
 
@@ -11,7 +11,7 @@ import android.net.Uri;
  * - http://git.cm-cloud.fr/MARIN/belvedere/snippets/16
  * <p>
  */
-public class QueryManager {
+public class DbpediaQueryManager {
     private static final String SEP = " ";
     private static final String RDF_PREFIX = "PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>";
     private static final String GEO_PREFIX = "PREFIX geo: <http://www.w3.org/2003/01/geo/wgs84_pos#>";

@@ -66,7 +66,7 @@ public final class WikiUrlGetterAsync extends AsyncTask<Placemark, Void, String>
                 .appendQueryParameter("prop", "langlinks")
                 .appendQueryParameter("llprop", "url")
                 .appendQueryParameter("lllang", lang)
-                .appendQueryParameter("pageids", Integer.toString(placemark.getId()))
+                .appendQueryParameter("pageids", placemark.getId())
                 .build();
 
         HttpURLConnection connection = (HttpURLConnection) new URL(uri.toString()).openConnection();

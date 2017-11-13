@@ -9,13 +9,13 @@
             android:layout_width="100dp"
             android:layout_height="1dp"
             android:layout_gravity="center"
-            android:background="@color/wallet_holo_blue_light" />
+            android:background="@color/camera_reticule" />
 
         <View
             android:layout_width="1dp"
             android:layout_height="50dp"
             android:layout_gravity="center"
-            android:background="@color/wallet_holo_blue_light" />
+            android:background="@color/camera_reticule" />
 
     </FrameLayout>
 

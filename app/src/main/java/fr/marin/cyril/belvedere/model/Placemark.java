@@ -4,7 +4,10 @@ import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
+import java.util.Objects;
+
 import fr.marin.cyril.belvedere.R;
+import fr.marin.cyril.belvedere.annotations.JsonField;
 import io.realm.RealmModel;
 import io.realm.annotations.Ignore;
 import io.realm.annotations.PrimaryKey;
@@ -18,33 +21,36 @@ import io.realm.annotations.Required;
 public class Placemark implements RealmModel {
 
     @PrimaryKey
-    private int id;
+    @Required
+    @JsonField("m")
+    private String id;
 
     @Required
+    @JsonField("lat")
     private Double latitude;
     @Required
+    @JsonField("lon")
     private Double longitude;
     @Required
-    private Double elevation;
+    @JsonField("altitude")
+    private Double elevation = 0d;
 
     @Required
-    private String title;
+    @JsonField("mLabel")
+    private String title = "";
 
-    private String comment;
-
-    @Required
-    private String type;
+    private String comment = "";
 
     @Ignore
     private double matchLevel = 0d;
     @Ignore
     private double distance = 0d;
 
-    public int getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
 
@@ -88,14 +94,6 @@ public class Placemark implements RealmModel {
         this.title = title;
     }
 
-    public PlacemarkType getType() {
-        return PlacemarkType.valueOf(type);
-    }
-
-    public void setType(PlacemarkType type) {
-        this.type = type.name();
-    }
-
     public String getComment() {
         return comment;
     }
@@ -121,20 +119,23 @@ public class Placemark implements RealmModel {
     }
 
     public MarkerOptions getMarkerOptions() {
-        MarkerOptions markerOptions = new MarkerOptions()
-                .position(new LatLng(this.latitude, this.longitude))
+        return new MarkerOptions()
+                .position(this.getLatLng())
                 .title(this.title)
-                .snippet(this.elevation + "m");
+                .snippet(this.getElevationString())
+                .icon(BitmapDescriptorFactory.fromResource(R.drawable.google_maps_marker_peak))
+                ;
+    }
 
-        switch (this.getType()) {
-            case MOUNTAIN:
-                markerOptions.icon(BitmapDescriptorFactory.fromResource(R.drawable.google_maps_marker_mount));
-                break;
-            case PEAK:
-                markerOptions.icon(BitmapDescriptorFactory.fromResource(R.drawable.google_maps_marker_peak));
-                break;
-        }
-
-        return markerOptions;
+    @Override
+    public String toString() {
+        return "Placemark{" +
+                "id='" + id + '\'' +
+                ", latitude=" + (Objects.isNull(latitude) ? "null" : latitude) +
+                ", longitude=" + (Objects.isNull(longitude) ? "null" : longitude) +
+                ", elevation=" + (Objects.isNull(elevation) ? "null" : elevation) +
+                ", title='" + (Objects.isNull(title) ? "null" : title) + '\'' +
+                ", comment='" + (Objects.isNull(comment) ? "null" : comment) + '\'' +
+                '}';
     }
 }
