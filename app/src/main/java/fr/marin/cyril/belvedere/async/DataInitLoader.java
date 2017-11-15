@@ -8,7 +8,6 @@ import android.preference.PreferenceManager;
 import android.util.Log;
 
 import java.io.InputStream;
-import java.util.Calendar;
 import java.util.Collections;
 import java.util.Date;
 import java.util.concurrent.TimeUnit;
@@ -67,46 +66,6 @@ public class DataInitLoader extends AsyncTaskLoader<Void> {
 
     private static HttpUrl wikidataHttpUrl() {
         return new HttpUrl.Builder().scheme("https").host("query.wikidata.org").addPathSegment("sparql").build();
-    }
-
-    @Override
-    protected void onStartLoading() {
-        final boolean shouldUpdate = this.shouldUpdateData();
-        Log.i(TAG + ".onStartLoading()", "Shoudl update : " + shouldUpdate);
-        if (shouldUpdate) {
-            Log.i(TAG + ".onStartLoading()", "Force load");
-            this.forceLoad();
-        } else {
-            Log.i(TAG + ".onStartLoading()", "Abandon");
-            this.deliverResult(null);
-        }
-    }
-
-    @Override
-    protected void onAbandon() {
-        super.onAbandon();
-        this.cancelLoad();
-    }
-
-    @Override
-    protected void onStopLoading() {
-        super.onStopLoading();
-        this.cancelLoad();
-    }
-
-    @Override
-    public void onCanceled(Void data) {
-        super.onCanceled(data);
-    }
-
-    @Override
-    protected void onReset() {
-        super.onReset();
-    }
-
-    @Override
-    public void onContentChanged() {
-        super.onContentChanged();
     }
 
     @Override
@@ -179,27 +138,6 @@ public class DataInitLoader extends AsyncTaskLoader<Void> {
             Log.d(TAG + ".loadInBackground()", e.getClass().getSimpleName() + " : " + e.getMessage(), e);
         }
         Log.i(TAG + ".initMountainsByCountry()", "End (count : " + realm.where(Placemark.class).count() + ")");
-    }
-
-    private boolean shouldUpdateData() {
-        // Obtention de la date de la dernière mise à jour
-        final long last_update_long = pref.getLong(Preferences.LAST_UPDATE_DATE.name(), Preferences.LAST_UPDATE_DATE.defaultValue());
-        // Obtention de la fréquence de mise à jour des données
-        final int update_frequency_days = pref.getInt(Preferences.UPDATE_FREQUENCY_DAYS.name(), (int) Preferences.UPDATE_FREQUENCY_DAYS.defaultValue());
-
-        final Calendar last_update_cal = Calendar.getInstance();
-        last_update_cal.setTimeInMillis(last_update_long);
-        final Calendar update_limit_cal = Calendar.getInstance();
-        update_limit_cal.add(Calendar.DAY_OF_YEAR, -1 * update_frequency_days);
-
-        if (last_update_long == Preferences.LAST_UPDATE_DATE.defaultValue()
-                || last_update_cal.before(update_limit_cal)) {
-            Log.i(TAG, "Mise à jour des données nécessaire");
-            return true;
-        } else {
-            Log.i(TAG, "Mise à jour des données inutile");
-            return false;
-        }
     }
 
 }

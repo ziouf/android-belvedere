@@ -6,11 +6,13 @@ import android.app.LoaderManager;
 import android.content.Context;
 import android.content.Intent;
 import android.content.Loader;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Build;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
@@ -22,12 +24,15 @@ import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import java.util.Arrays;
+import java.util.Calendar;
 import java.util.Collection;
 import java.util.Random;
 
+import fr.marin.cyril.belvedere.Preferences;
 import fr.marin.cyril.belvedere.R;
 import fr.marin.cyril.belvedere.async.DataInitLoader;
 
+// TODO : Affichage de la liste des Pays dans une popup si la liste des pays est vide dans les SharedPreferences
 public class LoadingActivity extends Activity
         implements ActivityCompat.OnRequestPermissionsResultCallback, LoaderManager.LoaderCallbacks<Void> {
 
@@ -108,12 +113,24 @@ public class LoadingActivity extends Activity
     }
 
     private void start() {
+        // TODO : Déplacer le test de connectivité dans la AsyncTaskLoader
         // Test de la connectivité réseau du terminal
         if (!this.isNetworkOk()) return;
 
         Log.i(TAG + ".start()", "Init Loader");
-        this.getLoaderManager().initLoader(0, null, this);
+        if (this.getLoaderManager().getLoader(0) == null)
+            this.getLoaderManager().initLoader(0, null, this);
+        else
+            this.getLoaderManager().restartLoader(0, null, this);
+
+        if (this.shouldUpdateData()) {
+            this.getLoaderManager().getLoader(0).forceLoad();
+        } else {
+            this.onLoadFinished(null, null);
+        }
     }
+
+    // TODO : Ajouter un listener dans la AsyncTaskLoader pour mettre à jour la barre de progression
 
     /**
      * MAJ de la barre de progression
@@ -153,7 +170,8 @@ public class LoadingActivity extends Activity
 
     @Override
     public void onLoadFinished(Loader<Void> loader, Void d) {
-        Log.i(TAG + ".onLoaderFinished()", "Loader id : " + loader.getId());
+        if (loader != null)
+            Log.i(TAG + ".onLoaderFinished()", "Loader id : " + loader.getId());
 
         LoadingActivity.this.startActivity(new Intent(LoadingActivity.this, MainActivity.class));
         LoadingActivity.this.finish();
@@ -162,5 +180,27 @@ public class LoadingActivity extends Activity
     @Override
     public void onLoaderReset(Loader<Void> loader) {
         Log.i(TAG + ".onLoaderReset()", "Loader id : " + loader.getId());
+    }
+
+    private boolean shouldUpdateData() {
+        final SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+        // Obtention de la date de la dernière mise à jour
+        final long last_update_long = pref.getLong(Preferences.LAST_UPDATE_DATE.name(), Preferences.LAST_UPDATE_DATE.defaultValue());
+        // Obtention de la fréquence de mise à jour des données
+        final int update_frequency_days = pref.getInt(Preferences.UPDATE_FREQUENCY_DAYS.name(), (int) Preferences.UPDATE_FREQUENCY_DAYS.defaultValue());
+
+        final Calendar last_update_cal = Calendar.getInstance();
+        last_update_cal.setTimeInMillis(last_update_long);
+        final Calendar update_limit_cal = Calendar.getInstance();
+        update_limit_cal.add(Calendar.DAY_OF_YEAR, -1 * update_frequency_days);
+
+        if (last_update_long == Preferences.LAST_UPDATE_DATE.defaultValue()
+                || last_update_cal.before(update_limit_cal)) {
+            Log.i(TAG, "Mise à jour des données nécessaire");
+            return true;
+        } else {
+            Log.i(TAG, "Mise à jour des données inutile");
+            return false;
+        }
     }
 }
