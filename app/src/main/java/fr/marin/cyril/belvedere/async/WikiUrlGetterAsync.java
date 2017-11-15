@@ -1,29 +1,31 @@
 package fr.marin.cyril.belvedere.async;
 
-import android.net.Uri;
 import android.os.AsyncTask;
+import android.util.Log;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
-import java.net.URL;
 import java.util.Locale;
 
+import fr.marin.cyril.belvedere.Belvedere;
+import fr.marin.cyril.belvedere.async.interfaces.OnPostExecuteListener;
 import fr.marin.cyril.belvedere.model.Placemark;
+import okhttp3.HttpUrl;
+import okhttp3.Request;
+import okhttp3.Response;
 
 /**
  * Created by cscm6014 on 10/02/2017.
  */
 
 public final class WikiUrlGetterAsync extends AsyncTask<Placemark, Void, String> {
+    private static final String TAG = WikiUrlGetterAsync.class.getSimpleName();
     private final String lang = Locale.getDefault().getLanguage();
-    private OnPostExecuteListener onPostExecuteListener;
+    private OnPostExecuteListener<String> onPostExecuteListener;
 
-    public static WikiUrlGetterAsync getInstance(OnPostExecuteListener onPostExecuteListener) {
+    public static WikiUrlGetterAsync getInstance(OnPostExecuteListener<String> onPostExecuteListener) {
         WikiUrlGetterAsync async = new WikiUrlGetterAsync();
         async.onPostExecuteListener = onPostExecuteListener;
         return async;
@@ -38,10 +40,16 @@ public final class WikiUrlGetterAsync extends AsyncTask<Placemark, Void, String>
                     .getJSONArray("langlinks")
                     .getJSONObject(0)
                     .getString("url");
+
         } catch (JSONException e) {
             // Do nothing
+            Log.e(TAG + ".getLangUrlFromResponse()", e.getClass().getSimpleName() + " : " + e.getMessage());
         }
         return null;
+    }
+
+    public void setOnPostExecuteListener(OnPostExecuteListener<String> onPostExecuteListener) {
+        this.onPostExecuteListener = onPostExecuteListener;
     }
 
     @Override
@@ -51,36 +59,29 @@ public final class WikiUrlGetterAsync extends AsyncTask<Placemark, Void, String>
                 return this.doInBackground(p);
             } catch (IOException e) {
                 // Do nothing
+                Log.e(TAG + ".doInBackground()", e.getClass().getSimpleName() + " : " + e.getMessage());
             }
         return null;
     }
 
     private String doInBackground(Placemark placemark) throws IOException {
-        Uri uri = new Uri.Builder()
+        final HttpUrl url = new HttpUrl.Builder()
                 .scheme("https")
-                .authority("en.wikipedia.org")
-                .appendPath("w")
-                .appendPath("api.php")
-                .appendQueryParameter("action", "query")
-                .appendQueryParameter("format", "json")
-                .appendQueryParameter("prop", "langlinks")
-                .appendQueryParameter("llprop", "url")
-                .appendQueryParameter("lllang", lang)
-                .appendQueryParameter("pageids", placemark.getId())
+                .host("www.mediawiki.org")
+                .addPathSegment("w")
+                .addPathSegment("api.php")
+                .addQueryParameter("action", "query")
+                .addQueryParameter("format", "json")
+                .addQueryParameter("prop", "langlinks")
+                .addQueryParameter("llprop", "url")
+                .addQueryParameter("lllang", lang)
+                .addQueryParameter("pageids", placemark.getId().replaceAll(".*/", ""))
                 .build();
 
-        HttpURLConnection connection = (HttpURLConnection) new URL(uri.toString()).openConnection();
-        connection.setInstanceFollowRedirects(true);
+        final Request request = new Request.Builder().url(url).get().build();
 
-        try (BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream()))) {
-            final StringBuilder sb = new StringBuilder();
-            String buffer;
-            while ((buffer = reader.readLine()) != null)
-                sb.append(buffer);
-
-            return sb.toString();
-        } finally {
-            connection.disconnect();
+        try (final Response response = Belvedere.getHttpClient().newCall(request).execute()) {
+            return response.body().string();
         }
     }
 
@@ -89,7 +90,4 @@ public final class WikiUrlGetterAsync extends AsyncTask<Placemark, Void, String>
         this.onPostExecuteListener.onPostExecute(s);
     }
 
-    public interface OnPostExecuteListener {
-        void onPostExecute(String s);
-    }
 }

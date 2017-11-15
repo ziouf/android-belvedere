@@ -6,7 +6,6 @@ import android.content.pm.PackageManager;
 import android.hardware.GeomagneticField;
 import android.location.Location;
 import android.net.Uri;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
@@ -42,14 +41,13 @@ import java.util.concurrent.Executors;
 import fr.marin.cyril.belvedere.Config;
 import fr.marin.cyril.belvedere.R;
 import fr.marin.cyril.belvedere.activities.CameraActivity;
-import fr.marin.cyril.belvedere.async.WikiUrlGetterAsync;
+import fr.marin.cyril.belvedere.async.AreaQueryAsyncTask;
 import fr.marin.cyril.belvedere.database.RealmDbHelper;
 import fr.marin.cyril.belvedere.model.Area;
 import fr.marin.cyril.belvedere.model.Placemark;
 import fr.marin.cyril.belvedere.services.CompassService;
 import fr.marin.cyril.belvedere.services.LocationService;
 import fr.marin.cyril.belvedere.tools.Orientation;
-import io.realm.Realm;
 
 /**
  * Created by cyril on 31/05/16.
@@ -269,35 +267,17 @@ public class MapsFragment extends Fragment
      * @return
      */
     private GoogleMap.OnInfoWindowClickListener getOnInfoWindowClickListener() {
-        return new GoogleMap.OnInfoWindowClickListener() {
-            @Override
-            public void onInfoWindowClick(Marker marker) {
-                final Placemark p = realm.copyFromRealm(markersShown.get(marker));
-
-                WikiUrlGetterAsync.getInstance(new WikiUrlGetterAsync.OnPostExecuteListener() {
-                    @Override
-                    public void onPostExecute(String response) {
-                        String url = WikiUrlGetterAsync.getLangUrlFromResponse(response);
-
-                        if (url == null || url.isEmpty()) {
-                            Toast.makeText(MapsFragment.this.getActivity(), R.string.toast_wiki_url_not_found, Toast.LENGTH_SHORT).show();
-                            return;
-                        }
-
-                        startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(url)));
-                    }
-                }).execute(p);
-            }
+        return marker -> {
+            final Placemark p = markersShown.get(marker);
+            if (Objects.nonNull(p.getArticle()) && !p.getArticle().isEmpty())
+                startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(p.getArticle())));
+            else
+                Toast.makeText(MapsFragment.this.getActivity(), R.string.toast_wiki_url_not_found, Toast.LENGTH_SHORT).show();
         };
     }
 
     private GoogleMap.OnMarkerClickListener getOnMarkerClickListener() {
-        return new GoogleMap.OnMarkerClickListener() {
-            @Override
-            public boolean onMarkerClick(Marker marker) {
-                return (compassMarker != null) && marker.getId().equals(compassMarker.getId());
-            }
-        };
+        return marker -> (compassMarker != null) && marker.getId().equals(compassMarker.getId());
     }
 
     /**
@@ -364,46 +344,22 @@ public class MapsFragment extends Fragment
             }
         }
 
-        final DbQueryTask aTask = new DbQueryTask();
-        aTask.setOnPostExecuteListener(placemarks -> {
-            for (Placemark p : placemarks) {
-                if (lastOpenedInfoWindowMarker != null
-                        && lastOpenedInfoWindowMarker.isInfoWindowShown()
-                        && Objects.equals(markersShown.get(lastOpenedInfoWindowMarker).getId(), p.getId()))
-                    continue;
-
-                final Marker marker = mMap.addMarker(p.getMarkerOptions());
-                markersShown.put(marker, p);
-            }
-
-            Log.i(TAG, "markerShown contain " + markersShown.size() + " item(s)");
-        });
+        final AreaQueryAsyncTask aTask = new AreaQueryAsyncTask();
+        aTask.setOnPostExecuteListener(this::onPostExecuteDbQueryTaskListener);
         aTask.execute(area);
     }
 
-    private static class DbQueryTask extends AsyncTask<Area, Void, Collection<Placemark>> {
+    private void onPostExecuteDbQueryTaskListener(Collection<Placemark> placemarks) {
+        for (Placemark p : placemarks) {
+            if (lastOpenedInfoWindowMarker != null
+                    && lastOpenedInfoWindowMarker.isInfoWindowShown()
+                    && Objects.equals(markersShown.get(lastOpenedInfoWindowMarker).getId(), p.getId()))
+                continue;
 
-        private OnPostExecuteListener onPostExecuteListener;
-
-        @Override
-        protected Collection<Placemark> doInBackground(Area... areas) {
-            try (final Realm realm = Realm.getDefaultInstance()) {
-                return RealmDbHelper.getInstance(realm).findInArea(areas[0], Placemark.class);
-            }
+            final Marker marker = mMap.addMarker(p.getMarkerOptions());
+            markersShown.put(marker, p);
         }
 
-        @Override
-        protected void onPostExecute(Collection<Placemark> placemarks) {
-            if (Objects.nonNull(this.onPostExecuteListener))
-                this.onPostExecuteListener.onPostExecute(placemarks);
-        }
-
-        public void setOnPostExecuteListener(OnPostExecuteListener onPostExecuteListener) {
-            this.onPostExecuteListener = onPostExecuteListener;
-        }
-
-        public interface OnPostExecuteListener {
-            void onPostExecute(Collection<Placemark> placemarks);
-        }
+        Log.i(TAG, "markerShown contain " + markersShown.size() + " item(s)");
     }
 }

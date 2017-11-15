@@ -41,6 +41,9 @@ public class Placemark implements RealmModel {
 
     private String comment = "";
 
+    @JsonField("article")
+    private String article;
+
     @Ignore
     private double matchLevel = 0d;
     @Ignore
@@ -100,6 +103,14 @@ public class Placemark implements RealmModel {
 
     public void setComment(String comment) {
         this.comment = comment;
+    }
+
+    public String getArticle() {
+        return article;
+    }
+
+    public void setArticle(String article) {
+        this.article = article;
     }
 
     public double getMatchLevel() {

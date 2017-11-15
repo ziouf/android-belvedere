@@ -1,2804 +1,2144 @@
 {
   "head": {
     "vars": [
-      "pays",
-      "paysLabel"
+      "country",
+      "countryLabel"
     ]
   },
   "results": {
     "bindings": [
       {
-        "pays": {
-          "type": "uri",
-          "value": "http://www.wikidata.org/entity/Q16"
-        },
-        "paysLabel": {
-          "xml:lang": "fr",
-          "type": "literal",
-          "value": "Canada"
-        }
-      },
-      {
-        "pays": {
-          "type": "uri",
-          "value": "http://www.wikidata.org/entity/Q17"
-        },
-        "paysLabel": {
-          "xml:lang": "fr",
-          "type": "literal",
-          "value": "Japon"
-        }
-      },
-      {
-        "pays": {
-          "type": "uri",
-          "value": "http://www.wikidata.org/entity/Q20"
-        },
-        "paysLabel": {
-          "xml:lang": "fr",
-          "type": "literal",
-          "value": "Norvège"
-        }
-      },
-      {
-        "pays": {
-          "type": "uri",
-          "value": "http://www.wikidata.org/entity/Q27"
-        },
-        "paysLabel": {
-          "xml:lang": "fr",
-          "type": "literal",
-          "value": "Irlande"
-        }
-      },
-      {
-        "pays": {
-          "type": "uri",
-          "value": "http://www.wikidata.org/entity/Q28"
-        },
-        "paysLabel": {
-          "xml:lang": "fr",
-          "type": "literal",
-          "value": "Hongrie"
-        }
-      },
-      {
-        "pays": {
-          "type": "uri",
-          "value": "http://www.wikidata.org/entity/Q29"
-        },
-        "paysLabel": {
-          "xml:lang": "fr",
-          "type": "literal",
-          "value": "Espagne"
-        }
-      },
-      {
-        "pays": {
-          "type": "uri",
-          "value": "http://www.wikidata.org/entity/Q30"
-        },
-        "paysLabel": {
-          "xml:lang": "fr",
-          "type": "literal",
-          "value": "États-Unis"
-        }
-      },
-      {
-        "pays": {
-          "type": "uri",
-          "value": "http://www.wikidata.org/entity/Q31"
-        },
-        "paysLabel": {
-          "xml:lang": "fr",
-          "type": "literal",
-          "value": "Belgique"
-        }
-      },
-      {
-        "pays": {
-          "type": "uri",
-          "value": "http://www.wikidata.org/entity/Q32"
-        },
-        "paysLabel": {
-          "xml:lang": "fr",
-          "type": "literal",
-          "value": "Luxembourg"
-        }
-      },
-      {
-        "pays": {
-          "type": "uri",
-          "value": "http://www.wikidata.org/entity/Q33"
-        },
-        "paysLabel": {
-          "xml:lang": "fr",
-          "type": "literal",
-          "value": "Finlande"
-        }
-      },
-      {
-        "pays": {
-          "type": "uri",
-          "value": "http://www.wikidata.org/entity/Q34"
-        },
-        "paysLabel": {
-          "xml:lang": "fr",
-          "type": "literal",
-          "value": "Suède"
-        }
-      },
-      {
-        "pays": {
-          "type": "uri",
-          "value": "http://www.wikidata.org/entity/Q36"
-        },
-        "paysLabel": {
-          "xml:lang": "fr",
-          "type": "literal",
-          "value": "Pologne"
-        }
-      },
-      {
-        "pays": {
-          "type": "uri",
-          "value": "http://www.wikidata.org/entity/Q37"
-        },
-        "paysLabel": {
-          "xml:lang": "fr",
-          "type": "literal",
-          "value": "Lituanie"
-        }
-      },
-      {
-        "pays": {
-          "type": "uri",
-          "value": "http://www.wikidata.org/entity/Q38"
-        },
-        "paysLabel": {
-          "xml:lang": "fr",
-          "type": "literal",
-          "value": "Italie"
-        }
-      },
-      {
-        "pays": {
-          "type": "uri",
-          "value": "http://www.wikidata.org/entity/Q39"
-        },
-        "paysLabel": {
-          "xml:lang": "fr",
-          "type": "literal",
-          "value": "Suisse"
-        }
-      },
-      {
-        "pays": {
-          "type": "uri",
-          "value": "http://www.wikidata.org/entity/Q40"
-        },
-        "paysLabel": {
-          "xml:lang": "fr",
-          "type": "literal",
-          "value": "Autriche"
-        }
-      },
-      {
-        "pays": {
-          "type": "uri",
-          "value": "http://www.wikidata.org/entity/Q41"
-        },
-        "paysLabel": {
-          "xml:lang": "fr",
-          "type": "literal",
-          "value": "Grèce"
-        }
-      },
-      {
-        "pays": {
-          "type": "uri",
-          "value": "http://www.wikidata.org/entity/Q43"
-        },
-        "paysLabel": {
-          "xml:lang": "fr",
-          "type": "literal",
-          "value": "Turquie"
-        }
-      },
-      {
-        "pays": {
-          "type": "uri",
-          "value": "http://www.wikidata.org/entity/Q45"
-        },
-        "paysLabel": {
-          "xml:lang": "fr",
-          "type": "literal",
-          "value": "Portugal"
-        }
-      },
-      {
-        "pays": {
-          "type": "uri",
-          "value": "http://www.wikidata.org/entity/Q77"
-        },
-        "paysLabel": {
-          "xml:lang": "fr",
-          "type": "literal",
-          "value": "Uruguay"
-        }
-      },
-      {
-        "pays": {
-          "type": "uri",
-          "value": "http://www.wikidata.org/entity/Q79"
-        },
-        "paysLabel": {
-          "xml:lang": "fr",
-          "type": "literal",
-          "value": "Égypte"
-        }
-      },
-      {
-        "pays": {
-          "type": "uri",
-          "value": "http://www.wikidata.org/entity/Q96"
-        },
-        "paysLabel": {
-          "xml:lang": "fr",
-          "type": "literal",
-          "value": "Mexique"
-        }
-      },
-      {
-        "pays": {
-          "type": "uri",
-          "value": "http://www.wikidata.org/entity/Q114"
-        },
-        "paysLabel": {
-          "xml:lang": "fr",
-          "type": "literal",
-          "value": "Kenya"
-        }
-      },
-      {
-        "pays": {
-          "type": "uri",
-          "value": "http://www.wikidata.org/entity/Q115"
-        },
-        "paysLabel": {
-          "xml:lang": "fr",
-          "type": "literal",
-          "value": "Éthiopie"
-        }
-      },
-      {
-        "pays": {
-          "type": "uri",
-          "value": "http://www.wikidata.org/entity/Q117"
-        },
-        "paysLabel": {
-          "xml:lang": "fr",
-          "type": "literal",
-          "value": "Ghana"
-        }
-      },
-      {
-        "pays": {
-          "type": "uri",
-          "value": "http://www.wikidata.org/entity/Q142"
-        },
-        "paysLabel": {
-          "xml:lang": "fr",
-          "type": "literal",
-          "value": "France"
-        }
-      },
-      {
-        "pays": {
-          "type": "uri",
-          "value": "http://www.wikidata.org/entity/Q145"
-        },
-        "paysLabel": {
-          "xml:lang": "fr",
-          "type": "literal",
-          "value": "Royaume-Uni"
-        }
-      },
-      {
-        "pays": {
-          "type": "uri",
-          "value": "http://www.wikidata.org/entity/Q148"
-        },
-        "paysLabel": {
-          "xml:lang": "fr",
-          "type": "literal",
-          "value": "République populaire de Chine"
-        }
-      },
-      {
-        "pays": {
-          "type": "uri",
-          "value": "http://www.wikidata.org/entity/Q155"
-        },
-        "paysLabel": {
-          "xml:lang": "fr",
-          "type": "literal",
-          "value": "Brésil"
-        }
-      },
-      {
-        "pays": {
-          "type": "uri",
-          "value": "http://www.wikidata.org/entity/Q159"
-        },
-        "paysLabel": {
-          "xml:lang": "fr",
-          "type": "literal",
-          "  value": "Russie"
-        }
-      },
-      {
-        "pays": {
-          "type": "uri",
-          "value": "http://www.wikidata.org/entity/Q183"
-        },
-        "paysLabel": {
-          "xml:lang": "fr",
-          "type": "literal",
-          "value": "Allemagne"
-        }
-      },
-      {
-        "pays": {
-          "type": "uri",
-          "value": "http://www.wikidata.org/entity/Q184"
-        },
-        "paysLabel": {
-          "xml:lang": "fr",
-          "type": "literal",
-          "value": "Biélorussie"
-        }
-      },
-      {
-        "pays": {
-          "type": "uri",
-          "value": "http://www.wikidata.org/entity/Q189"
-        },
-        "paysLabel": {
-          "xml:lang": "fr",
-          "type": "literal",
-          "value": "Islande"
-        }
-      },
-      {
-        "pays": {
-          "type": "uri",
-          "value": "http://www.wikidata.org/entity/Q191"
-        },
-        "paysLabel": {
-          "xml:lang": "fr",
-          "type": "literal",
-          "value": "Estonie"
-        }
-      },
-      {
-        "pays": {
-          "type": "uri",
-          "value": "http://www.wikidata.org/entity/Q211"
-        },
-        "paysLabel": {
-          "xml:lang": "fr",
-          "type": "literal",
-          "value": "Lettonie"
-        }
-      },
-      {
-        "pays": {
-          "type": "uri",
-          "value": "http://www.wikidata.org/entity/Q212"
-        },
-        "paysLabel": {
-          "xml:lang": "fr",
-          "type": "literal",
-          "value": "Ukraine"
-        }
-      },
-      {
-        "pays": {
-          "type": "uri",
-          "value": "http://www.wikidata.org/entity/Q213"
-        },
-        "paysLabel": {
-          "xml:lang": "fr",
-          "type": "literal",
-          "value": "République tchèque"
-        }
-      },
-      {
-        "pays": {
-          "type": "uri",
-          "value": "http://www.wikidata.org/entity/Q214"
-        },
-        "paysLabel": {
-          "xml:lang": "fr",
-          "type": "literal",
-          "value": "Slovaquie"
-        }
-      },
-      {
-        "pays": {
-          "type": "uri",
-          "value": "http://www.wikidata.org/entity/Q215"
-        },
-        "paysLabel": {
-          "xml:lang": "fr",
-          "type": "literal",
-          "value": "Slovénie"
-        }
-      },
-      {
-        "pays": {
-          "type": "uri",
-          "value": "http://www.wikidata.org/entity/Q217"
-        },
-        "paysLabel": {
-          "xml:lang": "fr",
-          "type": "literal",
-          "value": "Moldavie"
-        }
-      },
-      {
-        "pays": {
-          "type": "uri",
-          "value": "http://www.wikidata.org/entity/Q218"
-        },
-        "paysLabel": {
-          "xml:lang": "fr",
-          "type": "literal",
-          "value": "Roumanie"
-        }
-      },
-      {
-        "pays": {
-          "type": "uri",
-          "value": "http://www.wikidata.org/entity/Q219"
-        },
-        "paysLabel": {
-          "xml:lang": "fr",
-          "type": "literal",
-          "value": "Bulgarie"
-        }
-      },
-      {
-        "pays": {
-          "type": "uri",
-          "value": "http://www.wikidata.org/entity/Q221"
-        },
-        "paysLabel": {
-          "xml:lang": "fr",
-          "type": "literal",
-          "value": "République de Macédoine"
-        }
-      },
-      {
-        "pays": {
-          "type": "uri",
-          "value": "http://www.wikidata.org/entity/Q222"
-        },
-        "paysLabel": {
-          "xml:lang": "fr",
-          "type": "literal",
-          "value": "Albanie"
-        }
-      },
-      {
-        "pays": {
-          "type": "uri",
-          "value": "http://www.wikidata.org/entity/Q224"
-        },
-        "paysLabel": {
-          "xml:lang": "fr",
-          "type": "literal",
-          "value": "Croatie"
-        }
-      },
-      {
-        "pays": {
-          "type": "uri",
-          "value": "http://www.wikidata.org/entity/Q225"
-        },
-        "paysLabel": {
-          "xml:lang": "fr",
-          "type": "literal",
-          "value": "Bosnie-Herzégovine"
-        }
-      },
-      {
-        "pays": {
-          "type": "uri",
-          "value": "http://www.wikidata.org/entity/Q227"
-        },
-        "paysLabel": {
-          "xml:lang": "fr",
-          "type": "literal",
-          "value": "Azerbaïdjan"
-        }
-      },
-      {
-        "pays": {
-          "type": "uri",
-          "value": "http://www.wikidata.org/entity/Q228"
-        },
-        "paysLabel": {
-          "xml:lang": "fr",
-          "type": "literal",
-          "value": "Andorre"
-        }
-      },
-      {
-        "pays": {
-          "type": "uri",
-          "value": "http://www.wikidata.org/entity/Q229"
-        },
-        "paysLabel": {
-          "xml:lang": "fr",
-          "type": "literal",
-          "value": "Chypre"
-        }
-      },
-      {
-        "pays": {
-          "type": "uri",
-          "value": "http://www.wikidata.org/entity/Q230"
-        },
-        "paysLabel": {
-          "xml:lang": "fr",
-          "type": "literal",
-          "value": "Géorgie"
-        }
-      },
-      {
-        "pays": {
-          "type": "uri",
-          "value": "http://www.wikidata.org/entity/Q232"
-        },
-        "paysLabel": {
-          "xml:lang": "fr",
-          "type": "literal",
-          "value": "Kazakhstan"
-        }
-      },
-      {
-        "pays": {
-          "type": "uri",
-          "value": "http://www.wikidata.org/entity/Q233"
-        },
-        "paysLabel": {
-          "xml:lang": "fr",
-          "type": "literal",
-          "value": "Malte"
-        }
-      },
-      {
-        "pays": {
-          "type": "uri",
-          "value": "http://www.wikidata.org/entity/Q235"
-        },
-        "paysLabel": {
-          "xml:lang": "fr",
-          "type": "literal",
-          "value": "Monaco"
-        }
-      },
-      {
-        "pays": {
-          "type": "uri",
-          "value": "http://www.wikidata.org/entity/Q236"
-        },
-        "paysLabel": {
-          "xml:lang": "fr",
-          "type": "literal",
-          "value": "Monténégro"
-        }
-      },
-      {
-        "pays": {
-          "type": "uri",
-          "value": "http://www.wikidata.org/entity/Q237"
-        },
-        "paysLabel": {
-          "xml:lang": "fr",
-          "type": "literal",
-          "value": "Vatican"
-        }
-      },
-      {
-        "pays": {
-          "type": "uri",
-          "value": "http://www.wikidata.org/entity/Q238"
-        },
-        "paysLabel": {
-          "xml:lang": "fr",
-          "type": "literal",
-          "value": "Saint-Marin"
-        }
-      },
-      {
-        "pays": {
-          "type": "uri",
-          "value": "http://www.wikidata.org/entity/Q241"
-        },
-        "paysLabel": {
-          "xml:lang": "fr",
-          "type": "literal",
-          "value": "Cuba"
-        }
-      },
-      {
-        "pays": {
-          "type": "uri",
-          "value": "http://www.wikidata.org/entity/Q242"
-        },
-        "paysLabel": {
-          "xml:lang": "fr",
-          "type": "literal",
-          "value": "Belize"
-        }
-      },
-      {
-        "pays": {
-          "type": "uri",
-          "value": "http://www.wikidata.org/entity/Q244"
-        },
-        "paysLabel": {
-          "xml:lang": "fr",
-          "type": "literal",
-          "value": "Barbade"
-        }
-      },
-      {
-        "pays": {
-          "type": "uri",
-          "value": "http://www.wikidata.org/entity/Q252"
-        },
-        "paysLabel": {
-          "xml:lang": "fr",
-          "type": "literal",
-          "value": "Indonésie"
-        }
-      },
-      {
-        "pays": {
-          "type": "uri",
-          "value": "http://www.wikidata.org/entity/Q258"
-        },
-        "paysLabel": {
-          "xml:lang": "fr",
-          "type": "literal",
-          "value": "Afrique du Sud"
-        }
-      },
-      {
-        "pays": {
-          "type": "uri",
-          "value": "http://www.wikidata.org/entity/Q262"
-        },
-        "paysLabel": {
-          "xml:lang": "fr",
-          "type": "literal",
-          "value": "Algérie"
-        }
-      },
-      {
-        "pays": {
-          "type": "uri",
-          "value": "http://www.wikidata.org/entity/Q265"
-        },
-        "paysLabel": {
-          "xml:lang": "fr",
-          "type": "literal",
-          "value": "Ouzbékistan"
-        }
-      },
-      {
-        "pays": {
-          "type": "uri",
-          "value": "http://www.wikidata.org/entity/Q298"
-        },
-        "paysLabel": {
-          "xml:lang": "fr",
-          "type": "literal",
-          "value": "Chili"
-        }
-      },
-      {
-        "pays": {
-          "type": "uri",
-          "value": "http://www.wikidata.org/entity/Q334"
-        },
-        "paysLabel": {
-          "xml:lang": "fr",
-          "type": "literal",
-          "value": "Singapour"
-        }
-      },
-      {
-        "pays": {
-          "type": "uri",
-          "value": "http://www.wikidata.org/entity/Q347"
-        },
-        "paysLabel": {
-          "xml:lang": "fr",
-          "type": "literal",
-          "value": "Liechtenstein"
-        }
-      },
-      {
-        "pays": {
-          "type": "uri",
-          "value": "http://www.wikidata.org/entity/Q398"
-        },
-        "paysLabel": {
-          "xml:lang": "fr",
-          "type": "literal",
-          "value": "Bahreïn"
-        }
-      },
-      {
-        "pays": {
-          "type": "uri",
-          "value": "http://www.wikidata.org/entity/Q399"
-        },
-        "paysLabel": {
-          "xml:lang": "fr",
-          "type": "literal",
-          "value": "Arménie"
-        }
-      },
-      {
-        "pays": {
-          "type": "uri",
-          "value": "http://www.wikidata.org/entity/Q403"
-        },
-        "paysLabel": {
-          "xml:lang": "fr",
-          "type": "literal",
-          "value": "Serbie"
-        }
-      },
-      {
-        "pays": {
-          "type": "uri",
-          "value": "http://www.wikidata.org/entity/Q408"
-        },
-        "paysLabel": {
-          "xml:lang": "fr",
-          "type": "literal",
-          "value": "Australie"
-        }
-      },
-      {
-        "pays": {
-          "type": "uri",
-          "value": "http://www.wikidata.org/entity/Q414"
-        },
-        "paysLabel": {
-          "xml:lang": "fr",
-          "type": "literal",
-          "value": "Argentine"
-        }
-      },
-      {
-        "pays": {
-          "type": "uri",
-          "value": "http://www.wikidata.org/entity/Q419"
-        },
-        "paysLabel": {
-          "xml:lang": "fr",
-          "type": "literal",
-          "value": "Pérou"
-        }
-      },
-      {
-        "pays": {
-          "type": "uri",
-          "value": "http://www.wikidata.org/entity/Q423"
-        },
-        "paysLabel": {
-          "xml:lang": "fr",
-          "type": "literal",
-          "value": "Corée du Nord"
-        }
-      },
-      {
-        "pays": {
-          "type": "uri",
-          "value": "http://www.wikidata.org/entity/Q424"
-        },
-        "paysLabel": {
-          "xml:lang": "fr",
-          "type": "literal",
-          "value": "Cambodge"
-        }
-      },
-      {
-        "pays": {
-          "type": "uri",
-          "value": "http://www.wikidata.org/entity/Q574"
-        },
-        "paysLabel": {
-          "xml:lang": "fr",
-          "type": "literal",
-          "value": "Timor oriental"
-        }
-      },
-      {
-        "pays": {
-          "type": "uri",
-          "value": "http://www.wikidata.org/entity/Q657"
-        },
-        "paysLabel": {
-          "xml:lang": "fr",
-          "type": "literal",
-          "value": "Tchad"
-        }
-      },
-      {
-        "pays": {
-          "type": "uri",
-          "value": "http://www.wikidata.org/entity/Q664"
-        },
-        "paysLabel": {
-          "xml:lang": "fr",
-          "type": "literal",
-          "value": "Nouvelle-Zélande"
-        }
-      },
-      {
-        "pays": {
-          "type": "uri",
-          "value": "http://www.wikidata.org/entity/Q668"
-        },
-        "paysLabel": {
-          "xml:lang": "fr",
-          "type": "literal",
-          "value": "Inde"
-        }
-      },
-      {
-        "pays": {
-          "type": "uri",
-          "value": "http://www.wikidata.org/entity/Q672"
-        },
-        "paysLabel": {
-          "xml:lang": "fr",
-          "type": "literal",
-          "value": "Tuvalu"
-        }
-      },
-      {
-        "pays": {
-          "type": "uri",
-          "value": "http://www.wikidata.org/entity/Q678"
-        },
-        "paysLabel": {
-          "xml:lang": "fr",
-          "type": "literal",
-          "value": "Tonga"
-        }
-      },
-      {
-        "pays": {
-          "type": "uri",
-          "value": "http://www.wikidata.org/entity/Q683"
-        },
-        "paysLabel": {
-          "xml:lang": "fr",
-          "type": "literal",
-          "value": "Samoa"
-        }
-      },
-      {
-        "pays": {
-          "type": "uri",
-          "value": "http://www.wikidata.org/entity/Q685"
-        },
-        "paysLabel": {
-          "xml:lang": "fr",
-          "type": "literal",
-          "value": "Salomon"
-        }
-      },
-      {
-        "pays": {
-          "type": "uri",
-          "value": "http://www.wikidata.org/entity/Q686"
-        },
-        "paysLabel": {
-          "xml:lang": "fr",
-          "type": "literal",
-          "value": "Vanuatu"
-        }
-      },
-      {
-        "pays": {
-          "type": "uri",
-          "value": "http://www.wikidata.org/entity/Q691"
-        },
-        "paysLabel": {
-          "xml:lang": "fr",
-          "type": "literal",
-          "value": "Papouasie-Nouvelle-Guinée"
-        }
-      },
-      {
-        "pays": {
-          "type": "uri",
-          "value": "http://www.wikidata.org/entity/Q695"
-        },
-        "paysLabel": {
-          "xml:lang": "fr",
-          "type": "literal",
-          "value": "Palaos"
-        }
-      },
-      {
-        "pays": {
-          "type": "uri",
-          "value": "http://www.wikidata.org/entity/Q697"
-        },
-        "paysLabel": {
-          "xml:lang": "fr",
-          "type": "literal",
-          "value": "Nauru"
-        }
-      },
-      {
-        "pays": {
-          "type": "uri",
-          "value": "http://www.wikidata.org/entity/Q702"
-        },
-        "paysLabel": {
-          "xml:lang": "fr",
-          "type": "literal",
-          "value": "Micronésie"
-        }
-      },
-      {
-        "pays": {
-          "type": "uri",
-          "value": "http://www.wikidata.org/entity/Q709"
-        },
-        "paysLabel": {
-          "xml:lang": "fr",
-          "type": "literal",
-          "value": "îles Marshall"
-        }
-      },
-      {
-        "pays": {
-          "type": "uri",
-          "value": "http://www.wikidata.org/entity/Q710"
-        },
-        "paysLabel": {
-          "xml:lang": "fr",
-          "type": "literal",
-          "value": "Kiribati"
-        }
-      },
-      {
-        "pays": {
-          "type": "uri",
-          "value": "http://www.wikidata.org/entity/Q711"
-        },
-        "paysLabel": {
-          "xml:lang": "fr",
-          "type": "literal",
-          "value": "Mongolie"
-        }
-      },
-      {
-        "pays": {
-          "type": "uri",
-          "value": "http://www.wikidata.org/entity/Q712"
-        },
-        "paysLabel": {
-          "xml:lang": "fr",
-          "type": "literal",
-          "value": "Fidji"
-        }
-      },
-      {
-        "pays": {
-          "type": "uri",
-          "value": "http://www.wikidata.org/entity/Q717"
-        },
-        "paysLabel": {
-          "xml:lang": "fr",
-          "type": "literal",
-          "value": "Venezuela"
-        }
-      },
-      {
-        "pays": {
-          "type": "uri",
-          "value": "http://www.wikidata.org/entity/Q730"
-        },
-        "paysLabel": {
-          "xml:lang": "fr",
-          "type": "literal",
-          "value": "Suriname"
-        }
-      },
-      {
-        "pays": {
-          "type": "uri",
-          "value": "http://www.wikidata.org/entity/Q733"
-        },
-        "paysLabel": {
-          "xml:lang": "fr",
-          "type": "literal",
-          "value": "Paraguay"
-        }
-      },
-      {
-        "pays": {
-          "type": "uri",
-          "value": "http://www.wikidata.org/entity/Q734"
-        },
-        "paysLabel": {
-          "xml:lang": "fr",
-          "type": "literal",
-          "value": "Guyana"
-        }
-      },
-      {
-        "pays": {
-          "type": "uri",
-          "value": "http://www.wikidata.org/entity/Q736"
-        },
-        "paysLabel": {
-          "xml:lang": "fr",
-          "type": "literal",
-          "value": "Équateur"
-        }
-      },
-      {
-        "pays": {
-          "type": "uri",
-          "value": "http://www.wikidata.org/entity/Q739"
-        },
-        "paysLabel": {
-          "xml:lang": "fr",
-          "type": "literal",
-          "value": "Colombie"
-        }
-      },
-      {
-        "pays": {
-          "type": "uri",
-          "value": "http://www.wikidata.org/entity/Q750"
-        },
-        "paysLabel": {
-          "xml:lang": "fr",
-          "type": "literal",
-          "value": "Bolivie"
-        }
-      },
-      {
-        "pays": {
-          "type": "uri",
-          "value": "http://www.wikidata.org/entity/Q754"
-        },
-        "paysLabel": {
-          "xml:lang": "fr",
-          "type": "literal",
-          "value": "Trinité-et-Tobago"
-        }
-      },
-      {
-        "pays": {
-          "type": "uri",
-          "value": "http://www.wikidata.org/entity/Q757"
-        },
-        "paysLabel": {
-          "xml:lang": "fr",
-          "type": "literal",
-          "value": "Saint-Vincent-et-les-Grenadines"
-        }
-      },
-      {
-        "pays": {
-          "type": "uri",
-          "value": "http://www.wikidata.org/entity/Q760"
-        },
-        "paysLabel": {
-          "xml:lang": "fr",
-          "type": "literal",
-          "value": "Sainte-Lucie"
-        }
-      },
-      {
-        "pays": {
-          "type": "uri",
-          "value": "http://www.wikidata.org/entity/Q763"
-        },
-        "paysLabel": {
-          "xml:lang": "fr",
-          "type": "literal",
-          "value": "Saint-Christophe-et-Niévès"
-        }
-      },
-      {
-        "pays": {
-          "type": "uri",
-          "value": "http://www.wikidata.org/entity/Q766"
-        },
-        "paysLabel": {
-          "xml:lang": "fr",
-          "type": "literal",
-          "value": "Jamaïque"
-        }
-      },
-      {
-        "pays": {
-          "type": "uri",
-          "value": "http://www.wikidata.org/entity/Q769"
-        },
-        "paysLabel": {
-          "xml:lang": "fr",
-          "type": "literal",
-          "value": "Grenade"
-        }
-      },
-      {
-        "pays": {
-          "type": "uri",
-          "value": "http://www.wikidata.org/entity/Q774"
-        },
-        "paysLabel": {
-          "xml:lang": "fr",
-          "type": "literal",
-          "value": "Guatemala"
-        }
-      },
-      {
-        "pays": {
-          "type": "uri",
-          "value": "http://www.wikidata.org/entity/Q778"
-        },
-        "paysLabel": {
-          "xml:lang": "fr",
-          "type": "literal",
-          "value": "Bahamas"
-        }
-      },
-      {
-        "pays": {
-          "type": "uri",
-          "value": "http://www.wikidata.org/entity/Q781"
-        },
-        "paysLabel": {
-          "xml:lang": "fr",
-          "type": "literal",
-          "value": "Antigua-et-Barbuda"
-        }
-      },
-      {
-        "pays": {
-          "type": "uri",
-          "value": "http://www.wikidata.org/entity/Q783"
-        },
-        "paysLabel": {
-          "xml:lang": "fr",
-          "type": "literal",
-          "value": "Honduras"
-        }
-      },
-      {
-        "pays": {
-          "type": "uri",
-          "value": "http://www.wikidata.org/entity/Q784"
-        },
-        "paysLabel": {
-          "xml:lang": "fr",
-          "type": "literal",
-          "value": "Dominique"
-        }
-      },
-      {
-        "pays": {
-          "type": "uri",
-          "value": "http://www.wikidata.org/entity/Q785"
-        },
-        "paysLabel": {
-          "xml:lang": "fr",
-          "type": "literal",
-          "value": "Jersey"
-        }
-      },
-      {
-        "pays": {
-          "type": "uri",
-          "value": "http://www.wikidata.org/entity/Q786"
-        },
-        "paysLabel": {
-          "xml:lang": "fr",
-          "type": "literal",
-          "value": "République dominicaine"
-        }
-      },
-      {
-        "pays": {
-          "type": "uri",
-          "value": "http://www.wikidata.org/entity/Q790"
-        },
-        "paysLabel": {
-          "xml:lang": "fr",
-          "type": "literal",
-          "value": "Haïti"
-        }
-      },
-      {
-        "pays": {
-          "type": "uri",
-          "value": "http://www.wikidata.org/entity/Q792"
-        },
-        "paysLabel": {
-          "xml:lang": "fr",
-          "type": "literal",
-          "value": "Salvador"
-        }
-      },
-      {
-        "pays": {
-          "type": "uri",
-          "value": "http://www.wikidata.org/entity/Q794"
-        },
-        "paysLabel": {
-          "xml:lang": "fr",
-          "type": "literal",
-          "value": "Iran"
-        }
-      },
-      {
-        "pays": {
-          "type": "uri",
-          "value": "http://www.wikidata.org/entity/Q796"
-        },
-        "paysLabel": {
-          "xml:lang": "fr",
-          "type": "literal",
-          "value": "Irak"
-        }
-      },
-      {
-        "pays": {
-          "type": "uri",
-          "value": "http://www.wikidata.org/entity/Q800"
-        },
-        "paysLabel": {
-          "xml:lang": "fr",
-          "type": "literal",
-          "value": "Costa Rica"
-        }
-      },
-      {
-        "pays": {
-          "type": "uri",
-          "value": "http://www.wikidata.org/entity/Q801"
-        },
-        "paysLabel": {
-          "xml:lang": "fr",
-          "type": "literal",
-          "value": "Israël"
-        }
-      },
-      {
-        "pays": {
-          "type": "uri",
-          "value": "http://www.wikidata.org/entity/Q804"
-        },
-        "paysLabel": {
-          "xml:lang": "fr",
-          "type": "literal",
-          "value": "Panama"
-        }
-      },
-      {
-        "pays": {
-          "type": "uri",
-          "value": "http://www.wikidata.org/entity/Q805"
-        },
-        "paysLabel": {
-          "xml:lang": "fr",
-          "type": "literal",
-          "value": "Yémen"
-        }
-      },
-      {
-        "pays": {
-          "type": "uri",
-          "value": "http://www.wikidata.org/entity/Q810"
-        },
-        "paysLabel": {
-          "xml:lang": "fr",
-          "type": "literal",
-          "value": "Jordanie"
-        }
-      },
-      {
-        "pays": {
-          "type": "uri",
-          "value": "http://www.wikidata.org/entity/Q811"
-        },
-        "paysLabel": {
-          "xml:lang": "fr",
-          "type": "literal",
-          "value": "Nicaragua"
-        }
-      },
-      {
-        "pays": {
-          "type": "uri",
-          "value": "http://www.wikidata.org/entity/Q813"
-        },
-        "paysLabel": {
-          "xml:lang": "fr",
-          "type": "literal",
-          "value": "Kirghizistan"
-        }
-      },
-      {
-        "pays": {
-          "type": "uri",
-          "value": "http://www.wikidata.org/entity/Q817"
-        },
-        "paysLabel": {
-          "xml:lang": "fr",
-          "type": "literal",
-          "value": "Koweït"
-        }
-      },
-      {
-        "pays": {
-          "type": "uri",
-          "value": "http://www.wikidata.org/entity/Q819"
-        },
-        "paysLabel": {
-          "xml:lang": "fr",
-          "type": "literal",
-          "value": "Laos"
-        }
-      },
-      {
-        "pays": {
-          "type": "uri",
-          "value": "http://www.wikidata.org/entity/Q822"
-        },
-        "paysLabel": {
-          "xml:lang": "fr",
-          "type": "literal",
-          "value": "Liban"
-        }
-      },
-      {
-        "pays": {
-          "type": "uri",
-          "value": "http://www.wikidata.org/entity/Q826"
-        },
-        "paysLabel": {
-          "xml:lang": "fr",
-          "type": "literal",
-          "value": "Maldives"
-        }
-      },
-      {
-        "pays": {
-          "type": "uri",
-          "value": "http://www.wikidata.org/entity/Q833"
-        },
-        "paysLabel": {
-          "xml:lang": "fr",
-          "type": "literal",
-          "value": "Malaisie"
-        }
-      },
-      {
-        "pays": {
-          "type": "uri",
-          "value": "http://www.wikidata.org/entity/Q836"
-        },
-        "paysLabel": {
-          "xml:lang": "fr",
-          "type": "literal",
-          "value": "Birmanie"
-        }
-      },
-      {
-        "pays": {
-          "type": "uri",
-          "value": "http://www.wikidata.org/entity/Q837"
-        },
-        "paysLabel": {
-          "xml:lang": "fr",
-          "type": "literal",
-          "value": "Népal"
-        }
-      },
-      {
-        "pays": {
-          "type": "uri",
-          "value": "http://www.wikidata.org/entity/Q842"
-        },
-        "paysLabel": {
-          "xml:lang": "fr",
-          "type": "literal",
-          "value": "Oman"
-        }
-      },
-      {
-        "pays": {
-          "type": "uri",
-          "value": "http://www.wikidata.org/entity/Q843"
-        },
-        "paysLabel": {
-          "xml:lang": "fr",
-          "type": "literal",
-          "value": "Pakistan"
-        }
-      },
-      {
-        "pays": {
-          "type": "uri",
-          "value": "http://www.wikidata.org/entity/Q846"
-        },
-        "paysLabel": {
-          "xml:lang": "fr",
-          "type": "literal",
-          "value": "Qatar"
-        }
-      },
-      {
-        "pays": {
-          "type": "uri",
-          "value": "http://www.wikidata.org/entity/Q851"
-        },
-        "paysLabel": {
-          "xml:lang": "fr",
-          "type": "literal",
-          "value": "Arabie saoudite"
-        }
-      },
-      {
-        "pays": {
-          "type": "uri",
-          "value": "http://www.wikidata.org/entity/Q854"
-        },
-        "paysLabel": {
-          "xml:lang": "fr",
-          "type": "literal",
-          "value": "Sri Lanka"
-        }
-      },
-      {
-        "pays": {
-          "type": "uri",
-          "value": "http://www.wikidata.org/entity/Q858"
-        },
-        "paysLabel": {
-          "xml:lang": "fr",
-          "type": "literal",
-          "value": "Syrie"
-        }
-      },
-      {
-        "pays": {
-          "type": "uri",
-          "value": "http://www.wikidata.org/entity/Q863"
-        },
-        "paysLabel": {
-          "xml:lang": "fr",
-          "type": "literal",
-          "value": "Tadjikistan"
-        }
-      },
-      {
-        "pays": {
-          "type": "uri",
-          "value": "http://www.wikidata.org/entity/Q865"
-        },
-        "paysLabel": {
-          "xml:lang": "fr",
-          "type": "literal",
-          "value": "Taïwan"
-        }
-      },
-      {
-        "pays": {
-          "type": "uri",
-          "value": "http://www.wikidata.org/entity/Q869"
-        },
-        "paysLabel": {
-          "xml:lang": "fr",
-          "type": "literal",
-          "value": "Thaïlande"
-        }
-      },
-      {
-        "pays": {
-          "type": "uri",
-          "value": "http://www.wikidata.org/entity/Q874"
-        },
-        "paysLabel": {
-          "xml:lang": "fr",
-          "type": "literal",
-          "value": "Turkménistan"
-        }
-      },
-      {
-        "pays": {
-          "type": "uri",
-          "value": "http://www.wikidata.org/entity/Q878"
-        },
-        "paysLabel": {
-          "xml:lang": "fr",
-          "type": "literal",
-          "value": "Émirats arabes unis"
-        }
-      },
-      {
-        "pays": {
-          "type": "uri",
-          "value": "http://www.wikidata.org/entity/Q881"
-        },
-        "paysLabel": {
-          "xml:lang": "fr",
-          "type": "literal",
-          "value": "Viêt Nam"
-        }
-      },
-      {
-        "pays": {
-          "type": "uri",
-          "value": "http://www.wikidata.org/entity/Q884"
-        },
-        "paysLabel": {
-          "xml:lang": "fr",
-          "type": "literal",
-          "value": "Corée du Sud"
-        }
-      },
-      {
-        "pays": {
+        "country": {
           "type": "uri",
           "value": "http://www.wikidata.org/entity/Q889"
         },
-        "paysLabel": {
+        "countryLabel": {
           "xml:lang": "fr",
           "type": "literal",
           "value": "Afghanistan"
         }
       },
       {
-        "pays": {
+        "country": {
           "type": "uri",
-          "value": "http://www.wikidata.org/entity/Q902"
+          "value": "http://www.wikidata.org/entity/Q258"
         },
-        "paysLabel": {
+        "countryLabel": {
           "xml:lang": "fr",
           "type": "literal",
-          "value": "Bangladesh"
+          "value": "Afrique du Sud"
         }
       },
       {
-        "pays": {
+        "country": {
           "type": "uri",
-          "value": "http://www.wikidata.org/entity/Q912"
+          "value": "http://www.wikidata.org/entity/Q222"
         },
-        "paysLabel": {
+        "countryLabel": {
           "xml:lang": "fr",
           "type": "literal",
-          "value": "Mali"
+          "value": "Albanie"
         }
       },
       {
-        "pays": {
+        "country": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q262"
+        },
+        "countryLabel": {
+          "xml:lang": "fr",
+          "type": "literal",
+          "value": "Algérie"
+        }
+      },
+      {
+        "country": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q183"
+        },
+        "countryLabel": {
+          "xml:lang": "fr",
+          "type": "literal",
+          "value": "Allemagne"
+        }
+      },
+      {
+        "country": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q228"
+        },
+        "countryLabel": {
+          "xml:lang": "fr",
+          "type": "literal",
+          "value": "Andorre"
+        }
+      },
+      {
+        "country": {
           "type": "uri",
           "value": "http://www.wikidata.org/entity/Q916"
         },
-        "paysLabel": {
+        "countryLabel": {
           "xml:lang": "fr",
           "type": "literal",
           "value": "Angola"
         }
       },
       {
-        "pays": {
+        "country": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q781"
+        },
+        "countryLabel": {
+          "xml:lang": "fr",
+          "type": "literal",
+          "value": "Antigua-et-Barbuda"
+        }
+      },
+      {
+        "country": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q851"
+        },
+        "countryLabel": {
+          "xml:lang": "fr",
+          "type": "literal",
+          "value": "Arabie saoudite"
+        }
+      },
+      {
+        "country": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q414"
+        },
+        "countryLabel": {
+          "xml:lang": "fr",
+          "type": "literal",
+          "value": "Argentine"
+        }
+      },
+      {
+        "country": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q399"
+        },
+        "countryLabel": {
+          "xml:lang": "fr",
+          "type": "literal",
+          "value": "Arménie"
+        }
+      },
+      {
+        "country": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q408"
+        },
+        "countryLabel": {
+          "xml:lang": "fr",
+          "type": "literal",
+          "value": "Australie"
+        }
+      },
+      {
+        "country": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q40"
+        },
+        "countryLabel": {
+          "xml:lang": "fr",
+          "type": "literal",
+          "value": "Autriche"
+        }
+      },
+      {
+        "country": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q227"
+        },
+        "countryLabel": {
+          "xml:lang": "fr",
+          "type": "literal",
+          "value": "Azerbaïdjan"
+        }
+      },
+      {
+        "country": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q778"
+        },
+        "countryLabel": {
+          "xml:lang": "fr",
+          "type": "literal",
+          "value": "Bahamas"
+        }
+      },
+      {
+        "country": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q398"
+        },
+        "countryLabel": {
+          "xml:lang": "fr",
+          "type": "literal",
+          "value": "Bahreïn"
+        }
+      },
+      {
+        "country": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q902"
+        },
+        "countryLabel": {
+          "xml:lang": "fr",
+          "type": "literal",
+          "value": "Bangladesh"
+        }
+      },
+      {
+        "country": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q244"
+        },
+        "countryLabel": {
+          "xml:lang": "fr",
+          "type": "literal",
+          "value": "Barbade"
+        }
+      },
+      {
+        "country": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q31"
+        },
+        "countryLabel": {
+          "xml:lang": "fr",
+          "type": "literal",
+          "value": "Belgique"
+        }
+      },
+      {
+        "country": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q242"
+        },
+        "countryLabel": {
+          "xml:lang": "fr",
+          "type": "literal",
+          "value": "Belize"
+        }
+      },
+      {
+        "country": {
           "type": "uri",
           "value": "http://www.wikidata.org/entity/Q917"
         },
-        "paysLabel": {
+        "countryLabel": {
           "xml:lang": "fr",
           "type": "literal",
           "value": "Bhoutan"
         }
       },
       {
-        "pays": {
+        "country": {
           "type": "uri",
-          "value": "http://www.wikidata.org/entity/Q921"
+          "value": "http://www.wikidata.org/entity/Q836"
         },
-        "paysLabel": {
+        "countryLabel": {
           "xml:lang": "fr",
           "type": "literal",
-          "value": "Brunei"
+          "value": "Birmanie"
         }
       },
       {
-        "pays": {
+        "country": {
           "type": "uri",
-          "value": "http://www.wikidata.org/entity/Q924"
+          "value": "http://www.wikidata.org/entity/Q184"
         },
-        "paysLabel": {
+        "countryLabel": {
           "xml:lang": "fr",
           "type": "literal",
-          "value": "Tanzanie"
+          "value": "Biélorussie"
         }
       },
       {
-        "pays": {
+        "country": {
           "type": "uri",
-          "value": "http://www.wikidata.org/entity/Q928"
+          "value": "http://www.wikidata.org/entity/Q750"
         },
-        "paysLabel": {
+        "countryLabel": {
           "xml:lang": "fr",
           "type": "literal",
-          "value": "Philippines"
+          "value": "Bolivie"
         }
       },
       {
-        "pays": {
+        "country": {
           "type": "uri",
-          "value": "http://www.wikidata.org/entity/Q929"
+          "value": "http://www.wikidata.org/entity/Q225"
         },
-        "paysLabel": {
+        "countryLabel": {
           "xml:lang": "fr",
           "type": "literal",
-          "value": "République centrafricaine"
+          "value": "Bosnie-Herzégovine"
         }
       },
       {
-        "pays": {
-          "type": "uri",
-          "value": "http://www.wikidata.org/entity/Q945"
-        },
-        "paysLabel": {
-          "xml:lang": "fr",
-          "type": "literal",
-          "value": "Togo"
-        }
-      },
-      {
-        "pays": {
-          "type": "uri",
-          "value": "http://www.wikidata.org/entity/Q948"
-        },
-        "paysLabel": {
-          "xml:lang": "fr",
-          "type": "literal",
-          "value": "Tunisie"
-        }
-      },
-      {
-        "pays": {
-          "type": "uri",
-          "value": "http://www.wikidata.org/entity/Q953"
-        },
-        "paysLabel": {
-          "xml:lang": "fr",
-          "type": "literal",
-          "value": "Zambie"
-        }
-      },
-      {
-        "pays": {
-          "type": "uri",
-          "value": "http://www.wikidata.org/entity/Q954"
-        },
-        "paysLabel": {
-          "xml:lang": "fr",
-          "type": "literal",
-          "value": "Zimbabwe"
-        }
-      },
-      {
-        "pays": {
-          "type": "uri",
-          "value": "http://www.wikidata.org/entity/Q958"
-        },
-        "paysLabel": {
-          "xml:lang": "fr",
-          "type": "literal",
-          "value": "Soudan du Sud"
-        }
-      },
-      {
-        "pays": {
-          "type": "uri",
-          "value": "http://www.wikidata.org/entity/Q962"
-        },
-        "paysLabel": {
-          "xml:lang": "fr",
-          "type": "literal",
-          "value": "Bénin"
-        }
-      },
-      {
-        "pays": {
+        "country": {
           "type": "uri",
           "value": "http://www.wikidata.org/entity/Q963"
         },
-        "paysLabel": {
+        "countryLabel": {
           "xml:lang": "fr",
           "type": "literal",
           "value": "Botswana"
         }
       },
       {
-        "pays": {
+        "country": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q921"
+        },
+        "countryLabel": {
+          "xml:lang": "fr",
+          "type": "literal",
+          "value": "Brunei"
+        }
+      },
+      {
+        "country": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q155"
+        },
+        "countryLabel": {
+          "xml:lang": "fr",
+          "type": "literal",
+          "value": "Brésil"
+        }
+      },
+      {
+        "country": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q219"
+        },
+        "countryLabel": {
+          "xml:lang": "fr",
+          "type": "literal",
+          "value": "Bulgarie"
+        }
+      },
+      {
+        "country": {
           "type": "uri",
           "value": "http://www.wikidata.org/entity/Q965"
         },
-        "paysLabel": {
+        "countryLabel": {
           "xml:lang": "fr",
           "type": "literal",
           "value": "Burkina Faso"
         }
       },
       {
-        "pays": {
+        "country": {
           "type": "uri",
           "value": "http://www.wikidata.org/entity/Q967"
         },
-        "paysLabel": {
+        "countryLabel": {
           "xml:lang": "fr",
           "type": "literal",
           "value": "Burundi"
         }
       },
       {
-        "pays": {
+        "country": {
           "type": "uri",
-          "value": "http://www.wikidata.org/entity/Q970"
+          "value": "http://www.wikidata.org/entity/Q962"
         },
-        "paysLabel": {
+        "countryLabel": {
           "xml:lang": "fr",
           "type": "literal",
-          "value": "Comores"
+          "value": "Bénin"
         }
       },
       {
-        "pays": {
+        "country": {
           "type": "uri",
-          "value": "http://www.wikidata.org/entity/Q971"
+          "value": "http://www.wikidata.org/entity/Q424"
         },
-        "paysLabel": {
+        "countryLabel": {
           "xml:lang": "fr",
           "type": "literal",
-          "value": "République du Congo"
+          "value": "Cambodge"
         }
       },
       {
-        "pays": {
-          "type": "uri",
-          "value": "http://www.wikidata.org/entity/Q974"
-        },
-        "paysLabel": {
-          "xml:lang": "fr",
-          "type": "literal",
-          "value": "République démocratique du Congo"
-        }
-      },
-      {
-        "pays": {
-          "type": "uri",
-          "value": "http://www.wikidata.org/entity/Q977"
-        },
-        "paysLabel": {
-          "xml:lang": "fr",
-          "type": "literal",
-          "value": "Djibouti"
-        }
-      },
-      {
-        "pays": {
-          "type": "uri",
-          "value": "http://www.wikidata.org/entity/Q983"
-        },
-        "paysLabel": {
-          "xml:lang": "fr",
-          "type": "literal",
-          "value": "Guinée équatoriale"
-        }
-      },
-      {
-        "pays": {
-          "type": "uri",
-          "value": "http://www.wikidata.org/entity/Q986"
-        },
-        "paysLabel": {
-          "xml:lang": "fr",
-          "type": "literal",
-          "value": "Érythrée"
-        }
-      },
-      {
-        "pays": {
-          "type": "uri",
-          "value": "http://www.wikidata.org/entity/Q1000"
-        },
-        "paysLabel": {
-          "xml:lang": "fr",
-          "type": "literal",
-          "value": "Gabon"
-        }
-      },
-      {
-        "pays": {
-          "type": "uri",
-          "value": "http://www.wikidata.org/entity/Q1005"
-        },
-        "paysLabel": {
-          "xml:lang": "fr",
-          "type": "literal",
-          "value": "Gambie"
-        }
-      },
-      {
-        "pays": {
-          "type": "uri",
-          "value": "http://www.wikidata.org/entity/Q1006"
-        },
-        "paysLabel": {
-          "xml:lang": "fr",
-          "type": "literal",
-          "value": "Guinée"
-        }
-      },
-      {
-        "pays": {
-          "type": "uri",
-          "value": "http://www.wikidata.org/entity/Q1007"
-        },
-        "paysLabel": {
-          "xml:lang": "fr",
-          "type": "literal",
-          "value": "Guinée-Bissau"
-        }
-      },
-      {
-        "pays": {
-          "type": "uri",
-          "value": "http://www.wikidata.org/entity/Q1008"
-        },
-        "paysLabel": {
-          "xml:lang": "fr",
-          "type": "literal",
-          "value": "Côte d'Ivoire"
-        }
-      },
-      {
-        "pays": {
+        "country": {
           "type": "uri",
           "value": "http://www.wikidata.org/entity/Q1009"
         },
-        "paysLabel": {
+        "countryLabel": {
           "xml:lang": "fr",
           "type": "literal",
           "value": "Cameroun"
         }
       },
       {
-        "pays": {
+        "country": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q16"
+        },
+        "countryLabel": {
+          "xml:lang": "fr",
+          "type": "literal",
+          "value": "Canada"
+        }
+      },
+      {
+        "country": {
           "type": "uri",
           "value": "http://www.wikidata.org/entity/Q1011"
         },
-        "paysLabel": {
+        "countryLabel": {
           "xml:lang": "fr",
           "type": "literal",
           "value": "Cap-Vert"
         }
       },
       {
-        "pays": {
+        "country": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q298"
+        },
+        "countryLabel": {
+          "xml:lang": "fr",
+          "type": "literal",
+          "value": "Chili"
+        }
+      },
+      {
+        "country": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q229"
+        },
+        "countryLabel": {
+          "xml:lang": "fr",
+          "type": "literal",
+          "value": "Chypre"
+        }
+      },
+      {
+        "country": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q739"
+        },
+        "countryLabel": {
+          "xml:lang": "fr",
+          "type": "literal",
+          "value": "Colombie"
+        }
+      },
+      {
+        "country": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q970"
+        },
+        "countryLabel": {
+          "xml:lang": "fr",
+          "type": "literal",
+          "value": "Comores"
+        }
+      },
+      {
+        "country": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q423"
+        },
+        "countryLabel": {
+          "xml:lang": "fr",
+          "type": "literal",
+          "value": "Corée du Nord"
+        }
+      },
+      {
+        "country": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q884"
+        },
+        "countryLabel": {
+          "xml:lang": "fr",
+          "type": "literal",
+          "value": "Corée du Sud"
+        }
+      },
+      {
+        "country": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q800"
+        },
+        "countryLabel": {
+          "xml:lang": "fr",
+          "type": "literal",
+          "value": "Costa Rica"
+        }
+      },
+      {
+        "country": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q224"
+        },
+        "countryLabel": {
+          "xml:lang": "fr",
+          "type": "literal",
+          "value": "Croatie"
+        }
+      },
+      {
+        "country": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q241"
+        },
+        "countryLabel": {
+          "xml:lang": "fr",
+          "type": "literal",
+          "value": "Cuba"
+        }
+      },
+      {
+        "country": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q1008"
+        },
+        "countryLabel": {
+          "xml:lang": "fr",
+          "type": "literal",
+          "value": "Côte d'Ivoire"
+        }
+      },
+      {
+        "country": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q977"
+        },
+        "countryLabel": {
+          "xml:lang": "fr",
+          "type": "literal",
+          "value": "Djibouti"
+        }
+      },
+      {
+        "country": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q784"
+        },
+        "countryLabel": {
+          "xml:lang": "fr",
+          "type": "literal",
+          "value": "Dominique"
+        }
+      },
+      {
+        "country": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q29"
+        },
+        "countryLabel": {
+          "xml:lang": "fr",
+          "type": "literal",
+          "value": "Espagne"
+        }
+      },
+      {
+        "country": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q191"
+        },
+        "countryLabel": {
+          "xml:lang": "fr",
+          "type": "literal",
+          "value": "Estonie"
+        }
+      },
+      {
+        "country": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q712"
+        },
+        "countryLabel": {
+          "xml:lang": "fr",
+          "type": "literal",
+          "value": "Fidji"
+        }
+      },
+      {
+        "country": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q33"
+        },
+        "countryLabel": {
+          "xml:lang": "fr",
+          "type": "literal",
+          "value": "Finlande"
+        }
+      },
+      {
+        "country": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q142"
+        },
+        "countryLabel": {
+          "xml:lang": "fr",
+          "type": "literal",
+          "value": "France"
+        }
+      },
+      {
+        "country": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q1000"
+        },
+        "countryLabel": {
+          "xml:lang": "fr",
+          "type": "literal",
+          "value": "Gabon"
+        }
+      },
+      {
+        "country": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q1005"
+        },
+        "countryLabel": {
+          "xml:lang": "fr",
+          "type": "literal",
+          "value": "Gambie"
+        }
+      },
+      {
+        "country": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q117"
+        },
+        "countryLabel": {
+          "xml:lang": "fr",
+          "type": "literal",
+          "value": "Ghana"
+        }
+      },
+      {
+        "country": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q769"
+        },
+        "countryLabel": {
+          "xml:lang": "fr",
+          "type": "literal",
+          "value": "Grenade"
+        }
+      },
+      {
+        "country": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q41"
+        },
+        "countryLabel": {
+          "xml:lang": "fr",
+          "type": "literal",
+          "value": "Grèce"
+        }
+      },
+      {
+        "country": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q774"
+        },
+        "countryLabel": {
+          "xml:lang": "fr",
+          "type": "literal",
+          "value": "Guatemala"
+        }
+      },
+      {
+        "country": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q1006"
+        },
+        "countryLabel": {
+          "xml:lang": "fr",
+          "type": "literal",
+          "value": "Guinée"
+        }
+      },
+      {
+        "country": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q983"
+        },
+        "countryLabel": {
+          "xml:lang": "fr",
+          "type": "literal",
+          "value": "Guinée équatoriale"
+        }
+      },
+      {
+        "country": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q1007"
+        },
+        "countryLabel": {
+          "xml:lang": "fr",
+          "type": "literal",
+          "value": "Guinée-Bissau"
+        }
+      },
+      {
+        "country": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q734"
+        },
+        "countryLabel": {
+          "xml:lang": "fr",
+          "type": "literal",
+          "value": "Guyana"
+        }
+      },
+      {
+        "country": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q230"
+        },
+        "countryLabel": {
+          "xml:lang": "fr",
+          "type": "literal",
+          "value": "Géorgie"
+        }
+      },
+      {
+        "country": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q790"
+        },
+        "countryLabel": {
+          "xml:lang": "fr",
+          "type": "literal",
+          "value": "Haïti"
+        }
+      },
+      {
+        "country": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q783"
+        },
+        "countryLabel": {
+          "xml:lang": "fr",
+          "type": "literal",
+          "value": "Honduras"
+        }
+      },
+      {
+        "country": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q28"
+        },
+        "countryLabel": {
+          "xml:lang": "fr",
+          "type": "literal",
+          "value": "Hongrie"
+        }
+      },
+      {
+        "country": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q668"
+        },
+        "countryLabel": {
+          "xml:lang": "fr",
+          "type": "literal",
+          "value": "Inde"
+        }
+      },
+      {
+        "country": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q252"
+        },
+        "countryLabel": {
+          "xml:lang": "fr",
+          "type": "literal",
+          "value": "Indonésie"
+        }
+      },
+      {
+        "country": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q796"
+        },
+        "countryLabel": {
+          "xml:lang": "fr",
+          "type": "literal",
+          "value": "Irak"
+        }
+      },
+      {
+        "country": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q794"
+        },
+        "countryLabel": {
+          "xml:lang": "fr",
+          "type": "literal",
+          "value": "Iran"
+        }
+      },
+      {
+        "country": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q27"
+        },
+        "countryLabel": {
+          "xml:lang": "fr",
+          "type": "literal",
+          "value": "Irlande"
+        }
+      },
+      {
+        "country": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q189"
+        },
+        "countryLabel": {
+          "xml:lang": "fr",
+          "type": "literal",
+          "value": "Islande"
+        }
+      },
+      {
+        "country": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q801"
+        },
+        "countryLabel": {
+          "xml:lang": "fr",
+          "type": "literal",
+          "value": "Israël"
+        }
+      },
+      {
+        "country": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q38"
+        },
+        "countryLabel": {
+          "xml:lang": "fr",
+          "type": "literal",
+          "value": "Italie"
+        }
+      },
+      {
+        "country": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q766"
+        },
+        "countryLabel": {
+          "xml:lang": "fr",
+          "type": "literal",
+          "value": "Jamaïque"
+        }
+      },
+      {
+        "country": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q17"
+        },
+        "countryLabel": {
+          "xml:lang": "fr",
+          "type": "literal",
+          "value": "Japon"
+        }
+      },
+      {
+        "country": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q810"
+        },
+        "countryLabel": {
+          "xml:lang": "fr",
+          "type": "literal",
+          "value": "Jordanie"
+        }
+      },
+      {
+        "country": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q232"
+        },
+        "countryLabel": {
+          "xml:lang": "fr",
+          "type": "literal",
+          "value": "Kazakhstan"
+        }
+      },
+      {
+        "country": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q114"
+        },
+        "countryLabel": {
+          "xml:lang": "fr",
+          "type": "literal",
+          "value": "Kenya"
+        }
+      },
+      {
+        "country": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q813"
+        },
+        "countryLabel": {
+          "xml:lang": "fr",
+          "type": "literal",
+          "value": "Kirghizistan"
+        }
+      },
+      {
+        "country": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q710"
+        },
+        "countryLabel": {
+          "xml:lang": "fr",
+          "type": "literal",
+          "value": "Kiribati"
+        }
+      },
+      {
+        "country": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q817"
+        },
+        "countryLabel": {
+          "xml:lang": "fr",
+          "type": "literal",
+          "value": "Koweït"
+        }
+      },
+      {
+        "country": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q819"
+        },
+        "countryLabel": {
+          "xml:lang": "fr",
+          "type": "literal",
+          "value": "Laos"
+        }
+      },
+      {
+        "country": {
           "type": "uri",
           "value": "http://www.wikidata.org/entity/Q1013"
         },
-        "paysLabel": {
+        "countryLabel": {
           "xml:lang": "fr",
           "type": "literal",
           "value": "Lesotho"
         }
       },
       {
-        "pays": {
+        "country": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q211"
+        },
+        "countryLabel": {
+          "xml:lang": "fr",
+          "type": "literal",
+          "value": "Lettonie"
+        }
+      },
+      {
+        "country": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q822"
+        },
+        "countryLabel": {
+          "xml:lang": "fr",
+          "type": "literal",
+          "value": "Liban"
+        }
+      },
+      {
+        "country": {
           "type": "uri",
           "value": "http://www.wikidata.org/entity/Q1014"
         },
-        "paysLabel": {
+        "countryLabel": {
           "xml:lang": "fr",
           "type": "literal",
           "value": "Liberia"
         }
       },
       {
-        "pays": {
+        "country": {
           "type": "uri",
           "value": "http://www.wikidata.org/entity/Q1016"
         },
-        "paysLabel": {
+        "countryLabel": {
           "xml:lang": "fr",
           "type": "literal",
           "value": "Libye"
         }
       },
       {
-        "pays": {
+        "country": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q347"
+        },
+        "countryLabel": {
+          "xml:lang": "fr",
+          "type": "literal",
+          "value": "Liechtenstein"
+        }
+      },
+      {
+        "country": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q37"
+        },
+        "countryLabel": {
+          "xml:lang": "fr",
+          "type": "literal",
+          "value": "Lituanie"
+        }
+      },
+      {
+        "country": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q32"
+        },
+        "countryLabel": {
+          "xml:lang": "fr",
+          "type": "literal",
+          "value": "Luxembourg"
+        }
+      },
+      {
+        "country": {
           "type": "uri",
           "value": "http://www.wikidata.org/entity/Q1019"
         },
-        "paysLabel": {
+        "countryLabel": {
           "xml:lang": "fr",
           "type": "literal",
           "value": "Madagascar"
         }
       },
       {
-        "pays": {
+        "country": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q833"
+        },
+        "countryLabel": {
+          "xml:lang": "fr",
+          "type": "literal",
+          "value": "Malaisie"
+        }
+      },
+      {
+        "country": {
           "type": "uri",
           "value": "http://www.wikidata.org/entity/Q1020"
         },
-        "paysLabel": {
+        "countryLabel": {
           "xml:lang": "fr",
           "type": "literal",
           "value": "Malawi"
         }
       },
       {
-        "pays": {
+        "country": {
           "type": "uri",
-          "value": "http://www.wikidata.org/entity/Q1025"
+          "value": "http://www.wikidata.org/entity/Q826"
         },
-        "paysLabel": {
+        "countryLabel": {
           "xml:lang": "fr",
           "type": "literal",
-          "value": "Mauritanie"
+          "value": "Maldives"
         }
       },
       {
-        "pays": {
+        "country": {
           "type": "uri",
-          "value": "http://www.wikidata.org/entity/Q1027"
+          "value": "http://www.wikidata.org/entity/Q912"
         },
-        "paysLabel": {
+        "countryLabel": {
           "xml:lang": "fr",
           "type": "literal",
-          "value": "Maurice"
+          "value": "Mali"
         }
       },
       {
-        "pays": {
+        "country": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q233"
+        },
+        "countryLabel": {
+          "xml:lang": "fr",
+          "type": "literal",
+          "value": "Malte"
+        }
+      },
+      {
+        "country": {
           "type": "uri",
           "value": "http://www.wikidata.org/entity/Q1028"
         },
-        "paysLabel": {
+        "countryLabel": {
           "xml:lang": "fr",
           "type": "literal",
           "value": "Maroc"
         }
       },
       {
-        "pays": {
+        "country": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q1027"
+        },
+        "countryLabel": {
+          "xml:lang": "fr",
+          "type": "literal",
+          "value": "Maurice"
+        }
+      },
+      {
+        "country": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q1025"
+        },
+        "countryLabel": {
+          "xml:lang": "fr",
+          "type": "literal",
+          "value": "Mauritanie"
+        }
+      },
+      {
+        "country": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q96"
+        },
+        "countryLabel": {
+          "xml:lang": "fr",
+          "type": "literal",
+          "value": "Mexique"
+        }
+      },
+      {
+        "country": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q702"
+        },
+        "countryLabel": {
+          "xml:lang": "fr",
+          "type": "literal",
+          "value": "Micronésie"
+        }
+      },
+      {
+        "country": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q217"
+        },
+        "countryLabel": {
+          "xml:lang": "fr",
+          "type": "literal",
+          "value": "Moldavie"
+        }
+      },
+      {
+        "country": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q235"
+        },
+        "countryLabel": {
+          "xml:lang": "fr",
+          "type": "literal",
+          "value": "Monaco"
+        }
+      },
+      {
+        "country": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q711"
+        },
+        "countryLabel": {
+          "xml:lang": "fr",
+          "type": "literal",
+          "value": "Mongolie"
+        }
+      },
+      {
+        "country": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q236"
+        },
+        "countryLabel": {
+          "xml:lang": "fr",
+          "type": "literal",
+          "value": "Monténégro"
+        }
+      },
+      {
+        "country": {
           "type": "uri",
           "value": "http://www.wikidata.org/entity/Q1029"
         },
-        "paysLabel": {
+        "countryLabel": {
           "xml:lang": "fr",
           "type": "literal",
           "value": "Mozambique"
         }
       },
       {
-        "pays": {
+        "country": {
           "type": "uri",
           "value": "http://www.wikidata.org/entity/Q1030"
         },
-        "paysLabel": {
+        "countryLabel": {
           "xml:lang": "fr",
           "type": "literal",
           "value": "Namibie"
         }
       },
       {
-        "pays": {
+        "country": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q697"
+        },
+        "countryLabel": {
+          "xml:lang": "fr",
+          "type": "literal",
+          "value": "Nauru"
+        }
+      },
+      {
+        "country": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q811"
+        },
+        "countryLabel": {
+          "xml:lang": "fr",
+          "type": "literal",
+          "value": "Nicaragua"
+        }
+      },
+      {
+        "country": {
           "type": "uri",
           "value": "http://www.wikidata.org/entity/Q1032"
         },
-        "paysLabel": {
+        "countryLabel": {
           "xml:lang": "fr",
           "type": "literal",
           "value": "Niger"
         }
       },
       {
-        "pays": {
+        "country": {
           "type": "uri",
           "value": "http://www.wikidata.org/entity/Q1033"
         },
-        "paysLabel": {
+        "countryLabel": {
           "xml:lang": "fr",
           "type": "literal",
           "value": "Nigeria"
         }
       },
       {
-        "pays": {
-          "type": "uri",
-          "value": "http://www.wikidata.org/entity/Q1036"
-        },
-        "paysLabel": {
-          "xml:lang": "fr",
-          "type": "literal",
-          "value": "Ouganda"
-        }
-      },
-      {
-        "pays": {
-          "type": "uri",
-          "value": "http://www.wikidata.org/entity/Q1037"
-        },
-        "paysLabel": {
-          "xml:lang": "fr",
-          "type": "literal",
-          "value": "Rwanda"
-        }
-      },
-      {
-        "pays": {
-          "type": "uri",
-          "value": "http://www.wikidata.org/entity/Q1039"
-        },
-        "paysLabel": {
-          "xml:lang": "fr",
-          "type": "literal",
-          "value": "Sao Tomé-et-Principe"
-        }
-      },
-      {
-        "pays": {
-          "type": "uri",
-          "value": "http://www.wikidata.org/entity/Q1041"
-        },
-        "paysLabel": {
-          "xml:lang": "fr",
-          "type": "literal",
-          "value": "Sénégal"
-        }
-      },
-      {
-        "pays": {
-          "type": "uri",
-          "value": "http://www.wikidata.org/entity/Q1042"
-        },
-        "paysLabel": {
-          "xml:lang": "fr",
-          "type": "literal",
-          "value": "Seychelles"
-        }
-      },
-      {
-        "pays": {
-          "type": "uri",
-          "value": "http://www.wikidata.org/entity/Q1044"
-        },
-        "paysLabel": {
-          "xml:lang": "fr",
-          "type": "literal",
-          "value": "Sierra Leone"
-        }
-      },
-      {
-        "pays": {
-          "type": "uri",
-          "value": "http://www.wikidata.org/entity/Q1045"
-        },
-        "paysLabel": {
-          "xml:lang": "fr",
-          "type": "literal",
-          "value": "Somalie"
-        }
-      },
-      {
-        "pays": {
-          "type": "uri",
-          "value": "http://www.wikidata.org/entity/Q1049"
-        },
-        "paysLabel": {
-          "xml:lang": "fr",
-          "type": "literal",
-          "value": "Soudan"
-        }
-      },
-      {
-        "pays": {
-          "type": "uri",
-          "value": "http://www.wikidata.org/entity/Q1050"
-        },
-        "paysLabel": {
-          "xml:lang": "fr",
-          "type": "literal",
-          "value": "Swaziland"
-        }
-      },
-      {
-        "pays": {
-          "type": "uri",
-          "value": "http://www.wikidata.org/entity/Q1246"
-        },
-        "paysLabel": {
-          "xml:lang": "fr",
-          "type": "literal",
-          "value": "Kosovo"
-        }
-      },
-      {
-        "pays": {
-          "type": "uri",
-          "value": "http://www.wikidata.org/entity/Q9676"
-        },
-        "paysLabel": {
-          "xml:lang": "fr",
-          "type": "literal",
-          "value": "île de Man"
-        }
-      },
-      {
-        "pays": {
-          "type": "uri",
-          "value": "http://www.wikidata.org/entity/Q12544"
-        },
-        "paysLabel": {
-          "xml:lang": "fr",
-          "type": "literal",
-          "value": "Empire byzantin"
-        }
-      },
-      {
-        "pays": {
-          "type": "uri",
-          "value": "http://www.wikidata.org/entity/Q12560"
-        },
-        "paysLabel": {
-          "xml:lang": "fr",
-          "type": "literal",
-          "value": "Empire ottoman"
-        }
-      },
-      {
-        "pays": {
-          "type": "uri",
-          "value": "http://www.wikidata.org/entity/Q15180"
-        },
-        "paysLabel": {
-          "xml:lang": "fr",
-          "type": "literal",
-          "value": "Union des républiques socialistes soviétiques"
-        }
-      },
-      {
-        "pays": {
-          "type": "uri",
-          "value": "http://www.wikidata.org/entity/Q16957"
-        },
-        "paysLabel": {
-          "xml:lang": "fr",
-          "type": "literal",
-          "value": "République démocratique allemande"
-        }
-      },
-      {
-        "pays": {
-          "type": "uri",
-          "value": "http://www.wikidata.org/entity/Q23681"
-        },
-        "paysLabel": {
-          "xml:lang": "fr",
-          "type": "literal",
-          "value": "Chypre du Nord"
-        }
-      },
-      {
-        "pays": {
-          "type": "uri",
-          "value": "http://www.wikidata.org/entity/Q25230"
-        },
-        "paysLabel": {
-          "xml:lang": "fr",
-          "type": "literal",
-          "value": "Guernesey"
-        }
-      },
-      {
-        "pays": {
-          "type": "uri",
-          "value": "http://www.wikidata.org/entity/Q26988"
-        },
-        "paysLabel": {
-          "xml:lang": "fr",
-          "type": "literal",
-          "value": "îles Cook"
-        }
-      },
-      {
-        "pays": {
-          "type": "uri",
-          "value": "http://www.wikidata.org/entity/Q27306"
-        },
-        "paysLabel": {
-          "xml:lang": "fr",
-          "type": "literal",
-          "value": "royaume de Prusse"
-        }
-      },
-      {
-        "pays": {
-          "type": "uri",
-          "value": "http://www.wikidata.org/entity/Q28513"
-        },
-        "paysLabel": {
-          "xml:lang": "fr",
-          "type": "literal",
-          "value": "Autriche-Hongrie"
-        }
-      },
-      {
-        "pays": {
-          "type": "uri",
-          "value": "http://www.wikidata.org/entity/Q29999"
-        },
-        "paysLabel": {
-          "xml:lang": "fr",
-          "type": "literal",
-          "value": "Pays-Bas"
-        }
-      },
-      {
-        "pays": {
+        "country": {
           "type": "uri",
           "value": "http://www.wikidata.org/entity/Q34020"
         },
-        "paysLabel": {
+        "countryLabel": {
           "xml:lang": "fr",
           "type": "literal",
           "value": "Niue"
         }
       },
       {
-        "pays": {
+        "country": {
           "type": "uri",
-          "value": "http://www.wikidata.org/entity/Q34266"
+          "value": "http://www.wikidata.org/entity/Q20"
         },
-        "paysLabel": {
+        "countryLabel": {
           "xml:lang": "fr",
           "type": "literal",
-          "value": "Empire russe"
+          "value": "Norvège"
         }
       },
       {
-        "pays": {
+        "country": {
           "type": "uri",
-          "value": "http://www.wikidata.org/entity/Q34754"
+          "value": "http://www.wikidata.org/entity/Q664"
         },
-        "paysLabel": {
+        "countryLabel": {
           "xml:lang": "fr",
           "type": "literal",
-          "value": "Somaliland"
+          "value": "Nouvelle-Zélande"
         }
       },
       {
-        "pays": {
+        "country": {
           "type": "uri",
-          "value": "http://www.wikidata.org/entity/Q36704"
+          "value": "http://www.wikidata.org/entity/Q837"
         },
-        "paysLabel": {
+        "countryLabel": {
           "xml:lang": "fr",
           "type": "literal",
-          "value": "Yougoslavie"
+          "value": "Népal"
         }
       },
       {
-        "pays": {
+        "country": {
           "type": "uri",
-          "value": "http://www.wikidata.org/entity/Q40362"
+          "value": "http://www.wikidata.org/entity/Q842"
         },
-        "paysLabel": {
+        "countryLabel": {
           "xml:lang": "fr",
           "type": "literal",
-          "value": "République sahraouie"
+          "value": "Oman"
         }
       },
       {
-        "pays": {
+        "country": {
           "type": "uri",
-          "value": "http://www.wikidata.org/entity/Q41304"
+          "value": "http://www.wikidata.org/entity/Q1036"
         },
-        "paysLabel": {
+        "countryLabel": {
           "xml:lang": "fr",
           "type": "literal",
-          "value": "République de Weimar"
+          "value": "Ouganda"
         }
       },
       {
-        "pays": {
+        "country": {
           "type": "uri",
-          "value": "http://www.wikidata.org/entity/Q43287"
+          "value": "http://www.wikidata.org/entity/Q265"
         },
-        "paysLabel": {
+        "countryLabel": {
           "xml:lang": "fr",
           "type": "literal",
-          "value": "Empire allemand"
+          "value": "Ouzbékistan"
         }
       },
       {
-        "pays": {
+        "country": {
           "type": "uri",
-          "value": "http://www.wikidata.org/entity/Q49683"
+          "value": "http://www.wikidata.org/entity/Q843"
         },
-        "paysLabel": {
+        "countryLabel": {
           "xml:lang": "fr",
           "type": "literal",
-          "value": "grand-duché de Lituanie"
+          "value": "Pakistan"
         }
       },
       {
-        "pays": {
+        "country": {
           "type": "uri",
-          "value": "http://www.wikidata.org/entity/Q68682"
+          "value": "http://www.wikidata.org/entity/Q695"
         },
-        "paysLabel": {
+        "countryLabel": {
           "xml:lang": "fr",
           "type": "literal",
-          "value": "République soviétique populaire de Boukhara"
+          "value": "Palaos"
         }
       },
       {
-        "pays": {
+        "country": {
           "type": "uri",
-          "value": "http://www.wikidata.org/entity/Q83286"
+          "value": "http://www.wikidata.org/entity/Q804"
         },
-        "paysLabel": {
+        "countryLabel": {
           "xml:lang": "fr",
           "type": "literal",
-          "value": "République fédérative socialiste de Yougoslavie"
+          "value": "Panama"
         }
       },
       {
-        "pays": {
+        "country": {
           "type": "uri",
-          "value": "http://www.wikidata.org/entity/Q131964"
+          "value": "http://www.wikidata.org/entity/Q691"
         },
-        "paysLabel": {
+        "countryLabel": {
           "xml:lang": "fr",
           "type": "literal",
-          "value": "Empire d'Autriche"
+          "value": "Papouasie-Nouvelle-Guinée"
         }
       },
       {
-        "pays": {
+        "country": {
           "type": "uri",
-          "value": "http://www.wikidata.org/entity/Q138837"
+          "value": "http://www.wikidata.org/entity/Q733"
         },
-        "paysLabel": {
+        "countryLabel": {
           "xml:lang": "fr",
           "type": "literal",
-          "value": "République catalane"
+          "value": "Paraguay"
         }
       },
       {
-        "pays": {
+        "country": {
           "type": "uri",
-          "value": "http://www.wikidata.org/entity/Q147909"
+          "value": "http://www.wikidata.org/entity/Q29999"
         },
-        "paysLabel": {
+        "countryLabel": {
           "xml:lang": "fr",
           "type": "literal",
-          "value": "Royaume de Bulgarie"
+          "value": "Pays-Bas"
         }
       },
       {
-        "pays": {
+        "country": {
           "type": "uri",
-          "value": "http://www.wikidata.org/entity/Q148540"
+          "value": "http://www.wikidata.org/entity/Q928"
         },
-        "paysLabel": {
+        "countryLabel": {
           "xml:lang": "fr",
           "type": "literal",
-          "value": "République florentine"
+          "value": "Philippines"
         }
       },
       {
-        "pays": {
+        "country": {
           "type": "uri",
-          "value": "http://www.wikidata.org/entity/Q150981"
+          "value": "http://www.wikidata.org/entity/Q36"
         },
-        "paysLabel": {
+        "countryLabel": {
           "xml:lang": "fr",
           "type": "literal",
-          "value": "Confédération de l'Allemagne du Nord"
+          "value": "Pologne"
         }
       },
       {
-        "pays": {
+        "country": {
           "type": "uri",
-          "value": "http://www.wikidata.org/entity/Q153943"
+          "value": "http://www.wikidata.org/entity/Q45"
         },
-        "paysLabel": {
+        "countryLabel": {
           "xml:lang": "fr",
           "type": "literal",
-          "value": "royaume de Westphalie"
+          "value": "Portugal"
         }
       },
       {
-        "pays": {
+        "country": {
           "type": "uri",
-          "value": "http://www.wikidata.org/entity/Q154401"
+          "value": "http://www.wikidata.org/entity/Q419"
         },
-        "paysLabel": {
+        "countryLabel": {
           "xml:lang": "fr",
           "type": "literal",
-          "value": "République slovaque"
+          "value": "Pérou"
         }
       },
       {
-        "pays": {
+        "country": {
           "type": "uri",
-          "value": "http://www.wikidata.org/entity/Q165154"
+          "value": "http://www.wikidata.org/entity/Q846"
         },
-        "paysLabel": {
+        "countryLabel": {
           "xml:lang": "fr",
           "type": "literal",
-          "value": "Royaume de Sardaigne"
+          "value": "Qatar"
         }
       },
       {
-        "pays": {
+        "country": {
           "type": "uri",
-          "value": "http://www.wikidata.org/entity/Q170174"
+          "value": "http://www.wikidata.org/entity/Q218"
         },
-        "paysLabel": {
+        "countryLabel": {
           "xml:lang": "fr",
           "type": "literal",
-          "value": "États pontificaux"
+          "value": "Roumanie"
         }
       },
       {
-        "pays": {
+        "country": {
           "type": "uri",
-          "value": "http://www.wikidata.org/entity/Q170770"
+          "value": "http://www.wikidata.org/entity/Q756617"
         },
-        "paysLabel": {
+        "countryLabel": {
           "xml:lang": "fr",
           "type": "literal",
-          "value": "Grande-Principauté de Moscou"
+          "value": "Royaume du Danemark"
         }
       },
       {
-        "pays": {
+        "country": {
           "type": "uri",
-          "value": "http://www.wikidata.org/entity/Q171150"
+          "value": "http://www.wikidata.org/entity/Q145"
         },
-        "paysLabel": {
+        "countryLabel": {
           "xml:lang": "fr",
           "type": "literal",
-          "value": "Royaume de Hongrie"
+          "value": "Royaume-Uni"
         }
       },
       {
-        "pays": {
+        "country": {
           "type": "uri",
-          "value": "http://www.wikidata.org/entity/Q172579"
+          "value": "http://www.wikidata.org/entity/Q159"
         },
-        "paysLabel": {
+        "countryLabel": {
           "xml:lang": "fr",
           "type": "literal",
-          "value": "Royaume d'Italie"
+          "value": "Russie"
         }
       },
       {
-        "pays": {
+        "country": {
           "type": "uri",
-          "value": "http://www.wikidata.org/entity/Q174193"
+          "value": "http://www.wikidata.org/entity/Q1037"
         },
-        "paysLabel": {
+        "countryLabel": {
           "xml:lang": "fr",
           "type": "literal",
-          "value": "Royaume-Uni de Grande-Bretagne et d'Irlande"
+          "value": "Rwanda"
         }
       },
       {
-        "pays": {
+        "country": {
           "type": "uri",
-          "value": "http://www.wikidata.org/entity/Q179876"
+          "value": "http://www.wikidata.org/entity/Q929"
         },
-        "paysLabel": {
+        "countryLabel": {
           "xml:lang": "fr",
           "type": "literal",
-          "value": "Royaume d'Angleterre"
+          "value": "République centrafricaine"
         }
       },
       {
-        "pays": {
+        "country": {
           "type": "uri",
-          "value": "http://www.wikidata.org/entity/Q180393"
+          "value": "http://www.wikidata.org/entity/Q221"
         },
-        "paysLabel": {
+        "countryLabel": {
           "xml:lang": "fr",
           "type": "literal",
-          "value": "Royaume des Deux-Siciles"
+          "value": "République de Macédoine"
         }
       },
       {
-        "pays": {
+        "country": {
           "type": "uri",
-          "value": "http://www.wikidata.org/entity/Q186096"
+          "value": "http://www.wikidata.org/entity/Q786"
         },
-        "paysLabel": {
+        "countryLabel": {
           "xml:lang": "fr",
           "type": "literal",
-          "value": "Tsarat de Russie"
+          "value": "République dominicaine"
         }
       },
       {
-        "pays": {
+        "country": {
           "type": "uri",
-          "value": "http://www.wikidata.org/entity/Q188712"
+          "value": "http://www.wikidata.org/entity/Q971"
         },
-        "paysLabel": {
+        "countryLabel": {
           "xml:lang": "fr",
           "type": "literal",
-          "value": "Empire du Japon"
+          "value": "République du Congo"
         }
       },
       {
-        "pays": {
+        "country": {
           "type": "uri",
-          "value": "http://www.wikidata.org/entity/Q208169"
+          "value": "http://www.wikidata.org/entity/Q974"
         },
-        "paysLabel": {
+        "countryLabel": {
           "xml:lang": "fr",
           "type": "literal",
-          "value": "République de Raguse"
+          "value": "République démocratique du Congo"
         }
       },
       {
-        "pays": {
+        "country": {
           "type": "uri",
-          "value": "http://www.wikidata.org/entity/Q212439"
+          "value": "http://www.wikidata.org/entity/Q148"
         },
-        "paysLabel": {
+        "countryLabel": {
           "xml:lang": "fr",
           "type": "literal",
-          "value": "Hetmanat cosaque"
+          "value": "République populaire de Chine"
         }
       },
       {
-        "pays": {
+        "country": {
           "type": "uri",
-          "value": "http://www.wikidata.org/entity/Q223936"
+          "value": "http://www.wikidata.org/entity/Q213"
         },
-        "paysLabel": {
+        "countryLabel": {
           "xml:lang": "fr",
           "type": "literal",
-          "value": "Royaume d'Italie"
+          "value": "République tchèque"
         }
       },
       {
-        "pays": {
+        "country": {
           "type": "uri",
-          "value": "http://www.wikidata.org/entity/Q230791"
+          "value": "http://www.wikidata.org/entity/Q763"
         },
-        "paysLabel": {
+        "countryLabel": {
           "xml:lang": "fr",
           "type": "literal",
-          "value": "Royaume d'Écosse"
+          "value": "Saint-Christophe-et-Niévès"
         }
       },
       {
-        "pays": {
+        "country": {
           "type": "uri",
-          "value": "http://www.wikidata.org/entity/Q243610"
+          "value": "http://www.wikidata.org/entity/Q238"
         },
-        "paysLabel": {
+        "countryLabel": {
           "xml:lang": "fr",
           "type": "literal",
-          "value": "République populaire ukrainienne"
+          "value": "Saint-Marin"
         }
       },
       {
-        "pays": {
+        "country": {
           "type": "uri",
-          "value": "http://www.wikidata.org/entity/Q420759"
+          "value": "http://www.wikidata.org/entity/Q757"
         },
-        "paysLabel": {
+        "countryLabel": {
           "xml:lang": "fr",
           "type": "literal",
-          "value": "Second Empire bulgare"
+          "value": "Saint-Vincent-et-les-Grenadines"
         }
       },
       {
-        "pays": {
+        "country": {
           "type": "uri",
-          "value": "http://www.wikidata.org/entity/Q675363"
+          "value": "http://www.wikidata.org/entity/Q760"
         },
-        "paysLabel": {
+        "countryLabel": {
           "xml:lang": "fr",
           "type": "literal",
-          "value": "Comté de Genève"
+          "value": "Sainte-Lucie"
         }
       },
       {
-        "pays": {
+        "country": {
           "type": "uri",
-          "value": "http://www.wikidata.org/entity/Q696241"
+          "value": "http://www.wikidata.org/entity/Q685"
         },
-        "paysLabel": {
+        "countryLabel": {
           "xml:lang": "fr",
           "type": "literal",
-          "value": "Khanat de Kokand"
+          "value": "Salomon"
         }
       },
       {
-        "pays": {
+        "country": {
           "type": "uri",
-          "value": "http://www.wikidata.org/entity/Q713750"
+          "value": "http://www.wikidata.org/entity/Q792"
         },
-        "paysLabel": {
+        "countryLabel": {
           "xml:lang": "fr",
           "type": "literal",
-          "value": "Allemagne de l'Ouest"
+          "value": "Salvador"
         }
       },
       {
-        "pays": {
+        "country": {
           "type": "uri",
-          "value": "http://www.wikidata.org/entity/Q844930"
+          "value": "http://www.wikidata.org/entity/Q683"
         },
-        "paysLabel": {
+        "countryLabel": {
           "xml:lang": "fr",
           "type": "literal",
-          "value": "Athènes"
+          "value": "Samoa"
         }
       },
       {
-        "pays": {
+        "country": {
           "type": "uri",
-          "value": "http://www.wikidata.org/entity/Q870517"
+          "value": "http://www.wikidata.org/entity/Q1039"
         },
-        "paysLabel": {
+        "countryLabel": {
           "xml:lang": "fr",
           "type": "literal",
-          "value": "Royaume des Odryses"
+          "value": "Sao Tomé-et-Principe"
         }
       },
       {
-        "pays": {
+        "country": {
           "type": "uri",
-          "value": "http://www.wikidata.org/entity/Q907112"
+          "value": "http://www.wikidata.org/entity/Q403"
         },
-        "paysLabel": {
+        "countryLabel": {
           "xml:lang": "fr",
           "type": "literal",
-          "value": "Transnistrie"
+          "value": "Serbie"
         }
       },
       {
-        "pays": {
+        "country": {
           "type": "uri",
-          "value": "http://www.wikidata.org/entity/Q1206012"
+          "value": "http://www.wikidata.org/entity/Q1042"
         },
-        "paysLabel": {
+        "countryLabel": {
           "xml:lang": "fr",
           "type": "literal",
-          "value": "Reich allemand"
+          "value": "Seychelles"
         }
       },
       {
-        "pays": {
+        "country": {
           "type": "uri",
-          "value": "http://www.wikidata.org/entity/Q1508143"
+          "value": "http://www.wikidata.org/entity/Q1044"
         },
-        "paysLabel": {
+        "countryLabel": {
           "xml:lang": "fr",
           "type": "literal",
-          "value": "Hetmanat"
+          "value": "Sierra Leone"
         }
       },
       {
-        "pays": {
+        "country": {
           "type": "uri",
-          "value": "http://www.wikidata.org/entity/Q1760473"
+          "value": "http://www.wikidata.org/entity/Q334"
         },
-        "paysLabel": {
-          "xml:lang": "en",
-          "type": "literal",
-          "value": "Principality of Abkhazia"
-        }
-      },
-      {
-        "pays": {
-          "type": "uri",
-          "value": "http://www.wikidata.org/entity/Q2453974"
-        },
-        "paysLabel": {
+        "countryLabel": {
           "xml:lang": "fr",
           "type": "literal",
-          "value": "République du Don"
+          "value": "Singapour"
         }
       },
       {
-        "pays": {
+        "country": {
           "type": "uri",
-          "value": "http://www.wikidata.org/entity/Q2577303"
+          "value": "http://www.wikidata.org/entity/Q214"
         },
-        "paysLabel": {
-          "xml:lang": "en",
-          "type": "literal",
-          "value": "Kingdom of Sardinia"
-        }
-      },
-      {
-        "pays": {
-          "type": "uri",
-          "value": "http://www.wikidata.org/entity/Q4517333"
-        },
-        "paysLabel": {
-          "xml:lang": "en",
-          "type": "literal",
-          "value": "Da Chu"
-        }
-      },
-      {
-        "pays": {
-          "type": "uri",
-          "value": "http://www.wikidata.org/entity/Q13099569"
-        },
-        "paysLabel": {
+        "countryLabel": {
           "xml:lang": "fr",
           "type": "literal",
-          "value": "Hyrule"
+          "value": "Slovaquie"
         }
       },
       {
-        "pays": {
+        "country": {
           "type": "uri",
-          "value": "http://www.wikidata.org/entity/Q16056814"
+          "value": "http://www.wikidata.org/entity/Q215"
         },
-        "paysLabel": {
-          "xml:lang": "en",
+        "countryLabel": {
+          "xml:lang": "fr",
           "type": "literal",
-          "value": "Kingdom of Hungary"
+          "value": "Slovénie"
         }
       },
       {
-        "pays": {
+        "country": {
           "type": "uri",
-          "value": "http://www.wikidata.org/entity/Q31354462"
+          "value": "http://www.wikidata.org/entity/Q1045"
         },
-        "paysLabel": {
-          "xml:lang": "en",
+        "countryLabel": {
+          "xml:lang": "fr",
           "type": "literal",
-          "value": "The Republic of Abkhazia"
+          "value": "Somalie"
+        }
+      },
+      {
+        "country": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q958"
+        },
+        "countryLabel": {
+          "xml:lang": "fr",
+          "type": "literal",
+          "value": "Soudan du Sud"
+        }
+      },
+      {
+        "country": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q854"
+        },
+        "countryLabel": {
+          "xml:lang": "fr",
+          "type": "literal",
+          "value": "Sri Lanka"
+        }
+      },
+      {
+        "country": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q39"
+        },
+        "countryLabel": {
+          "xml:lang": "fr",
+          "type": "literal",
+          "value": "Suisse"
+        }
+      },
+      {
+        "country": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q730"
+        },
+        "countryLabel": {
+          "xml:lang": "fr",
+          "type": "literal",
+          "value": "Suriname"
+        }
+      },
+      {
+        "country": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q34"
+        },
+        "countryLabel": {
+          "xml:lang": "fr",
+          "type": "literal",
+          "value": "Suède"
+        }
+      },
+      {
+        "country": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q1050"
+        },
+        "countryLabel": {
+          "xml:lang": "fr",
+          "type": "literal",
+          "value": "Swaziland"
+        }
+      },
+      {
+        "country": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q858"
+        },
+        "countryLabel": {
+          "xml:lang": "fr",
+          "type": "literal",
+          "value": "Syrie"
+        }
+      },
+      {
+        "country": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q1041"
+        },
+        "countryLabel": {
+          "xml:lang": "fr",
+          "type": "literal",
+          "value": "Sénégal"
+        }
+      },
+      {
+        "country": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q863"
+        },
+        "countryLabel": {
+          "xml:lang": "fr",
+          "type": "literal",
+          "value": "Tadjikistan"
+        }
+      },
+      {
+        "country": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q924"
+        },
+        "countryLabel": {
+          "xml:lang": "fr",
+          "type": "literal",
+          "value": "Tanzanie"
+        }
+      },
+      {
+        "country": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q657"
+        },
+        "countryLabel": {
+          "xml:lang": "fr",
+          "type": "literal",
+          "value": "Tchad"
+        }
+      },
+      {
+        "country": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q869"
+        },
+        "countryLabel": {
+          "xml:lang": "fr",
+          "type": "literal",
+          "value": "Thaïlande"
+        }
+      },
+      {
+        "country": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q574"
+        },
+        "countryLabel": {
+          "xml:lang": "fr",
+          "type": "literal",
+          "value": "Timor oriental"
+        }
+      },
+      {
+        "country": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q945"
+        },
+        "countryLabel": {
+          "xml:lang": "fr",
+          "type": "literal",
+          "value": "Togo"
+        }
+      },
+      {
+        "country": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q678"
+        },
+        "countryLabel": {
+          "xml:lang": "fr",
+          "type": "literal",
+          "value": "Tonga"
+        }
+      },
+      {
+        "country": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q754"
+        },
+        "countryLabel": {
+          "xml:lang": "fr",
+          "type": "literal",
+          "value": "Trinité-et-Tobago"
+        }
+      },
+      {
+        "country": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q948"
+        },
+        "countryLabel": {
+          "xml:lang": "fr",
+          "type": "literal",
+          "value": "Tunisie"
+        }
+      },
+      {
+        "country": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q874"
+        },
+        "countryLabel": {
+          "xml:lang": "fr",
+          "type": "literal",
+          "value": "Turkménistan"
+        }
+      },
+      {
+        "country": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q43"
+        },
+        "countryLabel": {
+          "xml:lang": "fr",
+          "type": "literal",
+          "value": "Turquie"
+        }
+      },
+      {
+        "country": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q672"
+        },
+        "countryLabel": {
+          "xml:lang": "fr",
+          "type": "literal",
+          "value": "Tuvalu"
+        }
+      },
+      {
+        "country": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q212"
+        },
+        "countryLabel": {
+          "xml:lang": "fr",
+          "type": "literal",
+          "value": "Ukraine"
+        }
+      },
+      {
+        "country": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q77"
+        },
+        "countryLabel": {
+          "xml:lang": "fr",
+          "type": "literal",
+          "value": "Uruguay"
+        }
+      },
+      {
+        "country": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q686"
+        },
+        "countryLabel": {
+          "xml:lang": "fr",
+          "type": "literal",
+          "value": "Vanuatu"
+        }
+      },
+      {
+        "country": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q237"
+        },
+        "countryLabel": {
+          "xml:lang": "fr",
+          "type": "literal",
+          "value": "Vatican"
+        }
+      },
+      {
+        "country": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q717"
+        },
+        "countryLabel": {
+          "xml:lang": "fr",
+          "type": "literal",
+          "value": "Venezuela"
+        }
+      },
+      {
+        "country": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q881"
+        },
+        "countryLabel": {
+          "xml:lang": "fr",
+          "type": "literal",
+          "value": "Viêt Nam"
+        }
+      },
+      {
+        "country": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q805"
+        },
+        "countryLabel": {
+          "xml:lang": "fr",
+          "type": "literal",
+          "value": "Yémen"
+        }
+      },
+      {
+        "country": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q953"
+        },
+        "countryLabel": {
+          "xml:lang": "fr",
+          "type": "literal",
+          "value": "Zambie"
+        }
+      },
+      {
+        "country": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q954"
+        },
+        "countryLabel": {
+          "xml:lang": "fr",
+          "type": "literal",
+          "value": "Zimbabwe"
+        }
+      },
+      {
+        "country": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q79"
+        },
+        "countryLabel": {
+          "xml:lang": "fr",
+          "type": "literal",
+          "value": "Égypte"
+        }
+      },
+      {
+        "country": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q878"
+        },
+        "countryLabel": {
+          "xml:lang": "fr",
+          "type": "literal",
+          "value": "Émirats arabes unis"
+        }
+      },
+      {
+        "country": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q736"
+        },
+        "countryLabel": {
+          "xml:lang": "fr",
+          "type": "literal",
+          "value": "Équateur"
+        }
+      },
+      {
+        "country": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q986"
+        },
+        "countryLabel": {
+          "xml:lang": "fr",
+          "type": "literal",
+          "value": "Érythrée"
+        }
+      },
+      {
+        "country": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q30"
+        },
+        "countryLabel": {
+          "xml:lang": "fr",
+          "type": "literal",
+          "value": "États-Unis"
+        }
+      },
+      {
+        "country": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q115"
+        },
+        "countryLabel": {
+          "xml:lang": "fr",
+          "type": "literal",
+          "value": "Éthiopie"
+        }
+      },
+      {
+        "country": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q709"
+        },
+        "countryLabel": {
+          "xml:lang": "fr",
+          "type": "literal",
+          "value": "îles Marshall"
         }
       }
     ]

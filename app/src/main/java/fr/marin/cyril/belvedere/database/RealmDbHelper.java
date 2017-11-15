@@ -55,28 +55,4 @@ public class RealmDbHelper implements Closeable {
 
         return realm.copyFromRealm(results.subList(0, limit));
     }
-
-    public <T extends RealmModel> T save(final T data) {
-        realm.beginTransaction();
-        final T saved = realm.copyToRealmOrUpdate(data);
-        realm.commitTransaction();
-        return saved;
-    }
-
-    public <T extends RealmModel> Collection<T> saveAll(final Collection<T> data) {
-        realm.beginTransaction();
-        final Collection<T> saved = realm.copyToRealmOrUpdate(data);
-        realm.commitTransaction();
-        return saved;
-    }
-
-    public <T extends RealmModel> Long count(Class<T> clazz) {
-        return realm.where(clazz).count();
-    }
-
-    public <T extends RealmModel> Long countByType(String type, Class<T> clazz) {
-        return realm.where(clazz)
-                .equalTo("type", type)
-                .count();
-    }
 }

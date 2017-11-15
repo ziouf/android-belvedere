@@ -7,11 +7,15 @@ import com.fasterxml.jackson.core.JsonToken;
 import java.io.InputStream;
 import java.lang.reflect.Field;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
+import java.util.Objects;
+import java.util.Set;
 
 import fr.marin.cyril.belvedere.annotations.JsonField;
 import io.realm.Realm;
 import io.realm.RealmModel;
+import io.realm.annotations.Required;
 
 /**
  * Created by cyril on 15/11/17.
@@ -24,7 +28,7 @@ public class SparqlResponseJsonParser<T> {
 
     private final Class<T> clazz;
     private final Map<Field, String> fieldMap = new HashMap<>();
-//    private final Collection<String> vars = new ArrayList<>();
+    private final Set<Field> requieredFieldSet = new HashSet<>();
 
     public SparqlResponseJsonParser(Class<T> clazz) {
         this.clazz = clazz;
@@ -34,6 +38,9 @@ public class SparqlResponseJsonParser<T> {
                 f.setAccessible(true);
                 final JsonField a = f.getAnnotation(JsonField.class);
                 fieldMap.put(f, a.value());
+            }
+            if (f.isAnnotationPresent(Required.class)) {
+                requieredFieldSet.add(f);
             }
         }
     }
@@ -58,13 +65,13 @@ public class SparqlResponseJsonParser<T> {
     }
 
     private void parseJsonArray(JsonParser jsonParser, Realm realm, SparqlResponseJsonParser.JsonArrayParseFunction f) throws Exception {
-        while (!jsonParser.nextToken().equals(JsonToken.END_ARRAY)) {
+        while (!JsonToken.END_ARRAY.equals(jsonParser.nextToken())) {
             f.parse(jsonParser, realm);
         }
     }
 
     private void parseJsonHead(JsonParser jsonParser, Realm realm) throws Exception {
-        while (!jsonParser.nextToken().equals(JsonToken.END_OBJECT)) {
+        while (!JsonToken.END_OBJECT.equals(jsonParser.nextToken())) {
             if (JsonToken.FIELD_NAME.equals(jsonParser.getCurrentToken())) {
                 if ("vars".equals(jsonParser.getCurrentName())) {
                     this.parseJsonArray(jsonParser, realm, this::parseJsonVars);
@@ -80,7 +87,7 @@ public class SparqlResponseJsonParser<T> {
     }
 
     private void parseJsonResults(JsonParser jsonParser, Realm realm) throws Exception {
-        while (!jsonParser.nextToken().equals(JsonToken.END_OBJECT)) {
+        while (!JsonToken.END_OBJECT.equals(jsonParser.nextToken())) {
             if (JsonToken.FIELD_NAME.equals(jsonParser.currentToken())) {
                 if ("bindings".equals(jsonParser.getCurrentName())) {
                     this.parseJsonArray(jsonParser, realm, this::parseJsonBinding);
@@ -92,21 +99,33 @@ public class SparqlResponseJsonParser<T> {
     private void parseJsonBinding(JsonParser jsonParser, Realm realm) throws Exception {
         final T o = clazz.newInstance();
 
-        while (!jsonParser.nextToken().equals(JsonToken.END_OBJECT)) {
+        while (!JsonToken.END_OBJECT.equals(jsonParser.nextToken())) {
             if (JsonToken.FIELD_NAME.equals(jsonParser.currentToken())) {
                 final String curName = jsonParser.getCurrentName();
                 final String curValue = this.parseJsonValue(jsonParser);
+
                 for (Field f : fieldMap.keySet()) {
                     if (fieldMap.containsKey(f) && fieldMap.get(f).equalsIgnoreCase(curName)) {
                         if (f.getType().equals(String.class)) {
                             f.set(o, curValue);
+                        } else if (f.getType().equals(Integer.class)) {
+                            f.set(o, curValue.isEmpty() ? 0 : Integer.parseInt(curValue));
+                        } else if (f.getType().equals(Long.class)) {
+                            f.set(o, curValue.isEmpty() ? 0L : Long.parseLong(curValue));
+                        } else if (f.getType().equals(Float.class)) {
+                            f.set(o, curValue.isEmpty() ? 0f : Float.parseFloat(curValue));
                         } else if (f.getType().equals(Double.class)) {
                             f.set(o, curValue.isEmpty() ? 0d : Double.parseDouble(curValue));
+                        } else if (f.getType().equals(Byte.class)) {
+                            f.set(o, curValue.isEmpty() ? null : Byte.decode(curValue));
                         }
                     }
                 }
             }
         }
+
+        for (Field f : requieredFieldSet)
+            if (Objects.isNull(f.get(o))) return;
 
         if (RealmModel.class.isAssignableFrom(clazz))
             realm.insertOrUpdate((RealmModel) o);
@@ -114,7 +133,7 @@ public class SparqlResponseJsonParser<T> {
 
     private String parseJsonValue(JsonParser jsonParser) throws Exception {
         String value = "";
-        while (!jsonParser.nextToken().equals(JsonToken.END_OBJECT)) {
+        while (!JsonToken.END_OBJECT.equals(jsonParser.nextToken())) {
             if (JsonToken.FIELD_NAME.equals(jsonParser.currentToken())) {
                 if ("value".equals(jsonParser.getCurrentName())) {
                     value = jsonParser.nextTextValue();

@@ -3,34 +3,38 @@ package fr.marin.cyril.belvedere.activities;
 import android.Manifest;
 import android.app.Activity;
 import android.app.LoaderManager;
-import android.content.Context;
 import android.content.Intent;
 import android.content.Loader;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
-import android.net.ConnectivityManager;
-import android.net.NetworkInfo;
-import android.os.Build;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
-import android.telephony.TelephonyManager;
 import android.util.Log;
 import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
+import java.io.InputStream;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
-import java.util.Collection;
+import java.util.Collections;
+import java.util.List;
 import java.util.Random;
+import java.util.Set;
 
 import fr.marin.cyril.belvedere.Preferences;
 import fr.marin.cyril.belvedere.R;
-import fr.marin.cyril.belvedere.async.DataInitLoader;
+import fr.marin.cyril.belvedere.async.DataInitTaskLoader;
+import fr.marin.cyril.belvedere.fragments.CountrySelectDialogFragment;
+import fr.marin.cyril.belvedere.model.Country;
+import fr.marin.cyril.belvedere.tools.SparqlResponseJsonParser;
+import io.realm.Realm;
+import io.realm.Sort;
 
 // TODO : Affichage de la liste des Pays dans une popup si la liste des pays est vide dans les SharedPreferences
 public class LoadingActivity extends Activity
@@ -45,22 +49,9 @@ public class LoadingActivity extends Activity
     private static final int SYSTEM_UI_VISIBILITY = View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY
             | View.SYSTEM_UI_FLAG_FULLSCREEN;
 
-    private static final Collection<Integer> NET_TYPES = Arrays.asList(
-            ConnectivityManager.TYPE_MOBILE,
-            ConnectivityManager.TYPE_MOBILE_DUN,
-            ConnectivityManager.TYPE_WIMAX,
-            ConnectivityManager.TYPE_ETHERNET
-    );
-    private static final Collection<Integer> NET_SUB_TYPES = Arrays.asList(
-            TelephonyManager.NETWORK_TYPE_HSDPA,
-            TelephonyManager.NETWORK_TYPE_HSPA,
-            TelephonyManager.NETWORK_TYPE_HSPAP,
-            TelephonyManager.NETWORK_TYPE_HSUPA,
-            TelephonyManager.NETWORK_TYPE_LTE
-    );
-
     private View decorView;
-    private ConnectivityManager cm;
+
+    private SharedPreferences pref;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,14 +59,14 @@ public class LoadingActivity extends Activity
         decorView = getWindow().getDecorView();
         decorView.setSystemUiVisibility(SYSTEM_UI_VISIBILITY);
 
+        this.pref = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+
         this.setContentView(R.layout.activity_loading);
     }
 
     @Override
     protected void onPostCreate(@Nullable Bundle savedInstanceState) {
         super.onPostCreate(savedInstanceState);
-
-        this.cm = (ConnectivityManager) getApplicationContext().getSystemService(Context.CONNECTIVITY_SERVICE);
 
         // Check permissions
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
@@ -113,15 +104,37 @@ public class LoadingActivity extends Activity
     }
 
     private void start() {
-        // TODO : Déplacer le test de connectivité dans la AsyncTaskLoader
-        // Test de la connectivité réseau du terminal
-        if (!this.isNetworkOk()) return;
-
         Log.i(TAG + ".start()", "Init Loader");
-        if (this.getLoaderManager().getLoader(0) == null)
-            this.getLoaderManager().initLoader(0, null, this);
-        else
-            this.getLoaderManager().restartLoader(0, null, this);
+
+        final Set<String> countrySet = pref.getStringSet(Preferences.COUNTRIES, Collections.emptySet());
+
+        if (countrySet.isEmpty()) {
+            try (final Realm realm = Realm.getDefaultInstance()) {
+                if (realm.where(Country.class).count() == 0)
+                    this.initCountries(realm);
+
+                // Open fragment
+                final List<Country> countries = realm.copyFromRealm(
+                        realm.where(Country.class).findAllSorted("label", Sort.ASCENDING)
+                );
+
+                final Bundle bundle = new Bundle();
+                bundle.putParcelableArrayList(Preferences.COUNTRIES, new ArrayList<>(countries));
+
+                final CountrySelectDialogFragment newFragment = new CountrySelectDialogFragment();
+                newFragment.setArguments(bundle);
+                newFragment.setSharedPreferences(pref);
+                newFragment.setOnClickOkListener((dialogInterface, i) -> initData());
+                newFragment.setOnClickKoListener((dialogInterface, i) -> LoadingActivity.this.onLoadFinished(null, null));
+                newFragment.show(this.getFragmentManager(), "country frag");
+            }
+        } else {
+            this.initData();
+        }
+    }
+
+    private void initData() {
+        this.getLoaderManager().initLoader(0, null, this);
 
         if (this.shouldUpdateData()) {
             this.getLoaderManager().getLoader(0).forceLoad();
@@ -130,42 +143,37 @@ public class LoadingActivity extends Activity
         }
     }
 
-    // TODO : Ajouter un listener dans la AsyncTaskLoader pour mettre à jour la barre de progression
+    private void initCountries(Realm realm) {
+        Log.i(TAG + ".initCountries()", "Start");
+        final SparqlResponseJsonParser<Country> parser = new SparqlResponseJsonParser<>(Country.class);
+
+        try (final InputStream in = getApplicationContext().getResources().openRawResource(R.raw.raw_countries)) {
+            realm.beginTransaction();
+            parser.parseJsonResponse(in, realm);
+            realm.commitTransaction();
+        } catch (Exception e) {
+            realm.cancelTransaction();
+            Log.e(TAG + ".loadInBackground()", e.getClass().getSimpleName() + " : " + e.getMessage());
+            Log.d(TAG + ".loadInBackground()", e.getClass().getSimpleName() + " : " + e.getMessage(), e);
+        }
+        Log.i(TAG + ".initCountries()", "End (count : " + realm.where(Country.class).count() + ")");
+    }
 
     /**
      * MAJ de la barre de progression
      *
-     * @param values
+     * @param args
      */
-    private void onProgressUpdate(final Integer... values) {
+    private void onProgressUpdate(final Long... args) {
         final ProgressBar progressBar = findViewById(R.id.loading_progress);
-        progressBar.setMax(values[1]);
-        progressBar.setProgress(values[0]);
-    }
-
-    private boolean isNetworkOk() {
-        final NetworkInfo netInfo = cm.getActiveNetworkInfo();
-
-        if (netInfo == null) return false;
-        if (!netInfo.isConnected()) return false;
-
-        if (netInfo.getType() == ConnectivityManager.TYPE_WIFI)
-            return true;
-
-        if (NET_TYPES.contains(netInfo.getType()) && NET_SUB_TYPES.contains(netInfo.getSubtype()))
-            return true;
-
-        if (Build.VERSION.PREVIEW_SDK_INT >= Build.VERSION_CODES.LOLLIPOP)
-            if (netInfo.getType() == ConnectivityManager.TYPE_VPN)
-                return true;
-
-        return false;
+        progressBar.setMax(args[1].intValue());
+        progressBar.setProgress(args[0].intValue());
     }
 
     @Override
     public Loader<Void> onCreateLoader(int i, Bundle bundle) {
         Log.i(TAG + ".onCreateLoader()", "Loader id : " + i);
-        return new DataInitLoader(getApplicationContext());
+        return new DataInitTaskLoader(getApplicationContext(), this.pref, this::onProgressUpdate);
     }
 
     @Override

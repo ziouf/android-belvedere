@@ -1,7 +1,5 @@
 package fr.marin.cyril.belvedere.datasource;
 
-import android.net.Uri;
-
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
@@ -56,7 +54,7 @@ public class WikiDataQueryManager {
             "  OPTIONAL { ?m wd:Q333291 ?abstract. }" +
             "  OPTIONAL { ?m wdt:P2044 ?altitude. }" +
             "  FILTER ( ?globe = wd:Q2 )" +
-            "  SERVICE wikibase:label { bd:serviceParam wikibase:language \"%s,fr,en,de\" . } " +
+            "  SERVICE wikibase:label { bd:serviceParam wikibase:language \"%1$s,fr,en,de\" . } " +
             "}";
 
     private static final String GET_FR_MOUNTAINS_QUERY = "SELECT DISTINCT ?m ?mLabel ?lat ?lon ?abstract ?altitude " +
@@ -75,7 +73,7 @@ public class WikiDataQueryManager {
             "  OPTIONAL { ?m wdt:P2044 ?altitude. }" +
             "  FILTER ( ?pays = wd:Q142 )" +
             "  FILTER ( ?globe = wd:Q2 )" +
-            "  SERVICE wikibase:label { bd:serviceParam wikibase:language \"%s,fr,en,de\" . } " +
+            "  SERVICE wikibase:label { bd:serviceParam wikibase:language \"%1$s,fr,en,de\" . } " +
             "}";
 
     private static final String GET_MOUNTAINS_IN_AREA_QUERY = "SELECT DISTINCT ?m ?mLabel ?lat ?lon ?abstract ?altitude " +
@@ -94,20 +92,20 @@ public class WikiDataQueryManager {
             "  FILTER ( ?globe = wd:Q2 )" +
             "  SERVICE wikibase:box {" +
             "    ?place wdt:P625 ?location ." +
-            "    bd:serviceParam wikibase:cornerWest \"Point(%s %s)\"^^geo:wktLiteral ." +
-            "    bd:serviceParam wikibase:cornerEast \"Point(%s %s)\"^^geo:wktLiteral ." +
+            "    bd:serviceParam wikibase:cornerWest \"Point(%1$s %2$s)\"^^geo:wktLiteral ." +
+            "    bd:serviceParam wikibase:cornerEast \"Point(%3$s %4$s)\"^^geo:wktLiteral ." +
             "  } " +
-            "  SERVICE wikibase:label { bd:serviceParam wikibase:language \"%s,fr,en,de\" . } " +
+            "  SERVICE wikibase:label { bd:serviceParam wikibase:language \"%5$s,fr,en,de\" . } " +
             "}";
 
     private static final String GET_ALL_COUNTRIES_QUERY = "SELECT ?pays ?paysLabel WHERE {" +
             "  OPTIONAL { ?pays wdt:P17 ?pays. }" +
-            "  SERVICE wikibase:label { bd:serviceParam wikibase:language \"%s,fr,en,de\". }" +
+            "  SERVICE wikibase:label { bd:serviceParam wikibase:language \"%1$s,fr,en,de\". }" +
             "}";
 
-    private static final String GET_ALL_MOUTAINS_IN_COUNTRY_QUERY = "SELECT DISTINCT ?m ?mLabel ?lat ?lon ?abstract ?altitude WHERE {  " +
+    private static final String GET_ALL_MOUTAINS_IN_COUNTRY_QUERY = "SELECT DISTINCT ?m ?mLabel ?lat ?lon ?abstract ?altitude ?article WHERE {  " +
             "  ?m wdt:P31 wd:Q8502 ." +
-            "  ?m wdt:P17 <%s>;   " +
+            "  ?m wdt:P17 <%1$s>;   " +
             "  p:P625 [   " +
             "    psv:P625 [      " +
             "      wikibase:geoLatitude ?lat ;      " +
@@ -117,29 +115,13 @@ public class WikiDataQueryManager {
             "  ]" +
             "  OPTIONAL { ?m wd:Q333291 ?abstract. }  " +
             "  OPTIONAL { ?m wdt:P2044 ?altitude. }" +
+            "  OPTIONAL {" +
+            "      ?article schema:about ?m ." +
+            "      ?article schema:isPartOf <https://%2$s.wikipedia.org/> ." +
+            "    }" +
             "  FILTER ( ?globe = wd:Q2 )  " +
-            "  SERVICE wikibase:label { bd:serviceParam wikibase:language \"%s,fr,en,de\" . } " +
+            "  SERVICE wikibase:label { bd:serviceParam wikibase:language \"%2$s,fr,en,de\" . } " +
             "}";
-
-    private static Uri.Builder uriBuilder() {
-        return new Uri.Builder()
-                .scheme("https")
-                .authority("query.wikidata.org") //https://query.wikidata.org/sparql?query=SPARQL
-                .appendPath("sparql");
-    }
-
-    public static String query(String sparql) {
-        return uriBuilder()
-                .appendQueryParameter("format", "json")
-                .appendQueryParameter("query", sparql)
-                .build()
-                .toString();
-    }
-
-    public static Uri uri() {
-        return uriBuilder()
-                .build();
-    }
 
     public enum WikiDataQueries {
 

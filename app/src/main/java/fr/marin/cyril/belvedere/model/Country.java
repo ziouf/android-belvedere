@@ -1,5 +1,8 @@
 package fr.marin.cyril.belvedere.model;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import fr.marin.cyril.belvedere.annotations.JsonField;
 import io.realm.RealmModel;
 import io.realm.annotations.PrimaryKey;
@@ -10,16 +13,34 @@ import io.realm.annotations.Required;
  * Created by cyril on 15/11/17.
  */
 @RealmClass
-public class Country implements RealmModel {
+public class Country implements RealmModel, Parcelable {
 
+    public static final Creator<Country> CREATOR = new Creator<Country>() {
+        @Override
+        public Country createFromParcel(Parcel in) {
+            return new Country(in);
+        }
+
+        @Override
+        public Country[] newArray(int size) {
+            return new Country[size];
+        }
+    };
     @Required
     @PrimaryKey
-    @JsonField("pays")
+    @JsonField("country")
     private String id;
-
     @Required
-    @JsonField("paysLabel")
+    @JsonField("countryLabel")
     private String label;
+
+    public Country() {
+    }
+
+    private Country(Parcel in) {
+        id = in.readString();
+        label = in.readString();
+    }
 
     public String getId() {
         return id;
@@ -43,5 +64,16 @@ public class Country implements RealmModel {
                 "id='" + id + '\'' +
                 ", label='" + label + '\'' +
                 '}';
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel parcel, int i) {
+        parcel.writeString(id);
+        parcel.writeString(label);
     }
 }
