@@ -6,6 +6,7 @@ import android.content.pm.PackageManager;
 import android.hardware.GeomagneticField;
 import android.location.Location;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
@@ -13,7 +14,6 @@ import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.text.method.ScrollingMovementMethod;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -35,6 +35,9 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 import fr.marin.cyril.belvedere.Config;
 import fr.marin.cyril.belvedere.R;
@@ -47,14 +50,15 @@ import fr.marin.cyril.belvedere.services.CompassService;
 import fr.marin.cyril.belvedere.services.LocationService;
 import fr.marin.cyril.belvedere.tools.Orientation;
 import io.realm.Realm;
-import io.realm.RealmChangeListener;
 
 /**
  * Created by cyril on 31/05/16.
  */
-public class MapsFragment extends Fragment implements OnMapReadyCallback {
-    private static final String TAG = "MapsFragment";
+public class MapsFragment extends Fragment
+        implements OnMapReadyCallback {
+    private static final String TAG = MapsFragment.class.getSimpleName();
     private final Map<Marker, Placemark> markersShown = new HashMap<>();
+    private final ExecutorService pool = Executors.newSingleThreadExecutor();
     private View rootView;
     private Marker compassMarker;
     private Marker lastOpenedInfoWindowMarker;
@@ -101,7 +105,7 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback {
 
         AppCompatActivity activity = (AppCompatActivity) getActivity();
         // Set a Toolbar to replace the ActionBar.
-        activity.setSupportActionBar((Toolbar) rootView.findViewById(R.id.toolbar));
+        activity.setSupportActionBar(rootView.findViewById(R.id.toolbar));
 
         // Configuration de l'Actionbar
         ActionBar actionBar = activity.getSupportActionBar();
@@ -127,8 +131,8 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback {
 
     private void initFloatingActionButtons() {
         // Initialisation des FAB
-        final FloatingActionButton cameraButton = (FloatingActionButton) getActivity().findViewById(R.id.camera_button);
-        final FloatingActionButton myPosButton = (FloatingActionButton) getActivity().findViewById(R.id.myPosition_button);
+        final FloatingActionButton cameraButton = getActivity().findViewById(R.id.camera_button);
+        final FloatingActionButton myPosButton = getActivity().findViewById(R.id.myPosition_button);
 
         // Désactivation du bouton AR si le terminal ne dispose pas des capteurs ou autorisations suffisantes
         PackageManager pm = getActivity().getPackageManager();
@@ -169,24 +173,14 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback {
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
-        realm.addChangeListener(new RealmChangeListener<Realm>() {
-            @Override
-            public void onChange(Realm element) {
-                MapsFragment.this.updateMarkersOnMap();
-            }
-        });
+        realm.addChangeListener(realm -> MapsFragment.this.updateMarkersOnMap());
 
         // For showing a move to my loction button
         if (ContextCompat.checkSelfPermission(getActivity().getApplicationContext(), Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED)
             mMap.setMyLocationEnabled(true);
 
         // Update markers on Map
-        mMap.setOnCameraIdleListener(new GoogleMap.OnCameraIdleListener() {
-            @Override
-            public void onCameraIdle() {
-                MapsFragment.this.updateMarkersOnMap();
-            }
-        });
+        mMap.setOnCameraIdleListener(MapsFragment.this::updateMarkersOnMap);
 
         mMap.getUiSettings().setMapToolbarEnabled(false);
         mMap.getUiSettings().setRotateGesturesEnabled(false);
@@ -229,7 +223,7 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback {
                             azimuth += 360;
                             azimuth %= 360;
 
-                            Log.d(TAG, String.format("azimuth : %s° | pitch : %s°", (int) azimuth, (int) pitch));
+//                            Log.d(TAG, String.format("azimuth : %s° | pitch : %s°", (int) azimuth, (int) pitch));
                             compassMarker.setRotation(azimuth);
                         }
                     });
@@ -255,9 +249,9 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback {
                 final Placemark p = markersShown.get(marker);
 
                 final View v = getActivity().getLayoutInflater().inflate(R.layout.maps_info_window, null);
-                final TextView tvTitle = (TextView) v.findViewById(R.id.iw_title);
-                final TextView tvAltitude = (TextView) v.findViewById(R.id.iw_altitude);
-                final TextView tvComment = (TextView) v.findViewById(R.id.iw_comment);
+                final TextView tvTitle = v.findViewById(R.id.iw_title);
+                final TextView tvAltitude = v.findViewById(R.id.iw_altitude);
+                final TextView tvComment = v.findViewById(R.id.iw_comment);
 
                 tvTitle.setText(p.getTitle());
                 tvAltitude.setText(p.getElevationString());
@@ -359,25 +353,57 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback {
             final Collection<Marker> toRemove = new ArrayList<>();
             for (Marker marker : markersShown.keySet()) {
                 if (marker.isInfoWindowShown() && area.isInArea(marker.getPosition())) continue;
-                if (marker == lastOpenedInfoWindowMarker) lastOpenedInfoWindowMarker = null;
                 toRemove.add(marker);
             }
+
+            if (toRemove.contains(lastOpenedInfoWindowMarker)) lastOpenedInfoWindowMarker = null;
+
             for (Marker marker : toRemove) {
                 markersShown.remove(marker);
                 marker.remove();
             }
         }
 
-        for (Placemark p : realm.findInArea(area, Placemark.class)) {
-            if (lastOpenedInfoWindowMarker != null
-                    && lastOpenedInfoWindowMarker.isInfoWindowShown()
-                    && markersShown.get(lastOpenedInfoWindowMarker).getId() == p.getId())
-                continue;
+        final DbQueryTask aTask = new DbQueryTask();
+        aTask.setOnPostExecuteListener(placemarks -> {
+            for (Placemark p : placemarks) {
+                if (lastOpenedInfoWindowMarker != null
+                        && lastOpenedInfoWindowMarker.isInfoWindowShown()
+                        && Objects.equals(markersShown.get(lastOpenedInfoWindowMarker).getId(), p.getId()))
+                    continue;
 
-            final Marker marker = mMap.addMarker(p.getMarkerOptions());
-            markersShown.put(marker, p);
+                final Marker marker = mMap.addMarker(p.getMarkerOptions());
+                markersShown.put(marker, p);
+            }
+
+            Log.i(TAG, "markerShown contain " + markersShown.size() + " item(s)");
+        });
+        aTask.execute(area);
+    }
+
+    private static class DbQueryTask extends AsyncTask<Area, Void, Collection<Placemark>> {
+
+        private OnPostExecuteListener onPostExecuteListener;
+
+        @Override
+        protected Collection<Placemark> doInBackground(Area... areas) {
+            try (final Realm realm = Realm.getDefaultInstance()) {
+                return RealmDbHelper.getInstance(realm).findInArea(areas[0], Placemark.class);
+            }
         }
 
-        Log.i(TAG, "markerShown contain " + markersShown.size() + " item(s)");
+        @Override
+        protected void onPostExecute(Collection<Placemark> placemarks) {
+            if (Objects.nonNull(this.onPostExecuteListener))
+                this.onPostExecuteListener.onPostExecute(placemarks);
+        }
+
+        public void setOnPostExecuteListener(OnPostExecuteListener onPostExecuteListener) {
+            this.onPostExecuteListener = onPostExecuteListener;
+        }
+
+        public interface OnPostExecuteListener {
+            void onPostExecute(Collection<Placemark> placemarks);
+        }
     }
 }

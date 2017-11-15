@@ -3,6 +3,7 @@ package fr.marin.cyril.belvedere.database;
 import java.io.Closeable;
 import java.util.Collection;
 
+import fr.marin.cyril.belvedere.Preferences;
 import fr.marin.cyril.belvedere.model.Area;
 import io.realm.Realm;
 import io.realm.RealmChangeListener;
@@ -24,6 +25,12 @@ public class RealmDbHelper implements Closeable {
         return dbHelper;
     }
 
+    public static RealmDbHelper getInstance(Realm realm) {
+        final RealmDbHelper dbHelper = new RealmDbHelper();
+        dbHelper.realm = realm;
+        return dbHelper;
+    }
+
     @Override
     public void close() {
         this.realm.close();
@@ -38,16 +45,15 @@ public class RealmDbHelper implements Closeable {
     }
 
     public <T extends RealmModel> Collection<T> findInArea(Area area, Class<T> clazz) {
-        RealmResults<T> results = realm.where(clazz)
+        final RealmResults<T> results = realm.where(clazz)
                 .between("latitude", area.getBottom(), area.getTop())
                 .between("longitude", area.getLeft(), area.getRight())
-                .findAllSorted("elevation", Sort.DESCENDING)
-                .where().distinct("id");
+                .findAllSorted("elevation", Sort.DESCENDING);
 
         int size = results.size() > 0 ? results.size() : 0;
-        int limit = Math.min(size, Runtime.getRuntime().availableProcessors() * 30);
+        int limit = Math.min(size, Preferences.MAX_ON_MAP);
 
-        return results.subList(0, limit);
+        return realm.copyFromRealm(results.subList(0, limit));
     }
 
     public <T extends RealmModel> T save(final T data) {

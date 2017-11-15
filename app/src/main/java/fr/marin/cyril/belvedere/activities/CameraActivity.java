@@ -1,13 +1,19 @@
 package fr.marin.cyril.belvedere.activities;
 
+import android.Manifest;
 import android.annotation.TargetApi;
 import android.content.Context;
 import android.content.pm.ActivityInfo;
+import android.content.pm.PackageManager;
 import android.location.Location;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -15,7 +21,10 @@ import android.view.View;
 import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import java.util.Arrays;
+import java.util.UUID;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
@@ -37,8 +46,15 @@ import io.realm.Realm;
  * status bar and navigation/system bar) with user interaction.
  */
 @TargetApi(Build.VERSION_CODES.LOLLIPOP)
-public class CameraActivity extends AppCompatActivity {
-    private static final String TAG = "CameraActivity";
+public class CameraActivity extends AppCompatActivity
+        implements ActivityCompat.OnRequestPermissionsResultCallback {
+
+    private static final String TAG = CameraActivity.class.getSimpleName();
+
+    private static final int PERMISSIONS_CODE = UUID.randomUUID().hashCode();
+    private static final String[] PERMISSIONS = new String[]{
+            Manifest.permission.CAMERA
+    };
 
     private final Handler handler = new Handler(Looper.getMainLooper());
 
@@ -80,8 +96,18 @@ public class CameraActivity extends AppCompatActivity {
 
         // Init Camera
         this.camera = Camera.getCameraInstance(this);
-        this.peak_thumbnail_img = (ImageView) findViewById(R.id.peak_thumbnail_img);
-        this.peak_info_tv = (TextView) findViewById(R.id.peak_info_tv);
+        this.peak_thumbnail_img = findViewById(R.id.peak_thumbnail_img);
+        this.peak_info_tv = findViewById(R.id.peak_info_tv);
+    }
+
+    @Override
+    protected void onPostCreate(@Nullable Bundle savedInstanceState) {
+        super.onPostCreate(savedInstanceState);
+        // Check permissions
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
+            // Request CAMERA permissions
+            ActivityCompat.requestPermissions(this, PERMISSIONS, PERMISSIONS_CODE);
+        }
     }
 
     @Override
@@ -165,8 +191,20 @@ public class CameraActivity extends AppCompatActivity {
         this.realm.close();
     }
 
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+
+        if (requestCode == PERMISSIONS_CODE && grantResults.length == PERMISSIONS.length) {
+            if (grantResults[Arrays.asList(PERMISSIONS).indexOf(Manifest.permission.CAMERA)] != PackageManager.PERMISSION_GRANTED) {
+                Toast.makeText(this, "La permission CAMERA est necessaire", Toast.LENGTH_SHORT).show();
+                CameraActivity.this.finish();
+            }
+        }
+    }
+
     private void updateCompassView(float azimuth) {
-        final CompassView compassView = (CompassView) findViewById(R.id.camera_compass_view);
+        final CompassView compassView = findViewById(R.id.camera_compass_view);
         if (compassView != null)
             compassView.updateAzimuthAndRedraw(azimuth);
     }

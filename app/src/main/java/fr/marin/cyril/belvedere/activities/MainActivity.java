@@ -17,13 +17,14 @@ import fr.marin.cyril.belvedere.fragments.MapsFragment;
  * Created by cyril on 31/05/16.
  */
 public class MainActivity extends AppCompatActivity {
-    private static final String TAG = "MainActivity";
+    private static final String TAG = MainActivity.class.getSimpleName();
+
     public static FragmentManager fragmentManager;
 
     private ActionBarDrawerToggle toggle;
     private DrawerLayout drawerLayout;
 
-    private Bundle fragmentBundle = new Bundle();
+//    private Bundle fragmentBundle = new Bundle();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,8 +32,8 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         // Init Menu Drawer
-        drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
-        final NavigationView navigationView = (NavigationView) findViewById(R.id.navigation_view);
+        drawerLayout = findViewById(R.id.drawer_layout);
+        final NavigationView navigationView = findViewById(R.id.navigation_view);
         toggle = new ActionBarDrawerToggle(this, drawerLayout, R.string.open, R.string.close);
         drawerLayout.addDrawerListener(toggle);
 

@@ -87,7 +87,7 @@ public class Placemark implements RealmModel {
     }
 
     public String getTitle() {
-        return title;
+        return Character.toUpperCase(title.charAt(0)) + title.substring(1);
     }
 
     public void setTitle(String title) {

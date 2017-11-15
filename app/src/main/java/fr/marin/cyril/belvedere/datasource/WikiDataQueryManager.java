@@ -57,9 +57,7 @@ public class WikiDataQueryManager {
             "  OPTIONAL { ?m wdt:P2044 ?altitude. }" +
             "  FILTER ( ?globe = wd:Q2 )" +
             "  SERVICE wikibase:label { bd:serviceParam wikibase:language \"%s,fr,en,de\" . } " +
-            "} " +
-            "LIMIT %s " +
-            "OFFSET %s ";
+            "}";
 
     private static final String GET_FR_MOUNTAINS_QUERY = "SELECT DISTINCT ?m ?mLabel ?lat ?lon ?abstract ?altitude " +
             "WHERE " +
@@ -78,9 +76,7 @@ public class WikiDataQueryManager {
             "  FILTER ( ?pays = wd:Q142 )" +
             "  FILTER ( ?globe = wd:Q2 )" +
             "  SERVICE wikibase:label { bd:serviceParam wikibase:language \"%s,fr,en,de\" . } " +
-            "} " +
-            "LIMIT %s " +
-            "OFFSET %s ";
+            "}";
 
     private static final String GET_MOUNTAINS_IN_AREA_QUERY = "SELECT DISTINCT ?m ?mLabel ?lat ?lon ?abstract ?altitude " +
             "WHERE " +
@@ -102,9 +98,7 @@ public class WikiDataQueryManager {
             "    bd:serviceParam wikibase:cornerEast \"Point(%s %s)\"^^geo:wktLiteral ." +
             "  } " +
             "  SERVICE wikibase:label { bd:serviceParam wikibase:language \"%s,fr,en,de\" . } " +
-            "} " +
-            "LIMIT %s " +
-            "OFFSET %s ";
+            "}";
 
     private static final String GET_ALL_COUNTRIES_QUERY = "SELECT ?pays ?paysLabel WHERE {" +
             "  OPTIONAL { ?pays wdt:P17 ?pays. }" +
@@ -124,21 +118,19 @@ public class WikiDataQueryManager {
             "  OPTIONAL { ?m wd:Q333291 ?abstract. }  " +
             "  OPTIONAL { ?m wdt:P2044 ?altitude. }" +
             "  FILTER ( ?globe = wd:Q2 )  " +
-            "  SERVICE wikibase:label { bd:serviceParam wikibase:language \"en,fr,en,de\" . } " +
-            "} " +
-            "LIMIT %s " +
-            "OFFSET %s ";
+            "  SERVICE wikibase:label { bd:serviceParam wikibase:language \"%s,fr,en,de\" . } " +
+            "}";
 
     private static Uri.Builder uriBuilder() {
         return new Uri.Builder()
                 .scheme("https")
-                .authority("query.wikidata.org")
-                .appendPath("sparql")
-                .appendQueryParameter("format", "json");
+                .authority("query.wikidata.org") //https://query.wikidata.org/sparql?query=SPARQL
+                .appendPath("sparql");
     }
 
     public static String query(String sparql) {
         return uriBuilder()
+                .appendQueryParameter("format", "json")
                 .appendQueryParameter("query", sparql)
                 .build()
                 .toString();
@@ -183,6 +175,13 @@ public class WikiDataQueryManager {
             collection.add(Locale.getDefault().getLanguage());
             collection.add(Integer.toString(limit));
             collection.add(Integer.toString(offset));
+            return String.format(Locale.ENGLISH, query + " LIMIT %s OFFSET %s", collection.toArray());
+        }
+
+        public String getQuery(String... args) {
+            final Collection<String> collection = new ArrayList<>();
+            Collections.addAll(collection, args);
+            collection.add(Locale.getDefault().getLanguage());
             return String.format(Locale.ENGLISH, query, collection.toArray());
         }
     }

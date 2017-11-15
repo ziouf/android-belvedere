@@ -6,8 +6,10 @@ package fr.marin.cyril.belvedere;
 
 public enum Preferences {
     LAST_UPDATE_DATE(0),
-    UPDATE_FREQUENCY_DAYS(2);
+    UPDATE_FREQUENCY_DAYS(7),
+    COUNTRIES(0);
 
+    public static final int MAX_ON_MAP = Runtime.getRuntime().availableProcessors() * 15;
     private final long defaultValue;
 
     Preferences(long defaultValue) {
