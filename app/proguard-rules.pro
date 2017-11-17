@@ -15,3 +15,32 @@
 #-keepclassmembers class fqcn.of.javascript.interface.for.webview {
 #   public *;
 #}
+#-dontwarn
+-dontskipnonpubliclibraryclasses
+#-dontobfuscate
+-forceprocessing
+#-optimizationpasses 5
+
+# OkHttp
+-dontwarn okhttp3.**
+-dontwarn okio.**
+
+# Jackson
+-keepattributes *Annotation*,EnclosingMethod,Signature
+-keepnames class com.fasterxml.jackson.** { *; }
+-dontwarn com.fasterxml.jackson.databind.**
+-keep class org.codehaus.** { *; }
+-keepclassmembers public final enum org.codehaus.jackson.annotate.JsonAutoDetect$Visibility {
+    public static final org.codehaus.jackson.annotate.JsonAutoDetect$Visibility *; }
+
+
+# Belvedere
+-keep enum fr.marin.cyril.belvedere
+-keep class fr.marin.cyril.belvedere
+-keep interface fr.marin.cyril.belvedere
+
+# Logs
+-assumenosideeffects class android.util.Log {
+    public static *** d(...);
+    public static *** v(...);
+}

@@ -20,6 +20,10 @@ public class AreaQueryAsyncTask extends AsyncTask<Area, Void, Collection<Placema
 
     private OnPostExecuteListener<Collection<Placemark>> onPostExecuteListener;
 
+    public static AreaQueryAsyncTask newInstance() {
+        return new AreaQueryAsyncTask();
+    }
+
     @Override
     protected Collection<Placemark> doInBackground(Area... areas) {
         final Collection<Placemark> results = new ArrayList<>();
@@ -37,7 +41,8 @@ public class AreaQueryAsyncTask extends AsyncTask<Area, Void, Collection<Placema
             this.onPostExecuteListener.onPostExecute(placemarks);
     }
 
-    public void setOnPostExecuteListener(OnPostExecuteListener<Collection<Placemark>> onPostExecuteListener) {
+    public AreaQueryAsyncTask setOnPostExecuteListener(OnPostExecuteListener<Collection<Placemark>> onPostExecuteListener) {
         this.onPostExecuteListener = onPostExecuteListener;
+        return this;
     }
 }

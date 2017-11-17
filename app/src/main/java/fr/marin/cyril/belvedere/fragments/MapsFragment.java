@@ -344,9 +344,9 @@ public class MapsFragment extends Fragment
             }
         }
 
-        final AreaQueryAsyncTask aTask = new AreaQueryAsyncTask();
-        aTask.setOnPostExecuteListener(this::onPostExecuteDbQueryTaskListener);
-        aTask.execute(area);
+        AreaQueryAsyncTask.newInstance()
+                .setOnPostExecuteListener(this::onPostExecuteDbQueryTaskListener)
+                .execute(area);
     }
 
     private void onPostExecuteDbQueryTaskListener(Collection<Placemark> placemarks) {

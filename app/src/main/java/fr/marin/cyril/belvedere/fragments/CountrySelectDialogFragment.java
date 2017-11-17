@@ -29,8 +29,11 @@ public class CountrySelectDialogFragment extends DialogFragment {
     private List<Country> countries = new ArrayList<>();
     private DialogInterface.OnClickListener onClickOkListener;
     private DialogInterface.OnClickListener onClickKoListener;
-
     private SharedPreferences sharedPreferences;
+
+    public static CountrySelectDialogFragment newInstance() {
+        return new CountrySelectDialogFragment();
+    }
 
     public void setSharedPreferences(SharedPreferences pref) {
         this.sharedPreferences = pref;

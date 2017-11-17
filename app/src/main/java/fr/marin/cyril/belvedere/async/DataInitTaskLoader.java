@@ -114,7 +114,7 @@ public class DataInitTaskLoader extends AsyncTaskLoader<Void> {
         }
 
         // set last update date
-        pref.edit().putLong(Preferences.LAST_UPDATE_DATE.name(), new Date().getTime()).apply();
+        pref.edit().putLong(Preferences.LAST_UPDATE_DATE, new Date().getTime()).apply();
     }
 
     private void initMountainsByCountry(Country country, Realm realm) {

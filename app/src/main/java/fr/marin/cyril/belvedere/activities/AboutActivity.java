@@ -45,12 +45,12 @@ public class AboutActivity extends AppCompatActivity {
 
     private void changeListener(Realm realm) {
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
-        long last_update = sharedPreferences.getLong(Preferences.LAST_UPDATE_DATE.name(), Preferences.LAST_UPDATE_DATE.defaultValue());
-        long update_frequency_days = sharedPreferences.getLong(Preferences.UPDATE_FREQUENCY_DAYS.name(), Preferences.UPDATE_FREQUENCY_DAYS.defaultValue());
+        long last_update = sharedPreferences.getLong(Preferences.LAST_UPDATE_DATE, 0);
+        long update_frequency_days = sharedPreferences.getLong(Preferences.UPDATE_FREQUENCY_DAYS, Preferences.UPDATE_FREQUENCY_DAYS_DEFAULT);
 
         ArrayList<Pair<String, String>> about_items = new ArrayList<>();
         about_items.add(Pair.create(getString(R.string.last_data_update_date),
-                last_update != Preferences.LAST_UPDATE_DATE.defaultValue() ? SIMPLE_DATE_FORMAT.format(new Date(last_update)) : getString(R.string.never)));
+                last_update != 0 ? SIMPLE_DATE_FORMAT.format(new Date(last_update)) : getString(R.string.never)));
         about_items.add(Pair.create(getString(R.string.data_update_frequency),
                 Long.toString(update_frequency_days)));
         about_items.add(Pair.create(getString(R.string.total_peak_count),

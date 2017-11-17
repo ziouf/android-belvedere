@@ -35,4 +35,5 @@
     <string name="toast_update_database_finished">Database update finished</string>
     <string name="data_update_frequency">Data update frequency</string>
     <string name="toast_wiki_url_not_found">No Wikipedia article found for your language</string>
+    <string name="select_all">Select All</string>
 </resources>
