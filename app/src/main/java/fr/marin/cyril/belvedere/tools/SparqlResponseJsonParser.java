@@ -78,7 +78,7 @@ public class SparqlResponseJsonParser<T> {
     private void parseJsonBinding(JsonParser jsonParser, Realm realm) throws Exception {
         final T o = clazz.newInstance();
 
-        do {
+        while (!JsonToken.END_OBJECT.equals(jsonParser.nextToken())) {
             if (JsonToken.FIELD_NAME.equals(jsonParser.currentToken())) {
                 final String curName = jsonParser.getCurrentName();
                 final String curValue = this.parseJsonValue(jsonParser);
@@ -102,8 +102,7 @@ public class SparqlResponseJsonParser<T> {
                     }
                 }
             }
-
-        } while (!JsonToken.END_OBJECT.equals(jsonParser.nextToken()));
+        }
 
         if (RealmModel.class.isAssignableFrom(clazz))
             realm.insertOrUpdate((RealmModel) o);

@@ -1,9 +1,7 @@
 package fr.marin.cyril.belvedere.database;
 
 import java.io.Closeable;
-import java.util.Collection;
 
-import fr.marin.cyril.belvedere.Preferences;
 import fr.marin.cyril.belvedere.model.Area;
 import io.realm.Realm;
 import io.realm.RealmChangeListener;
@@ -44,15 +42,15 @@ public class RealmDbHelper implements Closeable {
         return realm.copyFromRealm(data);
     }
 
-    public <T extends RealmModel> Collection<T> findInArea(Area area, Class<T> clazz) {
+    public <T extends RealmModel> void findInArea(Area area,
+                                                  Class<T> clazz,
+                                                  RealmChangeListener<RealmResults<T>> listener) {
+
         final RealmResults<T> results = realm.where(clazz)
                 .between("latitude", area.getBottom(), area.getTop())
                 .between("longitude", area.getLeft(), area.getRight())
                 .findAllSorted("elevation", Sort.DESCENDING);
 
-        int size = results.size() > 0 ? results.size() : 0;
-        int limit = Math.min(size, Preferences.MAX_ON_MAP);
-
-        return realm.copyFromRealm(results.subList(0, limit));
+        results.addChangeListener(listener);
     }
 }

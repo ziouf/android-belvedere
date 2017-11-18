@@ -99,4 +99,14 @@ public class Area implements Parcelable {
         parcel.writeParcelable(northeast, PARCELABLE_WRITE_RETURN_VALUE);
         parcel.writeParcelable(southwest, PARCELABLE_WRITE_RETURN_VALUE);
     }
+
+    @Override
+    public String toString() {
+        return "Area{" +
+                "left=" + left +
+                ", top=" + top +
+                ", right=" + right +
+                ", bottom=" + bottom +
+                '}';
+    }
 }

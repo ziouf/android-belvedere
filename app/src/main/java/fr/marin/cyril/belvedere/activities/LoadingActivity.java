@@ -42,7 +42,7 @@ public class LoadingActivity extends Activity
 
     private static final String TAG = LoadingActivity.class.getSimpleName();
 
-    private static final int PERMISSIONS_CODE = new Random(0).nextInt(Integer.MAX_VALUE);
+    private static final int PERMISSIONS_CODE = new Random(0).nextInt(Short.MAX_VALUE);
     private static final String[] PERMISSIONS = new String[]{
             Manifest.permission.ACCESS_FINE_LOCATION
     };

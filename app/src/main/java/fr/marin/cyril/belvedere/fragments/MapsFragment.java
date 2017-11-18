@@ -39,15 +39,18 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 import fr.marin.cyril.belvedere.Config;
+import fr.marin.cyril.belvedere.Preferences;
 import fr.marin.cyril.belvedere.R;
 import fr.marin.cyril.belvedere.activities.CameraActivity;
-import fr.marin.cyril.belvedere.async.AreaQueryAsyncTask;
 import fr.marin.cyril.belvedere.database.RealmDbHelper;
 import fr.marin.cyril.belvedere.model.Area;
 import fr.marin.cyril.belvedere.model.Placemark;
 import fr.marin.cyril.belvedere.services.CompassService;
 import fr.marin.cyril.belvedere.services.LocationService;
 import fr.marin.cyril.belvedere.tools.Orientation;
+import io.realm.Realm;
+import io.realm.RealmResults;
+import io.realm.Sort;
 
 /**
  * Created by cyril on 31/05/16.
@@ -134,12 +137,10 @@ public class MapsFragment extends Fragment
 
         // Désactivation du bouton AR si le terminal ne dispose pas des capteurs ou autorisations suffisantes
         PackageManager pm = getActivity().getPackageManager();
-        if (ContextCompat.checkSelfPermission(getActivity(), Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED
-                || !pm.hasSystemFeature(PackageManager.FEATURE_CAMERA)
+        if (!pm.hasSystemFeature(PackageManager.FEATURE_CAMERA)
                 || !pm.hasSystemFeature(PackageManager.FEATURE_SENSOR_ACCELEROMETER)
                 || !pm.hasSystemFeature(PackageManager.FEATURE_SENSOR_COMPASS))
             cameraButton.setVisibility(View.GONE);
-
 
         // Action au click sur le bouton camera
         cameraButton.setOnClickListener(new View.OnClickListener() {
@@ -329,6 +330,19 @@ public class MapsFragment extends Fragment
     private void updateMarkersOnMap() {
         final Area area = new Area(mMap.getProjection().getVisibleRegion());
 
+        try (final Realm realm = Realm.getDefaultInstance()) {
+            final RealmResults<Placemark> results = realm.where(Placemark.class)
+                    .between("latitude", area.getBottom(), area.getTop())
+                    .between("longitude", area.getLeft(), area.getRight())
+                    .findAllSortedAsync("elevation", Sort.DESCENDING);
+            results.addChangeListener(this::onNextPlacemarks);
+            results.load();
+        }
+    }
+
+    private void onNextPlacemarks(RealmResults<Placemark> placemarks) {
+        final Area area = new Area(mMap.getProjection().getVisibleRegion());
+
         if (!markersShown.isEmpty()) {
             final Collection<Marker> toRemove = new ArrayList<>();
             for (Marker marker : markersShown.keySet()) {
@@ -344,13 +358,8 @@ public class MapsFragment extends Fragment
             }
         }
 
-        AreaQueryAsyncTask.newInstance()
-                .setOnPostExecuteListener(this::onPostExecuteDbQueryTaskListener)
-                .execute(area);
-    }
-
-    private void onPostExecuteDbQueryTaskListener(Collection<Placemark> placemarks) {
-        for (Placemark p : placemarks) {
+        for (int i = 0; i < Math.min(placemarks.size(), Preferences.MAX_ON_MAP); ++i) {
+            final Placemark p = placemarks.get(i);
             if (lastOpenedInfoWindowMarker != null
                     && lastOpenedInfoWindowMarker.isInfoWindowShown()
                     && Objects.equals(markersShown.get(lastOpenedInfoWindowMarker).getId(), p.getId()))

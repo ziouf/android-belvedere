@@ -10,72 +10,6 @@ import java.util.Locale;
  */
 
 public class WikiDataQueryManager {
-    private static final String COUNT_ALL_MOUNTAINS_QUERY = "SELECT (COUNT(DISTINCT ?m) as ?count) " +
-            "WHERE " +
-            "{" +
-            "  ?m wdt:P31 wd:Q8502;" +
-            "  p:P625 [" +
-            "    psv:P625 [" +
-            "      wikibase:geoLatitude ?lat ;" +
-            "      wikibase:geoLongitude ?lon ;" +
-            "      wikibase:geoGlobe ?globe ;" +
-            "    ];" +
-            "  ]" +
-            "  FILTER ( ?globe = wd:Q2 )" +
-            "}";
-
-    private static final String COUNT_FR_MOUTAINS_QUERY = "SELECT (COUNT(DISTINCT ?m) as ?count)" +
-            "WHERE" +
-            "{" +
-            "  ?m wdt:P31 wd:Q8502;" +
-            "  p:P625 [" +
-            "    psv:P625 [" +
-            "      wikibase:geoLatitude ?lat ;" +
-            "      wikibase:geoLongitude ?lon ;" +
-            "      wikibase:geoGlobe ?globe ;" +
-            "    ];" +
-            "  ];" +
-            "  wdt:P17 ?pays;" +
-            "  FILTER ( ?pays = wd:Q142 )" +
-            "  FILTER ( ?globe = wd:Q2 )" +
-            "}";
-
-    private static final String GET_ALL_MOUNTAINS_QUERY = "SELECT DISTINCT ?m ?mLabel ?lat ?lon ?abstract ?altitude " +
-            "WHERE " +
-            "{" +
-            "  ?m wdt:P31 wd:Q8502; " +
-            "  p:P625 [" +
-            "    psv:P625 [" +
-            "      wikibase:geoLatitude ?lat ;" +
-            "      wikibase:geoLongitude ?lon ;" +
-            "      wikibase:geoGlobe ?globe ;" +
-            "    ];" +
-            "  ]" +
-            "  OPTIONAL { ?m wd:Q333291 ?abstract. }" +
-            "  OPTIONAL { ?m wdt:P2044 ?altitude. }" +
-            "  FILTER ( ?globe = wd:Q2 )" +
-            "  SERVICE wikibase:label { bd:serviceParam wikibase:language \"%1$s,fr,en,de\" . } " +
-            "}";
-
-    private static final String GET_FR_MOUNTAINS_QUERY = "SELECT DISTINCT ?m ?mLabel ?lat ?lon ?abstract ?altitude " +
-            "WHERE " +
-            "{" +
-            "  ?m wdt:P31 wd:Q8502; " +
-            "  p:P625 [" +
-            "    psv:P625 [" +
-            "      wikibase:geoLatitude ?lat ;" +
-            "      wikibase:geoLongitude ?lon ;" +
-            "      wikibase:geoGlobe ?globe ;" +
-            "    ];" +
-            "  ];" +
-            "  wdt:P17 ?pays;" +
-            "  OPTIONAL { ?m wd:Q333291 ?abstract. }" +
-            "  OPTIONAL { ?m wdt:P2044 ?altitude. }" +
-            "  FILTER ( ?pays = wd:Q142 )" +
-            "  FILTER ( ?globe = wd:Q2 )" +
-            "  SERVICE wikibase:label { bd:serviceParam wikibase:language \"%1$s,fr,en,de\" . } " +
-            "}";
-
     private static final String GET_MOUNTAINS_IN_AREA_QUERY = "SELECT DISTINCT ?m ?mLabel ?lat ?lon ?abstract ?altitude " +
             "WHERE " +
             "{" +
@@ -124,16 +58,6 @@ public class WikiDataQueryManager {
             "}";
 
     public enum WikiDataQueries {
-
-        COUNT_FR_MOUNTAINS(COUNT_FR_MOUTAINS_QUERY),
-        COUNT_ALL_MOUNTAINS(COUNT_ALL_MOUNTAINS_QUERY),
-
-        /**
-         * First argument  : limit
-         * Second argument : offset
-         */
-        GET_ALL_MOUNTAINS(GET_ALL_MOUNTAINS_QUERY),
-        GET_FR_MOUNTAINS(GET_FR_MOUNTAINS_QUERY),
         /**
          * First argument  : cornerWest lat
          * Second argument : cornerWest lon
@@ -149,15 +73,6 @@ public class WikiDataQueryManager {
 
         WikiDataQueries(String query) {
             this.query = query;
-        }
-
-        public String getQuery(int offset, int limit, String... args) {
-            final Collection<String> collection = new ArrayList<>();
-            Collections.addAll(collection, args);
-            collection.add(Locale.getDefault().getLanguage());
-            collection.add(Integer.toString(limit));
-            collection.add(Integer.toString(offset));
-            return String.format(Locale.ENGLISH, query + " LIMIT %s OFFSET %s", collection.toArray());
         }
 
         public String getQuery(String... args) {
