@@ -161,7 +161,7 @@ public class MapsFragment extends Fragment
             // Close keyboard
             final InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
             if (Objects.nonNull(imm)) {
-                imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
+                imm.hideSoftInputFromWindow(rootView.getWindowToken(), 0);
             }
         });
         final ImageButton cancel = rootView.findViewById(R.id.search_cancel);
