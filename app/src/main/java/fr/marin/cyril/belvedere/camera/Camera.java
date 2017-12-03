@@ -10,7 +10,7 @@ public abstract class Camera {
 
     private final Activity context;
 
-    public Camera(Activity context) {
+    Camera(Activity context) {
         this.context = context;
     }
 

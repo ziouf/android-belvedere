@@ -1,26 +1,34 @@
 package fr.marin.cyril.belvedere.fragments;
 
 import android.Manifest;
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.hardware.GeomagneticField;
 import android.location.Location;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
-import android.text.method.ScrollingMovementMethod;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
+import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
+import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.annimon.stream.Stream;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
@@ -30,24 +38,23 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
-import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
-import java.util.Objects;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
 
 import fr.marin.cyril.belvedere.Config;
 import fr.marin.cyril.belvedere.Preferences;
 import fr.marin.cyril.belvedere.R;
 import fr.marin.cyril.belvedere.activities.CameraActivity;
-import fr.marin.cyril.belvedere.database.RealmDbHelper;
+import fr.marin.cyril.belvedere.enums.Orientation;
 import fr.marin.cyril.belvedere.model.Area;
 import fr.marin.cyril.belvedere.model.Placemark;
 import fr.marin.cyril.belvedere.services.CompassService;
 import fr.marin.cyril.belvedere.services.LocationService;
-import fr.marin.cyril.belvedere.tools.Orientation;
+import fr.marin.cyril.belvedere.tools.Objects;
+import io.realm.Case;
 import io.realm.Realm;
 import io.realm.RealmResults;
 import io.realm.Sort;
@@ -57,16 +64,19 @@ import io.realm.Sort;
  */
 public class MapsFragment extends Fragment
         implements OnMapReadyCallback {
+
     private static final String TAG = MapsFragment.class.getSimpleName();
     private final Map<Marker, Placemark> markersShown = new HashMap<>();
-    private final ExecutorService pool = Executors.newSingleThreadExecutor();
     private View rootView;
     private Marker compassMarker;
     private Marker lastOpenedInfoWindowMarker;
 
-    private RealmDbHelper realm;
+    private Realm realm;
     private GoogleMap mMap;
     private Location location;
+
+    private Placemark selectedPlacemark = null;
+    private List<Placemark> items = Collections.emptyList();
 
     private LocationService locationService;
     private LocationService.LocationEventListener locationEventListener;
@@ -82,7 +92,7 @@ public class MapsFragment extends Fragment
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        this.realm = RealmDbHelper.getInstance();
+        this.realm = Realm.getDefaultInstance();
     }
 
     @Override
@@ -93,8 +103,8 @@ public class MapsFragment extends Fragment
 
     @Nullable
     @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        if (this.rootView == null)
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        if (Objects.isNull(this.rootView))
             this.rootView = inflater.inflate(R.layout.fragment_maps, container, false);
 
         this.initActionBar();
@@ -102,17 +112,61 @@ public class MapsFragment extends Fragment
     }
 
     private void initActionBar() {
-        if (rootView == null) return;
+        if (Objects.isNull(rootView)) return;
 
-        AppCompatActivity activity = (AppCompatActivity) getActivity();
-        // Set a Toolbar to replace the ActionBar.
-        activity.setSupportActionBar(rootView.findViewById(R.id.toolbar));
+        final AppCompatActivity activity = (AppCompatActivity) getActivity();
+        if (Objects.nonNull(activity)) {
+            // Set a Toolbar to replace the ActionBar.
+            activity.setSupportActionBar(rootView.findViewById(R.id.toolbar));
 
-        // Configuration de l'Actionbar
-        ActionBar actionBar = activity.getSupportActionBar();
-        if (actionBar != null) {
-            actionBar.setDisplayOptions(ActionBar.DISPLAY_HOME_AS_UP | ActionBar.DISPLAY_USE_LOGO);
+            // Configuration de l'Actionbar
+            final ActionBar actionBar = activity.getSupportActionBar();
+            if (Objects.nonNull(actionBar)) {
+                actionBar.setDisplayOptions(ActionBar.DISPLAY_HOME_AS_UP | ActionBar.DISPLAY_USE_LOGO);
+            }
         }
+
+        final AutoCompleteTextView searchQuery = rootView.findViewById(R.id.search_edittext);
+        searchQuery.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int start, int before, int count) {
+                items = realm.where(Placemark.class)
+                        .contains("title", charSequence.toString(), Case.INSENSITIVE)
+                        .findAllSorted("title", Sort.ASCENDING);
+
+                searchQuery.setAdapter(new ArrayAdapter<>(
+                        getActivity(),
+                        android.R.layout.simple_dropdown_item_1line,
+                        Stream.of(items).map(Placemark::getTitle).toList()
+                ));
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
+            }
+        });
+        searchQuery.setOnItemClickListener((adapterView, view, i, l) -> {
+            // Zoom on placemark
+            selectedPlacemark = items.get(i);
+            final LatLng latLng = selectedPlacemark.getLatLng();
+            if (Objects.nonNull(latLng)) {
+                mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, 12));
+            }
+            // Close keyboard
+            final InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
+            if (Objects.nonNull(imm)) {
+                imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
+            }
+        });
+        final ImageButton cancel = rootView.findViewById(R.id.search_cancel);
+        cancel.setOnClickListener(view -> searchQuery.setText(null));
+
     }
 
     @Override
@@ -143,29 +197,23 @@ public class MapsFragment extends Fragment
             cameraButton.setVisibility(View.GONE);
 
         // Action au click sur le bouton camera
-        cameraButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Log.i(TAG, "Click cameraButton");
-                final Intent intent = new Intent(getActivity().getApplicationContext(), CameraActivity.class);
-                intent.putExtra(Config.BundleKeys.LOCATION, MapsFragment.this.location);
-                startActivity(intent);
-            }
+        cameraButton.setOnClickListener(v -> {
+            Log.i(TAG, "Click cameraButton");
+            final Intent intent = new Intent(getActivity().getApplicationContext(), CameraActivity.class);
+            intent.putExtra(Config.BundleKeys.LOCATION, MapsFragment.this.location);
+            startActivity(intent);
         });
 
         // Action au click sur le bouton myPosButton
-        myPosButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Log.i(TAG, "Click myPosButton");
-                // Demande d'activation des services de geolocalisation si désactivés
-                if (!locationService.isLocationServiceEnabled())
-                    locationService.askForLocationServiceActivation();
-                // Centrage de la vue sur la geolocalisation de l'utilisateur
-                centerMapCameraOnMyPosition();
-                // Abonnement au trigger de geolocalisation
-                locationService.registerLocationUpdates();
-            }
+        myPosButton.setOnClickListener(v -> {
+            Log.i(TAG, "Click myPosButton");
+            // Demande d'activation des services de geolocalisation si désactivés
+            if (!locationService.isLocationServiceEnabled())
+                locationService.askForLocationServiceActivation();
+            // Centrage de la vue sur la geolocalisation de l'utilisateur
+            centerMapCameraOnMyPosition();
+            // Abonnement au trigger de geolocalisation
+            locationService.registerLocationUpdates();
         });
     }
 
@@ -221,8 +269,6 @@ public class MapsFragment extends Fragment
                             if (geoField != null) azimuth += geoField.getDeclination();
                             azimuth += 360;
                             azimuth %= 360;
-
-//                            Log.d(TAG, String.format("azimuth : %s° | pitch : %s°", (int) azimuth, (int) pitch));
                             compassMarker.setRotation(azimuth);
                         }
                     });
@@ -250,12 +296,9 @@ public class MapsFragment extends Fragment
                 final View v = getActivity().getLayoutInflater().inflate(R.layout.maps_info_window, null);
                 final TextView tvTitle = v.findViewById(R.id.iw_title);
                 final TextView tvAltitude = v.findViewById(R.id.iw_altitude);
-                final TextView tvComment = v.findViewById(R.id.iw_comment);
 
                 tvTitle.setText(p.getTitle());
                 tvAltitude.setText(p.getElevationString());
-                tvComment.setText(p.getComment());
-                tvComment.setMovementMethod(new ScrollingMovementMethod());
 
                 lastOpenedInfoWindowMarker = marker;
 
@@ -344,30 +387,30 @@ public class MapsFragment extends Fragment
         final Area area = new Area(mMap.getProjection().getVisibleRegion());
 
         if (!markersShown.isEmpty()) {
-            final Collection<Marker> toRemove = new ArrayList<>();
-            for (Marker marker : markersShown.keySet()) {
-                if (marker.isInfoWindowShown() && area.isInArea(marker.getPosition())) continue;
-                toRemove.add(marker);
-            }
+            final Collection<Marker> toRemove = Stream.of(markersShown.keySet())
+                    .filter(marker -> !marker.isInfoWindowShown())
+                    .filter(marker -> !area.isInArea(marker.getPosition()))
+                    .toList();
 
             if (toRemove.contains(lastOpenedInfoWindowMarker)) lastOpenedInfoWindowMarker = null;
 
-            for (Marker marker : toRemove) {
-                markersShown.remove(marker);
-                marker.remove();
-            }
+            Stream.of(toRemove)
+                    .peek(markersShown::remove)
+                    .forEach(Marker::remove);
         }
 
-        for (int i = 0; i < Math.min(placemarks.size(), Preferences.MAX_ON_MAP); ++i) {
-            final Placemark p = placemarks.get(i);
-            if (lastOpenedInfoWindowMarker != null
-                    && lastOpenedInfoWindowMarker.isInfoWindowShown()
-                    && Objects.equals(markersShown.get(lastOpenedInfoWindowMarker).getId(), p.getId()))
-                continue;
+        Stream.range(0, Math.min(placemarks.size(), Preferences.MAX_ON_MAP))
+                .map(placemarks::get)
+                .withoutNulls()
+                .filterNot(p -> Objects.isNull(p.getId()))
+                .forEach(p -> {
+                    final Marker marker = mMap.addMarker(p.getMarkerOptions());
+                    markersShown.put(marker, p);
 
-            final Marker marker = mMap.addMarker(p.getMarkerOptions());
-            markersShown.put(marker, p);
-        }
+                    if (Objects.nonNull(selectedPlacemark) && selectedPlacemark.getId().equals(p.getId()))
+                        marker.showInfoWindow();
+
+                });
 
         Log.i(TAG, "markerShown contain " + markersShown.size() + " item(s)");
     }

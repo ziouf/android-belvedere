@@ -1,11 +1,9 @@
 package fr.marin.cyril.belvedere.activities;
 
 import android.Manifest;
-import android.annotation.TargetApi;
 import android.content.pm.ActivityInfo;
 import android.content.pm.PackageManager;
 import android.location.Location;
-import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -20,18 +18,21 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.annimon.stream.Stream;
+
 import java.util.Arrays;
 import java.util.Random;
 
 import fr.marin.cyril.belvedere.Config;
 import fr.marin.cyril.belvedere.R;
 import fr.marin.cyril.belvedere.camera.Camera;
+import fr.marin.cyril.belvedere.enums.Orientation;
 import fr.marin.cyril.belvedere.model.Area;
 import fr.marin.cyril.belvedere.model.Placemark;
 import fr.marin.cyril.belvedere.services.CompassService;
 import fr.marin.cyril.belvedere.services.LocationService;
 import fr.marin.cyril.belvedere.tools.ARPeakFinder;
-import fr.marin.cyril.belvedere.tools.Orientation;
+import fr.marin.cyril.belvedere.tools.Objects;
 import fr.marin.cyril.belvedere.views.CompassView;
 import io.realm.Realm;
 import io.realm.RealmResults;
@@ -41,7 +42,6 @@ import io.realm.Sort;
  * An example full-screen activity that shows and hides the system UI (i.e.
  * status bar and navigation/system bar) with user interaction.
  */
-@TargetApi(Build.VERSION_CODES.LOLLIPOP)
 public class CameraActivity extends AppCompatActivity
         implements ActivityCompat.OnRequestPermissionsResultCallback {
 
@@ -129,8 +129,11 @@ public class CameraActivity extends AppCompatActivity
                         oAzimuth = azimuth;
                         oPitch = pitch;
 
+                        if (Objects.isNull(oLocation) || Objects.isNull(oPitch))
+                            return;
+
                         try (final Realm realm = Realm.getDefaultInstance()) {
-                            final Area area = new ARPeakFinder(null, oLocation, oAzimuth, oPitch).getSearchArea();
+                            final Area area = new ARPeakFinder(oLocation, oAzimuth, oPitch).getSearchArea();
                             final RealmResults<Placemark> results = realm.where(Placemark.class)
                                     .between("latitude", area.getBottom(), area.getTop())
                                     .between("longitude", area.getLeft(), area.getRight())
@@ -190,20 +193,23 @@ public class CameraActivity extends AppCompatActivity
     }
 
     private void onNextPlacemarks(RealmResults<Placemark> placemarks) {
+        final ARPeakFinder pf = new ARPeakFinder(oLocation, oAzimuth, oPitch);
+
         if (placemarks.isEmpty()) {
             Log.d(TAG + ".onNextPlacemarks()", "Placemark empty");
             peak_thumbnail_img.setVisibility(View.INVISIBLE);
             peak_info_tv.setVisibility(View.INVISIBLE);
-            return;
+        } else {
+            Stream.of(placemarks)
+                    .filter(pf::isMatchingPlacemark)
+                    .limit(1)
+                    .forEach(placemark -> {
+                        Log.i(TAG + ".onNextPlacemarks()", "Placemark not empty : " + placemark.getTitle());
+
+                        peak_info_tv.setText(String.format("%s\n%s m", placemark.getTitle(), placemark.getElevation()));
+                        peak_info_tv.setVisibility(View.VISIBLE);
+                    });
         }
-
-        final Placemark placemark = placemarks.first();
-
-        Log.i(TAG + ".onNextPlacemarks()", "Placemark not empty : " + placemark.getTitle());
-
-        peak_info_tv.setText(String.format("%s\n%s m", placemark.getTitle(), placemark.getElevation()));
-        peak_info_tv.setVisibility(View.VISIBLE);
-
     }
 
 }

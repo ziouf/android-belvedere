@@ -9,11 +9,13 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 
+import com.annimon.stream.Collectors;
+import com.annimon.stream.Stream;
+
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-import java.util.stream.Collectors;
 
 import fr.marin.cyril.belvedere.Preferences;
 import fr.marin.cyril.belvedere.R;
@@ -60,8 +62,8 @@ public class CountrySelectDialogFragment extends DialogFragment {
                 .setPositiveButton(R.string.ok, this::onPositiveButtonClick)
                 .setNegativeButton(R.string.cancel, this::onNegativeButtonClick)
                 .setNeutralButton(R.string.select_all, this::onNeutralButtonClick)
-                .setMultiChoiceItems(countries.stream().map(Country::getLabel)
-                        .collect(Collectors.toList()).toArray(new String[0]), null, this::onMultiChoiceClickListener);
+                .setMultiChoiceItems(Stream.of(countries).map(Country::getLabel).collect(Collectors.toList()).toArray(new String[0]),
+                        null, this::onMultiChoiceClickListener);
 
         return builder.create();
     }
@@ -93,7 +95,7 @@ public class CountrySelectDialogFragment extends DialogFragment {
     private void onPositiveButtonClick(DialogInterface dialogInterface, int i) {
         sharedPreferences.edit().putStringSet(
                 Preferences.COUNTRIES,
-                selectedCountries.stream().map(Country::getId).collect(Collectors.toSet())
+                Stream.of(selectedCountries).map(Country::getId).collect(Collectors.toSet())
         ).apply();
 
         this.onClickOkListener.onClick(dialogInterface, i);

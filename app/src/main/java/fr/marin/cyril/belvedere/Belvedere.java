@@ -1,8 +1,8 @@
 package fr.marin.cyril.belvedere;
 
-import java.util.Objects;
 import java.util.concurrent.TimeUnit;
 
+import fr.marin.cyril.belvedere.tools.Objects;
 import io.realm.Realm;
 import io.realm.RealmConfiguration;
 import okhttp3.ConnectionPool;
@@ -40,12 +40,9 @@ public class Belvedere extends android.support.multidex.MultiDexApplication {
 
         Realm.init(this.getApplicationContext());
 
-        RealmConfiguration realmConfiguration = new RealmConfiguration.Builder()
+        Realm.setDefaultConfiguration(new RealmConfiguration.Builder()
                 .deleteRealmIfMigrationNeeded()
                 .schemaVersion(REALM_SCHEMA_VERSION)
-                .build();
-
-        Realm.setDefaultConfiguration(realmConfiguration);
-
+                .build());
     }
 }

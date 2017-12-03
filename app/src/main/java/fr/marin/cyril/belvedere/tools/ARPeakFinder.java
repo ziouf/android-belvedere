@@ -1,12 +1,10 @@
 package fr.marin.cyril.belvedere.tools;
 
-import android.content.Context;
 import android.location.Location;
 import android.util.Log;
 
+import com.annimon.stream.Stream;
 import com.google.android.gms.maps.model.LatLng;
-
-import java.util.Collection;
 
 import fr.marin.cyril.belvedere.model.Area;
 import fr.marin.cyril.belvedere.model.Placemark;
@@ -21,7 +19,7 @@ import fr.marin.cyril.belvedere.model.Placemark;
  * - Comparaison entre les deux azimuth modulo la précision
  */
 public class ARPeakFinder {
-    private static final String TAG = "ARPeakFinder";
+    private static final String TAG = ARPeakFinder.class.getSimpleName();
 
     private static final int MIN_VALUE = 0;
     private static final int MAX_VALUE = 1;
@@ -31,41 +29,17 @@ public class ARPeakFinder {
     private static final double[] ANGULAR_ACCURACY = new double[]{6d, 3d};
     private static final double EARTH_RADIUS_KM = 6371d;
 
-    private static ARPeakFinder singleton;
-
     // Observateur
-    private LatLng oLatLng;
-    private double oElevation;
-    private double oAzimuth;
-    private double oPitch;
+    private final LatLng oLatLng;
+    private final double oElevation;
+    private final double oAzimuth;
+    private final double oPitch;
 
-    private Collection<Placemark> placemarks;
-
-    public ARPeakFinder(Context context) {
-
-    }
-
-    public ARPeakFinder(Context context, Location location, double azimuth, double pitch) {
+    public ARPeakFinder(Location location, double azimuth, double pitch) {
         this.oLatLng = new LatLng(location.getLatitude(), location.getLongitude());
         this.oElevation = location.getAltitude();
         this.oAzimuth = (azimuth + 360) % 360;
         this.oPitch = Math.abs(pitch);
-    }
-
-    public static ARPeakFinder getInstance(Context context) {
-        if (singleton == null) singleton = new ARPeakFinder(context);
-        return singleton;
-    }
-
-    public void updateObserverLocation(final Location location) {
-        this.oLatLng = new LatLng(location.getLatitude(), location.getLongitude());
-        this.oElevation = location.getAltitude();
-        Log.v(TAG, "Update Observer Location");
-    }
-    public void updateObserverOrientation(final double azimuth, final double pitch) {
-        this.oPitch = pitch;
-        this.oAzimuth = azimuth;
-        Log.v(TAG, "Update Observer Orientation");
     }
 
     /**
@@ -73,14 +47,15 @@ public class ARPeakFinder {
      * @return
      */
     private double getAngularAccuracy(final double distance) {
-        for (int step = 0; step < DISTANCE_STEPS.length; ++step)
-            if (distance < DISTANCE_STEPS[step])
-                return ANGULAR_ACCURACY[step];
-        return ANGULAR_ACCURACY[DISTANCE_STEPS.length];
+        return Stream.range(0, DISTANCE_STEPS.length)
+                .filter(step -> distance < DISTANCE_STEPS[step])
+                .map(step -> ANGULAR_ACCURACY[step])
+                .findFirst()
+                .orElse(ANGULAR_ACCURACY[DISTANCE_STEPS.length])
+                ;
     }
 
     /**
-     *
      * @param azimuth
      * @param distance
      * @return
@@ -126,7 +101,6 @@ public class ARPeakFinder {
     }
 
     /**
-     *
      * @param distance
      * @param bearing
      * @return
@@ -138,14 +112,13 @@ public class ARPeakFinder {
         final double lng = Math.toRadians(oLatLng.longitude);
 
         final double lat2 = Math.toDegrees(Math.asin(Math.sin(lat) * Math.cos(dist) + Math.cos(lat) * Math.sin(dist) * Math.cos(brng)));
-        double lng2 = lng + Math.atan2(Math.sin(brng) * Math.sin(dist) * Math.cos(lat), Math.cos(dist) - Math.sin(lat) * Math.sin(lat2));
-        lng2 = Math.toDegrees((lng2 + 3 * Math.PI) % (2 * Math.PI) - Math.PI);
+        final double lng2Rad = lng + Math.atan2(Math.sin(brng) * Math.sin(dist) * Math.cos(lat), Math.cos(dist) - Math.sin(lat) * Math.sin(lat2));
+        final double lng2 = Math.toDegrees((lng2Rad + 3 * Math.PI) % (2 * Math.PI) - Math.PI);
 
         return new LatLng(lat2, lng2);
     }
 
     /**
-     *
      * @return
      */
     public Area getSearchArea() {
@@ -199,30 +172,24 @@ public class ARPeakFinder {
     /**
      * @return
      */
-    public Placemark getMatchingPlacemark() {
-        Placemark placemark = null;
-        for (Placemark p : placemarks) {
-            if (this.isMatchingAccuracy(p)) {
-                Log.i(TAG, "getMatchingPlacemark | Placemark Matching : " + p.getTitle());
-                if (placemark == null
-                        // Si les placemarks sont à l'horizon, on choisit le sommet le plus haut
-                        || (p.getDistance() > DISTANCE_STEPS[DISTANCE_STEPS.length - 1] && p.getElevation() > placemark.getElevation())
-                        // Si les placemarks sont proches, on choisit le plus proche
-                        || (p.getDistance() < DISTANCE_STEPS[DISTANCE_STEPS.length - 1] && p.getMatchLevel() < placemark.getMatchLevel())) {
+    public boolean isMatchingPlacemark(Placemark placemark) {
+        if (this.isMatchingAccuracy(placemark)) {
+            Log.i(TAG, "getMatchingPlacemark | Placemark Matching : " + placemark.getTitle());
+            if ((placemark.getDistance() > DISTANCE_STEPS[DISTANCE_STEPS.length - 1])
+                    // Si les placemarks sont proches, on choisit le plus proche
+                    || (placemark.getDistance() < DISTANCE_STEPS[DISTANCE_STEPS.length - 1])) {
 
-                    placemark = p;
-                }
+                return true;
             }
         }
-        return placemark;
+        return false;
     }
 
     /**
-     *
      * @param p
      * @return
      */
-    private boolean isMatchingAccuracy(final Placemark p) {
+    public boolean isMatchingAccuracy(final Placemark p) {
         final double distance = Utils.getDistanceBetween(oLatLng, p.getLatLng());
         final double tAzimuth = this.getTheoricalAzimuth(p.getLatLng());
         final double tPitch = this.getTheoricalPitch(p.getLatLng(), p.getElevation());
@@ -233,7 +200,6 @@ public class ARPeakFinder {
     }
 
     /**
-     *
      * @param targetTheoreticalAzimuth
      * @param distance
      * @return
@@ -248,7 +214,6 @@ public class ARPeakFinder {
     }
 
     /**
-     *
      * @param theoricalPitch
      * @param distance
      * @return
@@ -257,13 +222,5 @@ public class ARPeakFinder {
         final double angularAccuracy = this.getAngularAccuracy(distance);
         return oPitch > theoricalPitch - angularAccuracy
                 && oPitch < theoricalPitch + angularAccuracy;
-    }
-
-    public Collection<Placemark> getPlacemarks() {
-        return placemarks;
-    }
-
-    public void setPlacemarks(Collection<Placemark> placemarks) {
-        this.placemarks = placemarks;
     }
 }

@@ -19,11 +19,11 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
 import java.util.Locale;
-import java.util.Objects;
 
 import fr.marin.cyril.belvedere.Preferences;
 import fr.marin.cyril.belvedere.R;
 import fr.marin.cyril.belvedere.model.Placemark;
+import fr.marin.cyril.belvedere.tools.Objects;
 import io.realm.Realm;
 
 public class AboutActivity extends AppCompatActivity {
@@ -81,14 +81,14 @@ public class AboutActivity extends AppCompatActivity {
         @Override
         public View getView(int position, View convertView, ViewGroup parent) {
             View view = convertView;
-            if (view == null) {
+            if (Objects.isNull(view)) {
                 LayoutInflater inflater = LayoutInflater.from(getContext());
                 view = inflater.inflate(R.layout.about_item, null);
             }
 
             Pair<String, String> item = getItem(position);
 
-            if (item == null) return view;
+            if (Objects.isNull(item)) return view;
 
             TextView about_label = view.findViewById(R.id.about_label);
             TextView about_value = view.findViewById(R.id.about_value);

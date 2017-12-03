@@ -8,10 +8,12 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.Menu;
 import android.view.MenuItem;
 
 import fr.marin.cyril.belvedere.R;
 import fr.marin.cyril.belvedere.fragments.MapsFragment;
+import fr.marin.cyril.belvedere.tools.Objects;
 
 /**
  * Created by cyril on 31/05/16.
@@ -24,8 +26,6 @@ public class MainActivity extends AppCompatActivity {
     private ActionBarDrawerToggle toggle;
     private DrawerLayout drawerLayout;
 
-//    private Bundle fragmentBundle = new Bundle();
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -33,20 +33,16 @@ public class MainActivity extends AppCompatActivity {
 
         // Init Menu Drawer
         drawerLayout = findViewById(R.id.drawer_layout);
-        final NavigationView navigationView = findViewById(R.id.navigation_view);
-        toggle = new ActionBarDrawerToggle(this, drawerLayout, R.string.open, R.string.close);
+        toggle = new ActionBarDrawerToggle(this, drawerLayout, findViewById(R.id.toolbar), R.string.open, R.string.close);
         drawerLayout.addDrawerListener(toggle);
 
         // Init
-        assert navigationView != null;
-        navigationView.setNavigationItemSelectedListener(
-                new NavigationView.OnNavigationItemSelectedListener() {
-                    @Override
-                    public boolean onNavigationItemSelected(MenuItem item) {
-                        return selectDrawerItem(item);
-                    }
-                }
-        );
+        final NavigationView navigationView = findViewById(R.id.navigation_view);
+        if (Objects.nonNull(navigationView)) {
+            navigationView.setNavigationItemSelectedListener(
+                    this::selectDrawerItem
+            );
+        }
 
         // Fragment manager
         fragmentManager = getSupportFragmentManager();
@@ -55,6 +51,17 @@ public class MainActivity extends AppCompatActivity {
         fragmentManager.beginTransaction()
                 .replace(R.id.fragment_placeholder, MapsFragment.getInstance(), MapsFragment.class.getSimpleName())
                 .commit();
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+//        getMenuInflater().inflate(R.menu.menu, menu);
+//        // Retrieve the SearchView and plug it into SearchManager
+//        final SearchView searchView = (SearchView) MenuItemCompat.getActionView(menu.findItem(R.id.action_search));
+//        final SearchManager searchManager = (SearchManager) getSystemService(SEARCH_SERVICE);
+//        if (Objects.nonNull(searchManager))
+//            searchView.setSearchableInfo(searchManager.getSearchableInfo(getComponentName()));
+        return true;
     }
 
     @Override

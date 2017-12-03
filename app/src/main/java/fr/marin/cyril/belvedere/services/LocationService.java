@@ -19,6 +19,7 @@ import java.util.Collection;
 import java.util.HashSet;
 
 import fr.marin.cyril.belvedere.R;
+import fr.marin.cyril.belvedere.tools.Objects;
 
 /**
  * Created by cyril on 31/05/16.
@@ -51,7 +52,7 @@ public class LocationService implements LocationListener {
     }
 
     public static LocationService getInstance(Context context) {
-        if (singleton == null) singleton = new LocationService(context);
+        if (Objects.isNull(singleton)) singleton = new LocationService(context);
         return singleton;
     }
 

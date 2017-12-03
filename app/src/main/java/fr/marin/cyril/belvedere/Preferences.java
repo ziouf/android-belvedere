@@ -12,13 +12,4 @@ public class Preferences {
     public static final String COUNTRIES = "countries";
     public static final int MAX_ON_MAP = Runtime.getRuntime().availableProcessors() * 15;
 
-    private final long defaultValue;
-
-    Preferences(long defaultValue) {
-        this.defaultValue = defaultValue;
-    }
-
-    public long defaultValue() {
-        return defaultValue;
-    }
 }

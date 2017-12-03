@@ -8,10 +8,10 @@
 
     <!-- Floating Action Button -->
     <dimen name="fab_margin">0dp</dimen>
-    <dimen name="fab_margin_right">0dp</dimen>
-    <dimen name="fab_margin_top">0dp</dimen>
+    <dimen name="fab_margin_right">12dp</dimen>
+    <dimen name="fab_margin_top">6dp</dimen>
     <dimen name="fab_margin_left">0dp</dimen>
-    <dimen name="fab_margin_bottom">0dp</dimen>
+    <dimen name="fab_margin_bottom">8dp</dimen>
 
     <!-- Nav Header -->
     <dimen name="nav_header_padding">16dp</dimen>

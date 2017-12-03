@@ -13,7 +13,6 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Date;
-import java.util.Objects;
 
 import fr.marin.cyril.belvedere.Belvedere;
 import fr.marin.cyril.belvedere.Preferences;
@@ -21,6 +20,7 @@ import fr.marin.cyril.belvedere.async.interfaces.OnProgressListener;
 import fr.marin.cyril.belvedere.datasource.WikiDataQueryManager;
 import fr.marin.cyril.belvedere.model.Country;
 import fr.marin.cyril.belvedere.model.Placemark;
+import fr.marin.cyril.belvedere.tools.Objects;
 import fr.marin.cyril.belvedere.tools.SparqlResponseJsonParser;
 import io.realm.Realm;
 import io.realm.RealmQuery;
@@ -84,7 +84,7 @@ public class DataInitTaskLoader extends AsyncTaskLoader<Void> {
     private boolean isNetworkOk() {
         final NetworkInfo netInfo = cm.getActiveNetworkInfo();
 
-        if (netInfo == null) return false;
+        if (Objects.isNull(netInfo)) return false;
         if (!netInfo.isConnected()) return false;
 
         if (netInfo.getType() == ConnectivityManager.TYPE_WIFI)
@@ -118,7 +118,7 @@ public class DataInitTaskLoader extends AsyncTaskLoader<Void> {
     }
 
     private void initMountainsByCountry(Country country, Realm realm) {
-        Log.i(TAG + ".initMountainsByCountry()", "Start (" + country + ")");
+        Log.i(TAG, "Start (" + country + ")");
         final SparqlResponseJsonParser<Placemark> parser = new SparqlResponseJsonParser<>(Placemark.class);
         final String query = WikiDataQueryManager.WikiDataQueries.GET_ALL_MOUTAINS_IN_COUNTRY.getQuery(country.getId());
 
@@ -136,9 +136,9 @@ public class DataInitTaskLoader extends AsyncTaskLoader<Void> {
             }
         } catch (Exception e) {
             realm.cancelTransaction();
-            Log.e(TAG + ".loadInBackground()", e.getClass().getSimpleName() + " : " + e.getMessage());
-            Log.d(TAG + ".loadInBackground()", e.getClass().getSimpleName() + " : " + e.getMessage(), e);
+            Log.e(TAG, e.getClass().getSimpleName() + " : " + e.getMessage());
+            Log.d(TAG, e.getClass().getSimpleName() + " : " + e.getMessage(), e);
         }
-        Log.i(TAG + ".initMountainsByCountry()", "End (count : " + realm.where(Placemark.class).count() + ")");
+        Log.i(TAG, "End (count : " + realm.where(Placemark.class).count() + ")");
     }
 }

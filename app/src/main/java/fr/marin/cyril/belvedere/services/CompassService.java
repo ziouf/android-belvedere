@@ -7,9 +7,12 @@ import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 
+import com.annimon.stream.Stream;
+
 import java.util.HashSet;
 
-import fr.marin.cyril.belvedere.tools.Orientation;
+import fr.marin.cyril.belvedere.enums.Orientation;
+import fr.marin.cyril.belvedere.tools.Objects;
 
 /**
  * Created by cyril on 31/05/16.
@@ -21,7 +24,7 @@ public class CompassService
 
     private static CompassService singleton;
 
-    private final Context context;
+    private final PackageManager pm;
     private final HashSet<CompassEventListener> compassEventListenerSet;
     private final SensorManager sensorManager;
 
@@ -32,13 +35,13 @@ public class CompassService
     private float[] oMat;
 
     private CompassService(Context context) {
-        this.context = context;
+        this.pm = context.getPackageManager();
         this.compassEventListenerSet = new HashSet<>();
         this.sensorManager = (SensorManager) context.getSystemService(Context.SENSOR_SERVICE);
     }
 
     public static CompassService getInstance(Context context) {
-        if (singleton == null) singleton = new CompassService(context);
+        if (Objects.isNull(singleton)) singleton = new CompassService(context);
         return singleton;
     }
 
@@ -47,7 +50,6 @@ public class CompassService
     }
 
     public void resume() {
-        final PackageManager pm = context.getPackageManager();
         if (pm.hasSystemFeature(PackageManager.FEATURE_SENSOR_ACCELEROMETER)
                 && pm.hasSystemFeature(PackageManager.FEATURE_SENSOR_COMPASS)) {
             this.sensorManager.registerListener(this, sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER), SensorManager.SENSOR_DELAY_UI);
@@ -78,8 +80,8 @@ public class CompassService
                 SensorManager.getOrientation(R, oMat);
 
                 // Run event
-                for (CompassEventListener e : compassEventListenerSet)
-                    e.run();
+                Stream.of(compassEventListenerSet)
+                        .forEach(CompassEventListener::run);
             }
         }
     }
@@ -90,7 +92,7 @@ public class CompassService
     }
 
     private float[] lowPass(float[] input, float[] output) {
-        if (output == null) return input;
+        if (Objects.isNull(output)) return input;
 
         for (int i = 0; i < input.length; ++i)
             output[i] = output[i] + ALPHA * (input[i] - output[i]);

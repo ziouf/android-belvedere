@@ -20,6 +20,7 @@ import android.os.Handler;
 import android.os.HandlerThread;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
+import android.util.Log;
 import android.util.Size;
 import android.view.Surface;
 import android.view.TextureView;
@@ -29,6 +30,7 @@ import android.widget.Toast;
 import java.util.Collections;
 
 import fr.marin.cyril.belvedere.R;
+import fr.marin.cyril.belvedere.tools.Objects;
 
 /**
  * Created by Cyril on 21/04/2016.
@@ -38,13 +40,15 @@ final class CameraApi21
         extends Camera
         implements TextureView.SurfaceTextureListener {
 
+    private static final String TAG = CameraApi21.class.getSimpleName();
+
     private Size mPreviewSize;
     private TextureView mTextureView;
     private CameraDevice cameraDevice;
     private CaptureRequest.Builder previewBuilder;
     private CameraCaptureSession previewSession;
 
-    public CameraApi21(Activity context) {
+    CameraApi21(Activity context) {
         super(context);
 
         // Get sreen size
@@ -54,7 +58,7 @@ final class CameraApi21
 
         // Init Camera view
         getContext().findViewById(R.id.camera_preview_sv).setVisibility(View.GONE);
-        this.mTextureView = (TextureView) context.findViewById(R.id.camera_preview_tv);
+        this.mTextureView = context.findViewById(R.id.camera_preview_tv);
         if (this.mTextureView != null) this.mTextureView.setSurfaceTextureListener(this);
     }
 
@@ -83,7 +87,7 @@ final class CameraApi21
     }
 
     private void transformImage(int width, int height) {
-        if (mPreviewSize == null || mTextureView == null) {
+        if (Objects.isNull(mPreviewSize) || Objects.isNull(mTextureView)) {
             return;
         }
         Matrix matrix = new Matrix();
@@ -115,7 +119,7 @@ final class CameraApi21
             String cameraId = cameraManager.getCameraIdList()[0];
             cameraManager.openCamera(cameraId, this.getCameraDeviceStateCallback(), null);
         } catch (CameraAccessException e) {
-
+            Log.e(TAG, "Exception", e);
         }
 
         this.transformImage(width, height);
@@ -142,7 +146,7 @@ final class CameraApi21
             public void onOpened(@NonNull CameraDevice camera) {
                 cameraDevice = camera;
                 SurfaceTexture texture = mTextureView.getSurfaceTexture();
-                if (texture == null) return;
+                if (Objects.isNull(texture)) return;
 
                 try {
                     previewBuilder = cameraDevice.createCaptureRequest(CameraDevice.TEMPLATE_PREVIEW);
@@ -198,7 +202,7 @@ final class CameraApi21
                 try {
                     previewSession.setRepeatingRequest(previewBuilder.build(), null, backgroundHandler);
                 } catch (CameraAccessException ignore) {
-
+                    Log.e(TAG, "Exception", ignore);
                 }
             }
 

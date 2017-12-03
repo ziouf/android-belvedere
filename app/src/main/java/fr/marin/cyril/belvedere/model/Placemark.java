@@ -1,13 +1,12 @@
 package fr.marin.cyril.belvedere.model;
 
+import com.fasterxml.jackson.annotation.JsonAlias;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
-import java.util.Objects;
-
 import fr.marin.cyril.belvedere.R;
-import fr.marin.cyril.belvedere.annotations.JsonField;
+import fr.marin.cyril.belvedere.tools.Objects;
 import io.realm.RealmModel;
 import io.realm.annotations.Ignore;
 import io.realm.annotations.PrimaryKey;
@@ -22,26 +21,26 @@ public class Placemark implements RealmModel {
 
     @PrimaryKey
     @Required
-    @JsonField("m")
+    @JsonAlias("m")
     private String id;
 
     @Required
-    @JsonField("lat")
+    @JsonAlias("lat")
     private Double latitude;
     @Required
-    @JsonField("lon")
+    @JsonAlias("lon")
     private Double longitude;
     @Required
-    @JsonField("altitude")
+    @JsonAlias("altitude")
     private Double elevation = 0d;
 
     @Required
-    @JsonField("mLabel")
+    @JsonAlias("mLabel")
     private String title = "";
 
     private String comment = "";
 
-    @JsonField("article")
+    @JsonAlias("article")
     private String article;
 
     @Ignore

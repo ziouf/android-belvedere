@@ -10,6 +10,7 @@ import android.view.View;
 import java.io.IOException;
 
 import fr.marin.cyril.belvedere.R;
+import fr.marin.cyril.belvedere.tools.Objects;
 
 /**
  * Created by Cyril on 21/04/2016.
@@ -18,10 +19,12 @@ final class CameraApi01
         extends Camera
         implements SurfaceHolder.Callback {
 
+    private static final String TAG = CameraApi21.class.getSimpleName();
+
     private SurfaceHolder mHolder;
     private android.hardware.Camera mCamera;
 
-    public CameraApi01(Activity context) {
+    CameraApi01(Activity context) {
         super(context);
 
         context.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
@@ -34,12 +37,12 @@ final class CameraApi01
         mHolder.setType(SurfaceHolder.SURFACE_TYPE_PUSH_BUFFERS);
     }
 
-    public static android.hardware.Camera getCameraInstance() {
+    static android.hardware.Camera getCameraInstance() {
         android.hardware.Camera c = null;
         try {
             c = android.hardware.Camera.open();
         } catch (Exception e) {
-            Log.e("Camera", "Not available");
+            Log.e(TAG, "Not available");
         }
         return c;
     }
@@ -51,7 +54,7 @@ final class CameraApi01
 
     @Override
     public void surfaceChanged(SurfaceHolder holder, int format, int width, int height) {
-        if (mHolder.getSurface() == null) return;
+        if (Objects.isNull(mHolder.getSurface())) return;
 
         this.stopCameraPreview();
         this.startCameraPreview(holder);
@@ -63,14 +66,14 @@ final class CameraApi01
     }
 
     private void startCameraPreview(SurfaceHolder holder) {
-        if (this.mCamera == null)
+        if (Objects.isNull(this.mCamera))
             this.mCamera = CameraApi01.getCameraInstance();
 
         try {
             mCamera.setPreviewDisplay(holder);
             mCamera.startPreview();
         } catch (IOException ignore) {
-            Log.e("Camera", "Start preview failed");
+            Log.e(TAG, "Start preview failed");
         }
     }
 
@@ -78,7 +81,7 @@ final class CameraApi01
         try {
             mCamera.stopPreview();
         } catch (Exception ignore) {
-            Log.e("Camera", "Stop preview failed");
+            Log.e(TAG, "Stop preview failed");
         }
     }
 

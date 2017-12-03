@@ -19,7 +19,7 @@
 -dontskipnonpubliclibraryclasses
 #-dontobfuscate
 -forceprocessing
--optimizationpasses 5
+-optimizationpasses 10
 
 # OkHttp
 -dontwarn okhttp3.**

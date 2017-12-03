@@ -1,4 +1,4 @@
-<resources>
+<resources xmlns:android="http://schemas.android.com/apk/res/android">
 
     <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar" />
 
@@ -21,7 +21,13 @@
 
     <style name="AppTheme.Main.Compat" />
 
-    <style name="AppTheme.Main.ActionBar" />
+    <style name="AppTheme.Main.ActionBar">
+
+        <!-- Toolbar -->
+        <item name="background">@drawable/actionbar_layers</item>
+        <item name="android:background">@drawable/actionbar_layers</item>
+
+    </style>
 
     <style name="AppTheme.Main.ActionBar.Transparent">
         <item name="background">@android:color/transparent</item>
@@ -45,10 +51,27 @@
     </style>
 
     <style name="AppTheme.FloatingActionButton">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+
+        <item name="android:layout_marginStart">@dimen/fab_margin_left</item>
+        <item name="android:layout_marginEnd">@dimen/fab_margin_right</item>
         <item name="android:layout_marginLeft">@dimen/fab_margin_left</item>
-        <item name="android:layout_marginTop">@dimen/fab_margin_top</item>
         <item name="android:layout_marginRight">@dimen/fab_margin_right</item>
+        <item name="android:layout_marginTop">@dimen/fab_margin_top</item>
         <item name="android:layout_marginBottom">@dimen/fab_margin_bottom</item>
+
+        <item name="android:background">@color/background_black</item>
+    </style>
+
+    <style name="AppTheme.FloatingActionButton.Location">
+        <item name="android:src">@android:drawable/ic_menu_mylocation</item>
+        <item name="android:background">@android:color/background_light</item>
+        <!--<item name="app:backgroundTint">@android:color/background_light</item>-->
+    </style>
+
+    <style name="AppTheme.FloatingActionButton.Camera">
+        <item name="android:src">@drawable/ic_camera</item>
     </style>
 
     <style name="AppTheme.FloatingActionButton.Compat" />

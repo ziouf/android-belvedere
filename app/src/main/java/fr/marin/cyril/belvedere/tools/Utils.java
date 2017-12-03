@@ -18,8 +18,13 @@ import java.security.NoSuchAlgorithmException;
  * Created by Cyril on 13/04/2016.
  */
 public class Utils {
-    private static final String TAG = "Utils";
+    private static final String TAG = Utils.class.getSimpleName();
 
+    /**
+     * @param a
+     * @param b
+     * @return
+     */
     public static float getDistanceBetween(LatLng a, LatLng b) {
         float[] result = new float[3];
         Location.distanceBetween(a.latitude, a.longitude, b.latitude, b.longitude, result);
@@ -39,6 +44,11 @@ public class Utils {
         return result[0];
     }
 
+    /**
+     *
+     * @param degrees
+     * @return
+     */
     public static String getDirectionFrom0to360Degrees(float degrees) {
         if (degrees >= 360 - 22.5 || degrees < 22.5) {
             return "N";
@@ -68,6 +78,11 @@ public class Utils {
         return null;
     }
 
+    /**
+     *
+     * @param degrees
+     * @return
+     */
     public static String getDirectionFromMinus180to180Degrees(float degrees) {
         if (degrees >= -22.5 && degrees < 22.5) {
             return "N";
@@ -132,6 +147,12 @@ public class Utils {
         return sb.toString();
     }
 
+    /**
+     *
+     * @param context
+     * @param id
+     * @return
+     */
     public static Drawable getDrawable(Context context, int id) {
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP_MR1)
             return context.getResources().getDrawable(id);

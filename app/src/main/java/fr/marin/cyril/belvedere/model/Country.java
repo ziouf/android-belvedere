@@ -3,7 +3,8 @@ package fr.marin.cyril.belvedere.model;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-import fr.marin.cyril.belvedere.annotations.JsonField;
+import com.fasterxml.jackson.annotation.JsonAlias;
+
 import io.realm.RealmModel;
 import io.realm.annotations.PrimaryKey;
 import io.realm.annotations.RealmClass;
@@ -28,10 +29,10 @@ public class Country implements RealmModel, Parcelable {
     };
     @Required
     @PrimaryKey
-    @JsonField("country")
+    @JsonAlias("country")
     private String id;
     @Required
-    @JsonField("countryLabel")
+    @JsonAlias("countryLabel")
     private String label;
 
     public Country() {

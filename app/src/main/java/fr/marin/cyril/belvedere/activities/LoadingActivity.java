@@ -36,7 +36,6 @@ import fr.marin.cyril.belvedere.tools.SparqlResponseJsonParser;
 import io.realm.Realm;
 import io.realm.Sort;
 
-// TODO : Affichage de la liste des Pays dans une popup si la liste des pays est vide dans les SharedPreferences
 public class LoadingActivity extends Activity
         implements ActivityCompat.OnRequestPermissionsResultCallback, LoaderManager.LoaderCallbacks<Void> {
 
