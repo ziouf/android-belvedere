@@ -365,9 +365,12 @@ public class MapsFragment extends Fragment
     private void onNextPlacemarks(RealmResults<Placemark> placemarks) {
         final Area area = new Area(mMap.getProjection().getVisibleRegion());
 
+        if (Objects.nonNull(selectedPlacemark) && !area.isInArea(selectedPlacemark.getLatLng())) {
+            selectedPlacemark = null;
+        }
+
         if (!markersShown.isEmpty()) {
             final Collection<Marker> toRemove = Stream.of(markersShown.keySet())
-                    .filter(marker -> !marker.isInfoWindowShown())
                     .filter(marker -> !area.isInArea(marker.getPosition()))
                     .toList();
 
@@ -386,8 +389,9 @@ public class MapsFragment extends Fragment
                     final Marker marker = mMap.addMarker(p.getMarkerOptions());
                     markersShown.put(marker, p);
 
-                    if (Objects.nonNull(selectedPlacemark) && selectedPlacemark.getId().equals(p.getId()))
+                    if (Objects.nonNull(selectedPlacemark) && selectedPlacemark.getId().equals(p.getId())) {
                         marker.showInfoWindow();
+                    }
 
                 });
 
