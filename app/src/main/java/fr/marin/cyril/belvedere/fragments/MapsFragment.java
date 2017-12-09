@@ -15,14 +15,12 @@ import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
-import android.text.Editable;
-import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
-import android.widget.ArrayAdapter;
+import android.widget.AdapterView;
 import android.widget.AutoCompleteTextView;
 import android.widget.ImageButton;
 import android.widget.TextView;
@@ -39,9 +37,7 @@ import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
 import java.util.Collection;
-import java.util.Collections;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import fr.marin.cyril.belvedere.Config;
@@ -54,7 +50,7 @@ import fr.marin.cyril.belvedere.model.Placemark;
 import fr.marin.cyril.belvedere.services.CompassService;
 import fr.marin.cyril.belvedere.services.LocationService;
 import fr.marin.cyril.belvedere.tools.Objects;
-import io.realm.Case;
+import fr.marin.cyril.belvedere.tools.PlacemarkSearchAdapter;
 import io.realm.Realm;
 import io.realm.RealmResults;
 import io.realm.Sort;
@@ -76,7 +72,6 @@ public class MapsFragment extends Fragment
     private Location location;
 
     private Placemark selectedPlacemark = null;
-    private List<Placemark> items = Collections.emptyList();
 
     private LocationService locationService;
     private LocationService.LocationEventListener locationEventListener;
@@ -127,43 +122,26 @@ public class MapsFragment extends Fragment
         }
 
         final AutoCompleteTextView searchQuery = rootView.findViewById(R.id.search_edittext);
-        searchQuery.addTextChangedListener(new TextWatcher() {
+        searchQuery.setAdapter(new PlacemarkSearchAdapter(getActivity()));
+        searchQuery.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
-            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence charSequence, int start, int before, int count) {
-                items = realm.where(Placemark.class)
-                        .contains("title", charSequence.toString(), Case.INSENSITIVE)
-                        .findAllSorted("title", Sort.ASCENDING);
-
-                searchQuery.setAdapter(new ArrayAdapter<>(
-                        getActivity(),
-                        android.R.layout.simple_dropdown_item_1line,
-                        Stream.of(items).map(Placemark::getTitle).toList()
-                ));
-            }
-
-            @Override
-            public void afterTextChanged(Editable editable) {
-
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                //
+                selectedPlacemark = (Placemark) parent.getAdapter().getItem(position);
+                searchQuery.setText(null);
+                // Zoom on placemark
+                final LatLng latLng = selectedPlacemark.getLatLng();
+                if (Objects.nonNull(latLng)) {
+                    mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, 12));
+                }
+                // Close keyboard
+                final InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
+                if (Objects.nonNull(imm)) {
+                    imm.hideSoftInputFromWindow(rootView.getWindowToken(), 0);
+                }
             }
         });
-        searchQuery.setOnItemClickListener((adapterView, view, i, l) -> {
-            // Zoom on placemark
-            selectedPlacemark = items.get(i);
-            final LatLng latLng = selectedPlacemark.getLatLng();
-            if (Objects.nonNull(latLng)) {
-                mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, 12));
-            }
-            // Close keyboard
-            final InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
-            if (Objects.nonNull(imm)) {
-                imm.hideSoftInputFromWindow(rootView.getWindowToken(), 0);
-            }
-        });
+
         final ImageButton cancel = rootView.findViewById(R.id.search_cancel);
         cancel.setOnClickListener(view -> searchQuery.setText(null));
 
@@ -300,6 +278,7 @@ public class MapsFragment extends Fragment
                 tvTitle.setText(p.getTitle());
                 tvAltitude.setText(p.getElevationString());
 
+                selectedPlacemark = p;
                 lastOpenedInfoWindowMarker = marker;
 
                 return v;
