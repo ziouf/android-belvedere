@@ -73,8 +73,6 @@ public class MapsFragment extends Fragment
     private GoogleMap mMap;
     private Location location;
 
-    private Placemark selectedPlacemark = null;
-
     private LocationService locationService;
     private LocationService.LocationEventListener locationEventListener;
 
@@ -127,11 +125,9 @@ public class MapsFragment extends Fragment
         searchQuery.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                //
-                selectedPlacemark = (Placemark) parent.getAdapter().getItem(position);
-                searchQuery.setText(null);
+                final Placemark p = (Placemark) parent.getAdapter().getItem(position);
                 // Zoom on placemark
-                final LatLng latLng = selectedPlacemark.getLatLng();
+                final LatLng latLng = p.getLatLng();
                 if (Objects.nonNull(latLng)) {
                     mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, 12));
                 }
@@ -280,7 +276,6 @@ public class MapsFragment extends Fragment
                 tvTitle.setText(p.getTitle());
                 tvAltitude.setText(p.getElevationString());
 
-                selectedPlacemark = p;
                 lastOpenedInfoWindowMarker = marker;
 
                 return v;
@@ -364,10 +359,6 @@ public class MapsFragment extends Fragment
     private void onNextPlacemarks(RealmResults<Placemark> placemarks) {
         final Area area = new Area(mMap.getProjection().getVisibleRegion());
 
-        if (Objects.nonNull(selectedPlacemark) && !area.isInArea(selectedPlacemark.getLatLng())) {
-            selectedPlacemark = null;
-        }
-
         if (!markersShown.isEmpty()) {
             final Collection<Marker> toRemove = Stream.of(markersShown.keySet())
                     .filter(marker -> !area.isInArea(marker.getPosition()))
@@ -387,10 +378,6 @@ public class MapsFragment extends Fragment
                 .forEach(p -> {
                     final Marker marker = mMap.addMarker(p.getMarkerOptions());
                     markersShown.put(marker, p);
-
-                    if (Objects.nonNull(selectedPlacemark) && Objects.equals(p.getId(), selectedPlacemark.getId())) {
-                        marker.showInfoWindow();
-                    }
                 });
 
         Log.i(TAG, "markerShown contain " + markersShown.size() + " item(s)");

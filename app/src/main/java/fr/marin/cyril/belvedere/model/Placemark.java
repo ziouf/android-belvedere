@@ -139,6 +139,10 @@ public class Placemark implements RealmModel {
 
     @Override
     public String toString() {
+        return title;
+    }
+
+    public String toStringLong() {
         return "Placemark{" +
                 "id='" + id + '\'' +
                 ", latitude=" + (Objects.isNull(latitude) ? "null" : latitude) +
