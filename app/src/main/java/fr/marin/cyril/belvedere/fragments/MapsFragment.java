@@ -55,12 +55,11 @@ import io.realm.Sort;
 /**
  * Created by cyril on 31/05/16.
  */
-public class MapsFragment extends Fragment
+public class MapsFragment
+        extends Fragment
         implements OnMapReadyCallback {
 
     private static final String TAG = MapsFragment.class.getSimpleName();
-
-//    private final Map<Marker, Placemark> markersShown = new HashMap<>();
 
     private View rootView;
     private Marker compassMarker;
@@ -214,7 +213,7 @@ public class MapsFragment extends Fragment
         this.centerMapCameraOnMyPosition();
 
         final PackageManager pm = getActivity().getPackageManager();
-        if (compassMarker == null
+        if (Objects.isNull(compassMarker)
                 && (pm.hasSystemFeature(PackageManager.FEATURE_SENSOR_ACCELEROMETER)
                 && pm.hasSystemFeature(PackageManager.FEATURE_SENSOR_COMPASS))) {
 
@@ -237,10 +236,11 @@ public class MapsFragment extends Fragment
                     new CompassService.CompassEventListener() {
                         @Override
                         public void onSensorChanged(float azimuth, float pitch) {
-                            if (compassMarker == null || locationService == null) return;
+                            if (Objects.isNull(compassMarker) || Objects.isNull(locationService))
+                                return;
 
                             GeomagneticField geoField = locationService.getGeoField();
-                            if (geoField != null) azimuth += geoField.getDeclination();
+                            if (Objects.nonNull(geoField)) azimuth += geoField.getDeclination();
                             azimuth += 360;
                             azimuth %= 360;
                             compassMarker.setRotation(azimuth);
@@ -295,7 +295,7 @@ public class MapsFragment extends Fragment
     }
 
     private GoogleMap.OnMarkerClickListener getOnMarkerClickListener() {
-        return marker -> (compassMarker != null) && marker.getId().equals(compassMarker.getId());
+        return marker -> (Objects.nonNull(compassMarker)) && marker.getId().equals(compassMarker.getId());
     }
 
     /**
@@ -304,8 +304,8 @@ public class MapsFragment extends Fragment
     private void centerMapCameraOnMyPosition() {
         if (ContextCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED)
             return;
-        if (mMap == null) return;
-        if (locationService.getLocation() == null) return;
+        if (Objects.isNull(mMap)) return;
+        if (Objects.isNull(locationService.getLocation())) return;
 
         final Location location = locationService.getLocation();
         final LatLng latLng = new LatLng(location.getLatitude(), location.getLongitude());
@@ -315,11 +315,11 @@ public class MapsFragment extends Fragment
     @Override
     public void onPause() {
         super.onPause();
-        if (locationService != null) {
+        if (Objects.nonNull(locationService)) {
             locationService.pause();
             locationService.unRegisterLocationEventListener(locationEventListener);
         }
-        if (compassService != null) {
+        if (Objects.nonNull(compassService)) {
             compassService.pause();
             compassService.unRegisterCompassEventListener(compassServiceEventListener);
         }
@@ -328,15 +328,15 @@ public class MapsFragment extends Fragment
     @Override
     public void onResume() {
         super.onResume();
-        if (locationService != null) {
+        if (Objects.nonNull(locationService)) {
             locationService.resume();
-            if (locationEventListener != null)
+            if (Objects.nonNull(locationEventListener))
                 locationService.registerLocationEventListener(locationEventListener);
         }
-        if (compassService != null) {
+        if (Objects.nonNull(compassService)) {
             compassService.resume();
             compassService.setOrientation(Orientation.PORTRAIT);
-            if (compassServiceEventListener != null)
+            if (Objects.nonNull(compassServiceEventListener))
                 compassService.registerCompassEventListener(compassServiceEventListener);
         }
     }
@@ -358,6 +358,5 @@ public class MapsFragment extends Fragment
                         .map(realm::copyFromRealm)
                         .toList()
         );
-//        Log.i(TAG, "markerShown contain " + markersShown.size() + " item(s)");
     }
 }
