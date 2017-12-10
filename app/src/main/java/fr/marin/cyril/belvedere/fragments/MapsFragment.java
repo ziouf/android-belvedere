@@ -36,10 +36,6 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.Map;
-
 import fr.marin.cyril.belvedere.Config;
 import fr.marin.cyril.belvedere.Preferences;
 import fr.marin.cyril.belvedere.R;
@@ -49,6 +45,7 @@ import fr.marin.cyril.belvedere.model.Area;
 import fr.marin.cyril.belvedere.model.Placemark;
 import fr.marin.cyril.belvedere.services.CompassService;
 import fr.marin.cyril.belvedere.services.LocationService;
+import fr.marin.cyril.belvedere.tools.MapsMarkerManager;
 import fr.marin.cyril.belvedere.tools.Objects;
 import fr.marin.cyril.belvedere.tools.PlacemarkSearchAdapter;
 import io.realm.Realm;
@@ -63,11 +60,11 @@ public class MapsFragment extends Fragment
 
     private static final String TAG = MapsFragment.class.getSimpleName();
 
-    private final Map<Marker, Placemark> markersShown = new HashMap<>();
+//    private final Map<Marker, Placemark> markersShown = new HashMap<>();
 
     private View rootView;
     private Marker compassMarker;
-    private Marker lastOpenedInfoWindowMarker;
+    private MapsMarkerManager markerManager;
 
     private Realm realm;
     private GoogleMap mMap;
@@ -196,6 +193,7 @@ public class MapsFragment extends Fragment
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
+        markerManager = new MapsMarkerManager(mMap);
         realm.addChangeListener(realm -> MapsFragment.this.updateMarkersOnMap());
 
         // For showing a move to my loction button
@@ -264,10 +262,12 @@ public class MapsFragment extends Fragment
 
             @Override
             public View getInfoContents(Marker marker) {
-                if (compassMarker != null && marker.getId().equals(compassMarker.getId()))
+                if (Objects.isNull(marker))
+                    return null;
+                if (Objects.nonNull(compassMarker) && marker.getId().equals(compassMarker.getId()))
                     return null;
 
-                final Placemark p = markersShown.get(marker);
+                final Placemark p = markerManager.getPlacemark(marker);
 
                 final View v = getActivity().getLayoutInflater().inflate(R.layout.maps_info_window, null);
                 final TextView tvTitle = v.findViewById(R.id.iw_title);
@@ -275,8 +275,6 @@ public class MapsFragment extends Fragment
 
                 tvTitle.setText(p.getTitle());
                 tvAltitude.setText(p.getElevationString());
-
-                lastOpenedInfoWindowMarker = marker;
 
                 return v;
             }
@@ -288,7 +286,7 @@ public class MapsFragment extends Fragment
      */
     private GoogleMap.OnInfoWindowClickListener getOnInfoWindowClickListener() {
         return marker -> {
-            final Placemark p = markersShown.get(marker);
+            final Placemark p = markerManager.getPlacemark(marker);
             if (Objects.nonNull(p.getArticle()) && !p.getArticle().isEmpty())
                 startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(p.getArticle())));
             else
@@ -343,9 +341,6 @@ public class MapsFragment extends Fragment
         }
     }
 
-    /**
-     *
-     */
     private void updateMarkersOnMap() {
         final Area area = new Area(mMap.getProjection().getVisibleRegion());
         final RealmResults<Placemark> results = realm.where(Placemark.class)
@@ -357,29 +352,12 @@ public class MapsFragment extends Fragment
     }
 
     private void onNextPlacemarks(RealmResults<Placemark> placemarks) {
-        final Area area = new Area(mMap.getProjection().getVisibleRegion());
-
-        if (!markersShown.isEmpty()) {
-            final Collection<Marker> toRemove = Stream.of(markersShown.keySet())
-                    .filter(marker -> !area.isInArea(marker.getPosition()))
-                    .toList();
-
-            if (toRemove.contains(lastOpenedInfoWindowMarker)) lastOpenedInfoWindowMarker = null;
-
-            Stream.of(toRemove)
-                    .peek(markersShown::remove)
-                    .forEach(Marker::remove);
-        }
-
-        Stream.range(0, Math.min(placemarks.size(), Preferences.MAX_ON_MAP))
-                .map(placemarks::get)
-                .withoutNulls()
-                .filterNot(p -> Objects.isNull(p.getId()))
-                .forEach(p -> {
-                    final Marker marker = mMap.addMarker(p.getMarkerOptions());
-                    markersShown.put(marker, p);
-                });
-
-        Log.i(TAG, "markerShown contain " + markersShown.size() + " item(s)");
+        this.markerManager.putIfNotPresent(
+                Stream.range(0, Math.min(placemarks.size(), Preferences.MAX_ON_MAP))
+                        .map(placemarks::get)
+                        .map(realm::copyFromRealm)
+                        .toList()
+        );
+//        Log.i(TAG, "markerShown contain " + markersShown.size() + " item(s)");
     }
 }
