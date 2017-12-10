@@ -160,7 +160,7 @@ public class MapsFragment
         compassService = CompassService.getInstance(getActivity());
 
         // Initialisation du fragment Maps
-        SupportMapFragment mapFragment = (SupportMapFragment) getChildFragmentManager().findFragmentById(R.id.google_maps_fragment);
+        final SupportMapFragment mapFragment = (SupportMapFragment) getChildFragmentManager().findFragmentById(R.id.google_maps_fragment);
         mapFragment.getMapAsync(this);
 
         // Initialisation des FAB
@@ -173,7 +173,7 @@ public class MapsFragment
         final FloatingActionButton myPosButton = getActivity().findViewById(R.id.myPosition_button);
 
         // Désactivation du bouton AR si le terminal ne dispose pas des capteurs ou autorisations suffisantes
-        PackageManager pm = getActivity().getPackageManager();
+        final PackageManager pm = getActivity().getPackageManager();
         if (!pm.hasSystemFeature(PackageManager.FEATURE_CAMERA)
                 || !pm.hasSystemFeature(PackageManager.FEATURE_SENSOR_ACCELEROMETER)
                 || !pm.hasSystemFeature(PackageManager.FEATURE_SENSOR_COMPASS))
