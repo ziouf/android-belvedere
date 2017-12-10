@@ -62,7 +62,9 @@ public class MapsFragment extends Fragment
         implements OnMapReadyCallback {
 
     private static final String TAG = MapsFragment.class.getSimpleName();
+
     private final Map<Marker, Placemark> markersShown = new HashMap<>();
+
     private View rootView;
     private Marker compassMarker;
     private Marker lastOpenedInfoWindowMarker;
@@ -102,12 +104,11 @@ public class MapsFragment extends Fragment
         if (Objects.isNull(this.rootView))
             this.rootView = inflater.inflate(R.layout.fragment_maps, container, false);
 
-        this.initActionBar();
-        return rootView;
+        return this.initActionBar(rootView);
     }
 
-    private void initActionBar() {
-        if (Objects.isNull(rootView)) return;
+    private View initActionBar(View rootView) {
+        if (Objects.isNull(rootView)) return null;
 
         final AppCompatActivity activity = (AppCompatActivity) getActivity();
         if (Objects.nonNull(activity)) {
@@ -145,6 +146,7 @@ public class MapsFragment extends Fragment
         final ImageButton cancel = rootView.findViewById(R.id.search_cancel);
         cancel.setOnClickListener(view -> searchQuery.setText(null));
 
+        return rootView;
     }
 
     @Override
@@ -351,15 +353,12 @@ public class MapsFragment extends Fragment
      */
     private void updateMarkersOnMap() {
         final Area area = new Area(mMap.getProjection().getVisibleRegion());
-
-        try (final Realm realm = Realm.getDefaultInstance()) {
-            final RealmResults<Placemark> results = realm.where(Placemark.class)
-                    .between("latitude", area.getBottom(), area.getTop())
-                    .between("longitude", area.getLeft(), area.getRight())
-                    .findAllSortedAsync("elevation", Sort.DESCENDING);
-            results.addChangeListener(this::onNextPlacemarks);
-            results.load();
-        }
+        final RealmResults<Placemark> results = realm.where(Placemark.class)
+                .between("latitude", area.getBottom(), area.getTop())
+                .between("longitude", area.getLeft(), area.getRight())
+                .findAllSortedAsync("elevation", Sort.DESCENDING);
+        results.addChangeListener(this::onNextPlacemarks);
+        results.load();
     }
 
     private void onNextPlacemarks(RealmResults<Placemark> placemarks) {
@@ -389,10 +388,9 @@ public class MapsFragment extends Fragment
                     final Marker marker = mMap.addMarker(p.getMarkerOptions());
                     markersShown.put(marker, p);
 
-                    if (Objects.nonNull(selectedPlacemark) && selectedPlacemark.getId().equals(p.getId())) {
+                    if (Objects.nonNull(selectedPlacemark) && Objects.equals(p.getId(), selectedPlacemark.getId())) {
                         marker.showInfoWindow();
                     }
-
                 });
 
         Log.i(TAG, "markerShown contain " + markersShown.size() + " item(s)");

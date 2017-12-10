@@ -17,7 +17,7 @@ public abstract class PlacemarkTitleFilter extends Filter {
     protected FilterResults performFiltering(CharSequence constraint) {
         final FilterResults results = new FilterResults();
 
-        if (Objects.isNull(constraint) || constraint.length() <= 2) {
+        if (Objects.isNull(constraint) || constraint.length() < 2) {
             results.count = 0;
             results.values = null;
         } else {
