@@ -122,10 +122,21 @@ public class MapsFragment
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 final Placemark p = (Placemark) parent.getAdapter().getItem(position);
+                markerManager.putIfNotPresent(p);
                 // Zoom on placemark
                 final LatLng latLng = p.getLatLng();
                 if (Objects.nonNull(latLng)) {
-                    mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, 12));
+                    mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, 12), new GoogleMap.CancelableCallback() {
+                        @Override
+                        public void onFinish() {
+                            markerManager.getMarker(p).showInfoWindow();
+                        }
+
+                        @Override
+                        public void onCancel() {
+
+                        }
+                    });
                 }
                 // Close keyboard
                 final InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
