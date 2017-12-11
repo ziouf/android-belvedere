@@ -37,7 +37,7 @@ final class CameraApi01
         mHolder.setType(SurfaceHolder.SURFACE_TYPE_PUSH_BUFFERS);
     }
 
-    static android.hardware.Camera getCameraInstance() {
+    private static android.hardware.Camera getCameraInstance() {
         android.hardware.Camera c = null;
         try {
             c = android.hardware.Camera.open();

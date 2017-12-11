@@ -1,4 +1,4 @@
-<resources xmlns:android="http://schemas.android.com/apk/res/android">
+<resources>
 
     <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar" />
 
@@ -67,7 +67,7 @@
     <style name="AppTheme.FloatingActionButton.Location">
         <item name="android:src">@android:drawable/ic_menu_mylocation</item>
         <item name="android:background">@android:color/background_light</item>
-        <!--<item name="app:backgroundTint">@android:color/background_light</item>-->
+        <item name="backgroundTint">@android:color/background_light</item>
     </style>
 
     <style name="AppTheme.FloatingActionButton.Camera">

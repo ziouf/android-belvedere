@@ -14,13 +14,13 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
-import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.annimon.stream.Stream;
 
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.Random;
 
 import fr.marin.cyril.belvedere.Config;
@@ -54,11 +54,11 @@ public class CameraActivity extends AppCompatActivity
 
     private CompassService compassService;
     private CompassService.CompassEventListener compassEventListener;
+
     private LocationService locationService;
     private LocationService.LocationEventListener locationEventListener;
 
     private Camera camera;
-    private ImageView peak_thumbnail_img;
     private TextView peak_info_tv;
 
     private Location oLocation;
@@ -84,7 +84,6 @@ public class CameraActivity extends AppCompatActivity
 
         // Init Camera
         this.camera = Camera.getCameraInstance(this);
-        this.peak_thumbnail_img = findViewById(R.id.peak_thumbnail_img);
         this.peak_info_tv = findViewById(R.id.peak_info_tv);
     }
 
@@ -105,7 +104,7 @@ public class CameraActivity extends AppCompatActivity
 
         // Hide action bar
         final ActionBar actionBar = getSupportActionBar();
-        if (actionBar != null && actionBar.isShowing()) actionBar.hide();
+        if (Objects.nonNull(actionBar) && actionBar.isShowing()) actionBar.hide();
 
         // Configuration du mode immersif
         getWindow().getDecorView()
@@ -188,17 +187,16 @@ public class CameraActivity extends AppCompatActivity
 
     private void updateCompassView(float azimuth) {
         final CompassView compassView = findViewById(R.id.camera_compass_view);
-        if (compassView != null)
-            compassView.updateAzimuthAndRedraw(azimuth);
+        if (Objects.nonNull(compassView)) compassView.updateAzimuthAndRedraw(azimuth);
     }
 
-    private void onNextPlacemarks(RealmResults<Placemark> placemarks) {
+    private void onNextPlacemarks(Collection<Placemark> placemarks) {
         final ARPeakFinder pf = new ARPeakFinder(oLocation, oAzimuth, oPitch);
 
         if (placemarks.isEmpty()) {
             Log.d(TAG + ".onNextPlacemarks()", "Placemark empty");
-            peak_thumbnail_img.setVisibility(View.INVISIBLE);
             peak_info_tv.setVisibility(View.INVISIBLE);
+
         } else {
             Stream.of(placemarks)
                     .filter(pf::isMatchingPlacemark)

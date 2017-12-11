@@ -9,11 +9,13 @@ import android.util.AttributeSet;
 import android.util.Log;
 import android.view.View;
 
+import fr.marin.cyril.belvedere.tools.Objects;
+
 /**
  * Created by Cyril on 04/05/2016.
  */
 public class CompassView extends View {
-    private static final String TAG = "CompassView";
+    private static final String TAG = CompassView.class.getSimpleName();
 
     private static final int A = 0;
     private static final int L = 1;
@@ -101,7 +103,7 @@ public class CompassView extends View {
     }
 
     private void drawScale(Canvas canvas, int width, String label) {
-        if (label != null) {
+        if (Objects.nonNull(label)) {
             final Rect r = new Rect((getWidth() - width) - SCALE_WIDTH, getHeight() * 3 / 4, (getWidth() - width) + SCALE_WIDTH, getHeight());
             canvas.drawRect(r, painter);
             canvas.drawText(label, (getWidth() - width), getHeight() * 2 / 3, painter);

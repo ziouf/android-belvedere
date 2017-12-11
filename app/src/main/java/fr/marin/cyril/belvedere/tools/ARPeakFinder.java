@@ -51,8 +51,7 @@ public class ARPeakFinder {
                 .filter(step -> distance < DISTANCE_STEPS[step])
                 .map(step -> ANGULAR_ACCURACY[step])
                 .findFirst()
-                .orElse(ANGULAR_ACCURACY[DISTANCE_STEPS.length])
-                ;
+                .orElse(ANGULAR_ACCURACY[DISTANCE_STEPS.length]);
     }
 
     /**
@@ -60,13 +59,10 @@ public class ARPeakFinder {
      * @param distance
      * @return
      */
-    private double[] getAzimuthAccuracy(final double azimuth, final double distance) {
-        final double aangularAccuracy = this.getAngularAccuracy(distance);
-        Log.d(TAG, String.format("Azimuth accuracy : %s", aangularAccuracy));
-        final double[] minMax = new double[]{azimuth - aangularAccuracy, azimuth + aangularAccuracy};
-        if (minMax[MIN_VALUE] < 0) minMax[MIN_VALUE] += 360;
-        if (minMax[MAX_VALUE] >= 360) minMax[MAX_VALUE] -= 360;
-        return minMax;
+    private AzimuthRange getAzimuthAccuracy(final double azimuth, final double distance) {
+        final double angularAccuracy = this.getAngularAccuracy(distance);
+        Log.d(TAG, String.format("Azimuth accuracy : %s", angularAccuracy));
+        return AzimuthRange.get(azimuth - angularAccuracy, azimuth + angularAccuracy);
     }
 
     /**
@@ -205,12 +201,12 @@ public class ARPeakFinder {
      * @return
      */
     private boolean isMatchingAzimuth(final double targetTheoreticalAzimuth, final double distance) {
-        final double[] minMax = this.getAzimuthAccuracy(targetTheoreticalAzimuth, distance);
-        if (minMax[MIN_VALUE] > minMax[MAX_VALUE])
-            return (oAzimuth > 0 && oAzimuth < minMax[MAX_VALUE])
-                    && (oAzimuth > minMax[MIN_VALUE] && oAzimuth < 360);
+        final AzimuthRange minMax = this.getAzimuthAccuracy(targetTheoreticalAzimuth, distance);
+        if (minMax.min > minMax.max)
+            return (oAzimuth > 0 && oAzimuth < minMax.max)
+                    && (oAzimuth > minMax.min && oAzimuth < 360);
         else
-            return (oAzimuth > minMax[MIN_VALUE] && oAzimuth < minMax[MAX_VALUE]);
+            return (oAzimuth > minMax.min && oAzimuth < minMax.max);
     }
 
     /**
@@ -222,5 +218,22 @@ public class ARPeakFinder {
         final double angularAccuracy = this.getAngularAccuracy(distance);
         return oPitch > theoricalPitch - angularAccuracy
                 && oPitch < theoricalPitch + angularAccuracy;
+    }
+
+    /**
+     *
+     */
+    private static final class AzimuthRange {
+        final double min;
+        final double max;
+
+        private AzimuthRange(double min, double max) {
+            this.min = min < 0 ? min + 360 : min;
+            this.max = max >= 360 ? max - 360 : max;
+        }
+
+        public static AzimuthRange get(double min, double max) {
+            return new AzimuthRange(min, max);
+        }
     }
 }
