@@ -17,8 +17,6 @@ import android.view.WindowManager;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.annimon.stream.Stream;
-
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Random;
@@ -30,7 +28,9 @@ import fr.marin.cyril.belvedere.enums.Orientation;
 import fr.marin.cyril.belvedere.model.Area;
 import fr.marin.cyril.belvedere.model.Placemark;
 import fr.marin.cyril.belvedere.services.CompassService;
-import fr.marin.cyril.belvedere.services.LocationService;
+import fr.marin.cyril.belvedere.services.ILocationService;
+import fr.marin.cyril.belvedere.services.impl.AbstractLocationEventListener;
+import fr.marin.cyril.belvedere.services.impl.LocationServiceFactory;
 import fr.marin.cyril.belvedere.tools.ARPeakFinder;
 import fr.marin.cyril.belvedere.tools.Objects;
 import fr.marin.cyril.belvedere.views.CompassView;
@@ -55,8 +55,8 @@ public class CameraActivity extends AppCompatActivity
     private CompassService compassService;
     private CompassService.CompassEventListener compassEventListener;
 
-    private LocationService locationService;
-    private LocationService.LocationEventListener locationEventListener;
+    private ILocationService nativeLocationService;
+    private AbstractLocationEventListener locationEventListener;
 
     private Camera camera;
     private TextView peak_info_tv;
@@ -80,7 +80,7 @@ public class CameraActivity extends AppCompatActivity
 
         // Init services
         this.compassService = CompassService.getInstance(getApplicationContext());
-        this.locationService = LocationService.getInstance(getApplicationContext());
+        this.nativeLocationService = LocationServiceFactory.getLocationService(getApplicationContext());
 
         // Init Camera
         this.camera = Camera.getCameraInstance(this);
@@ -147,12 +147,11 @@ public class CameraActivity extends AppCompatActivity
 
         // Location Service
         Log.i(TAG, "Location Service init");
-        this.locationService.resume();
-        this.locationEventListener = locationService.registerLocationEventListener(
-                new LocationService.LocationEventListener() {
+        this.nativeLocationService.resume();
+        this.locationEventListener = nativeLocationService.registerLocationEventListener(
+                new AbstractLocationEventListener() {
                     @Override
                     public void onSensorChanged(Location location) {
-                        locationService.removeLocationUpdates();
                         oLocation = location;
                     }
                 }
@@ -166,8 +165,8 @@ public class CameraActivity extends AppCompatActivity
         // Pause Camera
         this.camera.pause();
         // Location Service
-        this.locationService.pause();
-        this.locationService.unRegisterLocationEventListener(locationEventListener);
+        this.nativeLocationService.pause();
+        this.nativeLocationService.unRegisterLocationEventListener(locationEventListener);
         // Compass Service
         this.compassService.pause();
         this.compassService.unRegisterCompassEventListener(compassEventListener);
@@ -191,23 +190,23 @@ public class CameraActivity extends AppCompatActivity
     }
 
     private void onNextPlacemarks(Collection<Placemark> placemarks) {
-        final ARPeakFinder pf = new ARPeakFinder(oLocation, oAzimuth, oPitch);
-
-        if (placemarks.isEmpty()) {
-            Log.d(TAG + ".onNextPlacemarks()", "Placemark empty");
-            peak_info_tv.setVisibility(View.INVISIBLE);
-
-        } else {
-            Stream.of(placemarks)
-                    .filter(pf::isMatchingPlacemark)
-                    .limit(1)
-                    .forEach(placemark -> {
-                        Log.i(TAG + ".onNextPlacemarks()", "Placemark not empty : " + placemark.getTitle());
-
-                        peak_info_tv.setText(String.format("%s\n%s m", placemark.getTitle(), placemark.getElevation()));
-                        peak_info_tv.setVisibility(View.VISIBLE);
-                    });
-        }
+//        final ARPeakFinder pf = new ARPeakFinder(oLocation, oAzimuth, oPitch);
+//
+//        if (placemarks.isEmpty()) {
+//            Log.d(TAG + ".onNextPlacemarks()", "Placemark empty");
+//            peak_info_tv.setVisibility(View.INVISIBLE);
+//
+//        } else {
+//            Stream.of(placemarks)
+//                    .filter(pf::isMatchingPlacemark)
+//                    .limit(1)
+//                    .forEach(placemark -> {
+//                        Log.i(TAG + ".onNextPlacemarks()", "Placemark not empty : " + placemark.getTitle());
+//
+//                        peak_info_tv.setText(String.format("%s\n%s m", placemark.getTitle(), placemark.getElevation()));
+//                        peak_info_tv.setVisibility(View.VISIBLE);
+//                    });
+//        }
     }
 
 }

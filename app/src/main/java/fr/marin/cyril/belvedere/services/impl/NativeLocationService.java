@@ -1,11 +1,10 @@
-package fr.marin.cyril.belvedere.services;
+package fr.marin.cyril.belvedere.services.impl;
 
 import android.Manifest;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.hardware.GeomagneticField;
 import android.location.Criteria;
 import android.location.Location;
 import android.location.LocationListener;
@@ -15,45 +14,40 @@ import android.provider.Settings;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AlertDialog;
 
+import com.annimon.stream.Stream;
+
 import java.util.Collection;
 import java.util.HashSet;
 
 import fr.marin.cyril.belvedere.R;
-import fr.marin.cyril.belvedere.tools.Objects;
+import fr.marin.cyril.belvedere.services.ILocationService;
 
 /**
  * Created by cyril on 31/05/16.
- * TODO : Utiliser les Google API au lieu des capteurs de l'appareil
- * https://developer.android.com/training/location/receive-location-updates.html
  */
-public class LocationService implements LocationListener {
-    private static final String TAG = LocationService.class.getSimpleName();
+class NativeLocationService
+        implements ILocationService, LocationListener {
+    private static final String TAG = NativeLocationService.class.getSimpleName();
 
-    private static final int LOCATION_UPDATE_TIME = 5 * 1000; // 5 secondes
-    private static final int LOCATION_UPDATE_DISTANCE = 15;   // 15 metres
-
-    private static LocationService singleton = null;
     private final Context context;
-    private final HashSet<LocationEventListener> locationEventListenerSet;
+    private final HashSet<AbstractLocationEventListener> locationEventListenerSet;
 
     private Location location;
-    private GeomagneticField geoField;
     private LocationManager locationManager;
 
     private AlertDialog dialog;
     private boolean dialogOpened = false;
     private boolean dialogAlreadyShown = false;
 
-    private LocationService(Context context) {
+    private NativeLocationService(Context context) {
         this.context = context;
         this.locationManager = (LocationManager) context.getSystemService(Context.LOCATION_SERVICE);
         this.dialog = this.initLocationServiceDialog(context);
         this.locationEventListenerSet = new HashSet<>();
     }
 
-    public static LocationService getInstance(Context context) {
-        if (Objects.isNull(singleton)) singleton = new LocationService(context);
-        return singleton;
+    public static NativeLocationService getInstance(Context context) {
+        return new NativeLocationService(context);
     }
 
     public void resume() {
@@ -85,7 +79,7 @@ public class LocationService implements LocationListener {
     public void registerLocationUpdates() {
         if (ActivityCompat.checkSelfPermission(context, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
             this.locationManager.requestLocationUpdates(locationManager.getBestProvider(new Criteria(), true),
-                    LOCATION_UPDATE_TIME, LOCATION_UPDATE_DISTANCE, this);
+                    LocationServiceFactory.LOCATION_UPDATE_TIME, LocationServiceFactory.LOCATION_UPDATE_DISTANCE, this);
         }
     }
 
@@ -101,15 +95,9 @@ public class LocationService implements LocationListener {
     @Override
     public void onLocationChanged(Location location) {
         this.location = location;
-        this.geoField = new GeomagneticField(
-                (float) location.getLatitude(),
-                (float) location.getLongitude(),
-                (float) location.getAltitude(),
-                location.getTime()
-        );
 
-        for (LocationEventListener e : locationEventListenerSet)
-            e.run();
+        Stream.of(locationEventListenerSet)
+                .forEach(l -> l.onSensorChanged(location));
     }
 
     @Override
@@ -154,10 +142,6 @@ public class LocationService implements LocationListener {
         return location;
     }
 
-    public GeomagneticField getGeoField() {
-        return geoField;
-    }
-
     /**
      * Initialisation de la popup
      *
@@ -188,24 +172,12 @@ public class LocationService implements LocationListener {
     }
 
 
-    public LocationEventListener registerLocationEventListener(LocationEventListener eventListener) {
+    public AbstractLocationEventListener registerLocationEventListener(AbstractLocationEventListener eventListener) {
         this.locationEventListenerSet.add(eventListener);
         return eventListener;
     }
 
-    public void unRegisterLocationEventListener(LocationEventListener eventListener) {
+    public void unRegisterLocationEventListener(AbstractLocationEventListener eventListener) {
         this.locationEventListenerSet.remove(eventListener);
-    }
-
-    /**
-     *
-     */
-    public static abstract class LocationEventListener implements Runnable {
-        @Override
-        public void run() {
-            this.onSensorChanged(singleton.location);
-        }
-
-        public abstract void onSensorChanged(Location location);
     }
 }

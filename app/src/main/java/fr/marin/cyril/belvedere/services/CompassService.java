@@ -63,11 +63,12 @@ public class CompassService
 
     @Override
     public void onSensorChanged(SensorEvent event) {
-        if (event.sensor.getType() == Sensor.TYPE_ACCELEROMETER)
+        if (event.sensor.getType() == Sensor.TYPE_ACCELEROMETER) {
             graMat = lowPass(event.values.clone(), graMat);
 
-        if (event.sensor.getType() == Sensor.TYPE_MAGNETIC_FIELD)
+        } else if (event.sensor.getType() == Sensor.TYPE_MAGNETIC_FIELD) {
             geoMat = lowPass(event.values.clone(), geoMat);
+        }
 
         if (graMat != null && geoMat != null) {
             oMat = new float[3];

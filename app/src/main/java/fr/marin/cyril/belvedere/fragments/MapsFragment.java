@@ -44,7 +44,9 @@ import fr.marin.cyril.belvedere.enums.Orientation;
 import fr.marin.cyril.belvedere.model.Area;
 import fr.marin.cyril.belvedere.model.Placemark;
 import fr.marin.cyril.belvedere.services.CompassService;
-import fr.marin.cyril.belvedere.services.LocationService;
+import fr.marin.cyril.belvedere.services.ILocationService;
+import fr.marin.cyril.belvedere.services.impl.AbstractLocationEventListener;
+import fr.marin.cyril.belvedere.services.impl.LocationServiceFactory;
 import fr.marin.cyril.belvedere.tools.MapsMarkerManager;
 import fr.marin.cyril.belvedere.tools.Objects;
 import fr.marin.cyril.belvedere.tools.PlacemarkSearchAdapter;
@@ -69,8 +71,8 @@ public class MapsFragment
     private GoogleMap mMap;
     private Location location;
 
-    private LocationService locationService;
-    private LocationService.LocationEventListener locationEventListener;
+    private ILocationService locationService;
+    private AbstractLocationEventListener locationEventListener;
 
     private CompassService compassService;
     private CompassService.CompassEventListener compassServiceEventListener;
@@ -156,7 +158,7 @@ public class MapsFragment
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-        locationService = LocationService.getInstance(getActivity());
+        locationService = LocationServiceFactory.getLocationService(getActivity());
         compassService = CompassService.getInstance(getActivity());
 
         // Initialisation du fragment Maps
@@ -191,12 +193,12 @@ public class MapsFragment
         myPosButton.setOnClickListener(v -> {
             Log.i(TAG, "Click myPosButton");
             // Demande d'activation des services de geolocalisation si désactivés
-            if (!locationService.isLocationServiceEnabled())
-                locationService.askForLocationServiceActivation();
+//            if (!locationService.isLocationServiceEnabled())
+//                locationService.askForLocationServiceActivation();
             // Centrage de la vue sur la geolocalisation de l'utilisateur
             centerMapCameraOnMyPosition();
             // Abonnement au trigger de geolocalisation
-            locationService.registerLocationUpdates();
+//            locationService.registerLocationUpdates();
         });
     }
 
@@ -234,7 +236,7 @@ public class MapsFragment
             );
 
             locationEventListener = locationService.registerLocationEventListener(
-                    new LocationService.LocationEventListener() {
+                    new AbstractLocationEventListener() {
                         @Override
                         public void onSensorChanged(Location location) {
                             MapsFragment.this.location = location;
@@ -250,8 +252,15 @@ public class MapsFragment
                             if (Objects.isNull(compassMarker) || Objects.isNull(locationService))
                                 return;
 
-                            GeomagneticField geoField = locationService.getGeoField();
-                            if (Objects.nonNull(geoField)) azimuth += geoField.getDeclination();
+                            if (Objects.nonNull(location)) {
+                                final GeomagneticField geoField = new GeomagneticField(
+                                        (float) location.getLatitude(),
+                                        (float) location.getLongitude(),
+                                        (float) location.getAltitude(),
+                                        location.getTime()
+                                );
+                                azimuth += geoField.getDeclination();
+                            }
                             azimuth += 360;
                             azimuth %= 360;
                             compassMarker.setRotation(azimuth);
@@ -316,9 +325,8 @@ public class MapsFragment
         if (ContextCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED)
             return;
         if (Objects.isNull(mMap)) return;
-        if (Objects.isNull(locationService.getLocation())) return;
+        if (Objects.isNull(location)) return;
 
-        final Location location = locationService.getLocation();
         final LatLng latLng = new LatLng(location.getLatitude(), location.getLongitude());
         mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, 12));
     }
