@@ -44,8 +44,8 @@ import fr.marin.cyril.belvedere.enums.Orientation;
 import fr.marin.cyril.belvedere.model.Area;
 import fr.marin.cyril.belvedere.model.Placemark;
 import fr.marin.cyril.belvedere.services.CompassService;
+import fr.marin.cyril.belvedere.services.ILocationEventListener;
 import fr.marin.cyril.belvedere.services.ILocationService;
-import fr.marin.cyril.belvedere.services.impl.AbstractLocationEventListener;
 import fr.marin.cyril.belvedere.services.impl.LocationServiceFactory;
 import fr.marin.cyril.belvedere.tools.MapsMarkerManager;
 import fr.marin.cyril.belvedere.tools.Objects;
@@ -72,7 +72,7 @@ public class MapsFragment
     private Location location;
 
     private ILocationService locationService;
-    private AbstractLocationEventListener locationEventListener;
+    private ILocationEventListener locationEventListener;
 
     private CompassService compassService;
     private CompassService.CompassEventListener compassServiceEventListener;
@@ -236,7 +236,7 @@ public class MapsFragment
             );
 
             locationEventListener = locationService.registerLocationEventListener(
-                    new AbstractLocationEventListener() {
+                    new ILocationEventListener() {
                         @Override
                         public void onSensorChanged(Location location) {
                             MapsFragment.this.location = location;

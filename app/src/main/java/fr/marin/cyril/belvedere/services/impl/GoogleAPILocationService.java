@@ -15,6 +15,7 @@ import com.google.android.gms.location.LocationServices;
 
 import java.util.HashSet;
 
+import fr.marin.cyril.belvedere.services.ILocationEventListener;
 import fr.marin.cyril.belvedere.services.ILocationService;
 
 /**
@@ -25,7 +26,7 @@ import fr.marin.cyril.belvedere.services.ILocationService;
 class GoogleAPILocationService implements ILocationService {
     private static final String TAG = GoogleAPILocationService.class.getSimpleName();
 
-    private final HashSet<AbstractLocationEventListener> locationEventListenerSet;
+    private final HashSet<ILocationEventListener> locationEventListenerSet;
     private final FusedLocationProviderClient mFusedLocationClient;
     private final LocationRequest mLocationRequest;
     private final Context context;
@@ -40,14 +41,14 @@ class GoogleAPILocationService implements ILocationService {
         }
     };
 
-    public GoogleAPILocationService(Context context) {
+    private GoogleAPILocationService(Context context) {
         this.context = context;
         this.mFusedLocationClient = LocationServices.getFusedLocationProviderClient(context);
         this.mLocationRequest = this.createLocationRequest();
         this.locationEventListenerSet = new HashSet<>();
     }
 
-    public static ILocationService getInstance(Context context) {
+    static ILocationService getInstance(Context context) {
         return new GoogleAPILocationService(context);
     }
 
@@ -82,13 +83,13 @@ class GoogleAPILocationService implements ILocationService {
     }
 
     @Override
-    public AbstractLocationEventListener registerLocationEventListener(AbstractLocationEventListener eventListener) {
+    public ILocationEventListener registerLocationEventListener(ILocationEventListener eventListener) {
         this.locationEventListenerSet.add(eventListener);
         return eventListener;
     }
 
     @Override
-    public void unRegisterLocationEventListener(AbstractLocationEventListener eventListener) {
+    public void unRegisterLocationEventListener(ILocationEventListener eventListener) {
         this.locationEventListenerSet.remove(eventListener);
     }
 }

@@ -28,8 +28,8 @@ import fr.marin.cyril.belvedere.enums.Orientation;
 import fr.marin.cyril.belvedere.model.Area;
 import fr.marin.cyril.belvedere.model.Placemark;
 import fr.marin.cyril.belvedere.services.CompassService;
+import fr.marin.cyril.belvedere.services.ILocationEventListener;
 import fr.marin.cyril.belvedere.services.ILocationService;
-import fr.marin.cyril.belvedere.services.impl.AbstractLocationEventListener;
 import fr.marin.cyril.belvedere.services.impl.LocationServiceFactory;
 import fr.marin.cyril.belvedere.tools.ARPeakFinder;
 import fr.marin.cyril.belvedere.tools.Objects;
@@ -56,7 +56,7 @@ public class CameraActivity extends AppCompatActivity
     private CompassService.CompassEventListener compassEventListener;
 
     private ILocationService nativeLocationService;
-    private AbstractLocationEventListener locationEventListener;
+    private ILocationEventListener locationEventListener;
 
     private Camera camera;
     private TextView peak_info_tv;
@@ -149,7 +149,7 @@ public class CameraActivity extends AppCompatActivity
         Log.i(TAG, "Location Service init");
         this.nativeLocationService.resume();
         this.locationEventListener = nativeLocationService.registerLocationEventListener(
-                new AbstractLocationEventListener() {
+                new ILocationEventListener() {
                     @Override
                     public void onSensorChanged(Location location) {
                         oLocation = location;
