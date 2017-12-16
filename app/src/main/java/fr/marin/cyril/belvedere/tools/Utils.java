@@ -1,9 +1,7 @@
 package fr.marin.cyril.belvedere.tools;
 
 import android.content.Context;
-import android.graphics.drawable.Drawable;
 import android.location.Location;
-import android.os.Build;
 import android.util.Log;
 
 import com.google.android.gms.maps.model.LatLng;
@@ -146,18 +144,4 @@ public class Utils {
 
         return sb.toString();
     }
-
-    /**
-     *
-     * @param context
-     * @param id
-     * @return
-     */
-    public static Drawable getDrawable(Context context, int id) {
-        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP_MR1)
-            return context.getResources().getDrawable(id);
-        else
-            return context.getDrawable(id);
-    }
-
 }

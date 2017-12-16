@@ -14,7 +14,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.Arrays;
@@ -59,7 +58,6 @@ public class CameraActivity extends AppCompatActivity
     private ILocationEventListener locationEventListener;
 
     private Camera camera;
-    private TextView peak_info_tv;
 
     private Location oLocation;
     private float oAzimuth;
@@ -84,7 +82,6 @@ public class CameraActivity extends AppCompatActivity
 
         // Init Camera
         this.camera = Camera.getCameraInstance(this);
-        this.peak_info_tv = findViewById(R.id.peak_info_tv);
     }
 
     @Override

@@ -19,7 +19,7 @@ final class CameraApi01
         extends Camera
         implements SurfaceHolder.Callback {
 
-    private static final String TAG = CameraApi21.class.getSimpleName();
+    private static final String TAG = CameraApi01.class.getSimpleName();
 
     private SurfaceHolder mHolder;
     private android.hardware.Camera mCamera;
@@ -28,13 +28,12 @@ final class CameraApi01
         super(context);
 
         context.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
-        context.findViewById(R.id.camera_binocular_mask).setVisibility(View.GONE);
         context.findViewById(R.id.camera_preview_tv).setVisibility(View.GONE);
 
         mCamera = CameraApi01.getCameraInstance();
         mHolder = ((SurfaceView) getContext().findViewById(R.id.camera_preview_sv)).getHolder();
         mHolder.addCallback(this);
-        mHolder.setType(SurfaceHolder.SURFACE_TYPE_PUSH_BUFFERS);
+//        mHolder.setType(SurfaceHolder.SURFACE_TYPE_PUSH_BUFFERS);
     }
 
     private static android.hardware.Camera getCameraInstance() {

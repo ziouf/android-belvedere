@@ -5,5 +5,5 @@ package fr.marin.cyril.belvedere.async.interfaces;
  */
 
 public interface OnProgressListener<T> {
-    void onProgress(T... args);
+    void onProgress(T[] args);
 }

@@ -1,10 +1,8 @@
 package fr.marin.cyril.belvedere.services.impl;
 
-import android.Manifest;
+import android.annotation.SuppressLint;
 import android.content.Context;
-import android.content.pm.PackageManager;
 import android.location.Location;
-import android.support.v4.app.ActivityCompat;
 
 import com.annimon.stream.Stream;
 import com.google.android.gms.location.FusedLocationProviderClient;
@@ -22,14 +20,12 @@ import fr.marin.cyril.belvedere.services.ILocationService;
  * Created by cyril on 12/12/17.
  * https://developer.android.com/training/location/receive-location-updates.html
  */
-
 class GoogleAPILocationService implements ILocationService {
     private static final String TAG = GoogleAPILocationService.class.getSimpleName();
 
     private final HashSet<ILocationEventListener> locationEventListenerSet;
     private final FusedLocationProviderClient mFusedLocationClient;
     private final LocationRequest mLocationRequest;
-    private final Context context;
     private Location location;
     private final LocationCallback mLocationCallback = new LocationCallback() {
         @Override
@@ -42,7 +38,6 @@ class GoogleAPILocationService implements ILocationService {
     };
 
     private GoogleAPILocationService(Context context) {
-        this.context = context;
         this.mFusedLocationClient = LocationServices.getFusedLocationProviderClient(context);
         this.mLocationRequest = this.createLocationRequest();
         this.locationEventListenerSet = new HashSet<>();
@@ -68,14 +63,13 @@ class GoogleAPILocationService implements ILocationService {
         this.stopLocationUpdates();
     }
 
+    @SuppressLint("MissingPermission")
     private void startLocationUpdates() {
-        if (ActivityCompat.checkSelfPermission(context, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
-            this.mFusedLocationClient.requestLocationUpdates(
-                    this.mLocationRequest,
-                    this.mLocationCallback,
-                    null
-            );
-        }
+        this.mFusedLocationClient.requestLocationUpdates(
+                this.mLocationRequest,
+                this.mLocationCallback,
+                null
+        );
     }
 
     private void stopLocationUpdates() {

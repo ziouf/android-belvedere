@@ -27,6 +27,8 @@ import android.view.TextureView;
 import android.view.View;
 import android.widget.Toast;
 
+import junit.framework.Assert;
+
 import java.util.Collections;
 
 import fr.marin.cyril.belvedere.R;
@@ -113,10 +115,11 @@ final class CameraApi21
         if (ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED)
             return;
 
-        CameraManager cameraManager = (CameraManager) getContext().getSystemService(Context.CAMERA_SERVICE);
+        final CameraManager cameraManager = (CameraManager) getContext().getSystemService(Context.CAMERA_SERVICE);
+        Assert.assertNotNull("CameraManager must not be null", cameraManager);
 
         try {
-            String cameraId = cameraManager.getCameraIdList()[0];
+            final String cameraId = cameraManager.getCameraIdList()[0];
             cameraManager.openCamera(cameraId, this.getCameraDeviceStateCallback(), null);
         } catch (CameraAccessException e) {
             Log.e(TAG, "Exception", e);

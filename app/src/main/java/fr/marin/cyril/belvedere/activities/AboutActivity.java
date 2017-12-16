@@ -79,7 +79,7 @@ public class AboutActivity extends AppCompatActivity {
 
         @NonNull
         @Override
-        public View getView(int position, View convertView, ViewGroup parent) {
+        public View getView(int position, View convertView, @NonNull ViewGroup parent) {
             View view = convertView;
             if (Objects.isNull(view)) {
                 LayoutInflater inflater = LayoutInflater.from(getContext());

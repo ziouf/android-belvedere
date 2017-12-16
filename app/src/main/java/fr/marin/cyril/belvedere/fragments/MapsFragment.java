@@ -192,13 +192,8 @@ public class MapsFragment
         // Action au click sur le bouton myPosButton
         myPosButton.setOnClickListener(v -> {
             Log.i(TAG, "Click myPosButton");
-            // Demande d'activation des services de geolocalisation si désactivés
-//            if (!locationService.isLocationServiceEnabled())
-//                locationService.askForLocationServiceActivation();
             // Centrage de la vue sur la geolocalisation de l'utilisateur
             centerMapCameraOnMyPosition();
-            // Abonnement au trigger de geolocalisation
-//            locationService.registerLocationUpdates();
         });
     }
 

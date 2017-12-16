@@ -7,15 +7,6 @@
 
     <include layout="@layout/camera_layout" />
 
-    <ImageView
-        android:id="@+id/camera_binocular_mask"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:scaleType="fitXY"
-        android:src="@drawable/binocular_mask"
-        android:visibility="gone"
-        />
-
     <include layout="@layout/camera_peak_info_layout" />
 
     <include layout="@layout/camera_reticule_layout" />

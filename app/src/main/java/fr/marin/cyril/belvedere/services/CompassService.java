@@ -20,13 +20,13 @@ import fr.marin.cyril.belvedere.tools.Objects;
 public class CompassService
         implements SensorEventListener {
     private static final String TAG = CompassService.class.getSimpleName();
-    private static final float ALPHA = 0.025f;
 
+    private static final float ALPHA = 0.025f;
     private static CompassService singleton;
 
     private final PackageManager pm;
-    private final HashSet<CompassEventListener> compassEventListenerSet;
     private final SensorManager sensorManager;
+    private final HashSet<CompassEventListener> compassEventListenerSet;
 
     private Orientation orientation = Orientation.PORTRAIT;
 
@@ -70,7 +70,7 @@ public class CompassService
             geoMat = lowPass(event.values.clone(), geoMat);
         }
 
-        if (graMat != null && geoMat != null) {
+        if (Objects.nonNull(graMat) && Objects.nonNull(geoMat)) {
             oMat = new float[3];
             final float[] R = new float[9];
             if (SensorManager.getRotationMatrix(R, null, graMat, geoMat)) {

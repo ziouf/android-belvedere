@@ -1,6 +1,7 @@
 package fr.marin.cyril.belvedere.tools;
 
 import android.content.Context;
+import android.support.annotation.NonNull;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,7 +10,8 @@ import android.widget.Filter;
 import android.widget.Filterable;
 import android.widget.TextView;
 
-import java.util.List;
+import java.util.Collection;
+import java.util.Collections;
 
 import fr.marin.cyril.belvedere.model.Placemark;
 
@@ -28,27 +30,32 @@ public class PlacemarkSearchAdapter extends ArrayAdapter<Placemark> implements F
         this.mInflater = LayoutInflater.from(ctx);
     }
 
+    @NonNull
     @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
+    public View getView(int position, View convertView, @NonNull ViewGroup parent) {
         final View view = Objects.isNull(convertView) ? mInflater.inflate(mFieldId, parent, false) : convertView;
         final TextView textView = (TextView) view;
 
         final Placemark placemark = this.getItem(position);
-        textView.setText(placemark.getTitle());
+        if (Objects.nonNull(placemark)) {
+            textView.setText(placemark.getTitle());
+        }
 
         return view;
     }
 
+    @NonNull
     @Override
+    @SuppressWarnings("unchecked")
     public Filter getFilter() {
         return new PlacemarkTitleFilter() {
             @Override
             protected void publishResults(CharSequence constraint, FilterResults results) {
-                if (results.count > 0) {
-                    PlacemarkSearchAdapter.this.clear();
-                    PlacemarkSearchAdapter.this.addAll((List<Placemark>) results.values);
-                }
+                PlacemarkSearchAdapter.this.clear();
+                PlacemarkSearchAdapter.this.addAll(
+                        Collections.checkedCollection((Collection) results.values, Placemark.class));
             }
         };
     }
+
 }

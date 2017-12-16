@@ -27,6 +27,7 @@ import io.realm.RealmQuery;
 import okhttp3.HttpUrl;
 import okhttp3.Request;
 import okhttp3.Response;
+import okhttp3.ResponseBody;
 
 /**
  * Created by cyril on 15/11/17.
@@ -130,9 +131,12 @@ public class DataInitTaskLoader extends AsyncTaskLoader<Void> {
 
         try (final Response response = Belvedere.getHttpClient().newCall(request).execute()) {
             if (response.isSuccessful()) {
-                realm.beginTransaction();
-                parser.parseJsonResponse(response.body().byteStream(), realm);
-                realm.commitTransaction();
+                final ResponseBody body = response.body();
+                if (Objects.nonNull(body)) {
+                    realm.beginTransaction();
+                    parser.parseJsonResponse(body.byteStream(), realm);
+                    realm.commitTransaction();
+                }
             }
         } catch (Exception e) {
             realm.cancelTransaction();

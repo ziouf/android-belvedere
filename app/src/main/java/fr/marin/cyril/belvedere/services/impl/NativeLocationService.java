@@ -22,14 +22,12 @@ class NativeLocationService
         implements ILocationService, LocationListener {
     private static final String TAG = NativeLocationService.class.getSimpleName();
 
-    //    private final Context context;
     private final HashSet<ILocationEventListener> locationEventListenerSet;
 
     private Location location;
     private LocationManager locationManager;
 
     private NativeLocationService(Context context) {
-//        this.context = context;
         this.locationManager = (LocationManager) context.getSystemService(Context.LOCATION_SERVICE);
         this.locationEventListenerSet = new HashSet<>();
     }
@@ -53,9 +51,7 @@ class NativeLocationService
      */
     @SuppressLint("MissingPermission")
     private void initLocation() {
-//        if (ActivityCompat.checkSelfPermission(context, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
-            this.location = locationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
-//        }
+        this.location = locationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
     }
 
     /**
@@ -63,19 +59,15 @@ class NativeLocationService
      */
     @SuppressLint("MissingPermission")
     private void registerLocationUpdates() {
-//        if (ActivityCompat.checkSelfPermission(context, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
-            this.locationManager.requestLocationUpdates(locationManager.getBestProvider(new Criteria(), true),
-                    LocationServiceFactory.LOCATION_UPDATE_TIME, LocationServiceFactory.LOCATION_UPDATE_DISTANCE, this);
-//        }
+        this.locationManager.requestLocationUpdates(locationManager.getBestProvider(new Criteria(), true),
+                LocationServiceFactory.LOCATION_UPDATE_TIME, LocationServiceFactory.LOCATION_UPDATE_DISTANCE, this);
     }
 
     /**
      * Désinscription au trigger de geolocalisation
      */
     private void removeLocationUpdates() {
-//        if (ActivityCompat.checkSelfPermission(context, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
-            this.locationManager.removeUpdates(this);
-//        }
+        this.locationManager.removeUpdates(this);
     }
 
     @Override
