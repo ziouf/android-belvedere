@@ -22,13 +22,13 @@ public class MapsMarkerManager {
         this.mMap = mMap;
     }
 
-    public void putMarker(Placemark placemark) {
+    private void putMarker(Placemark placemark) {
         final Marker marker = mMap.addMarker(placemark.getMarkerOptions());
         markers.put(placemark.hashCode(), marker);
         placemarks.put(marker.hashCode(), placemark);
     }
 
-    public void putAll(Collection<Placemark> placemarkCollection) {
+    private void putAll(Collection<Placemark> placemarkCollection) {
         Stream.of(placemarkCollection).forEach(this::putMarker);
     }
 
@@ -57,7 +57,7 @@ public class MapsMarkerManager {
         this.remove(placemark, marker);
     }
 
-    public void remove(Marker marker) {
+    private void remove(Marker marker) {
         if (Objects.isNull(marker)) return;
         final Placemark placemark = placemarks.get(marker.hashCode());
         this.remove(placemark, marker);
@@ -69,7 +69,7 @@ public class MapsMarkerManager {
         placemarks.remove(marker.hashCode());
     }
 
-    public void clear() {
+    private void clear() {
         Stream.range(0, markers.size())
                 .map(markers::valueAt)
                 .forEach(this::remove);

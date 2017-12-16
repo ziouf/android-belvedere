@@ -1,20 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Belvedere</string>
-    <string name="title_activity_camera">Jumelles</string>
-    <string name="title_activity_loading">Chargement</string>
-    <string name="title_activity_maps">Carte</string>
     <string name="loading_database_init">Initialisation de la base de données…\nCette opération peut prendre du temps</string>
-    <string name="loading_application_openning">Chargement de l\'application…</string>
 
     <string name="menu_maps">Carte</string>
-    <string name="menu_about">A propos</string>
-    <string name="label_altitude">altitude</string>
-    <string name="label_distance">distance</string>
     <string name="location_service_not_enabled">Localisation désactivée</string>
     <string name="open_location_settings">J\'ai besoin que les services de géolocalisation soient activés pour vous offrir la meilleure expérience utilisateur. \nOuvrir les paramêtres de localisation ?</string>
     <string name="cancel">Annuler</string>
-    <string name="exit_application">Quitter l\'application</string>
     <string name="ok">Ok</string>
     <string name="yes">Oui</string>
     <string name="no">Non</string>
@@ -22,15 +14,10 @@
     <string name="menu_settings">Paramètres</string>
     <string name="close">Fermer</string>
     <string name="open">Ouvrir</string>
-    <string name="menu_refresh">Mise à jour des données</string>
-    <string name="title_activity_settings">Parametres</string>
     <string name="last_data_update_date">Dernière mise à jour des données</string>
     <string name="data_update_frequency">Fréquence de rafraichissement des données (en jours)</string>
     <string name="total_peak_count">Nombre total de sommet</string>
-    <string name="total_mount_count">Nombre total de massif</string>
 
-    <string name="toast_update_database_finished">Mise à jour de la base de données terminée</string>
-    <string name="toast_init_database_finished">Initialisation de la base de données terminée</string>
     <string name="toast_wiki_url_not_found">Cet item ne dispose pas d\'article Wikipedia dans votre langue</string>
     <string name="select_all">Tout sélectionner</string>
 </resources>

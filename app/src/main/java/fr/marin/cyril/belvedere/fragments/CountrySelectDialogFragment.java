@@ -27,7 +27,7 @@ import fr.marin.cyril.belvedere.model.Country;
 
 public class CountrySelectDialogFragment extends DialogFragment {
 
-    final Set<Country> selectedCountries = new HashSet<>();
+    private final Set<Country> selectedCountries = new HashSet<>();
     private List<Country> countries = new ArrayList<>();
     private DialogInterface.OnClickListener onClickOkListener;
     private DialogInterface.OnClickListener onClickKoListener;

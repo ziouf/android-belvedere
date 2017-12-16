@@ -7,7 +7,7 @@
             android:title="@string/menu_maps" />
 
     </group>
-    <group android:id="@+id/menu_group_info">
+    <group>
         <item
             android:id="@+id/menu_settings"
             android:icon="@android:drawable/ic_menu_preferences"

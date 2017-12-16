@@ -21,7 +21,7 @@ import fr.marin.cyril.belvedere.tools.Objects;
 public class MainActivity extends AppCompatActivity {
     private static final String TAG = MainActivity.class.getSimpleName();
 
-    public static FragmentManager fragmentManager;
+    private static FragmentManager fragmentManager;
 
     private ActionBarDrawerToggle toggle;
     private DrawerLayout drawerLayout;

@@ -22,7 +22,7 @@ public abstract class Camera {
         }
     }
 
-    protected Activity getContext() {
+    Activity getContext() {
         return context;
     }
 

@@ -12,7 +12,7 @@ import io.realm.Sort;
  * Created by cyril on 09/12/17.
  */
 
-public abstract class PlacemarkTitleFilter extends Filter {
+abstract class PlacemarkTitleFilter extends Filter {
     @Override
     protected FilterResults performFiltering(CharSequence constraint) {
         final FilterResults results = new FilterResults();

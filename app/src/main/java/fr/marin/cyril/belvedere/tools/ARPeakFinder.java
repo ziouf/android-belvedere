@@ -185,7 +185,7 @@ public class ARPeakFinder {
      * @param p
      * @return
      */
-    public boolean isMatchingAccuracy(final Placemark p) {
+    private boolean isMatchingAccuracy(final Placemark p) {
         final double distance = Utils.getDistanceBetween(oLatLng, p.getLatLng());
         final double tAzimuth = this.getTheoricalAzimuth(p.getLatLng());
         final double tPitch = this.getTheoricalPitch(p.getLatLng(), p.getElevation());

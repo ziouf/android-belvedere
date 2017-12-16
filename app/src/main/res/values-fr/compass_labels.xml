@@ -1,13 +1,2 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources>
-    <array name="compass_labels_array">
-        <item>N</item>
-        <item>NE</item>
-        <item>E</item>
-        <item>SE</item>
-        <item>S</item>
-        <item>SO</item>
-        <item>O</item>
-        <item>NO</item>
-    </array>
-</resources>
+<resources></resources>

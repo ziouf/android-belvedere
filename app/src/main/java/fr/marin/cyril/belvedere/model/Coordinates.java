@@ -5,7 +5,7 @@ import com.google.android.gms.maps.model.LatLng;
 /**
  * Created by Cyril on 30/03/2016.
  */
-public class Coordinates {
+class Coordinates {
 
     private LatLng latLng;
     private Double elevation = 0d;

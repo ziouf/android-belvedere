@@ -40,7 +40,7 @@ public class Area implements Parcelable {
         this.init();
     }
 
-    protected Area(Parcel in) {
+    private Area(Parcel in) {
         northeast = in.readParcelable(LatLng.class.getClassLoader());
         southwest = in.readParcelable(LatLng.class.getClassLoader());
         left = in.readDouble();

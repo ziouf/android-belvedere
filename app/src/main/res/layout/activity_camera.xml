@@ -12,7 +12,6 @@
     <include layout="@layout/camera_reticule_layout" />
 
     <TextView
-        android:id="@+id/debug_camera_tv"
         style="@style/AppTheme.Debug"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

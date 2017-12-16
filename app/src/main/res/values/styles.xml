@@ -29,11 +29,6 @@
 
     </style>
 
-    <style name="AppTheme.Main.ActionBar.Transparent">
-        <item name="background">@android:color/transparent</item>
-        <item name="android:background">@android:color/transparent</item>
-    </style>
-
     <style name="AppTheme.Camera" parent="Theme.AppCompat.DayNight.NoActionBar" />
 
     <style name="AppTheme.Camera.Compat" />
@@ -73,7 +68,5 @@
     <style name="AppTheme.FloatingActionButton.Camera">
         <item name="android:src">@drawable/ic_camera</item>
     </style>
-
-    <style name="AppTheme.FloatingActionButton.Compat" />
 
 </resources>

@@ -15,7 +15,7 @@ import java.security.NoSuchAlgorithmException;
 /**
  * Created by Cyril on 13/04/2016.
  */
-public class Utils {
+class Utils {
     private static final String TAG = Utils.class.getSimpleName();
 
     /**
@@ -123,7 +123,7 @@ public class Utils {
      * @param is
      * @return
      */
-    public static String getSHA1FromInputStream(InputStream is) {
+    private static String getSHA1FromInputStream(InputStream is) {
         StringBuilder sb = new StringBuilder();
 
         try {
