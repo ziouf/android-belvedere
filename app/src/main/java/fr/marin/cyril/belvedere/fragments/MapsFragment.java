@@ -273,6 +273,7 @@ public class MapsFragment
             @Override
             public View getInfoWindow(Marker marker) {
                 return null;
+//                return getActivity().getLayoutInflater().inflate(R.layout.maps_info_window, null);
             }
 
             @Override
@@ -285,6 +286,7 @@ public class MapsFragment
                 final Placemark p = markerManager.getPlacemark(marker);
 
                 final View v = getActivity().getLayoutInflater().inflate(R.layout.maps_info_window, null);
+//                final View v = this.getInfoWindow(marker);
                 final TextView tvTitle = v.findViewById(R.id.iw_title);
                 final TextView tvAltitude = v.findViewById(R.id.iw_altitude);
 
@@ -302,10 +304,11 @@ public class MapsFragment
     private GoogleMap.OnInfoWindowClickListener getOnInfoWindowClickListener() {
         return marker -> {
             final Placemark p = markerManager.getPlacemark(marker);
-            if (Objects.nonNull(p.getArticle()) && !p.getArticle().isEmpty())
+            if (Objects.nonNull(p.getArticle()) && !p.getArticle().isEmpty()) {
                 startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(p.getArticle())));
-            else
+            } else {
                 Toast.makeText(MapsFragment.this.getActivity(), R.string.toast_wiki_url_not_found, Toast.LENGTH_SHORT).show();
+            }
         };
     }
 
@@ -366,7 +369,7 @@ public class MapsFragment
     }
 
     private void onNextPlacemarks(RealmResults<Placemark> placemarks) {
-        this.markerManager.putIfNotPresent(
+        this.markerManager.clearAndPutAll(
                 Stream.range(0, Math.min(placemarks.size(), Preferences.MAX_ON_MAP))
                         .map(placemarks::get)
                         .map(realm::copyFromRealm)

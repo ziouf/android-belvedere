@@ -10,6 +10,6 @@ public class Preferences {
     public static final int UPDATE_FREQUENCY_DAYS_DEFAULT = 7;
 
     public static final String COUNTRIES = "countries";
-    public static final int MAX_ON_MAP = Runtime.getRuntime().availableProcessors() * 15;
+    public static final int MAX_ON_MAP = Runtime.getRuntime().availableProcessors() * 10;
 
 }

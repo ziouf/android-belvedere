@@ -52,8 +52,10 @@ public class PlacemarkSearchAdapter extends ArrayAdapter<Placemark> implements F
             @Override
             protected void publishResults(CharSequence constraint, FilterResults results) {
                 PlacemarkSearchAdapter.this.clear();
-                PlacemarkSearchAdapter.this.addAll(
-                        Collections.checkedCollection((Collection) results.values, Placemark.class));
+                if (results.count > 0) {
+                    PlacemarkSearchAdapter.this.addAll(
+                            Collections.checkedCollection((Collection) results.values, Placemark.class));
+                }
             }
         };
     }

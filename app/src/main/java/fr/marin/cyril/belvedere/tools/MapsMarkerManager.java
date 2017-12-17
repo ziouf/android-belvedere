@@ -47,11 +47,11 @@ public class MapsMarkerManager {
     }
 
     public void clearAndPutAll(Collection<Placemark> placemarkCollection) {
-        this.clear();
-        this.putAll(placemarkCollection);
+        this.removeOthers(placemarkCollection);
+        this.putIfNotPresent(Stream.of(placemarkCollection));
     }
 
-    public void remove(Placemark placemark) {
+    private void remove(Placemark placemark) {
         if (Objects.isNull(placemark)) return;
         final Marker marker = markers.get(placemark.hashCode());
         this.remove(placemark, marker);
@@ -67,6 +67,13 @@ public class MapsMarkerManager {
         marker.remove();
         markers.remove(placemark.hashCode());
         placemarks.remove(marker.hashCode());
+    }
+
+    private void removeOthers(Collection<Placemark> placemarkCollection) {
+        Stream.range(0, placemarks.size())
+                .map(placemarks::valueAt)
+                .filterNot(placemarkCollection::contains)
+                .forEach(this::remove);
     }
 
     private void clear() {
